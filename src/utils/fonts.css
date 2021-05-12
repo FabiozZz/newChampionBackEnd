@@ -1,0 +1,228 @@
+/* Montserrat */
+@font-face {
+  font-family: 'Montserrat-black';
+  src: url('../assets/fonts/Montserrat/Montserrat-Black.ttf') format('ttf');
+  font-weight: 900;
+}
+@font-face {
+  font-family: 'Montserrat-black-italic';
+  font-weight: 900;
+  font-style: italic;
+  src: url('../assets/fonts/Montserrat/Montserrat-BlackItalic.ttf') format('ttf');
+}
+@font-face {
+  font-family: 'Montserrat-extraBold';
+  src: url('../assets/fonts/Montserrat/Montserrat-ExtraBold.ttf') format('ttf');
+  font-weight: 800;
+}
+@font-face {
+  font-family: 'Montserrat-extraBold-italic';
+  src: url('../assets/fonts/Montserrat/Montserrat-ExtraBoldItalic.ttf') format('ttf');
+  font-weight: 800;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Montserrat-bold';
+  font-weight: 700;
+  src: url('../assets/fonts/Montserrat/Montserrat-Bold.ttf') format('ttf');
+}
+@font-face {
+  font-family: 'Montserrat-bold-italic';
+  font-style: italic;
+  src: url('../assets/fonts/Montserrat/Montserrat-BoldItalic.ttf') format('ttf');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'Montserrat-semiBold';
+  src: url('../assets/fonts/Montserrat/Montserrat-SemiBold.ttf') format('ttf');
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'Montserrat-semiBold-italic';
+  src: url('../assets/fonts/Montserrat/Montserrat-SemiBoldItalic.ttf') format('ttf');
+  font-weight: 600;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Montserrat-medium';
+  src: url('../assets/fonts/Montserrat/Montserrat-Medium.ttf') format('ttf');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'Montserrat-medium-italic';
+  src: url('../assets/fonts/Montserrat/Montserrat-MediumItalic.ttf') format('ttf');
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Montserrat-regular';
+  src: url('../assets/fonts/Montserrat/Montserrat-Regular.ttf') format('ttf');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'Montserrat-regular-italic';
+  src: url('../assets/fonts/Montserrat/Montserrat-Regular.ttf') format('ttf');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Montserrat-light';
+  src: url('../assets/fonts/Montserrat/Montserrat-Light.ttf') format('ttf');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'Montserrat-light-italic';
+  src: url('../assets/fonts/Montserrat/Montserrat-LightItalic.ttf') format('ttf');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Montserrat-extraLight';
+  src: url('../assets/fonts/Montserrat/Montserrat-ExtraLight.ttf') format('ttf');
+  font-weight: 200;
+}
+@font-face {
+  font-family: 'Montserrat-extraLight-italic';
+  src: url('../assets/fonts/Montserrat/Montserrat-ExtraLightItalic.ttf') format('ttf');
+  font-weight: 200;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Montserrat-thin';
+  src: url('../assets/fonts/Montserrat/Montserrat-Thin.ttf') format('ttf');
+  font-weight: 100;
+}
+@font-face {
+  font-family: 'Montserrat-thin-italic';
+  src: url('../assets/fonts/Montserrat/Montserrat-ThinItalic.ttf') format('ttf');
+  font-weight: 100;
+  font-style: italic;
+}
+/* SF Pro */
+@font-face {
+  font-family: 'SF Pro Display-medium';
+  src: url('../assets/fonts/SFPro/SFProDisplay-Medium.eot');
+  src: local('SF Pro Display Medium'), local('SFProDisplay-Medium'), url('../assets/fonts/SFPro/SFProDisplay-Medium.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/SFPro/SFProDisplay-Medium.woff2') format('woff2'), url('../assets/fonts/SFPro/SFProDisplay-Medium.woff') format('woff'), url('../assets/fonts/SFPro/SFProDisplay-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SF Pro Display-heavy';
+  src: url('../assets/fonts/SFPro/SFProDisplay-Heavy.eot');
+  src: local('SF Pro Display Heavy'), local('SFProDisplay-Heavy'), url('../assets/fonts/SFPro/SFProDisplay-Heavy.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/SFPro/SFProDisplay-Heavy.woff2') format('woff2'), url('../assets/fonts/SFPro/SFProDisplay-Heavy.woff') format('woff'), url('../assets/fonts/SFPro/SFProDisplay-Heavy.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SF Pro Display-ultraLught-italic';
+  src: url('../assets/fonts/SFPro/SFProDisplay-UltralightItalic.eot');
+  src: local('SF Pro Display UltralightItalic'), local('SFProDisplay-UltralightItalic'), url('../assets/fonts/SFPro/SFProDisplay-UltralightItalic.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/SFPro/SFProDisplay-UltralightItalic.woff2') format('woff2'), url('../assets/fonts/SFPro/SFProDisplay-UltralightItalic.woff') format('woff'), url('../assets/fonts/SFPro/SFProDisplay-UltralightItalic.ttf') format('truetype');
+  font-weight: 200;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'SF Pro Display-regular-italic';
+  src: url('../assets/fonts/SFPro/SFProDisplay-RegularItalic.eot');
+  src: local('SF Pro Display Regular Italic'), local('SFProDisplay-RegularItalic'), url('../assets/fonts/SFPro/SFProDisplay-RegularItalic.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/SFPro/SFProDisplay-RegularItalic.woff2') format('woff2'), url('../assets/fonts/SFPro/SFProDisplay-RegularItalic.woff') format('woff'), url('../assets/fonts/SFPro/SFProDisplay-RegularItalic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'SF Pro Display-thin';
+  src: url('../assets/fonts/SFPro/SFProDisplay-Thin.eot');
+  src: local('SF Pro Display Thin'), local('SFProDisplay-Thin'), url('../assets/fonts/SFPro/SFProDisplay-Thin.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/SFPro/SFProDisplay-Thin.woff2') format('woff2'), url('../assets/fonts/SFPro/SFProDisplay-Thin.woff') format('woff'), url('../assets/fonts/SFPro/SFProDisplay-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SF Pro Display-light';
+  src: url('../assets/fonts/SFPro/SFProDisplay-Light.eot');
+  src: local('SF Pro Display Light'), local('SFProDisplay-Light'), url('../assets/fonts/SFPro/SFProDisplay-Light.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/SFPro/SFProDisplay-Light.woff2') format('woff2'), url('../assets/fonts/SFPro/SFProDisplay-Light.woff') format('woff'), url('../assets/fonts/SFPro/SFProDisplay-Light.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SF Pro Display-black-italic';
+  src: url('../assets/fonts/SFPro/SFProDisplay-BlackItalic.eot');
+  src: local('SF Pro Display Black Italic'), local('SFProDisplay-BlackItalic'), url('../assets/fonts/SFPro/SFProDisplay-BlackItalic.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/SFPro/SFProDisplay-BlackItalic.woff2') format('woff2'), url('../assets/fonts/SFPro/SFProDisplay-BlackItalic.woff') format('woff'), url('../assets/fonts/SFPro/SFProDisplay-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'SF Pro Display-bold';
+  src: url('../assets/fonts/SFPro/SFProDisplay-Bold.eot');
+  src: local('SF Pro Display Bold'), local('SFProDisplay-Bold'), url('../assets/fonts/SFPro/SFProDisplay-Bold.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/SFPro/SFProDisplay-Bold.woff2') format('woff2'), url('../assets/fonts/SFPro/SFProDisplay-Bold.woff') format('woff'), url('../assets/fonts/SFPro/SFProDisplay-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SF Pro Display-black';
+  src: url('../assets/fonts/SFPro/SFProDisplay-Black.eot');
+  src: local('SF Pro Display Black'), local('SFProDisplay-Black'), url('../assets/fonts/SFPro/SFProDisplay-Black.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/SFPro/SFProDisplay-Black.woff2') format('woff2'), url('../assets/fonts/SFPro/SFProDisplay-Black.woff') format('woff'), url('../assets/fonts/SFPro/SFProDisplay-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SF Pro Display-semiBold-italic';
+  src: url('../assets/fonts/SFPro/SFProDisplay-SemiboldItalic.eot');
+  src: local('SF Pro Display SemiboldItalic'), local('SFProDisplay-SemiboldItalic'), url('../assets/fonts/SFPro/SFProDisplay-SemiboldItalic.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/SFPro/SFProDisplay-SemiboldItalic.woff2') format('woff2'), url('../assets/fonts/SFPro/SFProDisplay-SemiboldItalic.woff') format('woff'), url('../assets/fonts/SFPro/SFProDisplay-SemiboldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'SF Pro Display-ultraLught';
+  src: url('../assets/fonts/SFPro/SFProDisplay-Ultralight.eot');
+  src: local('SF Pro Display Ultralight'), local('SFProDisplay-Ultralight'), url('../assets/fonts/SFPro/SFProDisplay-Ultralight.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/SFPro/SFProDisplay-Ultralight.woff2') format('woff2'), url('../assets/fonts/SFPro/SFProDisplay-Ultralight.woff') format('woff'), url('../assets/fonts/SFPro/SFProDisplay-Ultralight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SF Pro Display-light-italic';
+  src: url('../assets/fonts/SFPro/SFProDisplay-LightItalic.eot');
+  src: local('SF Pro Display LightItalic'), local('SFProDisplay-LightItalic'), url('../assets/fonts/SFPro/SFProDisplay-LightItalic.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/SFPro/SFProDisplay-LightItalic.woff2') format('woff2'), url('../assets/fonts/SFPro/SFProDisplay-LightItalic.woff') format('woff'), url('../assets/fonts/SFPro/SFProDisplay-LightItalic.ttf') format('truetype');
+  font-weight: 200;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'SF Pro Display-thin-italic';
+  src: url('../assets/fonts/SFPro/SFProDisplay-ThinItalic.eot');
+  src: local('SF Pro Display ThinItalic'), local('SFProDisplay-ThinItalic'), url('../assets/fonts/SFPro/SFProDisplay-ThinItalic.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/SFPro/SFProDisplay-ThinItalic.woff2') format('woff2'), url('../assets/fonts/SFPro/SFProDisplay-ThinItalic.woff') format('woff'), url('../assets/fonts/SFPro/SFProDisplay-ThinItalic.ttf') format('truetype');
+  font-weight: 100;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'SF Pro Display-medium-italic';
+  src: url('../assets/fonts/SFPro/SFProDisplay-MediumItalic.eot');
+  src: local('SF Pro Display MediumItalic'), local('SFProDisplay-MediumItalic'), url('../assets/fonts/SFPro/SFProDisplay-MediumItalic.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/SFPro/SFProDisplay-MediumItalic.woff2') format('woff2'), url('../assets/fonts/SFPro/SFProDisplay-MediumItalic.woff') format('woff'), url('../assets/fonts/SFPro/SFProDisplay-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'SF Pro Display-semiBold';
+  src: url('../assets/fonts/SFPro/SFProDisplay-Semibold.eot');
+  src: local('SF Pro Display Semibold'), local('SFProDisplay-Semibold'), url('../assets/fonts/SFPro/SFProDisplay-Semibold.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/SFPro/SFProDisplay-Semibold.woff2') format('woff2'), url('../assets/fonts/SFPro/SFProDisplay-Semibold.woff') format('woff'), url('../assets/fonts/SFPro/SFProDisplay-Semibold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SF Pro Display-heavy-italic';
+  src: url('../assets/fonts/SFPro/SFProDisplay-HeavyItalic.eot');
+  src: local('SF Pro Display HeavyItalic'), local('SFProDisplay-HeavyItalic'), url('../assets/fonts/SFPro/SFProDisplay-HeavyItalic.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/SFPro/SFProDisplay-HeavyItalic.woff2') format('woff2'), url('../assets/fonts/SFPro/SFProDisplay-HeavyItalic.woff') format('woff'), url('../assets/fonts/SFPro/SFProDisplay-HeavyItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'SF Pro Display-regular';
+  src: url('../assets/fonts/SFPro/SFProDisplay-Regular.eot');
+  src: local('SF Pro Display Regular'), local('SFProDisplay-Regular'), url('../assets/fonts/SFPro/SFProDisplay-Regular.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/SFPro/SFProDisplay-Regular.woff2') format('woff2'), url('../assets/fonts/SFPro/SFProDisplay-Regular.woff') format('woff'), url('../assets/fonts/SFPro/SFProDisplay-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SF Pro Display-bold-italic';
+  src: url('../assets/fonts/SFPro/SFProDisplay-BoldItalic.eot');
+  src: local('SF Pro Display BoldItalic'), local('SFProDisplay-BoldItalic'), url('../assets/fonts/SFPro/SFProDisplay-BoldItalic.eot?#iefix') format('embedded-opentype'), url('../assets/fonts/SFPro/SFProDisplay-BoldItalic.woff2') format('woff2'), url('../assets/fonts/SFPro/SFProDisplay-BoldItalic.woff') format('woff'), url('../assets/fonts/SFPro/SFProDisplay-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+/*# sourceMappingURL=fonts.css.map */
