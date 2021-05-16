@@ -21,11 +21,11 @@
   font-weight: 800;
   font-style: italic;
 }
-@font-face {
-  font-family: 'Montserrat-bold';
-  font-weight: 700;
-  src: url('../assets/fonts/Montserrat/Montserrat-Bold.ttf') format('ttf');
-}
+/*@font-face {*/
+/*  font-family: 'Montserrat-Bold';*/
+/*  src: url('../assets/fonts/Montserrat/Montserrat-Bold.ttf') format('ttf');*/
+/*  font-weight: 700;*/
+/*}*/
 @font-face {
   font-family: 'Montserrat-bold-italic';
   font-style: italic;

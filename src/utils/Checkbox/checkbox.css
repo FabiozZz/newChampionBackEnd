@@ -35,4 +35,15 @@
   box-sizing: border-box;
   border-radius: 4px;
 }
+.checkbox-app {
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  position: relative;
+  display: block;
+  z-index: 1;
+}
+.checkbox-app input {
+  display: none;
+}
 /*# sourceMappingURL=checkbox.css.map */
