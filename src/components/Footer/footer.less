@@ -1,0 +1,76 @@
+.footer {
+  z-index: 9999999999;
+  //
+  //@media (max-width: 991px) {
+  //  position: fixed;
+  //  bottom: 0;
+  //  left: 0;
+  //  right: 0;
+  //  .linkHome {
+  //    position: absolute;
+  //    right: 6px;
+  //    top: -40px;
+  //
+  //    &:hover circle {
+  //      fill: #31AF2E;
+  //    }
+  //
+  //    &:active circle {
+  //      fill: #579E54;
+  //    }
+  //  }
+  //}
+  width: 100vw;
+  height: 72px;
+  background: radial-gradient(circle at calc(100% - 51px) 7px, transparent 43px, white 48px);
+  position: fixed;
+  display: flex;
+  justify-content: flex-start;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  &__home {
+    cursor: pointer;
+    position: absolute;
+    right: 6px;
+    top: -40px;
+    &:hover circle {
+      fill: #31AF2E;
+    }
+    &:active circle {
+      fill: #579E54;
+    }
+  }
+  &__item{
+    width: 100px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    svg{
+      margin: auto;
+    }
+    p{
+      font-family: 'SF Pro Display',sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      text-align: center;
+      text-transform: uppercase;
+      color:#69707F;
+    }
+    &:hover path {
+      fill: #8798AD;
+    }
+    &:hover p {
+      color: #8798AD;
+    }
+    &:active path {
+      fill: #2E384D;
+    }
+    &:active p {
+      color: #2E384D;
+    }
+  }
+}

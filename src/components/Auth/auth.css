@@ -1,0 +1,16 @@
+.mainWrapper {
+  width: 93.75%;
+  margin: auto;
+}
+.mainWrapper form {
+  background-color: #FFFFFF;
+}
+.mainWrapper__email {
+  width: 65.555% !important;
+  margin: 36px auto;
+}
+.mainWrapper__pass {
+  width: 65.555% !important;
+  margin: 36px auto;
+}
+/*# sourceMappingURL=auth.css.map */

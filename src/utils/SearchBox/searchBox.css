@@ -1,0 +1,37 @@
+.searchBox {
+  width: 224px;
+  height: 40px;
+  border-radius: 5px;
+  background: #FFFFFF;
+  border: 1px solid rgba(46, 91, 255, 0.08);
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+.searchBox__img {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+}
+.searchBox__input {
+  padding: 8px 20px;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  border-radius: 5px;
+  color: #BFC5D2;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.searchBox__input:focus {
+  color: #69707F;
+  border: 1px solid #8798AD;
+  border-radius: 5px;
+}
+.searchBox__input::placeholder {
+  font-family: inherit;
+  font-weight: inherit;
+}
+/*# sourceMappingURL=searchBox.css.map */

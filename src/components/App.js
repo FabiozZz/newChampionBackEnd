@@ -1,25 +1,28 @@
 import React from 'react';
-import {BrowserRouter} from "react-router-dom";
-import {Checkbox} from "../utils/Checkbox/Checkbox";
-import {Button} from "../utils/Buttons/Button";
-import {DatePicker} from 'antd';
-import calendar from '../assets/images/calendar.svg';
-import {DataPicker} from "../utils/DataPicker/DataPicker";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {Footer} from "./Footer/Footer";
+import {Header} from "./Header/Header";
+import {useSelector} from "react-redux";
+import {CheckboxBtn} from "../utils/CheckboxBtn/CheckboxBtn";
+import {Auth} from "./Auth/Auth";
+import './app.css';
 
 function App() {
+    const isAuth = useSelector(state => state.user.isAuth);
     return (
         <BrowserRouter>
-            <form action="">
-            <Button text={'some text'}/>
-            <Button factor={'success'} text={'some text'}/>
-            <Button factor={'danger'} text={'some text'}/>
-            <Button factor={'dark'} text={'some text'}/>
-            <Button disabled={true} factor={'dark'} text={'some text'}/>
-            <Checkbox/>
-                <DatePicker suffixIcon={calendar}/>
-            <Checkbox disabled={true}/>
-            <DataPicker/>
-            </form>
+            <Header/>
+            <div className={'mainWrapper'}>
+                {isAuth ?
+                    <Switch>
+                        <Route path={'/'} render={() => <CheckboxBtn isChecked={true} setIsChecked={() => {
+                        }}/>}/>
+                    </Switch>
+                    :
+                    <Auth/>
+                }
+            </div>
+            <Footer/>
         </BrowserRouter>
     );
 }

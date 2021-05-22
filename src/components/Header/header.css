@@ -1,0 +1,32 @@
+.header {
+  width: 100vw;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #E4E8F0;
+}
+.header__logo {
+  margin-left: 3.125%;
+}
+.header__logout {
+  margin-right: 2.604%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header__logout span {
+  display: block;
+  margin-right: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  letter-spacing: 1.125px;
+  text-transform: uppercase;
+  color: #8798AD;
+}
+/*# sourceMappingURL=header.css.map */

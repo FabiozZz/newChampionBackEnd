@@ -8,12 +8,24 @@
   position: relative;
   display: inline-block;
 }
+.dataPicker-wrapper__inputWrapper__label {
+  color: #B0BAC9;
+  font-family: 'Montserrat-bold', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1.125px;
+  padding: 4px 0;
+  text-transform: uppercase;
+  display: block;
+}
 .dataPicker-wrapper__inputWrapper__after {
   position: relative;
 }
 .dataPicker-wrapper__inputWrapper__after input {
   line-height: 24px;
   font-family: 'SF Pro Display', sans-serif;
+  color: #BFC5D2;
   background: #F4F6FC;
   border: 1px solid #8798AD;
   box-sizing: border-box;
@@ -24,8 +36,11 @@
   font-size: 16px;
 }
 .dataPicker-wrapper__inputWrapper__after input:focus {
-  border: 1px solid black;
-  border-radius: 5px;
+  color: #69707F;
+}
+.dataPicker-wrapper__inputWrapper__after input::placeholder {
+  font-family: inherit;
+  font-weight: inherit;
 }
 .dataPicker-wrapper__inputWrapper__after img {
   content: '';
@@ -40,6 +55,8 @@
 .dataPicker-wrapper__calendar {
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
   border-radius: 16px;
+  background-color: #FFFFFF;
+  z-index: 9999999999999999999999999999;
   padding: 16px;
   position: absolute;
   width: 100%;

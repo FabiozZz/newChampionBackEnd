@@ -1,0 +1,109 @@
+.cardUser {
+  position: relative;
+  overflow: hidden;
+  width: 220px;
+  height: 98px;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  display: grid;
+  grid-template-rows: 3fr 3fr 6fr;
+  grid-template-columns: 10fr 2fr;
+  font-family: 'SF Pro Display', sans-serif;
+  grid-template-areas: 'names status' 'names status' 'notification success';
+  padding: 12px;
+}
+.cardUser__border {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: red;
+  width: 4px;
+}
+.cardUser__names {
+  grid-area: names;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.cardUser__cardStatus {
+  margin: auto;
+  grid-area: status;
+}
+.cardUser__notifications {
+  position: absolute;
+  bottom: -1px;
+  grid-area: notification;
+}
+.cardUser__notifications img {
+  margin-right: 8px;
+}
+.cardUser__success img {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: -3px;
+  bottom: -5px;
+  grid-area: success;
+}
+.cardUser__settingsCard {
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 12px;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 400;
+  line-height: 16px;
+  color: #8798AD;
+  text-align: center;
+}
+.cardUser__settingsCard span {
+  display: block;
+  padding: 6px 0;
+  cursor: pointer;
+}
+.cardUser__settingsCard a {
+  display: block;
+  padding: 6px 0;
+  color: #8798AD;
+}
+.cardUser__settingsCard__closeButton {
+  position: absolute;
+  z-index: 1;
+  top: -4px;
+  right: 8px;
+}
+#e6X7T9wLK8e2_ts {
+  animation: e6X7T9wLK8e2_ts__ts 1000ms linear infinite normal forwards;
+}
+@keyframes e6X7T9wLK8e2_ts__ts {
+  0% {
+    transform: translate(16px, 16px) scale(0, 0);
+  }
+  80% {
+    transform: translate(16px, 16px) scale(1, 1);
+  }
+  100% {
+    transform: translate(16px, 16px) scale(1, 1);
+  }
+}
+#e6X7T9wLK8e2 {
+  animation: e6X7T9wLK8e2_c_o 1000ms linear infinite normal forwards;
+}
+@keyframes e6X7T9wLK8e2_c_o {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/*# sourceMappingURL=cardUser.css.map */

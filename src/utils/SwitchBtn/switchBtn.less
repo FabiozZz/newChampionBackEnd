@@ -1,0 +1,20 @@
+.switch-wrapper {
+  display: inline-block;
+  button{
+    box-sizing: content-box;
+    justify-content: center;
+    div{
+      text-align: center;
+    }
+  }
+  &__checked{
+    background-color: #43BF41;
+    transition: 0.5s background-color;
+    border: 1px solid #579E54;
+  }
+  &__unchecked{
+    border: 1px solid #DFE6EE;
+    background-color: #F4F7FA;
+    transition: 0.5s background-color;
+  }
+}

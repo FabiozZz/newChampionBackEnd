@@ -1,0 +1,21 @@
+.switch-wrapper {
+  display: inline-block;
+}
+.switch-wrapper button {
+  box-sizing: content-box;
+  justify-content: center;
+}
+.switch-wrapper button div {
+  text-align: center;
+}
+.switch-wrapper__checked {
+  background-color: #43BF41;
+  transition: 0.5s background-color;
+  border: 1px solid #579E54;
+}
+.switch-wrapper__unchecked {
+  border: 1px solid #DFE6EE;
+  background-color: #F4F7FA;
+  transition: 0.5s background-color;
+}
+/*# sourceMappingURL=switchBtn.css.map */

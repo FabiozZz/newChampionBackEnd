@@ -1,14 +1,41 @@
 import React from 'react';
 import './button.css';
+import PropTypes from "prop-types";
 
-export const Button = ({factor = 'default', text,style={},click = ()=>{}, type = 'button',disabled=false}) => {
-    const handlerClick = (e) => {
-        if (e.target.type === 'submit') {
-            e.preventDefault();
-        }
-        click();
-    };
+/**
+ *
+ * @param name
+ * @param size
+ * @param factor
+ * @param text
+ * @param style
+ * @param click
+ * @param type
+ * @param disabled
+ * @returns {JSX.Element}
+ * @constructor
+ */
+export const Button = ({name,size,factor, text,style,click, type='button',disabled}) => {
+    size += 'SizeButton';
     return (
-        <button disabled={disabled} type={type} className={`btn-app__${factor}`} onClick={handlerClick} style={style}>{text}</button>
+        <button name={name} disabled={disabled} type={type} className={`${size} btn-app__${factor}`} onClick={click} style={style}>{text}</button>
     );
 };
+Button.defaultProps = {
+    size: 'default',
+    style:{},
+    disabled: false,
+    name: '',
+    factor:'default'
+}
+
+Button.propTypes = {
+    name: PropTypes.string,
+    size: PropTypes.oneOf(['default','small']),
+    factor: PropTypes.oneOf(['success','danger','default','dark']),
+    style: PropTypes.object,
+    disabled: PropTypes.bool,
+    type: PropTypes.oneOf(['button', 'submit']),
+    click: PropTypes.func,
+    text: PropTypes.string.isRequired
+}
