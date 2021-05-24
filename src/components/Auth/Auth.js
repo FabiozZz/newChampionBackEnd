@@ -1,41 +1,59 @@
-import React, {useRef} from 'react';
-import './auth.css';
+import React, {useRef, useState} from 'react';
 import {OtherInput} from "../../utils/OtherInput/OtherInput";
 import {Button} from "../../utils/Buttons/Button";
 import Api from "../../Api/Api";
 import './auth.css';
-
-let style = {
-    form:{
-        
-    }
-}
+import {Container} from "react-bootstrap";
+import {useDispatch} from "react-redux";
+import {useHistory} from "react-router";
+import {log_in} from "../../Acnions/userActions";
 
 
-export const Auth = () => {
+export const Auth = ({setLoad}) => {
 
+    const dispatch = useDispatch();
     const formRef = useRef(null);
+    const history = useHistory();
 
-    const handleSubmitForm = (e) => {
+    /**
+     * прослушивание события отправки формы авторизации
+     * тут идет запрос на сервер
+     * @param e
+     */
+    const handleSubmitForm = async (e) => {
         e.preventDefault();
+
         let form={}
+
         for(let key of formRef.current.elements){
             if (key.tagName === 'INPUT') {
                 form = {...form,[key.name]:key.value}
             }
         }
+
+        await Api.login(form).then(res=>{
+            dispatch(log_in(res));
+        });
+        history.push('/');
     };
 
     return (
-        <div style={style.root} className={'authWrapper'}>
-            <h1 className={'authWrapper__title'}>
-                Авторизация
-            </h1>
-            <form ref={formRef} onSubmit={handleSubmitForm}>
-                <OtherInput style={style.email} name={'email'} type={'email'}/>
-                <OtherInput style={style.pass} name={'pass'} type={'password'}/>
-                <Button style={{display:'block',margin:'36px auto'}} factor={'success'} text={'Войти'} type={'submit'}/>
-            </form>
-        </div>
+        <Container fluid={true} className={'mainWrapper formWrapper'}>
+
+            <div className="row h-100 m-auto align-content-center ">
+                <h1 className={'mb-4'}>
+                    Авторизация
+                </h1>
+
+                <form className={'col-12 row'} ref={formRef} onSubmit={handleSubmitForm}>
+
+                    <div className="formGroup mx-auto row">
+                        <OtherInput label={'введите email'} simpleClass={'col-12 mt-3 ml-auto mr-auto'} name={'email'} type={'email'}/>
+                        <OtherInput label={'введите пароль'} simpleClass={'col-12 mt-3 mx-auto'} name={'password'} type={'password'}/>
+                    </div>
+                    <Button style={{margin:'30px auto'}}  factor={'success'} text={'Войти'} type={'submit'}/>
+                </form>
+            </div>
+        </Container>
     );
 };

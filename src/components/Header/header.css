@@ -1,5 +1,4 @@
 .header {
-  width: 100vw;
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -11,6 +10,7 @@
   margin-left: 3.125%;
 }
 .header__logout {
+  cursor: pointer;
   margin-right: 2.604%;
   display: flex;
   justify-content: center;

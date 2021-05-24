@@ -40,7 +40,7 @@ export const OtherInput = ({name,required=false, label,type='text',disabled=fals
     };
 
     return (
-        <div style={style} className={'otherInput-wrapper'}>
+        <div style={style} className={`otherInput-wrapper ${simpleClass}`}>
             {label&&<label>{label}</label>}
             <input value={input} name={name} onChange={handleChangeInput} required={required} placeholder={placeholder} type={type} disabled={disabled}/>
         </div>

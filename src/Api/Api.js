@@ -136,7 +136,7 @@ class Api {
         console.log('после логина получен токен', this.getToken());
         localStorage.setItem('refresh_token',await res.data.refreshToken)
         this.refreshToken = localStorage.getItem('refresh_token');
-        return res
+        return res.data
     }
 
     /**

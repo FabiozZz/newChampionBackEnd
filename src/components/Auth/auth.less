@@ -1,18 +1,35 @@
-.mainWrapper{
-  width: 93.75%;
-  margin: auto;
+#firstLoading{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../assets/images/logoychamp.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  z-index: 999999999999999;
+}
+.formWrapper{
+  max-width: 736px;
+  h1{
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 52px;
+    color: #2E384D;
+  }
   form{
+    min-height: 296px;
     background-color: #FFFFFF;
-  }
-  &__title{
+    position: relative;
+    padding: 32px;
+    .formGroup{
+    }
+    button{
+      margin: 30px;
+    }
+    h1{
 
-  }
-  &__email{
-    width: 65.555% !important;
-    margin:36px auto;
-  }
-  &__pass{
-    width: 65.555% !important;
-    margin:36px auto;
+    }
   }
 }

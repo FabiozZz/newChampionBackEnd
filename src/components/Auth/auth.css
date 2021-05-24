@@ -1,16 +1,21 @@
-.mainWrapper {
-  width: 93.75%;
-  margin: auto;
+.formWrapper {
+  max-width: 736px;
 }
-.mainWrapper form {
+.formWrapper h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 52px;
+  color: #2E384D;
+}
+.formWrapper form {
+  min-height: 296px;
   background-color: #FFFFFF;
+  position: relative;
+  padding: 32px;
 }
-.mainWrapper__email {
-  width: 65.555% !important;
-  margin: 36px auto;
-}
-.mainWrapper__pass {
-  width: 65.555% !important;
-  margin: 36px auto;
+.formWrapper form button {
+  margin: 30px;
 }
 /*# sourceMappingURL=auth.css.map */
