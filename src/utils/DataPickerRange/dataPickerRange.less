@@ -1,17 +1,22 @@
 @import '../variable';
-.dataPicker-wrapper{
+.dataPickerRange-wrapper{
+  margin: 40px;
   font-family: 'SF Pro Display', sans-serif;
   font-size: 12px;
+  width: 220px;
   line-height: 16px;
   position: relative;
-  display: inline-block;
+  display: block;
+  border:none;
   &__inputWrapper{
+    display: flex;
+    flex-direction: row;
     color:#BFC5D2;
     background: #F4F6FC;
-    border: 1px solid #8798AD;
     box-sizing: border-box;
     border-radius: 5px;
     height: 40px;
+    border:none;
     &__label {
       color: #B0BAC9;
       font-family: 'Montserrat-bold',sans-serif;
@@ -22,35 +27,33 @@
       padding: 4px 0;
       text-transform: uppercase;
       display: block;
+      border: none;
+      &:focus{
+        border: none;
+      }
     }
     &__after{
       &:first-of-type input{
-        width: calc(200px / 2);
+        width: calc(220px / 2);
         padding: 8px;
       }
       &:last-of-type input{
-        width: calc(230px / 2);
+        width: calc(220px / 2);
         padding: 8px 16px 8px 8px;
       }
-
       position: relative;
       input {
         line-height: 24px;
         font-family: 'SF Pro Display', sans-serif;
         font-weight: 400;
-
         color:#BFC5D2;
         background: #F4F6FC;
-        border: none;
         box-sizing: border-box;
         height: 100%;
         border-radius: 5px;
         font-size: 16px;
         &:focus{
-          border: none;
-        }
-        &:active{
-          border: none;
+          border: 1px solid #8798AD !important;
         }
         &::placeholder{
           font-family: inherit;
@@ -58,7 +61,7 @@
         }
       }
 
-      img {
+      &__icon {
         content: '';
         position: absolute;
         top: 10px;
@@ -75,9 +78,18 @@
     border-radius: 16px;
     background-color: #FFFFFF;
     z-index: 9999999999999999999999999999;
-    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    left: 0;
+    width: calc(230px *2);
     position: absolute;
-    min-width: 272px;
+    padding: 16px;
+    &__calendarFrom + &__calendarTo{
+      display: inline-block;
+      min-width: 272px;
+
+    }
     &__change{
 
       display: flex;
@@ -157,5 +169,10 @@
 .activeItemTd{
   background: #2E384D;
   border-radius: 50%;
+  color:#ffffff !important;
+}
+.activeRangeItem{
+  background: red;
+  border-radius: 45%;
   color:#ffffff !important;
 }

@@ -21,27 +21,39 @@ import PropTypes from "prop-types";
  * @constructor
  */
 export const DataPickerRange = ({style = {}, label = '', disabled = false, simpleClass = ''}) => {
+    let windowWidth = window.innerWidth;
 
     let date = new Date();
     /**
      * локальный стейт для отображения календаря
      */
-    const [activeDate, setActiveDay] = useState({
-        currentDay: date.getDate(),
-        currentYear: date.getFullYear(),
-        currentMonth: date.getMonth(),
-        currentDayWeek: date.getDay(),
+    const [fromDate, setFromDay] = useState({
+        fromDay: date.getDate(),
+        fromYear: date.getFullYear(),
+        fromMonth: date.getMonth(),
+        fromDayWeek: date.getDay(),
     });
+    const [toDate, setToDay] = useState({
+        toDay: date.getDate(),
+        toYear: date.getFullYear(),
+        toMonth: date.getMonth()+1,
+        toDayWeek: date.getDay(),
+    });
+
 
     /**
      * деструктуризация локального стейта
      */
-    const {currentMonth, currentYear, currentDay} = activeDate;
+    const {fromMonth, fromYear, fromDay} = fromDate;
+    const {toMonth, toYear, toDay} = toDate;
+    const [pickerRange,setPickerRange] = useState({max:undefined,min:undefined});
+
 
     /**
      * установка значения в поле <input>
      */
-    const [userData, setUserData] = useState('');
+    const [fromData, setFromData] = useState('');
+    const [toData, setToData] = useState('');
 
     /**
      * стейт для переключения календаря
@@ -70,38 +82,58 @@ export const DataPickerRange = ({style = {}, label = '', disabled = false, simpl
      * переключатель месяца в большую сторону
      * @param e
      */
-    const handleNextMonth = (e) => {
+    const handleNextMonthFrom = (e) => {
         e.preventDefault();
-        currentMonth + 1 > 11 ?
-            setActiveDay({...activeDate, currentMonth: 0, currentYear: currentYear + 1}) :
-            setActiveDay({...activeDate, currentMonth: currentMonth + 1});
+        fromMonth + 1 > 11 ?
+            setFromDay({...fromDate, fromMonth: 0, fromYear: fromYear + 1}) :
+            setFromDay({...fromDate, fromMonth: fromMonth + 1});
+    };
+    const handleNextMonthTo = (e) => {
+        e.preventDefault();
+        toMonth + 1 > 11 ?
+            setToDay({...toDate, toMonth: 0, toYear: toYear + 1}) :
+            setToDay({...toDate, toMonth: toMonth + 1});
     };
     /**
      * переключатель месяца в меньшую сторону
      * @param e
      */
-    const handlePrevMonth = (e) => {
+    const handlePrevMonthFrom = (e) => {
         e.preventDefault();
-        currentMonth - 1 < 0 ?
-            setActiveDay({...activeDate, currentMonth: 11, currentYear: currentYear - 1}) :
-            setActiveDay({...activeDate, currentMonth: currentMonth - 1});
+        fromMonth - 1 < 0 ?
+            setFromDay({...fromDate, fromMonth: 11, fromYear: fromYear - 1}) :
+            setFromDay({...fromDate, fromMonth: fromMonth - 1});
+    };
+    const handlePrevMonthTo = (e) => {
+        e.preventDefault();
+        toMonth - 1 < 0 ?
+            setToDay({...toDate, toMonth: 11, toYear: toYear - 1}) :
+            setToDay({...toDate, toMonth: toMonth - 1});
     };
 
     /**
      * переключатель года в большую сторону
      * @param e
      */
-    const handleNextYear = (e) => {
+    const handleNextYearFrom = (e) => {
         e.preventDefault();
-        setActiveDay({...activeDate, currentYear: currentYear + 1});
+        setFromDay({...fromDate, fromYear: fromYear + 1});
+    };
+    const handleNextYearTo = (e) => {
+        e.preventDefault();
+        setToDay({...toDate, toYear: toYear + 1});
     };
     /**
      * переключатель года в меньшую сторону
      * @param e
      */
-    const handlePrevYear = (e) => {
+    const handlePrevYearFrom = (e) => {
         e.preventDefault();
-        setActiveDay({...activeDate, currentYear: currentYear - 1});
+        setFromDay({...fromDate, fromYear: fromYear - 1});
+    };
+    const handlePrevYearTo = (e) => {
+        e.preventDefault();
+        setToDay({...toDate, toYear: toYear - 1});
     };
 
     /**
@@ -112,13 +144,22 @@ export const DataPickerRange = ({style = {}, label = '', disabled = false, simpl
         if (!disabled) {
             e.preventDefault();
             setToggleIcon(!toggleIcon);
-            if (userData !== '') {
-                let newActiveDay = userData.split('.');
-                setActiveDay({
-                    ...activeDate,
-                    currentDay: Number(newActiveDay[0]) < 32 ? Number(newActiveDay[0]) : currentDay,
-                    currentMonth: Number(newActiveDay[1]) < 13 ? Number(newActiveDay[1] - 1) : activeDate.currentMonth,
-                    currentYear: Number(newActiveDay[2])
+            if (fromData !== '') {
+                let newActiveDay = fromData.split('.');
+                setFromDay({
+                    ...fromDate,
+                    fromDay: Number(newActiveDay[0]) < 32 ? Number(newActiveDay[0]) : fromDay,
+                    fromMonth: Number(newActiveDay[1]) < 13 ? Number(newActiveDay[1] - 1) : fromMonth,
+                    fromYear: Number(newActiveDay[2])
+                })
+            }
+            if (toData !== '') {
+                let newActiveDay = toData.split('.');
+                setToDay({
+                    ...toDate,
+                    toDay: Number(newActiveDay[0]) < 32 ? Number(newActiveDay[0]) : toDay,
+                    toMonth: Number(newActiveDay[1]) < 13 ? Number(newActiveDay[1] - 1) : toMonth,
+                    toYear: Number(newActiveDay[2])
                 })
             }
 
@@ -129,25 +170,75 @@ export const DataPickerRange = ({style = {}, label = '', disabled = false, simpl
      * функция для установки значения в поле инпут
      * @param e
      */
-    const handleChangeInputDate = (e) => {
+    const handleChangeInputDateFrom = (e) => {
         let symbol = e.target.value;
-        setUserData(symbol);
+        setFromData(symbol);
+    };
+    const handleChangeInputDateTo = (e) => {
+        let symbol = e.target.value;
+        setToData(symbol);
     };
 
     /**
      * установка дня при клике на календаре числа,
      * установка значения для <input/> используя стейт календаря
      * @param e
+     * @param arrayTarget
      */
+        // const handleChangeDataPicker = (e) => {
+        //     let symbol = e.target.textContent;
+        //     setActiveDay({...activeDate, currentDay: symbol})
+        //     setUserData(((symbol < 10) ? '0' + symbol : symbol) + '.' + ((currentMonth + 1) < 10 ? '0' + (currentMonth + 1) : currentMonth + 1) + '.' + currentYear)
+        // };
     const handleChangeDataPicker = (e) => {
-        let symbol = e.target.textContent;
-        setActiveDay({...activeDate, currentDay: symbol})
-        setUserData(((symbol < 10) ? '0' + symbol : symbol) + '.' + ((currentMonth + 1) < 10 ? '0' + (currentMonth + 1) : currentMonth + 1) + '.' + currentYear)
-    };
+            const {min, max} = pickerRange;
+
+            let numberCell = +e.target.textContent;
+            if (min === undefined) {
+                setPickerRange(prevState => ({...prevState, min: numberCell}));
+                setFromDay(prevState => ({...prevState, fromDay: min}))
+            }else if (max === undefined && numberCell > min) {
+                setPickerRange(prevState => ({...prevState, max: numberCell}));
+                setToDay(prevState=>({...prevState, toDay: max}));
+            }else if (numberCell <= min || (numberCell > min && numberCell < max)) {
+                setPickerRange(prevState => ({...prevState, max: numberCell}));
+                setToDay(prevState=>({...prevState, toDay: max}));
+            }else{
+                setPickerRange(prevState => ({...prevState, min: numberCell}));
+                setFromDay(prevState => ({...prevState, fromDay: min}))
+            }
+            // if (pickerRange.length <3 ) {
+            //     pickerRange.push(+e.target.textContent)
+            // }else{
+            //     if (+e.target.textContent <= pickerRange[0]) {
+            //         pickerRange[0].push(+e.target.textContent);
+            //     }else if(+e.target.textContent <= pickerRange[1] || +e.target.textContent >= pickerRange[1]){
+            //         pickerRange[1].push(+e.target.textContent);
+            //         // arrayTarget[1] = +e.target.textContent;
+            //     }
+            //
+            // }
+            console.log(pickerRange)
+            console.log(fromDate);
+            console.log(toDate);
+            // arrayTarget = arrayTarget.sort((a, b) => a - b);
+            // setFromData(((min < 10) ? '0' + min : min) + '.' + ((fromMonth + 1) < 10 ? '0' + (fromMonth + 1) : fromMonth + 1) + '.' + fromYear)
+            // setFromData(((max < 10) ? '0' + max : max) + '.' + ((toMonth + 1) < 10 ? '0' + (toMonth + 1) : toMonth + 1) + '.' + toYear)
+        };
+
+
+    useEffect(() => {
+        if (calendarWrapper.current!=null) {
+            if (calendarWrapper.current.getBoundingClientRect().right > windowWidth) {
+                calendarWrapper.current.style.left = (windowWidth - calendarWrapper.current.getBoundingClientRect().right - 10 ) + 'px'
+            }
+        }
+    },[toggleIcon, windowWidth]);
+
 
     /**
      * массив с кратким наименованием дней недели
-     * @type {string[]}
+     * @type {string[]}tr
      */
     const dayOfTheWeek = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 
@@ -168,14 +259,18 @@ export const DataPickerRange = ({style = {}, label = '', disabled = false, simpl
      * берет максимальное колличество дней для этого месяца
      * @type {number}
      */
-    let maxDays = days[currentMonth];
+    let maxDaysFrom = days[fromMonth];
+    let maxDaysTo = days[toMonth];
 
     /**
      * проверка на високосный год, если выбран февраль, и год високосный ->
      * прибавляет к максимальному колличеству дней еще один
      */
-    if (leapYear(currentYear)) {
-        maxDays++;
+    if (leapYear(fromYear)) {
+        maxDaysFrom++;
+    }
+    if (leapYear(toYear)) {
+        maxDaysTo++;
     }
 
     /**
@@ -200,12 +295,14 @@ export const DataPickerRange = ({style = {}, label = '', disabled = false, simpl
      * получение первого дня недели выбранного года и месяца для корректного отображения календаря
      * @type {number}
      */
-    const firstDayMonth = new Date(currentYear, currentMonth, 0).getDay();
+    const firstDayMonthFrom = new Date(fromYear, fromMonth, 0).getDay();
+    const firstDayMonthTo = new Date(toYear, toMonth, 0).getDay();
 
     /**
      * отрисовка самого календаря используя helper
      */
-    let table = renderTable(maxDays, firstDayMonth, handleChangeDataPicker, currentDay);
+    let tableFrom = renderTable(maxDaysFrom, firstDayMonthFrom, handleChangeDataPicker, fromDate,toDay);
+    let tableTo = renderTable(maxDaysTo, firstDayMonthTo, handleChangeDataPicker,fromDate, toDay);
 
     return (
         <>
@@ -213,64 +310,91 @@ export const DataPickerRange = ({style = {}, label = '', disabled = false, simpl
 
                 {/* обертка инпута */}
 
-                <div className={`dataPicker-wrapper`}>
-                    <label className={'dataPicker-wrapper__inputWrapper__label'}>{label}</label>
-                    <div className={`dataPicker-wrapper__inputWrapper ${disabled ? 'disabledDataPicker' : ''}`}>
-                        <label className={`dataPicker-wrapper__inputWrapper__after`}>
+                <div className={`dataPickerRange-wrapper`}>
+                    <label className={'dataPickerRange-wrapper__inputWrapper__label'}>{label}</label>
+                    <div className={`dataPickerRange-wrapper__inputWrapper ${disabled ? 'disabledDataPicker' : ''}`}>
+                        <label className={`dataPickerRange-wrapper__inputWrapper__after`}>
                             <InputMask ref={inputRef}
                                        name={'firstDate'}
                                        mask="99.99.9999"
-                                       disabled={true}
                                        placeholder={'Не указано'}
-                                       onChange={handleChangeInputDate}
-                                       value={userData}
+                                       onChange={handleChangeInputDateFrom}
+                                       value={fromData}
                             />
-                        </label>
-                        <span> --- </span>
-                        <label className={`dataPicker-wrapper__inputWrapper__after`}>
+                            <p className={'dataPickerRange-wrapper__inputWrapper__after__icon'}> --- </p>
                             <InputMask ref={inputRef}
                                        mask="99.99.9999"
                                        name={'lastDate'}
-                                       disabled={true}
                                        placeholder={'Не указано'}
-                                       onChange={handleChangeInputDate}
-                                       value={userData}
+                                       onChange={handleChangeInputDateTo}
+                                       value={toData}
                             />
-                            <img ref={iconRef} src={calendar} alt="calendar" onClick={handleToggleIconCalendar}/>
+                            <img className={'dataPickerRange-wrapper__inputWrapper__after__icon'} ref={iconRef} src={calendar} alt="calendar" onClick={handleToggleIconCalendar}/>
                         </label>
                     </div>
 
                     {/* обертка календаря */}
 
                     {toggleIcon &&
-                    <div ref={calendarWrapper} className={'dataPicker-wrapper__calendar'}>
-                        <div className={'dataPicker-wrapper__calendar__change'}>
-                            <div className={'dataPicker-wrapper__calendar__change__wrapper'}>
-                                <div className={'dataPicker-wrapper__calendar__change__wrapper__prev'}
-                                     onClick={handlePrevMonth}/>
-                                <span>{month[currentMonth]}</span>
-                                <div className={'dataPicker-wrapper__calendar__change__wrapper__next'}
-                                     onClick={handleNextMonth}/>
+                    <div ref={calendarWrapper} className={'dataPickerRange-wrapper__calendar'}>
+                        <div  className={'dataPickerRange-wrapper__calendarFrom'}>
+                            <div className={'dataPickerRange-wrapper__calendar__change'}>
+                                <div className={'dataPickerRange-wrapper__calendar__change__wrapper'}>
+                                    <div className={'dataPickerRange-wrapper__calendar__change__wrapper__prev'}
+                                         onClick={handlePrevMonthFrom}/>
+                                    <span>{month[fromMonth]}</span>
+                                    <div className={'dataPickerRange-wrapper__calendar__change__wrapper__next'}
+                                         onClick={handleNextMonthFrom}/>
+                                </div>
+                                <div className={'dataPickerRange-wrapper__calendar__change__wrapper'}>
+                                    <div className={'dataPickerRange-wrapper__calendar__change__wrapper__prev'}
+                                         onClick={handlePrevYearFrom}/>
+                                    <span>{fromYear}</span>
+                                    <div className={'dataPickerRange-wrapper__calendar__change__wrapper__next'}
+                                         onClick={handleNextYearFrom}/>
+                                </div>
                             </div>
-                            <div className={'dataPicker-wrapper__calendar__change__wrapper'}>
-                                <div className={'dataPicker-wrapper__calendar__change__wrapper__prev'}
-                                     onClick={handlePrevYear}/>
-                                <span>{currentYear}</span>
-                                <div className={'dataPicker-wrapper__calendar__change__wrapper__next'}
-                                     onClick={handleNextYear}/>
+                            <div className={'dataPickerRange-wrapper__calendar__date'}>
+                                <table>
+                                    <thead>
+                                    <tr>{dayOfTheWeek.map((el, index) => <th key={index}>{el}</th>)}</tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr className={'separate'}/>
+                                    {tableFrom}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div className={'dataPicker-wrapper__calendar__date'}>
-                            <table>
-                                <thead>
-                                <tr>{dayOfTheWeek.map((el, index) => <th key={index}>{el}</th>)}</tr>
-                                </thead>
-                                <tbody>
-                                <tr className={'separate'}/>
+                        <div className={'dataPickerRange-wrapper__calendarTo'}>
 
-                                {table}
-                                </tbody>
-                            </table>
+                            <div className={'dataPickerRange-wrapper__calendar__change'}>
+                                <div className={'dataPickerRange-wrapper__calendar__change__wrapper'}>
+                                    <div className={'dataPickerRange-wrapper__calendar__change__wrapper__prev'}
+                                         onClick={handlePrevMonthTo}/>
+                                    <span>{month[toMonth]}</span>
+                                    <div className={'dataPickerRange-wrapper__calendar__change__wrapper__next'}
+                                         onClick={handleNextMonthTo}/>
+                                </div>
+                                <div className={'dataPickerRange-wrapper__calendar__change__wrapper'}>
+                                    <div className={'dataPickerRange-wrapper__calendar__change__wrapper__prev'}
+                                         onClick={handlePrevYearTo}/>
+                                    <span>{toYear}</span>
+                                    <div className={'dataPickerRange-wrapper__calendar__change__wrapper__next'}
+                                         onClick={handleNextYearTo}/>
+                                </div>
+                            </div>
+                            <div className={'dataPickerRange-wrapper__calendar__date'}>
+                                <table>
+                                    <thead>
+                                    <tr>{dayOfTheWeek.map((el, index) => <th key={index}>{el}</th>)}</tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr className={'separate'}/>
+                                    {tableTo}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     }

@@ -21,7 +21,7 @@ import PropTypes from "prop-types";
  * @constructor
  */
 export const DataPicker = ({style = {}, label = '', disabled = false, simpleClass = ''}) => {
-
+    let windowWidth = window.innerWidth;
     /**
      * локальный стейт для отображения календаря
      */
@@ -102,6 +102,19 @@ export const DataPicker = ({style = {}, label = '', disabled = false, simpleClas
         e.preventDefault();
         setActiveDay({...activeDate, currentYear: currentYear - 1});
     };
+
+    useEffect(() => {
+
+
+        if (calendarWrapper.current!=null) {
+            if (calendarWrapper.current.getBoundingClientRect().right > windowWidth) {
+                calendarWrapper.current.style.left = (windowWidth - calendarWrapper.current.getBoundingClientRect().right - 10) + 'px'
+                console.log(calendarWrapper.current.style.left)
+            }
+            console.log(calendarWrapper.current.getBoundingClientRect().right)
+        }
+    },[toggleIcon]);
+
 
     /**
      * переключатель календаря для клика по иконке
@@ -207,7 +220,6 @@ export const DataPicker = ({style = {}, label = '', disabled = false, simpleClas
     let table = renderTable(maxDays, firstDayMonth, handleChangeDataPicker, currentDay);
 
     return (
-        <>
             <div style={style} className={` ${simpleClass}`}>
 
                 {/* обертка инпута */}
@@ -263,7 +275,6 @@ export const DataPicker = ({style = {}, label = '', disabled = false, simpleClas
                     }
                 </div>
             </div>
-        </>
     );
 };
 DataPicker.defaultProps = {

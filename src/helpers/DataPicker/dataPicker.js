@@ -1,6 +1,6 @@
 import React from "react";
 
-export const renderTable = (maxDays,firstDayMonth,func,classIndex) => {
+export const renderTable = (maxDays,firstDayMonth,func,classIndexFrom,classIndexTo) => {
     let renderTable = [];
     for (let row = 1, day = 1; day <= maxDays; row++) {
         let temp = [];
@@ -19,7 +19,12 @@ export const renderTable = (maxDays,firstDayMonth,func,classIndex) => {
         }
         renderTable.push(temp);
     }
-    return renderTable.map((tr,index)=>(<tr key={index}>{tr.map((td,index)=>(<td key={index} className={+classIndex === td? 'activeItemTd':''} onClick={func}>{td}</td>))}</tr>))
+    console.log(classIndexTo)
+    console.log(classIndexFrom)
+    return renderTable.map((tr,index)=>(
+        <tr key={index}>{tr.map((td,index)=>(
+            <td key={index} className={`${+classIndexFrom === td || +classIndexTo === td? 'activeItemTd':''} ${ (td>(+classIndexFrom)) && td<(+classIndexTo)  ? 'activeRangeItem':''}`} onClick={func}>{td}</td>))
+        }</tr>))
 };
 
 export const leapYear = (year)=>
