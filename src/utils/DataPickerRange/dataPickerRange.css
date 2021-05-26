@@ -6,22 +6,29 @@
   font-family: 'SF Pro Display', sans-serif;
   font-size: 12px;
   width: 220px;
+  height: 40px;
   line-height: 16px;
   position: relative;
   display: block;
-  border: none;
 }
 .dataPickerRange-wrapper__inputWrapper {
-  display: flex;
-  flex-direction: row;
   color: #BFC5D2;
   background: #F4F6FC;
   box-sizing: border-box;
   border-radius: 5px;
-  height: 40px;
-  border: none;
+  position: relative;
+  height: 100%;
+  border: 1px solid #BFC5D2;
 }
 .dataPickerRange-wrapper__inputWrapper__label {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   color: #B0BAC9;
   font-family: 'Montserrat-bold', sans-serif;
   font-weight: 700;
@@ -33,39 +40,46 @@
   display: block;
   border: none;
 }
-.dataPickerRange-wrapper__inputWrapper__label:focus {
-  border: none;
-}
 .dataPickerRange-wrapper__inputWrapper__after {
+  margin: 0;
+  width: 100%;
+  height: 100%;
   position: relative;
 }
 .dataPickerRange-wrapper__inputWrapper__after:first-of-type input {
-  width: calc(220px / 2);
-  padding: 8px;
+  width: 50%;
+  padding-left: 8px;
 }
 .dataPickerRange-wrapper__inputWrapper__after:last-of-type input {
-  width: calc(220px / 2);
-  padding: 8px 16px 8px 8px;
+  width: 50%;
+  padding-left: 4px;
 }
 .dataPickerRange-wrapper__inputWrapper__after input {
   line-height: 24px;
   font-family: 'SF Pro Display', sans-serif;
+  border-radius: 5px;
   font-weight: 400;
   color: #BFC5D2;
   background: #F4F6FC;
   box-sizing: border-box;
   height: 100%;
-  border-radius: 5px;
+  border: none;
   font-size: 16px;
 }
 .dataPickerRange-wrapper__inputWrapper__after input:focus {
-  border: 1px solid #8798AD !important;
+  outline: none;
 }
 .dataPickerRange-wrapper__inputWrapper__after input::placeholder {
+  padding-left: 8px;
   font-family: inherit;
   font-weight: inherit;
 }
-.dataPickerRange-wrapper__inputWrapper__after__icon {
+.dataPickerRange-wrapper__inputWrapper__after span {
+  position: absolute;
+  top: 30%;
+  left: calc(170px / 2);
+}
+.dataPickerRange-wrapper__inputWrapper__after img {
   content: '';
   position: absolute;
   top: 10px;
@@ -82,15 +96,18 @@
   z-index: 9999999999999999999999999999;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   left: 0;
-  width: calc(230px * 2);
+  width: 240px;
   position: absolute;
   padding: 16px;
 }
-.dataPickerRange-wrapper__calendar__calendarFrom + .dataPickerRange-wrapper__calendar__calendarTo {
-  display: inline-block;
-  min-width: 272px;
+.dataPickerRange-wrapper__calendar .calendarFrom {
+  padding-right: 5px;
+  border-right: 1px solid #E0E0E0;
+}
+.dataPickerRange-wrapper__calendar .calendarTo {
+  padding-left: 5px;
 }
 .dataPickerRange-wrapper__calendar__change {
   display: flex;

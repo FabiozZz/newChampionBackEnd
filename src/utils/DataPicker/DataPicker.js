@@ -111,7 +111,6 @@ export const DataPicker = ({style = {}, label = '', disabled = false, simpleClas
                 calendarWrapper.current.style.left = (windowWidth - calendarWrapper.current.getBoundingClientRect().right - 10) + 'px'
                 console.log(calendarWrapper.current.style.left)
             }
-            console.log(calendarWrapper.current.getBoundingClientRect().right)
         }
     },[toggleIcon]);
 
@@ -218,7 +217,6 @@ export const DataPicker = ({style = {}, label = '', disabled = false, simpleClas
      * отрисовка самого календаря используя helper
      */
     let table = renderTable(maxDays, firstDayMonth, handleChangeDataPicker, currentDay);
-
     return (
             <div style={style} className={` ${simpleClass}`}>
 
