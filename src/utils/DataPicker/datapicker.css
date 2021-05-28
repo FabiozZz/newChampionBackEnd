@@ -22,6 +22,7 @@
   padding: 4px 0;
   text-transform: uppercase;
   display: block;
+  margin: 0;
 }
 .dataPicker-wrapper__inputWrapper__after {
   position: relative;

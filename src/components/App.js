@@ -38,8 +38,8 @@ function App() {
     return (
         <BrowserRouter>
             <form ref={formRef} onSubmit={handleSubmit}>
-                <DataPicker/>
-                <DataPickerRange/>
+                <DataPicker label={'data'}/>
+                <DataPickerRange label={'data'}/>
             </form>
             {/*<DataPicker style={{width:'220px',margin:'20px'}}/>*/}
             {/*<Header/>*/}

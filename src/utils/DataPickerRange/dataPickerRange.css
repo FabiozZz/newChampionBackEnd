@@ -21,14 +21,6 @@
   border: 1px solid #BFC5D2;
 }
 .dataPickerRange-wrapper__inputWrapper__label {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   color: #B0BAC9;
   font-family: 'Montserrat-bold', sans-serif;
   font-weight: 700;
@@ -38,7 +30,7 @@
   padding: 4px 0;
   text-transform: uppercase;
   display: block;
-  border: none;
+  margin: 0;
 }
 .dataPickerRange-wrapper__inputWrapper__after {
   margin: 0;

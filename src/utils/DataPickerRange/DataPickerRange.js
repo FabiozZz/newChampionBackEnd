@@ -309,10 +309,6 @@ export const DataPickerRange = ({style = {}, label = '', disabled = false, simpl
         click
     );
 
-    console.log(fromDate)
-    console.log(toDate)
-    console.log(fromSelect)
-    console.log(toSelect)
     return (
         <>
             <div style={style} className={` ${simpleClass}`}>
