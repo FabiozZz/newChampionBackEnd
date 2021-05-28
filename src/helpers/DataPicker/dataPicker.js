@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 
 const cycleCalendar = (days,month,array)=>{
     for (let row = 1, day = 1; day <= days; row++) {
@@ -30,26 +31,58 @@ export const renderTable = (maxDays,firstDayMonth,func,classIndex) => {
         }</tr>))
 };
 
-export const renderTableRange = (maxDaysFrom,firstDayMonthFrom,func,dayFrom,monthFrom,yearFrom,dayTo,monthTo,yearTo,key) => {
+export const renderTableRange = (
+    maxDaysFrom,
+    firstDayMonthFrom,
+    func,
+    dayFrom,
+    monthFrom,
+    yearFrom,
+    dayTo,
+    monthTo,
+    yearTo,
+    selectFrom,
+    selectTo,click) => {
+
     let tableFrom = [];
+
+
     cycleCalendar(maxDaysFrom, firstDayMonthFrom, tableFrom);
-    let keyCell;
 
     return tableFrom.map((tr, index) => {
-        return <tr key={index}>{tr.map((td, index) => {
-            keyCell = key+monthFrom+yearFrom;
-            key++;
-                // let tempClass = (keyFrom === key+monthFrom+yearFrom || keyTo === key+monthTo+yearTo) ? 'activeItemTd' : null;
-                // if (keyTo && keyFrom) {
-                //     if (key > keyFrom && key  < keyTo) {
-                //         tempClass += ' activeRangeItem'
-                //     }
-                // }
+        return <tr key={index}>{tr.map((td,index) => {
+                let month = (click ? monthFrom : monthTo);
+                let year = (click ? yearFrom : yearTo);
+            let idCell = (td < 10 ? '0'+ td : td) + '-' + (month<10? '0'+month:month) + '-' + year;
+            let cell = [+td, +month+1, +year];
+                let arrayFrom = selectFrom.split('-');
+                let arrayTo = selectTo.split('-');
+                let [fromD,fromM,fromY] = arrayFrom;
+                let [toD,toM,toY] = arrayTo;
+                let tempClass = (selectFrom === idCell) || (selectTo === idCell) ? 'activeItemTd' : '';
+            let addClassFrom = '',addClassTo='';
+            if ((selectFrom !== selectTo)&& (selectTo && selectFrom)) {
+                addClassFrom = moment([+fromD,+fromM+1,+fromY],'DD-MM-YYYY').isBefore(moment([+toD,+toM+1,+toY],'DD-MM-YYYY'))
+                ? 'activeItemFrom':'activeItemTo';
+                addClassTo = moment([+fromD,+fromM+1,+fromY],'DD-MM-YYYY').isAfter(moment([+toD,+toM+1,+toY],'DD-MM-YYYY'))
+                ? 'activeItemFrom':'activeItemTo';
+            }
 
-                return (<td key={key}
-                            id={keyCell}
-                            // className={tempClass}
-                            onClick={func}>{td}</td>);
+            // let addClassTo = selectFrom && selectTo? '':'';
+            let follow = moment(cell, 'DD-MM-YYYY').isBefore(moment([+toD,+toM+1,+toY], 'DD-MM-YYYY'))&&moment(cell, 'DD-MM-YYYY').isAfter(moment([+fromD,+fromM+1,+fromY], 'D-M-YYYY'))
+            let unfollow = moment(cell, 'DD-MM-YYYY').isBefore(moment([+fromD,+fromM+1,+fromY], 'DD-MM-YYYY'))&&moment(cell, 'DD-MM-YYYY').isAfter(moment([+toD,+toM+1,+toY], 'D-M-YYYY'))
+            console.log()
+                let plusClass =
+                    td !== undefined && selectTo && selectFrom && selectFrom !== selectTo
+                    &&
+                    (
+                        follow || unfollow
+                    )
+                        ? 'activeItemRange' : '';
+                return (<td key={index}
+                            id={idCell}
+                            className={`${tempClass} ${plusClass} ${idCell === selectFrom ?addClassFrom:''} ${idCell === selectTo?addClassTo:''}`}
+                            onClick={td!==undefined? func : null}>{td}</td>);
             }
         )}</tr>
     })

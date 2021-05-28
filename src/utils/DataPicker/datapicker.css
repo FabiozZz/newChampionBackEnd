@@ -67,8 +67,7 @@
   padding: 16px;
   position: absolute;
   left: 0;
-  top: 100%;
-  width: 284px;
+  width: 272px;
 }
 .dataPicker-wrapper__calendar__change {
   display: flex;
@@ -133,14 +132,10 @@
   height: 32px;
 }
 .dataPicker-wrapper__calendar__date table tbody td {
+  position: relative;
   width: 32px;
   height: 32px;
   cursor: pointer;
   color: #69707F;
-}
-.activeItemTd {
-  background: #2E384D;
-  border-radius: 50%;
-  color: #ffffff !important;
 }
 /*# sourceMappingURL=datapicker.css.map */

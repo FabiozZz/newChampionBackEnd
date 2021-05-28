@@ -33,20 +33,22 @@ export const DataPickerRange = ({style = {}, label = '', disabled = false, simpl
         fromYear: date.getFullYear(),
         fromMonth: date.getMonth(),
         fromDayWeek: date.getDay(),
+        fromSelect:''
     });
     const [toDate, setToDay] = useState({
         toDay: undefined,
         toYear: date.getFullYear(),
         toMonth: date.getMonth(),
         toDayWeek: date.getDay(),
+        toSelect:''
     });
 
     const [click, setClick] = useState(true);
     /**
      * деструктуризация локального стейта
      */
-    const {fromMonth, fromYear, fromDay} = fromDate;
-    const {toMonth, toYear, toDay} = toDate;
+    const {fromMonth, fromYear, fromDay,fromSelect} = fromDate;
+    const {toMonth, toYear, toDay,toSelect} = toDate;
 
 
     /**
@@ -201,20 +203,20 @@ export const DataPickerRange = ({style = {}, label = '', disabled = false, simpl
     const handleChangeDataPicker = (e) => {
         click ? handleChangeDataPickerFrom(e) : handleChangeDataPickerTo(e);
         setClick(prevState => !prevState);
-        // let symbol = e.target.textContent;
-        // setFromDay({...fromDate, fromDay: symbol})
-        // setFromData(((symbol < 10) ? '0' + symbol : symbol) + '.' + ((fromMonth + 1) < 10 ? '0' + (fromMonth + 1) : fromMonth + 1) + '.' + fromYear)
     };
     const handleChangeDataPickerFrom = (e) => {
         let symbol = e.target.textContent;
-        setFromDay({...fromDate, fromDay: symbol})
+        let id = e.target.getAttribute('id');
+        setFromDay({...fromDate, fromDay: +symbol, fromSelect: id});
         setFromData(((symbol < 10) ? '0' + symbol : symbol) + '.' + ((fromMonth + 1) < 10 ? '0' + (fromMonth + 1) : fromMonth + 1) + '.' + fromYear)
         setToData(((symbol < 10) ? '0' + symbol : symbol) + '.' + ((fromMonth + 1) < 10 ? '0' + (fromMonth + 1) : fromMonth + 1) + '.' + fromYear)
-        setToDay({...toDate, toDay: undefined,toMonth: fromMonth,toYear: fromYear})
+        setToDay({...toDate, toDay: undefined,toMonth: fromMonth,toYear: fromYear,toSelect: id})
+
     };
     const handleChangeDataPickerTo = (e) => {
         let symbol = e.target.textContent;
-        setToDay({...toDate, toDay: symbol})
+        let id = e.target.getAttribute('id');
+        setToDay({...toDate, toDay: +symbol,toSelect: id})
         setToData(((symbol < 10) ? '0' + symbol : symbol) + '.' + ((toMonth + 1) < 10 ? '0' + (toMonth + 1) : toMonth + 1) + '.' + toYear)
     };
 
@@ -292,13 +294,25 @@ export const DataPickerRange = ({style = {}, label = '', disabled = false, simpl
     /**
      * отрисовка самого календаря используя helper
      */
-        // let tableFrom = renderTable(maxDaysFrom, firstDayMonthFrom, handleChangeDataPickerFrom,toDay,fromDay);
-        // let tableTo = renderTable(maxDaysTo, firstDayMonthTo, handleChangeDataPickerTo,fromDate,toDay);
-    let key = 0;
-    let tableFrom = renderTableRange(click? maxDaysFrom: maxDaysTo,
+    let tableFrom = renderTableRange(
+        click? maxDaysFrom: maxDaysTo,
         click?firstDayMonthFrom:firstDayMonthTo,
-        handleChangeDataPicker,fromDay,fromMonth,fromYear,toDay,toMonth,toMonth,toYear,key);
+        handleChangeDataPicker,
+        fromDay,
+        fromMonth,
+        fromYear,
+        toDay,
+        toMonth,
+        toYear,
+        fromSelect,
+        toSelect,
+        click
+    );
 
+    console.log(fromDate)
+    console.log(toDate)
+    console.log(fromSelect)
+    console.log(toSelect)
     return (
         <>
             <div style={style} className={` ${simpleClass}`}>
@@ -316,7 +330,7 @@ export const DataPickerRange = ({style = {}, label = '', disabled = false, simpl
                                        onChange={handleChangeInputDateFrom}
                                        value={fromData}
                             />
-                            <span>---</span>
+                            <div className={'dataPickerRange-wrapper__inputWrapper__after__separator'}/>
                             <InputMask ref={inputRef}
                                        mask="99.99.9999"
                                        name={'lastDate'}
