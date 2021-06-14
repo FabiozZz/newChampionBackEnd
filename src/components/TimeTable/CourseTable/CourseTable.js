@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import classes from './courseTable.module.css';
 import {CardUser} from "../../../utils/CardUser/CardUser";
-import edit from '../../../assets/images/editCouch.svg'
 import {useDispatch, useSelector} from "react-redux";
 import {Option} from "./Option";
 import {change_couch} from "../../../Acnions/timeTableActions";

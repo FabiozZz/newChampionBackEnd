@@ -12,6 +12,7 @@ export const Option = ({change,id,couch,couchList}) => {
     const selectRef = useRef(null);
     useEffect(() => {
         if (optionBox.current!=null) {
+            optionBox.current.style.bottom = - (optionBox.current.getBoundingClientRect().height ) + 'px'
             if (optionBox.current.getBoundingClientRect().right >= window.innerWidth) {
                 optionBox.current.style.right = 30 + 'px';
             }
@@ -30,21 +31,21 @@ export const Option = ({change,id,couch,couchList}) => {
     }, []);
 
     return (
-        <div ref={selectRef} className={classes.block_trainer}>
+        <div onClick={handleToggleOptionBox} ref={selectRef} className={classes.block_trainer}>
             <span className={classes.trainer}>{couch}</span>
             <div className={classes.edit}>
-                <img className={classes.edit__icon} onClick={handleToggleOptionBox} src={edit} alt="edit"/>
+                <img className={classes.edit__icon}  src={edit} alt="edit"/>
                 {toggleOption&&<div className={classes.arrowOptionBox}/>}
+                {toggleOption &&
+                <div ref={optionBox} className={classes.optionBox}>
+                    {couchList.map(item => (<option key={item.id} onClick={(e) => {
+                        change(id, e.target.value);
+                        setToggleOption(false);
+                    }} value={item.name} className={classes.optionBox_item}>{item.name}</option>))}
+                </div>
+                }
 
             </div>
-            {toggleOption &&
-            <div ref={optionBox} className={classes.optionBox}>
-                {couchList.map(item => (<option key={item.id} onClick={(e) => {
-                    change(id, e.target.value);
-                    setToggleOption(false);
-                }} value={item.name} className={classes.optionBox_item}>{item.name}</option>))}
-            </div>
-            }
 
         </div>    );
 };

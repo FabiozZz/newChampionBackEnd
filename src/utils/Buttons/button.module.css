@@ -69,9 +69,10 @@
      background: var(--btn-active-default);
  }
 .default:disabled{
-     color:#69707F;
-     background: var(--btn-disabled-default);
- }
+    color:#BFC5D2;
+    background: var(--btn-disabled-success);
+    border: none;
+}
 
 .dark {
     border: 1px solid #ffffff;

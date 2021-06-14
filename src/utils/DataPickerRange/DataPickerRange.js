@@ -198,7 +198,6 @@ export const DataPickerRange = ({style = {}, label = '', disabled = false, simpl
      * установка дня при клике на календаре числа,
      * установка значения для <input/> используя стейт календаря
      * @param e
-     * @param arrayTarget
      */
     const handleChangeDataPicker = (e) => {
         click ? handleChangeDataPickerFrom(e) : handleChangeDataPickerTo(e);

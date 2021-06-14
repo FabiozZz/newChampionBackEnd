@@ -10,7 +10,8 @@ const user = {
 }
 const data = [
     {
-        id: 1, totalClients: 14,toDay:0, name: 'Бразильское Джиу-Джитсу', coach: 'Плиев Станислав Робертович', timeTraining: '12.04.2021',
+        //Плиев Станислав Робертович
+        id: 1, totalClients: 14,toDay:0, name: 'Бразильское Джиу-Джитсу', coach: 'Константин Константинович Константинопольский', timeTraining: '12.04.2021',
         clients: [
             {
                 id: 1, name: 'Константин', middleName: 'Константинович', lastName: 'Константинопольский',
@@ -199,9 +200,9 @@ const data = [
 // ];
 const dataSelectAllGroup = [
     {id: 1, name: 'дети 3-7 лет',course:[
-            {id:1,name: 'Маленький Самурай'},
+            {id:1,name: 'Маленькие Самураи'},
             {id:2,name: 'Маленький Чемпион'},
-            {id:3,name: 'Маленький Воин'},
+            {id:3,name: 'Маленькие воины'},
         ]},
     {id: 2, name: 'подростки 8-15 лет',course:[
             {id:4,name: 'Тхэквондо'},
@@ -218,9 +219,9 @@ const dataSelectAllGroup = [
 ];
 const dataSelectChildGroup = [
     {id: 1, name: 'дети 3-7 лет',course:[
-            {id:1,name: 'Маленький Самурай'},
+            {id:1,name: 'Маленькие Самураи'},
             {id:2,name: 'Маленький Чемпион'},
-            {id:3,name: 'Маленький Воин'},
+            {id:3,name: 'Маленькие воины'},
         ]},
     {id: 2, name: 'подростки 8-15 лет',course:[
             {id:4,name: 'Тхэквондо'},

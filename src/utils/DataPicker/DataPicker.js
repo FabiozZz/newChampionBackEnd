@@ -233,7 +233,6 @@ export const DataPicker = ({
      * отрисовка самого календаря используя helper
      */
     let table = renderTable(maxDays, firstDayMonth, handleChangeDataPicker, currentDay, classes.activeItemTd);
-    let str;
     return (
         <div style={style} className={` ${simpleClass}`}>
 

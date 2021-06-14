@@ -66,12 +66,19 @@ export const Kid = () => {
         setPersonalData({...personalData, birthDay: some});
     };
 
-    const [parents, setParents] = useState([]);
+    const [parents, setParents] = useState([{},{}]);
+
     const addParentsData = (data) => {
         setParents(prevState => [...prevState, data]);
+        console.log(parents)
     };
+
+
     const removeParentsData = (i) => {
-        setParents(prevState => prevState.splice(i, 1));
+        if (i > -1) {
+            console.log(parents)
+            setParents(prevState => prevState.splice(i, 1));
+        }
     };
 
 
@@ -126,6 +133,10 @@ export const Kid = () => {
         })();
     },[dispatch]);
 
+    const handleSubmitForm = (e) => {
+        e.preventDefault();
+        console.log(parents);
+    };
 
     return (
         <div className={'col-12'}>
@@ -177,7 +188,7 @@ export const Kid = () => {
 
             {/* блок с кнопками отмены и отправки данных */}
 
-            <EndBtnGroup goBack={goBack} personal={personal} rules={rules}/>
+            <EndBtnGroup submit={handleSubmitForm} goBack={goBack} personal={personal} rules={rules}/>
 
 
         </div>

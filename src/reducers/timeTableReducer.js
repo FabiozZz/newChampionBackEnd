@@ -1,6 +1,6 @@
 import {
     CHANGE_COUCH_FOR_COURSE,
-    CHANGE_TODAY,
+    CHANGE_TODAY, CLEAR_FILTER, FILTERED_CLIENTS,
     LOAD_CLIENTS,
     LOAD_COUCH,
     LOAD_GROUP
@@ -17,16 +17,16 @@ const initialState ={
 export const timeTableReducer = (state=initialState,action) => {
     switch (action.type) {
         case CHANGE_TODAY:
-            var copyState = [...state.clients];
+            const copyStateToDay = [...state.clients];
             // eslint-disable-next-line array-callback-return
-            copyState.find(e=>{
+            copyStateToDay.find(e=>{
                 if (e.id === action.course) {
                     e.toDay++;
                     return e;
                 }
             })
             // eslint-disable-next-line array-callback-return
-            copyState[action.course-1].clients.find(e => {
+            copyStateToDay[action.course-1].clients.find(e => {
                 if (e.id === action.id) {
                     e.toDay = !e.toDay;
                     return e;
@@ -34,12 +34,12 @@ export const timeTableReducer = (state=initialState,action) => {
             });
             return {
                 ...state,
-                clients: [...copyState]
+                clients: [...copyStateToDay]
             };
         case CHANGE_COUCH_FOR_COURSE:
-            var copyState = [...state.clients];
+            const copyStateCouchForCourse = [...state.clients];
             // eslint-disable-next-line array-callback-return
-            copyState.find(e=>{
+            copyStateCouchForCourse.find(e=>{
                 if (e.id === action.id) {
                     e.coach = action.couch;
                     return e;
@@ -47,7 +47,7 @@ export const timeTableReducer = (state=initialState,action) => {
             })
             return {
                 ...state,
-                clients: [...copyState]
+                clients: [...copyStateCouchForCourse]
             };
         case LOAD_GROUP:
             return {
@@ -71,6 +71,22 @@ export const timeTableReducer = (state=initialState,action) => {
             return {
                 ...state,
                 clients: [...action.clients]
+            }
+        case FILTERED_CLIENTS:
+            const filteredClients = state.clients.filter(e=>{
+                if (e.name === action.group || e.coach === action.coach) {
+                    return e;
+                }
+
+            });
+            return {
+                ...state,
+                filterClients: [...filteredClients]
+            }
+        case CLEAR_FILTER:
+            return {
+                ...state,
+                filterClients: []
             }
         default:
             return state;

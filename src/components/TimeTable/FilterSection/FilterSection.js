@@ -4,16 +4,37 @@ import {DataPickerRange} from "../../../utils/DataPickerRange/DataPickerRange";
 import {Button} from "../../../utils/Buttons/Button";
 import {SelectGroup} from "./SelectGroup/SelectGroup";
 import {SelectCouch} from "./SelectCouch/SelectCouch";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {OtherInput} from "../../../utils/OtherInput/OtherInput";
+import {clear_filter, filtered_clients} from "../../../Acnions/timeTableActions";
 
 export const FilterSection = (props) => {
-    const filteredData = useSelector(state => state.timeTable.filterSection);
-    const {group, couch} = filteredData;
+    const dispacth = useDispatch();
+
+    const filterData = useSelector(state => state.timeTable.filterClients);
+
+    const filteredVariables = useSelector(state => state.timeTable.filterSection);
+
+    const {group, couch} = filteredVariables;
+
     const [sectionGroup, setSectionGroup] = useState('');
+
     const handleChangeValueGroup = ({target}) => {
         setSectionGroup(target.value);
     };
+
+    const handleChangeFilter = (e) => {
+        e.preventDefault();
+        dispacth(filtered_clients(sectionGroup, sectionCouch));
+    };
+    const clearFilter = (e) => {
+        e.preventDefault();
+        console.log('click')
+        setSectionGroup('');
+        setSectionCouch('');
+        dispacth(clear_filter());
+    };
+
 
     const [sectionCouch, setSectionCouch] = useState('');
     const handleChangeValueCouch = ({target}) => {
@@ -41,8 +62,8 @@ export const FilterSection = (props) => {
                 </div>
 
                 <div className={`row ${classes.wrapper__btn_group}`}>
-                        <Button className={classes.wrapper__btn_group__item} factor={'success'} disabled={true} text={'очистить фильтры'}/>
-                        <Button className={classes.wrapper__btn_group__item} factor={"success"} text={'применить'}/>
+                        <Button click={clearFilter} disabled={!(sectionCouch || sectionGroup)} className={classes.wrapper__btn_group__item} factor={'default'} text={'очистить фильтры'}/>
+                        <Button click={handleChangeFilter} className={classes.wrapper__btn_group__item} factor={"success"} text={'применить'}/>
                 </div>
             </div>
 

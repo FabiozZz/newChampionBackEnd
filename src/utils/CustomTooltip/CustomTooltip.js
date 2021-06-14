@@ -1,6 +1,5 @@
 import React from 'react';
 import {Tooltip} from "antd";
-import classes from './customTooltip.module.css';
 
 export const CustomTooltip = ({color='light',title,placement='right',children}) => {
     const colorTooltip = color === 'green' ? '#43BF41' : color === 'dark'?'#3D434A':color ==='light'? 'white': null

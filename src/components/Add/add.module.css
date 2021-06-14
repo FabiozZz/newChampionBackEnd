@@ -20,6 +20,7 @@
     background: #ffffff;
     padding: 24px 16px;
     margin: 16px 0;
+    position: relative;
 }
 .block_info__title{
     font-family: 'Montserrat',sans-serif;
@@ -61,6 +62,32 @@
 .block_info__btn{
     padding-top: 34px;
 }
+.block_info__parent_block{
+    position: relative;
+}
+.block_info__added{
+    padding-top: 88px;
+}
+.block_info__separate{
+    position: absolute;
+    padding-top: 42px;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw !important;
+}
+.block_info__remove_parents{
+    position: absolute;
+    cursor: pointer;
+    margin-top: 46px;
+    top: 0;
+    right: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .polytic{
     margin: 24px 0 24px 16px;
 }
@@ -81,6 +108,10 @@
     color: #8798AD;
 }
 .polytic__sub_text {
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    line-height: inherit;
     text-decoration: underline;
 
 }

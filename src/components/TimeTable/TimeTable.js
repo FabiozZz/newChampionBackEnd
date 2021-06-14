@@ -25,7 +25,7 @@ export const TimeTable = () => {
 
     const {clients,filterClients} = stateClients
 
-    let dataClients = filterClients.length? filterClients: clients;
+    let dataClients = filterClients.length? filterClients : clients;
 
     const [isLoad, setIsLoad] = useState(false);
 

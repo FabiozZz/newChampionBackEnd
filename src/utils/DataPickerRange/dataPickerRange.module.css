@@ -1,12 +1,12 @@
 @import '../variable.css';
-*{
-  margin: 0;
-  padding: 0;
-  font-weight: normal;
-  font-size: small;
-  line-height: normal;
-  letter-spacing: normal;
-}
+/**{*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*  font-weight: normal;*/
+/*  font-size: small;*/
+/*  line-height: normal;*/
+/*  letter-spacing: normal;*/
+/*}*/
 .dataPickerRangeWrapper {
   font-family: 'SF Pro Display', sans-serif;
   font-size: 12px;
@@ -107,7 +107,7 @@
   z-index: 9999999999999999999999999999;
   right: 0;
   width: 272px;
-
+  font-size: 12px;
   position: absolute;
   padding: 16px;
 }
@@ -158,8 +158,10 @@
 .separate{
   height: 12px;
 }
+.date{
 
-table {
+}
+.date table {
   font-size: 12px;
   margin-top: 16px;
   width: 100%;
@@ -167,17 +169,17 @@ table {
   text-align: center;
   border-collapse: collapse;
 }
-table thead {
+.date table thead {
   border-bottom: 1px solid #E0E0E0;
   padding: 500px;
   color: #BDBDBD;
 }
-table thead th{
+.date table thead th{
   width: 32px;
   height: 32px;
 }
 
-table tbody tr td{
+.date table tbody tr td{
   position: relative;
   width: 32px;
   height: 32px;
@@ -235,12 +237,12 @@ table tbody tr td{
   z-index: -9999999999999;
   color:#ffffff !important;
 }
-td:first-child:after   {
+.date td:first-child:after   {
   overflow: hidden;
   border-bottom-left-radius: 100px;
   border-top-left-radius: 100px;
 }
-td:last-child:after   {
+.date td:last-child:after   {
   overflow: hidden;
   border-bottom-right-radius: 100px;
   border-top-right-radius: 100px;
