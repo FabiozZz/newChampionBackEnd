@@ -1,0 +1,107 @@
+.cardUser {
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+    width: 220px;
+    height: 100px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    display: grid;
+    grid-template-rows: 3fr 3fr 6fr;
+    grid-template-columns: 10fr 2fr;
+    font-family: 'SF Pro Display', sans-serif;
+    grid-template-areas:
+          'names status'
+          'names health'
+          'notification success';
+    padding: 12px;
+}
+.names {
+    grid-area: names;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #2E384D;
+}
+.cardStatus{
+    margin: auto;
+    grid-area: status;
+}
+.notifications {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    position: absolute;
+    bottom: -4px;
+    grid-area: notification;
+}
+.notifications img{
+    margin-right: 8px;
+}
+.health{
+    grid-area: health;
+    margin: auto;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+.health img {
+    position: absolute;
+    bottom: -10px;
+    right: 7px;
+}
+.success{
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    cursor: pointer;
+    position: absolute;
+    bottom: -7px;
+    right: 2px;
+    grid-area: success;
+    background: #EEF3F5;
+    border: 1px solid #BFC5D2;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+.success img{
+    margin: auto;
+    padding: 0;
+}
+.settingsCard {
+    position: absolute;
+    top: 12px;
+    bottom: 12px;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 12px;
+    font-family: 'SF Pro Display', sans-serif;
+    font-weight: 400;
+    line-height: 16px;
+    color: #8798AD;
+    text-align: center;
+}
+.settingsCard span{
+    display: block;
+    padding: 6px 0;
+    cursor: pointer;
+}
+.settingsCard a{
+    display: block;
+    padding: 6px 0;
+    color:#8798AD;
+}
+.closeButton{
+    position: absolute;
+    z-index: 1;
+    top: -4px;
+    right: 8px;
+}

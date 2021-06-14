@@ -2,18 +2,20 @@ import React, {useRef, useState} from 'react';
 import {OtherInput} from "../../utils/OtherInput/OtherInput";
 import {Button} from "../../utils/Buttons/Button";
 import Api from "../../Api/Api";
-import './auth.css';
-import {Container} from "react-bootstrap";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router";
 import {log_in} from "../../Acnions/userActions";
-
+import classes from './auth.module.css';
 
 export const Auth = ({setLoad}) => {
+
+    const [isLoad, setIsLoad] = useState(false);
 
     const dispatch = useDispatch();
     const formRef = useRef(null);
     const history = useHistory();
+
+
 
     /**
      * прослушивание события отправки формы авторизации
@@ -22,6 +24,7 @@ export const Auth = ({setLoad}) => {
      */
     const handleSubmitForm = async (e) => {
         e.preventDefault();
+        setIsLoad(true)
 
         let form={}
 
@@ -32,28 +35,39 @@ export const Auth = ({setLoad}) => {
         }
 
         await Api.login(form).then(res=>{
+            setIsLoad(false)
             dispatch(log_in(res));
+            history.push('/');
         });
-        history.push('/');
     };
 
     return (
-        <Container fluid={true} className={'mainWrapper formWrapper'}>
+            <div className="row">
+                <div className={'col-12'}>
+                    <h1 className={classes.title}>Авторизация</h1>
+                </div>
 
-            <div className="row h-100 m-auto align-content-center ">
-                <h1 className={'mb-4'}>
-                    Авторизация
-                </h1>
-
-                <form className={'col-12 row'} ref={formRef} onSubmit={handleSubmitForm}>
-
-                    <div className="formGroup mx-auto row">
-                        <OtherInput label={'введите email'} simpleClass={'col-12 mt-3 ml-auto mr-auto'} name={'email'} type={'email'}/>
-                        <OtherInput label={'введите пароль'} simpleClass={'col-12 mt-3 mx-auto'} name={'password'} type={'password'}/>
-                    </div>
-                    <Button style={{margin:'30px auto'}}  factor={'success'} text={'Войти'} type={'submit'}/>
-                </form>
+                <div className="col-12">
+                    <form className={classes.form_wrapper} ref={formRef} onSubmit={handleSubmitForm}>
+                        <div className="row">
+                            <div className={`col-8 ${classes.form_wrapper__block_input}`}>
+                                <div className="row">
+                                    <div className={`col-12 ${classes.form_wrapper__item}`}>
+                                        <OtherInput label={'введите email'} name={'email'} type={'email'}/>
+                                    </div>
+                                    <div className={`col-12 ${classes.form_wrapper__item}`}>
+                                        <OtherInput label={'введите пароль'} name={'password'} type={'password'}/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className={`col-4 ${classes.form_wrapper__send}`}>
+                                <Button factor={'success'} disabled={isLoad} text={'Войти'} type={'submit'}/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </Container>
     );
 };

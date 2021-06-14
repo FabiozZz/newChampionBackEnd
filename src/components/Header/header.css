@@ -11,10 +11,6 @@
 }
 .header__logout {
   cursor: pointer;
-  margin-right: 2.604%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .header__logout span {
   display: block;

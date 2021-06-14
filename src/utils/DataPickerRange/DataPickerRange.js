@@ -1,10 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
-import './dataPickerRange.css';
+// import './dataPickerRange.css';
 import calendar from '../../assets/images/calendar.svg';
 import InputMask from 'react-input-mask';
 import {leapYear, renderTableRange} from "../../helpers/DataPicker/dataPicker";
 import PropTypes from "prop-types";
-
+import classes from './dataPickerRange.module.css';
 
 /**
  * визуализация <input type="text"> с появлением внешнего окна для выбора даты
@@ -20,7 +20,7 @@ import PropTypes from "prop-types";
  * @returns {JSX.Element}
  * @constructor
  */
-export const DataPickerRange = ({style = {}, label = '', disabled = false, simpleClass = ''}) => {
+export const DataPickerRange = ({style = {}, label = '', disabled = false, simpleClass = '',...props}) => {
     let windowWidth = window.innerWidth;
 
     let date = new Date();
@@ -306,66 +306,66 @@ export const DataPickerRange = ({style = {}, label = '', disabled = false, simpl
         toYear,
         fromSelect,
         toSelect,
-        click
+        click,
+        classes
     );
 
     return (
         <>
-            <div style={style} className={` ${simpleClass}`}>
-
                 {/* обертка инпута */}
-
-                <div className={`dataPickerRange-wrapper`}>
-                    <label className={'dataPickerRange-wrapper__inputWrapper__label'}>{label}</label>
-                    <div className={`dataPickerRange-wrapper__inputWrapper ${disabled ? 'disabledDataPicker' : ''}`}>
-                        <label className={`dataPickerRange-wrapper__inputWrapper__after`}>
+                <div className={`${classes.dataPickerRangeWrapper} ${props.className?props.className:''}`}>
+                    <label className={classes.label}>{label}</label>
+                    <div className={`${classes.inputWrapper} ${disabled ? 'disabledDataPicker' : ''}`}>
+                        <label className={classes.after}>
                             <InputMask ref={inputRef}
                                        name={'firstDate'}
                                        mask="99.99.9999"
+                                       className={classes.input}
                                        placeholder={'от'}
                                        onChange={handleChangeInputDateFrom}
                                        value={fromData}
                             />
-                            <div className={'dataPickerRange-wrapper__inputWrapper__after__separator'}/>
+                            <div className={classes.separator}/>
                             <InputMask ref={inputRef}
                                        mask="99.99.9999"
                                        name={'lastDate'}
+                                       className={classes.input}
                                        placeholder={'до'}
                                        onChange={handleChangeInputDateTo}
                                        value={toData}
                             />
-                            <img className={'dataPickerRange-wrapper__inputWrapper__after__icon'} ref={iconRef} src={calendar} alt="calendar" onClick={handleToggleIconCalendar}/>
+                            <img ref={iconRef} src={calendar} alt="calendar" onClick={handleToggleIconCalendar}/>
                         </label>
                     </div>
 
                     {/* обертка календаря */}
 
                     {toggleIcon &&
-                    <div ref={calendarWrapper} className={'dataPickerRange-wrapper__calendar'}>
-                        <div  className={'dataPickerRange-wrapper__calendarFrom'}>
-                            <div className={'dataPickerRange-wrapper__calendar__change'}>
-                                <div className={'dataPickerRange-wrapper__calendar__change__wrapper'}>
-                                    <div className={'dataPickerRange-wrapper__calendar__change__wrapper__prev'}
+                    <div ref={calendarWrapper} className={classes.calendar}>
+                        <div >
+                            <div className={classes.change}>
+                                <div className={classes.wrapper}>
+                                    <div className={classes.prev}
                                          onClick={handlePrevMonth}/>
                                     <span>{click? month[fromMonth]:month[toMonth]}</span>
-                                    <div className={'dataPickerRange-wrapper__calendar__change__wrapper__next'}
+                                    <div className={classes.next}
                                          onClick={handleNextMonth}/>
                                 </div>
-                                <div className={'dataPickerRange-wrapper__calendar__change__wrapper'}>
-                                    <div className={'dataPickerRange-wrapper__calendar__change__wrapper__prev'}
+                                <div className={classes.wrapper}>
+                                    <div className={classes.prev}
                                          onClick={handlePrevYear}/>
                                     <span>{click?fromYear:toYear}</span>
-                                    <div className={'dataPickerRange-wrapper__calendar__change__wrapper__next'}
+                                    <div className={classes.next}
                                          onClick={handleNextYear}/>
                                 </div>
                             </div>
-                            <div className={'dataPickerRange-wrapper__calendar__date'}>
+                            <div className={classes.date}>
                                 <table>
                                     <thead>
                                     <tr>{dayOfTheWeek.map((el, index) => <th key={index}>{el}</th>)}</tr>
                                     </thead>
                                     <tbody>
-                                    <tr className={'separate'}/>
+                                    <tr className={classes.separate}/>
                                     {tableFrom}
                                     </tbody>
                                 </table>
@@ -374,7 +374,6 @@ export const DataPickerRange = ({style = {}, label = '', disabled = false, simpl
                     </div>
                     }
                 </div>
-            </div>
         </>
     );
 };

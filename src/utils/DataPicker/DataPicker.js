@@ -4,11 +4,15 @@ import calendar from '../../assets/images/calendar.svg';
 import InputMask from 'react-input-mask';
 import {leapYear, renderTable} from "../../helpers/DataPicker/dataPicker";
 import PropTypes from "prop-types";
+import classes from './dataPicker.module.css';
 
 
 /**
  * визуализация <input type="text"> с появлением внешнего окна для выбора даты
  *
+ * @param value
+ * @param setValue
+ * @param name
  * @param style объект стилей применяемый к корневому элементу
  *
  * @param label принимает строку, подпись над компонентом
@@ -20,16 +24,25 @@ import PropTypes from "prop-types";
  * @returns {JSX.Element}
  * @constructor
  */
-export const DataPicker = ({style = {}, label = '', disabled = false, simpleClass = ''}) => {
+export const DataPicker = ({
+                               value,setValue,
+                               name = '',
+                               style = {},
+                               label = '',
+                               disabled = false,
+                               simpleClass = ''
+                           }) => {
+
     let windowWidth = window.innerWidth;
+    let date = new Date();
     /**
      * локальный стейт для отображения календаря
      */
     const [activeDate, setActiveDay] = useState({
-        currentDay: 10,
-        currentYear: 2000,
-        currentMonth: 10,
-        currentDayWeek: 1,
+        currentDay: 1,
+        currentYear: date.getFullYear(),
+        currentMonth: date.getMonth(),
+        currentDayWeek: date.getDay(),
     });
 
     /**
@@ -37,10 +50,10 @@ export const DataPicker = ({style = {}, label = '', disabled = false, simpleClas
      */
     const {currentMonth, currentYear, currentDay} = activeDate;
 
-    /**
-     * установка значения в поле <input>
-     */
-    const [userData, setUserData] = useState('');
+    // /**
+    //  * установка значения в поле <input>
+    //  */
+    // const [userData, setUserData] = useState('');
 
     /**
      * стейт для переключения календаря
@@ -106,13 +119,13 @@ export const DataPicker = ({style = {}, label = '', disabled = false, simpleClas
     useEffect(() => {
 
 
-        if (calendarWrapper.current!=null) {
+        if (calendarWrapper.current != null) {
             if (calendarWrapper.current.getBoundingClientRect().right > windowWidth) {
                 calendarWrapper.current.style.left = (windowWidth - calendarWrapper.current.getBoundingClientRect().right - 10) + 'px'
                 console.log(calendarWrapper.current.style.left)
             }
         }
-    },[toggleIcon]);
+    }, [toggleIcon, windowWidth]);
 
 
     /**
@@ -123,15 +136,15 @@ export const DataPicker = ({style = {}, label = '', disabled = false, simpleClas
         if (!disabled) {
             e.preventDefault();
             setToggleIcon(!toggleIcon);
-            if (userData !== '') {
-                let newActiveDay = userData.split('.');
-                setActiveDay({
-                    ...activeDate,
-                    currentDay: Number(newActiveDay[0]) < 32 ? Number(newActiveDay[0]) : currentDay,
-                    currentMonth: Number(newActiveDay[1]) < 13 ? Number(newActiveDay[1] - 1) : activeDate.currentMonth,
-                    currentYear: Number(newActiveDay[2])
-                })
-            }
+            // if (userData !== '') {
+            //     let newActiveDay = userData.split('.');
+            //     setActiveDay({
+            //         ...activeDate,
+            //         currentDay: Number(newActiveDay[0]) < 32 ? Number(newActiveDay[0]) : currentDay,
+            //         currentMonth: Number(newActiveDay[1]) < 13 ? Number(newActiveDay[1] - 1) : activeDate.currentMonth,
+            //         currentYear: Number(newActiveDay[2])
+            //     })
+            // }
 
         }
     };
@@ -142,7 +155,8 @@ export const DataPicker = ({style = {}, label = '', disabled = false, simpleClas
      */
     const handleChangeInputDate = (e) => {
         let symbol = e.target.value;
-        setUserData(symbol);
+        // setUserData(symbol);
+        setValue(symbol);
     };
 
     /**
@@ -153,7 +167,9 @@ export const DataPicker = ({style = {}, label = '', disabled = false, simpleClas
     const handleChangeDataPicker = (e) => {
         let symbol = e.target.textContent;
         setActiveDay({...activeDate, currentDay: symbol})
-        setUserData(((symbol < 10) ? '0' + symbol : symbol) + '.' + ((currentMonth + 1) < 10 ? '0' + (currentMonth + 1) : currentMonth + 1) + '.' + currentYear)
+        // setUserData(((symbol < 10) ? '0' + symbol : symbol) + '.' + ((currentMonth + 1) < 10 ? '0' + (currentMonth + 1) : currentMonth + 1) + '.' + currentYear);
+        setValue(((symbol < 10) ? '0' + symbol : symbol) + '.' + ((currentMonth + 1) < 10 ? '0' + (currentMonth + 1) : currentMonth + 1) + '.' + currentYear);
+
     };
 
     /**
@@ -216,63 +232,75 @@ export const DataPicker = ({style = {}, label = '', disabled = false, simpleClas
     /**
      * отрисовка самого календаря используя helper
      */
-    let table = renderTable(maxDays, firstDayMonth, handleChangeDataPicker, currentDay);
+    let table = renderTable(maxDays, firstDayMonth, handleChangeDataPicker, currentDay, classes.activeItemTd);
+    let str;
     return (
-            <div style={style} className={` ${simpleClass}`}>
+        <div style={style} className={` ${simpleClass}`}>
 
-                {/* обертка инпута */}
-
-                <div className={`dataPicker-wrapper`}>
-                    <label className={'dataPicker-wrapper__inputWrapper__label'}>{label}</label>
-                    <div className={`dataPicker-wrapper__inputWrapper ${disabled ? 'disabledDataPicker' : ''}`}>
-                        <label className={`dataPicker-wrapper__inputWrapper__after`}>
-                            <InputMask ref={inputRef}
-                                       mask="99.99.9999"
-                                       disabled={disabled}
-                                       placeholder={'Не указано'}
-                                       onChange={handleChangeInputDate}
-                                       value={userData}
-                            />
-                            <img ref={iconRef} src={calendar} alt="calendar" onClick={handleToggleIconCalendar}/>
-                        </label>
-                    </div>
-
-                    {/* обертка календаря */}
-
-                    {toggleIcon &&
-                    <div ref={calendarWrapper} className={'dataPicker-wrapper__calendar'}>
-                        <div className={'dataPicker-wrapper__calendar__change'}>
-                            <div className={'dataPicker-wrapper__calendar__change__wrapper'}>
-                                <div className={'dataPicker-wrapper__calendar__change__wrapper__prev'}
-                                     onClick={handlePrevMonth}/>
-                                <span>{month[currentMonth]}</span>
-                                <div className={'dataPicker-wrapper__calendar__change__wrapper__next'}
-                                     onClick={handleNextMonth}/>
-                            </div>
-                            <div className={'dataPicker-wrapper__calendar__change__wrapper'}>
-                                <div className={'dataPicker-wrapper__calendar__change__wrapper__prev'}
-                                     onClick={handlePrevYear}/>
-                                <span>{currentYear}</span>
-                                <div className={'dataPicker-wrapper__calendar__change__wrapper__next'}
-                                     onClick={handleNextYear}/>
-                            </div>
-                        </div>
-                        <div className={'dataPicker-wrapper__calendar__date'}>
-                            <table>
-                                <thead>
-                                <tr>{dayOfTheWeek.map((el, index) => <th key={index}>{el}</th>)}</tr>
-                                </thead>
-                                <tbody>
-                                <tr className={'separate'}/>
-
-                                {table}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    }
+            {/* обертка инпута */}
+            {/*`dataPicker-wrapper`*/}
+            <div className={classes.dataPicker_wrapper}>
+                {/*'dataPicker-wrapper__inputWrapper__label'*/}
+                <label className={classes.dataPicker_wrapper__label}>{label}</label>
+                {/*dataPicker-wrapper__inputWrapper*/}
+                <div className={classes.dataPicker_wrapper__input_wrapper}>
+                    {/*dataPicker-wrapper__inputWrapper__after*/}
+                    <label className={classes.dataPicker_wrapper__after}>
+                        <InputMask ref={inputRef}
+                                   name={name}
+                                   mask="99.99.9999"
+                                   disabled={disabled}
+                                   placeholder={'Не указано'}
+                                   onChange={handleChangeInputDate}
+                                   value={value}
+                        />
+                        <img ref={iconRef} src={calendar} alt="calendar" onClick={handleToggleIconCalendar}/>
+                    </label>
                 </div>
+
+                {/* обертка календаря */}
+
+                {toggleIcon &&
+                //    dataPicker-wrapper__calendar
+                <div ref={calendarWrapper} className={classes.dataPicker_wrapper__calendar}>
+                    {/*'dataPicker-wrapper__calendar__change'*/}
+                    <div className={classes.dataPicker_wrapper__calendar__change}>
+                        {/*'dataPicker-wrapper__calendar__change__wrapper'*/}
+                        <div className={classes.dataPicker_wrapper__calendar__change__wrapper}>
+                            <div className={classes.dataPicker_wrapper__calendar__change__wrapper__prev}
+                                 onClick={handlePrevMonth}/>
+                            <span>{month[currentMonth]}</span>
+                            {/*'dataPicker-wrapper__calendar__change__wrapper__next'*/}
+                            <div className={classes.dataPicker_wrapper__calendar__change__wrapper__next}
+                                 onClick={handleNextMonth}/>
+                        </div>
+                        {/*'dataPicker-wrapper__calendar__change__wrapper'*/}
+                        <div className={classes.dataPicker_wrapper__calendar__change__wrapper}>
+                            {/*'dataPicker-wrapper__calendar__change__wrapper__prev'*/}
+                            <div className={classes.dataPicker_wrapper__calendar__change__wrapper__prev}
+                                 onClick={handlePrevYear}/>
+                            <span>{currentYear}</span>
+                            {/*'dataPicker-wrapper__calendar__change__wrapper__next'*/}
+                            <div className={classes.dataPicker_wrapper__calendar__change__wrapper__next}
+                                 onClick={handleNextYear}/>
+                        </div>
+                    </div>
+                    {/*'dataPicker-wrapper__calendar__date'*/}
+                    <div className={classes.dataPicker_wrapper__calendar__date}>
+                        <table>
+                            <thead>
+                            <tr>{dayOfTheWeek.map((el, index) => <th key={index}>{el}</th>)}</tr>
+                            </thead>
+                            <tbody>
+                            <tr className={classes.separate}/>
+                            {table}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                }
             </div>
+        </div>
     );
 };
 DataPicker.defaultProps = {

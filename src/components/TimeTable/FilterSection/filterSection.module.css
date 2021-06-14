@@ -1,0 +1,20 @@
+.wrapper {
+    padding: 24px 32px;
+    background: #ffffff;
+    height: 236px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+}
+.wrapper__select_group{
+    padding-top: 16px;
+}
+.wrapper__btn_group{
+    display: flex;
+    justify-content: center;
+    padding-top: 16px;
+}
+
+.wrapper__btn_group__item{
+    margin: 0 calc(37px / 2);
+}

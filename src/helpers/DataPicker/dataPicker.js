@@ -22,12 +22,12 @@ const cycleCalendar = (days,month,array)=>{
 
 }
 
-export const renderTable = (maxDays,firstDayMonth,func,classIndex) => {
+export const renderTable = (maxDays,firstDayMonth,func,classIndex,className) => {
     let renderTable = [];
     cycleCalendar(maxDays, firstDayMonth, renderTable);
     return renderTable.map((tr,index)=>(
         <tr key={index}>{tr.map((td,index)=>(
-            <td key={index} className={`${+classIndex === td ? 'activeItemTd':''}`} onClick={func}>{td}</td>))
+            <td key={index} className={`${+classIndex === td ? className:''}`} onClick={func}>{td}</td>))
         }</tr>))
 };
 
@@ -42,7 +42,7 @@ export const renderTableRange = (
     monthTo,
     yearTo,
     selectFrom,
-    selectTo,click) => {
+    selectTo,click,classes) => {
 
     let tableFrom = [];
 
@@ -59,13 +59,13 @@ export const renderTableRange = (
                 let arrayTo = selectTo.split('-');
                 let [fromD,fromM,fromY] = arrayFrom;
                 let [toD,toM,toY] = arrayTo;
-                let tempClass = (selectFrom === idCell) || (selectTo === idCell) ? 'activeItemTd' : '';
+                let tempClass = (selectFrom === idCell) || (selectTo === idCell) ? classes.activeItemTd : '';
             let addClassFrom = '',addClassTo='';
             if ((selectFrom !== selectTo)&& (selectTo && selectFrom)) {
                 addClassFrom = moment([+fromD,+fromM+1,+fromY],'DD-MM-YYYY').isBefore(moment([+toD,+toM+1,+toY],'DD-MM-YYYY'))
-                ? 'activeItemFrom':'activeItemTo';
+                ? classes.activeItemFrom:classes.activeItemTo;
                 addClassTo = moment([+fromD,+fromM+1,+fromY],'DD-MM-YYYY').isAfter(moment([+toD,+toM+1,+toY],'DD-MM-YYYY'))
-                ? 'activeItemFrom':'activeItemTo';
+                ? classes.activeItemFrom:classes.activeItemTo;
             }
 
             let follow = moment(cell, 'DD-MM-YYYY').isBefore(moment([+toD,+toM+1,+toY], 'DD-MM-YYYY'))&&moment(cell, 'DD-MM-YYYY').isAfter(moment([+fromD,+fromM+1,+fromY], 'D-M-YYYY'))
@@ -77,7 +77,7 @@ export const renderTableRange = (
                     (
                         follow || unfollow
                     )
-                        ? 'activeItemRange' : '';
+                        ? classes.activeItemRange : '';
                 return (<td key={index}
                             id={idCell}
                             className={`${tempClass} ${plusClass} ${idCell === selectFrom ?addClassFrom:''} ${idCell === selectTo?addClassTo:''}`}

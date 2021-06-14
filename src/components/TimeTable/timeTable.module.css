@@ -1,0 +1,43 @@
+.wrapper{
+}
+.wrapper__filter{
+    position: sticky;
+    margin-left: -30px;
+    margin-right: -30px;
+    top: 0;
+    z-index: 99999999;
+}
+.wrapper__title{
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 52px;
+    padding-bottom: 40px;
+    color: #2E384D;
+}
+.button_group{
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 4fr 4fr 4fr;
+    padding: 40px 32px 52px;
+}
+.button_group__btn{
+    margin: auto;
+}
+.wrapper__course_table{
+    margin-left: -30px;
+    margin-right: -30px;
+    padding-left: 32px;
+    padding-right: 32px;
+    flex-wrap: nowrap;
+    overflow: auto;
+}
+.helper{
+    position: fixed;
+    right: 0;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    background: red;
+}

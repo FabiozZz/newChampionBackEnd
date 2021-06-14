@@ -1,0 +1,22 @@
+.title{
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 52px;
+    color: #2E384D;
+}
+.form_wrapper {
+    background: #FFFFFF;
+    padding: calc(40px - 16px) 40px 40px;
+}
+.form_wrapper__block_input{
+    margin: 0 auto;
+}
+.form_wrapper__item{
+    padding: 16px 0 0;
+}
+.form_wrapper__send {
+    padding-top: 40px;
+    margin: 0 auto;
+}

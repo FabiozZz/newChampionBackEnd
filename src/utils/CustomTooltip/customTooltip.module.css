@@ -1,0 +1,4 @@
+.appTooltipClass .ant-tooltip-inner {
+    border-radius: 50% !important;
+    color: green !important;
+}

@@ -1,0 +1,40 @@
+.app-wrapper-auth {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 80px 1fr ;
+  height: 100%;
+  position: relative;
+}
+.app-wrapper-auth__auth {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.footer-hidden {
+  height: 80px;
+  width: 100%;
+}
+.app-wrapper {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 80px 1fr 72px;
+  height: 100%;
+  position: relative;
+}
+.app-wrapper__footer {
+  position: sticky;
+  bottom: 0;
+}
+.appToolTipClassgreen .ant-tooltip-inner {
+  border-radius: 4px !important;
+  color: white !important;
+}
+.appToolTipClassdark .ant-tooltip-inner {
+  border-radius: 4px !important;
+  color: white !important;
+}
+.appToolTipClasslight .ant-tooltip-inner {
+  border-radius: 4px !important;
+  color: black !important;
+}
+/*# sourceMappingURL=app.css.map */

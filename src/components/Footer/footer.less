@@ -46,11 +46,12 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-content: center;
+    align-items: center;
+
     svg{
-      margin: auto;
     }
-    p{
+    span{
+      margin-top: 8px;
       font-family: 'SF Pro Display',sans-serif;
       font-weight: 400;
       font-size: 12px;
@@ -62,14 +63,17 @@
     &:hover path {
       fill: #8798AD;
     }
-    &:hover p {
+    &:hover span {
       color: #8798AD;
     }
     &:active path {
       fill: #2E384D;
     }
-    &:active p {
+    &:active span {
       color: #2E384D;
     }
   }
+}
+a{
+  text-decoration: none !important;
 }

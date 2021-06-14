@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import './otherInput.css'
 import PropTypes from "prop-types";
+import classes from './otherInput.module.css';
 
 /**
  * визуальная обертка для стандартного <input/>
@@ -24,25 +24,12 @@ import PropTypes from "prop-types";
  * @returns {JSX.Element}
  * @constructor
  */
-export const OtherInput = ({name,required=false, label,type='text',disabled=false,simpleClass='',style={},placeholder='Не указано'}) => {
-
-    /**
-     * локальный стейт для поля <input />
-     */
-    const [input, setInput] = useState('');
-
-    /**
-     * прослушивание события ввода в поле, изменение локального стейта
-     * @param target
-     */
-    const handleChangeInput = ({target}) => {
-        setInput(target.value);
-    };
+export const OtherInput = ({value,setValue,name,required, label,type,disabled,style,placeholder,...props}) => {
 
     return (
-        <div style={style} className={`otherInput-wrapper ${simpleClass}`}>
+        <div style={style} className={`${classes.otherInputWrapper} ${props.className}`}>
             {label&&<label>{label}</label>}
-            <input value={input} name={name} onChange={handleChangeInput} required={required} placeholder={placeholder} type={type} disabled={disabled}/>
+            <input value={value} name={name} onChange={setValue} required={required} placeholder={placeholder} type={type} disabled={disabled}/>
         </div>
     );
 };
@@ -54,7 +41,8 @@ OtherInput.defaultProps = {
     simpleClass: '',
     name:'',
     style: {},
-    placeholder: 'Не указано'
+    placeholder: 'Не указано',
+    className: ''
 };
 
 OtherInput.propTypes = {

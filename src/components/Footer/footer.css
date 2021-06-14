@@ -27,12 +27,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-content: center;
+  align-items: center;
 }
-.footer__item svg {
-  margin: auto;
-}
-.footer__item p {
+.footer__item span {
+  margin-top: 8px;
   font-family: 'SF Pro Display', sans-serif;
   font-weight: 400;
   font-size: 12px;
@@ -44,13 +42,16 @@
 .footer__item:hover path {
   fill: #8798AD;
 }
-.footer__item:hover p {
+.footer__item:hover span {
   color: #8798AD;
 }
 .footer__item:active path {
   fill: #2E384D;
 }
-.footer__item:active p {
+.footer__item:active span {
   color: #2E384D;
+}
+a {
+  text-decoration: none !important;
 }
 /*# sourceMappingURL=footer.css.map */

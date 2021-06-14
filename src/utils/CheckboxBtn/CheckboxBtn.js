@@ -28,12 +28,10 @@ export const CheckboxBtn = ({disabled = false,name='',setIsChecked,isChecked=fal
         </div> : <div className={'checkbox-nonDisabled'}/>;
 
     return (
-        <>
             <label className={'checkbox-app'}>
                 {disabledBox}
                 <input disabled={disabled} onChange={setIsChecked} name={name} value={isChecked?1:0} type="checkbox"/>
             </label>
-        </>
     )
 };
 

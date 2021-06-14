@@ -1,0 +1,22 @@
+.hide_wrapper{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.hide_wrapper__from{
+    position: absolute;
+    top: -22px;
+    left: calc(50% - (174px / 2));
+}
+.hide_wrapper__to{
+    position: absolute;
+    transform: rotate(180deg);
+    top: -42px;
+    left: calc(50% - (174px / 2));
+}
