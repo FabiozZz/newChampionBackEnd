@@ -105,3 +105,22 @@
     top: -4px;
     right: 8px;
 }
+.cardUser__tooltip_text_wrapper{
+    margin: 0;
+    padding: 12px 8px;
+}
+.cardUser__tooltip_text_wrapper__text_center{
+    font-family: 'SF Pro Display',sans-serif;
+    padding: 0;
+    margin: 0;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    color: #FFFFFF;
+}
+.cardUser__tooltip_text_wrapper__text_center__date{
+    font-weight: 900;
+    color: #FFFFFF;
+}

@@ -2,14 +2,46 @@ import React, {useEffect, useRef, useState} from 'react';
 import classes from "./courseTable.module.css";
 import edit from "../../../assets/images/editCouch.svg";
 
+/**
+ * компонент для изменения треннера группы
+ *
+ * @param change функция с помощью которой можно поменять тренера
+ * @param id порядковый номер группы в базе
+ * @param couch тренер
+ * @param couchList список доступных тренеров
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const Option = ({change,id,couch,couchList}) => {
+
+    /**
+     * локальный стейт для переключения видимости блока со списком тренеров
+     */
     const [toggleOption, setToggleOption] = useState(false);
+
+    /**
+     * функция для переключения видимости блока со списком тренеров
+     */
     const handleToggleOptionBox = () => {
         setToggleOption(!toggleOption);
     };
 
+    /**
+     * ссылка на блок со списком тренеров
+     * @type {React.MutableRefObject<null>}
+     */
     const optionBox = useRef(null);
+
+    /**
+     * ссылка на оболочку компонента
+     * @type {React.MutableRefObject<null>}
+     */
     const selectRef = useRef(null);
+
+    /**
+     * эффект запускается каждый раз при переключения видимости блока со списком тренеров
+     * проверяет положение блока и корректирует его если блок выходит за видимою часть окна браузера
+     */
     useEffect(() => {
         if (optionBox.current!=null) {
             optionBox.current.style.bottom = - (optionBox.current.getBoundingClientRect().height ) + 'px'
@@ -18,6 +50,15 @@ export const Option = ({change,id,couch,couchList}) => {
             }
         }
     },[toggleOption]);
+
+    /**
+     * эффект запускается один раз
+     * при монтировании компонента вешает на страницу прослушивание события клика,
+     * если клик пришелся на по компоненту - сворачивает блок с тренерами,
+     * если клик был по конкретному тренеру - отправляет данные на сервер для замены
+     * и сворачивает блок
+     * при размонтировании компонента, удаляет прослушку
+     */
     useEffect(() => {
         const onClick = e => {
             if ((optionBox.current && !optionBox.current.contains(e.target))

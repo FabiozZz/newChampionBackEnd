@@ -2,8 +2,23 @@ import React from 'react';
 import PropTypes from "prop-types";
 import classes from './cardUserStatus.module.css';
 import {CustomTooltip} from "../../CustomTooltip/CustomTooltip";
+import parentClass from '../cardUser.module.css';
 
-export const CardUserStatus = ({status, style,danger,freeze, classStatus=''}) => {
+/**
+ * вспомогательный компонент для визуального отображения статуса клиента
+ * @param cardStatusName имя статуса
+ * @param cardFrom срок абонимента от ...
+ * @param cardTo срок абонимента до ...
+ * @param lessons количество доступных занятий
+ * @param status числовое отображение статуса, количество купленных абониментов
+ * @param style объект стилей
+ * @param danger булевое значение, выгорает абонимент
+ * @param freeze булевое значение, заморожен ли абонимент
+ * @param classStatus строка, класс для оболлочки карточки
+ * @returns {JSX.Element}
+ * @constructor
+ */
+export const CardUserStatus = ({abonimentName,cardStatusName,cardFrom,cardTo,lessons,status, style,danger,freeze, classStatus=''}) => {
 
     let color = status > 0 && status <3 ? '#E0E0E0':
         status >= 3 && status <= 5 ? '#A45640' :
@@ -22,8 +37,17 @@ export const CardUserStatus = ({status, style,danger,freeze, classStatus=''}) =>
         <svg width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.4674 3.77273V2.54545C23.4674 1.13964 22.3575 0 20.9883 0H3.27995C1.91074 0 0.800781 1.13964 0.800781 2.54545V3.77273C0.800781 3.89823 0.899904 4 1.02214 4H23.2461C23.3683 4 23.4674 3.89823 23.4674 3.77273Z" fill={`${color}`}/><path d="M0.800781 5.6818V13.4545C0.800781 14.8603 1.91074 16 3.27995 16H20.9883C22.3575 16 23.4674 14.8603 23.4674 13.4545V5.6818C23.4674 5.5563 23.3683 5.45453 23.2461 5.45453H1.02214C0.899904 5.45453 0.800781 5.5563 0.800781 5.6818Z" fill={`${color}`}/>
 
         </svg>;
+
     return (
-        <CustomTooltip placement={'top'} color={'dark'} title={()=>(<><p>some text</p><p>some text</p></>)}>
+        <CustomTooltip placement={'top'} color={'dark'} title={()=>(
+            <div className={parentClass.cardUser__tooltip_text_wrapper}>
+                {freeze?
+                    <p className={`${parentClass.cardUser__tooltip_text_wrapper__text_center} ${parentClass.cardUser__tooltip_text_wrapper__text_center__date}`}>ЗАМОРОЖЕН</p>:null}
+                <p className={parentClass.cardUser__tooltip_text_wrapper__text_center}>{abonimentName} {cardStatusName}</p>
+                <p className={parentClass.cardUser__tooltip_text_wrapper__text_center}>Срок действия: <span className={parentClass.cardUser__tooltip_text_wrapper__text_center__date}>{cardFrom}-{cardTo}</span></p>
+                <p className={parentClass.cardUser__tooltip_text_wrapper__text_center}>Доступно: <span className={parentClass.cardUser__tooltip_text_wrapper__text_center__date}>{lessons}</span> занятий</p>
+            </div>
+        )}>
         <div style={{margin:"0 auto",...style}} className={`${classStatus} ${classes.statusWrapper}`}>
 
             {color && renderCardStatus }
@@ -42,7 +66,7 @@ export const CardUserStatus = ({status, style,danger,freeze, classStatus=''}) =>
 CardUserStatus.defaultProps = {
     status: 0,
     danger: false,
-    freeze: false
+    freeze:false
 }
 CardUserStatus.propType = {
     status: PropTypes.number.isRequired,

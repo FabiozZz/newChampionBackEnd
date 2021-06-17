@@ -4,6 +4,15 @@ import {OtherInput} from "../../../../utils/OtherInput/OtherInput";
 import {DataPicker} from "../../../../utils/DataPicker/DataPicker";
 import {MaskInput} from "../../../../utils/MaskInput/MaskInput";
 
+/**
+ * компонент визуализации ввода персональных данных
+ *
+ * @param data объект с данными {...data,lastName,name,middleName,phone,birthDay}
+ * @param change функция изменения {...data,lastName,name,middleName,phone}
+ * @param changeData функция изменения {...data,birthDay}
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const PersonalData = ({data,change,changeData}) => {
 
     return (

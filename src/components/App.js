@@ -10,8 +10,19 @@ import {Footer} from "./Footer/Footer";
 import {Container} from "react-bootstrap";
 import {Adult} from "./Add/Adult/Adult";
 import {Kid} from "./Add/Сhild/Kid";
+import {Profile} from "./Profile/Profile";
 
+/**
+ * главный компонент содержащий все приложение
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function App() {
+    /**
+     * константа из redux показывает авторизован ли менеджер
+     * @type {boolean|*}
+     */
     const isAuth = useSelector(state => state.user.isAuth);
     // const [isLoad, setIsLoad] = useState(false);
 
@@ -46,6 +57,9 @@ function App() {
     // const target = useRef(null);
 
 
+    /**
+     * если не авторизован пользователь, то его выбрасывает на экран входа в систему
+     */
     if (!isAuth) {
         return (
             <BrowserRouter>
@@ -66,12 +80,6 @@ function App() {
 
     return (
         <BrowserRouter>
-            {/*<CardUser surname={} name={} birthDay={}/>*/}
-            {/*<form ref={formRef} onSubmit={handleSubmit}>*/}
-            {/*    <DataPicker label={'data'}/>*/}
-            {/*    <DataPickerRange label={'data'}/>*/}
-            {/*</form>*/}
-            {/*<DataPicker style={{width:'220px',margin:'20px'}}/>*/}
             <Container className={'h-100'} fluid={true}>
                 <div className="app-wrapper">
                     <div className="app-wrapper__header">
@@ -82,12 +90,13 @@ function App() {
                                 <Route exact path={'/'} render={() => (<TimeTable/>)}/>
                                 <Route path={'/add_adult'} render={() => (<Adult/>)}/>
                                 <Route path={'/add_child'} render={() => (<Kid/>)}/>
+                                <Route path={'/profile/:id'} render={() => (<Profile/>)}/>
                             </Switch>
 
                     </div>
+
                     <div className="app-wrapper__footer">
                         <Footer/>
-
                     </div>
                     {/*<div className={'footer-hidden'}/>*/}
                 </div>

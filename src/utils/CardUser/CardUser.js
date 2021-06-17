@@ -15,6 +15,14 @@ import {CustomTooltip} from "../CustomTooltip/CustomTooltip";
 /**
  * компонент для отображения клиента
  *
+ * @param cardStatusName строка, содержит название абонимента и статуса
+ *
+ * @param cardFrom срок действия абонимента от ...
+ *
+ * @param cardTo срок действия абонимента до ...
+ *
+ * @param lessons  сколько занятий осталось
+ *
  * @param id принимает число, порядковый номер из базы
  *
  * @param name принимает строку, имя клиента
@@ -33,16 +41,20 @@ import {CustomTooltip} from "../CustomTooltip/CustomTooltip";
  *
  * @param birthDay булевой тип, для визуально отображения того что скоро будет день рождение клиента
  *
+ * @param birthDayDate строка, дата рождения клиента
+ *
  * @param expire булевой тип, для визуально отображения что скоро закончится абонимент
  *
  * @param style принимает объект стилей для корневого элемента карточки
  *
+ * @param course название группы в которой занимается клиент
+ *
  * @returns {JSX.Element}
  * @constructor
  */
-export const CardUser = ({id, name, surname, status, freeze, health, toDay, call, birthDay, expire, style, course}) => {
-
+export const CardUser = ({abonimentName,cardStatusName,cardFrom,cardTo,lessons,id, name, surname, status, freeze, health, toDay, call, birthDay, birthDayDate, expire, style, course}) => {
     const dispatch = useDispatch();
+
 
     /**
      * переключатель видимости галочки на карточке
@@ -56,7 +68,6 @@ export const CardUser = ({id, name, surname, status, freeze, health, toDay, call
         // setShowSuccess(prevState => !prevState);
     };
 
-
     return (
         <NavLink to={`/profile/${id}`}>
             <div className={classes.cardUser} style={style}>
@@ -65,22 +76,33 @@ export const CardUser = ({id, name, surname, status, freeze, health, toDay, call
                     <span>{name}</span>
                     <span>{surname}</span>
                 </div>
-                <CardUserStatus className={classes.cardStatus} freeze={freeze} danger={expire} status={status}/>
+                <CardUserStatus
+                    abonimentName={abonimentName}
+                    cardStatusName={cardStatusName}
+                    cardFrom={cardFrom}
+                    cardTo={cardTo}
+                    lessons={lessons}
+                    className={classes.cardStatus}
+                    freeze={freeze}
+                    danger={expire}
+                    status={status}/>
                 <div className={classes.notifications}>
                     {birthDay &&
-                        <CustomTooltip placement={'top'} color={'dark'} title={'день рождения'}>
+                        <CustomTooltip placement={'top'} color={'dark'} title={()=>(
+                            <div className={classes.cardUser__tooltip_text_wrapper}>
+                                <p className={classes.cardUser__tooltip_text_wrapper__text_center}>День рождения</p>
+                                <p className={`${classes.cardUser__tooltip_text_wrapper__text_center} ${classes.cardUser__tooltip_text_wrapper__text_center__date}`}>{birthDayDate}</p>
+                            </div>)}>
                             <img width={20} height={20} src={gift} alt="gift"/>
                         </CustomTooltip>
                     }
                     {call &&
-                        <CustomTooltip placement={'top'} color={'dark'} title={'нужно позвонить'}>
-                            <img width={23} height={20} src={phone} alt="phone"/>
-                        </CustomTooltip>
+                            <img width={23} height={20} src={phone} title={'Нужно позвонить'} alt="звонок"/>
                     }
                 </div>
                 {health &&
                 <div className={classes.health}>
-                    <img src={healthSVG} title='Необходима справка' alt="Нужна справка"/>
+                    <img src={healthSVG} title='Необходима справка' alt="справка"/>
                 </div>
                 }
 

@@ -3,6 +3,16 @@ import classes from "../../add.module.css";
 import {SelectGroup} from "../../../TimeTable/FilterSection/SelectGroup/SelectGroup";
 import {DataPicker} from "../../../../utils/DataPicker/DataPicker";
 
+/**
+ * компонент визуализации ввода данных о тестовом занятии
+ *
+ * @param groupList массив
+ * @param value объект с значениями
+ * @param setGroup функция для установки значения в value.group
+ * @param setDate функция для устновки значения в value.dateTest
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const TestLesson = ({groupList,value,setGroup,setDate}) => {
     return (
         <div className={`row ${classes.block_info}`}>

@@ -7,11 +7,10 @@ import {SelectCouch} from "./SelectCouch/SelectCouch";
 import {useDispatch, useSelector} from "react-redux";
 import {OtherInput} from "../../../utils/OtherInput/OtherInput";
 import {clear_filter, filtered_clients} from "../../../Acnions/timeTableActions";
+import {isEmpty} from "../../../helpers/common";
 
 export const FilterSection = (props) => {
     const dispacth = useDispatch();
-
-    const filterData = useSelector(state => state.timeTable.filterClients);
 
     const filteredVariables = useSelector(state => state.timeTable.filterSection);
 
@@ -25,13 +24,16 @@ export const FilterSection = (props) => {
 
     const handleChangeFilter = (e) => {
         e.preventDefault();
+        if (isEmpty(date)) {
+            // api запрос к базе
+        }
         dispacth(filtered_clients(sectionGroup, sectionCouch));
     };
     const clearFilter = (e) => {
         e.preventDefault();
-        console.log('click')
         setSectionGroup('');
         setSectionCouch('');
+        setDate(prevState => ({from:'',to:''}))
         dispacth(clear_filter());
     };
 
@@ -39,6 +41,19 @@ export const FilterSection = (props) => {
     const [sectionCouch, setSectionCouch] = useState('');
     const handleChangeValueCouch = ({target}) => {
         setSectionCouch(target.value);
+    };
+
+    const [date, setDate] = useState({
+        from:'',
+        to: ''
+    });
+    const handleChangeDatePickerFrom = (some) => {
+        setDate(prevState => ({...prevState,from:some}))
+        console.log(date)
+    };
+    const handleChangeDatePickerTo = (some) => {
+        setDate(prevState=>({...prevState,to:some}))
+        console.log(date)
     };
 
     return (
@@ -57,12 +72,12 @@ export const FilterSection = (props) => {
                         <SelectCouch value={sectionCouch} setValue={handleChangeValueCouch} label={"тренеры"} data={couch}/>
                     </div>
                     <div className={`col`}>
-                        <DataPickerRange label={"даты"}/>
+                        <DataPickerRange value={date} setValueFrom={handleChangeDatePickerFrom} setValueTo={handleChangeDatePickerTo} label={"даты"}/>
                     </div>
                 </div>
 
                 <div className={`row ${classes.wrapper__btn_group}`}>
-                        <Button click={clearFilter} disabled={!(sectionCouch || sectionGroup)} className={classes.wrapper__btn_group__item} factor={'default'} text={'очистить фильтры'}/>
+                        <Button click={clearFilter} disabled={!(sectionCouch || sectionGroup||date.to||date.from)} className={classes.wrapper__btn_group__item} factor={'default'} text={'очистить фильтры'}/>
                         <Button click={handleChangeFilter} className={classes.wrapper__btn_group__item} factor={"success"} text={'применить'}/>
                 </div>
             </div>

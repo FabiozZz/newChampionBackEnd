@@ -10,6 +10,7 @@ import {Skeleton} from "antd";
 import {load_clients, load_couch, load_group} from "../../Acnions/timeTableActions";
 import {NavLink} from "react-router-dom";
 import {HiddenFilter} from "./HiddenFilter/HiddenFilter";
+import HeaderNav from "../common/HeaderNav";
 
 
 
@@ -88,21 +89,7 @@ export const TimeTable = () => {
             </div>
         {/*// <div className={`row ${classes.wrapper}`}>*/}
             {/* верхняя группа кнопок */}
-            <div className={`col-12 ${classes.button_group}`}>
-                <div className={classes.button_group__btn}>
-                    <NavLink to={'/add_adult'}>
-                        <Button text={'добавить взрослого'}/>
-                    </NavLink>
-                </div>
-                <div className={classes.button_group__btn}>
-                    <NavLink to={'/add_child'}>
-                        <Button text={'добавить ребенка'} factor={'success'}/>
-                    </NavLink>
-                </div>
-                <div className={classes.button_group__btn}>
-                    <SearchBox/>
-                </div>
-            </div>
+            <HeaderNav/>
             <div className="col-12">
                 <h1 className={classes.wrapper__title}>Расписание</h1>
             </div>

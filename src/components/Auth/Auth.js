@@ -6,16 +6,39 @@ import {useDispatch} from "react-redux";
 import {useHistory} from "react-router";
 import {log_in} from "../../Acnions/userActions";
 import classes from './auth.module.css';
+import {isEmpty} from "../../helpers/common";
 
-export const Auth = ({setLoad}) => {
+/**
+ * компонент для авторизации менеджера
+ * @returns {JSX.Element}
+ * @constructor
+ */
+export const Auth = () => {
 
+    /**
+     * константа и метод ее изменения, для переключения индикатора загрузки
+     */
     const [isLoad, setIsLoad] = useState(false);
 
     const dispatch = useDispatch();
-    const formRef = useRef(null);
+
     const history = useHistory();
 
+    /**
+     * стейт для полей ввода
+     */
+    const [data, setData] = useState({
+        email:'',
+        password:''
+    });
 
+    /**
+     * метод для изменения полей ввода
+     * @param e
+     */
+    const handleChangeInput = (e) => {
+        setData(prevState => ({...prevState,[e.target.name]:e.target.value}))
+    };
 
     /**
      * прослушивание события отправки формы авторизации
@@ -25,20 +48,11 @@ export const Auth = ({setLoad}) => {
     const handleSubmitForm = async (e) => {
         e.preventDefault();
         setIsLoad(true)
-
-        let form={}
-
-        for(let key of formRef.current.elements){
-            if (key.tagName === 'INPUT') {
-                form = {...form,[key.name]:key.value}
-            }
-        }
-
-        await Api.login(form).then(res=>{
-            setIsLoad(false)
-            dispatch(log_in(res));
-            history.push('/');
-        });
+            await Api.login(data).then(res=>{
+                setIsLoad(false)
+                dispatch(log_in(res));
+                history.push('/');
+            });
     };
 
     return (
@@ -48,22 +62,22 @@ export const Auth = ({setLoad}) => {
                 </div>
 
                 <div className="col-12">
-                    <form className={classes.form_wrapper} ref={formRef} onSubmit={handleSubmitForm}>
+                    <form className={classes.form_wrapper} onSubmit={handleSubmitForm}>
                         <div className="row">
                             <div className={`col-8 ${classes.form_wrapper__block_input}`}>
                                 <div className="row">
                                     <div className={`col-12 ${classes.form_wrapper__item}`}>
-                                        <OtherInput label={'введите email'} name={'email'} type={'email'}/>
+                                        <OtherInput value={data.email} setValue={handleChangeInput} label={'введите email'} name={'email'} type={'email'}/>
                                     </div>
                                     <div className={`col-12 ${classes.form_wrapper__item}`}>
-                                        <OtherInput label={'введите пароль'} name={'password'} type={'password'}/>
+                                        <OtherInput value={data.password} setValue={handleChangeInput} label={'введите пароль'} name={'password'} type={'password'}/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="row">
                             <div className={`col-4 ${classes.form_wrapper__send}`}>
-                                <Button factor={'success'} disabled={isLoad} text={'Войти'} type={'submit'}/>
+                                <Button factor={'success'} disabled={!data.email||!data.password||isLoad} text={'Войти'} type={'submit'}/>
                             </div>
                         </div>
                     </form>

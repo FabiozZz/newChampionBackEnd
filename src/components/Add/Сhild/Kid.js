@@ -11,117 +11,14 @@ import {Rules} from "../common/Rules/Rules";
 import {EndBtnGroup} from "../common/EndBtnGroup/EndBtnGroup";
 import {PersonalData} from "./PersonalData/PersonalData";
 import {ParentsBlock} from "./ParentsBlock/ParentsBlock";
+import {Redirect} from "../../common/Redirect";
 
+/**
+ * компонент для добавления нового клиента ребёнка
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const Kid = () => {
-    const history = useHistory();
-
-    const goBack = () => {
-        history.goBack();
-    };
-
-    const [testData, setTestData] = useState({
-        group: '',
-        dateTest: ''
-    });
-
-    const handleChangeValueGroupTestLesson =  (e) => {
-        setTestData({...testData,group: e.target.value});
-    };
-
-    const handleChangeValueDateTestLesson =  (data) => {
-        setTestData({...testData,dateTest: data});
-    };
-
-    const groupList = useSelector(state => state.addChild.groupList);
-
-    const [personalData,setPersonalData] = useState({
-        lastName: '',
-        middleName: '',
-        name: '',
-        phone: '',
-        birthDay: '',
-    })
-
-    const handleChangePersonalData =  (e,data) => {
-
-        let name = e.target.name;
-        // eslint-disable-next-line default-case
-        switch (name) {
-            case 'lastName':
-                setPersonalData({...personalData,lastName: e.target.value})
-                break;
-            case 'middleName':
-                setPersonalData({...personalData,middleName: e.target.value})
-                break;
-            case 'name':
-                setPersonalData({...personalData,name: e.target.value})
-                break;
-            case 'phone':
-                setPersonalData({...personalData,phone: e.target.value})
-                break;
-        }
-    };
-
-    const handleDataPickerPersonal =  (some) => {
-        setPersonalData({...personalData, birthDay: some});
-    };
-
-    const [parents, setParents] = useState([{},{}]);
-
-    const addParentsData = (data) => {
-        setParents(prevState => [...prevState, data]);
-        console.log(parents)
-    };
-
-
-    const removeParentsData = (i) => {
-        if (i > -1) {
-            console.log(parents)
-            setParents(prevState => prevState.splice(i, 1));
-        }
-    };
-
-
-    const [address, setAddress] = useState({
-        street: '',
-        house: '',
-        corpus: '',
-        room: ''
-    });
-
-    const handleChangeAddressComponent = (e) => {
-        let name = e.target.name;
-        // eslint-disable-next-line default-case
-        switch (name) {
-            case 'street':
-                setAddress(prevState => ({...prevState,street:e.target.value}))
-                break;
-            case 'house':
-                setAddress(prevState => ({...prevState,house:e.target.value}))
-                break;
-            case 'corpus':
-                setAddress(prevState => ({...prevState,corpus:e.target.value}))
-                break;
-            case 'room':
-                setAddress(prevState => ({...prevState,room:e.target.value}))
-                break;
-        }
-    };
-
-    const [sale, setSale] = useState('');
-    const handleChangeValueSale = (e) => {
-        setSale(e.target.value);
-    };
-
-    const [rules, setRules] = useState(true);
-    const handleToggleRules = () => {
-        setRules(!rules);
-    };
-
-    const [personal, setPersonal] = useState(true);
-    const handleTogglePersonal = () => {
-        setPersonal(!personal);
-    };
 
     const dispatch = useDispatch();
 
@@ -133,9 +30,167 @@ export const Kid = () => {
         })();
     },[dispatch]);
 
+    const history = useHistory();
+
+    /**
+     * функция для вохврата в компонент с которого переключились
+     */
+    const goBack = () => {
+        history.goBack();
+    };
+
+    /**
+     * локальный стейт для хранения/установки данных для TestLesson
+     */
+    const [testData, setTestData] = useState({
+        group: '',
+        dateTest: ''
+    });
+
+    /**
+     * прослушивание события ввода данных для TestLesson
+     * @param e
+     */
+    const handleChangeValueGroupTestLesson =  (e) => {
+        setTestData({...testData,group: e.target.value});
+    };
+
+    /**
+     * прослушиване события ввода и выбора дыты для TestLesson
+     * @param data
+     */
+    const handleChangeValueDateTestLesson =  (data) => {
+        setTestData({...testData,dateTest: data});
+    };
+
+    /**
+     * константа из redux для отображения списка доступных групп
+     * @type {[]|*}
+     */
+    const groupList = useSelector(state => state.addChild.groupList);
+
+    /**
+     * локальный стейт для храниения/установки персональных данных клиента для PersonalData
+     */
+    const [personalData,setPersonalData] = useState({
+        lastName: '',
+        middleName: '',
+        name: '',
+        phone: '',
+        birthDay: '',
+    })
+
+    /**
+     * прослушивание события ввода данных для PersonalData
+     * @param e
+     */
+    const handleChangePersonalData =  (e,data) => {
+        let name = e.target.name;
+        setPersonalData(prevState => ({...prevState,[name]:e.target.value}))
+    };
+
+    /**
+     * прослушивания события выбора даты персональных данных в DataPicker для PersonalData
+     * @param some
+     */
+    const handleDataPickerPersonal =  (some) => {
+        setPersonalData({...personalData, birthDay: some});
+    };
+
+    /**
+     * локальный стейт для хранения/установки массива данных о родителях клиента
+     */
+    const [parents, setParents] = useState([{},{}]);
+
+    /**
+     * функция для обновления объекта
+     * @param i индекс объекта в массиве
+     * @param object новый массив для обновления предидущего
+     */
+    const handleChangeItemParentsBlock = (i,object) => {
+        setParents(prevState => [...prevState.slice(0,i),object,...prevState.slice(i+1)]);
+    };
+
+    /**
+     * функция добавления нового поустого объекта в массив родителей
+     */
+    const addParentsData = () => {
+        setParents(prevState => [...prevState, {}]);
+    };
+
+    /**
+     * удаление объекта из массива
+     * @param i индекс объекта в массиве который нужно удалить
+     */
+    const removeParentsData = (i) => {
+            setParents(parents.filter((e,index)=> index!==i ));
+    };
+
+    /**
+     * локальный стейт для храниения/установки адреса клиента для Address
+     */
+    const [address, setAddress] = useState({
+        street: '',
+        house: '',
+        corpus: '',
+        room: ''
+    });
+
+    /**
+     * прослушивание события ввода данных для Address
+     * @param e
+     */
+    const handleChangeAddressComponent = (e) => {
+        let name = e.target.name;
+        setAddress(prevState => ({...prevState,[name]:e.target.value}))
+    };
+
+    /**
+     * локальный стейт для хранения/установки для Sale
+     */
+    const [sale, setSale] = useState('');
+
+    /**
+     * прослушивание ввода данных для Sale
+     * @param e
+     */
+    const handleChangeValueSale = (e) => {
+        setSale(e.target.value);
+    };
+
+    /**
+     * локальный стейт для установки/снятии флага о том что клиент принял
+     * правила посещения клуба для Rules
+     */
+    const [rules, setRules] = useState(true);
+
+    /**
+     * прослушивание клика для переключения флага для Rules
+     */
+    const handleToggleRules = () => {
+        setRules(!rules);
+    };
+
+    /**
+     * локальный стейт для установки/снятии флага о том что клиент принял
+     * правилазачисления и посещения клуба для Rules
+     */
+    const [personal, setPersonal] = useState(true);
+
+    /**
+     * прослушивание клика для переключения флага для Rules
+     */
+    const handleTogglePersonal = () => {
+        setPersonal(!personal);
+    };
+
+    /**
+     * функция которая отрабатывает при отправке формы на сервер
+     * @param e
+     */
     const handleSubmitForm = (e) => {
         e.preventDefault();
-        console.log(parents);
+        // отправка данных на сервер
     };
 
     return (
@@ -143,18 +198,7 @@ export const Kid = () => {
 
             {/* блок навигации */}
 
-            <div className="row">
-                <div className={`col-12 ${classes.wrapper_adult}`}>
-                    <div onClick={goBack} className={classes.wrapper_adult__svg}>
-                        <svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M1.48618 10.2947C1.608 10.1733 1.74016 10.0709 1.8792 9.98177L11.1808 0.680602C12.0882 -0.226398 13.5604 -0.226829 14.4683 0.681033C15.3762 1.58846 15.3762 3.06024 14.4683 3.96853L6.45768 11.9792L14.5096 20.0315C15.4175 20.939 15.4175 22.4103 14.5096 23.319C14.0555 23.7736 13.4601 24 12.8661 24C12.272 24 11.6763 23.7736 11.2226 23.319L1.8792 13.9748C1.74016 13.8857 1.60714 13.7833 1.48618 13.6619C1.02213 13.1978 0.798289 12.5865 0.809482 11.9783C0.798289 11.37 1.02213 10.7592 1.48618 10.2947Z"
-                                fill="#69707F"/>
-                        </svg>
-                    </div>
-                    <h1 className={classes.wrapper_adult__title}>Регистрация ребёнка</h1>
-                </div>
-            </div>
+            <Redirect title={'Регистрация ребёнка'}/>
 
             {/* блок тестового занятия */}
 
@@ -170,6 +214,7 @@ export const Kid = () => {
             {/* блок персональной информации о родителях */}
 
             <ParentsBlock parents={parents}
+                          change={handleChangeItemParentsBlock}
                           addParents={addParentsData}
                           removeParents={removeParentsData}
             />

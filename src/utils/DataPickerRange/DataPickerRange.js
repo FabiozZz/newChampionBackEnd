@@ -9,6 +9,8 @@ import classes from './dataPickerRange.module.css';
 /**
  * визуализация <input type="text"> с появлением внешнего окна для выбора даты
  *
+ * @param value
+ * @param setValue
  * @param style объект стилей применяемый к корневому элементу
  *
  * @param label принимает строку, подпись над компонентом
@@ -17,10 +19,20 @@ import classes from './dataPickerRange.module.css';
  *
  * @param simpleClass строка, классы для компонента
  *
+ * @param props
  * @returns {JSX.Element}
  * @constructor
  */
-export const DataPickerRange = ({style = {}, label = '', disabled = false, simpleClass = '',...props}) => {
+export const DataPickerRange = ({
+                                    value,
+                                    setValueFrom,
+                                    setValueTo,
+                                    style = {},
+                                    label = '',
+                                    disabled = false,
+                                    simpleClass = '',
+                                    ...props
+                                }) => {
     let windowWidth = window.innerWidth;
 
     let date = new Date();
@@ -119,6 +131,7 @@ export const DataPickerRange = ({style = {}, label = '', disabled = false, simpl
             setToDay({...toDate, toMonth: toMonth - 1});
     };
 
+
     /**
      * переключатель года в большую сторону
      * @param e
@@ -188,10 +201,12 @@ export const DataPickerRange = ({style = {}, label = '', disabled = false, simpl
     const handleChangeInputDateFrom = (e) => {
         let symbol = e.target.value;
         setFromData(symbol);
+        setValueFrom(symbol);
     };
     const handleChangeInputDateTo = (e) => {
         let symbol = e.target.value;
         setToData(symbol);
+        setValueTo(symbol);
     };
 
     /**
@@ -208,6 +223,8 @@ export const DataPickerRange = ({style = {}, label = '', disabled = false, simpl
         let id = e.target.getAttribute('id');
         setFromDay({...fromDate, fromDay: +symbol, fromSelect: id});
         setFromData(((symbol < 10) ? '0' + symbol : symbol) + '.' + ((fromMonth + 1) < 10 ? '0' + (fromMonth + 1) : fromMonth + 1) + '.' + fromYear)
+        setValueFrom(((symbol < 10) ? '0' + symbol : symbol) + '.' + ((fromMonth + 1) < 10 ? '0' + (fromMonth + 1) : fromMonth + 1) + '.' + fromYear)
+        setValueTo(((symbol < 10) ? '0' + symbol : symbol) + '.' + ((fromMonth + 1) < 10 ? '0' + (fromMonth + 1) : fromMonth + 1) + '.' + fromYear)
         setToData(((symbol < 10) ? '0' + symbol : symbol) + '.' + ((fromMonth + 1) < 10 ? '0' + (fromMonth + 1) : fromMonth + 1) + '.' + fromYear)
         setToDay({...toDate, toDay: undefined,toMonth: fromMonth,toYear: fromYear,toSelect: id})
 
@@ -217,6 +234,7 @@ export const DataPickerRange = ({style = {}, label = '', disabled = false, simpl
         let id = e.target.getAttribute('id');
         setToDay({...toDate, toDay: +symbol,toSelect: id})
         setToData(((symbol < 10) ? '0' + symbol : symbol) + '.' + ((toMonth + 1) < 10 ? '0' + (toMonth + 1) : toMonth + 1) + '.' + toYear)
+        setValueTo(((symbol < 10) ? '0' + symbol : symbol) + '.' + ((toMonth + 1) < 10 ? '0' + (toMonth + 1) : toMonth + 1) + '.' + toYear)
     };
 
     useEffect(() => {
@@ -311,68 +329,68 @@ export const DataPickerRange = ({style = {}, label = '', disabled = false, simpl
 
     return (
         <>
-                {/* обертка инпута */}
-                <div className={`${classes.dataPickerRangeWrapper} ${props.className?props.className:''}`}>
-                    <label className={classes.label}>{label}</label>
-                    <div className={`${classes.inputWrapper} ${disabled ? 'disabledDataPicker' : ''}`}>
-                        <label className={classes.after}>
-                            <InputMask ref={inputRef}
-                                       name={'firstDate'}
-                                       mask="99.99.9999"
-                                       className={classes.input}
-                                       placeholder={'от'}
-                                       onChange={handleChangeInputDateFrom}
-                                       value={fromData}
-                            />
-                            <div className={classes.separator}/>
-                            <InputMask ref={inputRef}
-                                       mask="99.99.9999"
-                                       name={'lastDate'}
-                                       className={classes.input}
-                                       placeholder={'до'}
-                                       onChange={handleChangeInputDateTo}
-                                       value={toData}
-                            />
-                            <img ref={iconRef} src={calendar} alt="calendar" onClick={handleToggleIconCalendar}/>
-                        </label>
-                    </div>
+            {/* обертка инпута */}
+            <div className={`${classes.dataPickerRangeWrapper} ${props.className?props.className:''}`}>
+                <label className={classes.label}>{label}</label>
+                <div className={`${classes.inputWrapper} ${disabled ? 'disabledDataPicker' : ''}`}>
+                    <label className={classes.after}>
+                        <InputMask ref={inputRef}
+                                   name={'firstDate'}
+                                   mask="99.99.9999"
+                                   className={classes.input}
+                                   placeholder={'от'}
+                                   onChange={handleChangeInputDateFrom}
+                                   value={value.from}
+                        />
+                        <div className={classes.separator}/>
+                        <InputMask ref={inputRef}
+                                   mask="99.99.9999"
+                                   name={'lastDate'}
+                                   className={classes.input}
+                                   placeholder={'до'}
+                                   onChange={handleChangeInputDateTo}
+                                   value={value.to}
+                        />
+                        <img ref={iconRef} src={calendar} alt="calendar" onClick={handleToggleIconCalendar}/>
+                    </label>
+                </div>
 
-                    {/* обертка календаря */}
+                {/* обертка календаря */}
 
-                    {toggleIcon &&
-                    <div ref={calendarWrapper} className={classes.calendar}>
-                        <div >
-                            <div className={classes.change}>
-                                <div className={classes.wrapper}>
-                                    <div className={classes.prev}
-                                         onClick={handlePrevMonth}/>
-                                    <span>{click? month[fromMonth]:month[toMonth]}</span>
-                                    <div className={classes.next}
-                                         onClick={handleNextMonth}/>
-                                </div>
-                                <div className={classes.wrapper}>
-                                    <div className={classes.prev}
-                                         onClick={handlePrevYear}/>
-                                    <span>{click?fromYear:toYear}</span>
-                                    <div className={classes.next}
-                                         onClick={handleNextYear}/>
-                                </div>
+                {toggleIcon &&
+                <div ref={calendarWrapper} className={classes.calendar}>
+                    <div >
+                        <div className={classes.change}>
+                            <div className={classes.wrapper}>
+                                <div className={classes.prev}
+                                     onClick={handlePrevMonth}/>
+                                <span>{click? month[fromMonth]:month[toMonth]}</span>
+                                <div className={classes.next}
+                                     onClick={handleNextMonth}/>
                             </div>
-                            <div className={classes.date}>
-                                <table>
-                                    <thead>
-                                    <tr>{dayOfTheWeek.map((el, index) => <th key={index}>{el}</th>)}</tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr className={classes.separate}/>
-                                    {tableFrom}
-                                    </tbody>
-                                </table>
+                            <div className={classes.wrapper}>
+                                <div className={classes.prev}
+                                     onClick={handlePrevYear}/>
+                                <span>{click?fromYear:toYear}</span>
+                                <div className={classes.next}
+                                     onClick={handleNextYear}/>
                             </div>
                         </div>
+                        <div className={classes.date}>
+                            <table>
+                                <thead>
+                                <tr>{dayOfTheWeek.map((el, index) => <th key={index}>{el}</th>)}</tr>
+                                </thead>
+                                <tbody>
+                                <tr className={classes.separate}/>
+                                {tableFrom}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    }
                 </div>
+                }
+            </div>
         </>
     );
 };

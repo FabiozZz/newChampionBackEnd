@@ -4,7 +4,6 @@ import classes from "./mask.module.css";
 import PropTypes from "prop-types";
 
 /**
- *
  * @param style принимает объект, инлайн стили для обертки
  *
  * @param label принимает строку, подпись к текстовому полю

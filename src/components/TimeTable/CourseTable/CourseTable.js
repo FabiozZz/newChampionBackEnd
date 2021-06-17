@@ -6,17 +6,40 @@ import {Option} from "./Option";
 import {change_couch} from "../../../Acnions/timeTableActions";
 import Api from "../../../Api/Api";
 
+/**
+ * компонент для визуального отображения занятий
+ *
+ * @param data массив объектов с клиентами
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const CourseTable = ({data}) => {
-
+    /**
+     * массив полученный из redux хранит список доступных тренеров для замены
+     * @type {[]|*}
+     */
     const couchList = useSelector(state => state.timeTable.filterSection.couch);
+
     const dispatch = useDispatch();
 
+    /**
+     * функция отправляет данные на сервер для подмены тренеров
+     *
+     * @param id порядковый номер группы
+     *
+     * @param couch тренер на которого меняют существующего тренера
+     *
+     * @returns {Promise<void>}
+     */
     const handleChangeCouchForCourse = async (id,couch) => {
         await Api.getChangeCouch(id, couch).then(r=>{
             dispatch(change_couch(id,couch))
 
         });
     };
+
+    // если в массиве что то есть
     if (data.length) {
         const renderListGroup = data.map(e=>{
             return (
@@ -30,6 +53,11 @@ export const CourseTable = ({data}) => {
                             return (
                                 <div key={card.id} className={`${classes.item}`}>
                                     <CardUser
+                                        abonimentName={card.abonement}
+                                        cardStatusName={card.statusName}
+                                        cardFrom={card.cardFrom}
+                                        lessons={card.lessons}
+                                        cardTo={card.cardTo}
                                         id={card.id}
                                         name={card.name}
                                         surname={card.lastName}
@@ -38,8 +66,10 @@ export const CourseTable = ({data}) => {
                                         health={card.health}
                                         toDay={card.toDay}
                                         birthDay={card.birthday}
+                                        birthDayDate={card.birthdayDate}
                                         status={card.status}
                                         course={card.course}
+                                        freeze={card.freeze}
                                     />
                                 </div>)})
                         }
@@ -52,6 +82,7 @@ export const CourseTable = ({data}) => {
             </div>
         )
     }else{
+        // если массив пуст
         return (
             <div className={'col-12 text-center my-5'}>
                 <p>Данных нет</p>

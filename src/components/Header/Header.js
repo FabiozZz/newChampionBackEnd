@@ -6,13 +6,27 @@ import {useHistory} from "react-router";
 import Api from "../../Api/Api";
 import classes from './header.module.css';
 
+/**
+ * компонент шапки CRM
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const Header = () => {
+
+    /**
+     * константы из redux
+     * @param isAuth авторизован ли менеджер
+     * @param currentUser данные менеджера если он авторизован
+     */
     const {currentUser,isAuth} = useSelector(state => state.user);
 
     const dispatch = useDispatch();
 
     const history = useHistory();
 
+    /**
+     * прослушивание события выхода из CRM
+     */
     const handleExitCRM = () => {
         Api.logout();
         dispatch(log_out());
