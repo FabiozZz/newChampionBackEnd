@@ -2,6 +2,7 @@ import React from 'react';
 import classes from "../../add.module.css";
 import {SelectGroup} from "../../../TimeTable/FilterSection/SelectGroup/SelectGroup";
 import {DataPicker} from "../../../../utils/DataPicker/DataPicker";
+import {SelectFilial} from "./SelectFilial";
 
 /**
  * компонент визуализации ввода данных о тестовом занятии
@@ -13,7 +14,7 @@ import {DataPicker} from "../../../../utils/DataPicker/DataPicker";
  * @returns {JSX.Element}
  * @constructor
  */
-export const TestLesson = ({groupList,value,setGroup,setDate}) => {
+export const TestLesson = ({groupList,value,setGroup,setDate,setFilial,filialList}) => {
     return (
         <div className={`row ${classes.block_info}`}>
 
@@ -27,9 +28,13 @@ export const TestLesson = ({groupList,value,setGroup,setDate}) => {
                                      label={'групповые занятия единоборствами'} data={groupList}/>
                     </div>
                     <div className={`col-6 ${classes.block_info__item}`}>
+                        <SelectFilial data={filialList} label={'филиал'} value={value.filial} setValue={setFilial}/>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className={`col-5 ${classes.block_info__item}`}>
                         <DataPicker value={value.dateTest} name={'dateTest'} setValue={setDate} label={'дата пробного занятия'}/>
                     </div>
-
                 </div>
             </div>
         </div>

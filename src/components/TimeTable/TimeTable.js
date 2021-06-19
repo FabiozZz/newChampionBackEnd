@@ -46,7 +46,6 @@ export const TimeTable = () => {
             if (filterRef.current) {
                 let box = filterRef.current.getBoundingClientRect();
                 if (box.top <= 0) {
-                    console.log(box.top < 0)
                     setVvisibleHiddenFilter(true);
                 } else if (box.top > 0){
                     setVvisibleHiddenFilter(false);
@@ -61,25 +60,19 @@ export const TimeTable = () => {
 
     useEffect(() => {
         setIsLoad(true);
-            (async () => {
-
-                await Api.getClientsTimeTable().then(r => {
-                    dispatch(load_clients(r))
-                    setIsLoad(false);
-                });
-            })();
-            (async () => {
-
-                await Api.getGroupList().then(r => {
-                    dispatch(load_group(r))
-                })
-            })();
-            (async () => {
-
-                await Api.getCouchList().then(r => {
-                    dispatch(load_couch(r))
-                })
-            })();
+        const loadData = async () =>{
+            await Api.getClientsTimeTable().then(r => {
+                dispatch(load_clients(r))
+            });
+            await Api.getGroupList().then(r => {
+                dispatch(load_group(r))
+            })
+            await Api.getCouchList().then(r => {
+                dispatch(load_couch(r))
+            })
+            await setIsLoad(false);
+        };
+        loadData();
         },[dispatch]);
 
     return (

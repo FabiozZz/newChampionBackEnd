@@ -49,11 +49,9 @@ export const FilterSection = (props) => {
     });
     const handleChangeDatePickerFrom = (some) => {
         setDate(prevState => ({...prevState,from:some}))
-        console.log(date)
     };
     const handleChangeDatePickerTo = (some) => {
         setDate(prevState=>({...prevState,to:some}))
-        console.log(date)
     };
 
     return (

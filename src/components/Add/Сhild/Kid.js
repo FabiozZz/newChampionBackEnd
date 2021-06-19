@@ -12,6 +12,7 @@ import {EndBtnGroup} from "../common/EndBtnGroup/EndBtnGroup";
 import {PersonalData} from "./PersonalData/PersonalData";
 import {ParentsBlock} from "./ParentsBlock/ParentsBlock";
 import {Redirect} from "../../common/Redirect";
+import {group_list_adult} from "../../../Acnions/addAdultClientActions";
 
 /**
  * компонент для добавления нового клиента ребёнка
@@ -23,12 +24,16 @@ export const Kid = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        (async () => {
-            await Api.getGroupForChild().then(r=> {
-                dispatch(group_list_child(r));
+        const loadData = async () => {
+            await Api.getGroupForAdult().then(r => {
+                dispatch(group_list_adult(r));
             });
-        })();
-    },[dispatch]);
+            await Api.getFilialList().then(r => {
+                setFilialList([...r.data])
+            });
+        }
+        loadData();
+    },[]);
 
     const history = useHistory();
 
@@ -43,9 +48,11 @@ export const Kid = () => {
      * локальный стейт для хранения/установки данных для TestLesson
      */
     const [testData, setTestData] = useState({
+        filial:'',
         group: '',
         dateTest: ''
     });
+    const [filialList, setFilialList] = useState([]);
 
     /**
      * прослушивание события ввода данных для TestLesson
@@ -53,6 +60,14 @@ export const Kid = () => {
      */
     const handleChangeValueGroupTestLesson =  (e) => {
         setTestData({...testData,group: e.target.value});
+    };
+
+    /**
+     * прослушивание события ввода данных для TestLesson
+     * @param e
+     */
+    const handleChangeValueFilialTestLesson =  (e) => {
+        setTestData({...testData,filial: e.target.value});
     };
 
     /**
@@ -198,18 +213,22 @@ export const Kid = () => {
 
             {/* блок навигации */}
 
-            <Redirect title={'Регистрация ребёнка'}/>
+            <Redirect padding={true} title={'Регистрация ребёнка'}/>
 
             {/* блок тестового занятия */}
 
             <TestLesson groupList={groupList}
+                        filialList={filialList}
                         value={testData}
+                        setFilial={handleChangeValueFilialTestLesson}
                         setGroup={handleChangeValueGroupTestLesson}
                         setDate={handleChangeValueDateTestLesson}/>
 
             {/* блок персональной информации о ребенке */}
 
-            <PersonalData data={personalData} change={handleChangePersonalData} changeData={handleDataPickerPersonal}/>
+            <PersonalData data={personalData}
+                          change={handleChangePersonalData}
+                          changeData={handleDataPickerPersonal}/>
 
             {/* блок персональной информации о родителях */}
 

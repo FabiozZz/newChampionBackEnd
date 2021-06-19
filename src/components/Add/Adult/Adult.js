@@ -29,11 +29,15 @@ export const Adult = () => {
      * с сохраненем полученных данных в redux
      */
     useEffect(() => {
-        (async () => {
-            await Api.getGroupForAdult().then(r=> {
+        const loadData = async () => {
+            await Api.getGroupForAdult().then(r => {
                 dispatch(group_list_adult(r));
             });
-        })();
+            await Api.getFilialList().then(r => {
+                setFilialList([...r.data])
+            });
+        }
+        loadData();
     },[]);
 
     /**
@@ -92,9 +96,11 @@ export const Adult = () => {
      * локальный стейт для хранения/установки данных для TestLesson
      */
     const [testData, setTestData] = useState({
+        filial: '',
         group: '',
         dateTest: ''
     });
+    const [filialList, setFilialList] = useState([]);
 
     /**
      * прослушивание события ввода данных для TestLesson
@@ -102,6 +108,14 @@ export const Adult = () => {
      */
     const handleChangeValueGroupTestLesson =  (e) => {
         setTestData({...testData,group: e.target.value});
+    };
+
+    /**
+     * прослушивание события ввода данных для TestLesson
+     * @param e
+     */
+    const handleChangeValueFilialTestLesson =  (e) => {
+        setTestData({...testData,filial: e.target.value});
     };
 
     /**
@@ -170,11 +184,13 @@ export const Adult = () => {
 
     return (
         <div className={`col-12`}>
-<Redirect title={'Регистрация взрослого'}/>
+<Redirect padding={true} title={'Регистрация взрослого'}/>
             {/* блок пробного занятия */}
 
             <TestLesson groupList={groupList}
+                        filialList={filialList}
                         value={testData}
+                        setFilial={handleChangeValueFilialTestLesson}
                         setGroup={handleChangeValueGroupTestLesson}
                         setDate={handleChangeValueDateTestLesson}/>
 

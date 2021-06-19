@@ -69,23 +69,30 @@ export const CardUser = ({abonimentName,cardStatusName,cardFrom,cardTo,lessons,i
     };
 
     return (
-        <NavLink to={`/profile/${id}`}>
+        <NavLink to={`/profile/${id}/info`}>
             <div className={classes.cardUser} style={style}>
-
                 <div className={classes.names}>
                     <span>{name}</span>
                     <span>{surname}</span>
                 </div>
+
+                <CustomTooltip placement={'top'} color={'dark'} title={()=>(
+                    <div className={classes.card_status__tooltip_text_wrapper}>
+                        {freeze?
+                            <p className={`${classes.card_status__tooltip_text_wrapper__text_center} ${classes.card_status__tooltip_text_wrapper__text_center__date}`}>ЗАМОРОЖЕН</p>:null}
+                        <p className={classes.card_status__tooltip_text_wrapper__text_center}>{abonimentName} {cardStatusName}</p>
+                        <p className={classes.card_status__tooltip_text_wrapper__text_center}>Срок действия: <span className={classes.card_status__tooltip_text_wrapper__text_center__date}>{cardFrom}-{cardTo}</span></p>
+                        <p className={classes.card_status__tooltip_text_wrapper__text_center}>Доступно: <span className={classes.card_status__tooltip_text_wrapper__text_center__date}>{lessons}</span> занятий</p>
+                    </div>
+                )}>
+                    <div className={classes.cardStatus}>
                 <CardUserStatus
-                    abonimentName={abonimentName}
-                    cardStatusName={cardStatusName}
-                    cardFrom={cardFrom}
-                    cardTo={cardTo}
-                    lessons={lessons}
-                    className={classes.cardStatus}
                     freeze={freeze}
                     danger={expire}
                     status={status}/>
+                    </div>
+                </CustomTooltip>
+
                 <div className={classes.notifications}>
                     {birthDay &&
                         <CustomTooltip placement={'top'} color={'dark'} title={()=>(

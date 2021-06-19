@@ -1,34 +1,46 @@
 import React, {useEffect, useState} from 'react';
-import {useHistory, useParams} from "react-router";
+import {Route, Switch, useHistory, useParams} from "react-router";
 import Api from "../../Api/Api";
 import HeaderNav from "../common/HeaderNav";
-import classes from "../Add/add.module.css";
+import classes from "./profile.module.css";
 import {Redirect} from "../common/Redirect";
+import {NavigateProfile} from "./NavigeteProfile/NavigeteProfile";
+import {ProfileInfo} from "./Pages/ProfileInfo/ProfileInfo";
+import {isEmpty} from "../../helpers/common";
 
 export const Profile = () => {
-    const params = useParams();
+    const {id} = useParams();
 
 
     const [user, setUser] = useState({});
 
     useEffect(() => {
-        Api.getProfile(params.id).then(r => {
-            setUser({...r})
-        });
+        (async () => {
+            await Api.getProfile(id).then(r => {
+                setUser({...r})
+            });
+        })();
     },[]);
 
     return (
         <div>
             <HeaderNav/>
             <Redirect title={'Профиль'}/>
-
-            <h1>{user.name}</h1>
-
-            <div className={classes.block_info}></div>
-            <div className={classes.block_info}></div>
-            <div className={classes.block_info}></div>
-            <div className={classes.block_info}></div>
-            <div className={classes.block_info}></div>
+            <NavigateProfile id={id}/>
+            <Switch>
+                {!isEmpty(user)&&
+                    <>
+                <Route exact path={`/profile/${id}/info`} render={() => <ProfileInfo user={user}/>}/>
+                    <Route path={`/profile/${id}/visit_history`} render={() => <h1>История посещений</h1>}/>
+                    <Route path={`/profile/${id}/payment_history`} render={() => <h1>История оплат</h1>}/>
+                    <Route path={`/profile/${id}/gamification`} render={() => <h1>Геймификация</h1>}/>
+                    </>
+                }
+            </Switch>
+            {/*<div className={classes.block_info}></div>*/}
+            {/*<div className={classes.block_info}></div>*/}
+            {/*<div className={classes.block_info}></div>*/}
+            {/*<div className={classes.block_info}></div>*/}
         </div>
     );
 };

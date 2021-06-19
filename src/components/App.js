@@ -90,7 +90,7 @@ function App() {
                                 <Route exact path={'/'} render={() => (<TimeTable/>)}/>
                                 <Route path={'/add_adult'} render={() => (<Adult/>)}/>
                                 <Route path={'/add_child'} render={() => (<Kid/>)}/>
-                                <Route path={'/profile/:id'} render={() => (<Profile/>)}/>
+                                <Route path={'/profile/:id/'} render={() => (<Profile/>)}/>
                             </Switch>
 
                     </div>

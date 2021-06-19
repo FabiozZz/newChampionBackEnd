@@ -9,6 +9,50 @@ const user = {
     name:'FabiozZz',
     email: 'fabiozzz.dev@gmail.com',
 }
+
+const client = {
+    id: 1, name: 'Константин', middleName: 'Константинович', lastName: 'Константинопольский',
+    privateData:[],
+    birthday: false,
+    statusName:'Новый пользователь',
+    birthdayDate: '06.10.1989',
+    health: true,
+    whereIs:'Яндекс Карты',
+    address:
+        {
+            street:'Красная',
+            house:'155',
+            corpus:'2',
+            room:'802'
+        },
+    status: 30,
+    abonement:'MINI',
+    cardFrom:'22.11.2021',
+    cardTo:'22.12.21',
+    lessons:'8',
+    call: false,
+    burnAbonement: true,
+    course: 1,
+    freeze:true,
+    toDay:false,
+    is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[
+        {
+            lastName:'Константинопольский',
+            name:'Константин',
+            middleName:'Константинович',
+            hoIs:'Отец',
+            phone:'+7 (123) 456-78-90'
+        },
+        {
+            lastName:'Константинопольский',
+            name:'Константин',
+            middleName:'Константинович',
+            hoIs:'Отец',
+            phone:'+7 (123) 456-78-90'
+        }
+    ],
+}
+
 const data = [
     {
         //Константин Константинович Константинопольский
@@ -16,229 +60,224 @@ const data = [
         clients: [
             {
                 id: 1, name: 'Константин', middleName: 'Константинович', lastName: 'Константинопольский',
-                status: 30, abonement:'MINI', parents:[{
+                status: 30, abonement:'Стандарт', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.89', call: false, burnAbonement: true,
-                course: 1,freeze:true,toDay:false,
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Сапфировый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+                course: 'Бразильское Джиу-Джитсу',freeze:true,toDay:false,
             },
             {
                 id: 2, name: 'Иван', middleName: 'Беляев', lastName: 'Беляев',
-                status: 5, abonement:'MINI', parents:[{
+                status: 5, abonement:'MINI', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: true, birthdayDate: '06.10.89', call: false, burnAbonement: false,
-                course: 1,freeze:true,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Бронзовый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: true, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
+                course: 'Бразильское Джиу-Джитсу',freeze:true,toDay:false
             },
             {
-                id: 3, name: 'Адам', middleName: '', lastName: 'Соловьев',
-                status: 0, abonement:'MINI', parents:[{
+                id: 3, name: 'Адам', middleName: 'Константинович', lastName: 'Соловьев',
+                status: 0, abonement:'', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: false, birthdayDate: '06.10.89', call: true, burnAbonement: false,
-                course: 1,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'', cardFrom:'',cardTo:'', lessons:'', health: false, birthday: false, birthdayDate: '21.10.1989', call: false, burnAbonement: false,
+                course: 'Бразильское Джиу-Джитсу',freeze:false,toDay:false
             },
             {
                 id: 4, name: 'Ольга', middleName: '', lastName: 'Васильева',
-                status: 13, abonement:'MINI', parents:[{
+                status: 13, abonement:'MINI', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: false, birthdayDate: '06.10.89', call: false, burnAbonement: true,
-                course: 1,freeze:true,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Рубиновый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+                course: 'Бразильское Джиу-Джитсу',freeze:true,toDay:false
             },
             {
                 id: 5, name: 'Ирина', middleName: 'Константинович', lastName: 'Дмитриева',
-                status: 30, abonement:'MINI', parents:[{
+                status: 30, abonement:'MINI', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: true,birthdayDate: '06.10.89', call: true, burnAbonement: true,
-                course: 1,freeze:true,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Сапфировый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: true,birthdayDate: '06.10.1989', call: true, burnAbonement: true,
+                course: 'Бразильское Джиу-Джитсу',freeze:true,toDay:false
             },
             {
                 id: 6, name: 'Александра', middleName: 'Константинович', lastName: 'Семенова',
-                status: 79, abonement:'MINI', parents:[{
+                status: 79, abonement:'MINI', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.89', call: false, burnAbonement: true,
-                course: 1,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Брилиантовый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+                course: 'Бразильское Джиу-Джитсу',freeze:false,toDay:false
             },
             {
                 id: 25, name: 'Александра', middleName: 'Константинович', lastName: 'Семенова',
-                status: 79, abonement:'MINI', parents:[{
+                status: 79, abonement:'SMART', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.89', call: false, burnAbonement: true,
-                course: 1,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Брилиантовый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+                course: 'Бразильское Джиу-Джитсу',freeze:false,toDay:false
             },
             {
                 id: 26, name: 'Александра', middleName: 'Константинович', lastName: 'Семенова',
-                status: 79, abonement:'MINI', parents:[{
+                status: 79, abonement:'MINI', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.89', call: false, burnAbonement: true,
-                course: 1,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Брилиантовый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+                course: 'Бразильское Джиу-Джитсу',freeze:false,toDay:false
             },
             {
                 id: 27, name: 'Александра', middleName: 'Константинович', lastName: 'Семенова',
-                status: 79, abonement:'MINI', parents:[{
+                status: 79, abonement:'MINI', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.89', call: false, burnAbonement: true,
-                course: 1,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Брилиантовый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+                course: 'Бразильское Джиу-Джитсу',freeze:false,toDay:false
             },
             {
                 id: 28, name: 'Александра', middleName: 'Константинович', lastName: 'Семенова',
-                status: 79, abonement:'MINI', parents:[{
+                status: 79, abonement:'MINI', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.89', call: false, burnAbonement: true,
-                course: 1,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Брилиантовый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+                course: 'Бразильское Джиу-Джитсу',freeze:false,toDay:false
             },
             {
                 id: 29, name: 'Александра', middleName: 'Константинович', lastName: 'Семенова',
-                status: 79, abonement:'MINI', parents:[{
+                status: 79, abonement:'MINI', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.89', call: false, burnAbonement: true,
-                course: 1,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Брилиантовый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+                course: 'Бразильское Джиу-Джитсу',freeze:false,toDay:false
             },
             {
                 id: 30, name: 'Александра', middleName: 'Константинович', lastName: 'Семенова',
-                status: 79, abonement:'MINI', parents:[{
+                status: 79, abonement:'MINI', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.89', call: false, burnAbonement: true,
-                course: 1,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Брилиантовый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+                course: 'Бразильское Джиу-Джитсу',freeze:false,toDay:false
             },
             {
                 id: 31, name: 'Александра', middleName: 'Константинович', lastName: 'Семенова',
-                status: 79, abonement:'MINI', parents:[{
+                status: 79, abonement:'MINI', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.89', call: false, burnAbonement: true,
-                course: 1,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Брилиантовый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+                course: 'Бразильское Джиу-Джитсу',freeze:false,toDay:false
             },
             {
                 id: 32, name: 'Александра', middleName: 'Константинович', lastName: 'Семенова',
-                status: 79, abonement:'MINI', parents:[{
+                status: 79, abonement:'MINI', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.89', call: false, burnAbonement: true,
-                course: 1,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Брилиантовый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+                course: 'Бразильское Джиу-Джитсу',freeze:false,toDay:false
             },
         ]
     },
     {
-        //
         id: 2, totalClients: 6, toDay:0, name: 'Маленькие Самураи', coach: 'Кобялко Владимир Владимирович', timeTraining: '12.04.2021',
         clients: [
             {
                 id: 7, name: 'Вера', middleName: 'Константинович', lastName: 'Григорьева',
-                status: 11, abonement:'MINI', parents:[{
+                status: 11, abonement:'MINI', is_Adult:false,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                },{
-                    lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
-                    street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: false, birthdayDate: '06.10.89', call: true, burnAbonement: false,
-                course: 2,freeze:true,toDay:false
+                }], address:{
+                    street:'Красная', house:'155',corpus:null,room:null
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Золотой пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: false, birthdayDate: '06.10.1989', call: true, burnAbonement: false,
+                course:'Маленькие Самураи',freeze:true,toDay:false
             },
             {
                 id: 8, name: 'Варвара', middleName: 'Константинович', lastName: 'Климова',
-                status: 5, abonement:'MINI', parents:[{
+                status: 5, abonement:'MINI', is_Adult:false,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: false, birthdayDate: '06.10.89', call: false, burnAbonement: false,
-                course: 2,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Бронзовый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
+                course:'Маленькие Самураи',freeze:false,toDay:false
             },
             {
                 id: 9, name: 'Вера', middleName: 'Константинович', lastName: 'Григорьева',
-                status: 3, abonement:'MINI', parents:[{
+                status: 3, abonement:'MINI', is_Adult:false,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                },{
-                    lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.89', call: false, burnAbonement: false,
-                course: 2,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Бронзовый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
+                course:'Маленькие Самураи',freeze:false,toDay:false
             },
             {
                 id: 10, name: 'Виктория', middleName: 'Константинович', lastName: 'Латвинова',
-                status: 3, abonement:'MINI', parents:[{
+                status: 3, abonement:'MINI', is_Adult:false,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: true,birthdayDate: '06.10.89', call: true, burnAbonement: false,
-                course: 2,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Бронзовый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: true,birthdayDate: '06.10.1989', call: true, burnAbonement: false,
+                course:'Маленькие Самураи',freeze:false,toDay:false
             },
             {
                 id: 11, name: 'Алксандра', middleName: 'Константинович', lastName: 'Кононова',
-                status:18, abonement:'MINI', parents:[{
+                status:18, abonement:'MINI', is_Adult:false,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: false, birthdayDate: '06.10.89', call: true, burnAbonement: false,
-                course: 2,freeze:true,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Рубиновый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: false, birthdayDate: '06.10.1989', call: true, burnAbonement: false,
+                course:'Маленькие Самураи',freeze:true,toDay:false
             },
             {
                 id: 12, name: 'Филлип', middleName: 'Константинович', lastName: 'Зотов',
-                status: 0, abonement:'MINI', parents:[{
+                status: 0, abonement:'', is_Adult:false,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: true,birthdayDate: '06.10.89', call: false, burnAbonement: false,
-                course: 2,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'', cardFrom:'',cardTo:'', lessons:'', health: false, birthday: false,birthdayDate: '06.10.1989', call: false, burnAbonement: false,
+                course:'Маленькие Самураи',freeze:false,toDay:false
             },
         ]
     },
@@ -247,69 +286,69 @@ const data = [
         clients: [
             {
                 id: 13, name: 'Игорь', middleName: 'Константинович', lastName: 'Дубровин',
-                status: 15, abonement:'MINI', parents:[{
+                status: 15, abonement:'MINI', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: true,birthdayDate: '06.10.89', call: true, burnAbonement: false,
-                course: 3,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Рубиновый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: true,birthdayDate: '06.10.1993', call: true, burnAbonement: false,
+                course:'Самбо/Дзюдо',freeze:false,toDay:false
             },
             {
                 id: 14, name: 'Константин', middleName: 'Константинович', lastName: 'Волков',
-                status: 20, abonement:'MINI', parents:[{
+                status: 20, abonement:'MINI', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: true,birthdayDate: '06.10.89', call: false, burnAbonement:false,
-                course: 3,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Рубиновый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: true,birthdayDate: '06.10.1989', call: false, burnAbonement:false,
+                course:'Самбо/Дзюдо',freeze:false,toDay:false
             },
             {
                 id: 15, name: 'Владимир', middleName: 'Константинович', lastName: 'Панкратов',
-                status: 12, abonement:'MINI', parents:[{
+                status: 12, abonement:'MINI', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: true,birthdayDate: '06.10.89', call: true, burnAbonement: true,
-                course: 3,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Рубиновый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: true,birthdayDate: '06.10.1989', call: true, burnAbonement: true,
+                course:'Самбо/Дзюдо',freeze:false,toDay:false
             },
             {
                 id: 16, name: 'Ева', middleName: 'Константинович', lastName: 'Щербакова',
-                status: 2, abonement:'MINI', parents:[{
+                status: 2, abonement:'MINI', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: false, birthdayDate: '06.10.89', call: true, burnAbonement: false,
-                course: 2,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: false, birthdayDate: '06.10.1989', call: true, burnAbonement: false,
+                course:'Самбо/Дзюдо',freeze:false,toDay:false
             },
             {
                 id: 17, name: 'Екатерина', middleName: 'Константинович', lastName: 'Фадеева',
-                status: 10, abonement:'MINI', parents:[{
+                status: 10, abonement:'MINI', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: false, birthdayDate: '06.10.89', call: false, burnAbonement: false,
-                course: 3,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Золотой пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
+                course:'Самбо/Дзюдо',freeze:false,toDay:false
             },
             {
                 id: 18, name: 'Таисия', middleName: 'Константинович', lastName: 'Александрова',
-                status: 14, abonement:'MINI', parents:[{
+                status: 14, abonement:'MINI', is_Adult:true,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: false, birthdayDate: '06.10.89', call: true, burnAbonement: false,
-                course: 1,freeze:true,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Рубиновый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: false, birthdayDate: '06.10.1989', call: true, burnAbonement: false,
+                course:'Самбо/Дзюдо',freeze:true,toDay:false
             },
         ]
     },
@@ -318,79 +357,73 @@ const data = [
         clients: [
             {
                 id: 19, name: 'Арсений', middleName: 'Константинович', lastName: 'Горшков',
-                status: 0, abonement:'MINI', parents:[{
+                status: 0, abonement:'', is_Adult:false,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.89', call: false, burnAbonement: false,
-                course: 4,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'', cardFrom:'',cardTo:'', lessons:'', health: false, birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
+                course:'Маленькие воины',freeze:false,toDay:false
             },
             {
                 id: 20, name: 'Вера', middleName: 'Константинович', lastName: 'Самсонова',
-                status: 1, abonement:'MINI', parents:[{
+                status: 1, abonement:'MINI', is_Adult:false,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: false, birthdayDate: '06.10.89', call: false, burnAbonement: true,
-                course: 4,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+                course:'Маленькие воины',freeze:false,toDay:false
             },
             {
                 id: 21, name: 'Марк', middleName: 'Константинович', lastName: 'Новиков',
-                status: 7, abonement:'MINI', parents:[{
+                status: 7, abonement:'MINI', is_Adult:false,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: false, birthdayDate: '06.10.89', call: false, burnAbonement: false,
-                course: 4,freeze:true,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Золотой пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
+                course:'Маленькие воины',freeze:true,toDay:false
             },
             {
                 id: 22, name: 'Богдан', middleName: 'Константинович', lastName: 'Федоров',
-                status: 0, abonement:'MINI', parents:[{
+                status: 0, abonement:'', is_Adult:false,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: true, birthday: false, birthdayDate: '06.10.89', call: true, burnAbonement: false,
-                course: 4,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'', cardFrom:'',cardTo:'', lessons:'', health: false, birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
+                course:'Маленькие воины',freeze:false,toDay:false
             },
             {
                 id: 23, name: 'Владимир', middleName: 'Константинович', lastName: 'Андреев',
-                status: 8, abonement:'MINI', parents:[{
+                status: 8, abonement:'MINI', is_Adult:false,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: true,birthdayDate: '06.10.89', call: true, burnAbonement: false,
-                course: 4,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Золотой пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: true,birthdayDate: '06.10.1989', call: true, burnAbonement: false,
+                course:'Маленькие воины',freeze:false,toDay:false
             },
             {
                 id: 24, name: 'Владлен', middleName: 'Константинович', lastName: 'Шаткий',
-                status: 9, abonement:'MINI', parents:[{
+                status: 9, abonement:'MINI', is_Adult:false,filial:'Московская 130',is_whatsApp:false,parents:[{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
                 },{
                     lastName:'Константинопольский',name:'Константин',middleName:'Константинович',hoIs:'Отец',phone:'+7 (123) 456-78-90'
-                }], address:[{
+                }], address:{
                     street:'Красная', house:'155',corpus:'2',room:'802'
-                }],whereIs:'Яндекс Карты',privateData:[{}], statusName:'Новый пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: true,birthdayDate: '06.10.89', call: false, burnAbonement: true,
-                course: 4,freeze:false,toDay:false
+                },whereIs:'Яндекс Карты',privateData:[], statusName:'Золотой пользователь', cardFrom:'22.11.2021',cardTo:'22.12.21', lessons:'8', health: false, birthday: true,birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+                course:'Маленькие воины',freeze:false,toDay:false
             },
         ]
     }
 ];
-// const dataSelectGroup = [
-//     {id: 1, name: 'Бразильское Джиу-Джитсу'},
-//     {id: 2, name: 'Маленькие Самураи'},
-//     {id: 3, name: 'Самбо/Дзюдо'},
-//     {id: 4, name: 'Маленькие воины'},
-// ];
 const dataSelectAllGroup = [
     {id: 1, name: 'дети 3-7 лет',course:[
             {id:1,name: 'Маленькие Самураи'},
@@ -431,18 +464,26 @@ const dataSelectAdultGroup = [
             {id:11,name: 'Грэпплинг'},
         ]},
 ];
-// const timeGroup = [
-//     {id: 1, name: '12:30'},
-//     {id: 2, name: '14:00'},
-//     {id: 3, name: '17:30'},
-//     {id: 4, name: '18:00'},
-// ];
 const dataSelectCouch = [
     {id:1,name:'Плиев Станислав Робертович'},
     {id:2,name:'Кобялко Владимир Владимирович'},
     {id:3,name:'Бураков Анатолий Петрович'},
     {id:4,name:'Корицкая Диана Александровна'},
 ];
+const filialList = [
+    {
+        id:1,name:'Московская 130'
+    },
+    {
+        id:2,name:'Дальняя 99'
+    }
+]
+const typeAboniment=[
+    {id:1,name:'Стандарт'},
+    {id:2,name:'SMART'},
+    {id:1,name:'NONSTOP'},
+    {id:1,name:'MINI'}
+]
 
 /* основные */
 mock.onPost('/auth/login').reply(200, {user,accessToken: 'TOKEN_ACC',refreshToken:'TOKEN_REF'});
@@ -459,13 +500,18 @@ mock.onPut('/couch_change').reply(200, {success:'ok'});
 mock.onPatch(/\/check_clients\/\d+\/\d+/).reply(200);
 mock.onGet(/\/get_profile\/\d+/).reply(200);
 
-/* для добавления взрослого клиента */
 
+mock.onGet('/filial_list').reply(200, [...filialList]);
+
+/* для добавления взрослого клиента */
 mock.onGet('/group_list_adult').reply(200, {dataSelectAdultGroup});
 
 /* для добавления ребенка */
 
 mock.onGet('/group_list_child').reply(200,{dataSelectChildGroup})
+
+/* для профиля */
+mock.onGet('/get_abonement_list').reply(200, [...typeAboniment]);
 
 
 mock.resetHistory();
@@ -703,6 +749,15 @@ class Api {
         return await this.client.get('/group_list_adult').then(r=>r.data.dataSelectAdultGroup)
     }
 
+    /**
+     * получение списка филиалов для клиента
+     *
+     * @returns {Promise<[{name: string, course: [{name: string, id: number}, {name: string, id: number}, {name: string, id: number}], id: number}]>}
+     */
+    async getFilialList() {
+        return await this.client.get('/filial_list').then(r=>r)
+    }
+
     /* для добавления ребенка */
 
     /**
@@ -712,6 +767,12 @@ class Api {
      */
     async getGroupForChild() {
         return await this.client.get('/group_list_child').then(r=>r.data.dataSelectChildGroup)
+    }
+
+    /* для профиля */
+
+    async getAbonimentList() {
+        return await this.client.get('/get_abonement_list').then(r => r.data);
     }
 
     /* отмена операциии запроса, не тестил, может не работать */

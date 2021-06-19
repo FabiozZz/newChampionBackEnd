@@ -1,0 +1,23 @@
+.wrapper_redirect_p{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 40px 24px;
+}.wrapper_redirect{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 24px;
+}
+.wrapper_redirect__svg{
+    cursor: pointer;
+    padding: 16px 16px;
+}
+.wrapper_redirect__title{
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 52px;
+    color: #2E384D;
+}
