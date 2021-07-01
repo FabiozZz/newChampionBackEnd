@@ -1,0 +1,23 @@
+.wrapper{
+    height: 40px;
+    background: #FFFFFF;
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    margin: 0 -30px;
+    padding: 0 32px;
+}
+.item{
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    color: rgba(105, 112, 127, 0.7);
+    height: 100%;
+    display: grid;
+    grid-template-columns: min-content min-content;
+    grid-gap: 4px;
+    grid-auto-flow: column;
+    align-items: center;
+}

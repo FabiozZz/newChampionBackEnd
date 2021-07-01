@@ -1,5 +1,5 @@
 .searchBox {
-    width: 224px;
+    max-width: 224px;
     height: 40px;
     border-radius: 5px;
     background: #FFFFFF;

@@ -1,20 +1,21 @@
 .wrapper {
     padding: 24px 32px;
     background: #ffffff;
-    height: 236px;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
+    margin: 0 -30px;
+    grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr;
+    border-bottom: 1px solid #EEF3F5;
 }
 .wrapper__select_group{
     padding-top: 16px;
 }
-.wrapper__btn_group{
-    display: flex;
-    justify-content: center;
-    padding-top: 16px;
-}
+/*.wrapper__btn_group{*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    padding-top: 16px;*/
+/*}*/
 
-.wrapper__btn_group__item{
-    margin: 0 calc(37px / 2);
-}
+/*.wrapper__btn_group__item{*/
+/*    margin: 0 calc(37px / 2);*/
+/*}*/

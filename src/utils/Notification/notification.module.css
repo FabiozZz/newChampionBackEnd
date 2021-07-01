@@ -1,0 +1,53 @@
+.notif{
+    box-sizing: border-box;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+    padding: 0;
+    height: 52px;
+}
+.notif__box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 52px;
+}
+.notif__text{
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #2E384D;
+    padding-left: 16px;
+}
+.notif__box_success{
+    border: 1px solid #56BD5B;
+    background: #56BD5B;
+}
+.notif__box_danger{
+    border: 1px solid #E34C4C;
+    background: #E34C4C;
+}
+.notif__box_warning{
+    border: 1px solid #F7B422;
+    background: #F7B422;
+}
+.notif_success{
+    background: rgba(86, 189, 91, 0.05);
+    border: 1px solid #56BD5B;
+}
+.notif_warning {
+    background: rgba(247, 180, 34, 0.05);
+    border: 1px solid #F7B422;
+}
+.notif_danger{
+    background: rgba(227, 76, 76, 0.05);
+    border: 1px solid #E34C4C;
+}

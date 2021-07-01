@@ -74,11 +74,13 @@ export const timeTableReducer = (state=initialState,action) => {
             }
         case FILTERED_CLIENTS:
             const filteredClients = state.clients.filter(e=>{
-                if (e.name === action.group || e.coach === action.coach) {
+                if ((action.group && e.name === action.group) || (action.coach && e.coach === action.coach)) {
                     return e;
+                }else{
+                    return null;
                 }
-
             });
+            console.log(filteredClients)
             return {
                 ...state,
                 filterClients: [...filteredClients]

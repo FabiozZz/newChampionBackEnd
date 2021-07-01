@@ -3,7 +3,7 @@
     display: grid;
     grid-auto-columns: 220px;
     grid-template-rows: repeat(5,min-content);
-    grid-gap: 0 12px;
+    grid-column-gap: 24px;
     grid-auto-flow: column;
     margin: 20px 18px 20px  0;
 }
@@ -75,6 +75,7 @@
     color: #69707F;
 }
 .item{
+    box-shadow: var(--box-shadow);
     margin-top: 8px;
 }
 .arrowOptionBox {
