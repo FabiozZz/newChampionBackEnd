@@ -21,7 +21,11 @@ export const FilterClientsSection = () => {
     const handleChangeSearch = (e) => {
         setSearch(e.target.value);
     };
-
+    const [activeStatus, setActiveStatus] = useState('');
+    const handleChangeValueForStatus = (some) => {
+        setActiveStatus(some);
+    }
+    console.log(activeStatus);
     return (
         <>
             <div className={`row ${classes.wrapper}`}>
@@ -43,7 +47,7 @@ export const FilterClientsSection = () => {
                     <BtnGroup is_Adult={isAdult} toggleActive={setIsAdult}/>
                 </div>
             </div>
-                <StatusFilterSection data={filterData.status}/>
+                <StatusFilterSection activePunkt={activeStatus} setPunkt={handleChangeValueForStatus} data={filterData.status}/>
         </>
     );
 };

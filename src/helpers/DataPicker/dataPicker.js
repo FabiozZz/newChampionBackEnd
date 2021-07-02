@@ -70,7 +70,6 @@ export const renderTableRange = (
 
             let follow = moment(cell, 'DD-MM-YYYY').isBefore(moment([+toD,+toM+1,+toY], 'DD-MM-YYYY'))&&moment(cell, 'DD-MM-YYYY').isAfter(moment([+fromD,+fromM+1,+fromY], 'D-M-YYYY'))
             let unfollow = moment(cell, 'DD-MM-YYYY').isBefore(moment([+fromD,+fromM+1,+fromY], 'DD-MM-YYYY'))&&moment(cell, 'DD-MM-YYYY').isAfter(moment([+toD,+toM+1,+toY], 'D-M-YYYY'))
-            console.log()
                 let plusClass =
                     td !== undefined && selectTo && selectFrom && selectFrom !== selectTo
                     &&

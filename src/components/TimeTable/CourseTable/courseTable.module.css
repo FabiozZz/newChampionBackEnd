@@ -5,7 +5,7 @@
     grid-template-rows: repeat(5,min-content);
     grid-column-gap: 24px;
     grid-auto-flow: column;
-    margin: 20px 18px 20px  0;
+    margin: 40px 18px 20px  0;
 }
 .courseWrapper{
     /*display: grid;*/

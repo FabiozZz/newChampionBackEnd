@@ -10,7 +10,6 @@ import {Counter} from "../../../../../utils/Counter/Counter";
 import {SelectStatus} from "../SelectStatus/SelectStatus";
 import {SelectCouch} from "../../../../TimeTable/FilterSection/SelectCouch/SelectCouch";
 import {SelectGroup} from "../../../../TimeTable/FilterSection/SelectGroup/SelectGroup";
-import {Notification} from "../../../../../utils/Notification/Notification";
 
 export const AddAboniment = ({profile}) => {
     const {couch, group, status, typeAboniment} = profile;
@@ -153,9 +152,6 @@ export const AddAboniment = ({profile}) => {
                 </> :
                 null
             }
-            <div>
-                <Notification factor={'success'} text={'some text'}/>
-            </div>
         </div>
     );
 };

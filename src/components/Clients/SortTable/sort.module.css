@@ -1,4 +1,6 @@
 .sort_section{
+    padding-top: 40px;
+    padding-bottom: 16px;
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -25,6 +27,7 @@
     color: #69707F;
 }
 .sort_select {
+    cursor:pointer;
     position: relative;
     display: inline-grid;
     grid-template-columns: max-content min-content;
@@ -59,4 +62,21 @@
     padding: 23px 57px 32px 16px;
     background: #FFFFFF;
     position: absolute;
+}
+.sort_section_factor{
+    display: grid;
+    grid-gap: 8px;
+    grid-auto-flow: column;
+}
+.factor_active path{
+    cursor:pointer;
+    fill:#43BF41;
+}
+.factor_rows path {
+    cursor: pointer;
+    fill:#8798AD;
+}
+.factor_column path {
+    cursor:pointer;
+    fill:#8798AD;
 }

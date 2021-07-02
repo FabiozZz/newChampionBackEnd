@@ -80,7 +80,6 @@ export const timeTableReducer = (state=initialState,action) => {
                     return null;
                 }
             });
-            console.log(filteredClients)
             return {
                 ...state,
                 filterClients: [...filteredClients]

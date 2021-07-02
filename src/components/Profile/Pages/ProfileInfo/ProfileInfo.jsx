@@ -6,6 +6,7 @@ import addCard from '../../../../assets/images/cardAdd.svg';
 import {AbonimentInfo} from "./AbonimentInfo";
 import {AddAboniment} from "./AddAboniment/AddAboniment";
 import {Notification} from "../../../../utils/Notification/Notification";
+import {isEmpty} from "../../../../helpers/common";
 
 export const ProfileInfo = ({profile}) => {
     const {user} = profile
@@ -62,15 +63,11 @@ export const ProfileInfo = ({profile}) => {
                     :
                     <h3 className={classes.block_info__title}>Абонемент</h3>
                 }
-                {(!user.privateData.number &&!user.privateData.serial)&&
-                    <div className={classes.notif}>
-                        <Notification factor={'danger'} text={(
-                            <span>Не заполнены паспортные данные</span>
-                        )}/>
-
-                    </div>
-                }
-
+                {/*{(user.status>0&&user.is_Adult&&isEmpty(user.privateData))&&*/}
+                {/*    <div>*/}
+                {/*        <Notification factor={'danger'} text={}/>*/}
+                {/*    </div>*/}
+                {/*}*/}
                 {user.status?
                 <AbonimentInfo user={user} whatsApp={whatsApp} handleToggleWhatsApp={handleToggleWhatsApp}/>
                 :

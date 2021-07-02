@@ -22,7 +22,7 @@ const user = {
 const clients = [
     {
         id: 1, name: 'Константин', middleName: 'Константинович', lastName: 'Константинопольский',
-        status: 30, totalPay: 3200, is_Archive: true, abonement: 'Стандарт', is_Adult: true, phone: '+7 (997) 567-12-67', filial: 'Московская 130', is_whatsApp: false, parents: [{
+        status: 30, totalPay: 3200, is_Archive: true, abonement: 'Стандарт', is_Adult: false, phone: '+7 (997) 567-12-67', filial: 'Московская 130', is_whatsApp: false, parents: [{
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }, {
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
@@ -36,16 +36,13 @@ const clients = [
     },
     {
         id: 2, name: 'Иван', middleName: 'Беляев', lastName: 'Беляев',
-        status: 5, totalPay: 3200, is_Archive: false, abonement: 'MINI', is_Adult: true, phone: '+7 (997) 567-12-67', filial: 'Московская 130', is_whatsApp: false, parents: [{
+        status: 0, totalPay: 3200, is_Archive: false, abonement: 'MINI', is_Adult: false, phone: '+7 (997) 567-12-67', filial: 'Московская 130', is_whatsApp: false, parents: [{
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }, {
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Бронзовый', img: BronzeClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: true, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Бронзовый', img: BronzeClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: true, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
         course: 'Бразильское Джиу-Джитсу', coach: 'Плиев Станислав Робертович', freeze: true, toDay: false
     },
     {
@@ -56,10 +53,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: null, cardFrom: null, cardTo: null, lessons: '', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '21.10.1989', call: false, burnAbonement: false,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: null, cardFrom: null, cardTo: null, lessons: '', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '21.10.1989', call: false, burnAbonement: false,
         course: 'Бразильское Джиу-Джитсу', coach: 'Плиев Станислав Робертович', freeze: false, toDay: false
     },
     {
@@ -70,10 +64,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Рубиновый', img: RybyClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Рубиновый', img: RybyClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
         course: 'Бразильское Джиу-Джитсу', coach: 'Плиев Станислав Робертович', freeze: true, toDay: false
     },
     {
@@ -84,10 +75,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Сапфировый', img: SapfirClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: true, birthdayDate: '06.10.1989', call: true, burnAbonement: true,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Сапфировый', img: SapfirClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: true, birthdayDate: '06.10.1989', call: true, burnAbonement: true,
         course: 'Бразильское Джиу-Джитсу', coach: 'Плиев Станислав Робертович', freeze: true, toDay: false
     },
     {
@@ -98,10 +86,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Брилиантовый', img: BrilClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Брилиантовый', img: BrilClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
         course: 'Бразильское Джиу-Джитсу', coach: 'Плиев Станислав Робертович', freeze: false, toDay: false
     },
     {
@@ -112,10 +97,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Брилиантовый', img: BrilClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Брилиантовый', img: BrilClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
         course: 'Бразильское Джиу-Джитсу', coach: 'Плиев Станислав Робертович', freeze: false, toDay: false
     },
     {
@@ -126,10 +108,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Брилиантовый', img: BrilClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Брилиантовый', img: BrilClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
         course: 'Бразильское Джиу-Джитсу', coach: 'Плиев Станислав Робертович', freeze: false, toDay: false
     },
     {
@@ -140,10 +119,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Брилиантовый', img: BrilClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Брилиантовый', img: BrilClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
         course: 'Бразильское Джиу-Джитсу', coach: 'Плиев Станислав Робертович', freeze: false, toDay: false
     },
     {
@@ -154,10 +130,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Брилиантовый', img: BrilClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Брилиантовый', img: BrilClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
         course: 'Бразильское Джиу-Джитсу', coach: 'Плиев Станислав Робертович', freeze: false, toDay: false
     },
     {
@@ -168,7 +141,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [], statusName: 'Брилиантовый', img: BrilClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Брилиантовый', img: BrilClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
         course: 'Бразильское Джиу-Джитсу', coach: 'Плиев Станислав Робертович', freeze: false, toDay: false
     },
     {
@@ -179,10 +152,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Брилиантовый', img: BrilClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Брилиантовый', img: BrilClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
         course: 'Бразильское Джиу-Джитсу', coach: 'Плиев Станислав Робертович', freeze: false, toDay: false
     },
     {
@@ -193,10 +163,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Брилиантовый', img: BrilClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Брилиантовый', img: BrilClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
         course: 'Бразильское Джиу-Джитсу', coach: 'Плиев Станислав Робертович', freeze: false, toDay: false
     },
     {
@@ -207,10 +174,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Брилиантовый', img: BrilClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Брилиантовый', img: BrilClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
         course: 'Бразильское Джиу-Джитсу', coach: 'Плиев Станислав Робертович', freeze: false, toDay: false
     },
     {
@@ -219,10 +183,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: null, room: null
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Золотой', img: GoldClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: true, burnAbonement: false,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Золотой', img: GoldClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: true, burnAbonement: false,
         course: 'Маленькие Самураи', coach: 'Кобялко Владимир Владимирович', freeze: true, toDay: false
     },
     {
@@ -233,10 +194,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Бронзовый', img: BronzeClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Бронзовый', img: BronzeClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
         course: 'Маленькие Самураи', coach: 'Кобялко Владимир Владимирович', freeze: false, toDay: false
     },
     {
@@ -245,10 +203,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Бронзовый', img: BronzeClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Бронзовый', img: BronzeClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
         course: 'Маленькие Самураи', coach: 'Кобялко Владимир Владимирович', freeze: false, toDay: false
     },
     {
@@ -259,10 +214,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Бронзовый', img: BronzeClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: true, birthdayDate: '06.10.1989', call: true, burnAbonement: false,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Бронзовый', img: BronzeClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: true, birthdayDate: '06.10.1989', call: true, burnAbonement: false,
         course: 'Маленькие Самураи', coach: 'Кобялко Владимир Владимирович', freeze: false, toDay: false
     },
     {
@@ -273,10 +225,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Рубиновый', img: RybyClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: true, burnAbonement: false,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Рубиновый', img: RybyClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: true, burnAbonement: false,
         course: 'Маленькие Самураи', coach: 'Кобялко Владимир Владимирович', freeze: true, toDay: false
     },
     {
@@ -287,10 +236,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: null, cardFrom: null, cardTo: null, lessons: '', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: null, cardFrom: null, cardTo: null, lessons: '', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
         course: 'Маленькие Самураи', coach: 'Кобялко Владимир Владимирович', freeze: false, toDay: false
     },
     {
@@ -301,10 +247,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: {
-            serial: '462415',
-            number: '12323123'
-        }, statusName: 'Рубиновый', img: RybyClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: true, birthdayDate: '06.10.1993', call: true, burnAbonement: false,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Рубиновый', img: RybyClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: true, birthdayDate: '06.10.1993', call: true, burnAbonement: false,
         course: 'Самбо/Дзюдо', coach: 'Бураков Анатолий Петрович', freeze: false, toDay: false
     },
     {
@@ -315,10 +258,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Рубиновый', img: RybyClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: true, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Рубиновый', img: RybyClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: true, healthExpire: '22.12.2021', birthday: true, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
         course: 'Самбо/Дзюдо', coach: 'Бураков Анатолий Петрович', freeze: false, toDay: false
     },
     {
@@ -329,10 +269,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Рубиновый', img: RybyClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: true, birthdayDate: '06.10.1989', call: true, burnAbonement: true,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Рубиновый', img: RybyClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: true, birthdayDate: '06.10.1989', call: true, burnAbonement: true,
         course: 'Самбо/Дзюдо', coach: 'Бураков Анатолий Петрович', freeze: false, toDay: false
     },
     {
@@ -343,10 +280,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Новый', img: NewCliet, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: true, burnAbonement: false,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Новый', img: NewCliet, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: true, burnAbonement: false,
         course: 'Самбо/Дзюдо', coach: 'Бураков Анатолий Петрович', freeze: false, toDay: false
     },
     {
@@ -357,10 +291,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Золотой', img: GoldClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Золотой', img: GoldClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
         course: 'Самбо/Дзюдо', coach: 'Бураков Анатолий Петрович', freeze: false, toDay: false
     },
     {
@@ -371,10 +302,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Рубиновый', img: RybyClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: true, burnAbonement: false,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Рубиновый', img: RybyClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: true, burnAbonement: false,
         course: 'Самбо/Дзюдо', coach: 'Бураков Анатолий Петрович', freeze: true, toDay: false
     },
     {
@@ -385,10 +313,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: null, cardFrom: null, cardTo: null, lessons: '', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: null, cardFrom: null, cardTo: null, lessons: '', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
         course: 'Маленькие воины', coach: 'Корицкая Диана Александровна', freeze: false, toDay: false
     },
     {
@@ -399,10 +324,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Новый', img: NewCliet, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Новый', img: NewCliet, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
         course: 'Маленькие воины', coach: 'Корицкая Диана Александровна', freeze: false, toDay: false
     },
     {
@@ -413,10 +335,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Золотой', img: GoldClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Золотой', img: GoldClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
         course: 'Маленькие воины', coach: 'Корицкая Диана Александровна', freeze: true, toDay: false
     },
     {
@@ -427,10 +346,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: null, cardFrom: null, cardTo: null, lessons: '', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: null, cardFrom: null, cardTo: null, lessons: '', health: false, healthExpire: '22.12.2021', birthday: false, birthdayDate: '06.10.1989', call: false, burnAbonement: false,
         course: 'Маленькие воины', coach: 'Корицкая Диана Александровна', freeze: false, toDay: false
     },
     {
@@ -441,10 +357,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Золотой', img: GoldClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: true, birthdayDate: '06.10.1989', call: true, burnAbonement: false,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Золотой', img: GoldClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: true, birthdayDate: '06.10.1989', call: true, burnAbonement: false,
         course: 'Маленькие воины', coach: 'Корицкая Диана Александровна', freeze: false, toDay: false
     },
     {
@@ -455,10 +368,7 @@ const clients = [
             lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
         }], address: {
             street: 'Красная', house: '155', corpus: '2', room: '802'
-        }, whereIs: 'Яндекс Карты', privateData: [{
-            serial: '',
-            number: ''
-        }], statusName: 'Золотой', img: GoldClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: true, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
+        }, whereIs: 'Яндекс Карты', privateData: {}, statusName: 'Золотой', img: GoldClient, cardFrom: '22.11.2021', cardTo: '22.12.21', lessons: '8', health: false, healthExpire: '22.12.2021', birthday: true, birthdayDate: '06.10.1989', call: false, burnAbonement: true,
         course: 'Маленькие воины', coach: 'Корицкая Диана Александровна', freeze: false, toDay: false
     },
 
@@ -471,7 +381,7 @@ const data = [
         clients: [
             {
                 id: 1, name: 'Константин', middleName: 'Константинович', lastName: 'Константинопольский',
-                status: 30, totalPay: 3200, is_Archive: false, abonement: 'Стандарт', is_Adult: true, phone: '+7 (997) 567-12-67', filial: 'Московская 130', is_whatsApp: false, parents: [{
+                status: 30, totalPay: 3200, is_Archive: true, abonement: 'Стандарт', is_Adult: true, phone: '+7 (997) 567-12-67', filial: 'Московская 130', is_whatsApp: false, parents: [{
                     lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'
                 }, {
                     lastName: 'Константинопольский', name: 'Константин', middleName: 'Константинович', hoIs: 'Отец', phone: '+7 (123) 456-78-90'

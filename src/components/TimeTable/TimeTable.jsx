@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useRef, useState} from 'react';
 import classes from './timeTable.module.css';
 import {CourseTable} from "./CourseTable/CourseTable";
@@ -96,6 +97,7 @@ export const TimeTable = () => {
     const toggleVisibleInfo = () => {
         setVisibleInfo(!visibleInfo);
     };
+
 
     useEffect(() => {
             if (refBox.current) {

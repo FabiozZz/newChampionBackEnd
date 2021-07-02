@@ -1,21 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {getKeyByValue, sort} from '../../../../helpers/sortSelect/sort';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import {getKeyByValue} from '../../../../helpers/sortSelect/sort';
 import classes from '../sort.module.css';
 
 export const SortSelect = () => {
 
-    const dispatch = useDispatch();
-    const refInput = useRef(null);
+    // const dispatch = useDispatch();
+    // const refInput = useRef(null);
 
     const clientsLIst = useSelector(state => state.clientsList);
-    const {sortSection,allClients,filterClients}=clientsLIst
+    const {sortSection/*,allClients,filterClients*/}=clientsLIst
     const [sortVariable, setSortVariable] = useState({
         name: '',
         type: '',
         field: '',
     });
-    console.log(sortVariable)
     useEffect(()=>{
         if (sortSection.length) {
             setSortVariable({
@@ -29,9 +28,9 @@ export const SortSelect = () => {
     const toggleHideOption = () => {
         setHide(!hide);
     };
-    const selectOpion = (e)=>{
-        setSortVariable(e.target.value);
-    };
+    // const selectOpion = (e)=>{
+    //     setSortVariable(e.target.value);
+    // };
     return (
         <>
             <span onClick={toggleHideOption}
