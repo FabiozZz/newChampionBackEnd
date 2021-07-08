@@ -60,17 +60,18 @@ export const CourseTable = ({data}) => {
                                             lessons={card.lessons}
                                             cardTo={card.cardTo}
                                             id={card.id}
-                                            name={card.name}
-                                            surname={card.lastName}
+                                            name={card.first_name}
+                                            surname={card.last_name}
                                             expire={card.burnAbonement}
                                             call={card.call}
                                             health={card.health}
                                             toDay={card.toDay}
                                             birthDay={card.birthday}
-                                            birthDayDate={card.birthdayDate}
+                                            birthDayDate={card.date_of_birth}
                                             status={card.status}
                                             course={card.course}
                                             freeze={card.freeze}
+                                            img={card.img}
                                         />
                                     </div>);
                             }else {

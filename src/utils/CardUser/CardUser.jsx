@@ -52,7 +52,7 @@ import {CustomTooltip} from "../CustomTooltip/CustomTooltip";
  * @returns {JSX.Element}
  * @constructor
  */
-export const CardUser = ({abonimentName,cardStatusName,cardFrom,cardTo,lessons,id, name, surname, status, freeze, health, toDay, call, birthDay, birthDayDate, expire, style, course}) => {
+export const CardUser = ({img,abonimentName,cardStatusName,cardFrom,cardTo,lessons,id, name, surname, status, freeze, health, toDay, call, birthDay, birthDayDate, expire, style, course}) => {
     const dispatch = useDispatch();
 
 
@@ -69,13 +69,13 @@ export const CardUser = ({abonimentName,cardStatusName,cardFrom,cardTo,lessons,i
     };
 
     return (
-        <NavLink to={`/profile/${id}/info`}>
+        <NavLink to={`/profile/${id}`}>
             <div className={classes.cardUser} style={style}>
                 <div className={classes.names}>
                     <span>{name}</span>
                     <span>{surname}</span>
                 </div>
-
+                {img&&
                 <CustomTooltip placement={'top'} color={'dark'} title={()=>(
                     <div className={classes.card_status__tooltip_text_wrapper}>
                         {freeze?
@@ -86,12 +86,11 @@ export const CardUser = ({abonimentName,cardStatusName,cardFrom,cardTo,lessons,i
                     </div>
                 )}>
                     <div className={classes.cardStatus}>
-                <CardUserStatus
-                    freeze={freeze}
-                    danger={expire}
-                    status={status}/>
+                        <img width={17} height={12} src={img} alt="card"/>
                     </div>
                 </CustomTooltip>
+
+                }
 
                 <div className={classes.notifications}>
                     {birthDay &&

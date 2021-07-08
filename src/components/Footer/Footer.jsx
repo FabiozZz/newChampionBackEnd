@@ -11,7 +11,7 @@ import classes from './footer.module.css';
 export const Footer = (props) => {
     return (
         <div className={'row'}>
-            <div className={`col-12 ${classes.footer} ${props.className}`} {...props}>
+            <div className={`col-12 ${classes.footer} ${props.className?props.className:''}`} {...props}>
                 {/* кнопка для перехода на главную страницу */}
 
                 <NavLink className={classes.home} to={'/'}>

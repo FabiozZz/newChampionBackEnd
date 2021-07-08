@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import classes from './filter.module.css';
 import {OtherInput} from "../../../utils/OtherInput/OtherInput";
 import {ListType} from "./ListType/ListType";
@@ -9,45 +9,100 @@ import {FilialList} from "./FilialList/FilialList";
 import {GroupList} from "./GroupList/GroupList";
 import {BtnGroup} from "./BtnGroup/BtnGroup";
 import {StatusFilterSection} from "./StatusFilterSection/StatusFilterSection";
+import {AnchorBox} from "../AnchorBox/AnchorBox";
 
 export const FilterClientsSection = () => {
+
     const [isAdult, setIsAdult] = useState(false);
-    // const [isActiveStatus,setActiveStatus] = useState({
-    //     name:'',
-    //     active:false
-    // })
+
     const filterData = useSelector(state => state.clientsList.filterSection);
+
     const [search, setSearch] = useState('');
     const handleChangeSearch = (e) => {
+
+        // здесь будут запросы к базе
+
         setSearch(e.target.value);
     };
-    const [activeStatus, setActiveStatus] = useState('');
+    const [activeStatus, setActiveStatus] = useState({
+        name: ''
+    });
     const handleChangeValueForStatus = (some) => {
         setActiveStatus(some);
     }
-    console.log(activeStatus);
+
+    const [selectFilter, setSelectFilter] = useState({
+        listType:{name: ''},
+        abonementType:{name: ''},
+        couchList:{name: ''},
+        filialList:{name: ''},
+        groupList:{name: ''}
+    });
+
+    const {listType, abonementType, couchList, filialList, groupList} = selectFilter;
+
+    const handleChangeFilterDate = (name,obj) => {
+        setSelectFilter(prevState => ({...prevState, [name]: {...obj}}));
+    };
+
+    const [ancor, setHideAncor] = useState(false);
+
+    const refFilter = useRef(null)
+    useEffect(()=>{
+        const spyFilterSection = () => {
+            if (refFilter.current) {
+                if (refFilter.current.getBoundingClientRect().bottom < 0) {
+                    setHideAncor(true)
+                }else{
+                    setHideAncor(false);
+                }
+            }
+        };
+        document.addEventListener('scroll', spyFilterSection);
+        return () => document.removeEventListener('scroll', spyFilterSection);
+    },[])
+
+    const clearFilter = () => {
+        setSelectFilter({
+            listType: {name: ''},
+            abonementType: {name: ''},
+            couchList: {name: ''},
+            filialList: {name: ''},
+            groupList: {name: ''}
+        });
+        setActiveStatus({name: ''});
+        setSearch('');
+    };
+    const selectedData = listType.name || abonementType.name || couchList.name || filialList.name || groupList.name || search || activeStatus.name;
     return (
         <>
-            <div className={`row ${classes.wrapper}`}>
-                <div className={classes.wrapper__first_line}>
-                    <OtherInput name={'search'}
-                                value={search}
-                                setValue={handleChangeSearch}
-                                label={'поиск'}/>
+            <div ref={refFilter} id={'filters'} className="col-12">
 
+                <div className={`row ${classes.wrapper}`}>
+                    <div className={classes.wrapper__first_line}>
+                        <OtherInput name={'search'}
+                                    value={search}
+                                    setValue={handleChangeSearch}
+                                    label={'поиск'}/>
+
+                    </div>
+                    <div className={classes.wrapper__second_line}>
+                        <ListType name={'listType'} value={listType.name} setValue={handleChangeFilterDate} label={'тип списка'} data={filterData.types}/>
+                        <AbonimentType name={'abonementType'} value={abonementType.name} setValue={handleChangeFilterDate} label={'тип абонимента'} data={filterData.abonement}/>
+                        <CouchList name={'couchList'} value={couchList.name} setValue={handleChangeFilterDate} label={'тренер'} data={filterData.couch}/>
+                    </div>
+                    <div className={classes.wrapper__third_line}>
+                        <FilialList name={'filialList'} value={filialList.name} setValue={handleChangeFilterDate} label={'филиалы'} data={filterData.filial}/>
+                        <GroupList name={'groupList'} value={groupList.name} setValue={handleChangeFilterDate} label={'единоборства'} data={filterData.group}/>
+                        <BtnGroup is_Adult={isAdult} toggleActive={setIsAdult}/>
+                    </div>
                 </div>
-                <div className={classes.wrapper__second_line}>
-                    <ListType label={'тип списка'} data={filterData.types}/>
-                    <AbonimentType label={'тип абонимента'} data={filterData.aboniment}/>
-                    <CouchList label={'тренер'} data={filterData.couch}/>
-                </div>
-                <div className={classes.wrapper__third_line}>
-                    <FilialList label={'филиалы'} data={filterData.filial}/>
-                    <GroupList label={'единоборства'} data={filterData.group}/>
-                    <BtnGroup is_Adult={isAdult} toggleActive={setIsAdult}/>
-                </div>
+                <StatusFilterSection activePunkt={activeStatus.name} setPunkt={handleChangeValueForStatus} data={filterData.status}/>
             </div>
-                <StatusFilterSection activePunkt={activeStatus} setPunkt={handleChangeValueForStatus} data={filterData.status}/>
+            {(ancor || selectedData)&&
+            <AnchorBox ancor={ancor} clear={clearFilter} select={selectedData}/>
+            }
+
         </>
     );
 };

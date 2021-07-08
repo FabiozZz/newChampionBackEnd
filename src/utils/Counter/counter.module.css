@@ -17,7 +17,6 @@
 }
 .otherInputWrapper div input {
     text-align: center;
-    display: inline-block;
     border-radius: 5px;
     position: relative;
     color: #BFC5D2;
@@ -47,8 +46,21 @@
 }
 .wrapper{
     display: grid;
-    grid-auto-flow: column;
+    grid-template-columns: repeat(3,min-content);
 }
+/*.wrapper_input {*/
+/*    -moz-appearance: textfield;*/
+/*}*/
+/*.wrapper_input:hover,*/
+/*.wrapper_input::placeholder,*/
+/*.wrapper_input:focus {*/
+/*    -moz-appearance: textfield;*/
+/*}*/
+/*.wrapper_input::-webkit-inner-spin-button,*/
+/*.wrapper_input::-webkit-outer-spin-button {*/
+/*    -webkit-appearance: none;*/
+/*    margin: 0;*/
+/*}*/
 .toggle{
     cursor: pointer;
     display: flex;

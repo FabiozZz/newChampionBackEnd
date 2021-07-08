@@ -10,10 +10,10 @@
   flex-direction: column;
   justify-content: center;
 }
-.footer-hidden {
-  height: 80px;
-  width: 100%;
-}
+/*.footer-hidden {*/
+/*  height: 80px;*/
+/*  width: 100%;*/
+/*}*/
 .app-wrapper {
   display: grid;
   grid-template-columns: 100%;

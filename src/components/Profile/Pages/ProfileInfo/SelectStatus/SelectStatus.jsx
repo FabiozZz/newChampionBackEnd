@@ -76,8 +76,10 @@ export const SelectStatus = ({label,value,setValue,data,...props}) => {
     }, []);
 
     useEffect(() => {
-        setValue(data[0].name)
-    },[data, setValue]);
+        if (value === '') {
+            setValue(data[0]);
+        }
+    },[data, setValue, value]);
 
     return (
         <div ref={selectRef} className={`${classes.selectBoxWrapper} ${props.className}`} {...props}>
@@ -90,10 +92,10 @@ export const SelectStatus = ({label,value,setValue,data,...props}) => {
             </div>
             {toggleOptionBox&&
             <div ref={optionBox} className={classes.optionBox}>
-                {data.map(item=> (<option key={item.id} onClick={(e)=> {
-                    setValue(e.target.value);
+                {data.map(item=> (<option key={item.id} onClick={()=> {
+                    setValue(item);
                     setToggleOptionBox(false);
-                }} value={item.name} className={classes.item}>{item.name}</option>))}
+                }} value={item.name} className={classes.item}>{item.name} клиент</option>))}
             </div>
             }
         </div>

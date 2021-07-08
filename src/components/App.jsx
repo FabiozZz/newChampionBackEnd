@@ -92,6 +92,7 @@ function App() {
                                 <Route path={'/add_adult'} component={Adult}/>
                                 <Route path={'/add_child'} component={Kid}/>
                                 <Route path={'/profile/:id/'} component={Profile}/>
+                                {/*<Route exact path={'/profile/:id/edit'} component={EditProfile}/>*/}
                                 <Route path={'/clients'} component={Clients}/>
                             </Switch>
 

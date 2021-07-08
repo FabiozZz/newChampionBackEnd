@@ -10,7 +10,9 @@ import classes from './profile.module.css';
 import {Button} from "../../utils/Buttons/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {
+    clear_profile,
     load_profile_aboniment, load_profile_couch,
+    load_profile_filial,
     load_profile_group,
     load_profile_status,
     load_profile_user
@@ -20,7 +22,6 @@ import axios from "axios";
 export const Profile = () => {
 
     const profile = useSelector(state => state.profile)
-
 
     const dispatch = useDispatch();
 
@@ -46,18 +47,21 @@ export const Profile = () => {
             await Api.getCouchList(source.token).then(r => {
                 dispatch(load_profile_couch(r.data))
             });
+            await Api.getFilialList(source.token).then(r => {
+                dispatch(load_profile_filial(r.data))
+            });
         })();
     },[dispatch, id]);
-    // if (isEmpty(profile.profile)) {
-    //     return null
-    // }
+    useEffect(() => {
+        return () => dispatch(clear_profile());
+    },[dispatch]);
     return (
         <>
             <div className="col-12">
                 <HeaderNav/>
             </div>
             <div className="col-12">
-                <Redirect title={'Профиль'}/>
+                <Redirect title={'Профиль'} padding={true}/>
             </div>
             {profile.user.is_Archive&&
             <div className={classes.block_info}>
@@ -89,10 +93,6 @@ export const Profile = () => {
                         :
                         <ProfileInfo profile={profile}/>)
             }
-            {/*<div className={classes.block_info}></div>*/}
-            {/*<div className={classes.block_info}></div>*/}
-            {/*<div className={classes.block_info}></div>*/}
-            {/*<div className={classes.block_info}></div>*/}
         </>
     );
 };

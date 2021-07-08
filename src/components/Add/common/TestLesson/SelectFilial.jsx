@@ -75,7 +75,7 @@ export const SelectFilial = ({value,setValue,label,data,...props}) => {
             {toggleOptionBox&&
             <div ref={optionBox} className={classes.optionBox}>
                 {data.map(item=> (<option key={item.id} onClick={(e)=> {
-                    setValue(e);
+                    setValue({id:item.id,name:item.name});
                     setToggleOptionBox(false);
                 }} value={item.name} className={classes.item}>{item.name}</option>))}
             </div>

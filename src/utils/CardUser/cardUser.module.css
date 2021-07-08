@@ -14,7 +14,7 @@
           'names status'
           'names health'
           'notification success';
-    padding: 12px;
+    padding: 12px 8px 12px 12px;
 }
 .names {
     grid-area: names;

@@ -2,7 +2,7 @@ import React from 'react';
 import cn from "classnames";
 import classes from "../../clients.module.css";
 import imageBirthDay from "../../../../assets/images/clientsListCard/giftbox.svg";
-import {ageToString} from "../../../../helpers/common";
+import {ageToString, declOfLessonsNum} from "../../../../helpers/common";
 import imagePhone from "../../../../assets/images/clientsListCard/phone.svg";
 import imageTime from "../../../../assets/images/clientsListCard/clock.svg";
 import imageHealth from "../../../../assets/images/clientsListCard/health.svg";
@@ -12,6 +12,7 @@ import imageCountAbiniment from "../../../../assets/images/clientsListCard/count
 import imageCash from "../../../../assets/images/clientsListCard/cash.svg";
 import IMageCall from "../../../../assets/images/phone 1.svg";
 import {NavLink} from "react-router-dom";
+import { declOfNum } from '../../../Profile/Pages/ProfileInfo/AbonimentInfo';
 
 export const ClientsRow = ({clients}) => {
     return (
@@ -20,7 +21,7 @@ export const ClientsRow = ({clients}) => {
                 {clients.map(client=>{
                     let rowBlock = client.status <= 0 ? classes.item_block_not_status : classes.item_block;
                     return (
-                        <NavLink key={client.id} className={classes.wr_card_row} to={`/profile/${client.id}/info`}>
+                        <NavLink key={client.id} className={classes.wr_card_row} to={`/profile/${client.id}`}>
 
                             <div className={classes.list_row__item}>
                                 <div className={classes.item_name_and_notif}>
@@ -44,22 +45,22 @@ export const ClientsRow = ({clients}) => {
                                     }
 
                                     <p className={classes.item_name}>
-                                        {client.lastName} {client.name} {client.middleName}
+                                        {client.last_name} {client.first_name} {client.middle_name}
                                     </p>
 
                                 </div>
                                 <div className={classes.item_birth_and_phone}>
                                     <div className={classes.group_block}>
-                                        <img src={imageBirthDay} alt={clients.birthDayDate}/>
+                                        <img src={imageBirthDay} alt={clients.date_of_birth}/>
                                         <span
-                                            className={classes.item_text}>{client.birthdayDate} ({ageToString(client.birthdayDate)})</span>
+                                            className={classes.item_text}>{client.date_of_birth} ({ageToString(client.date_of_birth)})</span>
                                     </div>
                                     <div className={classes.group_block}>
-                                        {client.phone?
+                                        {client.phone_number?
                                             <>
                                                 <img src={imagePhone} alt={'phone'}/>
                                                 <span
-                                                    className={classes.item_text}>{client.phone}</span>
+                                                    className={classes.item_text}>{client.phone_number}</span>
                                             </>:null
                                         }
                                     </div>
@@ -107,11 +108,11 @@ export const ClientsRow = ({clients}) => {
                                             <div className={classes.item_block}>
                                                 <div className={classes.group_block}>
                                                     <img src={client.img} alt="card"/>
-                                                    <span className={classes.item_text}>{client.abonement} {client.statusName} клиент</span>
+                                                    <span className={classes.item_text}>{client.abonement.name} {client.statusName.name} клиент</span>
                                                 </div>
                                                 <div className={classes.group_block}>
                                                     <img src={imageTime} alt="time"/>
-                                                    <span className={classes.item_text}><b>{client.lessons}</b> занятий до <b>{client.cardTo}</b></span>
+                                                    <span className={classes.item_text}><b>{client.abonement.lessons}</b> {declOfLessonsNum(client.abonement.lessons)} до <b>{client.cardTo}</b></span>
                                                 </div>
                                             </div>
 

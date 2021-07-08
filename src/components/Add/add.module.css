@@ -1,3 +1,6 @@
+.redirect{
+    padding-top: 40px;
+}
 .wrapper_adult{
     display: flex;
     flex-direction: row;
@@ -35,6 +38,8 @@
 }
 .block_info__item{
     padding-top: 16px;
+    align-self:flex-end;
+    overflow: hidden;
 }
 .block_info__input{
     line-height: 24px;
@@ -74,7 +79,6 @@
     top: 0;
     left: 0;
     right: 0;
-    width: 100vw !important;
 }
 .block_info__remove_parents{
     position: absolute;

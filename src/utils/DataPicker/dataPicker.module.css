@@ -23,6 +23,7 @@
 .dataPicker_wrapper__after{
     position: relative;
     width: 100%;
+    margin:0;
 }
 .dataPicker_wrapper__after input{
     line-height: 24px;

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import HeaderNav from "../common/HeaderNav";
 import {Redirect} from "../common/Redirect";
 import {FilterClientsSection} from "./FilterClientSection/FilterClientsSection";
@@ -16,13 +16,8 @@ import {
 import { SortTable } from './SortTable/SortTable';
 import {ClientsColumn} from "./SortTable/ClientsColumn/ClientsColumn";
 import {ClientsRow} from "./SortTable/ClientsRow/ClientsRow";
-import classes from './clients.module.css';
-import cn from "classnames";
-import {AnchorBox} from "./AnchorBox/AnchorBox";
-
 
 export const Clients = () => {
-
     const [activeFactor, setActiveFactor] = useState(true);
     const toggleColumn = () => {
         setActiveFactor(true)
@@ -70,22 +65,8 @@ export const Clients = () => {
         return () => source.cancel('Операция прервана');
     }, [dispatch]);
 
-    const [ancor, setHideAncor] = useState(false);
 
-    const refFilter = useRef(null)
-    useEffect(()=>{
-        const spyFilterSection = () => {
-            if (refFilter.current) {
-                if (refFilter.current.getBoundingClientRect().bottom < 0) {
-                    setHideAncor(true)
-                }else{
-                    setHideAncor(false);
-                }
-            }
-        };
-        document.addEventListener('scroll', spyFilterSection);
-        return () => document.removeEventListener('scroll', spyFilterSection);
-    },[])
+
 
     return (
         <>
@@ -95,12 +76,7 @@ export const Clients = () => {
             <div className="col-12">
                 <Redirect padding={true} title={"Список клиентов"}/>
             </div>
-            <div ref={refFilter} id={'filters'} className="col-12">
                 <FilterClientsSection/>
-            </div>
-            {ancor&&
-                <AnchorBox/>
-            }
             <div className={'col-12'}>
                 <SortTable clients={clients} active={activeFactor} row={toggleRow} column={toggleColumn}/>
             </div>

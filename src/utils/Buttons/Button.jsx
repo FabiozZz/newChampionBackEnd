@@ -4,6 +4,7 @@ import classes from './button.module.css';
 
 /**
  *
+ * @param className
  * @param name прнимает строку, при необходимости можно задать имя кнопке
  *
  * @param size принимает строку, устанавливает размер кнопки,

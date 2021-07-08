@@ -10,6 +10,7 @@ import {Sale} from "../common/Sale/Sale";
 import {Rules} from "../common/Rules/Rules";
 import {EndBtnGroup} from "../common/EndBtnGroup/EndBtnGroup";
 import {Redirect} from "../../common/Redirect";
+import classes from '../add.module.css'
 
 /**
  * компонент для добавления нового взрослого клиента
@@ -66,11 +67,11 @@ export const Adult = () => {
      * локальный стейт для храниения/установки персональных данных клиента для PersonalData
      */
     const [personalData,setPersonalData] = useState({
-        lastName: '',
-        middleName: '',
-        name: '',
-        phone: '',
-        birthDay: ''
+        last_name: '',
+        middle_name: '',
+        first_name: '',
+        phone_number: '',
+        date_of_birth: ''
     })
 
     /**
@@ -94,8 +95,8 @@ export const Adult = () => {
      * локальный стейт для хранения/установки данных для TestLesson
      */
     const [testData, setTestData] = useState({
-        filial: '',
-        group: '',
+        filial: {name:''},
+        group: {name:''},
         dateTest: ''
     });
     const [filialList, setFilialList] = useState([]);
@@ -104,16 +105,16 @@ export const Adult = () => {
      * прослушивание события ввода данных для TestLesson
      * @param e
      */
-    const handleChangeValueGroupTestLesson =  (e) => {
-        setTestData({...testData,group: e.target.value});
+    const handleChangeValueGroupTestLesson =  (obj) => {
+        setTestData({...testData,group: {...obj}});
     };
 
     /**
      * прослушивание события ввода данных для TestLesson
      * @param e
      */
-    const handleChangeValueFilialTestLesson =  (e) => {
-        setTestData({...testData,filial: e.target.value});
+    const handleChangeValueFilialTestLesson =  (obj) => {
+        setTestData({...testData,filial: {...obj}});
     };
 
     /**
@@ -176,17 +177,27 @@ export const Adult = () => {
      */
     const handleSubmitForm = (e) => {
         e.preventDefault();
-        // отправка данных на сервер
+        let uploadData = {
+            ...testData,
+        ...personalData,
+            address: `${address.street} ${address.house} ${address.corpus} ${address.room}`,
+            source:sale,
+        }
+        console.log(uploadData)
     };
 
 
     return (
-        <div className={`col-12`}>
-<Redirect padding={true} title={'Регистрация взрослого'}/>
+        <>
+            <div className={classes.redirect}>
+                <Redirect padding={true} title={'Регистрация взрослого'}/>
+            </div>
             {/* блок пробного занятия */}
+            <form onSubmit={handleSubmitForm} className={`col-12`}>
 
             <TestLesson groupList={groupList}
                         filialList={filialList}
+                        isAdult={true}
                         value={testData}
                         setFilial={handleChangeValueFilialTestLesson}
                         setGroup={handleChangeValueGroupTestLesson}
@@ -215,8 +226,9 @@ export const Adult = () => {
 
             {/* блок с кнопками подтверждения или отмены */}
 
-            <EndBtnGroup submit={handleSubmitForm} goBack={goBack} personal={personal} rules={rules}/>
+            <EndBtnGroup goBack={goBack} personal={personal} rules={rules}/>
 
-        </div>
+        </form>
+        </>
     );
 };

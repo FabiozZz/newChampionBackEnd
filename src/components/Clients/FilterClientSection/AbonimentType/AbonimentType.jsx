@@ -14,7 +14,7 @@ import classes from './type.module.css';
  * @returns {JSX.Element}
  * @constructor
  */
-export const AbonimentType = ({label,value,setValue,data,...props}) => {
+export const AbonimentType = ({name,label,value,setValue,data,...props}) => {
 
     /**
      * локальный стейт для установки и хранения значения видимости блока с опциями
@@ -88,7 +88,7 @@ export const AbonimentType = ({label,value,setValue,data,...props}) => {
             {toggleOptionBox&&
             <div ref={optionBox} className={classes.optionBox}>
                 {data.map(item=> (<option key={item.id} onClick={(e)=> {
-                    setValue(e);
+                    setValue({id:item.id,name:item.name});
                     setToggleOptionBox(false);
                 }} value={item.name} className={classes.item}>{item.name}</option>))}
             </div>

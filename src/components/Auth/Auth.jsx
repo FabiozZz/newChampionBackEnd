@@ -27,7 +27,7 @@ export const Auth = () => {
      * стейт для полей ввода
      */
     const [data, setData] = useState({
-        email:'',
+        username:'',
         password:''
     });
 
@@ -51,7 +51,10 @@ export const Auth = () => {
                 setIsLoad(false)
                 dispatch(log_in(res));
                 history.push('/');
-            });
+            }).catch(er=>{
+            console.log(er)
+            setIsLoad(false)
+        });
     };
 
     return (
@@ -66,7 +69,7 @@ export const Auth = () => {
                             <div className={`col-8 ${classes.form_wrapper__block_input}`}>
                                 <div className="row">
                                     <div className={`col-12 ${classes.form_wrapper__item}`}>
-                                        <OtherInput value={data.email} setValue={handleChangeInput} label={'введите email'} name={'email'} type={'email'}/>
+                                        <OtherInput value={data.username} setValue={handleChangeInput} label={'введите login'} name={'username'} type={'text'}/>
                                     </div>
                                     <div className={`col-12 ${classes.form_wrapper__item}`}>
                                         <OtherInput value={data.password} setValue={handleChangeInput} label={'введите пароль'} name={'password'} type={'password'}/>
@@ -76,7 +79,7 @@ export const Auth = () => {
                         </div>
                         <div className="row">
                             <div className={`col-4 ${classes.form_wrapper__send}`}>
-                                <Button factor={'success'} disabled={!data.email||!data.password||isLoad} text={'Войти'} type={'submit'}/>
+                                <Button factor={'success'} disabled={!data.username||!data.password||isLoad} text={'Войти'} type={'submit'}/>
                             </div>
                         </div>
                     </form>

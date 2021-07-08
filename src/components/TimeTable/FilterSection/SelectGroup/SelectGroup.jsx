@@ -91,7 +91,7 @@ export const SelectGroup = ({name,value,setValue,label,data,...props}) => {
         <h3 className={classes.optionBox__title}>{item.name}</h3>
         {item.course.map((option,index)=><option key={option.id} onClick={(e)=> {
             setValueInput(e);
-            setValue(e);
+            setValue({id:option.id,name:option.name});
             setToggleOptionBox(false);
         }} value={option.name} className={classes.optionBox__item}>{option.name}</option>)}
     </div>));

@@ -4,6 +4,16 @@
     margin: 16px 0;
     position: relative;
 }
+.block_info__header{
+    display: grid;
+    grid-template-columns: 11fr 1fr;
+    padding-bottom: 16px;
+    align-items:center;
+}
+.block_info__header_img{
+    justify-self: end;
+    cursor:pointer;
+}
 .block_info__title_wrapper{
     display: flex;
     flex-direction: row;
@@ -30,9 +40,9 @@
     letter-spacing: 4px;
     text-transform: uppercase;
     color: #8798AD;
-    padding-bottom: 24px;
 }
 .block_info__btn_group{
+    padding-top: 32px;
     display: grid;
     grid-template-columns: 4fr 5fr 3fr;
     grid-gap: 24px;
@@ -41,6 +51,20 @@
     display: grid;
     grid-template-columns: 3fr 9fr;
     position: relative;
+}
+.block_info__info_card{
+    padding-left: 8px;
+    padding-bottom: 24px;
+    display: grid;
+    grid-gap: 17px;
+    grid-template-columns: min-content max-content min-content min-content;
+    grid-auto-flow: column;
+}
+.block_info__info_card__img{
+    align-self:center;
+}
+.block_info__info_card__text{
+
 }
 .block_info__item_small{
     display: grid;
@@ -52,6 +76,23 @@
 }
 .block_info__item_parent:last-child{
     padding-bottom: 0;
+}
+.block_info__info_card__general{
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 1px;
+    color: #69707F;
+}
+.block_info__info_card__label{
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    color: #69707F;
 }
 .block_info__item_label{
     font-family: 'SF Pro Display',sans-serif;
@@ -178,6 +219,10 @@
     grid-template-columns: max-content max-content 1fr max-content max-content;
     grid-template-rows: 1fr;
 }
+.sale_count__input {
+    min-width: 0;
+    display: inline;
+}
 .sale_count img:last-child{
     padding-left: 6px;
 }
@@ -202,4 +247,44 @@
 .success{
     padding-top: 16px;
     margin: auto;
+}
+.edit_price{
+    padding: 0;
+    margin: 0;
+    border:none;
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #69707F;
+    border-bottom: 1px solid #69707F;
+}
+.edit_price:focus{
+    border-bottom: 1px solid #69707F;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #69707F;
+}
+.edit_block{
+    display: flex;
+}
+.edit_block_text{
+    border-bottom: 1px solid #69707F;
+
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #69707F;
+}
+.img_edit{
+    cursor: pointer;
 }

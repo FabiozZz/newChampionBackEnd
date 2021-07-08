@@ -1,17 +1,20 @@
 import {
+    CLEAR_PROFILE,
     LOAD_PROFILE_COUCH,
+    LOAD_PROFILE_FILIAL,
     LOAD_PROFILE_GROUP,
     LOAD_PROFILE_STATUS,
     LOAD_PROFILE_TYPE_ABONIMENT,
-    LOAD_PROFILE_USER
+    LOAD_PROFILE_USER,
 } from "../constants/profileConstant";
-
+console.log(LOAD_PROFILE_FILIAL);
 const initialState = {
-    user:{},
+    user: {},
     typeAboniment: [],
-    status:[],
-    group:[],
-    couch:[]
+    status: [],
+    group: [],
+    couch: [],
+    filial: []
 }
 
 export const profileReducer = (state = initialState, action) => {
@@ -40,6 +43,20 @@ export const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 couch: action.couch
+            };
+        case CLEAR_PROFILE:
+            return {
+                user: {},
+                typeAboniment: [],
+                status: [],
+                group: [],
+                couch: [],
+                filial: []
+            };
+        case LOAD_PROFILE_FILIAL:
+            return {
+                ...state,
+                filial: action.filial
             };
         default:
             return state;

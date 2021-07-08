@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 /**
  *
  * @param label
+ * @param increment
+ * @param decrement
  * @param style
  * @param name
  * @param value
@@ -23,7 +25,7 @@ export const Counter = ({label,increment,decrement,style,name,value,setValue,req
             {label&&<label>{label}</label>}
             <div className={classes.wrapper}>
                 <span onClick={decrement} className={classes.toggle}>-</span>
-                <input value={value} max={3} min={1}  name={name} onChange={setValue} required={required} placeholder={placeholder} type={'number'} disabled={disabled}/>
+                <input className={classes.wrapper_input} value={value} max={3} min={1}  name={name} onChange={setValue} required={required} placeholder={placeholder} type={'number'} disabled={disabled}/>
                 <span onClick={increment} className={classes.toggle}>+</span>
             </div>
         </div>
@@ -50,6 +52,6 @@ Counter.propTypes = {
     disabled: PropTypes.bool,
     style: PropTypes.object,
     placeholder: PropTypes.string,
-    value:PropTypes.string,
+    value:PropTypes.number,
     setValue: PropTypes.func
 };

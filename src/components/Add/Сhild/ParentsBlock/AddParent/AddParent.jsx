@@ -39,7 +39,7 @@ export const AddParent = ({data,change,index}) => {
         if (isEmpty(data)) {
             Object.assign(data,userDate);
         }
-    },[data, userDate]);
+    },[]);
 
     /**
      * эффект отрабатывает каждый раз при вводе пользователем
@@ -47,7 +47,7 @@ export const AddParent = ({data,change,index}) => {
      */
     useEffect(() => {
         change(index,userDate);
-    },[change, index, userDate]);
+    },[ index, userDate]);
 
     return (
         <>

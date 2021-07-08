@@ -61,6 +61,6 @@ MaskInput.propTypes= {
     className:PropTypes.string,
     placeholder:PropTypes.string,
     mask: PropTypes.string,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.string,
     setValue: PropTypes.func.isRequired
 }

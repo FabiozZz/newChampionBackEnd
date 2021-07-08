@@ -24,22 +24,22 @@ export const PersonalData = ({data,change,changeData}) => {
             <div className="col-12">
                 <div className="row">
                     <div className={`col-4 ${classes.block_info__item}`}>
-                        <OtherInput value={data.lastName} setValue={change} name={'lastName'} label={'фамилия'} required={true}/>
+                        <OtherInput value={data.lastName} setValue={change} name={'last_name'} label={'фамилия'} required={true}/>
                     </div>
                     <div className={`col-4 ${classes.block_info__item}`}>
-                        <OtherInput value={data.name} setValue={change} name={'name'} label={'имя'} required={true}/>
+                        <OtherInput value={data.name} setValue={change} name={'first_name'} label={'имя'} required={true}/>
                     </div>
                     <div className={`col-4 ${classes.block_info__item}`}>
-                        <OtherInput value={data.middleName} setValue={change} name={'middleName'} label={'отчество'} required={true}/>
+                        <OtherInput value={data.middleName} setValue={change} name={'middle_name'} label={'отчество'} required={true}/>
                     </div>
                 </div>
                 <div className="row">
                     <div className={`col-5 ${classes.block_info__item}`}>
-                        <DataPicker value={data.birthDay} setValue={changeData} name={'birthDay'} label={'дата рождения'}/>
+                        <DataPicker value={data.birthDay} setValue={changeData} name={'date_of_birth'} label={'дата рождения'}/>
                     </div>
                     <div className={`col-6 ${classes.block_info__item}`}>
                         <MaskInput value={data.phone}
-                                   name={'phone'}
+                                   name={'phone_number'}
                                    setValue={change}
                                    mask={'+7 (999) 999-99-99'}
                                    label={'номер телефона'}

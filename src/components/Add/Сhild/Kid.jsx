@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useHistory} from "react-router";
 import {TestLesson} from "../common/TestLesson/TestLesson";
 import Api from "../../../Api/Api";
@@ -10,7 +10,8 @@ import {EndBtnGroup} from "../common/EndBtnGroup/EndBtnGroup";
 import {PersonalData} from "./PersonalData/PersonalData";
 import {ParentsBlock} from "./ParentsBlock/ParentsBlock";
 import {Redirect} from "../../common/Redirect";
-import {group_list_adult} from "../../../Acnions/addAdultClientActions";
+import {group_list_child} from "../../../Acnions/addChildClientActions";
+import classes from '../add.module.css'
 
 /**
  * компонент для добавления нового клиента ребёнка
@@ -19,12 +20,14 @@ import {group_list_adult} from "../../../Acnions/addAdultClientActions";
  */
 export const Kid = () => {
 
+    const refForm = useRef(null);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
         (async () => {
-            await Api.getGroupForAdult().then(r => {
-                dispatch(group_list_adult(r));
+            await Api.getGroupForChild().then(r => {
+                dispatch(group_list_child([...r]));
             });
             await Api.getFilialList().then(r => {
                 setFilialList([...r.data])
@@ -45,9 +48,10 @@ export const Kid = () => {
      * локальный стейт для хранения/установки данных для TestLesson
      */
     const [testData, setTestData] = useState({
-        filial:'',
-        group: '',
-        dateTest: ''
+        filial: {name:''},
+        group: {name:''},
+        dateTest: '',
+        file: {}
     });
     const [filialList, setFilialList] = useState([]);
 
@@ -55,16 +59,16 @@ export const Kid = () => {
      * прослушивание события ввода данных для TestLesson
      * @param e
      */
-    const handleChangeValueGroupTestLesson =  (e) => {
-        setTestData({...testData,group: e.target.value});
+    const handleChangeValueGroupTestLesson =  (obj) => {
+        setTestData({...testData,group: {...obj}});
     };
 
     /**
      * прослушивание события ввода данных для TestLesson
      * @param e
      */
-    const handleChangeValueFilialTestLesson =  (e) => {
-        setTestData({...testData,filial: e.target.value});
+    const handleChangeValueFilialTestLesson =  (obj) => {
+        setTestData({...testData,filial: {...obj}});
     };
 
     /**
@@ -135,7 +139,7 @@ export const Kid = () => {
      * @param i индекс объекта в массиве который нужно удалить
      */
     const removeParentsData = (i) => {
-            setParents(parents.filter((e,index)=> index!==i ));
+        setParents(parents.filter((e,index)=> index!==i ));
     };
 
     /**
@@ -202,56 +206,67 @@ export const Kid = () => {
      */
     const handleSubmitForm = (e) => {
         e.preventDefault();
-        // отправка данных на сервер
+        let uploadData = {
+            testData,
+            personalData,
+            parents,
+            address,
+            sale
+        }
+        console.log(uploadData)
+        // data.append('health',file)
     };
 
     return (
-        <div className={'col-12'}>
+        <>
 
             {/* блок навигации */}
+            <div className={classes.redirect}>
+                <Redirect padding={true} title={'Регистрация ребёнка'}/>
+            </div>
+            <form ref={refForm} onSubmit={handleSubmitForm} className={'col-12'}>
 
-            <Redirect padding={true} title={'Регистрация ребёнка'}/>
+                {/* блок тестового занятия */}
 
-            {/* блок тестового занятия */}
+                <TestLesson groupList={groupList}
+                            filialList={filialList}
+                            value={testData}
+                            setFilial={handleChangeValueFilialTestLesson}
+                            setGroup={handleChangeValueGroupTestLesson}
+                            setDate={handleChangeValueDateTestLesson}/>
 
-            <TestLesson groupList={groupList}
-                        filialList={filialList}
-                        value={testData}
-                        setFilial={handleChangeValueFilialTestLesson}
-                        setGroup={handleChangeValueGroupTestLesson}
-                        setDate={handleChangeValueDateTestLesson}/>
+                {/* блок персональной информации о ребенке */}
 
-            {/* блок персональной информации о ребенке */}
+                <PersonalData data={personalData}
+                              change={handleChangePersonalData}
+                              changeData={handleDataPickerPersonal}/>
 
-            <PersonalData data={personalData}
-                          change={handleChangePersonalData}
-                          changeData={handleDataPickerPersonal}/>
+                {/* блок персональной информации о родителях */}
 
-            {/* блок персональной информации о родителях */}
+                <ParentsBlock parents={parents}
+                              change={handleChangeItemParentsBlock}
+                              addParents={addParentsData}
+                              removeParents={removeParentsData}
+                />
 
-            <ParentsBlock parents={parents}
-                          change={handleChangeItemParentsBlock}
-                          addParents={addParentsData}
-                          removeParents={removeParentsData}
-            />
+                {/* блок адреса */}
 
-            {/* блок адреса */}
+                <Address change={handleChangeAddressComponent} address={address}/>
 
-            <Address change={handleChangeAddressComponent} address={address}/>
+                {/* блок информации об источнике */}
 
-            {/* блок информации об источнике */}
+                <Sale sale={sale} setSale={handleChangeValueSale}/>
 
-            <Sale sale={sale} setSale={handleChangeValueSale}/>
+                {/* блок с чекбоксами о разъяснении информации */}
 
-            {/* блок с чекбоксами о разъяснении информации */}
+                <Rules rules={rules} setRules={handleToggleRules} personal={personal} setPersonal={handleTogglePersonal}/>
 
-            <Rules rules={rules} setRules={handleToggleRules} personal={personal} setPersonal={handleTogglePersonal}/>
+                {/* блок с кнопками отмены и отправки данных */}
 
-            {/* блок с кнопками отмены и отправки данных */}
-
-            <EndBtnGroup submit={handleSubmitForm} goBack={goBack} personal={personal} rules={rules}/>
+                <EndBtnGroup  goBack={goBack} personal={personal} rules={rules}/>
 
 
-        </div>
+            </form>
+        </>
     );
 };

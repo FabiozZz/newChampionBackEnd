@@ -88,7 +88,7 @@ export const SelectCouch = ({label,value,setValue,data,...props}) => {
             {toggleOptionBox&&
             <div ref={optionBox} className={classes.optionBox}>
                 {data.map(item=> (<option key={item.id} onClick={(e)=> {
-                    setValue(e);
+                    setValue(item);
                     setToggleOptionBox(false);
                 }} value={item.name} className={classes.item}>{item.name}</option>))}
                 {/*<h3 className={'selectBox-wrapper__optionBox__title'}>дети 3-7 лет</h3>*/}

@@ -74,8 +74,8 @@ export const SelectAbonement = ({value,setValue,label,data,...props}) => {
             </div>
             {toggleOptionBox&&
             <div ref={optionBox} className={classes.optionBox}>
-                {data.map((item,index)=> (<option key={index} onClick={(e)=> {
-                    setValue(e);
+                {data.map((item,index)=> (<option key={index} onClick={()=> {
+                    setValue({...item});
                     setToggleOptionBox(false);
                 }} value={item.name} className={classes.item}>{item.name}</option>))}
             </div>

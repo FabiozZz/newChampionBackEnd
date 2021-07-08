@@ -14,7 +14,7 @@ import classes from './list.module.css';
  * @returns {JSX.Element}
  * @constructor
  */
-export const ListType = ({label,value,setValue,data,...props}) => {
+export const ListType = ({name,label,value,setValue,data,...props}) => {
 
     /**
      * локальный стейт для установки и хранения значения видимости блока с опциями
@@ -87,10 +87,10 @@ export const ListType = ({label,value,setValue,data,...props}) => {
             </div>
             {toggleOptionBox&&
             <div ref={optionBox} className={classes.optionBox}>
-                {data.map(item=> (<option key={item.id} onClick={(e)=> {
-                    setValue(e);
+                {data.map(item=> (<option key={item.id}  onClick={(e)=> {
+                    setValue(name,{id:item.id,name:item.name});
                     setToggleOptionBox(false);
-                }} value={item.name} className={classes.item}>{item.name}</option>))}
+                }} value={item.id} className={classes.item}>{item.name}</option>))}
             </div>
             }
         </div>
