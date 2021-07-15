@@ -1,0 +1,187 @@
+.wrapper {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #2e384d;
+  z-index: 999999999999999999999;
+  position: sticky;
+  top: 0;
+}
+.active_link svg path{
+  fill:#ffffff;
+}
+.logo {
+  cursor: pointer;
+  position: absolute;
+  top: 32px;
+  left: 20.42px;
+  width: calc(100% - 20.42px);
+  height: 48px;
+  background: inherit;
+  padding: 8px 0;
+  transition: all 0.5s;
+  background: #2e384d;
+}
+.logo:hover {
+  height: 48px;
+  width: 178px;
+  background: #2e384d;
+  overflow: hidden;
+}
+.logo_img {
+  background-position: left;
+  background-repeat: no-repeat;
+  background-image: url("../../assets/images/logo_default.svg");
+  height: 44.53px;
+  width: 31.16px;
+  transition: background-image 0.1s;
+  float: left;
+}
+.logo:hover .logo_img {
+  margin-left: 1px;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-image: url("../../assets/images/logo_hover.svg");
+  height: 32px;
+  width: 146.26px;
+  float: left;
+}
+.link {
+  /* padding: 12px 12px 12px 0; */
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  background: inherit;
+  background: #2e384d;
+}
+.link_text{
+  justify-self: flex-end;
+  font-family: 'SF Pro Display',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #8798ad;
+  width: 0;
+  display:inline-block;
+  overflow: hidden;
+}
+
+.home {
+  cursor: pointer;
+  width: calc(100% - 24px);
+  position: absolute;
+  top: 236px;
+  left: 24px;
+  transition: width 0.1s;
+}
+.home:hover .home_svg path{
+  fill:#8798AD;
+}
+.home:hover{
+  width: 138px;
+}
+.home:hover .home_text{
+  width: calc(100% - 32px);
+  transition: width 0.1s;
+}
+
+.reports {
+  cursor: pointer;
+  width: calc(100% - 24px);
+  position: absolute;
+  top: 296px;
+  left: 24px;
+  transition: width 0.1s;
+}
+.reports:hover .reports_svg path{
+  fill:#8798AD;
+}
+.reports:hover{
+  width: 138px;
+}
+.reports:hover .reports_text{
+  width: calc(100% - 32px);
+  transition: width 0.1s;
+}
+
+.stuff {
+  cursor: pointer;
+  width: calc(100% - 24px);
+  position: absolute;
+  top: 356px;
+  left: 24px;
+  transition: width 0.1s;
+}
+.stuff:hover .stuff_svg path{
+  fill:#8798AD;
+}
+.stuff:hover{
+  width: 138px;
+}
+.stuff:hover .stuff_text{
+  width: calc(100% - 32px);
+  transition: width 0.1s;
+}
+
+.clients {
+  cursor: pointer;
+  width: calc(100% - 24px);
+  position: absolute;
+  top: 416px;
+  left: 24px;
+  transition: width 0.1s;
+}
+.clients:hover .clients_svg path{
+  fill:#8798AD;
+}
+.clients:hover{
+  width: 138px;
+}
+.clients:hover .clients_text{
+  width: calc(100% - 32px);
+  transition: width 0.1s;
+}
+
+.settings {
+  cursor: pointer;
+  width: calc(100% - 24px);
+  position: absolute;
+  top: 476px;
+  left: 24px;
+  transition: width 0.1s;
+}
+.settings:hover .settings_svg path{
+  fill:#8798AD;
+}
+.settings:hover{
+  width: 138px;
+}
+.settings:hover .settings_text{
+  width: calc(100% - 32px);
+  transition: width 0.1s;
+}
+
+.exit{
+  cursor: pointer;
+  position: absolute;
+  bottom: 100px;
+  left: 24px;
+  width: 24px;height: 24px;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+}
+.exit:hover path{
+  fill:#8798AD;
+}
+
+@media screen and (max-width: 1439px) {
+  .wrapper {
+    display: none;
+  }
+}

@@ -14,7 +14,7 @@ import classes from './selectGroup.module.css';
  * @returns {JSX.Element}
  * @constructor
  */
-export const SelectGroup = ({name,value,setValue,label,data,...props}) => {
+export const SelectGroup = ({required=false,name,value,setValue,label,data,...props}) => {
     const refInput = useRef(null);
 
     /**
@@ -38,7 +38,6 @@ export const SelectGroup = ({name,value,setValue,label,data,...props}) => {
      * @param e
      */
     const handleChangeValue = (e) => {
-        console.log(valueInput)
         // setValue(e, valueInput);
     };
 
@@ -87,13 +86,20 @@ export const SelectGroup = ({name,value,setValue,label,data,...props}) => {
         return () => document.removeEventListener('click', onClick);
     }, []);
 
+    // const renderOption = data.map((item,index)=> (<div key={item.id}>
+    //     <h3 className={classes.optionBox__title}>{item.name}</h3>
+    //     {item.course.map((option,index)=><option key={option.id} onClick={(e)=> {
+    //         setValueInput(e);
+    //         setValue({id:option.id,name:option.name});
+    //         setToggleOptionBox(false);
+    //     }} value={option.name} className={classes.optionBox__item}>{option.name}</option>)}
+    // </div>));
     const renderOption = data.map((item,index)=> (<div key={item.id}>
-        <h3 className={classes.optionBox__title}>{item.name}</h3>
-        {item.course.map((option,index)=><option key={option.id} onClick={(e)=> {
+        <option onClick={(e)=> {
             setValueInput(e);
-            setValue({id:option.id,name:option.name});
+            setValue({...item});
             setToggleOptionBox(false);
-        }} value={option.name} className={classes.optionBox__item}>{option.name}</option>)}
+        }} value={item} className={classes.optionBox__item}>{item.name}</option>
     </div>));
 
     return (
@@ -102,7 +108,7 @@ export const SelectGroup = ({name,value,setValue,label,data,...props}) => {
             <div className={classes.inputWrapper} onClick={handleToggleOptionBox}>
                 <svg className={classes.arrow} width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.66437 0.252601C1.25159 -0.114317 0.619519 -0.0771359 0.252601 0.335647C-0.114317 0.74843 -0.0771359 1.3805 0.335647 1.74742L4.83565 5.74742C5.21453 6.08421 5.78549 6.08421 6.16437 5.74742L10.6644 1.74742C11.0772 1.3805 11.1143 0.74843 10.7474 0.335647C10.3805 -0.0771359 9.74843 -0.114317 9.33565 0.252601L5.50001 3.66206L1.66437 0.252601Z" fill="#BFC5D2"/></svg>
                 <span/>
-                <input ref={refInput} name={name} className={classes.input} value={value} onClick={handleChangeValue} disabled={true} type="text" placeholder={'Не выбрано'}/>
+                <input required={required} ref={refInput} name={name} className={classes.input} value={value.name||''} onClick={handleChangeValue} disabled={true} type="text" placeholder={'Не выбрано'}/>
                 {toggleOptionBox&&<div className={classes.arrowOptionBox}/>}
             </div>
             {toggleOptionBox&&

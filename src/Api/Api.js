@@ -10,7 +10,7 @@ import BrilClient from "../assets/images/statusFilter/BrilClient.svg";
 import sortAsc from "../assets/images/sortImage/asc.svg";
 import sortDesc from "../assets/images/sortImage/desc.svg";
 
-const mock = new MockAdapter(axios, { delayResponse: 500 });
+// const mock = new MockAdapter(axios, { delayResponse: 500 });
 
 const clients = [
   {
@@ -46,7 +46,6 @@ const clients = [
       },
     ],
     address: {
-      street: "Красная",
       house: "155",
       corpus: "2",
       room: "802",
@@ -843,7 +842,7 @@ const clients = [
     status: 0,
     totalPay: 3200,
     is_Archive: false,
-    abonement: {  },
+    abonement: {},
     is_Adult: false,
     filial: {
       id: 1,
@@ -874,7 +873,7 @@ const clients = [
     },
     whereIs: "Яндекс Карты",
     privateData: {},
-    statusName: {  },
+    statusName: {},
     img: null,
     cardFrom: "22.11.2021",
     cardTo: "22.12.21",
@@ -3604,16 +3603,16 @@ const price = [
     price: 5800
   },
   {
-    aboniment:6,
-    price:12000
+    aboniment: 6,
+    price: 12000
   },
   {
-    aboniment:7,
-    price:21000
+    aboniment: 7,
+    price: 21000
   },
   {
-    aboniment:8,
-    price:2200
+    aboniment: 8,
+    price: 2200
   }
 ];
 const typeAboniment = [
@@ -3679,56 +3678,54 @@ let conAx = {
 };
 
 /* основные */
-mock
-  .onPost(conAx.baseURL + "/login/")
-  .reply(200, { user, accessToken: "TOKEN_ACC", refreshToken: "TOKEN_REF" });
+// mock
+//   .onPost(conAx.baseURL + "/login/")
+// mock.onPost(conAx.baseURL + "/auth/register").reply(200, { success: "Ok" });
 
-mock.onPost(conAx.baseURL + "/auth/register").reply(200, { success: "Ok" });
+// mock
+//   .onPost(conAx.baseURL + "/refresh-token/")
+//   .reply(200, { user, accessToken: "TOKEN_ACC2", refreshToken: "TOKEN_REs2" });
 
-mock
-  .onPost(conAx.baseURL + "/auth/refresh")
-  .reply(200, { user, accessToken: "TOKEN_ACC2", refreshToken: "TOKEN_REs2" });
+// /* для главной */
 
-/* для главной */
+// mock.onGet(conAx.baseURL + "/clients/").reply(200, [...data]);
+// mock.onGet(conAx.baseURL + "/group_list").reply(200, [...dataSelectAllGroup]);
+// mock.onGet(conAx.baseURL + "/couch_list").reply(200, [...dataSelectCouch]);
+// mock.onPut(conAx.baseURL + "/couch_change").reply(200, { success: "ok" });
+// mock.onPatch(/http:\/\/127\.0\.0\.1:8000\/api\/v1\/check_clients\/\d+\/\d+/).reply(200);
+// mock.onGet(/http:\/\/127\.0\.0\.1:8000\/api\/v1\/client\/\d+/).reply(200);
 
-mock.onGet(conAx.baseURL + "/clients").reply(200, [...data]);
-mock.onGet(conAx.baseURL + "/group_list").reply(200, [...dataSelectAllGroup]);
-mock.onGet(conAx.baseURL + "/couch_list").reply(200, [...dataSelectCouch]);
-mock.onPut(conAx.baseURL + "/couch_change").reply(200, { success: "ok" });
-mock.onPatch(/http:\/\/127\.0\.0\.1:8000\/api\/v1\/check_clients\/\d+\/\d+/).reply(200);
-mock.onGet(/http:\/\/127\.0\.0\.1:8000\/api\/v1\/get_profile\/\d+/).reply(200);
+// mock.onGet(conAx.baseURL + "/filial_list").reply(200, [...filialList]);
 
-mock.onGet(conAx.baseURL + "/filial_list").reply(200, [...filialList]);
+// /* для добавления взрослого клиента */
+// mock
+//   .onGet(conAx.baseURL + "/group_list_adult")
+//   .reply(200, { dataSelectAdultGroup });
 
-/* для добавления взрослого клиента */
-mock
-  .onGet(conAx.baseURL + "/group_list_adult")
-  .reply(200, { dataSelectAdultGroup });
+// /* для добавления ребенка */
 
-/* для добавления ребенка */
+// mock
+//   .onGet(conAx.baseURL + "/group_list_child")
+//   .reply(200, { dataSelectChildGroup });
 
-mock
-  .onGet(conAx.baseURL + "/group_list_child")
-  .reply(200, { dataSelectChildGroup });
+// /* для профиля */
 
-/* для профиля */
+// mock
+//   .onGet(conAx.baseURL + "/get_abonement_list")
+//   .reply(200, [...typeAboniment]);
+//   mock.onGet(conAx.baseURL + "/get_profile_list").reply(200, [...statusList]);
+//   mock.onGet(conAx.baseURL + "/get_price").reply(200, [...price]);
 
-mock
-  .onGet(conAx.baseURL + "/get_abonement_list")
-  .reply(200, [...typeAboniment]);
-  mock.onGet(conAx.baseURL + "/get_profile_list").reply(200, [...statusList]);
-  mock.onGet(conAx.baseURL + "/get_price").reply(200, [...price]);
+// /* для списка клиентов */
 
-/* для списка клиентов */
+// mock.onGet(conAx.baseURL + "/client").reply(200, [...clients]);
+// mock.onGet(conAx.baseURL + "/get_types_for_all").reply(200, [...typesLists]);
+// mock
+//   .onGet(conAx.baseURL + "/get_status_for_all")
+//   .reply(200, [...statusListFilter]);
+// mock.onGet(conAx.baseURL + "/get_sort_for_all").reply(200, [...sortList]);
 
-mock.onGet(conAx.baseURL + "/get_all_clients").reply(200, [...clients]);
-mock.onGet(conAx.baseURL + "/get_types_for_all").reply(200, [...typesLists]);
-mock
-  .onGet(conAx.baseURL + "/get_status_for_all")
-  .reply(200, [...statusListFilter]);
-mock.onGet(conAx.baseURL + "/get_sort_for_all").reply(200, [...sortList]);
-
-mock.resetHistory();
+// mock.resetHistory();
 
 /**
  * response на логин token & refreshToken
@@ -3743,7 +3740,7 @@ class Api {
     this.refreshRequest = null;
 
     this.client.defaults.baseURL = "http://127.0.0.1:8000/api/v1";
-
+    console.log(this.token)
     this.client.interceptors.request.use(
       (config) => {
         if (this.token === null) {
@@ -3763,7 +3760,6 @@ class Api {
     this.client.interceptors.response.use(
       (r) => r,
       async (error) => {
-        console.log();
         this.refreshToken = localStorage.getItem("refresh_token");
         if (
           !this.token ||
@@ -3775,13 +3771,13 @@ class Api {
         }
 
         if (!this.refreshRequest) {
-          this.refreshRequest = this.client.post("/auth/refresh", {
-            refreshToken: this.refreshToken,
+          this.refreshRequest = this.client.post("/refresh-token/", {
+            refresh: this.refreshToken,
           });
           console.log(this.refreshRequest);
         }
         const { data } = await this.refreshRequest;
-        this.token = data.accessToken;
+        this.token = data.access;
         localStorage.setItem("refresh_token", data.refreshToken);
         this.refreshToken = data.refreshToken;
         const newRequest = {
@@ -3818,10 +3814,10 @@ class Api {
         username: username,
         password: password,
       });
-    console.log('вызван логин ')
-    this.setToken(await res.data.accessToken);
+    console.log('вызван логин')
+    this.setToken(await res.data.access);
     console.log('после логина получен токен', this.getToken());
-    localStorage.setItem('refresh_token', await res.data.refreshToken)
+    localStorage.setItem('refresh_token', await res.data.refresh)
     this.refreshToken = localStorage.getItem('refresh_token');
     return res.data
   }
@@ -3908,17 +3904,15 @@ class Api {
    * @param id
    * @param course
    */
-  async checkClient(id, course) {
-    return await this.client.patch(`/check_clients/${course}/${id}`);
+  async checkClient(id,set) {
+    return await this.client.put(`/schedule/train/${id}/`,{is_visited:set});
   }
 
   async getProfile(id) {
-    return await this.client
-      .get(`/get_profile/${id}`)
-      .then((r) => {
-        let client = clients.find((e) => e.id === Number(id));
-        return client;
-      });
+    return await this.client.get(`/client/${id}/`);
+  }
+  async editProfile(id,data){
+    return await this.client.put(`/client/${id}/`,{...data});
   }
 
   /**
@@ -3926,7 +3920,7 @@ class Api {
    * @returns {Promise<AxiosResponse<any>>}
    */
   async getClientsTimeTable(token) {
-    return await this.client.get("/clients", { cancelToken: token });
+    return await this.client.get("/schedule/lesson/", { cancelToken: token });
   }
 
   /**
@@ -3935,7 +3929,7 @@ class Api {
    * @returns {Promise<[{name: string, course: [{name: string, id: number}, {name: string, id: number}, {name: string, id: number}], id: number}, {name: string, course: [{name: string, id: number}, {name: string, id: number}, {name: string, id: number}, {name: string, id: number}, {name: string, id: number}], id: number}, {name: string, course: [{name: string, id: number}, {name: string, id: number}, {name: string, id: number}], id: number}]|void>}
    */
   async getGroupList(token) {
-    return await this.client.get("/group_list", { cancelToken: token });
+    return await this.client.get("/core/group/", { cancelToken: token });
   }
 
   /**
@@ -3944,7 +3938,7 @@ class Api {
    * @returns {Promise<[{name: string, id: number}, {name: string, id: number}, {name: string, id: number}, {name: string, id: number}]|void>}
    */
   async getCouchList(token) {
-    return await this.client.get("/couch_list", { cancelToken: token });
+    return await this.client.get("/core/trainer/", { cancelToken: token });
   }
 
   /**
@@ -3952,17 +3946,8 @@ class Api {
    *
    * @returns {Promise<AxiosResponse<any>>}
    */
-  async getChangeCouch(id, course) {
-    return await this.client
-      .put("/couch_change")
-      .then((data) => data.success)
-      .catch((e) => {
-        if (axios.isCancel(e)) {
-          return e.message;
-        } else {
-          console.log(e);
-        }
-      });
+  async changeCouch(id, couch) {
+    return await this.client.put(`/schedule/lesson/${id}/`,{trainer:{id:couch}})
   }
 
   /* для страницы добавления взрослого клиента */
@@ -3995,7 +3980,12 @@ class Api {
   }
 
   /* для добавления ребенка */
-
+  async postAddChild(child) {
+    return await this.client.post('/client/createChild/', { ...child })
+  }
+  async postAddAdult(adult) {
+    return await this.client.post('/client/createAdult/', { ...adult })
+  }
   /**
    * получение списка групп доступных для ребенка
    *
@@ -4022,12 +4012,12 @@ class Api {
 
   async getPriceList(token, abonement, status) {
     return await this.client.get("/get_price", { cancelToken: token }).then(r => {
-      let priceList,result;
-      if(abonement<=4){
+      let priceList, result;
+      if (abonement <= 4) {
         priceList = r.data.find(item => item.abonement === abonement);
-        result = priceList.priceList.find(item=>item.id === status);
-      }else{
-        result = r.data.find(item=>item.aboniment === abonement);
+        result = priceList.priceList.find(item => item.id === status);
+      } else {
+        result = r.data.find(item => item.aboniment === abonement);
       }
       return result.price;
 
@@ -4035,8 +4025,8 @@ class Api {
   }
 
   /* для списка клиентов */
-  async getAllClients(token) {
-    return await this.client.get("/get_all_clients", { cancelToken: token });
+  async getAllClients() {
+    return await this.client.get("/client/");
   }
 
   async getTypeList(token) {

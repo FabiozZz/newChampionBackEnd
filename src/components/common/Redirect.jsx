@@ -10,8 +10,7 @@ export const Redirect = ({title,padding=false}) => {
     };
 
     return (
-        <div className="row">
-            <div className={`col-12 ${padding?classes.wrapper_redirect_p:classes.wrapper_redirect}`}>
+            <div className={`row ${padding?classes.wrapper_redirect_p:classes.wrapper_redirect}`}>
                 <div onClick={goBack} className={classes.wrapper_redirect__svg}>
                     <svg width="16" height="24" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -21,6 +20,5 @@ export const Redirect = ({title,padding=false}) => {
                 </div>
                 <h1 className={classes.wrapper_redirect__title}>{title}</h1>
             </div>
-        </div>
     );
 };

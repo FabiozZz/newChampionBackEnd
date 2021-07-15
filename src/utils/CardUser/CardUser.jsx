@@ -1,16 +1,17 @@
-import React from 'react';
-import {CardUserStatus} from "./Status/CardUserStatus";
+import React, { useState } from 'react';
+import { CardUserStatus } from "./Status/CardUserStatus";
 import phone from '../../assets/images/phone 1.svg';
 import gift from '../../assets/images/gift.svg';
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import success from '../../assets/images/success.svg';
 import classes from './cardUser.module.css';
-import {useDispatch} from "react-redux";
-import {client_change_toDay} from "../../Acnions/timeTableActions";
+import { useDispatch } from "react-redux";
+import { client_change_toDay } from "../../Acnions/timeTableActions";
 import Api from "../../Api/Api";
 import healthSVG from '../../assets/images/health.svg';
-import {CustomTooltip} from "../CustomTooltip/CustomTooltip";
+import { CustomTooltip } from "../CustomTooltip/CustomTooltip";
+import cn from 'classnames';
 
 /**
  * компонент для отображения клиента
@@ -52,7 +53,10 @@ import {CustomTooltip} from "../CustomTooltip/CustomTooltip";
  * @returns {JSX.Element}
  * @constructor
  */
-export const CardUser = ({img,abonimentName,cardStatusName,cardFrom,cardTo,lessons,id, name, surname, status, freeze, health, toDay, call, birthDay, birthDayDate, expire, style, course}) => {
+export const CardUser = ({ img, abonimentName, cardStatusName, cardFrom, cardTo, lesson_id, train_id, id, name, surname, status, freeze, health, toDay, call, birthDay, birthDayDate, expire, style, course }) => {
+
+    const [check, setCheck] = useState(false);
+
     const dispatch = useDispatch();
 
 
@@ -60,9 +64,12 @@ export const CardUser = ({img,abonimentName,cardStatusName,cardFrom,cardTo,lesso
      * переключатель видимости галочки на карточке
      */
     const handleToggleSuccess = async (e) => {
-        e.preventDefault()
-        await Api.checkClient(id, course).then(r => {
-            dispatch(client_change_toDay(id, course));
+        e.preventDefault();
+        // console.log('%ctoDay: ', 'color: MidnightBlue; background: Aquamarine;', toDay);
+        setCheck(true)
+        await Api.checkClient(train_id, !toDay).then(r => {
+        setCheck(false)
+        dispatch(client_change_toDay(lesson_id, train_id, { ...r.data }));
         });
 
         // setShowSuccess(prevState => !prevState);
@@ -75,7 +82,7 @@ export const CardUser = ({img,abonimentName,cardStatusName,cardFrom,cardTo,lesso
                     <span>{name}</span>
                     <span>{surname}</span>
                 </div>
-                {img&&
+                {/* {img&&
                 <CustomTooltip placement={'top'} color={'dark'} title={()=>(
                     <div className={classes.card_status__tooltip_text_wrapper}>
                         {freeze?
@@ -90,9 +97,9 @@ export const CardUser = ({img,abonimentName,cardStatusName,cardFrom,cardTo,lesso
                     </div>
                 </CustomTooltip>
 
-                }
+                } */}
 
-                <div className={classes.notifications}>
+                {/* <div className={classes.notifications}>
                     {birthDay &&
                         <CustomTooltip placement={'top'} color={'dark'} title={()=>(
                             <div className={classes.cardUser__tooltip_text_wrapper}>
@@ -105,17 +112,18 @@ export const CardUser = ({img,abonimentName,cardStatusName,cardFrom,cardTo,lesso
                     {call &&
                             <img width={23} height={20} src={phone} title={'Нужно позвонить'} alt="звонок"/>
                     }
-                </div>
-                {health &&
+                </div> */}
+                {/* {health &&
                 <div className={classes.health}>
                     <img src={healthSVG} title='Необходима справка' alt="справка"/>
                 </div>
-                }
-
+                } */}
                 <div className={classes.success} onClick={handleToggleSuccess}>
-                    {toDay &&
-                    <img src={success} alt="success"/>
-                    }
+                {check?
+                <div class={cn(classes.lds_ring)}><div></div><div></div><div></div><div></div></div>
+                :toDay&&
+                        <img src={success} alt="success" />}
+
                 </div>
             </div>
         </NavLink>

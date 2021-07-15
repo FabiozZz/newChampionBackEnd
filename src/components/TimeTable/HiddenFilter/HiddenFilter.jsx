@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
+import { isEmpty } from '../../../helpers/common';
 import classes from './hiddenFilter.module.css';
 
 export const HiddenFilter = ({hide,toggleHide,date,group,couch,clear}) => {
@@ -42,7 +43,7 @@ export const HiddenFilter = ({hide,toggleHide,date,group,couch,clear}) => {
                     </div>
 
             }
-            {date.from||date.to||couch||group?<span className={classes.hide_wrapper__clear} onClick={clear}>Очистить</span>:""}
+            {date.from||date.to||!isEmpty(couch)||!isEmpty(group)?<span className={classes.hide_wrapper__clear} onClick={clear}>Очистить</span>:""}
         </div>
     );
 };

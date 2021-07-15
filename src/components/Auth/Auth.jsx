@@ -1,10 +1,10 @@
-import React, { useState} from 'react';
-import {OtherInput} from "../../utils/OtherInput/OtherInput";
-import {Button} from "../../utils/Buttons/Button";
+import React, { useState } from 'react';
+import { OtherInput } from "../../utils/OtherInput/OtherInput";
+import { Button } from "../../utils/Buttons/Button";
 import Api from "../../Api/Api";
-import {useDispatch} from "react-redux";
-import {useHistory} from "react-router";
-import {log_in} from "../../Acnions/userActions";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
+import { log_in } from "../../Acnions/userActions";
 import classes from './auth.module.css';
 
 /**
@@ -27,8 +27,8 @@ export const Auth = () => {
      * стейт для полей ввода
      */
     const [data, setData] = useState({
-        username:'',
-        password:''
+        username: '',
+        password: ''
     });
 
     /**
@@ -36,7 +36,7 @@ export const Auth = () => {
      * @param e
      */
     const handleChangeInput = (e) => {
-        setData(prevState => ({...prevState,[e.target.name]:e.target.value}))
+        setData(prevState => ({ ...prevState, [e.target.name]: e.target.value }))
     };
 
     /**
@@ -47,43 +47,30 @@ export const Auth = () => {
     const handleSubmitForm = async (e) => {
         e.preventDefault();
         setIsLoad(true)
-            await Api.login(data).then(res=>{
-                setIsLoad(false)
-                dispatch(log_in(res));
-                history.push('/');
-            }).catch(er=>{
+        await Api.login(data).then(res => {
+            setIsLoad(false)
+            dispatch(log_in());
+            history.push('/');
+        }).catch(er => {
             console.log(er)
             setIsLoad(false)
         });
     };
 
     return (
-            <div className="row">
-                <div className={'col-12'}>
-                    <h1 className={classes.title}>Авторизация</h1>
-                </div>
-
-                <div className="col-12">
-                    <form className={classes.form_wrapper} onSubmit={handleSubmitForm}>
-                        <div className="row">
-                            <div className={`col-8 ${classes.form_wrapper__block_input}`}>
-                                <div className="row">
-                                    <div className={`col-12 ${classes.form_wrapper__item}`}>
-                                        <OtherInput value={data.username} setValue={handleChangeInput} label={'введите login'} name={'username'} type={'text'}/>
-                                    </div>
-                                    <div className={`col-12 ${classes.form_wrapper__item}`}>
-                                        <OtherInput value={data.password} setValue={handleChangeInput} label={'введите пароль'} name={'password'} type={'password'}/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className={`col-4 ${classes.form_wrapper__send}`}>
-                                <Button factor={'success'} disabled={!data.username||!data.password||isLoad} text={'Войти'} type={'submit'}/>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+        <div className={classes.wrapper}>
+            <div className={classes.title}>
+                <h1>Авторизация</h1>
             </div>
+            <form className={classes.form_wrapper} onSubmit={handleSubmitForm}>
+                <div className={classes.form_wrapper__item}>
+                    <OtherInput value={data.username} setValue={handleChangeInput} label={'введите login'} name={'username'} type={'text'} />
+                    <OtherInput value={data.password} setValue={handleChangeInput} label={'введите пароль'} name={'password'} type={'password'} />
+                </div>
+                <div className={classes.form_wrapper__send}>
+                    <Button factor={'success'} size={"auto"} disabled={!data.username || !data.password || isLoad} text={'Войти'} type={'submit'} />
+                </div>
+            </form>
+        </div>
     );
 };

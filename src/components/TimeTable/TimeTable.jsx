@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import classes from "./timeTable.module.css";
+import classes from "./general.module.css";
 import { CourseTable } from "./CourseTable/CourseTable";
 import Api from "../../Api/Api";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,7 @@ import axios from "axios";
 import { FilterSection } from "./FilterSection/FilterSection";
 import { HiddenFilter } from "./HiddenFilter/HiddenFilter";
 import { InfoBlock } from "./InfoBlock/InfoBlock";
+import cn from 'classnames';
 
 export const error = (text) => {
     message.error(text, 2);
@@ -32,16 +33,18 @@ export const TimeTable = () => {
 
     const [isLoad, setIsLoad] = useState(false);
 
+    // const [uploadData, setUploadData] = useState(false);
+
     const dispatch = useDispatch();
 
-    const [groupData, setGroup] = useState("");
-    const handleChangeGroup = (e) => {
-        setGroup(e.target.value);
+    const [groupData, setGroup] = useState({});
+    const handleChangeGroup = (obj) => {
+        setGroup(obj);
     };
 
-    const [couchData, setCouch] = useState("");
-    const handleChangeCouch = (e) => {
-        setCouch(e.target.value);
+    const [couchData, setCouch] = useState({});
+    const handleChangeCouch = (obj) => {
+        setCouch(obj);
     };
 
     const [date, setDate] = useState({
@@ -58,18 +61,25 @@ export const TimeTable = () => {
 
     useEffect(() => {
         const source = axios.CancelToken.source();
-        setIsLoad(true);
+        // setUploadData(true)
+        // if (!dataClients.length) {
+            setIsLoad(true);
+        // }
         (async () => {
             await Api.getClientsTimeTable(source.token).then((r) => {
                 dispatch(load_clients(r.data));
             });
             await Api.getGroupList(source.token).then((r) => {
+                console.log('%cr: ', 'color: MidnightBlue; background: Aquamarine;', r);
+
                 dispatch(load_group(r.data));
             });
             await Api.getCouchList(source.token).then((r) => {
+                console.log('%cr: ', 'color: MidnightBlue; background: Aquamarine;', r);
                 dispatch(load_couch(r.data));
             });
             await setIsLoad(false);
+            // await setUploadData(false);
         })().catch((e) => {
             if (axios.isCancel(e)) {
                 error(e.message);
@@ -85,8 +95,8 @@ export const TimeTable = () => {
 
     const clearFilter = () => {
         setDate({ from: "", to: "" });
-        setGroup("");
-        setCouch("");
+        setGroup({});
+        setCouch({});
     };
 
     useEffect(() => {
@@ -121,15 +131,15 @@ export const TimeTable = () => {
 
     return (
         <>
-            <div className="col-12">
-                <HeaderNav />
-            </div>
+            {/* {(uploadData && dataClients.length) &&
+                <div class={cn(classes.lds_ring)}><div></div><div></div><div></div><div></div></div>
+            } */}
 
-            <div className="col-12">
-                <h1 className={classes.wrapper__title}>Расписание</h1>
-            </div>
+            <HeaderNav />
 
-            <div className={`col-12 ${classes.wrapper__table}`}>
+            <h1 className={classes.wrapper__title}>Расписание</h1>
+
+            <div className={cn('container-fluid', classes.wrapper__table)}>
                 {!hide && (
                     <FilterSection
                         date={date}
@@ -156,8 +166,8 @@ export const TimeTable = () => {
                     </div>
                 )}
                 <div ref={refBox} className={` ${classes.wrapper__course_table} ${isLoad ? "row" : ""}`}>
-                    <Skeleton loading={isLoad} paragraph={{ rows: 4, width: "100%" }} active={true}/>
-                    <Skeleton loading={isLoad} paragraph={{ rows: 4, width: "100%" }} active={true}/>
+                    <Skeleton loading={isLoad} paragraph={{ rows: 4, width: "100%" }} active={true} />
+                    <Skeleton loading={isLoad} paragraph={{ rows: 4, width: "100%" }} active={true} />
                     <Skeleton loading={isLoad} paragraph={{ rows: 4, width: "100%" }} active={true}>
                         <CourseTable data={dataClients} />
                     </Skeleton>

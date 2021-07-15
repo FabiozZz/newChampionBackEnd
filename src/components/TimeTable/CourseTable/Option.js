@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import classes from "./courseTable.module.css";
 import edit from "../../../assets/images/editCouch.svg";
 
@@ -12,7 +12,7 @@ import edit from "../../../assets/images/editCouch.svg";
  * @returns {JSX.Element}
  * @constructor
  */
-export const Option = ({change,id,couch,couchList}) => {
+export const Option = ({ change, id, couch, couchList }) => {
 
     /**
      * локальный стейт для переключения видимости блока со списком тренеров
@@ -43,13 +43,13 @@ export const Option = ({change,id,couch,couchList}) => {
      * проверяет положение блока и корректирует его если блок выходит за видимою часть окна браузера
      */
     useEffect(() => {
-        if (optionBox.current!=null) {
-            optionBox.current.style.bottom = - (optionBox.current.getBoundingClientRect().height ) + 'px'
+        if (optionBox.current != null) {
+            optionBox.current.style.bottom = - (optionBox.current.getBoundingClientRect().height) + 'px'
             if (optionBox.current.getBoundingClientRect().right >= window.innerWidth) {
                 optionBox.current.style.right = 30 + 'px';
             }
         }
-    },[toggleOption]);
+    }, [toggleOption]);
 
     /**
      * эффект запускается один раз
@@ -71,22 +71,27 @@ export const Option = ({change,id,couch,couchList}) => {
         return () => document.removeEventListener('click', onClick);
     }, []);
 
+    const [load, setLoad] = useState(false)
+
     return (
         <div onClick={handleToggleOptionBox} ref={selectRef} className={classes.block_trainer}>
             <span className={classes.trainer}>{couch}</span>
             <div className={classes.edit}>
-                <img className={classes.edit__icon}  src={edit} alt="edit"/>
-                {toggleOption&&<div className={classes.arrowOptionBox}/>}
+                <img className={classes.edit__icon} src={edit} alt="edit" />
+                {toggleOption && <div className={classes.arrowOptionBox} />}
                 {toggleOption &&
-                <div ref={optionBox} className={classes.optionBox}>
-                    {couchList.map(item => (<option key={item.id} onClick={(e) => {
-                        change(id, e.target.value);
-                        setToggleOption(false);
-                    }} value={item.name} className={classes.optionBox_item}>{item.name}</option>))}
-                </div>
+                    <div ref={optionBox} className={classes.optionBox}>
+                        {couchList.map(item => {
+                            let trainer = `${item.last_name} ${item.first_name} ${item.middle_name}`
+                            return (<option key={item.id} onClick={(e) => {
+                                change(id,{...item});
+                                setToggleOption(false);
+                            }} className={classes.optionBox_item}>{trainer}</option>)
+                        })}
+                    </div>
                 }
 
             </div>
 
-        </div>    );
+        </div>);
 };

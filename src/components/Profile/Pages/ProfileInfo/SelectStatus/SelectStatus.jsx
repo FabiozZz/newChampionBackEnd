@@ -79,7 +79,7 @@ export const SelectStatus = ({label,value,setValue,data,...props}) => {
         if (value === '') {
             setValue(data[0]);
         }
-    },[data, setValue, value]);
+    },[data]);
 
     return (
         <div ref={selectRef} className={`${classes.selectBoxWrapper} ${props.className}`} {...props}>

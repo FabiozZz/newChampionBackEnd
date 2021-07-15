@@ -1,29 +1,29 @@
-.app-wrapper-auth {
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 80px 1fr ;
-  height: 100%;
-  position: relative;
-}
-.app-wrapper-auth__auth {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-/*.footer-hidden {*/
-/*  height: 80px;*/
-/*  width: 100%;*/
-/*}*/
 .app-wrapper {
+  height: calc(100% - 80px);
   display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 80px 1fr 72px;
-  height: 100%;
-  position: relative;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: min-content;
+  margin: 0 17px ;
+  grid-gap: 24px;
+  
+}
+.app-wrapper_auth {
+  align-content: center;
+  height: calc(100% - 180px);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: min-content;
+  margin: 0 17px;
+  grid-gap: 24px;
 }
 .app-wrapper__footer {
-  position: sticky;
+  position: fixed;
+  left: 15px;
+  right: 15px;
   bottom: 0;
+}
+.footer-hidden {
+  height: 72px;
 }
 .appToolTipClassgreen .ant-tooltip-inner {
   border-radius: 4px !important;
@@ -37,4 +37,27 @@
   border-radius: 4px !important;
   color: black !important;
 }
+.wrapper_large{
+  display: inline;
+}
+
+@media screen and (min-width: 1439px) {
+  .app-wrapper {
+    grid-template-columns: repeat(12,1fr );
+    height: 100%;
+    margin: 0;
+  }
+  .app-wrapper__footer {
+    display: none;
+  }
+  .wrapper_large{
+    max-width: 100%;
+    display:grid;
+    margin-bottom: 0;
+    margin-left: -15px;
+    grid-template-columns: 72px 1fr;
+    grid-gap: 32px;
+  }
+}
+
 /*# sourceMappingURL=app.css.map */

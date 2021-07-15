@@ -4,6 +4,7 @@ import {Button} from "../../../../utils/Buttons/Button";
 import {AddParent} from "./AddParent/AddParent";
 import separate from '../../../../assets/images/blockInfoSeparate.svg';
 import remove from '../../../../assets/images/removeParent.svg';
+import {isEmpty} from "../../../../helpers/common";
 
 /**
  * компонент прослойка
@@ -17,15 +18,11 @@ import remove from '../../../../assets/images/removeParent.svg';
 export const ParentsBlock = ({parents,addParents,removeParents,change}) => {
 
     return (
-        <div className={`row ${classes.block_info}`}>
-
-            <div className="col-12">
+        <div className={classes.block_info}>
                 <h3 className={classes.block_info__title}>информация о родителях</h3>
-            </div>
-
             {parents.map((e,index)=> {
                 return (
-                    <div key={index} className={`col-12 ${classes.block_info__parent_block} ${index>0&& classes.block_info__added}`}>
+                    <div key={index} className={`${classes.block_info__parent_block} ${index>0&& classes.block_info__added}`}>
 
                         {/* начиная со второго элемента добавляется разделитель между блоками и кнопка для удаления не нужного блока */}
                         {index>0 &&
@@ -38,7 +35,7 @@ export const ParentsBlock = ({parents,addParents,removeParents,change}) => {
 
                         </>
                         }
-                        <AddParent data={e} index={index} change={change}/>
+                        <AddParent passport={!isEmpty(e.passport)} data={e} index={index} change={change}/>
                     </div>
                 )
             })}

@@ -20,9 +20,9 @@
   background: #F4F6FC;
   box-sizing: border-box;
   border-radius: 5px;
-  position: relative;
-  height: 100%;
   border: 1px solid #BFC5D2;
+  position: relative;
+  height: 40px;
 }
 .label {
   color: #B0BAC9;
@@ -30,6 +30,8 @@
   font-weight: 700;
   font-size: 12px;
   line-height: 16px;
+  border-radius: 5px;
+
   letter-spacing: 1.125px;
   padding: 0 0 4px;
   text-transform: uppercase;
@@ -39,7 +41,7 @@
 .after {
   margin: 0;
   width: 100%;
-  height: 100%;
+  border-radius: 5px;
   position: relative;
 }
 .after .separator{

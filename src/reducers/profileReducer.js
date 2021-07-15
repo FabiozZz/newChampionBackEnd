@@ -1,4 +1,5 @@
 import {
+    CHANGE_PROFILE,
     CLEAR_PROFILE,
     LOAD_PROFILE_COUCH,
     LOAD_PROFILE_FILIAL,
@@ -57,6 +58,11 @@ export const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 filial: action.filial
+            };
+        case CHANGE_PROFILE:
+            return {
+                ...state,
+                user: {...action.profile}
             };
         default:
             return state;

@@ -1,17 +1,19 @@
 import React from 'react';
-import {BrowserRouter} from "react-router-dom";
-import {useSelector} from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { useSelector } from "react-redux";
 import './app.css';
-import {Header} from "./Header/Header";
-import {Route, Switch} from "react-router";
-import {Auth} from "./Auth/Auth";
-import {Footer} from "./Footer/Footer";
-import {Container} from "react-bootstrap";
-import {Adult} from "./Add/Adult/Adult";
-import {Kid} from "./Add/Сhild/Kid";
-import {Profile} from "./Profile/Profile";
-import {Clients} from "./Clients/Clients";
+import { Header } from "./Header/Header";
+import { Route, Switch } from "react-router";
+import { Auth } from "./Auth/Auth";
+import { Footer } from "./Footer/Footer";
+import { Container } from "react-bootstrap";
+import { Adult } from "./Add/Adult/Adult";
+import { Kid } from "./Add/Сhild/Kid";
+import { Profile } from "./Profile/Profile";
+import { Clients } from "./Clients/Clients";
 import { TimeTable } from './TimeTable/TimeTable';
+import { EditProfile } from "./Profile/Pages/ProfileInfo/EditProfile/EditProfile";
+import { SideBar } from './SideBar/SideBar';
 
 /**
  * главный компонент содержащий все приложение
@@ -64,14 +66,10 @@ function App() {
     if (!isAuth) {
         return (
             <BrowserRouter>
-                <Container className={'h-100'} fluid={'xl'}>
-                    <div className="app-wrapper-auth">
-                        <div className={'app-wrapper-auth__header'}>
-                            <Header/>
-                        </div>
-                        <div className={'app-wrapper-auth__auth'}>
-                            <Auth/>
-                        </div>
+                <Container className={'h-100'} fluid={true}>
+                    <Header />
+                    <div className="app-wrapper_auth">
+                        <Auth />
                     </div>
                 </Container>
             </BrowserRouter>
@@ -82,27 +80,28 @@ function App() {
     return (
         <BrowserRouter>
             <Container className={'h-100'} fluid={true}>
-                <div className="app-wrapper">
-                    <div className="app-wrapper__header">
-                        <Header/>
-                    </div>
-                    <div className="row-cols-1 app-wrapper__content">
-                            <Switch>
-                                <Route exact path={'/'} component={TimeTable}/>
-                                <Route path={'/add_adult'} component={Adult}/>
-                                <Route path={'/add_child'} component={Kid}/>
-                                <Route path={'/profile/:id/'} component={Profile}/>
-                                {/*<Route exact path={'/profile/:id/edit'} component={EditProfile}/>*/}
-                                <Route path={'/clients'} component={Clients}/>
-                            </Switch>
+                <Header />
+                <div className="wrapper_large">
+                    <SideBar />
+                    <div className="app-wrapper">
+
+                        <Switch>
+                            <Route exact path={'/'} component={TimeTable} />
+                            <Route path={'/add_adult'} component={Adult} />
+                            <Route path={'/add_child'} component={Kid} />
+                            <Route exact path={'/profile/:id/'} component={Profile} />
+                            <Route exact path={'/profile/:id/edit'} component={EditProfile} />
+                            <Route path={'/clients'} component={Clients} />
+                        </Switch>
 
                     </div>
-
-                    <div className="app-wrapper__footer">
-                        <Footer/>
-                    </div>
-                    {/*<div className={'footer-hidden'}/>*/}
                 </div>
+                {/* <div className={'footer-hidden'}/> */}
+
+                <div className="app-wrapper__footer">
+                    <Footer />
+                </div>
+
             </Container>
 
         </BrowserRouter>

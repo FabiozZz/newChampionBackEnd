@@ -6,27 +6,21 @@ import {DataPicker} from "../../../../utils/DataPicker/DataPicker";
 export const PersonalData = ({data,change,changeData}) => {
 
     return (
-        <div className={`row ${classes.block_info}`}>
+        <div className={classes.block_info}>
 
-            <div className="col-12">
-                <h3 className={classes.block_info__title}>информация о ребёнке</h3>
-            </div>
-            <div className="col-12">
-                <div className="row">
-                    <div className={`col-4 ${classes.block_info__item}`}>
-                        <OtherInput value={data.lastName} setValue={change} name={'lastName'} label={'фамилия'} required={true}/>
-                    </div>
-                    <div className={`col-4 ${classes.block_info__item}`}>
-                        <OtherInput value={data.name} setValue={change} name={'name'} label={'имя'} required={true}/>
-                    </div>
-                    <div className={`col-4 ${classes.block_info__item}`}>
-                        <OtherInput value={data.middleName} setValue={change} name={'middleName'} label={'отчество'} required={true}/>
-                    </div>
+            <h3 className={classes.block_info__title}>информация о ребёнке</h3>
+            <div className={classes.block_info__item}>
+                <div className={classes.last_name}>
+                    <OtherInput value={data.last_name} setValue={change} name={'last_name'} label={'фамилия'} required={true}/>
                 </div>
-                <div className="row">
-                    <div className={`col-5 ${classes.block_info__item}`}>
-                        <DataPicker value={data.birthDay} setValue={changeData} name={'birthDay'} label={'дата рождения'}/>
-                    </div>
+                <div className={classes.first_name}>
+                    <OtherInput value={data.first_name} setValue={change} name={'first_name'} label={'имя'} required={true}/>
+                </div>
+                <div className={classes.middle_name}>
+                    <OtherInput value={data.middle_name} setValue={change} name={'middle_name'} label={'отчество'}/>
+                </div>
+                <div className={classes.date_of_birth}>
+                    <DataPicker value={data.date_of_birth} setValue={changeData} name={'date_of_birth'} label={'дата рождения'} required={true}/>
                 </div>
             </div>
         </div>

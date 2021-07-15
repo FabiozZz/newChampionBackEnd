@@ -1,4 +1,5 @@
 import {
+    CHANGE_PROFILE,
     CLEAR_PROFILE,
     LOAD_PROFILE_COUCH,
     LOAD_PROFILE_FILIAL,
@@ -15,3 +16,4 @@ export const load_profile_group = (group) => ({type: LOAD_PROFILE_GROUP, group})
 export const load_profile_couch = (couch) => ({type: LOAD_PROFILE_COUCH, couch});
 export const load_profile_filial = (filial) => ({type: LOAD_PROFILE_FILIAL, filial});
 export const clear_profile = () => ({type: CLEAR_PROFILE});
+export const change_data_profile = (profile) => ({type: CHANGE_PROFILE,profile});

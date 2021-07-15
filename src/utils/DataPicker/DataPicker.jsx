@@ -30,7 +30,8 @@ export const DataPicker = ({
                                style = {},
                                label = '',
                                disabled = false,
-                               simpleClass = ''
+                               simpleClass = '',
+                                required = false
                            }) => {
 
     let windowWidth = window.innerWidth;
@@ -252,6 +253,7 @@ export const DataPicker = ({
                                    placeholder={'Не указано'}
                                    onChange={handleChangeInputDate}
                                    value={value}
+                                   required={required}
                         />
                         <img ref={iconRef} src={calendar} alt="calendar" onClick={handleToggleIconCalendar}/>
                     </label>

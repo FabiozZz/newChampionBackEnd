@@ -62,6 +62,7 @@
     margin-top: 20px;
 }
 .inputWrapper {
+    overflow: hidden;
     background: #F4F6FC;
     border: 1px solid #BFC5D2;
     box-sizing: border-box;

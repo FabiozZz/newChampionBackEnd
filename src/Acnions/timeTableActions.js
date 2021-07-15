@@ -12,7 +12,7 @@ export const load_couch = (couch) => ({type: LOAD_COUCH, couch});
 
 export const change_couch = (id,couch) => ({type: CHANGE_COUCH_FOR_COURSE, id,couch});
 
-export const client_change_toDay = (id,course) => ({type: CHANGE_TODAY, id,course});
+export const client_change_toDay = (lesson,train,client) => ({type: CHANGE_TODAY, lesson,train,client});
 
 export const filtered_clients = (group, coach) => ({type: FILTERED_CLIENTS, group, coach});
 export const clear_filter = () => ({type: CLEAR_FILTER});

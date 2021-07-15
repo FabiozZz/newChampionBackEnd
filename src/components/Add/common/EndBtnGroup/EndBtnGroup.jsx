@@ -12,15 +12,15 @@ import {Button} from "../../../../utils/Buttons/Button";
  * @returns {JSX.Element}
  * @constructor
  */
-export const EndBtnGroup = ({goBack,personal,rules}) => {
+export const EndBtnGroup = ({goBack,personal=true,rules=true}) => {
     return (
         <div className={`row ${classes.btn_group}`}>
 
-            <div className={`col-4 ${classes.btn_group__item}`}>
+            <div className={`col-2 ${classes.btn_group__item}`}>
                 <Button click={goBack} text={'отменить'} factor={'danger'}/>
             </div>
 
-            <div className={`col-4 ${classes.btn_group__item}`}>
+            <div className={`col-2 ${classes.btn_group__item}`}>
                 <Button type={'submit'} disabled={!personal || !rules} text={'сохранить'} factor={'success'}/>
             </div>
 

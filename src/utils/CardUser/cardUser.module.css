@@ -1,126 +1,165 @@
 .cardUser {
-    margin: 0;
-    position: relative;
-    overflow: hidden;
-    width: 220px;
-    height: 100px;
-    border-radius: 5px;
-    background-color: #FFFFFF;
-    display: grid;
-    grid-template-rows: 3fr 3fr 6fr;
-    grid-template-columns: 10fr 2fr;
-    font-family: 'SF Pro Display', sans-serif;
-    grid-template-areas:
-          'names status'
-          'names health'
-          'notification success';
-    padding: 12px 8px 12px 12px;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  width: 220px;
+  height: 100px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  display: grid;
+  grid-template-rows: 3fr 3fr 6fr;
+  grid-template-columns: 10fr 2fr;
+  font-family: "SF Pro Display", sans-serif;
+  grid-template-areas:
+    "names status"
+    "names health"
+    "notification success";
+  padding: 12px 8px 12px 12px;
 }
 .names {
-    grid-area: names;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    font-family: 'SF Pro Display',sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 24px;
-    color: #2E384D;
+  grid-area: names;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-family: "SF Pro Display", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: #2e384d;
 }
-.cardStatus{
-    margin: auto;
-    grid-area: status;
+.cardStatus {
+  margin: auto;
+  grid-area: status;
 }
 .notifications {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    position: absolute;
-    bottom: -4px;
-    grid-area: notification;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  position: absolute;
+  bottom: -4px;
+  grid-area: notification;
 }
-.notifications img{
-    margin-right: 8px;
+.notifications img {
+  margin-right: 8px;
 }
-.health{
-    grid-area: health;
-    margin: auto;
-    position: relative;
-    height: 100%;
-    width: 100%;
+.health {
+  grid-area: health;
+  margin: auto;
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
 .health img {
-    position: absolute;
-    bottom: -10px;
-    right: 7px;
+  position: absolute;
+  bottom: -10px;
+  right: 7px;
 }
-.success{
-    width: 26px;
-    height: 26px;
-    padding: 0;
-    cursor: pointer;
-    position: absolute;
-    bottom: -7px;
-    right: 2px;
-    grid-area: success;
-    background: #EEF3F5;
-    border: 1px solid #BFC5D2;
-    border-radius: 50%;
-    box-sizing: border-box;
+.success {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  cursor: pointer;
+  position: absolute;
+  bottom: -7px;
+  right: 2px;
+  grid-area: success;
+  background: #eef3f5;
+  border: 1px solid #bfc5d2;
+  border-radius: 50%;
+  box-sizing: border-box;
 }
-.success img{
-    margin: auto;
-    padding: 0;
+.success img {
+  margin: auto;
+  padding: 0;
 }
 .settingsCard {
-    position: absolute;
-    top: 12px;
-    bottom: 12px;
-    left: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    font-size: 12px;
-    font-family: 'SF Pro Display', sans-serif;
-    font-weight: 400;
-    line-height: 16px;
-    color: #8798AD;
-    text-align: center;
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 12px;
+  font-family: "SF Pro Display", sans-serif;
+  font-weight: 400;
+  line-height: 16px;
+  color: #8798ad;
+  text-align: center;
 }
-.settingsCard span{
-    display: block;
-    padding: 6px 0;
-    cursor: pointer;
+.settingsCard span {
+  display: block;
+  padding: 6px 0;
+  cursor: pointer;
 }
-.settingsCard a{
-    display: block;
-    padding: 6px 0;
-    color:#8798AD;
+.settingsCard a {
+  display: block;
+  padding: 6px 0;
+  color: #8798ad;
 }
-.closeButton{
-    position: absolute;
-    z-index: 1;
-    top: -4px;
-    right: 8px;
+.closeButton {
+  position: absolute;
+  z-index: 1;
+  top: -4px;
+  right: 8px;
 }
-.card_status__tooltip_text_wrapper{
-    margin: 0;
-    padding: 12px 8px;
+.card_status__tooltip_text_wrapper {
+  margin: 0;
+  padding: 12px 8px;
 }
-.card_status__tooltip_text_wrapper__text_center{
-    font-family: 'SF Pro Display',sans-serif;
-    padding: 0;
-    margin: 0;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 16px;
-    text-align: center;
-    color: #FFFFFF;
+.card_status__tooltip_text_wrapper__text_center {
+  font-family: "SF Pro Display", sans-serif;
+  padding: 0;
+  margin: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  color: #ffffff;
 }
-.card_status__tooltip_text_wrapper__text_center__date{
-    font-weight: 900;
-    color: #FFFFFF;
+.card_status__tooltip_text_wrapper__text_center__date {
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.lds_ring {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.lds_ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  /* margin: 8px; */
+  border: 3px solid rgb(88, 89, 90);
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: rgb(70, 70, 70) transparent transparent transparent;
+}
+.lds_ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds_ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds_ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

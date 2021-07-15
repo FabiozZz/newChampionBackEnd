@@ -1,118 +1,116 @@
-
 .table_wrapper {
-    display: grid;
-    grid-auto-columns: 220px;
-    grid-template-rows: repeat(5,min-content);
-    grid-column-gap: 24px;
-    grid-auto-flow: column;
-    margin: 40px 18px 20px  0;
+  display: grid;
+  grid-auto-columns: 220px;
+  grid-template-rows: repeat(5, min-content);
+  grid-column-gap: 24px;
+  grid-auto-flow: column;
+  padding-right: 40px;
+  margin: 40px 18px 20px 0;
 }
-.courseWrapper{
-    /*display: grid;*/
-    /*grid-auto-flow: row;*/
-    /*grid-auto-rows: auto;*/
-    /*width: 220px;*/
+.infoBlock {
+  display: grid;
 }
-.infoBlock{
-    display: grid;
+.course {
+  white-space: pre-wrap;
+  font-family: "SF Pro Display", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 1px;
+  color: #2e384d;
 }
-.course{
-    white-space: pre-wrap;
-    font-family: 'SF Pro Display',sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: 1px;
-    color: #2E384D;
+.block_trainer {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  cursor: pointer;
+  margin-top: 8px;
+  grid-template-columns: 8fr 1fr;
+  position: relative;
 }
-.block_trainer{
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
-    cursor: pointer;
-    margin-top: 8px;
-    grid-template-columns: 8fr 1fr;
-    position: relative;
+.trainer {
+  white-space: pre-wrap;
+  font-family: "SF Pro Display", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: #2e384d;
+  margin: 0;
 }
-.trainer{
-    white-space: pre-wrap;
-    font-family: 'SF Pro Display',sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 16px;
-    color: #2E384D;
-    margin: 0;
+.edit {
+  position: relative;
 }
-.edit{
-    position: relative;
+.edit__icon {
+  display: inline;
+  margin: auto;
+  cursor: pointer;
+  padding: 8px;
 }
-.edit__icon{
-    display: inline;
-    margin: auto;
-    cursor: pointer;
-    padding: 8px;
+.date {
+  margin-top: 4px;
+  display: block;
+  font-family: "SF Pro Display", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: #8798ad;
 }
-.date{
-    margin-top: 4px;
-    display: block;
-    font-family: 'SF Pro Display',sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 16px;
-    color: #8798AD;
+.count {
+  display: block;
+  margin-top: 12px;
+  font-family: "SF Pro Display", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: #69707f;
 }
-.count{
-    display: block;
-    margin-top: 12px;
-    font-family: 'SF Pro Display',sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 16px;
-    color: #69707F;
-}
-.item{
-    box-shadow: var(--box-shadow);
-    margin-top: 8px;
+.item {
+  box-shadow: var(--box-shadow);
+  margin-top: 8px;
 }
 .arrowOptionBox {
-    position: absolute;
-    background-color: #FFFFFF;
-    width: 13px;
-    height: 13px;
-    right: 6px;
-    bottom: -10px;
-    z-index: 9999999;
-    transform-origin: center;
-    transform: rotate(45deg);
+  position: absolute;
+  background-color: #ffffff;
+  width: 13px;
+  height: 13px;
+  right: 6px;
+  bottom: -10px;
+  z-index: 9999999;
+  transform-origin: center;
+  transform: rotate(45deg);
 }
 .optionBox {
-    z-index: 9999;
-    width: 220px;
-    position: absolute;
-    right: -5px;
-    padding: 0 16px 16px;
-    background-color: #FFFFFF;
-    border-radius: 4px;
-    box-shadow: 0 2px 6px #B0BAC5;
+  z-index: 9999;
+  /* overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens:auto;
+    white-space: pre-wrap; */
+  min-width: 220px;
+  position: absolute;
+  right: -5px;
+  padding: 0 16px 16px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px #b0bac5;
 }
 .optionBox_item {
-    word-break: normal;
-    display: inline-block;
-    word-wrap: break-word;
-    white-space: normal;
-    padding-top: 16px;
-    cursor: pointer;
-    font-family: 'SF Pro Display', sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 16px;
-    color: #2E384D;
+  word-break: normal;
+  display: inline-block;
+  word-wrap: break-word;
+  white-space: normal;
+  padding-top: 16px;
+  cursor: pointer;
+  font-family: "SF Pro Display", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: #2e384d;
 }
-.trainer_edit{
-    position: relative;
+.trainer_edit {
+  position: relative;
 }
