@@ -74,21 +74,21 @@ export const Clients = () => {
     }, [dispatch]);
 
 
-
     return (
         <>
             <HeaderNav/>
-            <Redirect padding={true} title={"Список клиентов"} />
+            <Redirect padding={true} title={"Список клиентов"}/>
 
             <div className={classes.wrapper}>
-                <FilterClientsSection />
-                    <SortTable clients={clients} active={activeFactor} row={toggleRow} column={toggleColumn} />
-                <Skeleton loading={load} paragraph={{ rows: 4, width: "100%" }} active={true}>
-                {activeFactor ?
-                    <ClientsColumn clients={clients} /> :
-                    <ClientsRow clients={clients} />
-
-                }
+                <FilterClientsSection/>
+                <SortTable clients={clients} active={activeFactor} row={toggleRow} column={toggleColumn}/>
+                <Skeleton loading={load} paragraph={{rows: 4, width: "100%"}} active={true}>
+                    {!clients.length?
+                        <p className={classes.text_none_data}>Данных нет</p>:
+                        activeFactor ?
+                            <ClientsColumn clients={clients}/> :
+                            <ClientsRow clients={clients}/>
+                    }
 
                 </Skeleton>
 

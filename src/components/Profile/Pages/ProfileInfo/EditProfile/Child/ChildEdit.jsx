@@ -40,7 +40,9 @@ export const ChildEdit = ({ user }) => {
     const handleSubmit = async(e)=>{
         e.preventDefault();
         await Api.editProfile(user.id,client).then(r=>{
-            dispatch(change_data_profile(r.data))
+            dispatch(change_data_profile(r.data));
+            history.push(`/profile/${r.data.id}`)
+
         })
     }
 

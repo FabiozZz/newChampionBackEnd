@@ -249,5 +249,18 @@
     line-height: 24px;
     color: #8798AD;
 }
+
+.text_none_data {
+    text-decoration: none;
+    align-items: center;
+    text-align:center;
+    cursor: pointer;
+    height: 100%;
+    font-family: 'SF Pro Display', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+}
 @media screen and (min-width:1439px){
 }

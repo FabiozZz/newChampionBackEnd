@@ -20,7 +20,6 @@ export const AddParent = ({data,change,index,passport=false}) => {
      * локальный стейт, в случае если объект data приходит не пустой, заполняется данными из data
      */
     let initialState;
-    console.log(data)
     if (passport) {
         initialState = {
             last_name: data.last_name||'',

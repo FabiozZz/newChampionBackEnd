@@ -195,7 +195,7 @@ export const Adult = () => {
             address: `ул.${address.street} ${address.house && 'д.' + address.house} ${address.corpus && 'кор.' + address.corpus} ${address.room && 'кв.' + address.room}`,
             // address,
         }
-        console.log(uploadData)
+        // console.log(uploadData)
         await Api.postAddAdult(uploadData).then(r => {
             
             console.log(r)

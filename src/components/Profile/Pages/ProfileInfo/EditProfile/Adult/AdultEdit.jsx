@@ -39,6 +39,7 @@ export const AdultEdit = ({ user }) => {
         e.preventDefault();
         await Api.editProfile(user.id,client).then(r=>{
             dispatch(change_data_profile(r.data))
+            history.push(`/profile/${r.data.id}`)
         })
     }
 
