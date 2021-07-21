@@ -79,9 +79,12 @@ export const CardUser = ({ img, abonimentName, cardStatusName, cardFrom, cardTo,
         <NavLink to={`/profile/${id}`}>
             <div className={classes.cardUser} style={style}>
                 <div className={classes.names}>
-                    <span>{name}</span>
                     <span>{surname}</span>
+                    <span>{name}</span>
                 </div>
+
+
+
                 {/* {img&&
                 <CustomTooltip placement={'top'} color={'dark'} title={()=>(
                     <div className={classes.card_status__tooltip_text_wrapper}>

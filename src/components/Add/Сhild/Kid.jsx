@@ -215,7 +215,8 @@ export const Kid = () => {
             ...personalData,
             date_of_birth:personalData.date_of_birth.replace(/(\d+).(\d+).(\d+)/g,'$3-$2-$1'),
             parents,
-            address:'some address'
+            address: `ул.${address.street} ${address.house && 'д.' + address.house} ${address.corpus && 'кор.' + address.corpus} ${address.room && 'кв.' + address.room}`,
+
         }
         console.log(uploadData)
 

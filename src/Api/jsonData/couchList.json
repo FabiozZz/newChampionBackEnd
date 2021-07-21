@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "first_name": "Станислав",
+    "middle_name": "Робертович",
+    "last_name": "Плиев",
+    "phone_number": "89996569885"
+  },
+  {
+    "id": 2,
+    "first_name": "Владимир",
+    "middle_name": "Владимирович",
+    "last_name": "Кобялко",
+    "phone_number": "89896569885"
+  },
+  {
+    "id": 3,
+    "first_name": "Анатолий",
+    "middle_name": "Петрович",
+    "last_name": "Бураков",
+    "phone_number": "89896569885"
+  },
+  {
+    "id": 4,
+    "first_name": "Диана",
+    "middle_name": "Александровна",
+    "last_name": "Корицкая",
+    "phone_number": "89863269885"
+  }
+]

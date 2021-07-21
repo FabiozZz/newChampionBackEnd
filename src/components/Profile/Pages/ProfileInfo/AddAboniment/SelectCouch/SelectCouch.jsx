@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from "prop-types";
 import classes from './selectCouch.module.css';
-import { isEmpty } from '../../../../helpers/common';
+import {isEmpty} from "../../../../../../helpers/common";
 
 /**
  * компонент для визуальзации выпадающего списка <select>
@@ -65,15 +65,9 @@ export const SelectCouch = ({ label, value, setValue, data, ...props }) => {
      * при размонтировании компонента удаляется событие
      */
     useEffect(() => {
-        data.unshift({
-            id: 0,
-            first_name: '',
-            middle_name: '',
-            last_name: 'Все',
-            phone_number: ''
-        });
-        data = [...new Set(data)];
-
+        if (value.last_name === '' || value.first_name === '' || value.middle_name === '') {
+            setValue(data[0]);
+        }
         const onClick = e => {
             if ((optionBox.current && !optionBox.current.contains(e.target))
                 &&

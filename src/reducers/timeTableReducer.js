@@ -7,15 +7,17 @@ import {
     LOAD_GROUP
 } from "../constants/timeTableConstants";
 import { isEmpty } from "../helpers/common";
+import {FILTERED_CLIENTS_FIO} from "../constants/profileConstant";
 
-const initialState ={
+const initialState = {
     clients: [],
-    filterClients:[],
-    filterSection:{
-        group:[],
-        couch:[]
+    filterClients: [],
+    copyFilterClients: [],
+    filterSection: {
+        group: [],
+        couch: []
     }
-}
+};
 export const timeTableReducer = (state=initialState,action) => {
     switch (action.type) {
         case CHANGE_TODAY:
@@ -61,7 +63,7 @@ export const timeTableReducer = (state=initialState,action) => {
                 ...state,
                 filterSection: {
                     ...state.filterSection,
-                    group: [...action.group]
+                    group: [...state.filterSection.group,...action.group]
                 }
 
             }
@@ -70,7 +72,7 @@ export const timeTableReducer = (state=initialState,action) => {
                 ...state,
                 filterSection: {
                     ...state.filterSection,
-                    couch: [...action.couch]
+                    couch: [...state.filterSection.couch,...action.couch]
                 }
 
             }
@@ -87,7 +89,46 @@ export const timeTableReducer = (state=initialState,action) => {
             });
             return {
                 ...state,
-                filterClients: [...filteredClients]
+                filterClients: [...filteredClients],
+                copyFilterClients: [...filteredClients]
+            };
+        case FILTERED_CLIENTS_FIO:
+            let copyStateClientsForFilteredFio = [];
+            let result;
+            let copy;
+            if (state.filterClients.length) {
+                copy = [...state.filterClients];
+                for (let i = 0; i < state.filterClients.length; i++) {
+                    copyStateClientsForFilteredFio.push({...state.filterClients[i], trainings: [...state.filterClients[i].trainings]});
+                }
+                result = copyStateClientsForFilteredFio.filter((lesson,index)=>{
+                    lesson.trainings = state.filterClients[index].trainings.filter(train => {
+                        let fullName = `${train.client.first_name.toLowerCase()} ${train.client.last_name.toLowerCase()}`
+                        let fullNameRev = `${train.client.last_name.toLowerCase()} ${train.client.first_name.toLowerCase()}`
+                        return fullName.toLowerCase().includes(action.event.toLowerCase()) || fullNameRev.toLowerCase().includes(action.event.toLowerCase())
+                    });
+                    return lesson.trainings.length;
+
+                })
+
+            }else{
+                copy = [...state.clients];
+                for (let i = 0; i < state.clients.length; i++) {
+                    copyStateClientsForFilteredFio.push({...state.clients[i], trainings: [...state.clients[i].trainings]});
+                }
+                result = copyStateClientsForFilteredFio.filter((lesson,index)=>{
+                    lesson.trainings = state.clients[index].trainings.filter(train => {
+                        let fullName = `${train.client.first_name.toLowerCase()} ${train.client.last_name.toLowerCase()}`
+                        let fullNameRev = `${train.client.last_name.toLowerCase()} ${train.client.first_name.toLowerCase()}`
+                        return fullName.toLowerCase().includes(action.event.toLowerCase()) || fullNameRev.toLowerCase().includes(action.event.toLowerCase())
+                    });
+                    return lesson.trainings.length;
+
+                })
+            }
+            return {
+                ...state,
+                filterClients: action.event !== ""?[...result]:[...state.copyFilterClients],
             }
         case CLEAR_FILTER:
             return {

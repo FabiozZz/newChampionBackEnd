@@ -3,6 +3,7 @@ import classes from "../../add.module.css";
 import {OtherInput} from "../../../../utils/OtherInput/OtherInput";
 import {DataPicker} from "../../../../utils/DataPicker/DataPicker";
 import {MaskInput} from "../../../../utils/MaskInput/MaskInput";
+import {MaskInputTel} from "../../../../utils/MaskInputTel/MaskInputTel";
 
 /**
  * компонент визуализации ввода персональных данных
@@ -14,6 +15,14 @@ import {MaskInput} from "../../../../utils/MaskInput/MaskInput";
  * @constructor
  */
 export const PersonalData = ({data,change,changeData,changePass}) => {
+
+    // let beforeMaskedValueChange = (newState, oldState, userInput) => {
+    //     let value = newState.value;
+    //    if (userInput.length >= 10){
+    //         value.slice(1,10)
+    //     }
+    //     return {value};
+    // }
 
     return (
         <div className={`${classes.block_info}`}>
@@ -33,12 +42,12 @@ export const PersonalData = ({data,change,changeData,changePass}) => {
                     <DataPicker value={data.date_of_birth} setValue={changeData} name={'date_of_birth'} label={'дата рождения'} required={true}/>
                 </div>
                 <div className={classes.phone_number}>
-                    <MaskInput value={data.phone}
+                    <MaskInputTel value={data.phone_number}
                                name={'phone_number'}
                                setValue={change}
-                               mask={'+7 (999) 999-99-99'}
                                required={true}
                                label={'номер телефона'}
+                               // beforeMaskedValueChange={beforeMaskedValueChange}
                     />
                 </div>
                 <div className={classes.serial}>

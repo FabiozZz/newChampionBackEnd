@@ -5,7 +5,7 @@ import Api from "../../Api/Api";
 import { useDispatch, useSelector } from "react-redux";
 import { message, Skeleton } from "antd";
 import {
-    filtered_clients,
+    filtered_clients, filtered_clients_fio,
     load_clients,
     load_couch,
     load_group,
@@ -25,9 +25,16 @@ export const TimeTable = () => {
     const refBox = useRef(null);
     const refInfo = useRef(null);
 
+    const [search, setSearch] = useState('');
+
+    const hendleSearchClient = (e) => {
+        setSearch(e.target.value);
+        dispatch(filtered_clients_fio(e.target.value));
+    };
+
     const stateClients = useSelector((state) => state.timeTable);
 
-    const { clients, filterClients } = stateClients;
+    const {clients, filterClients} = stateClients;
 
     let dataClients = filterClients.length ? filterClients : clients;
 
@@ -52,18 +59,18 @@ export const TimeTable = () => {
         to: "",
     });
     const handleChangeDateFrom = (some) => {
-        setDate((prevState) => ({ ...prevState, from: some }));
+        setDate((prevState) => ({...prevState, from: some}));
     };
 
     const handleChangeDateTo = (some) => {
-        setDate((prevState) => ({ ...prevState, to: some }));
+        setDate((prevState) => ({...prevState, to: some}));
     };
 
     useEffect(() => {
         const source = axios.CancelToken.source();
         // setUploadData(true)
         // if (!dataClients.length) {
-            setIsLoad(true);
+        setIsLoad(true);
         // }
         (async () => {
             await Api.getClientsTimeTable(source.token).then((r) => {
@@ -94,9 +101,10 @@ export const TimeTable = () => {
     };
 
     const clearFilter = () => {
-        setDate({ from: "", to: "" });
+        setDate({from: "", to: ""});
         setGroup({});
         setCouch({});
+        setSearch('');
     };
 
     useEffect(() => {
@@ -135,13 +143,15 @@ export const TimeTable = () => {
                 <div class={cn(classes.lds_ring)}><div></div><div></div><div></div><div></div></div>
             } */}
 
-            <HeaderNav />
+            <HeaderNav/>
 
             <h1 className={classes.wrapper__title}>Расписание</h1>
 
             <div className={cn('container-fluid', classes.wrapper__table)}>
                 {!hide && (
                     <FilterSection
+                        serch={search}
+                        setSearch={hendleSearchClient}
                         date={date}
                         couchData={couchData}
                         groupData={groupData}
@@ -152,6 +162,7 @@ export const TimeTable = () => {
                     />
                 )}
                 <HiddenFilter
+                    search={search}
                     hide={hide}
                     clear={clearFilter}
                     toggleHide={handleToggleHide}
@@ -162,14 +173,14 @@ export const TimeTable = () => {
 
                 {hideOrVisInfo && (
                     <div ref={refInfo} className={classes.info_block} onClick={toggleVisibleInfo}>
-                        <InfoBlock toggle={visibleInfo} />
+                        <InfoBlock toggle={visibleInfo}/>
                     </div>
                 )}
                 <div ref={refBox} className={` ${classes.wrapper__course_table} ${isLoad ? "row" : ""}`}>
-                    <Skeleton loading={isLoad} paragraph={{ rows: 4, width: "100%" }} active={true} />
-                    <Skeleton loading={isLoad} paragraph={{ rows: 4, width: "100%" }} active={true} />
-                    <Skeleton loading={isLoad} paragraph={{ rows: 4, width: "100%" }} active={true}>
-                        <CourseTable data={dataClients} />
+                    <Skeleton loading={isLoad} paragraph={{rows: 4, width: "100%"}} active={true}/>
+                    <Skeleton loading={isLoad} paragraph={{rows: 4, width: "100%"}} active={true}/>
+                    <Skeleton loading={isLoad} paragraph={{rows: 4, width: "100%"}} active={true}>
+                        <CourseTable data={dataClients}/>
                     </Skeleton>
                 </div>
             </div>

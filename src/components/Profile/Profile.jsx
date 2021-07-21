@@ -36,7 +36,8 @@ export const Profile = () => {
         let source = axios.CancelToken.source();
         (async () => {
             await Api.getProfile(id).then(r => {
-                dispatch(load_profile_user(r.data))
+                // dispatch(load_profile_user(r.data))
+                dispatch(load_profile_user(r))
             });
             // await Api.getAbonimentList(source.token).then(r => {
             //     dispatch(load_profile_aboniment(r.data))

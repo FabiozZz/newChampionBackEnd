@@ -83,10 +83,12 @@ export const Option = ({ change, id, couch, couchList }) => {
                     <div ref={optionBox} className={classes.optionBox}>
                         {couchList.map(item => {
                             let trainer = `${item.last_name} ${item.first_name} ${item.middle_name}`
-                            return (<option key={item.id} onClick={(e) => {
-                                change(id,{...item});
-                                setToggleOption(false);
-                            }} className={classes.optionBox_item}>{trainer}</option>)
+                            if (item.id !== 0) {
+                                return (<option key={item.id} onClick={(e) => {
+                                    change(id,{...item});
+                                    setToggleOption(false);
+                                }} className={classes.optionBox_item}>{trainer}</option>);
+                            }
                         })}
                     </div>
                 }

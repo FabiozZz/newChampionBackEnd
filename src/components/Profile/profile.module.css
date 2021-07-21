@@ -51,6 +51,19 @@
   text-transform: uppercase;
   color: #8798ad;
 }
+.block_info__title_aboniment{
+  padding-top: 32px;
+  padding-bottom: 32px;
+  font-family: 'Montserrat',sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #8798AD;
+
+}
 .block_info__btn_group {
   padding-top: 32px;
   display: grid;
@@ -190,38 +203,82 @@
 }
 .add_aboniment {
   display: grid;
-  grid-auto-flow: row;
+  grid-template-columns: repeat(12,1fr);
   grid-gap: 16px;
   align-items: end;
 }
+/* first line */
+.card_number{
+  grid-column: 1/5;
+}
 .aboniment {
-  display: grid;
-  grid-template-columns: 4fr 3fr 3fr 2fr;
-  grid-gap: 24px;
+  grid-column: 5/8;
 }
+.status{
+  grid-column: 8/11;
+}
+.counter{
+  grid-column: 11/13;
+}
+
+/* second line */
+
 .group {
-  display: grid;
-  grid-template-columns: 4fr 6fr;
-  grid-gap: 24px;
+  grid-column: 1/5;
 }
-.pass {
+
+/* third line */
+  /* child */
+    .parent_select{
+      grid-column: 1/5;
+    }
+    .parent_serial{
+      grid-column: 5/9;
+    }
+    .parent_number {
+      grid-column: 9/13;
+    }
+  /* Adult */
+    .adult_serial{
+      grid-column: 1/5;
+    }
+    .adult_number{
+      grid-column: 5/9;
+    }
+
+/* forth line */
+.sales_card{
+  grid-column: 1/13;
+  grid-gap: 4px;
   display: grid;
-  grid-template-columns: 5fr 3fr 4fr;
-  align-items: end;
-  grid-gap: 24px;
+  grid-template-columns: repeat(12,1fr);
 }
-.pass_adult {
-  display: grid;
-  grid-template-columns: 3fr 4fr 5fr;
-  align-items: end;
-  grid-gap: 24px;
-}
+
+/*.pass {*/
+/*  display: grid;*/
+/*  grid-column: 1/12;*/
+/*  grid-template-columns: 5fr 3fr 4fr;*/
+/*  align-items: end;*/
+/*  grid-gap: 24px;*/
+/*}*/
+/*.pass_adult {*/
+/*  display: grid;*/
+/*  grid-template-columns: 3fr 4fr 5fr;*/
+/*  align-items: end;*/
+/*  grid-gap: 24px;*/
+/*}*/
 .sale {
   display: grid;
   grid-template-columns: 6fr 6fr;
   grid-gap: 24px;
 }
+.procent{
+  grid-column: 1/7;
+}
 .sale_count {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  grid-column: 1/13;
   align-items: end;
   display: grid;
   grid-template-columns: max-content max-content 1fr max-content max-content;
@@ -253,8 +310,10 @@
   width: 100%;
 }
 .success {
-  padding-top: 16px;
-  margin: auto;
+  grid-column: 1/13;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 32px;
 }
 .edit_price {
   padding: 0;
@@ -336,11 +395,70 @@
 .sale {
   grid-column: 1/7;
 }
+/*.passport_serial{*/
+/*  grid-column:1/5;*/
+/*}*/
+/*.passport_number{*/
+/*  grid-column: 5/10;*/
+/*}*/
 
 @media screen and (min-width: 1439px) {
   .block_info {
       padding: 32px 24px;
   }
+  .add_aboniment {
+    display: grid;
+    grid-template-columns: repeat(11,1fr);
+    grid-gap: 16px;
+    align-items: end;
+  }
+
+  /* first line */
+
+  .card_number{
+    grid-column: 1/4;
+  }
+  .aboniment {
+    grid-column: 4/7;
+  }
+  .status{
+    grid-column: 7/10;
+  }
+  .counter{
+    grid-column: 10/12;
+  }
+
+  /* second line */
+
+  .group {
+    grid-column: 1/4;
+  }
+
+  /* third line */
+    /* child */
+      .parent_select{
+        grid-column: 1/4;
+      }
+      .parent_serial{
+        grid-column: 4/7;
+      }
+      .parent_number{
+        grid-column: 7/10;
+      }
+    /* Adult */
+      .adult_serial{
+        grid-column: 1/4;
+      }
+      .adult_number{
+        grid-column: 4/7;
+      }
+
+  /* forth line */
+  .sales_card{
+    grid-column: 1/12;
+  }
+
+
   .last_name {
     grid-column: 1 / 4;
   }

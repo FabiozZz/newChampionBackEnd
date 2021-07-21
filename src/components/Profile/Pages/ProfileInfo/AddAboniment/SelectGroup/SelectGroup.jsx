@@ -74,12 +74,6 @@ export const SelectGroup = ({required=false,name,value,setValue,label,data,...pr
      * при размонтировании компонента удаляется событие
      */
     useEffect(() => {
-        data.unshift({
-            id: 0,
-            name: 'Все',
-            trainer: 0
-        });
-        data = [...new Set(data)];
         const onClick = e => {
             if ((optionBox.current && !optionBox.current.contains(e.target))
                 &&

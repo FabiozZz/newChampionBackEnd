@@ -18,7 +18,7 @@
 .inputWrapper {
   color: #BFC5D2;
   background: #F4F6FC;
-  box-sizing: border-box;
+  box-sizing: content-box;
   border-radius: 5px;
   border: 1px solid #BFC5D2;
   position: relative;
@@ -45,7 +45,7 @@
   position: relative;
 }
 .after .separator{
-  height: 1px;
+  height: 2px;
   width: 10px;
   position: absolute;
   top: 50%;

@@ -3,6 +3,7 @@ import classes from "../../../add.module.css";
 import {OtherInput} from "../../../../../utils/OtherInput/OtherInput";
 import {MaskInput} from "../../../../../utils/MaskInput/MaskInput";
 import {isEmpty} from "../../../../../helpers/common";
+import {MaskInputTel} from "../../../../../utils/MaskInputTel/MaskInputTel";
 
 /**
  * компонент визуализация ввода данных
@@ -27,7 +28,7 @@ export const AddParent = ({data,change,index,passport=false}) => {
             middle_name: data.middle_name||'',
             who: data.who||'',
             phone_number: data.phone_number||'',
-            passport: {...data.passport}
+            // passport: {...data.passport}
         };
     }else{
         initialState = {
@@ -45,10 +46,10 @@ export const AddParent = ({data,change,index,passport=false}) => {
         // Object.assign(data,userDate);
     }
 
-    const changeInputsPassport = (e) =>{
-        setUserDate(prevState => ({...prevState, passport: {...prevState.passport,[e.target.name]:e.target.value}}));
-        // Object.assign(data,userDate);
-    }
+    // const changeInputsPassport = (e) =>{
+    //     setUserDate(prevState => ({...prevState, passport: {...prevState.passport,[e.target.name]:e.target.value}}));
+    //     // Object.assign(data,userDate);
+    // }
 
     /**
      * эффект отрабатывает один раз при отрисовке компонента,
@@ -83,7 +84,7 @@ export const AddParent = ({data,change,index,passport=false}) => {
                 <OtherInput value={data.who} setValue={changeInputs} name={'who'} label={'кем приходитесь ребёнку'} required={true}/>
             </div>
             <div className={classes.phone_number_parent}>
-                <MaskInput name={'phone_number'} value={data.phone_number} mask={'+7 (999) 999-99-99'} setValue={changeInputs} required={true} label={'номер телефона'}/>
+                <MaskInputTel name={'phone_number'} value={data.phone_number} setValue={changeInputs} required={true} label={'номер телефона'}/>
             </div>
             {/* {passport&&
                 <>

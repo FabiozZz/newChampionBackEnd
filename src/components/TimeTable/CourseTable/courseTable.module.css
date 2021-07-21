@@ -4,8 +4,12 @@
   grid-template-rows: repeat(5, min-content);
   grid-column-gap: 24px;
   grid-auto-flow: column;
-  padding-right: 40px;
-  margin: 40px 18px 20px 0;
+  /*padding-right: 40px;*/
+  margin: 40px 18px auto 0;
+}
+.table_wrapper:after{
+  content: "";
+  width: 10px;
 }
 .infoBlock {
   display: grid;

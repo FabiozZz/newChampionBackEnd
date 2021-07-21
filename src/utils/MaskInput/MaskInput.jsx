@@ -27,11 +27,12 @@ import PropTypes from "prop-types";
  * @returns {JSX.Element}
  * @constructor
  */
-export const MaskInput = ({style,label,name,required,disabled,className,placeholder,value,setValue,mask}) => {
+export const MaskInput = ({style,label,name,required,disabled,className,placeholder,value,setValue,mask,permanents=[]}) => {
     return (
         <div style={style} className={`${classes.otherInputWrapper} ${className}`}>
             {label&&<label>{label}</label>}
             <InputMask name={name}
+                       permanents={permanents}
                        required={required}
                        disabled={disabled}
                        value={value}

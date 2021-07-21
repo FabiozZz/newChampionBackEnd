@@ -9,11 +9,12 @@ import {SelectAbonement} from "../SelectAbonement";
 import { MaskInput } from "../../../../../utils/MaskInput/MaskInput";
 import { Counter } from "../../../../../utils/Counter/Counter";
 import { SelectStatus } from "../SelectStatus/SelectStatus";
-import { SelectCouch } from "../../../../TimeTable/FilterSection/SelectCouch/SelectCouch";
-import { SelectGroup } from "../../../../TimeTable/FilterSection/SelectGroup/SelectGroup";
 import { declOfLessonsNum, declOfWeekNum } from '../../../../../helpers/common';
 import Api from '../../../../../Api/Api';
 import axios from 'axios';
+import {SelectParent} from "../SelectParent/SelectParent";
+import {SelectCouch} from "./SelectCouch/SelectCouch";
+import {SelectGroup} from "./SelectGroup/SelectGroup";
 
 
 export const AddAboniment = ({profile}) => {
@@ -22,19 +23,22 @@ export const AddAboniment = ({profile}) => {
     const {couch, group, status, typeAboniment, user} = profile;
 
     const [selectAboniment, setAboniment] = useState({
-        id:null,
+        id: null,
         name: ''
     });
+    console.log(profile)
     const handleChangeAboniment = (item) => {
-        setAboniment(prevState => ({...prevState,...item}))
+        setAboniment(prevState => ({...prevState, ...item}))
     };
 
     const [selectCouch, setCouch] = useState({
         id: null,
-        name:''
+        first_name: '',
+        last_name: '',
+        middle_name: '',
     });
     const handleChangeCouch = (obj) => {
-        setCouch(prevState => ({...prevState,...obj}));
+        setCouch(prevState => ({...prevState, ...obj}));
     };
 
     const [selectGroup, setGroup] = useState({
@@ -42,7 +46,7 @@ export const AddAboniment = ({profile}) => {
         name: ''
     });
     const handleChangeGroup = (obj) => {
-        setGroup(prevState => ({...prevState,...obj}));
+        setGroup(prevState => ({...prevState, ...obj}));
     };
 
     const [selectStatus, setStatus] = useState({
@@ -50,7 +54,7 @@ export const AddAboniment = ({profile}) => {
         name: ''
     });
     const handleChangeStatus = (obj) => {
-        setStatus(prevState => ({...prevState,...obj}))
+        setStatus(prevState => ({...prevState, ...obj}))
     };
 
     const [card, setCard] = useState('');
@@ -71,6 +75,15 @@ export const AddAboniment = ({profile}) => {
         setCount(countCard <= 1 ? 1 : countCard - 1)
     };
 
+    const [selectParent, setParent] = useState({
+        first_name: '',
+        last_name: '',
+        middle_name: '',
+    });
+    const handleChangeParentData = (obj) => {
+        setParent({...obj});
+    }
+
     const [passport, setPassport] = useState({
         number: '',
         serial: ''
@@ -79,26 +92,26 @@ export const AddAboniment = ({profile}) => {
         setPassport(prevState => ({...prevState, [e.target.name]: e.target.value}))
     };
 
-    const [price, setPrice] = useState(0)
+    const [price, setPrice] = useState(Number(selectAboniment.price))
 
     const [editPrice, setEditPrice] = useState({
-        price: price,
+        price: 0,
         edit: false
     });
     const handleChangePriceAbonement = (e) => {
-        setPrice(Number(e.target.value));
+        setEditPrice(prevState => ({...prevState,price:Number(e.target.value)}));
     };
     const toggleEdit = () => {
         setEditPrice(prevState => ({...prevState, edit: !prevState.edit}));
     };
 
+
     useEffect(() => {
+        setEditPrice(prevState => ({...prevState,price:Number(selectAboniment.price)}));
         let source = axios.CancelToken.source();
         (async () => {
             if (selectAboniment.id && selectStatus.id) {
-                await Api.getPriceList(source.token, selectAboniment.id, selectStatus.id).then(r => {
-                    setPrice(r)
-                });
+
             }
         })();
         return () => source.cancel();
@@ -114,120 +127,121 @@ export const AddAboniment = ({profile}) => {
     return (
         <>
             <div className={classes.add_aboniment}>
-                <div className={`${classes.aboniment}`}>
-                    <div>
-                        <OtherInput value={card} setValue={handleChangeNumCard} label={'номер карты'}/>
-                    </div>
-                    <div>
-                        <SelectAbonement value={selectAboniment.name} setValue={handleChangeAboniment}
-                                         data={typeAboniment}
-                                         label={'тип абонимента'}/>
-                    </div>
-                    <div>
-                        <SelectStatus value={selectStatus.name} setValue={handleChangeStatus} data={status}
-                                      label={'статус'}/>
-                    </div>
-                    <div>
-                        <Counter value={countCard}
-                                 decrement={handleDecrementCount}
-                                 increment={handleIncrementCount}
-                                 setValue={handleChangeCountCard}
-                                 label={'количество'}/>
-                    </div>
+                <div className={classes.card_number}>
+                    <OtherInput value={card} setValue={handleChangeNumCard} label={'номер карты'}/>
                 </div>
-
+                <div className={classes.aboniment}>
+                    <SelectAbonement value={selectAboniment.name} setValue={handleChangeAboniment}
+                                     data={typeAboniment}
+                                     label={'тип абонимента'}/>
+                </div>
+                <div className={classes.status}>
+                    <SelectStatus value={selectStatus.name} setValue={handleChangeStatus} data={status}
+                                  label={'статус'}/>
+                </div>
+                <div className={classes.counter}>
+                    <Counter value={countCard}
+                             decrement={handleDecrementCount}
+                             increment={handleIncrementCount}
+                             setValue={handleChangeCountCard}
+                             label={'количество'}/>
+                </div>
                 {
-                    selectAboniment.id <= 4 && selectAboniment.id !== null ?
+                    selectAboniment.is_personal === 0 ?
 
                         <div className={`${classes.group}`}>
-                            <SelectGroup label={'группа'} data={group} value={selectGroup.name}
+                            <SelectGroup label={'группа'} data={group} value={selectGroup}
                                          setValue={handleChangeGroup}/>
                         </div>
 
+                        : selectAboniment.is_personal === 1 ?
+                        <div className={`${classes.group}`}>
+                            <SelectCouch data={couch} value={selectCouch} setValue={handleChangeCouch}
+                                         label={'тренер'}/>
+                        </div>
                         :
-                        selectAboniment.id > 4 && selectAboniment.id < 8 && selectAboniment.id !== null ?
-                            <div className={`${classes.group}`}>
-                                <SelectCouch data={couch} value={selectCouch.name} setValue={handleChangeCouch}
-                                             label={'тренер'}/>
-                            </div>
-                            :
-                            null
+                        null
                 }
-                <div className={`${profile.user.is_Adult ? classes.pass_adult : classes.pass}`}>
 
-                    {user.is_Adult ?
-                        <>
-                            <div>
-                                <MaskInput setValue={handleChangePass} name={'serial'} value={passport.serial}
-                                           mask={'9999'}
-                                           label={'паспорт'} placeholder={'Серия'}/>
-                            </div>
-                            <div>
-                                <MaskInput value={passport.number} setValue={handleChangePass} name={'number'}
-                                           mask={'999999999'} placeholder={'Номер'}/>
-                            </div>
-                        </>
-                        :
-                        <>
-                            <div>
-                                <OtherInput label={'предствитель ребенка'}/>
-                            </div>
-                            <div>
-                                <OtherInput label={'паспорт родителя'} placeholder={'Серия'}/>
-                            </div>
-                            <div>
-                                <OtherInput placeholder={'Номер'}/>
-                            </div>
-                        </>
-
-                    }
-                </div>
-                {selectAboniment.name !== '' && selectStatus.name !== '' ?
+                {user.is_adult ?
                     <>
-                        <div className={`${classes.sale}`}>
-                            <div>
-                                <OtherInput label={'скидка'}/>
-                            </div>
+                        <div className={classes.adult_serial}>
+                            <MaskInput setValue={handleChangePass} name={'serial'} value={passport.serial}
+                                       mask={'9999'}
+                                       label={'паспорт'} placeholder={'Серия'}/>
                         </div>
-                        <div className={`${classes.sale_count}`}>
-                        <span className={`${classes.sale_count_text}`}>{selectAboniment.lessons > 20 ? <span
-                            dangerouslySetInnerHTML={{__html: '&#8734;'}}/> : selectAboniment.lessons} {declOfLessonsNum(selectAboniment.lessons)}</span>
-                            <span className={`${classes.sale_count_text}`}>{selectAboniment.week > 8 ? <span
-                                dangerouslySetInnerHTML={{__html: '&#8734;'}}/> : selectAboniment.week} {declOfWeekNum(selectAboniment.week)}</span>
-                            <img className={classes.sale_count_img} src={devider} alt="devider"/>
+                        <div className={classes.adult_number}>
+                            <MaskInput value={passport.number} setValue={handleChangePass} name={'number'}
+                                       mask={'999999999'} placeholder={'Номер'}/>
+                        </div>
+                    </>
+                    :
+                    <>
+                        <div className={classes.parent_select}>
+                            <SelectParent value={selectParent} setValue={handleChangeParentData} data={user.parents}
+                                          label={'предствитель ребенка'}/>
+                        </div>
+                        <div className={classes.parent_serial}>
+                            <OtherInput label={'паспорт родителя'} placeholder={'Серия'}/>
+                        </div>
+                        <div className={classes.parent_number}>
+                            <OtherInput placeholder={'Номер'}/>
+                        </div>
+                    </>
 
-                            {
-                                editPrice.edit ?
-                                    <div onClick={toggleEdit} className={classes.edit_block}>
-                                    <input autoFocus
-                                           className={classes.edit_price}
-                                           style={{width:((String(price).length*10)+'px')}}
-                                           value={price}
-                                           onChange={handleChangePriceAbonement}
-                                           type="number"/>
-                                        <span className={classes.edit_block_text}>&#8381;</span>
-                                        <img className={classes.img_edit} src={success_edit} alt="edit"/>
-                                    </div>
-                                    :
-                                    <div onClick={toggleEdit} className={classes.edit_block}>
-                                    <span className={`${classes.edit_block_text}`}>{price * countCard}
-                                        &#8381;</span>
-                                        <img className={classes.img_edit} src={edit} alt="edit"/>
-                                    </div>
-
-                            }
-                        </div>
-                        <div className={`${classes.success}`}>
-                            <Button text={'применить'} factor={"success"}/>
-                        </div>
-                    </> :
-                    null
                 }
             </div>
+
+            {selectAboniment.name !== '' && selectStatus.name !== '' ?
+                <>
+                    <h3 className={classes.block_info__title_aboniment}>{selectAboniment.name} для {selectStatus.name.replace(/[а-я]{2}$/gi, 'ых')} клиентов</h3>
+                    <div className={classes.add_aboniment}>
+
+                        <div className={classes.sales_card}>
+                            <div className={classes.procent}>
+                                <OtherInput label={'скидка'}/>
+                            </div>
+                            <div className={`${classes.sale_count}`}>
+                            <span className={`${classes.sale_count_text}`}>{selectAboniment.train_quantity > 20 ? <span
+                                dangerouslySetInnerHTML={{__html: '&#8734;'}}/> : selectAboniment.train_quantity} {declOfLessonsNum(selectAboniment.train_quantity)}</span>
+                                <span className={`${classes.sale_count_text}`}>{(selectAboniment.days_duration / 7) > 8 ? <span
+                                    dangerouslySetInnerHTML={{__html: '&#8734;'}}/> : (selectAboniment.days_duration / 7)} {declOfWeekNum((selectAboniment.days_duration / 7))}</span>
+                                <img className={classes.sale_count_img} src={devider} alt="devider"/>
+
+                                {
+                                    editPrice.edit ?
+                                        <div onClick={toggleEdit} className={classes.edit_block}>
+                                        <input autoFocus
+                                               className={classes.edit_price}
+                                               style={{width:((String(editPrice.price).length*10)+'px')}}
+                                               value={editPrice.price}
+                                               onChange={handleChangePriceAbonement}
+                                               type="number"/>
+                                            <span className={classes.edit_block_text}>&#8381;</span>
+                                            <img className={classes.img_edit} src={success_edit} alt="edit"/>
+                                        </div>
+                                        :
+                                        <div onClick={toggleEdit} className={classes.edit_block}>
+                                        <span className={`${classes.edit_block_text}`}>{editPrice.price * countCard}
+                                            &#8381;</span>
+                                            <img className={classes.img_edit} src={edit} alt="edit"/>
+                                        </div>
+
+                                }
+                            </div>
+                            <div className={`${classes.success}`}>
+                                <Button text={'применить'} factor={"success"}/>
+                            </div>
+                        </div>
+                    </div>
+                </>
+                :
+                null
+
+            }
             {/*<input className={classes.sale_count__input}*/}
             {/*       type={'number'} size={editPrice.price.length}*/}
             {/*       value={editPrice.price} onChange={handleChangePriceAbonement}/>*/}
-
         </>
     );
 };

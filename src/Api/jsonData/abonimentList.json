@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "name": "Стандарт",
+    "train_quantity": 12,
+    "days_duration": 28,
+    "is_personal": 0,
+    "price": "3900.00"
+  },
+  {
+    "id": 2,
+    "name": "SMART",
+    "train_quantity": 12,
+    "days_duration": 56,
+    "is_personal": 0,
+    "price": "4700.00"
+  },
+  {
+    "id": 3,
+    "name": "NONSTOP",
+    "train_quantity": 9999,
+    "days_duration": 28,
+    "is_personal": 0,
+    "price": "5500.00"
+  },
+  {
+    "id": 4,
+    "name": "MINI",
+    "train_quantity": 8,
+    "days_duration": 28,
+    "is_personal": 0,
+    "price": "3200.00"
+  },
+  {
+    "id": 5,
+    "name": "GOLD",
+    "train_quantity": 5,
+    "days_duration": 9999,
+    "is_personal": 1,
+    "price": "5800.00"
+  },
+  {
+    "id": 6,
+    "name": "PLATINUM",
+    "train_quantity": 11,
+    "days_duration": 9999,
+    "is_personal": 1,
+    "price": "12000.00"
+  },
+  {
+    "id": 7,
+    "name": "SUPER PLATINUM",
+    "train_quantity": 20,
+    "days_duration": 9999,
+    "is_personal": 1,
+    "price": "21000.00"
+  },
+  {
+    "id": 8,
+    "name": "PROFI",
+    "train_quantity": 9999,
+    "days_duration": 28,
+    "is_personal": 2,
+    "price": "2200.00"
+  }
+]

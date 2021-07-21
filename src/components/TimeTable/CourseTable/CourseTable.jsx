@@ -21,7 +21,6 @@ export const CourseTable = ({ data }) => {
      * @type {[]|*}
      */
     const couchList = useSelector(state => state.timeTable.filterSection.couch);
-    console.log('%ccouchList: ', 'color: MidnightBlue; background: Aquamarine;', couchList);
 
     const dispatch = useDispatch();
 
@@ -92,7 +91,7 @@ export const CourseTable = ({ data }) => {
         })
         return (
             <div className={classes.table_wrapper}>
-                {[renderListGroup, renderListGroup]}
+                {renderListGroup}
             </div>
         )
     } else {

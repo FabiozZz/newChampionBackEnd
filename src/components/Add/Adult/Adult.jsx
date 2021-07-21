@@ -56,7 +56,7 @@ export const Adult = () => {
     });
     /**
      * прослушивание события ввода данных для Address
-      * @param e
+     * @param e
      */
     const handleChangeAddressComponent = (e) => {
         let name = e.target.name;
@@ -84,7 +84,7 @@ export const Adult = () => {
      */
     const handleChangePersonalData = (e) => {
         let name = e.target.name;
-        setPersonalData(prevState => ({ ...prevState, [name]: e.target.value }));
+            setPersonalData(prevState => ({ ...prevState, [name]: e.target.value }));
     };
 
     const handleChangePersonalPass = (e) => {
@@ -197,7 +197,7 @@ export const Adult = () => {
         }
         // console.log(uploadData)
         await Api.postAddAdult(uploadData).then(r => {
-            
+
             console.log(r)
             if (r.status === 201) {
                 history.push(`/profile/${r.data.id}`)
@@ -227,9 +227,9 @@ export const Adult = () => {
                 {/* блок личной информации */}
 
                 <PersonalData data={personalData}
-                    changePass={handleChangePersonalPass}
-                    changeData={handleDataPickerPersonal}
-                    change={handleChangePersonalData} />
+                              changePass={handleChangePersonalPass}
+                              changeData={handleDataPickerPersonal}
+                              change={handleChangePersonalData} />
 
                 {/* блок адреса проживания */}
 
@@ -242,9 +242,9 @@ export const Adult = () => {
                 {/* блок с чекбоксами */}
 
                 <Rules rules={rules}
-                    setRules={handleToggleRules}
-                    personal={personal}
-                    setPersonal={handleTogglePersonal} />
+                       setRules={handleToggleRules}
+                       personal={personal}
+                       setPersonal={handleTogglePersonal} />
 
                 {/* блок с кнопками подтверждения или отмены */}
 
