@@ -18,9 +18,17 @@ import {
     load_profile_group,
     load_profile_status
 } from "../../../../Acnions/profileActions";
+import {isEmpty} from "../../../../helpers/common";
+import {SuccessContext} from "../../SuccessContext";
+import {SuccessAdd} from "./SuccessAdd/SuccessAdd";
 
 export const ProfileInfo = ({profile}) => {
     const {user} = profile
+    const [success, setSuccess]  = useState(false);
+    const handleChangeSuccess = () => {
+        setSuccess(!success);
+    };
+
     const [age, setAge] = useState('');
     const [whatsApp, setWhatsApp] = useState(false);
 
@@ -49,7 +57,7 @@ export const ProfileInfo = ({profile}) => {
     }
     useEffect(() => {
         let dateNow = moment();
-        let dateBirth = moment(user.date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g, '$3-$2-$1'));
+        let dateBirth = moment(user.date_of_birth);
         let mathAge = Math.floor(dateNow.diff(dateBirth, 'year'));
         mathAge += (mathAge % 100 < 21 || mathAge % 10 < 1 || (mathAge % 10 > 4 && mathAge % 10 <= 9) || mathAge % 10 === 0) ? ' лет' :
             mathAge % 10 === 1 ? ' год' : ' года';
@@ -67,36 +75,42 @@ export const ProfileInfo = ({profile}) => {
             }
             {/* {!user.is_Archive && */}
             <div className={classes.block_info}>
-
-                <div className={classes.block_info__header}>
-
-                    {user.club_card.level === null ?
-
-                        <>
-                            <div className={classes.block_info__title_wrapper}>
-                                <img src={addCard} alt="add"/>
-                                <h3 className={classes.block_info__title_wr_text}>Абонемент</h3>
-                            </div>
-                        </>
-
+                <SuccessContext.Provider value={{success, handleChangeSuccess,profile}}>
+                    {success?
+                        <SuccessAdd />
                         :
-
                         <>
-                            <h3 className={classes.block_info__title}>Абонемент</h3>
-                            <img onClick={showModal} className={classes.block_info__header_img} src={edit_profile}
-                                 alt="edit_profile"/>
+                            <div className={classes.block_info__header}>
+
+                                {user.club_card.level === null ?
+
+                                    <>
+                                        <div className={classes.block_info__title_wrapper}>
+                                            <img src={addCard} alt="add"/>
+                                            <h3 className={classes.block_info__title_wr_text}>Абонемент</h3>
+                                        </div>
+                                    </>
+
+                                    :
+
+                                    <>
+                                        <h3 className={classes.block_info__title}>Абонемент</h3>
+                                        <img onClick={showModal} className={classes.block_info__header_img} src={edit_profile}
+                                             alt="edit_profile"/>
+                                    </>
+
+                                }
+                            </div>
+                            {isEmpty(user.club_card.level) ?
+
+                                <AddAboniment profile={profile}/>
+                                :
+                                <AbonimentInfo user={user} whatsApp={whatsApp} handleToggleWhatsApp={handleToggleWhatsApp}/>
+                            }
                         </>
-
                     }
-                </div>
-                {user.club_card.level === null ?
 
-                    <AddAboniment profile={profile}/>
-                    :
-                    <AbonimentInfo user={user} whatsApp={whatsApp} handleToggleWhatsApp={handleToggleWhatsApp}/>
-                }
-
-
+                </SuccessContext.Provider>
             </div>
 
             {/* } */}
@@ -123,7 +137,8 @@ export const ProfileInfo = ({profile}) => {
                     <span className={classes.block_info__item_label__text}>{user.middle_name}</span>
 
                     <p className={classes.block_info__item_label}>Дата рождения:</p>
-                    <span className={classes.block_info__item_label__text}>{moment(user.date_of_birth).format('DD.MM.YYYY')} ({age})</span>
+                    <span
+                        className={classes.block_info__item_label__text}>{moment(user.date_of_birth).format('DD.MM.YYYY')} ({age})</span>
 
                     {user.is_adult &&
                     <>

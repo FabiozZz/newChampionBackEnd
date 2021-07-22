@@ -114,3 +114,11 @@ export default function phoneMask() {
         phoneInput.addEventListener('paste', onPhonePaste, false);
     }
 }
+
+export const isBirthDay = (date) => {
+    let dateFinish = moment();
+    let dateStart = moment().subtract(3, 'd').format('YYYY-MM-DD');
+    let birthData = moment(date).format(`${dateFinish.format('YYYY')}-MM-DD`);
+    return moment(birthData).isBetween(dateStart,dateFinish.format('YYYY-MM-DD'),undefined,'[]');
+
+};

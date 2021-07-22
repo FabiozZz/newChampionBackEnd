@@ -12,6 +12,8 @@ import Api from "../../Api/Api";
 import healthSVG from '../../assets/images/health.svg';
 import { CustomTooltip } from "../CustomTooltip/CustomTooltip";
 import cn from 'classnames';
+import {isBirthDay} from "../../helpers/common";
+import moment from "moment";
 
 /**
  * компонент для отображения клиента
@@ -102,12 +104,12 @@ export const CardUser = ({ img, abonimentName, cardStatusName, cardFrom, cardTo,
 
                 } */}
 
-                {/* <div className={classes.notifications}>
-                    {birthDay &&
+                <div className={classes.notifications}>
+                    {isBirthDay(birthDayDate) &&
                         <CustomTooltip placement={'top'} color={'dark'} title={()=>(
-                            <div className={classes.cardUser__tooltip_text_wrapper}>
-                                <p className={classes.cardUser__tooltip_text_wrapper__text_center}>День рождения</p>
-                                <p className={`${classes.cardUser__tooltip_text_wrapper__text_center} ${classes.cardUser__tooltip_text_wrapper__text_center__date}`}>{birthDayDate}</p>
+                            <div className={classes.tootip_wrapper}>
+                                <p className={classes.tooltip_title}>День рождения</p>
+                                <p className={classes.tooltip_title}><b>{moment(birthDayDate).format('DD.MM.YYYY')}</b></p>
                             </div>)}>
                             <img width={20} height={20} src={gift} alt="gift"/>
                         </CustomTooltip>
@@ -115,7 +117,7 @@ export const CardUser = ({ img, abonimentName, cardStatusName, cardFrom, cardTo,
                     {call &&
                             <img width={23} height={20} src={phone} title={'Нужно позвонить'} alt="звонок"/>
                     }
-                </div> */}
+                </div>
                 {/* {health &&
                 <div className={classes.health}>
                     <img src={healthSVG} title='Необходима справка' alt="справка"/>

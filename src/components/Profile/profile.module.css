@@ -72,7 +72,7 @@
 }
 .block_info__item {
   display: grid;
-  grid-template-columns: 3fr 9fr;
+  grid-template-columns: 4fr 9fr;
   position: relative;
 }
 .block_info__info_card {

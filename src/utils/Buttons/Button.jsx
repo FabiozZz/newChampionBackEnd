@@ -27,12 +27,12 @@ import classes from './button.module.css';
  * @returns {JSX.Element}
  * @constructor
  */
-export const Button = ({className,name,size,factor, text,style,click, type='button',disabled}) => {
+export const Button = ({className,name,size,factor, text,style,click, type='button',disabled,...props}) => {
 
     /**
      * проверка введенного значения и подстановка соответствующего класса
      */
-    let sizeUser = size === 'default' ? classes.defaultSizeButton : size === 'small' ? classes.smallSizeButton : size === 'auto'? classes.autoSizeButton : classes.defaultSizeButton;
+    let sizeUser = size === 'default' ? classes.defaultSizeButton : size === 'small' ? classes.smallSizeButton : size === 'auto'? classes.autoSizeButton :size === 'min'? classes.minSizeButton :classes.defaultSizeButton;
 
     /**
      * проверка введенного форм-фактора и в зависимости от выбранного применяет стили
@@ -42,7 +42,7 @@ export const Button = ({className,name,size,factor, text,style,click, type='butt
             factor === 'dark' ? classes.dark : classes.default;
 
     return (
-        <button name={name} disabled={disabled} type={type} className={`${sizeUser} ${classes.btnApp} ${className} ${factorUser}`} onClick={click} style={style}>{text}</button>
+        <button name={name} disabled={disabled} type={type} className={`${sizeUser} ${classes.btnApp} ${className} ${factorUser}`} onClick={click} style={style}>{text?text:props.children}</button>
     );
 };
 
@@ -57,11 +57,11 @@ Button.defaultProps = {
 
 Button.propTypes = {
     name: PropTypes.string,
-    size: PropTypes.oneOf(['default','small','auto']),
+    size: PropTypes.oneOf(['default','small','auto','min']),
     factor: PropTypes.oneOf(['success','danger','default','dark']),
     style: PropTypes.object,
     disabled: PropTypes.bool,
     type: PropTypes.oneOf(['button', 'submit']),
     click: PropTypes.func,
-    text: PropTypes.string.isRequired
+    text: PropTypes.string
 }

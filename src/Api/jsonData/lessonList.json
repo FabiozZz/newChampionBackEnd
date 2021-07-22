@@ -1,4 +1,5 @@
 [
+
   {
     "id": 2,
     "trainings": [
@@ -27,6 +28,7 @@
           "email": "",
           "is_adult": true
         },
+        "call": true,
         "is_visited": false,
         "lesson": 2
       },
@@ -55,6 +57,7 @@
           "email": "",
           "is_adult": true
         },
+        "call": false,
         "is_visited": false,
         "lesson": 2
       }
@@ -72,6 +75,8 @@
     },
     "date": "2021-07-18T18:30:00+03:00"
   },
+
+
   {
     "id": 4,
     "trainings": [
@@ -100,6 +105,7 @@
           "email": "",
           "is_adult": true
         },
+        "call": false,
         "is_visited": false,
         "lesson": 4
       },
@@ -128,6 +134,7 @@
           "email": "",
           "is_adult": true
         },
+        "call": false,
         "is_visited": false,
         "lesson": 4
       }
@@ -145,6 +152,7 @@
     },
     "date": "2021-07-18T16:30:00+03:00"
   },
+
   {
     "id": 5,
     "trainings": [
@@ -173,6 +181,7 @@
           "email": "",
           "is_adult": true
         },
+        "call": true,
         "is_visited": false,
         "lesson": 5
       },
@@ -201,6 +210,7 @@
           "email": "",
           "is_adult": true
         },
+        "call": false,
         "is_visited": false,
         "lesson": 5
       }
@@ -261,6 +271,7 @@
           "email": "",
           "is_adult": false
         },
+        "call": false,
         "is_visited": false,
         "lesson": 6
       },
@@ -289,6 +300,7 @@
           "email": "",
           "is_adult": true
         },
+        "call": false,
         "is_visited": false,
         "lesson": 6
       }
@@ -334,6 +346,7 @@
           "email": "",
           "is_adult": true
         },
+        "call": false,
         "is_visited": false,
         "lesson": 7
       },
@@ -355,13 +368,14 @@
           "first_name": "Иван",
           "middle_name": "Олегович",
           "last_name": "ДербенченкоBS",
-          "date_of_birth": "1989-10-21",
+          "date_of_birth": "1989-07-22",
           "address": "ул.Героя Яцкова д.16 кор.5 кв.18",
           "in_archive": false,
           "phone_number": "89996569885",
           "email": "",
           "is_adult": true
         },
+        "call": false,
         "is_visited": false,
         "lesson": 7
       }
@@ -415,6 +429,7 @@
           "email": "",
           "is_adult": false
         },
+        "call": false,
         "is_visited": false,
         "lesson": 8
       },
@@ -458,6 +473,7 @@
           "email": "",
           "is_adult": false
         },
+        "call": false,
         "is_visited": false,
         "lesson": 8
       },
@@ -501,6 +517,7 @@
           "email": "",
           "is_adult": false
         },
+        "call": true,
         "is_visited": false,
         "lesson": 8
       },
@@ -529,6 +546,7 @@
           "email": "",
           "is_adult": true
         },
+        "call": false,
         "is_visited": false,
         "lesson": 8
       }
@@ -574,6 +592,7 @@
           "email": "",
           "is_adult": true
         },
+        "call": false,
         "is_visited": false,
         "lesson": 3
       },
@@ -617,6 +636,7 @@
           "email": "",
           "is_adult": false
         },
+        "call": false,
         "is_visited": false,
         "lesson": 3
       }
@@ -677,6 +697,7 @@
           "email": "",
           "is_adult": false
         },
+        "call": false,
         "is_visited": false,
         "lesson": 1
       },
@@ -713,6 +734,7 @@
           "email": "",
           "is_adult": false
         },
+        "call": false,
         "is_visited": false,
         "lesson": 1
       }

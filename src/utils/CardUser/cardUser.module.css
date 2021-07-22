@@ -40,6 +40,18 @@
   bottom: -4px;
   grid-area: notification;
 }
+.tootip_wrapper{
+  margin: 6px 0;
+}
+.tooltip_title {
+  font-family: 'SF Pro Display', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: #FFFFFF;
+  text-align: center;
+}
 .notifications img {
   margin-right: 8px;
 }
@@ -140,7 +152,7 @@
   width: 20px;
   height: 20px;
   /* margin: 8px; */
-  border: 3px solid rgb(88, 89, 90);
+  /*border: 3px solid rgb(88, 89, 90);*/
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: rgb(70, 70, 70) transparent transparent transparent;

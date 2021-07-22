@@ -56,6 +56,7 @@ mock.onGet(conAx.baseURL + "/subscription/cardLevel/").reply(200, [...statuses])
 mock.onPut(conAx.baseURL + "/couch_change").reply(200, { success: "ok" });
 mock.onPut(/http:\/\/127\.0\.0\.1:8000\/api\/v1\/schedule\/train\/\d+\//).reply(200);
 mock.onGet(/http:\/\/127\.0\.0\.1:8000\/api\/v1\/client\/\d+\//).reply(200,[...clients]);
+mock.onPut(/http:\/\/127\.0\.0\.1:8000\/api\/v1\/client\/\d+\//).reply(200);
 
 mock.onGet(conAx.baseURL + "/filial_list").reply(200, /*[.../!*filialList*!/]*/);
 
@@ -274,9 +275,11 @@ class Api {
     return await this.client.get(`/client/${id}/`).then(r => {
       return r.data.find(client => Number(client.id)===Number(id));
     });
-
   }
   async editProfile(id,data){
+    return await this.client.put(`/client/${id}/`,{...data});
+  }
+  async editProfileAbonement(id,data){
     return await this.client.put(`/client/${id}/`,{...data});
   }
 

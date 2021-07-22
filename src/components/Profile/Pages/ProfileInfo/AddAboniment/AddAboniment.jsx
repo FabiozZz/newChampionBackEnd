@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { OtherInput } from "../../../../../utils/OtherInput/OtherInput";
 import classes from '../../../profile.module.css';
 import devider from '../../../../../assets/images/deviderParent.svg'
@@ -15,10 +15,17 @@ import axios from 'axios';
 import {SelectParent} from "../SelectParent/SelectParent";
 import {SelectCouch} from "./SelectCouch/SelectCouch";
 import {SelectGroup} from "./SelectGroup/SelectGroup";
+import moment from "moment";
+import {useDispatch} from "react-redux";
+import {upload_profile_club_card} from "../../../../../Acnions/profileActions";
+import {SuccessContext} from "../../../SuccessContext";
 
 
 export const AddAboniment = ({profile}) => {
 
+    const {handleChangeSuccess} = useContext(SuccessContext);
+
+    const dispatch = useDispatch();
 
     const {couch, group, status, typeAboniment, user} = profile;
 
@@ -26,7 +33,6 @@ export const AddAboniment = ({profile}) => {
         id: null,
         name: ''
     });
-    console.log(profile)
     const handleChangeAboniment = (item) => {
         setAboniment(prevState => ({...prevState, ...item}))
     };
@@ -92,8 +98,6 @@ export const AddAboniment = ({profile}) => {
         setPassport(prevState => ({...prevState, [e.target.name]: e.target.value}))
     };
 
-    const [price, setPrice] = useState(Number(selectAboniment.price))
-
     const [editPrice, setEditPrice] = useState({
         price: 0,
         edit: false
@@ -108,22 +112,48 @@ export const AddAboniment = ({profile}) => {
 
     useEffect(() => {
         setEditPrice(prevState => ({...prevState,price:Number(selectAboniment.price)}));
-        let source = axios.CancelToken.source();
-        (async () => {
-            if (selectAboniment.id && selectStatus.id) {
+        // let source = axios.CancelToken.source();
+        // (async () => {
+        //     if (selectAboniment.id && selectStatus.id) {
+        //
+        //     }
+        // })();
+        // return () => source.cancel();
+    }, [selectAboniment.id, selectAboniment.price, selectStatus.id]);
 
+    const handleSubmitAboniment = async () => {
+        let dopData;
+        if (selectAboniment.is_personal === 0) {
+            dopData = {
+                train_group:selectGroup
             }
-        })();
-        return () => source.cancel();
-    }, [selectAboniment.id, selectStatus.id]);
+        }else if (selectAboniment.is_personal === 1) {
+            dopData = {
+                train_trainer: selectCouch
+            }
+        }else{
+            dopData = {
+                train_group:null,
+                train_trainer:null
+            };
+        }
+        let uploadData = {
+            club_card: {
+                train_balance: selectAboniment.train_quantity,
+                valid_from: moment().format('YYYY-MM-DD'),
+                valid_until: moment().add(selectAboniment.days_duration, 'd').format('YYYY-MM-DD'),
+                personal_discount: 0,
+                level: {...selectStatus},
+                rate: {...selectAboniment}
+            },
+            ...dopData
+        };
+        console.log(selectStatus)
+        await Api.editProfileAbonement(user.id, uploadData);
+        await dispatch(upload_profile_club_card(uploadData));
+        await handleChangeSuccess();
 
-    // const [width, setWidth] = useState(0);
-    //
-    // useEffect(() => {
-    //     if (refSpan.current) {
-    //         setWidth(refSpan.current.offsetWidth);
-    //     }
-    // }, [price]);
+    };
     return (
         <>
             <div className={classes.add_aboniment}>
@@ -230,7 +260,7 @@ export const AddAboniment = ({profile}) => {
                                 }
                             </div>
                             <div className={`${classes.success}`}>
-                                <Button text={'применить'} factor={"success"}/>
+                                <Button click={handleSubmitAboniment} text={'применить'} factor={"success"}/>
                             </div>
                         </div>
                     </div>

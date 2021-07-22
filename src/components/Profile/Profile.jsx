@@ -35,10 +35,12 @@ export const Profile = () => {
     useEffect(() => {
         let source = axios.CancelToken.source();
         (async () => {
-            await Api.getProfile(id).then(r => {
+
+            /*await Api.getProfile(id).then(r => {
                 // dispatch(load_profile_user(r.data))
                 dispatch(load_profile_user(r))
-            });
+            });*/
+
             // await Api.getAbonimentList(source.token).then(r => {
             //     dispatch(load_profile_aboniment(r.data))
             // });
@@ -56,7 +58,7 @@ export const Profile = () => {
             // });
         })().catch(e => error(e.message));
         return () => {
-            dispatch(clear_profile());
+            // dispatch(clear_profile());
             source.cancel('операция прервана');
         };
     }, [dispatch, id]);

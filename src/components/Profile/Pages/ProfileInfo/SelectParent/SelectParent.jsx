@@ -92,7 +92,7 @@ export const SelectParent = ({label, value, setValue, data, ...props}) => {
                         fill="#BFC5D2"/>
                 </svg>
                 <span/>
-                <input className={classes.input} value={`${value.last_name} ${value.first_name} ${value.middle_name}`} disabled={true} type="text"/>
+                <input className={classes.input} value={value.who} disabled={true} type="text"/>
                 {toggleOptionBox && <div className={classes.arrowOptionBox}/>}
             </div>
             {toggleOptionBox &&
@@ -100,7 +100,7 @@ export const SelectParent = ({label, value, setValue, data, ...props}) => {
                 {data.map(item => (<option key={item.id} onClick={() => {
                     setValue(item);
                     setToggleOptionBox(false);
-                }} className={classes.item}>{item.last_name} {item.first_name} {item.middle_name}</option>))}
+                }} className={classes.item}>{item.who}</option>))}
             </div>
             }
         </div>

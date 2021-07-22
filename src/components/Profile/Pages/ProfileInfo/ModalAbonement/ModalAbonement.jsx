@@ -15,17 +15,17 @@ export const ModalAbonement = ({ profile, modal, toggle }) => {
     const closeModal = () => {
         toggle(!modal)
     }
-    const [selectFilial, setSelectFilial] = useState(user.filial)
-    const handleChangeFilialForUser = (obj) => {
-        setSelectFilial(obj);
-    };
+    // const [selectFilial, setSelectFilial] = useState(user.filial)
+    // const handleChangeFilialForUser = (obj) => {
+    //     setSelectFilial(obj);
+    // };
 
-    const [selectAbonement, setSelectAbonement] = useState(user.abonement)
+    const [selectAbonement, setSelectAbonement] = useState(user.club_card.rate)
     const handleChangeAbonementForUser = (obj) => {
         setSelectAbonement(obj);
     };
 
-    const [selectStatus, setSelectStatus] = useState(user.statusName)
+    const [selectStatus, setSelectStatus] = useState(user.club_card.level)
     const handleChangeStatusForUser = (obj) => {
         setSelectStatus(obj);
     };
@@ -40,7 +40,7 @@ export const ModalAbonement = ({ profile, modal, toggle }) => {
             <div className={classes.block_form}>
                 <div className={classes.block_form__item}>
                     <OtherInput label={'перенести абонимент'} placeholder={'ФИО нового владельца'} />
-                    <SelectFilial value={selectFilial.name} setValue={handleChangeFilialForUser} label={'филиал'} data={profile.profile} />
+                    {/*<SelectFilial value={selectFilial.name} setValue={handleChangeFilialForUser} label={'филиал'} data={profile.profile} />*/}
                 </div>
                 <img width={500} src={separate} alt="separate" />
                 <div className={classes.block_form__item}>
@@ -50,8 +50,8 @@ export const ModalAbonement = ({ profile, modal, toggle }) => {
                 <div className={classes.block_form__cash}>
                     <span className={classes.block_form__cash__label}></span>
                     <div className={classes.block_form__cash__info}>
-                        <span>{user.abonement.lessons} {declOfLessonsNum(user.abonement.lessons)}</span>
-                        <span>{user.abonement.week>8?'U+267E':user.abonement.week} {declOfWeekNum(user.abonement.week)}</span>
+                        <span>{user.club_card.train_balance} {declOfLessonsNum(user.club_card.train_balance)}</span>
+                        <span>{(user.club_card.rate.days_duration/7)>8?<span dangerouslySetInnerHTML={{__html: '&#8734;'}}/>:(user.club_card.rate.days_duration / 7)} {declOfWeekNum(user.club_card.rate.days_duration)}</span>
                     </div>
                 </div>
                 {/* <img src={separate} alt="separate" />

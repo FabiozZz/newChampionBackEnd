@@ -6,7 +6,7 @@ import {
     LOAD_PROFILE_GROUP,
     LOAD_PROFILE_STATUS,
     LOAD_PROFILE_TYPE_ABONIMENT,
-    LOAD_PROFILE_USER
+    LOAD_PROFILE_USER, UPDATE_PROFILE_CLUB_CARD
 } from "../constants/profileConstant";
 
 export const load_profile_user = (profile) => ({type: LOAD_PROFILE_USER, profile});
@@ -17,3 +17,4 @@ export const load_profile_couch = (couch) => ({type: LOAD_PROFILE_COUCH, couch})
 export const load_profile_filial = (filial) => ({type: LOAD_PROFILE_FILIAL, filial});
 export const clear_profile = () => ({type: CLEAR_PROFILE});
 export const change_data_profile = (profile) => ({type: CHANGE_PROFILE,profile});
+export const upload_profile_club_card = (club_card) => ({type: UPDATE_PROFILE_CLUB_CARD,club_card});

@@ -68,10 +68,10 @@ export const CourseTable = ({ data }) => {
                                             name={train.client.first_name}
                                             surname={train.client.last_name}
                                             // expire={card.burnAbonement}
-                                            // call={card.call}
+                                            call={train.call}
                                             // health={card.health}
                                             toDay={train.is_visited}
-                                            // birthDay={train.card.birthday}
+                                            // birthDay={train.client.birth_of_day}
                                             birthDayDate={train.client.date_of_birth}
                                         // status={card.status}
                                         // course={card.course}
