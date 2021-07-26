@@ -4,7 +4,7 @@ import classes from './selectCouch.module.css';
 import {isEmpty} from "../../../../../../helpers/common";
 
 /**
- * компонент для визуальзации выпадающего списка <select>
+ * компонент для визуальзации выпадающего списка select
  *
  * @param label принимает строку, для отображения заголовка поля
  *

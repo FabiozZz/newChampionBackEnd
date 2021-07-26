@@ -82,7 +82,7 @@ export const Kid = () => {
 
     /**
      * константа из redux для отображения списка доступных групп
-     * @type {[]|*}
+     * @type {array}
      */
     const groupList = useSelector(state => state.addChild.groupList);
 

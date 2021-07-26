@@ -8,14 +8,11 @@ import close from '../../assets/images/close_modal.svg';
  * @param children - то что должна скрывать модалка
  * @returns JSX
  */
-export const Modal = ({hide,toggle,children}) => {
-    const onClick = ()=>{
-        toggle(!hide);
-    }
+export const Modal = ({toggle,children}) => {
     return (
         <div className={classes.back}>
             <div className={classes.wrapper}>
-                <img onClick={onClick} className={classes.close} src={close} alt="close"/>
+                <img onClick={toggle} className={classes.close} src={close} alt="close"/>
                 {children}
             </div>
         </div>

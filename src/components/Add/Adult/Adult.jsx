@@ -13,9 +13,8 @@ import { Redirect } from "../../common/Redirect";
 import classes from '../add.module.css'
 
 /**
- * компонент для добавления нового взрослого клиента
+ * @desc компонент для добавления нового взрослого клиента
  * @returns {JSX.Element}
- * @constructor
  */
 export const Adult = () => {
 
@@ -40,8 +39,8 @@ export const Adult = () => {
     // }, [dispatch]);
 
     /**
-     * константа из redux для отображения списка доступных групп
-     * @type {[]|*}
+     *
+     * @type {Array}
      */
     const groupList = useSelector(state => state.addAdult.groupList);
 

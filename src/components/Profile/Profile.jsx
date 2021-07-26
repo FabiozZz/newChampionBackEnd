@@ -41,18 +41,18 @@ export const Profile = () => {
                 dispatch(load_profile_user(r))
             });*/
 
-            // await Api.getAbonimentList(source.token).then(r => {
-            //     dispatch(load_profile_aboniment(r.data))
-            // });
-            // await Api.getStatusList(source.token).then(r => {
-            //     dispatch(load_profile_status(r.data))
-            // });
-            // await Api.getGroupList(source.token).then(r => {
-            //     dispatch(load_profile_group(r.data))
-            // });
-            // await Api.getCouchList(source.token).then(r => {
-            //     dispatch(load_profile_couch(r.data))
-            // });
+            await Api.getAbonimentList(source.token).then(r => {
+                dispatch(load_profile_aboniment(r.data))
+            });
+            await Api.getStatusList(source.token).then(r => {
+                dispatch(load_profile_status(r.data))
+            });
+            await Api.getGroupList(source.token).then(r => {
+                dispatch(load_profile_group(r.data))
+            });
+            await Api.getCouchList(source.token).then(r => {
+                dispatch(load_profile_couch(r.data))
+            });
             // await Api.getFilialList(source.token).then(r => {
             //     dispatch(load_profile_filial(r.data))
             // });

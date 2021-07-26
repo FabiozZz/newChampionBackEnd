@@ -1,0 +1,124 @@
+.wrapper {
+    display: grid;
+    grid-auto-flow: row;
+    padding: 32px 0 35px;
+    box-sizing: border-box;
+    position: relative
+}
+.wrapper__label {
+    padding-bottom: 16px;
+    padding-left: 24px;
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #8798AD;
+}
+.block_form{
+    padding: 16px 24px;
+    display: grid;
+    grid-template-columns:1fr;
+    grid-template-rows: min-content;
+    grid-gap: 16px;
+}
+.card_num{
+
+}
+.block_one{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.block_three{
+    display: grid;
+    grid-template-columns: 1fr 1fr min-content;
+    grid-gap: 24px;
+
+}
+
+
+.sale_count {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    grid-column: 1/13;
+    align-items: end;
+    display: grid;
+    grid-template-columns: max-content max-content 1fr;
+}
+.sale_count__input {
+    min-width: 0;
+    display: inline;
+}
+.sale_count img:last-child {
+    padding-left: 6px;
+}
+.sale_count_text {
+    font-family: "SF Pro Display", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #69707f;
+}
+.sale_count_text:first-child {
+    padding-right: 24px;
+}
+.sale_count_img{
+    margin-bottom: 4px;
+    min-width: 50px;
+    width: 100%;
+}
+.edit_price {
+    padding: 0;
+    margin: 0;
+    border: none;
+    font-family: "SF Pro Display", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #69707f;
+    border-bottom: 1px solid #69707f;
+}
+.edit_price:focus {
+    border-bottom: 1px solid #69707f;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    font-family: "SF Pro Display", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #69707f;
+}
+.edit_block {
+    display: flex;
+}
+.edit_block_text {
+    border-bottom: 1px solid #69707f;
+
+    font-family: "SF Pro Display", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #69707f;
+}
+.img_edit {
+    cursor: pointer;
+}
+.end_btn {
+    margin-top: 8px;
+    display: grid;
+    grid-template-columns: repeat(2,200px);
+    justify-content:center;
+    grid-gap: 11px;
+}
+.flex{
+    display: flex;
+    justify-content:space-between;
+    align-items:flex-end;
+}

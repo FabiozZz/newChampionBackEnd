@@ -3,46 +3,48 @@ import PropTypes from "prop-types";
 import classes from './type.module.css';
 
 /**
- * компонент для визуальзации выпадающего списка <select>
+ * @description компонент для визуальзации выпадающего списка select
  *
- * @param label принимает строку, для отображения заголовка поля
- *
- * @param simpleClass принимает строку, установка пользовательских классов для обертки + к существующем классвм
- *
- * @param style принимает объект стилей
- *
+ * @param {string} name имя поля инпута
+ * @param {string} label принимает строку, для отображения заголовка поля
+ * @param {string} value возвращаемое значение
+ * @param {function} setValue функция дял изменения значения value
+ * @param {array} data массив для выподающего списка
+ * @param {object} props пропы для контейенра компонента
  * @returns {JSX.Element}
  * @constructor
  */
 export const AbonimentType = ({name,label,value,setValue,data,...props}) => {
 
     /**
-     * локальный стейт для установки и хранения значения видимости блока с опциями
+     * @description локальный стейт для установки и хранения значения видимости блока с опциями
+     * @param {boolean} toggleOptionBox булевое значение
+     * @param {function} setToggleOptionBox функция изменения значения toggleOptionBox
      */
     const [toggleOptionBox, setToggleOptionBox] = useState(false);
 
     /**
-     * переключатлель видимости блока с опциями
-     * @param e
+     * @description переключатлель видимости блока с опциями
+     * @function
      */
-    const handleToggleOptionBox = (e) => {
-        e.preventDefault();
+    const handleToggleOptionBox = () => {
         setToggleOptionBox(prevState => !prevState);
     };
 
     /**
-     * ссылка на весь компонент
+     * ссылка на контейнер компонента
      * @type {React.MutableRefObject<null>}
      */
     const selectRef = useRef(null);
 
     /**
-     * ссылка на окно с опциями
+     * ссылка на выпадающий бюокс с опциями
      * @type {React.MutableRefObject<null>}
      */
     const optionBox = useRef(null);
 
     /**
+     * @function
      * еффект следит за положением выподающего списка с опциями, эсли он уходит с экрана,
      * добовляет отступ чтобы список оставался видимым полностью
      */
@@ -88,7 +90,7 @@ export const AbonimentType = ({name,label,value,setValue,data,...props}) => {
             {toggleOptionBox&&
             <div ref={optionBox} className={classes.optionBox}>
                 {data.map(item=> (<option key={item.id} onClick={(e)=> {
-                    setValue({id:item.id,name:item.name});
+                    setValue({...item});
                     setToggleOptionBox(false);
                 }} value={item.name} className={classes.item}>{item.name}</option>))}
             </div>

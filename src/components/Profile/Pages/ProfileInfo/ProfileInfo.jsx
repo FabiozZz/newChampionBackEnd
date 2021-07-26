@@ -6,7 +6,7 @@ import addCard from '../../../../assets/images/cardAdd.svg';
 import { AbonimentInfo } from "./AbonimentInfo";
 import { AddAboniment } from "./AddAboniment/AddAboniment";
 import edit_profile from '../../../../assets/images/edit_profile.svg';
-import { ModalAbonement } from './ModalAbonement/ModalAbonement';
+import { ModalEditAbonement } from './ModalEditAbonement/ModalEditAbonement';
 import { NavLink } from "react-router-dom";
 import Api from "../../../../Api/Api";
 import {load_couch, load_group} from "../../../../Acnions/timeTableActions";
@@ -21,6 +21,8 @@ import {
 import {isEmpty} from "../../../../helpers/common";
 import {SuccessContext} from "../../SuccessContext";
 import {SuccessAdd} from "./SuccessAdd/SuccessAdd";
+import {Modal} from "../../../../utils/Modal/Modal";
+import {ModalChangeAbonement} from "./ModalChangeClient/ModalChangeAbonement";
 
 export const ProfileInfo = ({profile}) => {
     const {user} = profile
@@ -64,20 +66,40 @@ export const ProfileInfo = ({profile}) => {
         setAge(mathAge);
     }, [user.date_of_birth]);
 
-    const [modal, toggleModal] = useState(false);
+    const [modal, toggleModal] = useState({
+        show: false,
+        type: 'edit'
+    });
     const showModal = () => {
-        toggleModal(true);
+        toggleModal(prevState=>({...prevState,show:!modal.show}));
     };
+    const clearType = () => {
+        toggleModal(prevState=>({...prevState,type:''}));
+    }
+    const showAndChangeTypeModalEdit = () => {
+        toggleModal(prevState=>({...prevState,show:!modal.show,type:'edit'}));
+    }
+    const showAndChangeTypeModalChange = () => {
+        toggleModal(prevState=>({...prevState,show:!modal.show,type:''}));
+    }
     return (
         <>
-            {modal &&
-            <ModalAbonement profile={profile} modal={modal} toggle={toggleModal}/>
+            {modal.show &&
+            <Modal toggle={showModal}>
+                {
+                    modal.type === 'edit' ?
+                        <ModalEditAbonement toggleModal={showModal} change={clearType} type={modal.type} profile={profile}/>
+                    :
+                        <ModalChangeAbonement toggleModal={showModal} profile={profile} type={modal.type}/>
+                }
+
+            </Modal>
             }
             {/* {!user.is_Archive && */}
             <div className={classes.block_info}>
-                <SuccessContext.Provider value={{success, handleChangeSuccess,profile}}>
-                    {success?
-                        <SuccessAdd />
+                <SuccessContext.Provider value={{success, handleChangeSuccess, profile,showAndChangeTypeModalChange}}>
+                    {success ?
+                        <SuccessAdd/>
                         :
                         <>
                             <div className={classes.block_info__header}>
@@ -95,7 +117,8 @@ export const ProfileInfo = ({profile}) => {
 
                                     <>
                                         <h3 className={classes.block_info__title}>Абонемент</h3>
-                                        <img onClick={showModal} className={classes.block_info__header_img} src={edit_profile}
+                                        <img onClick={showAndChangeTypeModalEdit} className={classes.block_info__header_img}
+                                             src={edit_profile}
                                              alt="edit_profile"/>
                                     </>
 
@@ -105,7 +128,8 @@ export const ProfileInfo = ({profile}) => {
 
                                 <AddAboniment profile={profile}/>
                                 :
-                                <AbonimentInfo user={user} whatsApp={whatsApp} handleToggleWhatsApp={handleToggleWhatsApp}/>
+                                <AbonimentInfo user={user} whatsApp={whatsApp}
+                                               handleToggleWhatsApp={handleToggleWhatsApp}/>
                             }
                         </>
                     }

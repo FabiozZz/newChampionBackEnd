@@ -77,11 +77,16 @@
 }
 .block_info__info_card {
   padding-left: 8px;
+  padding-right: 16px;
   padding-bottom: 24px;
   display: grid;
   grid-gap: 17px;
-  grid-template-columns: min-content max-content min-content min-content;
+  align-items:center;
+  grid-template-columns: min-content 1fr min-content min-content;
   grid-auto-flow: column;
+}
+.block_info__info_card svg {
+  cursor: pointer;
 }
 .block_info__info_card__img {
   align-self: center;

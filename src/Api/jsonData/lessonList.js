@@ -1,4 +1,11 @@
-[
+import NewCliet from "../../assets/images/statusFilter/NewClient.svg";
+import BronzeClient from "../../assets/images/statusFilter/BronzeClient.svg";
+import GoldClient from "../../assets/images/statusFilter/GoldClient.svg";
+import RybyClient from "../../assets/images/statusFilter/RybyClient.svg";
+import SapfirClient from "../../assets/images/statusFilter/SapfirClient.svg";
+import BrilClient from "../../assets/images/statusFilter/BrilClient.svg";
+
+const data = [
 
   {
     "id": 2,
@@ -14,8 +21,19 @@
             "valid_from": null,
             "valid_until": null,
             "personal_discount": 0,
-            "level": null,
-            "rate": null
+            "level":   {
+              "id": 2,
+              "name": "Бронзовый",
+              "img":BronzeClient
+            },
+            "rate":  {
+              "id": 2,
+              "name": "SMART",
+              "train_quantity": 12,
+              "days_duration": 56,
+              "is_personal": 0,
+              "price": "4700.00"
+            },
           },
           "train_group": null,
           "first_name": "Иван",
@@ -753,3 +771,4 @@
     "date": "2021-07-18T19:30:00+03:00"
   }
 ]
+export default data;

@@ -8,9 +8,10 @@ import {MaskInputTel} from "../../../../utils/MaskInputTel/MaskInputTel";
 /**
  * компонент визуализации ввода персональных данных
  *
- * @param data объект с данными {...data,lastName,name,middleName,phone,birthDay}
- * @param change функция изменения {...data,lastName,name,middleName,phone}
- * @param changeData функция изменения {...data,birthDay}
+ * @param {object} data объект с данными {...data,last_name,first_name,middle_name,phone_number,birth_of_date}
+ * @param {function} change функция изменения {...data,last_name,first_name,middle_name,phone_number}
+ * @param {function} changeData функция изменения {...data,birth_of_date}
+ * @param {function} changePass функция изменения данных паспорта
  * @returns {JSX.Element}
  * @constructor
  */

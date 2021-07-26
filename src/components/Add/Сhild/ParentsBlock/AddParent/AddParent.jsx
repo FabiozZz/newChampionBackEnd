@@ -8,10 +8,10 @@ import {MaskInputTel} from "../../../../../utils/MaskInputTel/MaskInputTel";
 /**
  * компонент визуализация ввода данных
  *
- * @param data пустой объект, приходит от компонента Kid
- * @param change функция замены пустого массива на измененный
- * @param index порядковый номер объекта в массива parents
- * @param passport если есть паспорт, в локальный стейт добавляется поля для пасспорта
+ * @param {object} data пустой объект, приходит от компонента Kid
+ * @param {function} change функция замены пустого массива на измененный
+ * @param {number} index порядковый номер объекта в массива parents
+ * @param {object} passport если есть паспорт, в локальный стейт добавляется поля для пасспорта
  * @returns {JSX.Element}
  * @constructor
  */

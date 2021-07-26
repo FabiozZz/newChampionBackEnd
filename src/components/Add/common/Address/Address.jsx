@@ -5,9 +5,9 @@ import {OtherInput} from "../../../../utils/OtherInput/OtherInput";
 /**
  * компонент визуализации ввода данных адреса
  *
- * @param address объект с данными {...address,street,house,corpus,room}
- * @param change функция изменения данных {...address,street,house,corpus,room}
- * @returns {JSX.Element}
+ * @param {object} address объект с данными {...address,street,house,corpus,room}
+ * @param {function} change функция изменения данных {...address,street,house,corpus,room}
+ * @returns {JSX.Element}  jsx
  * @constructor
  */
 export const Address = ({address,change}) => {

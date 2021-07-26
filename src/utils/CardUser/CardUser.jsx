@@ -26,6 +26,10 @@ import moment from "moment";
  *
  * @param lessons  сколько занятий осталось
  *
+ * @param img
+ * @param abonimentName
+ * @param lesson_id
+ * @param train_id
  * @param id принимает число, порядковый номер из базы
  *
  * @param name принимает строку, имя клиента
@@ -55,7 +59,7 @@ import moment from "moment";
  * @returns {JSX.Element}
  * @constructor
  */
-export const CardUser = ({ img, abonimentName, cardStatusName, cardFrom, cardTo, lesson_id, train_id, id, name, surname, status, freeze, health, toDay, call, birthDay, birthDayDate, expire, style, course }) => {
+export const CardUser = ({ lessons, img, abonimentName, cardStatusName, cardFrom, cardTo, lesson_id, train_id, id, name, surname, status, freeze, health, toDay, call, birthDay, birthDayDate, expire, style, course }) => {
 
     const [check, setCheck] = useState(false);
 
@@ -86,8 +90,7 @@ export const CardUser = ({ img, abonimentName, cardStatusName, cardFrom, cardTo,
                 </div>
 
 
-
-                {/* {img&&
+                {img&&
                 <CustomTooltip placement={'top'} color={'dark'} title={()=>(
                     <div className={classes.card_status__tooltip_text_wrapper}>
                         {freeze?
@@ -98,11 +101,11 @@ export const CardUser = ({ img, abonimentName, cardStatusName, cardFrom, cardTo,
                     </div>
                 )}>
                     <div className={classes.cardStatus}>
-                        <img width={17} height={12} src={img} alt="card"/>
+                        <img width={20} height={15} src={img} alt="card"/>
                     </div>
                 </CustomTooltip>
 
-                } */}
+                }
 
                 <div className={classes.notifications}>
                     {isBirthDay(birthDayDate) &&
@@ -125,7 +128,7 @@ export const CardUser = ({ img, abonimentName, cardStatusName, cardFrom, cardTo,
                 } */}
                 <div className={classes.success} onClick={handleToggleSuccess}>
                 {check?
-                <div class={cn(classes.lds_ring)}><div></div><div></div><div></div><div></div></div>
+                <div className={cn(classes.lds_ring)}><div></div><div></div><div></div><div></div></div>
                 :toDay&&
                         <img src={success} alt="success" />}
 

@@ -48,7 +48,6 @@ export const MaskInputTel = ({style,label,name,required,disabled,className,place
                 // formatting will be in onPhoneInput handler
                 input.value = inputNumbersValue;
                 setValue(e)
-                return;
             }
         }
     }
@@ -63,7 +62,7 @@ export const MaskInputTel = ({style,label,name,required,disabled,className,place
             return input.value = "";
         }
 
-        if (input.value.length != selectionStart) {
+        if (input.value.length !== selectionStart) {
             // Editing in the middle of input, not last symbol
             if (e.data && /\D/g.test(e.data)) {
                 // Attempt to input non-numeric symbol
@@ -73,8 +72,8 @@ export const MaskInputTel = ({style,label,name,required,disabled,className,place
         }
 
         if (["7", "8", "9"].indexOf(inputNumbersValue[0]) > -1) {
-            if (inputNumbersValue[0] == "9") inputNumbersValue = "7" + inputNumbersValue;
-            let firstSymbols = (inputNumbersValue[0] == "8") ? "7" : "+7";
+            if (inputNumbersValue[0] === "9") inputNumbersValue = "7" + inputNumbersValue;
+            let firstSymbols = (inputNumbersValue[0] === "8") ? "7" : "+7";
             formattedInputValue = input.value = firstSymbols + " ";
             if (inputNumbersValue.length > 1) {
                 formattedInputValue += '(' + inputNumbersValue.substring(1, 4);
@@ -96,7 +95,7 @@ export const MaskInputTel = ({style,label,name,required,disabled,className,place
     const onPhoneKeyDown = function (e) {
         // Clear input after remove last symbol
         let inputValue = e.target.value.replace(/\D/g, '');
-        if (e.keyCode == 8 && inputValue.length == 1) {
+        if (e.keyCode === 8 && inputValue.length === 1) {
             e.target.value = "";
         }
     }
@@ -108,7 +107,6 @@ export const MaskInputTel = ({style,label,name,required,disabled,className,place
             inputRef.current.addEventListener('keydown', onPhoneKeyDown);
             inputRef.current.addEventListener('input', onPhoneInput, false);
             inputRef.current.addEventListener('paste', onPhonePaste, false);
-            inputRef.current.addEventListener('keyup', onPhoneKeyUp, false);
         }
     },[onPhoneInput, onPhonePaste])
     return (
@@ -118,6 +116,7 @@ export const MaskInputTel = ({style,label,name,required,disabled,className,place
                 <input name={name}
                        type={"tel"}
                        ref={inputRef}
+                       onChange={onPhoneKeyUp}
                        maxLength={"18"}
                        required={required}
                        disabled={disabled}

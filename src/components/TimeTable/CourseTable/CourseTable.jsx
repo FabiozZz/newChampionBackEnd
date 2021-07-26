@@ -18,7 +18,7 @@ import moment from 'moment';
 export const CourseTable = ({ data }) => {
     /**
      * массив полученный из redux хранит список доступных тренеров для замены
-     * @type {[]|*}
+     * @type {array}
      */
     const couchList = useSelector(state => state.timeTable.filterSection.couch);
 
@@ -53,15 +53,16 @@ export const CourseTable = ({ data }) => {
                     <span className={classes.count}>Отмечено: <b>{checked_clients.length}</b> человек из <b>{lesson.trainings.length}</b></span>
                     <div>
                         {lesson.trainings.map(train => {
+                                console.log(train)
                             if (!train.client.in_archive) {
                                 return (
                                     <div key={train.id} className={`${classes.item}`}>
                                         <CardUser
-                                            // abonimentName={card.abonement}
-                                            // cardStatusName={card.statusName}
-                                            // cardFrom={card.cardFrom}
-                                            // lessons={card.lessons}
-                                            // cardTo={card.cardTo}
+                                            abonimentName={train.client.rate?train.client.rate.name:null}
+                                            cardStatusName={train.client.level?train.client.level.name:null}
+                                            cardFrom={train.client.rate?train.client.rate.valid_from:null}
+                                            lessons={train.client.rate?train.client.rate.train_quantity:null}
+                                            cardTo={train.client.rate?train.client.rate.valid_until:null}
                                             lesson_id={lesson.id}
                                             train_id={train.id}
                                             id={train.client.id}
@@ -76,7 +77,7 @@ export const CourseTable = ({ data }) => {
                                         // status={card.status}
                                         // course={card.course}
                                         // freeze={card.freeze}
-                                        // img={card.img}
+                                        img={train.client.club_card.level?train.client.club_card.level.img:null}
                                         />
                                     </div>);
                             } else {

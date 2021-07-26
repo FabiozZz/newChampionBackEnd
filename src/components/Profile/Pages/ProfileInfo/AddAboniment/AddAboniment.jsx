@@ -241,12 +241,12 @@ export const AddAboniment = ({profile}) => {
                                 {
                                     editPrice.edit ?
                                         <div onClick={toggleEdit} className={classes.edit_block}>
-                                        <input autoFocus
-                                               className={classes.edit_price}
-                                               style={{width:((String(editPrice.price).length*10)+'px')}}
-                                               value={editPrice.price}
-                                               onChange={handleChangePriceAbonement}
-                                               type="number"/>
+                                            <input autoFocus
+                                                   className={classes.edit_price}
+                                                   style={{width:((String(editPrice.price).length*10)+'px')}}
+                                                   value={editPrice.price * countCard}
+                                                   onChange={handleChangePriceAbonement}
+                                                   type="number"/>
                                             <span className={classes.edit_block_text}>&#8381;</span>
                                             <img className={classes.img_edit} src={success_edit} alt="edit"/>
                                         </div>
