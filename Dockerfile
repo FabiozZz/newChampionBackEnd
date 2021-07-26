@@ -1,29 +1,19 @@
-# Возьмите базовый образ
-
 FROM node:16-alpine
-
-# задайте рабочую директорию
 
 WORKDIR /app
 
-# добавьте `/app/node_modules/.bin` в $PATH
-
 ENV PATH /app/node_modules/.bin:$PATH
 
-# установите зависимости приложения
+COPY package*.json ./
 
-COPY package.json ./
+RUN npm config set unsafe-perm true
 
-RUN npm install -g yarn
+RUN npm install -g npm@7.20.1
 
-RUN yarn
+RUN npm install
 
-
-# добавьте приложение
+RUN chown -R node /app/node_modules
 
 COPY . ./
 
-
-# запустите приложение
-
-CMD ["yarn", "start"]
+CMD ["npm", "start"]

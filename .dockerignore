@@ -1,9 +1,13 @@
-/node_modules
+node_modules
 
-/build
+npm-debug.log
 
-/.dockerignore
+build
 
-/Dockerfile
+.dockerignore
 
-/Dockerfile.prod
+**/.git
+
+**/.DS_Store
+
+**/node_modules
