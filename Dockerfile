@@ -14,20 +14,16 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 COPY package.json ./
 
-COPY package-lock.json ./
+RUN npm install -g yarn
 
-RUN npm install
+RUN yarn
 
-RUN npm install react-scripts@3.4.1 -g
-
- 
 
 # добавьте приложение
 
 COPY . ./
 
- 
 
 # запустите приложение
 
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
