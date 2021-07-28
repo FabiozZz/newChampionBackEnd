@@ -53,7 +53,7 @@ export const CourseTable = ({ data }) => {
                     <span className={classes.count}>Отмечено: <b>{checked_clients.length}</b> человек из <b>{lesson.trainings.length}</b></span>
                     <div>
                         {lesson.trainings.map(train => {
-                                console.log(train)
+                                // console.log(train)
                             if (!train.client.in_archive) {
                                 return (
                                     <div key={train.id} className={`${classes.item}`}>

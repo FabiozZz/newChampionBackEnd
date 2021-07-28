@@ -14,6 +14,8 @@ import { Clients } from "./Clients/Clients";
 import { TimeTable } from './TimeTable/TimeTable';
 import { EditProfile } from "./Profile/Pages/ProfileInfo/EditProfile/EditProfile";
 import { SideBar } from './SideBar/SideBar';
+import { Settings } from './Settings/Settings';
+import {CreateAndEditLessons} from "./Settings/CreateAndEditLessons/CreateAndEditLessons";
 
 /**
  * главный компонент содержащий все приложение
@@ -86,12 +88,14 @@ function App() {
                     <div className="app-wrapper">
 
                         <Switch>
-                            <Route exact path={'/'} component={TimeTable} />
-                            <Route path={'/add_adult'} component={Adult} />
-                            <Route path={'/add_child'} component={Kid} />
-                            <Route exact path={'/profile/:id/'} component={Profile} />
-                            <Route exact path={'/profile/:id/edit'} component={EditProfile} />
-                            <Route path={'/clients'} component={Clients} />
+                            <Route exact path={'/'} render={()=><TimeTable/>} />
+                            <Route path={'/add_adult'} render={()=><Adult/>} />
+                            <Route path={'/add_child'} render={()=><Kid/>} />
+                            <Route exact path={'/profile/:id/'} render={()=><Profile/>} />
+                            <Route exact path={'/profile/:id/edit'} render={()=><EditProfile/>} />
+                            <Route path={'/clients'} render={()=><Clients/>} />
+                            <Route exact path={'/settings'} render={()=><Settings/>} />
+                            <Route path={'/settings/lesson'} render={()=><CreateAndEditLessons/>} />
                         </Switch>
 
                     </div>
