@@ -5,6 +5,7 @@ import {adultClientReducer} from "../reducers/adultClientReducer";
 import {childClientReducer} from "../reducers/childClientReducer";
 import {clientsReducer} from "../reducers/clientsReducer";
 import {profileReducer} from "../reducers/profileReducer";
+import {createLessonsReducer} from "../reducers/createLessonsReducer";
 
 const rootReducer = combineReducers({
     user: userReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     clientsList: clientsReducer,
     addAdult: adultClientReducer,
     addChild: childClientReducer,
-    profile: profileReducer
+    profile: profileReducer,
+    lessons: createLessonsReducer
 })
 export const store = createStore(rootReducer);
 

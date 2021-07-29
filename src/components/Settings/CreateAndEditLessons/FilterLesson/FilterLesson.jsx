@@ -1,14 +1,12 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import classes from './filter.module.css';
 import {Btn} from "../../../Clients/FilterClientSection/BtnGroup/Btn/Btn";
 import {OtherInput} from "../../../../utils/OtherInput/OtherInput";
+import {ContextData} from "../CreateAndEditLessons";
 
 export const FilterLesson = () => {
-    const [activeBtn,setActiveBtn] = useState('')
-    const handleClickBtn = (e) => {
-        setActiveBtn(e.target.dataset.valueActive);
-    };
 
+    const {activeBtn,handleClickBtn} = useContext(ContextData)
     return (
         <div className={classes.wrapper}>
             <div className={classes.selector}>
@@ -25,6 +23,7 @@ export const FilterLesson = () => {
                     <Btn onClick={handleClickBtn} isActive={activeBtn === 'month'} data-value-active={'month'} children={'Месяц'}/>
                 </div>
             </div>
+
         </div>
     );
 };

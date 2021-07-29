@@ -1,0 +1,113 @@
+.selector_month{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.prev{
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.text{
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #8798AD;
+}
+.next{
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    transform: rotate(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.calendar_month{
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-template-rows: min-content repeat(6,1fr);
+    grid-gap: 4px;
+}
+.weekdays_month{
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    padding-bottom: 4px;
+    line-height: 16px;
+    letter-spacing: 1.125px;
+    text-transform: uppercase;
+    color: #8798AD;
+    text-align: center;
+}
+.item_month {
+    display: flex;
+    flex-direction:column;
+    cursor: pointer;
+    padding: 12px;
+    height: 98px;
+    background: #DFE6EE;
+}
+.date {
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    padding-bottom: 12px;
+}
+.label_date{
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+}
+.item_month_mute{
+    opacity: 0.5;
+}
+.item_month_green{
+    background: #43BF41;
+    color:white;
+}
+.calendar_week{
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-gap: 3px;
+}
+.weekdays_week{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 9px;
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1.125px;
+    text-transform: uppercase;
+    color: #8798AD;
+    text-align: center;
+}
+.item_week {
+    cursor: pointer;
+    padding: 12px;
+    height: 64px;
+    background: #DFE6EE;
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    color: #8798AD;
+}

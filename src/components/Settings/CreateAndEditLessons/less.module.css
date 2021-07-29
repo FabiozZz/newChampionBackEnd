@@ -1,0 +1,15 @@
+.wrapper{
+    grid-column: 1/13;
+    display: grid;
+    margin: 0 -14px;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content 1fr;
+    grid-gap: 20px;
+    background:#ffffff;
+    padding: 32px 16px;
+}
+.out{
+    grid-column: 1/13;
+    grid-template-columns: repeat(12,1fr);
+    padding-bottom: 96px;
+}
