@@ -3,14 +3,19 @@ import classes from '../calendar.module.css';
 import moment from "moment";
 import 'moment/locale/ru';
 import {ContextData} from "../CreateAndEditLessons";
+import cn from "classnames";
+import {useSelector} from "react-redux";
+import {declOfLessonsNum} from "../../../../helpers/common";
 
 var defaultWeekdays = Array.apply(null, Array(7)).map(function (_, i) {
     return ;
 });
 
 export const WeekLesson = () => {
-    const {date, setDate} = useContext(ContextData);
+    const {date, setDate,changeDate,setActiveBtn} = useContext(ContextData);
+    const {lessons} = useSelector(state => state.lessons);
     const [currentDate, setCurrentDate] = useState({
+        date:date,
         start:moment(date).isoWeekday(1),
         startDay: moment(date).isoWeekday(1).format('DD'),
         startMonth:date.format('MMMM'),
@@ -20,10 +25,6 @@ export const WeekLesson = () => {
         lastYear:moment(date).isoWeekday(7).format('YYYY'),
     });
 
-    console.log(currentDate.startDay,currentDate.lastDay)
-    console.log(currentDate.startMonth,currentDate.lastMonth)
-    console.log(currentDate.start);
-
     const handleChangeMonth = (e) => {
         if (e.currentTarget.dataset.valueMonth === 'month') {
             setDate(date.add(7, 'd'))
@@ -31,6 +32,7 @@ export const WeekLesson = () => {
             setDate(date.subtract(7,'d'))
         }
         setCurrentDate({
+            date:date,
             start:moment(date).isoWeekday(1),
             startDay: moment(date).isoWeekday(1).format('DD'),
             startMonth:date.format('MMMM'),
@@ -43,7 +45,30 @@ export const WeekLesson = () => {
 
     let renderTable=[];
     for (let i = 0; i < 7; i++) {
-        renderTable.push(<React.Fragment key={i}><span className={classes.weekdays_week}>{moment(i, 'e').startOf('week').isoWeekday(i + 1).format('ddd')}</span><div id={currentDate.start.format('YYYY-DD-MM')} className={classes.item_week}>{currentDate.start.format('DD.MM')}</div></React.Fragment>)
+        let tempLesson = 0;
+        let tempClass = false ;
+        for (let k =0;k<lessons.length;k++) {
+            if (moment(lessons[k].date).format('YYYY-DD-MM') === moment(currentDate.start).format('YYYY-DD-MM')) {
+                tempClass = true;
+                tempLesson++;
+            }
+        }
+
+        renderTable.push(<React.Fragment key={i}>
+            <span className={classes.weekdays_week}>
+                {moment(i, 'e').startOf('week').isoWeekday(i + 1).format('ddd')}
+            </span>
+            <div id={currentDate.start.format('YYYY-MM-DD')}
+                 onClick={(e) => {
+                     changeDate(e.currentTarget.id)
+                     setActiveBtn('day');
+                 }}
+                 className={cn(classes.item_week, {[classes.item_week_green]: tempClass})}>
+                <span className={classes.date_week}>{currentDate.start.format('DD.MM')}</span>
+                {tempLesson ?
+                    <span className={classes.label_date_week}>{tempLesson} {declOfLessonsNum(tempLesson)}</span> : null}
+            </div>
+        </React.Fragment>);
         currentDate.start.add(1,'d')
     }
 

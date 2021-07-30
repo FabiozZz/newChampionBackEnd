@@ -10,7 +10,9 @@ import moment from "moment";
 import axios from "axios";
 import Api from "../../../Api/Api";
 import {useDispatch} from "react-redux";
-import {download_data} from "../../../Acnions/createLessonsActons";
+import {download_couch_data, download_data, download_group_data} from "../../../Acnions/createLessonsActons";
+import {load_couch, load_group} from "../../../Acnions/timeTableActions";
+import {error} from "../../TimeTable/TimeTable";
 
 export const ContextData = createContext(undefined);
 
@@ -36,13 +38,23 @@ export const CreateAndEditLessons = () => {
     useEffect(() => {
         const source = axios.CancelToken.source();
         (async () => {
-            await Api.getClientsTimeTable(source.token).then(r => {
+            await Api.getClientsTimeTable(source.token).then((r) => {
                 dispatch(download_data(r.data));
             });
-        })();
-        return ()=> source.cancel('Операция прервана');
+            await Api.getGroupList(source.token).then((r) => {
 
-    },[]);
+                dispatch(download_group_data(r.data));
+            });
+            await Api.getCouchList(source.token).then((r) => {
+                dispatch(download_couch_data(r.data));
+            });
+        })().catch((e) => {
+            if (axios.isCancel(e)) {
+                error(e.message);
+            }
+        });
+        return () => source.cancel("Операция прервана");
+    }, [dispatch]);
     return (
         <>
             <HeaderNav/>

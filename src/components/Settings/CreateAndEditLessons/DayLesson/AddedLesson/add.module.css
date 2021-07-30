@@ -1,0 +1,16 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    grid-gap: 24px;
+}
+.first_line{
+    grid-column: 1/13;
+    display: grid;
+    grid-template-columns: 1fr 1fr min-content;
+    align-items: end;
+    grid-gap: 24px;
+}
+.second_line {
+    grid-column: 1/4;
+
+}

@@ -100,6 +100,8 @@
     text-align: center;
 }
 .item_week {
+    display: flex;
+    flex-direction:column;
     cursor: pointer;
     padding: 12px;
     height: 64px;
@@ -110,4 +112,70 @@
     font-size: 12px;
     line-height: 16px;
     color: #8798AD;
+}
+.item_week_green{
+    background: #43BF41;
+    color:white;
+}
+.date_week {
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    padding-bottom: 4px;
+}
+.label_date_week{
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+}
+.no_filter_data{
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    color: #8798AD;
+}
+.table{
+    border-collapse: separate;
+    border-spacing: 4px;
+}
+.table thead th{
+    text-align: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1.125px;
+    text-transform: uppercase;
+    color: rgba(105, 112, 127, 0.7);
+}
+.table tbody td{
+    text-align: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    color: #8798AD;
+}
+.table tbody tr:nth-child(2n+1){
+    background: #FBFBFE;
+}
+.table tbody tr:nth-child(2n+2){
+    background: #F4F6FC;
+}
+.delete_lesson{
+    cursor: pointer;
+    margin-left: 16px;
+    margin-right: 16px;
 }
