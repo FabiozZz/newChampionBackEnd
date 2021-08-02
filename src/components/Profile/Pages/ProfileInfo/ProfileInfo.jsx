@@ -80,21 +80,21 @@ export const ProfileInfo = ({profile}) => {
         toggleModal(prevState=>({...prevState,show:!modal.show,type:'edit'}));
     }
     const showAndChangeTypeModalChange = () => {
-        toggleModal(prevState=>({...prevState,show:!modal.show,type:''}));
+        // toggleModal(prevState=>({...prevState,show:!modal.show,type:''}));
     }
     return (
         <>
-            {modal.show &&
-            <Modal toggle={showModal}>
-                {
-                    modal.type === 'edit' ?
-                        <ModalEditAbonement toggleModal={showModal} change={clearType} type={modal.type} profile={profile}/>
-                    :
-                        <ModalChangeAbonement toggleModal={showModal} profile={profile} type={modal.type}/>
-                }
+            {/*{modal.show &&*/}
+            {/*<Modal toggle={showModal}>*/}
+            {/*    {*/}
+            {/*        modal.type === 'edit' ?*/}
+            {/*            <ModalEditAbonement toggleModal={showModal} change={clearType} type={modal.type} profile={profile}/>*/}
+            {/*        :*/}
+            {/*            <ModalChangeAbonement toggleModal={showModal} profile={profile} type={modal.type}/>*/}
+            {/*    }*/}
 
-            </Modal>
-            }
+            {/*</Modal>*/}
+            {/*}*/}
             {/* {!user.is_Archive && */}
             <div className={classes.block_info}>
                 <SuccessContext.Provider value={{success, handleChangeSuccess, profile,showAndChangeTypeModalChange}}>
