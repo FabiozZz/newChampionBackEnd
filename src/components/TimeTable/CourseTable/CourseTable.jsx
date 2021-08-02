@@ -6,6 +6,7 @@ import { Option } from "./Option";
 import { change_couch } from "../../../Acnions/timeTableActions";
 import Api from "../../../Api/Api";
 import moment from 'moment';
+import {isEmpty} from "../../../helpers/common";
 
 /**
  * компонент для визуального отображения занятий
@@ -58,11 +59,11 @@ export const CourseTable = ({ data }) => {
                                 return (
                                     <div key={train.id} className={`${classes.item}`}>
                                         <CardUser
-                                            abonimentName={train.client.rate?train.client.rate.name:null}
-                                            cardStatusName={train.client.level?train.client.level.name:null}
-                                            cardFrom={train.client.rate?train.client.rate.valid_from:null}
-                                            lessons={train.client.rate?train.client.rate.train_quantity:null}
-                                            cardTo={train.client.rate?train.client.rate.valid_until:null}
+                                            abonimentName={!isEmpty(train.client.club_card.rate)?train.client.club_card.rate.name:null}
+                                            cardStatusName={!isEmpty(train.client.club_card.level)?train.client.club_card.level.name:null}
+                                            cardFrom={train.client.club_card.valid_from}
+                                            lessons={train.client.club_card.train_balance}
+                                            cardTo={train.client.club_card.valid_until}
                                             lesson_id={lesson.id}
                                             train_id={train.id}
                                             id={train.client.id}
@@ -77,7 +78,7 @@ export const CourseTable = ({ data }) => {
                                         // status={card.status}
                                         // course={card.course}
                                         // freeze={card.freeze}
-                                        img={train.client.club_card.level?train.client.club_card.level.img:null}
+                                        img={train.client.club_card.level}
                                         />
                                     </div>);
                             } else {

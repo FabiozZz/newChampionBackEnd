@@ -18,7 +18,7 @@ export const DayLesson = () => {
 
     const [addedLessons, setAddedLessons] = useState([]);
     const addLesson = () => {
-        setAddedLessons(prevState=> [...prevState,{trainer: {},group: {}}]);
+        setAddedLessons(prevState=> [...prevState,{}]);
 
         console.log(addedLessons)
     };
@@ -76,7 +76,11 @@ export const DayLesson = () => {
 
     const submit = () => {
         dispatch(add_lesson(addedLessons))
-        console.log(addedLessons);
+        let uploadData = {
+            date: currentDate.date.format(),
+            group_id:addedLessons.map(item=>item.id)
+        }
+        console.log(uploadData);
     };
     const remove = (id) => {
         dispatch(remove_lesson(id))

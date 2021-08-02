@@ -17,7 +17,7 @@ import {SelectCouch} from "./SelectCouch/SelectCouch";
 import {SelectGroup} from "./SelectGroup/SelectGroup";
 import moment from "moment";
 import {useDispatch} from "react-redux";
-import {upload_profile_club_card} from "../../../../../Acnions/profileActions";
+import {load_profile_user, upload_profile_club_card} from "../../../../../Acnions/profileActions";
 import {SuccessContext} from "../../../SuccessContext";
 
 
@@ -123,35 +123,27 @@ export const AddAboniment = ({profile}) => {
 
     const handleSubmitAboniment = async () => {
         let dopData;
-        if (selectAboniment.is_personal === 0) {
+        if (Number(editPrice.price) !== Number(selectAboniment.price)) {
             dopData = {
-                train_group:selectGroup
+                price:editPrice.price
             }
-        }else if (selectAboniment.is_personal === 1) {
-            dopData = {
-                train_trainer: selectCouch
-            }
-        }else{
-            dopData = {
-                train_group:null,
-                train_trainer:null
-            };
+        }else {
+            dopData = {};
         }
         let uploadData = {
-            club_card: {
-                train_balance: selectAboniment.train_quantity,
-                valid_from: moment().format('YYYY-MM-DD'),
-                valid_until: moment().add(selectAboniment.days_duration, 'd').format('YYYY-MM-DD'),
-                personal_discount: 0,
-                level: {...selectStatus},
-                rate: {...selectAboniment}
-            },
+            rate_id:selectAboniment.id,
+            level_id:selectStatus.id,
+            train_group:selectGroup.id,
+            quantity:countCard,
             ...dopData
         };
-        console.log(selectStatus)
-        await Api.editProfileAbonement(user.id, uploadData);
-        await dispatch(upload_profile_club_card(uploadData));
-        await handleChangeSuccess();
+        console.log(uploadData)
+        await Api.editProfileAbonement(user.club_card.id, uploadData).then(r => {
+            dispatch(load_profile_user(r.data))
+            handleChangeSuccess();
+
+        });
+        // await dispatch(upload_profile_club_card(uploadData));
 
     };
     return (
@@ -177,20 +169,18 @@ export const AddAboniment = ({profile}) => {
                              label={'количество'}/>
                 </div>
                 {
-                    selectAboniment.is_personal === 0 ?
+                    !selectAboniment.is_personal?
 
                         <div className={`${classes.group}`}>
                             <SelectGroup label={'группа'} data={group} value={selectGroup}
                                          setValue={handleChangeGroup}/>
                         </div>
 
-                        : selectAboniment.is_personal === 1 ?
+                        :
                         <div className={`${classes.group}`}>
                             <SelectCouch data={couch} value={selectCouch} setValue={handleChangeCouch}
                                          label={'тренер'}/>
                         </div>
-                        :
-                        null
                 }
 
                 {user.is_adult ?
@@ -228,9 +218,9 @@ export const AddAboniment = ({profile}) => {
                     <div className={classes.add_aboniment}>
 
                         <div className={classes.sales_card}>
-                            <div className={classes.procent}>
-                                <OtherInput label={'скидка'}/>
-                            </div>
+                            {/*<div className={classes.procent}>*/}
+                            {/*    <OtherInput label={'скидка'}/>*/}
+                            {/*</div>*/}
                             <div className={`${classes.sale_count}`}>
                             <span className={`${classes.sale_count_text}`}>{selectAboniment.train_quantity > 20 ? <span
                                 dangerouslySetInnerHTML={{__html: '&#8734;'}}/> : selectAboniment.train_quantity} {declOfLessonsNum(selectAboniment.train_quantity)}</span>

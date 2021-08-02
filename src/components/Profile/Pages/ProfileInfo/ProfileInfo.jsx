@@ -36,23 +36,23 @@ export const ProfileInfo = ({profile}) => {
 
     const dispatch = useDispatch();
 
-    useEffect(() =>{
-        let source = axios.CancelToken.source();
-        (async () => {
-            await Api.getGroupList(source.token).then((r) => {
-                dispatch(load_profile_group(r.data))
-            });
-            await Api.getCouchList(source.token).then((r) => {
-                dispatch(load_profile_couch(r.data))
-            });
-            await Api.getAbonimentList(source.token).then((r) => {
-                dispatch(load_profile_aboniment(r.data))
-            });
-            await Api.getStatusListForClients(source.token).then(r => {
-                dispatch(load_profile_status(r.data));
-            });
-        })();
-    },[])
+    // useEffect(() =>{
+    //     let source = axios.CancelToken.source();
+    //     (async () => {
+    //         await Api.getGroupList(source.token).then((r) => {
+    //             dispatch(load_profile_group(r.data))
+    //         });
+    //         await Api.getCouchList(source.token).then((r) => {
+    //             dispatch(load_profile_couch(r.data))
+    //         });
+    //         await Api.getAbonimentList(source.token).then((r) => {
+    //             dispatch(load_profile_aboniment(r.data))
+    //         });
+    //         await Api.getStatusListForClients(source.token).then(r => {
+    //             dispatch(load_profile_status(r.data));
+    //         });
+    //     })();
+    // },[])
 
     const handleToggleWhatsApp = () => {
         setWhatsApp(!whatsApp)
@@ -124,7 +124,7 @@ export const ProfileInfo = ({profile}) => {
 
                                 }
                             </div>
-                            {isEmpty(user.club_card.level) ?
+                            {isEmpty(user.club_card.rate) ?
 
                                 <AddAboniment profile={profile}/>
                                 :

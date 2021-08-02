@@ -12,7 +12,7 @@ import Api from "../../Api/Api";
 import healthSVG from '../../assets/images/health.svg';
 import { CustomTooltip } from "../CustomTooltip/CustomTooltip";
 import cn from 'classnames';
-import {isBirthDay} from "../../helpers/common";
+import {declOfLessonsNum, isBirthDay} from "../../helpers/common";
 import moment from "moment";
 
 /**
@@ -96,8 +96,9 @@ export const CardUser = ({ lessons, img, abonimentName, cardStatusName, cardFrom
                         {freeze?
                             <p className={`${classes.card_status__tooltip_text_wrapper__text_center} ${classes.card_status__tooltip_text_wrapper__text_center__date}`}>ЗАМОРОЖЕН</p>:null}
                         <p className={classes.card_status__tooltip_text_wrapper__text_center}>{abonimentName} {cardStatusName}</p>
-                        <p className={classes.card_status__tooltip_text_wrapper__text_center}>Срок действия: <span className={classes.card_status__tooltip_text_wrapper__text_center__date}>{cardFrom}-{cardTo}</span></p>
-                        <p className={classes.card_status__tooltip_text_wrapper__text_center}>Доступно: <span className={classes.card_status__tooltip_text_wrapper__text_center__date}>{lessons}</span> занятий</p>
+                        <p className={classes.card_status__tooltip_text_wrapper__text_center}>Срок действия: <span className={classes.card_status__tooltip_text_wrapper__text_center__date}>{moment(cardFrom).format('YYYY.MM.DD')}-{moment(cardTo).format('YYYY.MM.DD')}</span></p>
+                        <p className={classes.card_status__tooltip_text_wrapper__text_center}>Доступно: <span className={classes.card_status__tooltip_text_wrapper__text_center__date}>{lessons>998?<span
+                            dangerouslySetInnerHTML={{__html: '&#8734;'}}/> :lessons}</span> {declOfLessonsNum(lessons)}</p>
                     </div>
                 )}>
                     <div className={classes.cardStatus}>

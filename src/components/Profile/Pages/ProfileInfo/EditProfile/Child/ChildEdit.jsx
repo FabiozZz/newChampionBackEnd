@@ -13,6 +13,7 @@ import { PersonalData } from '../../../../../Add/Сhild/PersonalData/PersonalDat
 import HeaderNav from '../../../../../common/HeaderNav';
 import { Redirect } from "../../../../../common/Redirect";
 import classes from '../../../../profile.module.css';
+import moment from "moment";
 
 export const ChildEdit = ({ user }) => {
 
@@ -26,7 +27,7 @@ export const ChildEdit = ({ user }) => {
         first_name:user.first_name,
         last_name:user.last_name,
         middle_name:user.middle_name,
-        date_of_birth:user.date_of_birth,
+        date_of_birth:moment(user.date_of_birth).format('DD.MM.YYYY')||'',
         address:user.address,
     })
     const handleChangeClientData = (e)=>{
@@ -39,7 +40,12 @@ export const ChildEdit = ({ user }) => {
 
     const handleSubmit = async(e)=>{
         e.preventDefault();
-        await Api.editProfile(user.id,client).then(r=>{
+        let uploadData = {
+        ...client,
+            date_of_birth: moment(client.date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1')).format('YYYY-MM-DD')
+        }
+        console.log(uploadData)
+        await Api.editProfile(user.id,uploadData).then(r=>{
             dispatch(change_data_profile(r.data));
             history.push(`/profile/${r.data.id}`)
 
