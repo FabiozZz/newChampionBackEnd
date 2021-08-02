@@ -432,7 +432,7 @@ class Api {
     /* для страницы профиля */
 
     async getStatusList(token) {
-        return await this.client.get("/subscription/cardLevel/", {cancelToken: token});
+        return await this.client.get("/subscription/cardLevel/", {  cancelToken: token});
     }
 }
 
