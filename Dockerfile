@@ -6,10 +6,10 @@ WORKDIR /app
 
 COPY package.json /app/
 
-RUN npm install -g npm@latest
+RUN npm install -g yarn
 RUN npm install -g react-scripts@latest
 
-RUN npm install
+RUN yarn
 
 RUN chown -R node /app/node_modules
 
