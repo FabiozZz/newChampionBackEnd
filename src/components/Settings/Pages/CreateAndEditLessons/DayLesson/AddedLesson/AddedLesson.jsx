@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import classes from './add.module.css';
-import {SelectGroup} from "../../../../Profile/Pages/ProfileInfo/AddAboniment/SelectGroup/SelectGroup";
-import {SelectCouch} from "../../../../Profile/Pages/ProfileInfo/AddAboniment/SelectCouch/SelectCouch";
-import {Btn} from "../../../../Clients/FilterClientSection/BtnGroup/Btn/Btn";
+import {SelectGroup} from "../../../../../Profile/Pages/ProfileInfo/AddAboniment/SelectGroup/SelectGroup";
+import {Btn} from "../../../../../Clients/FilterClientSection/BtnGroup/Btn/Btn";
 import {useSelector} from "react-redux";
-import {isEmpty} from "../../../../../helpers/common";
+import {isEmpty} from "../../../../../../helpers/common";
 
 export const AddedLesson = (props) => {
-    const {group, couch} = useSelector(state => state.lessons);
+    const {group} = useSelector(state => state.lessons);
     const [userData,setUserData] = useState({
         // trainer:{
         //     id: null,
@@ -26,7 +25,7 @@ export const AddedLesson = (props) => {
     // };
 
     const handleChangeGroup = (obj) => {
-        setUserData(prevState => ({...obj}));
+        setUserData({...obj});
     };
     useEffect(() => {
         if (isEmpty(props.item)) {

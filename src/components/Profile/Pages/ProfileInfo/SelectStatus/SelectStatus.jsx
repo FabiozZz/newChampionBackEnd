@@ -9,8 +9,6 @@ import classes from './status.module.css';
  *
  * @param simpleClass принимает строку, установка пользовательских классов для обертки + к существующем классвм
  *
- * @param style принимает объект стилей
- *
  * @returns {JSX.Element}
  * @constructor
  */
@@ -79,6 +77,7 @@ export const SelectStatus = ({label,value,setValue,data,...props}) => {
         if (value === '') {
             setValue(data[0]);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[data]);
 
     return (

@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import classes from './side.module.css';
 import cn from 'classnames';
-import { NavLink, useHistory, useRouteMatch } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Api from '../../Api/Api';
-import { log_out } from '../../Acnions/userActions';
+import { log_out } from '../../Actions/userActions';
 import { CustomLink } from '../../utils/CustomLink/CustomLink';
 
+/**
+ * Компонент меню для десктопа
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const SideBar = () => {
     const dispatch = useDispatch();
     const history = useHistory();

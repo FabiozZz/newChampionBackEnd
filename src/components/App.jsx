@@ -11,22 +11,20 @@ import { Adult } from "./Add/Adult/Adult";
 import { Kid } from "./Add/Сhild/Kid";
 import { Profile } from "./Profile/Profile";
 import { Clients } from "./Clients/Clients";
-import { TimeTable } from './TimeTable/TimeTable';
 import { EditProfile } from "./Profile/Pages/ProfileInfo/EditProfile/EditProfile";
 import { SideBar } from './SideBar/SideBar';
 import { Settings } from './Settings/Settings';
-import {CreateAndEditLessons} from "./Settings/CreateAndEditLessons/CreateAndEditLessons";
+import { CreateAndEditLessons } from "./Settings/Pages/CreateAndEditLessons/CreateAndEditLessons";
 
 /**
  * главный компонент содержащий все приложение
  *
- * @returns {JSX.Element}
- * @constructor
+ * @return {JSX.Element}
  */
 function App() {
     /**
      * константа из redux показывает авторизован ли менеджер
-     * @type {boolean|*}
+     * @type {boolean}
      */
     const isAuth = useSelector(state => state.user.isAuth);
     // const [isLoad, setIsLoad] = useState(false);
@@ -88,7 +86,7 @@ function App() {
                     <div className="app-wrapper">
 
                         <Switch>
-                            <Route exact path={'/'} render={()=><TimeTable/>} />
+                            {/*<Route exact path={'/'} render={()=><TimeTable/>} />*/}
                             <Route path={'/add_adult'} render={()=><Adult/>} />
                             <Route path={'/add_child'} render={()=><Kid/>} />
                             <Route exact path={'/profile/:id/'} render={()=><Profile/>} />

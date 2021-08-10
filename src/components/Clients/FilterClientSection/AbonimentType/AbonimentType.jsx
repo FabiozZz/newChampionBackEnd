@@ -44,7 +44,6 @@ export const AbonimentType = ({name,label,value,setValue,data,...props}) => {
     const optionBox = useRef(null);
 
     /**
-     * @function
      * еффект следит за положением выподающего списка с опциями, эсли он уходит с экрана,
      * добовляет отступ чтобы список оставался видимым полностью
      */
@@ -89,7 +88,7 @@ export const AbonimentType = ({name,label,value,setValue,data,...props}) => {
             </div>
             {toggleOptionBox&&
             <div ref={optionBox} className={classes.optionBox}>
-                {data.map(item=> (<option key={item.id} onClick={(e)=> {
+                {data.map(item=> (<option key={item.id} onClick={()=> {
                     setValue({...item});
                     setToggleOptionBox(false);
                 }} value={item.name} className={classes.item}>{item.name}</option>))}

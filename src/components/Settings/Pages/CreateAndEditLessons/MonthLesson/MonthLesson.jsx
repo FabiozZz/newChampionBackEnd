@@ -1,18 +1,21 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import classes from '../calendar.module.css';
 import moment from "moment";
 import 'moment/locale/ru';
 import {ContextData} from "../CreateAndEditLessons";
 import cn from "classnames";
 import {useSelector} from "react-redux";
-import {declOfGroupsNum} from "../../../../helpers/common";
-import {renderTable} from "../../../../helpers/DataPicker/dataPicker";
+import {declOfGroupsNum} from "../../../../../helpers/common";
 
 var defaultWeekdays = Array.apply(null, Array(7)).map(function (_, i) {
     return <span className={classes.weekdays_month} key={i}>{moment(i, 'e').startOf('week').isoWeekday(i + 1).format('ddd')}</span>;
 });
 
-
+/**
+ * отображение расписания за месяц
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const MonthLesson = () => {
     // const [renderTable, setTable] = useState([]);
     let renderTable = [];

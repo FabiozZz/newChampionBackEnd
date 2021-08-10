@@ -1,12 +1,11 @@
 import React, {useContext} from 'react';
 import classes from "../../profile.module.css";
-import {CheckboxBtn} from "../../../../utils/CheckboxBtn/CheckboxBtn";
 import {declOfLessonsNum, isEmpty} from '../../../../helpers/common';
 import moment from "moment";
 import {SuccessContext} from "../../SuccessContext";
 
 
-export const AbonimentInfo = ({user,whatsApp,handleToggleWhatsApp}) => {
+export const AbonimentInfo = ({user}) => {
     const {showAndChangeTypeModalChange} = useContext(SuccessContext);
     return (
         <>

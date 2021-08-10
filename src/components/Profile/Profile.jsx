@@ -12,16 +12,21 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     clear_profile,
     load_profile_aboniment, load_profile_couch,
-    load_profile_filial,
+    // load_profile_filial,
     load_profile_group,
     load_profile_status,
     load_profile_user
-} from "../../Acnions/profileActions";
+} from "../../Actions/profileActions";
 import axios from "axios";
-import { error } from "../TimeTable/TimeTable";
 import { ProfileVisit } from './Pages/ProfileVisit/ProfileVisit';
 import { ProfilePay } from './Pages/ProfilePay/ProfilePay';
 
+
+/**
+ * страница просмотра и редактирования профиля клиента
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const Profile = () => {
 
     const profile = useSelector(state => state.profile)
@@ -56,7 +61,7 @@ export const Profile = () => {
             // await Api.getFilialList(source.token).then(r => {
             //     dispatch(load_profile_filial(r.data))
             // });
-        })().catch(e => error(e.message));
+        })();
         return () => {
             dispatch(clear_profile());
             source.cancel('операция прервана');

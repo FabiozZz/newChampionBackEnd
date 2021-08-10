@@ -4,7 +4,7 @@ import { Button } from "../../utils/Buttons/Button";
 import Api from "../../Api/Api";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { log_in } from "../../Acnions/userActions";
+import { log_in } from "../../Actions/userActions";
 import classes from './auth.module.css';
 
 /**
@@ -47,7 +47,7 @@ export const Auth = () => {
     const handleSubmitForm = async (e) => {
         e.preventDefault();
         setIsLoad(true)
-        await Api.login(data).then(res => {
+        await Api.login(data).then(() => {
             setIsLoad(false)
             dispatch(log_in());
             history.push('/');

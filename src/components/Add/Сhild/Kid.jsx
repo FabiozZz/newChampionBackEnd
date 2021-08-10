@@ -1,18 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useHistory } from "react-router";
-import { TestLesson } from "../common/TestLesson/TestLesson";
+// import { TestLesson } from "../common/TestLesson/TestLesson";
 import Api from "../../../Api/Api";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 import { Address } from "../common/Address/Address";
-import { Sale } from "../common/Sale/Sale";
+// import { Sale } from "../common/Sale/Sale";
 import { Rules } from "../common/Rules/Rules";
 import { EndBtnGroup } from "../common/EndBtnGroup/EndBtnGroup";
 import { PersonalData } from "./PersonalData/PersonalData";
 import { ParentsBlock } from "./ParentsBlock/ParentsBlock";
 import { Redirect } from "../../common/Redirect";
-import { group_list_child } from "../../../Acnions/addChildClientActions";
+// import { group_list_child } from "../../../Actions/addChildClientActions";
 import classes from '../add.module.css'
-import moment from 'moment';
+// import moment from 'moment';
 
 /**
  * компонент для добавления нового клиента ребёнка
@@ -23,7 +23,7 @@ export const Kid = () => {
 
     const refForm = useRef(null);
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     // useEffect(() => {
     //     (async () => {
@@ -48,43 +48,43 @@ export const Kid = () => {
     /**
      * локальный стейт для хранения/установки данных для TestLesson
      */
-    const [testData, setTestData] = useState({
-        filial: { name: '' },
-        group: { name: '' },
-        dateTest: '',
-        file: {}
-    });
-    const [filialList, setFilialList] = useState([]);
+    // const [testData, setTestData] = useState({
+    //     filial: { name: '' },
+    //     group: { name: '' },
+    //     dateTest: '',
+    //     file: {}
+    // });
+    // const [filialList, setFilialList] = useState([]);
 
-    /**
-     * прослушивание события ввода данных для TestLesson
-     * @param e
-     */
-    const handleChangeValueGroupTestLesson = (obj) => {
-        setTestData({ ...testData, group: { ...obj } });
-    };
+    // /**
+    //  * прослушивание события ввода данных для TestLesson
+    //  * @param e
+    //  */
+    // const handleChangeValueGroupTestLesson = (obj) => {
+    //     setTestData({ ...testData, group: { ...obj } });
+    // };
+    //
+    // /**
+    //  * прослушивание события ввода данных для TestLesson
+    //  * @param e
+    //  */
+    // const handleChangeValueFilialTestLesson = (obj) => {
+    //     setTestData({ ...testData, filial: { ...obj } });
+    // };
 
-    /**
-     * прослушивание события ввода данных для TestLesson
-     * @param e
-     */
-    const handleChangeValueFilialTestLesson = (obj) => {
-        setTestData({ ...testData, filial: { ...obj } });
-    };
-
-    /**
-     * прослушиване события ввода и выбора дыты для TestLesson
-     * @param data
-     */
-    const handleChangeValueDateTestLesson = (data) => {
-        setTestData({ ...testData, dateTest: data });
-    };
-
-    /**
-     * константа из redux для отображения списка доступных групп
-     * @type {array}
-     */
-    const groupList = useSelector(state => state.addChild.groupList);
+    // /**
+    //  * прослушиване события ввода и выбора дыты для TestLesson
+    //  * @param data
+    //  */
+    // const handleChangeValueDateTestLesson = (data) => {
+    //     setTestData({ ...testData, dateTest: data });
+    // };
+    //
+    // /**
+    //  * константа из redux для отображения списка доступных групп
+    //  * @type {array}
+    //  */
+    // const groupList = useSelector(state => state.addChild.groupList);
 
     /**
      * локальный стейт для храниения/установки персональных данных клиента для PersonalData
@@ -100,7 +100,7 @@ export const Kid = () => {
      * прослушивание события ввода данных для PersonalData
      * @param e
      */
-    const handleChangePersonalData = (e, data) => {
+    const handleChangePersonalData = (e) => {
         let name = e.target.name;
         setPersonalData(prevState => ({ ...prevState, [name]: e.target.value }))
     };
@@ -166,18 +166,18 @@ export const Kid = () => {
         setAddress(prevState => ({ ...prevState, [name]: e.target.value }))
     };
 
-    /**
-     * локальный стейт для хранения/установки для Sale
-     */
-    const [sale, setSale] = useState('');
-
-    /**
-     * прослушивание ввода данных для Sale
-     * @param e
-     */
-    const handleChangeValueSale = (e) => {
-        setSale(e.target.value);
-    };
+    // /**
+    //  * локальный стейт для хранения/установки для Sale
+    //  */
+    // const [sale, setSale] = useState('');
+    //
+    // /**
+    //  * прослушивание ввода данных для Sale
+    //  * @param e
+    //  */
+    // const handleChangeValueSale = (e) => {
+    //     setSale(e.target.value);
+    // };
 
     /**
      * локальный стейт для установки/снятии флага о том что клиент принял

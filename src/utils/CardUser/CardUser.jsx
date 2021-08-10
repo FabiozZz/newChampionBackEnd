@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CardUserStatus } from "./Status/CardUserStatus";
+// import { CardUserStatus } from "./Status/CardUserStatus";
 import phone from '../../assets/images/phone 1.svg';
 import gift from '../../assets/images/gift.svg';
 import { NavLink } from "react-router-dom";
@@ -7,59 +7,60 @@ import PropTypes from "prop-types";
 import success from '../../assets/images/success.svg';
 import classes from './cardUser.module.css';
 import { useDispatch } from "react-redux";
-import { client_change_toDay } from "../../Acnions/timeTableActions";
+import { client_change_toDay } from "../../Actions/timeTableActions";
 import Api from "../../Api/Api";
-import healthSVG from '../../assets/images/health.svg';
+// import healthSVG from '../../assets/images/health.svg';
 import { CustomTooltip } from "../CustomTooltip/CustomTooltip";
 import cn from 'classnames';
 import {declOfLessonsNum, isBirthDay} from "../../helpers/common";
-import moment from "moment";
+import moment from 'moment';
 
 /**
- * компонент для отображения клиента
- *
- * @param cardStatusName строка, содержит название абонимента и статуса
- *
- * @param cardFrom срок действия абонимента от ...
- *
- * @param cardTo срок действия абонимента до ...
- *
- * @param lessons  сколько занятий осталось
- *
- * @param img
- * @param abonimentName
- * @param lesson_id
- * @param train_id
- * @param id принимает число, порядковый номер из базы
- *
- * @param name принимает строку, имя клиента
- *
- * @param surname принимает строку, фамилия клиента
- *
- * @param status принимает число, для визуально отображения статуса клиента
- *
- * @param freeze булевой тип, состояние клиента заморожен или нет
- *
- * @param health булевой тип, состояние клиента, принес он справку от врача или нет
- *
- * @param toDay булевой тип,
- *
- * @param call булевой тип, для визуально отображения необходимости прозвонить клиента
- *
- * @param birthDay булевой тип, для визуально отображения того что скоро будет день рождение клиента
- *
- * @param birthDayDate строка, дата рождения клиента
- *
- * @param expire булевой тип, для визуально отображения что скоро закончится абонимент
- *
- * @param style принимает объект стилей для корневого элемента карточки
- *
- * @param course название группы в которой занимается клиент
- *
+ * @typedef {object} CardUserProps
+ * @property {string} cardStatusName содержит название абонимента и статуса
+ * @property {string} cardFrom срок действия абонимента от ... ['YYYY-MM-DD']
+ * @property {string} cardTo срок действия абонимента до ... ['YYYY-MM-DD']
+ * @property {number} lessons  сколько занятий осталось
+ * @property {string} img пока не понятно будет или нет, а если будет то в каком формате ....
+ * @property {string} abonimentName наименование абонимента
+ * @property {string} lesson_id порядковый номер занятия в базе
+ * @property {number} train_id порядковый номер тренировки в базе
+ * @property {number} id порядковый номер клиента в базы
+ * @property {string} name имя клиента
+ * @property {string} surname фамилия клиента
+ * @property {number} status старый вариант для моков, сейчас не используется (пока?...)
+ * @property {boolean} freeze состояние клиента заморожен или нет
+ * @property {boolean} toDay присутствовал ли на занятии
+ * @property {boolean} call для визуально отображения необходимости прозвонить клиента
+ * @property {string} birthDayDate дата рождения клиента
+ * @property {object} style стилей для корневого элемента карточки
+ */
+
+/**
+ * @deprecated
+ * @param {string} cardStatusName содержит название абонимента и статуса
+ * @param {string} cardFrom срок действия абонимента от ... ['YYYY-MM-DD']
+ * @param {string} cardTo срок действия абонимента до ... ['YYYY-MM-DD']
+ * @param {number} lessons  сколько занятий осталось
+ * @param {string} img пока не понятно будет или нет, а если будет то в каком формате ....
+ * @param {string} abonimentName наименование абонимента
+ * @param {string} lesson_id порядковый номер занятия в базе
+ * @param {number} train_id порядковый номер тренировки в базе
+ * @param {number} id порядковый номер клиента в базы
+ * @param {string} name имя клиента
+ * @param {string} surname фамилия клиента
+ * @param {number} status старый вариант для моков, сейчас не используется (пока?...)
+ * @param {boolean} freeze состояние клиента заморожен или нет
+ * @param {boolean} toDay присутствовал ли на занятии
+ * @param {boolean} call для визуально отображения необходимости прозвонить клиента
+ * @param {string} birthDayDate дата рождения клиента
+ * @param {object} style стилей для корневого элемента карточки
  * @returns {JSX.Element}
  * @constructor
  */
-export const CardUser = ({ lessons, img, abonimentName, cardStatusName, cardFrom, cardTo, lesson_id, train_id, id, name, surname, status, freeze, health, toDay, call, birthDay, birthDayDate, expire, style, course }) => {
+export const CardUser = ({ lessons, img, abonimentName, cardStatusName, cardFrom, cardTo, lesson_id, train_id, id, name, surname,  freeze, toDay, call, birthDayDate, style}) => {
+
+    // const  = props
 
     const [check, setCheck] = useState(false);
 
@@ -68,6 +69,9 @@ export const CardUser = ({ lessons, img, abonimentName, cardStatusName, cardFrom
 
     /**
      * переключатель видимости галочки на карточке
+     * @function
+     * @async
+     * @inner
      */
     const handleToggleSuccess = async (e) => {
         e.preventDefault();
@@ -129,7 +133,7 @@ export const CardUser = ({ lessons, img, abonimentName, cardStatusName, cardFrom
                 } */}
                 <div className={classes.success} onClick={handleToggleSuccess}>
                 {check?
-                <div className={cn(classes.lds_ring)}><div></div><div></div><div></div><div></div></div>
+                <div className={cn(classes.lds_ring)}><div/><div/><div/><div/></div>
                 :toDay&&
                         <img src={success} alt="success" />}
 

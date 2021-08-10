@@ -4,10 +4,15 @@ import moment from "moment";
 import 'moment/locale/ru';
 import {ContextData} from "../CreateAndEditLessons";
 import {useDispatch, useSelector} from "react-redux";
-import {add_lesson, clear_filter_lesson, remove_lesson, search_lesson} from "../../../../Acnions/createLessonsActons";
+import {add_lesson, clear_filter_lesson, remove_lesson, search_lesson} from "../../../../../Actions/createLessonsActons";
 import {AddedLesson} from "./AddedLesson/AddedLesson";
-import {Button} from "../../../../utils/Buttons/Button";
+import {Button} from "../../../../../utils/Buttons/Button";
 
+/**
+ * отображение расписания за день
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const DayLesson = () => {
 
     const {date, setDate} = useContext(ContextData);

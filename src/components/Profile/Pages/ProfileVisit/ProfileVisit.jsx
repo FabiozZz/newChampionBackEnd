@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { DataPickerRange } from '../../../../utils/DataPickerRange/DataPickerRange';
 import { OtherInput } from '../../../../utils/OtherInput/OtherInput';
-import HeaderNav from '../../../common/HeaderNav';
 import classes from './visit.module.css';
 
-export const ProfileVisit = ({ profile }) => {
+export const ProfileVisit = () => {
 
-    const [date, setDate] = useState({
+    const [date/*, setDate*/] = useState({
         from: '',
         to: ''
     })

@@ -2,17 +2,9 @@ import React from 'react';
 import cn from "classnames";
 import classes from "../../clients.module.css";
 import imageBirthDay from "../../../../assets/images/clientsListCard/giftbox.svg";
-import { ageToString, declOfLessonsNum } from "../../../../helpers/common";
+import { ageToString} from "../../../../helpers/common";
 import imagePhone from "../../../../assets/images/clientsListCard/phone.svg";
-import imageTime from "../../../../assets/images/clientsListCard/clock.svg";
-import imageHealth from "../../../../assets/images/clientsListCard/health.svg";
-import imageCourse from "../../../../assets/images/clientsListCard/course.svg";
-import imageCouch from "../../../../assets/images/clientsListCard/couch.svg";
-import imageCountAbiniment from "../../../../assets/images/clientsListCard/countAbiniment.svg";
-import imageCash from "../../../../assets/images/clientsListCard/cash.svg";
-import IMageCall from "../../../../assets/images/phone 1.svg";
 import { NavLink } from "react-router-dom";
-import { declOfNum } from '../../../Profile/Pages/ProfileInfo/AbonimentInfo';
 
 export const ClientsRow = ({ clients }) => {
     return (

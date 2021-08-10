@@ -6,24 +6,17 @@ import addCard from '../../../../assets/images/cardAdd.svg';
 import { AbonimentInfo } from "./AbonimentInfo";
 import { AddAboniment } from "./AddAboniment/AddAboniment";
 import edit_profile from '../../../../assets/images/edit_profile.svg';
-import { ModalEditAbonement } from './ModalEditAbonement/ModalEditAbonement';
 import { NavLink } from "react-router-dom";
-import Api from "../../../../Api/Api";
-import {load_couch, load_group} from "../../../../Acnions/timeTableActions";
-import axios from "axios";
-import {useDispatch} from "react-redux";
-import {
-    load_profile_aboniment,
-    load_profile_couch,
-    load_profile_group,
-    load_profile_status
-} from "../../../../Acnions/profileActions";
 import {isEmpty} from "../../../../helpers/common";
 import {SuccessContext} from "../../SuccessContext";
 import {SuccessAdd} from "./SuccessAdd/SuccessAdd";
-import {Modal} from "../../../../utils/Modal/Modal";
-import {ModalChangeAbonement} from "./ModalChangeClient/ModalChangeAbonement";
 
+/**
+ * вывод основной информации о польлзователе
+ * @param {object} profile профиль порльзователя
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const ProfileInfo = ({profile}) => {
     const {user} = profile
     const [success, setSuccess]  = useState(false);
@@ -34,7 +27,7 @@ export const ProfileInfo = ({profile}) => {
     const [age, setAge] = useState('');
     const [whatsApp, setWhatsApp] = useState(false);
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     // useEffect(() =>{
     //     let source = axios.CancelToken.source();
@@ -70,12 +63,12 @@ export const ProfileInfo = ({profile}) => {
         show: false,
         type: 'edit'
     });
-    const showModal = () => {
-        toggleModal(prevState=>({...prevState,show:!modal.show}));
-    };
-    const clearType = () => {
-        toggleModal(prevState=>({...prevState,type:''}));
-    }
+    // const showModal = () => {
+    //     toggleModal(prevState=>({...prevState,show:!modal.show}));
+    // };
+    // const clearType = () => {
+    //     toggleModal(prevState=>({...prevState,type:''}));
+    // }
     const showAndChangeTypeModalEdit = () => {
         toggleModal(prevState=>({...prevState,show:!modal.show,type:'edit'}));
     }

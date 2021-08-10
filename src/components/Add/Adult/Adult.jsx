@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+
+import React, { useState } from 'react';
 import Api from "../../../Api/Api";
-import { useDispatch, useSelector } from "react-redux";
-import { group_list_adult } from "../../../Acnions/addAdultClientActions";
+// import { useDispatch, useSelector } from "react-redux";
+// import { group_list_adult } from "../../../Actions/addAdultClientActions";
 import { useHistory } from "react-router";
 import { Address } from "../common/Address/Address";
 import { PersonalData } from "./PersonalData/PersonalData";
-import { TestLesson } from "../common/TestLesson/TestLesson";
+// import { TestLesson } from "../common/TestLesson/TestLesson";
 import { Sale } from "../common/Sale/Sale";
 import { Rules } from "../common/Rules/Rules";
 import { EndBtnGroup } from "../common/EndBtnGroup/EndBtnGroup";
@@ -13,14 +14,14 @@ import { Redirect } from "../../common/Redirect";
 import classes from '../add.module.css'
 
 /**
- * @desc компонент для добавления нового взрослого клиента
- * @returns {JSX.Element}
+ * компонент для добавления нового взрослого клиента
+ * @returns {React.Element}
  */
 export const Adult = () => {
 
     const history = useHistory();
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     /**
      * еффект, сробатывает единожды при монтировании компонента,
@@ -38,14 +39,15 @@ export const Adult = () => {
     //     })()
     // }, [dispatch]);
 
-    /**
-     *
-     * @type {Array}
-     */
-    const groupList = useSelector(state => state.addAdult.groupList);
+    // /**
+    //  * группы полученные из Redux
+    //  * @returns {Array} список групп
+    //  */
+    // const groupList = useSelector(state => state.addAdult.groupList);
 
     /**
      * локальный стейт для храниения/установки адреса клиента для Address
+     * @const {object} address
      */
     const [address, setAddress] = useState({
         street: '',
@@ -99,39 +101,39 @@ export const Adult = () => {
         setPersonalData({ ...personalData, date_of_birth: some });
     };
 
-    /**
-     * локальный стейт для хранения/установки данных для TestLesson
-     */
-    const [testData, setTestData] = useState({
-        filial: { name: '' },
-        group: { name: '' },
-        dateTest: ''
-    });
-    const [filialList, setFilialList] = useState([]);
-
-    /**
-     * прослушивание события ввода данных для TestLesson
-     * @param e
-     */
-    const handleChangeValueGroupTestLesson = (obj) => {
-        setTestData({ ...testData, group: { ...obj } });
-    };
-
-    /**
-     * прослушивание события ввода данных для TestLesson
-     * @param e
-     */
-    const handleChangeValueFilialTestLesson = (obj) => {
-        setTestData({ ...testData, filial: { ...obj } });
-    };
-
-    /**
-     * прослушиване события ввода и выбора дыты для TestLesson
-     * @param data
-     */
-    const handleChangeValueDateTestLesson = (data) => {
-        setTestData({ ...testData, dateTest: data });
-    };
+    // /**
+    //  * локальный стейт для хранения/установки данных для TestLesson
+    //  */
+    // const [testData, setTestData] = useState({
+    //     filial: { name: '' },
+    //     group: { name: '' },
+    //     dateTest: ''
+    // });
+    // const [filialList, setFilialList] = useState([]);
+    //
+    // /**
+    //  * прослушивание события ввода данных для TestLesson
+    //  * @param e
+    //  */
+    // const handleChangeValueGroupTestLesson = (obj) => {
+    //     setTestData({ ...testData, group: { ...obj } });
+    // };
+    //
+    // /**
+    //  * прослушивание события ввода данных для TestLesson
+    //  * @param e
+    //  */
+    // const handleChangeValueFilialTestLesson = (obj) => {
+    //     setTestData({ ...testData, filial: { ...obj } });
+    // };
+    //
+    // /**
+    //  * прослушиване события ввода и выбора дыты для TestLesson
+    //  * @param data
+    //  */
+    // const handleChangeValueDateTestLesson = (data) => {
+    //     setTestData({ ...testData, dateTest: data });
+    // };
 
     /**
      * локальный стейт для хранения/установки для Sale
@@ -179,12 +181,23 @@ export const Adult = () => {
         setPersonal(!personal);
     };
 
+
+    const {save, setSave} = useState(false);
+    /**
+     *
+     * @param bool {boolean}
+     */
+    const handleSaveClients = (bool) => {
+        setSave(bool);
+    }
+
     /**
      * функция которая отрабатывает при отправке формы на сервер
      * @param e
      */
     const handleSubmitForm = async (e) => {
         e.preventDefault();
+        handleSaveClients(true);
         let uploadData = {
             first_name:personalData.first_name,
             middle_name:personalData.middle_name,
@@ -197,10 +210,9 @@ export const Adult = () => {
         // console.log(uploadData)
         await Api.postAddAdult(uploadData).then(r => {
 
-            console.log(r)
-            if (r.status === 201) {
-                history.push(`/profile/${r.data.id}`)
-            }
+            console.log(r);
+            history.push(`/profile/${r.data.id}`);
+            handleSaveClients(false);
 
         }).catch(e => console.log(e))
 
@@ -247,7 +259,7 @@ export const Adult = () => {
 
                 {/* блок с кнопками подтверждения или отмены */}
 
-                <EndBtnGroup goBack={goBack} personal={personal} rules={rules} />
+                <EndBtnGroup save={save} goBack={goBack} personal={personal} rules={rules} />
 
             </form>
         </div>

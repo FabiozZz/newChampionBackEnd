@@ -1,9 +1,14 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import classes from './filter.module.css';
-import {Btn} from "../../../Clients/FilterClientSection/BtnGroup/Btn/Btn";
-import {OtherInput} from "../../../../utils/OtherInput/OtherInput";
+import {Btn} from "../../../../Clients/FilterClientSection/BtnGroup/Btn/Btn";
+import {OtherInput} from "../../../../../utils/OtherInput/OtherInput";
 import {ContextData} from "../CreateAndEditLessons";
 
+/**
+ * фильтрация расписания
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const FilterLesson = () => {
 
     const {activeBtn,handleClickBtn} = useContext(ContextData)

@@ -1,13 +1,13 @@
 import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
-
-import clientsList from './jsonData/clientsList.json';
-import abonimantList from './jsonData/abonimentList.json';
-import statusList from './jsonData/statusList';
-import couchList from './jsonData/couchList.json';
-import lessonList from './jsonData/lessonList.js';
-import loginData from './jsonData/loginData.json';
-import coursesList from './jsonData/coursesList.json';
+// import MockAdapter from "axios-mock-adapter";
+//
+// import clientsList from './jsonData/clientsList.json';
+// import abonimantList from './jsonData/abonimentList.json';
+// import statusList from './jsonData/statusList';
+// import couchList from './jsonData/couchList.json';
+// import lessonList from './jsonData/lessonList.js';
+// import loginData from './jsonData/loginData.json';
+// import coursesList from './jsonData/coursesList.json';
 
 // const mock = new MockAdapter(axios, {delayResponse: 500});
 //
@@ -84,15 +84,13 @@ import coursesList from './jsonData/coursesList.json';
 // mock.resetHistory();
 
 /**
- * Response на логин token & refreshToken
- *
+ * Класс Api содержит все методы для связи с сервером проекта
  */
-
 class Api {
-    constructor(options = {}) {
-        /**
-         * @typedef AxiosResponse
-         */
+    /**
+     * В конструкторе создается axios и сохраняется во внутреннюю переменную {@link this.client}
+     */
+    constructor() {
         this.client = axios.create();
         this.token = null;
         this.refreshToken = null;
@@ -263,8 +261,8 @@ class Api {
     /**
      * Отметка\снятие отметки о присутствии клиента на занятии
      *
-     * @param id
-     * @param set
+     * @param id {number} id клиента
+     * @param set {boolean} состояние был/не был
      */
     async checkClient(id, set) {
         return await this.client.put(`/schedule/train/${id}/`, {is_visited: set});
@@ -287,8 +285,8 @@ class Api {
 
     /**
      * Временный запрос на получение фиктивных клиентов
-     * @returns {Promise<AxiosResponse<any>>}
-     * @param {CancelToken} token
+     * @returns {Promise}
+     * @param {CancelToken} token токен для отмены вызова при уничтожении компонента
      */
     async getClientsTimeTable(token) {
         return await this.client.get("/schedule/lesson/", {cancelToken: token});
@@ -297,7 +295,7 @@ class Api {
     /**
      *
      * @param token
-     * @returns {Promise<AxiosResponse<any>>}
+     * @returns {Promise}
      */
     async getGroupList(token) {
         return await this.client.get("/core/group/", {cancelToken: token});
@@ -306,7 +304,7 @@ class Api {
     /**
      *
      * @param token
-     * @returns {Promise<AxiosResponse<any>>}
+     * @returns {Promise}
      */
     async getCouchList(token) {
         return await this.client.get("/core/trainer/", {cancelToken: token});
@@ -315,7 +313,7 @@ class Api {
     /**
      * смена тренера у группы
      *
-     * @returns {Promise<AxiosResponse<any>>}
+     * @returns {Promise}
      */
     async changeCouch(id, couch) {
         return await this.client.put(`/schedule/lesson/${id}/`, {trainer: {id: couch}})
@@ -326,7 +324,7 @@ class Api {
     /**
      * Получение списка групп доступных для взрослого клиента
      *
-     * @returns {Promise<AxiosResponse<any>>}
+     * @returns {Promise}
      */
     async getGroupForAdult() {
         return await this.client
@@ -345,7 +343,7 @@ class Api {
      * Получение списка филиалов для клиента
      *
      * @param token
-     * @returns {Promise<AxiosResponse<any>>}
+     * @returns {Promise}
      */
     async getFilialList(token) {
         return await this.client.get("/filial_list", {cancelToken: token});
@@ -363,7 +361,7 @@ class Api {
     /**
      * Получение списка групп доступных для ребенка
      *
-     * @returns {Promise<AxiosResponse<any>>}
+     * @returns {Promise}
      */
     async getGroupForChild() {
         return await this.client

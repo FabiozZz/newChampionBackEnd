@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { DataPickerRange } from '../../../../utils/DataPickerRange/DataPickerRange';
-import { OtherInput } from '../../../../utils/OtherInput/OtherInput';
 import classes from './pay.module.css';
 
-export const ProfilePay = ({profile}) => {
-    const [date, setDate] = useState({
+export const ProfilePay = () => {
+    const [date/*, setDate*/] = useState({
         from: '',
         to: ''
     })
+
     return (
         <>
             <div className={classes.wrapper_search}>

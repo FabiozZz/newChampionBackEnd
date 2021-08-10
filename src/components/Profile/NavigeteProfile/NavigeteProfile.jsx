@@ -1,7 +1,14 @@
 import React from 'react';
 import classes from "../profile.module.css";
 
-export const NavigateProfile = ({ setIndex, tabIndex, id }) => {
+/**
+ * навигация по профилю
+ * @param {function} setIndex переключение активного таба
+ * @param {number} tabIndex активный индекс
+ * @returns {JSX.Element}
+ * @constructor
+ */
+export const NavigateProfile = ({ setIndex, tabIndex}) => {
     return (
         <div className={classes.nav_block}>
 

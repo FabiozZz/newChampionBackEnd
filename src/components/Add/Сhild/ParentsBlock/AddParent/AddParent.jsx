@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import classes from "../../../add.module.css";
 import {OtherInput} from "../../../../../utils/OtherInput/OtherInput";
-import {MaskInput} from "../../../../../utils/MaskInput/MaskInput";
 import {isEmpty} from "../../../../../helpers/common";
 import {MaskInputTel} from "../../../../../utils/MaskInputTel/MaskInputTel";
 
@@ -59,7 +58,7 @@ export const AddParent = ({data,change,index,passport=false}) => {
         if (isEmpty(data)) {
             Object.assign(data,userDate);
         }
-    },[]);
+    },[data, userDate]);
 
     /**
      * эффект отрабатывает каждый раз при вводе пользователем
@@ -67,7 +66,8 @@ export const AddParent = ({data,change,index,passport=false}) => {
      */
     useEffect(() => {
         change(index,userDate);
-    },[ index, userDate]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[index, userDate]);
 
     return (
         <div className={classes.block_info__item}>

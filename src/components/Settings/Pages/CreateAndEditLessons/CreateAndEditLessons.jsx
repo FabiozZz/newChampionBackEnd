@@ -1,6 +1,6 @@
 import React, {createContext, useEffect, useState} from 'react'
-import HeaderNav from '../../common/HeaderNav';
-import {Redirect} from '../../common/Redirect';
+import HeaderNav from '../../../common/HeaderNav';
+import {Redirect} from '../../../common/Redirect';
 import classes from './less.module.css';
 import {FilterLesson} from "./FilterLesson/FilterLesson";
 import {MonthLesson} from "./MonthLesson/MonthLesson";
@@ -8,14 +8,22 @@ import {WeekLesson} from "./WeekLesson/WeekLesson";
 import {DayLesson} from "./DayLesson/DayLesson";
 import moment from "moment";
 import axios from "axios";
-import Api from "../../../Api/Api";
+import Api from "../../../../Api/Api";
 import {useDispatch} from "react-redux";
-import {download_couch_data, download_data, download_group_data} from "../../../Acnions/createLessonsActons";
-import {load_couch, load_group} from "../../../Acnions/timeTableActions";
-import {error} from "../../TimeTable/TimeTable";
+import {download_couch_data, download_data, download_group_data} from "../../../../Actions/createLessonsActons";
+// import {load_couch, load_group} from "../../../Actions/timeTableActions";
 
+/**
+ * контекст для передачи данных вниз по дереву компонентам, которые обернуты в контекст
+ * @type {React.Context<undefined>}
+ */
 export const ContextData = createContext(undefined);
 
+/**
+ * страница управления расписанием
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const CreateAndEditLessons = () => {
     const dispatch = useDispatch();
 
@@ -50,7 +58,6 @@ export const CreateAndEditLessons = () => {
             });
         })().catch((e) => {
             if (axios.isCancel(e)) {
-                error(e.message);
             }
         });
         return () => source.cancel("Операция прервана");

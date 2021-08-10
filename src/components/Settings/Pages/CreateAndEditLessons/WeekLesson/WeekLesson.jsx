@@ -1,16 +1,20 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import classes from '../calendar.module.css';
 import moment from "moment";
 import 'moment/locale/ru';
 import {ContextData} from "../CreateAndEditLessons";
 import cn from "classnames";
 import {useSelector} from "react-redux";
-import {declOfLessonsNum} from "../../../../helpers/common";
+import {declOfLessonsNum} from "../../../../../helpers/common";
 
-var defaultWeekdays = Array.apply(null, Array(7)).map(function (_, i) {
-    return ;
-});
-
+// var defaultWeekdays = Array.apply(null, Array(7)).map(function (_, i) {
+//     return ;
+// });
+/**
+ * отображение расписания за неделю
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const WeekLesson = () => {
     const {date, setDate,changeDate,setActiveBtn} = useContext(ContextData);
     const {lessons} = useSelector(state => state.lessons);

@@ -1,7 +1,8 @@
 import React from 'react';
-import { NavLink, useHistory, useRouteMatch } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 import { CustomLink } from '../../utils/CustomLink/CustomLink';
 import classes from './footer.module.css';
+import cn from "classnames";
 
 /**
  * статичный компонент, возвращает JSX разметку
@@ -17,7 +18,7 @@ export const Footer = (props) => {
             <div className={`col-12 ${classes.footer} ${props.className ? props.className : ''}`} {...props}>
                 {/* кнопка для перехода на главную страницу */}
 
-                <CustomLink route={route.path} exact={true} activeClassName={classes.item_active} className={classes.home} activeClassName={classes.home_active} to={'/'}>
+                <CustomLink route={route.path} exact={true} activeClassName={cn(classes.item_active,classes.home_active)} className={classes.home} to={'/'}>
                     <div className={classes.svg} />
                 </CustomLink>
 

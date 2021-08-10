@@ -1,10 +1,14 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
 import HeaderNav from '../common/HeaderNav'
 import { Redirect } from '../common/Redirect'
 import { LinkItem } from './LinkItem/LinkItem';
 import classes from './settings.module.css';
 
+/**
+ * компонент меню настроек
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const Settings = () => {
     return (
         <>
