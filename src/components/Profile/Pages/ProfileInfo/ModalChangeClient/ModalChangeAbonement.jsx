@@ -1,13 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import { Modal } from '../../../../../utils/Modal/Modal';
 import { OtherInput } from '../../../../../utils/OtherInput/OtherInput';
 import { UserInfo } from '../UserInfo/UserInfo';
 import classes from './modal_change.module.css';
-import { SelectFilial } from '../../../../Add/common/TestLesson/SelectFilial';
-import separate from '../../../../../assets/images/deviderParent.svg';
 import { AbonimentType } from '../../../../Clients/FilterClientSection/AbonimentType/AbonimentType';
 import { SelectStatus } from '../SelectStatus/SelectStatus';
-import { declOfNum } from '../AbonimentInfo';
 import { declOfLessonsNum, declOfWeekNum } from '../../../../../helpers/common';
 import {Counter} from "../../../../../utils/Counter/Counter";
 import {SelectGroup} from "../AddAboniment/SelectGroup/SelectGroup";
@@ -77,11 +73,11 @@ export const ModalChangeAbonement = ({ profile,toggleModal }) => {
             <UserInfo user={user}/>
             <div className={classes.block_form}>
                 <div className={classes.block_one}>
-                    <OtherInput label={'перенести абонимент'} />
+                    <OtherInput label={'перенести абонемент'} />
                     {/*<SelectFilial value={selectFilial.name} setValue={handleChangeFilialForUser} label={'филиал'} data={profile.profile} />*/}
                 </div>
                 <div className={classes.block_three}>
-                    <AbonimentType label={'тип абонимента'} setValue={handleChangeAbonementForUser}
+                    <AbonimentType label={'тип абонемента'} setValue={handleChangeAbonementForUser}
                                    value={selectAbonement.name} data={profile.typeAboniment}/>
                     <SelectStatus label={'статус'} value={selectStatus.name} setValue={handleChangeStatusForUser}
                                   data={profile.status}/>

@@ -116,12 +116,7 @@ export const Kid = () => {
     /**
      * локальный стейт для хранения/установки массива данных о родителях клиента
      */
-    const [parents, setParents] = useState([{
-        // passport: {
-        //     serial: '',
-        //     number: ''
-        // }
-    }, {}]);
+    const [parents, setParents] = useState([{}, {}]);
 
     /**
      * функция для обновления объекта

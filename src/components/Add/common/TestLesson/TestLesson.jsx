@@ -1,9 +1,10 @@
 import React, {useRef} from 'react';
 import classes from "../../add.module.css";
-import {SelectGroup} from "../../../TimeTable/FilterSection/SelectGroup/SelectGroup";
+// import {SelectGroup} from "../../../TimeTable/FilterSection/SelectGroup/SelectGroup";
 import {DataPicker} from "../../../../utils/DataPicker/DataPicker";
 import {SelectFilial} from "./SelectFilial";
 import {Button} from "../../../../utils/Buttons/Button";
+import {SelectGroup} from "../../../Profile/Pages/ProfileInfo/AddAboniment/SelectGroup/SelectGroup";
 
 /**
  * компонент визуализации ввода данных о тестовом занятии
@@ -14,6 +15,7 @@ import {Button} from "../../../../utils/Buttons/Button";
  * @param setDate функция для устновки значения в value.dateTest
  * @param setFilial
  * @param filialList
+ * @param isAdult
  * @returns {JSX.Element}
  * @constructor
  */

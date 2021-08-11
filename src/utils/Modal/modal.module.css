@@ -7,11 +7,20 @@
     justify-content: center;
     align-items: center
 }
-.wrapper{
+.wrapper_sm{
     position: relative;
     min-height: 50px;
     background: #ffffff;
     width: 546px;
+    display: grid;
+    grid-auto-flow: row;
+    padding-top: 32px;padding-bottom: 35px;
+}
+.wrapper_lg{
+    position: relative;
+    min-height: 50px;
+    background: #ffffff;
+    width: 634px;
     display: grid;
     grid-auto-flow: row;
     padding-top: 32px;padding-bottom: 35px;

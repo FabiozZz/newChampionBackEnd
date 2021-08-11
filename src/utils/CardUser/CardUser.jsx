@@ -17,12 +17,12 @@ import moment from 'moment';
 
 /**
  * @typedef {object} CardUserProps
- * @property {string} cardStatusName содержит название абонимента и статуса
- * @property {string} cardFrom срок действия абонимента от ... ['YYYY-MM-DD']
- * @property {string} cardTo срок действия абонимента до ... ['YYYY-MM-DD']
+ * @property {string} cardStatusName содержит название абонемента и статуса
+ * @property {string} cardFrom срок действия абонемента от ... ['YYYY-MM-DD']
+ * @property {string} cardTo срок действия абонемента до ... ['YYYY-MM-DD']
  * @property {number} lessons  сколько занятий осталось
  * @property {string} img пока не понятно будет или нет, а если будет то в каком формате ....
- * @property {string} abonimentName наименование абонимента
+ * @property {string} abonimentName наименование абонемента
  * @property {string} lesson_id порядковый номер занятия в базе
  * @property {number} train_id порядковый номер тренировки в базе
  * @property {number} id порядковый номер клиента в базы
@@ -38,12 +38,12 @@ import moment from 'moment';
 
 /**
  * @deprecated
- * @param {string} cardStatusName содержит название абонимента и статуса
- * @param {string} cardFrom срок действия абонимента от ... ['YYYY-MM-DD']
- * @param {string} cardTo срок действия абонимента до ... ['YYYY-MM-DD']
+ * @param {string} cardStatusName содержит название абонемента и статуса
+ * @param {string} cardFrom срок действия абонемента от ... ['YYYY-MM-DD']
+ * @param {string} cardTo срок действия абонемента до ... ['YYYY-MM-DD']
  * @param {number} lessons  сколько занятий осталось
  * @param {string} img пока не понятно будет или нет, а если будет то в каком формате ....
- * @param {string} abonimentName наименование абонимента
+ * @param {string} abonimentName наименование абонемента
  * @param {string} lesson_id порядковый номер занятия в базе
  * @param {number} train_id порядковый номер тренировки в базе
  * @param {number} id порядковый номер клиента в базы

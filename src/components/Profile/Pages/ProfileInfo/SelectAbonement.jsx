@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import classes from '../../../TimeTable/FilterSection/SelectCouch/selectCouch.module.css'
+import classes from './selectCouch.module.css'
 
 export const SelectAbonement = ({value,setValue,label,data,...props}) => {
 

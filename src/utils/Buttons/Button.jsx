@@ -50,7 +50,7 @@ Button.defaultProps = {
 Button.propTypes = {
     name: PropTypes.string,
     size: PropTypes.oneOf(['default','small','auto','min']),
-    factor: PropTypes.oneOf([]),
+    factor: PropTypes.oneOf(['success','danger','default','dark']),
     style: PropTypes.object,
     disabled: PropTypes.bool,
     type: PropTypes.oneOf(['button', 'submit']),

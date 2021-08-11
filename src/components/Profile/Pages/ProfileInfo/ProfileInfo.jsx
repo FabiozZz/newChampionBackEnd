@@ -10,6 +10,18 @@ import { NavLink } from "react-router-dom";
 import {isEmpty} from "../../../../helpers/common";
 import {SuccessContext} from "../../SuccessContext";
 import {SuccessAdd} from "./SuccessAdd/SuccessAdd";
+import {Modal} from "../../../../utils/Modal/Modal";
+import {ModalEditAbonement} from "./ModalEditAbonement/ModalEditAbonement";
+import {ModalChangeAbonement} from "./ModalChangeClient/ModalChangeAbonement";
+import axios from "axios";
+import Api from "../../../../Api/Api";
+import {
+    load_profile_aboniment,
+    load_profile_couch,
+    load_profile_group,
+    load_profile_status
+} from "../../../../Actions/profileActions";
+import {useDispatch} from "react-redux";
 
 /**
  * вывод основной информации о польлзователе
@@ -27,25 +39,25 @@ export const ProfileInfo = ({profile}) => {
     const [age, setAge] = useState('');
     const [whatsApp, setWhatsApp] = useState(false);
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    // useEffect(() =>{
-    //     let source = axios.CancelToken.source();
-    //     (async () => {
-    //         await Api.getGroupList(source.token).then((r) => {
-    //             dispatch(load_profile_group(r.data))
-    //         });
-    //         await Api.getCouchList(source.token).then((r) => {
-    //             dispatch(load_profile_couch(r.data))
-    //         });
-    //         await Api.getAbonimentList(source.token).then((r) => {
-    //             dispatch(load_profile_aboniment(r.data))
-    //         });
-    //         await Api.getStatusListForClients(source.token).then(r => {
-    //             dispatch(load_profile_status(r.data));
-    //         });
-    //     })();
-    // },[])
+    useEffect(() =>{
+        let source = axios.CancelToken.source();
+        (async () => {
+            await Api.getGroupList(source.token).then((r) => {
+                dispatch(load_profile_group(r.data))
+            });
+            await Api.getCouchList(source.token).then((r) => {
+                dispatch(load_profile_couch(r.data))
+            });
+            await Api.getAbonimentList(source.token).then((r) => {
+                dispatch(load_profile_aboniment(r.data))
+            });
+            await Api.getStatusListForClients(source.token).then(r => {
+                dispatch(load_profile_status(r.data));
+            });
+        })();
+    },[dispatch])
 
     const handleToggleWhatsApp = () => {
         setWhatsApp(!whatsApp)
@@ -63,32 +75,32 @@ export const ProfileInfo = ({profile}) => {
         show: false,
         type: 'edit'
     });
-    // const showModal = () => {
-    //     toggleModal(prevState=>({...prevState,show:!modal.show}));
-    // };
-    // const clearType = () => {
-    //     toggleModal(prevState=>({...prevState,type:''}));
-    // }
+    const showModal = () => {
+        toggleModal(prevState=>({...prevState,show:!modal.show}));
+    };
+    const clearType = () => {
+        toggleModal(prevState=>({...prevState,type:''}));
+    }
     const showAndChangeTypeModalEdit = () => {
         toggleModal(prevState=>({...prevState,show:!modal.show,type:'edit'}));
     }
     const showAndChangeTypeModalChange = () => {
-        // toggleModal(prevState=>({...prevState,show:!modal.show,type:''}));
+        toggleModal(prevState=>({...prevState,show:!modal.show,type:''}));
     }
     return (
         <>
-            {/*{modal.show &&*/}
-            {/*<Modal toggle={showModal}>*/}
-            {/*    {*/}
-            {/*        modal.type === 'edit' ?*/}
-            {/*            <ModalEditAbonement toggleModal={showModal} change={clearType} type={modal.type} profile={profile}/>*/}
-            {/*        :*/}
-            {/*            <ModalChangeAbonement toggleModal={showModal} profile={profile} type={modal.type}/>*/}
-            {/*    }*/}
+            {modal.show &&
+            <Modal toggle={showModal}>
+                {
+                    modal.type === 'edit' ?
+                        <ModalEditAbonement toggleModal={showModal} change={clearType} type={modal.type} profile={profile}/>
+                    :
+                        <ModalChangeAbonement toggleModal={showModal} profile={profile} type={modal.type}/>
+                }
 
-            {/*</Modal>*/}
-            {/*}*/}
-            {/* {!user.is_Archive && */}
+            </Modal>
+            }
+             {!user.is_Archive &&
             <div className={classes.block_info}>
                 <SuccessContext.Provider value={{success, handleChangeSuccess, profile,showAndChangeTypeModalChange}}>
                     {success ?
@@ -130,7 +142,7 @@ export const ProfileInfo = ({profile}) => {
                 </SuccessContext.Provider>
             </div>
 
-            {/* } */}
+             }
 
             <div className={classes.block_info}>
 

@@ -1,4 +1,3 @@
-import ActionButton from "antd/lib/modal/ActionButton";
 import {
     CHANGE_COUCH_FOR_COURSE,
     CHANGE_TODAY, CLEAR_FILTER, FILTERED_CLIENTS,
@@ -85,6 +84,8 @@ export const timeTableReducer = (state=initialState,action) => {
             const filteredClients = state.clients.filter(e=>{
                 if ((!isEmpty(action.group) && e.group.id === action.group.id) || (!isEmpty(action.coach) && e.trainer.id === action.coach.id)) {
                     return e;
+                }else{
+                    return null;
                 }
             });
             return {
@@ -95,9 +96,7 @@ export const timeTableReducer = (state=initialState,action) => {
         case FILTERED_CLIENTS_FIO:
             let copyStateClientsForFilteredFio = [];
             let result;
-            let copy;
             if (state.filterClients.length) {
-                copy = [...state.filterClients];
                 for (let i = 0; i < state.filterClients.length; i++) {
                     copyStateClientsForFilteredFio.push({...state.filterClients[i], trainings: [...state.filterClients[i].trainings]});
                 }
@@ -112,7 +111,6 @@ export const timeTableReducer = (state=initialState,action) => {
                 })
 
             }else{
-                copy = [...state.clients];
                 for (let i = 0; i < state.clients.length; i++) {
                     copyStateClientsForFilteredFio.push({...state.clients[i], trainings: [...state.clients[i].trainings]});
                 }

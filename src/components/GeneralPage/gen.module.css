@@ -1,0 +1,32 @@
+.wrapper{
+    grid-column: 1/13;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: min-content;
+    grid-gap: 8px;
+    padding-bottom: 90px;
+}
+.title {
+    grid-column: 1/13;
+    font-family: "Montserrat", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    padding-bottom: 40px;
+    line-height: 52px;
+    color: #2e384d;
+}
+.time{
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #8798AD;
+}
+.course_list{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: min-content;
+    grid-gap: 4px;
+}

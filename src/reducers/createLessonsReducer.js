@@ -7,7 +7,6 @@ import {
     LOAD_GROUP_LESSON, REMOVE_DATA
 } from "../constants/createLessonsConstants";
 import moment from "moment";
-import {CLEAR_FILTER} from "../constants/timeTableConstants";
 
 const initialState = {
     lessons: [],

@@ -1,0 +1,104 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: min-content 1fr 1fr min-content;
+    grid-template-rows: min-content min-content;
+    align-items: center;
+    grid-gap: 0 16px;
+    background: #FFFFFF;
+    padding: 12px 24px;
+    border: 1px solid rgba(46, 91, 255, 0.08);
+    box-sizing: border-box;
+    box-shadow: 0 10px 20px rgba(46, 91, 255, 0.07);
+    border-radius: 1px;
+}
+.info{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(3,min-content);
+}
+.time{
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    color: #8798AD;
+}
+.name{
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 1px;
+    color: #2E384D;
+}
+.option{
+    display: flex;
+}
+.people {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, min-content);
+    grid-gap: 8px;
+    justify-items: center;
+}
+.people_text{
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    color: #69707F;
+}
+.add_client img , .add_client svg{
+    cursor: pointer;
+}
+.none{
+    display: none;
+    transition: all 0.5s;
+}
+.client_wrapper{
+    display: block;
+    grid-column: 1/5;
+    padding-top: 16px;
+    margin-left: -24px;
+    margin-right: -24px;
+    padding-bottom: 16px;
+    border-top: 1px solid rgba(46, 91, 255, 0.08);
+    transition: all 0.5s;
+}
+.client_wrapper table{
+    width: 100%;
+}
+.client_wrapper table td{
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #2E384D;
+}
+.client_wrapper table td{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.client_wrapper table tr td:first-child{
+    padding-left: 24px;
+}
+.client_wrapper table tr td:last-child{
+    opacity:0;
+}
+.client_wrapper table tr:hover{
+    background: #F4F6FC;
+}
+.client_wrapper table tr:hover td:last-child{
+    opacity:1;
+}
+.table_notif img:nth-child(1n+1):not(:last-child){
+    margin-right: 4px;
+}
+.table_notif svg:nth-child(1n+1):not(:last-child){
+    margin-right: 4px;
+}

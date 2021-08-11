@@ -155,7 +155,7 @@ export const AddAboniment = ({profile}) => {
                 <div className={classes.aboniment}>
                     <SelectAbonement value={selectAboniment.name} setValue={handleChangeAboniment}
                                      data={typeAboniment}
-                                     label={'тип абонимента'}/>
+                                     label={'тип абонемента'}/>
                 </div>
                 <div className={classes.status}>
                     <SelectStatus value={selectStatus.name} setValue={handleChangeStatus} data={status}

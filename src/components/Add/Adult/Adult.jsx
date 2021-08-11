@@ -1,12 +1,9 @@
 
 import React, { useState } from 'react';
 import Api from "../../../Api/Api";
-// import { useDispatch, useSelector } from "react-redux";
-// import { group_list_adult } from "../../../Actions/addAdultClientActions";
 import { useHistory } from "react-router";
 import { Address } from "../common/Address/Address";
 import { PersonalData } from "./PersonalData/PersonalData";
-// import { TestLesson } from "../common/TestLesson/TestLesson";
 import { Sale } from "../common/Sale/Sale";
 import { Rules } from "../common/Rules/Rules";
 import { EndBtnGroup } from "../common/EndBtnGroup/EndBtnGroup";
@@ -21,7 +18,6 @@ export const Adult = () => {
 
     const history = useHistory();
 
-    // const dispatch = useDispatch();
 
     /**
      * еффект, сробатывает единожды при монтировании компонента,
@@ -30,9 +26,9 @@ export const Adult = () => {
      */
     // useEffect(() => {
     //     (async () => {
-    //         await Api.getGroupForAdult().then(r => {
-    //             dispatch(group_list_adult(r));
-    //         });
+    //         // await Api.getGroupForAdult().then(r => {
+    //         //     dispatch(group_list_adult(r));
+    //         // });
     //         await Api.getFilialList().then(r => {
     //             setFilialList([...r.data])
     //         });

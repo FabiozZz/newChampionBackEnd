@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useRef} from 'react';
 import classes from "./tel.module.css";
 import PropTypes from "prop-types";
 import './phoneinput'

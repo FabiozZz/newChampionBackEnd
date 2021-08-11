@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import classes from '../../../TimeTable/FilterSection/SelectCouch/selectCouch.module.css'
+import classes from '../../../Profile/Pages/ProfileInfo/selectCouch.module.css'
 
 export const SelectFilial = ({required,value,setValue,label,data,...props}) => {
 
@@ -74,7 +74,7 @@ export const SelectFilial = ({required,value,setValue,label,data,...props}) => {
             </div>
             {toggleOptionBox&&
             <div ref={optionBox} className={classes.optionBox}>
-                {data.map(item=> (<option key={item.id} onClick={(e)=> {
+                {data.map(item=> (<option key={item.id} onClick={()=> {
                     setValue({id:item.id,name:item.name});
                     setToggleOptionBox(false);
                 }} value={item.name} className={classes.item}>{item.name}</option>))}

@@ -7,14 +7,14 @@ import { Route, Switch } from "react-router";
 import { Auth } from "./Auth/Auth";
 import { Footer } from "./Footer/Footer";
 import { Container } from "react-bootstrap";
-import { Adult } from "./Add/Adult/Adult";
-import { Kid } from "./Add/Сhild/Kid";
 import { Profile } from "./Profile/Profile";
 import { Clients } from "./Clients/Clients";
 import { EditProfile } from "./Profile/Pages/ProfileInfo/EditProfile/EditProfile";
 import { SideBar } from './SideBar/SideBar';
 import { Settings } from './Settings/Settings';
 import { CreateAndEditLessons } from "./Settings/Pages/CreateAndEditLessons/CreateAndEditLessons";
+import GeneralPage from "./GeneralPage/GeneralPage";
+import Add from "./Add/Add";
 
 /**
  * главный компонент содержащий все приложение
@@ -86,9 +86,8 @@ function App() {
                     <div className="app-wrapper">
 
                         <Switch>
-                            {/*<Route exact path={'/'} render={()=><TimeTable/>} />*/}
-                            <Route path={'/add_adult'} render={()=><Adult/>} />
-                            <Route path={'/add_child'} render={()=><Kid/>} />
+                            <Route exact path={'/'} render={()=><GeneralPage/>} />
+                            <Route path={'/add_client'} render={()=><Add/>} />
                             <Route exact path={'/profile/:id/'} render={()=><Profile/>} />
                             <Route exact path={'/profile/:id/edit'} render={()=><EditProfile/>} />
                             <Route path={'/clients'} render={()=><Clients/>} />

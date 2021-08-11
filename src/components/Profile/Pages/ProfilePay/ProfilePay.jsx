@@ -23,7 +23,7 @@ export const ProfilePay = () => {
                         <thead>
                             <tr>
                                 <th>дата</th>
-                                <th>абонимент</th>
+                                <th>абонемент</th>
                                 <th>статус</th>
                                 <th>сумма</th>
                                 <th >скидка</th>
