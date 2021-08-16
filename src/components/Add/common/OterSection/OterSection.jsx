@@ -10,16 +10,15 @@ import {OtherInput} from "../../../../utils/OtherInput/OtherInput";
  * @returns {JSX.Element}
  * @constructor
  */
-export const Sale = ({sale,setSale}) => {
+export const OterSection = ({sale,setSale}) => {
     return (
         <div className={classes.block_info}>
-                <h3 className={classes.block_info__title}>прочее</h3>
+            <h3 className={classes.block_info__title}>Прочее</h3>
             <div className={classes.block_info__item}>
                 <div className={classes.sale}>
-                    <OtherInput value={sale} setValue={setSale} name={'sales'} label={'откуда пришел'}/>
+                    <OtherInput value={sale} onChange={setSale} label={'Откуда узнали о нас'}/>
                 </div>
             </div>
-
         </div>
     );
 };

@@ -15,16 +15,17 @@ import {Button} from "../../../../utils/Buttons/Button";
  */
 export const EndBtnGroup = ({save, goBack, personal = true, rules = true}) => {
     return (
-        <div className={`row ${classes.btn_group}`}>
-
-            <div className={`col-3 ${classes.btn_group__item}`}>
+        <div className={`${classes.btn_group}`}>
+            <span/>
+            <div className={`${classes.btn_group__item}`}>
                 <Button click={goBack} text={'отменить'} factor={'danger'}/>
             </div>
 
-            <div className={`col-3 ${classes.btn_group__item}`}>
+            <div className={`${classes.btn_group__item}`}>
                 <Button type={'submit'} disabled={(!personal || !rules) && !save} text={'сохранить'}
                         factor={'success'}/>
             </div>
+            <span/>
 
         </div>
     );

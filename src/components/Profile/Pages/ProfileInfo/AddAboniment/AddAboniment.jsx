@@ -6,13 +6,11 @@ import { Button } from "../../../../../utils/Buttons/Button";
 import edit from '../../../../../assets/images/editAboniment.svg';
 import success_edit from '../../../../../assets/images/successAbonement.svg';
 import {SelectAbonement} from "../SelectAbonement";
-import { MaskInput } from "../../../../../utils/MaskInput/MaskInput";
 import { Counter } from "../../../../../utils/Counter/Counter";
 import { SelectStatus } from "../SelectStatus/SelectStatus";
 import { declOfLessonsNum, declOfWeekNum } from '../../../../../helpers/common';
 import Api from '../../../../../Api/Api';
 // import axios from 'axios';
-import {SelectParent} from "../SelectParent/SelectParent";
 import {SelectCouch} from "./SelectCouch/SelectCouch";
 import {SelectGroup} from "./SelectGroup/SelectGroup";
 // import moment from "moment";
@@ -81,22 +79,22 @@ export const AddAboniment = ({profile}) => {
         setCount(countCard <= 1 ? 1 : countCard - 1)
     };
 
-    const [selectParent, setParent] = useState({
-        first_name: '',
-        last_name: '',
-        middle_name: '',
-    });
-    const handleChangeParentData = (obj) => {
-        setParent({...obj});
-    }
+    // const [selectParent, setParent] = useState({
+    //     first_name: '',
+    //     last_name: '',
+    //     middle_name: '',
+    // });
+    // const handleChangeParentData = (obj) => {
+    //     setParent({...obj});
+    // }
 
-    const [passport, setPassport] = useState({
-        number: '',
-        serial: ''
-    })
-    const handleChangePass = (e) => {
-        setPassport(prevState => ({...prevState, [e.target.name]: e.target.value}))
-    };
+    // const [passport, setPassport] = useState({
+    //     number: '',
+    //     serial: ''
+    // })
+    // const handleChangePass = (e) => {
+    //     setPassport(prevState => ({...prevState, [e.target.name]: e.target.value}))
+    // };
 
     const [editPrice, setEditPrice] = useState({
         price: 0,
@@ -183,33 +181,33 @@ export const AddAboniment = ({profile}) => {
                         </div>
                 }
 
-                {user.is_adult ?
-                    <>
-                        <div className={classes.adult_serial}>
-                            <MaskInput setValue={handleChangePass} name={'serial'} value={passport.serial}
-                                       mask={'9999'}
-                                       label={'паспорт'} placeholder={'Серия'}/>
-                        </div>
-                        <div className={classes.adult_number}>
-                            <MaskInput value={passport.number} setValue={handleChangePass} name={'number'}
-                                       mask={'999999999'} placeholder={'Номер'}/>
-                        </div>
-                    </>
-                    :
-                    <>
-                        <div className={classes.parent_select}>
-                            <SelectParent value={selectParent} setValue={handleChangeParentData} data={user.parents}
-                                          label={'предствитель ребенка'}/>
-                        </div>
-                        <div className={classes.parent_serial}>
-                            <OtherInput label={'паспорт родителя'} placeholder={'Серия'}/>
-                        </div>
-                        <div className={classes.parent_number}>
-                            <OtherInput placeholder={'Номер'}/>
-                        </div>
-                    </>
+                {/*{user.is_adult ?*/}
+                {/*    <>*/}
+                {/*        <div className={classes.adult_serial}>*/}
+                {/*            <MaskInput setValue={handleChangePass} name={'serial'} value={passport.serial}*/}
+                {/*                       mask={'9999'}*/}
+                {/*                       label={'паспорт'} placeholder={'Серия'}/>*/}
+                {/*        </div>*/}
+                {/*        <div className={classes.adult_number}>*/}
+                {/*            <MaskInput value={passport.number} setValue={handleChangePass} name={'number'}*/}
+                {/*                       mask={'999999999'} placeholder={'Номер'}/>*/}
+                {/*        </div>*/}
+                {/*    </>*/}
+                {/*    :*/}
+                {/*    <>*/}
+                {/*        <div className={classes.parent_select}>*/}
+                {/*            <SelectParent value={selectParent} setValue={handleChangeParentData} data={user.parents}*/}
+                {/*                          label={'предствитель ребенка'}/>*/}
+                {/*        </div>*/}
+                {/*        <div className={classes.parent_serial}>*/}
+                {/*            <OtherInput label={'паспорт родителя'} placeholder={'Серия'}/>*/}
+                {/*        </div>*/}
+                {/*        <div className={classes.parent_number}>*/}
+                {/*            <OtherInput placeholder={'Номер'}/>*/}
+                {/*        </div>*/}
+                {/*    </>*/}
 
-                }
+                {/*}*/}
             </div>
 
             {selectAboniment.name !== '' && selectStatus.name !== '' ?

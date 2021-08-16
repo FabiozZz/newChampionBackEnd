@@ -2,6 +2,33 @@
   grid-column: 1/13;
   padding-bottom: 100px;
 }
+.block_info_f {
+  display: flex;
+  flex-direction: row;
+}
+.block_info_f .block_info {
+  flex-grow: 1;
+  min-width:50%;
+  /*justify-self: stretch;*/
+}
+.block_foto{
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-end;
+  background: #fff;
+  margin: 16px 24px 16px 0;
+  width:auto;
+  max-width: 50%;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+.block_foto img{
+  max-width: 100%;
+  width: auto;
+  border:none;
+  max-height:272px;
+  height:auto;
+}
 .block_info {
   background: #ffffff;
   padding: 32px 16px;
@@ -407,6 +434,74 @@
 /*  grid-column: 5/10;*/
 /*}*/
 
+.block_info__ball{
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 16px;
+}
+.ball_group{
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 10px;
+}
+.ball_group_inputs{
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min-content;
+  grid-gap: 20px;
+}
+.ball_group_inputs input[type=radio]{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid #DFE6EE;
+}
+.ball_group_inputs input:checked{
+  position:relative;
+  background: #43BF41;
+  border: 1px solid #DFE6EE;
+}
+.ball_group_inputs input:checked:before{
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  top: calc(50% - (7px / 2));
+  left: calc(50% - (7px / 2));
+  background: #fff;
+  border-radius: 50%;
+}
+.ball_group_inputs label{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.ball_history_table{
+  display: grid;
+  grid-template-columns: min-content min-content;
+  grid-auto-rows: min-content;
+  grid-gap: 4px 36px;
+}
+.date{
+  font-family: 'SF Pro Display',sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+  color: #69707F;
+}
+.ball{
+  font-family: 'SF Pro Display',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: #69707F;
+}
 @media screen and (min-width: 1439px) {
   .block_info {
       padding: 32px 24px;

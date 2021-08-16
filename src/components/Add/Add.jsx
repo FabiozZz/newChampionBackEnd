@@ -5,14 +5,99 @@ import {DataPicker} from "../../utils/DataPicker/DataPicker";
 import camera from './camera (1) 1.png';
 import {Redirect} from "../common/Redirect";
 import moment from "moment";
+import {Button} from "../../utils/Buttons/Button";
+import {Adult} from "./Adult/Adult";
+import TrialSectionSection from "./common/TrialSectionSection/TrialSectionSection";
+import {AddresSection} from "./common/AddresSection/AddresSection";
+import {OterSection} from "./common/OterSection/OterSection";
+import {Kid} from "./Сhild/Kid";
+import {RulesSection} from "./common/RulesSection/RulesSection";
+import {EndBtnGroup} from "./common/EndBtnGroup/EndBtnGroup";
+import {useHistory} from "react-router";
+import {Modal} from "../../utils/Modal/Modal";
+import ModalPhoto from "./ModalPhoto/ModalPhoto";
 
 export const ContextAdult = createContext();
 export const ContextChild = createContext();
+export const ContextModal = createContext();
 
 const Add = () => {
+
+    /* Modal */
+
+    const [state,setState] = useState({
+        width:320,
+        height:0,
+        image: null,
+        streaming:false
+    })
+    const video = useRef(null),
+        canvas = useRef(null),
+        photo = useRef(null)
+
+
+    function clearphoto() {
+        let context = canvas.current.getContext('2d');
+        context.fillStyle = "#AAA";
+        context.fillRect(0, 0, canvas.current.width, canvas.current.height);
+
+        let data = canvas.current.toDataURL('image/jpeg');
+        setState(prevState=>({...prevState,image:data}))
+        console.log(data)
+        photo.current.setAttribute('src', data);
+    }
+
+    function takepicture() {
+        let context = canvas.current.getContext('2d');
+        if (state.width && state.height) {
+            canvas.current.width = state.width;
+            canvas.current.height = state.height;
+            context.drawImage(video.current, 0, 0, state.width, state.height);
+
+            let data = canvas.current.toDataURL('image/jpeg');
+            photo.current.setAttribute('src', data);
+        } else {
+            clearphoto();
+        }
+    }
+
+    const canplay = () => {
+        if (!state.streaming && video.current) {
+            setState(prevState=>({...prevState, height: video.current.videoHeight / ( video.current.videoWidth / state.width )}))
+
+
+            video.current.setAttribute('height', state.height);
+            video.current.setAttribute('width', state.width);
+            canvas.current.setAttribute('width', state.width);
+            canvas.current.setAttribute('height', state.height);
+
+            // streaming = true;
+            setState(prevState=>({...prevState,streaming:true}))
+        }
+    };
+
+    function startUp() {
+        navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+            .then(function(stream) {
+                video.current.srcObject = stream;
+                video.current.play();
+            })
+            .catch(function(err) {
+                console.log("An error occurred: " + err);
+            });
+        video.current.addEventListener('canplay', canplay);
+        clearphoto();
+    }
+
+
+    /* endModal */
+
     /* common */
 
-    const refFoto = useRef(null)
+    const [modal, setModal] = useState(false);
+    const toggleModal = () => {
+        setModal(!modal);
+    };
 
     /**
      * локальный стейт для храниения/установки персональных данных клиента для PersonalData
@@ -24,7 +109,7 @@ const Add = () => {
         date_of_birth: '',
     });
 
-    const [age, setAge] = useState('');
+    const [age, setAge] = useState(0);
 
 
     /**
@@ -44,10 +129,78 @@ const Add = () => {
         setPersonalData({ ...personalData, date_of_birth: some });
     };
 
+    /**
+     * локальный стейт для храниения/установки адреса клиента для Address
+     */
+    const [address, setAddress] = useState({
+        street: '',
+        house: '',
+        corpus: '',
+        room: ''
+    });
+
+    /**
+     * прослушивание события ввода данных для Address
+     * @param e
+     */
+    const handleChangeAddressComponent = (e) => {
+        let name = e.target.name;
+        setAddress(prevState => ({ ...prevState, [name]: e.target.value }))
+    };
+
+    /**
+     * локальный стейт для хранения/установки для Sale
+     */
+    const [sale, setSale] = useState('');
+
+    /**
+     * прослушивание ввода данных для Sale
+     * @param e
+     */
+    const handleChangeValueSale = (e) => {
+        setSale(e.target.value);
+    };
+
+    /**
+     * локальный стейт для установки/снятии флага о том что клиент принял
+     * правила посещения клуба для Rules
+     */
+    const [rules, setRules] = useState(true);
+
+    /**
+     * прослушивание клика для переключения флага для Rules
+     */
+    const handleToggleRules = () => {
+        setRules(!rules);
+    };
+
+    /**
+     * локальный стейт для установки/снятии флага о том что клиент принял
+     * правилазачисления и посещения клуба для Rules
+     */
+    const [personal, setPersonal] = useState(true);
+
+    /**
+     * прослушивание клика для переключения флага для Rules
+     */
+    const handleTogglePersonal = () => {
+        setPersonal(!personal);
+    };
+
+    const history = useHistory();
+
+    /**
+     * функция для вохврата в компонент с которого переключились
+     */
+    const goBack = () => {
+        history.goBack();
+    };
+
+
     /**/
 
     /* child */
-    // const refFile = useRef(null)
+    const refFile = useRef(null)
 
     /**
      * локальный стейт для хранения/установки массива данных о родителях клиента
@@ -88,100 +241,79 @@ const Add = () => {
 
     },[age, personalData.date_of_birth]);
     return (
-        <div className={classes.wrapper}>
+        <>
+            {modal&&
+            <Modal size={'lg'} toggle={toggleModal}>
+                <ContextModal.Provider value={{state,setState,clearphoto,takepicture,canplay,startUp,video,canvas,photo}}>
+                    <ModalPhoto/>
+                </ContextModal.Provider>
+            </Modal>
+            }
+            <form onSubmit={() => console.log('submit')} className={classes.wrapper}>
 
-            <div className={classes.redirect}>
-                <Redirect title={"Регистрация клиента"} padding={true}/>
-            </div>
+                <div className={classes.redirect}>
+                    <Redirect title={"Регистрация клиента"} padding={true}/>
+                </div>
+                <div onClick={toggleModal} className={classes.block_f}>
+                    <img width={72} height={72} src={camera} alt={''}/>
+                    <span>Добавить фото</span>
+                </div>
 
-            <button onClick={() => {
-                refFoto.current.click();
-            }} className={classes.block_f}>
-                <img width={72} height={72} src={camera} alt={''}/>
-                <span>Добавить фото</span>
-                <input ref={refFoto} name={'foto'} type="file" hidden={true}/>
-            </button>
-
-            <div className={classes.block_info_f}>
-                <h3 className={classes.block_info__title}>личная информация</h3>
-                <div className={classes.block_info__item}>
-                    <div className={classes.last_name}>
-                        <OtherInput setValue={handleChangePersonalData} name={'last_name'}
-                                    value={personalData.last_name} label={'фамилия'}/>
-                    </div>
-                    <div className={classes.first_name}>
-                        <OtherInput setValue={handleChangePersonalData} name={'first_name'}
-                                    value={personalData.first_name} label={'имя'}/>
-                    </div>
-                    <div className={classes.middle_name}>
-                        <OtherInput setValue={handleChangePersonalData} name={'middle_name'}
-                                    value={personalData.middle_name} label={'отчество'}/>
-                    </div>
-                    <div className={classes.date_of_birth}>
-                        <DataPicker value={personalData.date_of_birth} setValue={handleDataPickerPersonal}
-                                    label={'дата рождения'}/>
+                <div className={classes.block_info_f}>
+                    <h3 className={classes.block_info__title}>личная информация</h3>
+                    <div className={classes.block_info__item}>
+                        <div className={classes.last_name}>
+                            <OtherInput setValue={handleChangePersonalData} name={'last_name'}
+                                        value={personalData.last_name} label={'фамилия'}/>
+                        </div>
+                        <div className={classes.first_name}>
+                            <OtherInput setValue={handleChangePersonalData} name={'first_name'}
+                                        value={personalData.first_name} label={'имя'}/>
+                        </div>
+                        <div className={classes.middle_name}>
+                            <OtherInput setValue={handleChangePersonalData} name={'middle_name'}
+                                        value={personalData.middle_name} label={'отчество'}/>
+                        </div>
+                        <div className={classes.date_of_birth}>
+                            <DataPicker value={personalData.date_of_birth} setValue={handleDataPickerPersonal}
+                                        label={'дата рождения'}/>
+                        </div>
                     </div>
                 </div>
-            </div>
+                {age>0 ?
+                    <>
+                        {age > 0 && age < 16 ?
+                            <ContextChild.Provider value={{}}>
+                                <div className={classes.button}>
+                                    <Button size={'default'} text={'добавить справку'} click={() => {
+                                        refFile.current.click();
+                                    }}/>
+                                    <input ref={refFile} name={'health'} type="file" hidden={true}/>
+                                </div>
+                                <TrialSectionSection/>
 
-            {/*<div className={classes.button}>*/}
-            {/*    <Button size={'default'} text={'добавить справку'} click={() => {*/}
-            {/*        refFile.current.click();*/}
-            {/*    }}/>*/}
-            {/*    <input ref={refFile} name={'health'} type="file" hidden={true}/>*/}
-            {/*</div>*/}
+                                <Kid/>
+                            </ContextChild.Provider>
+                            : age >= 16 ?
+                                <ContextAdult.Provider value={{}}>
+                                    <Adult/>
+                                    <TrialSectionSection/>
+                                </ContextAdult.Provider>
+                                : null
+                        }
 
-            {/*<div className={classes.block_info}>*/}
-            {/*    <div className={classes.block_info__item}>*/}
-            {/*        <div className={classes.phone_number}>*/}
-            {/*            <MaskInputTel label={"номер телефона"} setValue={()=>{}}/>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
 
-            {/*<div className={classes.block_info}>*/}
-            {/*    <h3 className={classes.block_info__title}>Пробное занятие</h3>*/}
-            {/*    <div className={classes.block_info__item}>*/}
-            {/*        <div className={classes.group}>*/}
-            {/*            <OtherInput label={'группа'}/>*/}
-            {/*        </div>*/}
-            {/*        <div className={classes.filial}>*/}
-            {/*            <OtherInput label={'филиал'}/>*/}
-            {/*        </div>*/}
-            {/*        <div className={classes.picker}>*/}
-            {/*            <DataPicker label={"дата пробного занятия"} setValue={()=>{}}/>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
+                        <AddresSection change={handleChangeAddressComponent} address={address}/>
 
-            {/*<div className={classes.block_info}>*/}
-            {/*    <h3 className={classes.block_info__title}>Адресс</h3>*/}
-            {/*    <div className={classes.block_info__item}>*/}
-            {/*        <div className={classes.street}>*/}
-            {/*            <OtherInput label={'улица'}/>*/}
-            {/*        </div>*/}
-            {/*        <div className={classes.house}>*/}
-            {/*            <OtherInput label={'дом'}/>*/}
-            {/*        </div>*/}
-            {/*        <div className={classes.corspus}>*/}
-            {/*            <OtherInput label={"корпус"}/>*/}
-            {/*        </div>*/}
-            {/*        <div className={classes.room}>*/}
-            {/*            <OtherInput label={"картира"}/>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
+                        <OterSection sale={sale} setSale={handleChangeValueSale}/>
 
-            {/*<div className={classes.block_info}>*/}
-            {/*    <h3 className={classes.block_info__title}>Прочее</h3>*/}
-            {/*    <div className={classes.block_info__item}>*/}
-            {/*        <div className={classes.sale}>*/}
-            {/*            <OtherInput label={'Откуда узнали о нас'}/>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
+                        <RulesSection rules={rules} setRules={handleToggleRules} personal={personal} setPersonal={handleTogglePersonal}/>
 
-        </div>
+                        <EndBtnGroup goBack={goBack} personal={personal} rules={rules}/>
+                    </>
+                    : null}
+            </form>
+        </>
     );
 };
 
