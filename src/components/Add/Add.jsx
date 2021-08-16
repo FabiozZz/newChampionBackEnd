@@ -19,78 +19,8 @@ import ModalPhoto from "./ModalPhoto/ModalPhoto";
 
 export const ContextAdult = createContext();
 export const ContextChild = createContext();
-export const ContextModal = createContext();
 
 const Add = () => {
-
-    /* Modal */
-
-    const [state,setState] = useState({
-        width:320,
-        height:0,
-        image: null,
-        streaming:false
-    })
-    const video = useRef(null),
-        canvas = useRef(null),
-        photo = useRef(null)
-
-
-    function clearphoto() {
-        let context = canvas.current.getContext('2d');
-        context.fillStyle = "#AAA";
-        context.fillRect(0, 0, canvas.current.width, canvas.current.height);
-
-        let data = canvas.current.toDataURL('image/jpeg');
-        setState(prevState=>({...prevState,image:data}))
-        console.log(data)
-        photo.current.setAttribute('src', data);
-    }
-
-    function takepicture() {
-        let context = canvas.current.getContext('2d');
-        if (state.width && state.height) {
-            canvas.current.width = state.width;
-            canvas.current.height = state.height;
-            context.drawImage(video.current, 0, 0, state.width, state.height);
-
-            let data = canvas.current.toDataURL('image/jpeg');
-            photo.current.setAttribute('src', data);
-        } else {
-            clearphoto();
-        }
-    }
-
-    const canplay = () => {
-        if (!state.streaming && video.current) {
-            setState(prevState=>({...prevState, height: video.current.videoHeight / ( video.current.videoWidth / state.width )}))
-
-
-            video.current.setAttribute('height', state.height);
-            video.current.setAttribute('width', state.width);
-            canvas.current.setAttribute('width', state.width);
-            canvas.current.setAttribute('height', state.height);
-
-            // streaming = true;
-            setState(prevState=>({...prevState,streaming:true}))
-        }
-    };
-
-    function startUp() {
-        navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-            .then(function(stream) {
-                video.current.srcObject = stream;
-                video.current.play();
-            })
-            .catch(function(err) {
-                console.log("An error occurred: " + err);
-            });
-        video.current.addEventListener('canplay', canplay);
-        clearphoto();
-    }
-
-
-    /* endModal */
 
     /* common */
 
@@ -244,9 +174,7 @@ const Add = () => {
         <>
             {modal&&
             <Modal size={'lg'} toggle={toggleModal}>
-                <ContextModal.Provider value={{state,setState,clearphoto,takepicture,canplay,startUp,video,canvas,photo}}>
-                    <ModalPhoto/>
-                </ContextModal.Provider>
+                    <ModalPhoto modal={modal}/>
             </Modal>
             }
             <form onSubmit={() => console.log('submit')} className={classes.wrapper}>
