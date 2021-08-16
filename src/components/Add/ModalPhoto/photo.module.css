@@ -1,0 +1,16 @@
+.booth {
+    width: auto;
+    background: #ccc;
+    border: 10px solid #ddd;
+    margin: 0 auto;
+}
+
+.booth_capture_button {
+    display: block;
+    margin: 10px;
+    padding: 10px 20px;
+    background: cornflowerblue;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+}

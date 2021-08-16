@@ -178,9 +178,9 @@
     .picker{
         grid-column: 7/10;
     }
-    .button{
-        grid-column: 10 / 12;
-    }
+    /*.button{*/
+    /*    grid-column: 10 / 12;*/
+    /*}*/
 
     .last_name{
         grid-column: 1 / 4;
@@ -234,7 +234,7 @@
         grid-column:9/11;
     }
     .phone_number_parent{
-        grid-column:7/13;
+        grid-column:1/4;
     }
     .serial_parent{
         grid-column: 1 / 6;
@@ -296,6 +296,7 @@
     align-items: center;
 }
 .polytic{
+    grid-column: 1/13;
     margin: 24px 0 24px 16px;
 }
 .polytic__block{
@@ -323,9 +324,11 @@
 
 }
 .btn_group{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    grid-column: 1/13;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
     margin-bottom: 150px;
 }
 .btn_group__item{

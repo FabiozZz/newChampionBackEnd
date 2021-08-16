@@ -14,7 +14,7 @@ const ItemCourse = () => {
     const refOption = useRef(null);
     const refAdd = useRef(null);
     const toggleBox = (e) => {
-        if (e.target !== refOption.current && !refAdd.current.contains(e.target)) {
+        if (!refOption.current.contains(e.target) && !refAdd.current.contains(e.target)) {
             setHide(!hide);
         }
     };
@@ -35,7 +35,7 @@ const ItemCourse = () => {
                 <span className={classes.time}>9:30 - 10:00</span>
                 <h4 className={classes.name}>Бразильское Джиу-Джитсу</h4>
                 <div ref={refOption} className={classes.option}>
-                    <Option id={1} couch={`${couchList[0].last_name}  ${couchList[0].middle_name}`} couchList={couchList}/>
+                    <Option id={1} couch={`${couchList[0].last_name} ${couchList[0].first_name} ${couchList[0].middle_name}`} couchList={couchList}/>
                 </div>
             </div>
             <div className={classes.people}>
