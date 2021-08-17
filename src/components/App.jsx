@@ -63,18 +63,18 @@ function App() {
     /**
      * если не авторизован пользователь, то его выбрасывает на экран входа в систему
      */
-    if (!isAuth) {
-        return (
-            <BrowserRouter>
-                <Container className={'h-100'} fluid={true}>
-                    <Header />
-                    <div className="app-wrapper_auth">
-                        <Auth />
-                    </div>
-                </Container>
-            </BrowserRouter>
-        )
-    }
+    // if (!isAuth) {
+    //     return (
+    //         <BrowserRouter>
+    //             <Container className={'h-100'} fluid={true}>
+    //                 <Header />
+    //                 <div className="app-wrapper_auth">
+    //                     <Auth />
+    //                 </div>
+    //             </Container>
+    //         </BrowserRouter>
+    //     )
+    // }
 
 
     return (

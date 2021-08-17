@@ -11,8 +11,10 @@
     "bootstrap": "^4.6.0",
     "moment": "^2.29.1",
     "react": "^17.0.2",
+    "react-avatar-editor": "^12.0.0",
     "react-bootstrap": "^1.6.0",
     "react-dom": "^17.0.2",
+    "react-html5-camera-photo": "^1.5.5",
     "react-input-mask": "^2.0.4",
     "react-maskedinput": "^4.0.1",
     "react-redux": "^7.2.4",
@@ -48,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
     "axios-mock-adapter": "^1.19.0",
     "better-docs": "^2.3.2",
     "docdash": "^1.2.0",

@@ -23,10 +23,21 @@ export const ContextChild = createContext();
 const Add = () => {
 
     /* common */
+    // const [image, setImage] = useState({image:null,navigator:( navigator.getUserMedia ||
+    //         navigator.webkitGetUserMedia ||
+    //         navigator.mozGetUserMedia ||
+    //         navigator.msGetUserMedia)});
+    // const handleChangeImage = (data) => setImage(prevState=>({...prevState,image:data}));
+
 
     const [modal, setModal] = useState(false);
     const toggleModal = () => {
         setModal(!modal);
+        // if (modal) {
+        //     image.navigator.mediaDevices.getUserMedia({video: true, audio: false}).then(stream => {
+        //         stream.getTracks().forEach(track=>track.stop())
+        //     });
+        // }
     };
 
     /**
@@ -183,7 +194,7 @@ const Add = () => {
                     <Redirect title={"Регистрация клиента"} padding={true}/>
                 </div>
                 <div onClick={toggleModal} className={classes.block_f}>
-                    <img width={72} height={72} src={camera} alt={''}/>
+                    <img  src={camera} alt={''}/>
                     <span>Добавить фото</span>
                 </div>
 

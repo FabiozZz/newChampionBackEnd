@@ -33,6 +33,8 @@
 .block_f{
     grid-column: 1/4;
     display: flex;
+    width: 174px;
+    height: 224px;
     flex-direction:column;
     align-items: center;
     justify-content: center;
