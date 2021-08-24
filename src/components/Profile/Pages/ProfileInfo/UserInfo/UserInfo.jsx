@@ -3,7 +3,6 @@ import classes from './info.module.css';
 import separate from '../../../../../assets/images/lineModalDevider.svg';
 import prolongation_aboniment from '../../../../../assets/images/prolongationAbon.svg';
 import return_cash from '../../../../../assets/images/returnCash.svg';
-import { declOfNum } from '../AbonimentInfo';
 import { declOfLessonsNum } from '../../../../../helpers/common';
 import moment from "moment";
 
@@ -28,7 +27,7 @@ export const UserInfo = ({ user,change,type }) => {
                     {
                         type === 'edit' ?
                             <div className={classes.block_info__images}>
-                                <img onClick={change} src={prolongation_aboniment} alt="продление абонимента"/>
+                                <img onClick={change} src={prolongation_aboniment} alt="продление абонемента"/>
                                 <img src={return_cash} alt="возврат ДС"/>
                             </div>
                             :null

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useRef} from 'react';
 import classes from "./tel.module.css";
 import PropTypes from "prop-types";
 import './phoneinput'
@@ -100,15 +100,18 @@ export const MaskInputTel = ({style,label,name,required,disabled,className,place
         }
     }
     const onPhoneKeyUp = (e) => {
+        onPhoneKeyDown(e);
+        onPhoneInput(e);
+        onPhonePaste(e);
         setValue(e)
     };
-    useEffect(() => {
-        if (inputRef.current) {
-            inputRef.current.addEventListener('keydown', onPhoneKeyDown);
-            inputRef.current.addEventListener('input', onPhoneInput, false);
-            inputRef.current.addEventListener('paste', onPhonePaste, false);
-        }
-    },[onPhoneInput, onPhonePaste])
+    // useEffect(() => {
+    //     if (inputRef.current) {
+    //         inputRef.current.addEventListener('keydown', onPhoneKeyDown);
+    //         inputRef.current.addEventListener('input', onPhoneInput, false);
+    //         inputRef.current.addEventListener('paste', onPhonePaste, false);
+    //     }
+    // },[onPhoneInput, onPhonePaste])
     return (
         <>
             <div style={style} className={`${classes.otherInputWrapper} ${className}`}>

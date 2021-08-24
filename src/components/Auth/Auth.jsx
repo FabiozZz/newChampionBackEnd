@@ -4,8 +4,9 @@ import { Button } from "../../utils/Buttons/Button";
 import Api from "../../Api/Api";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { log_in } from "../../Acnions/userActions";
+import { log_in } from "../../Actions/userActions";
 import classes from './auth.module.css';
+import {notificationPopUp} from "../common/Error";
 
 /**
  * компонент для авторизации менеджера
@@ -13,6 +14,8 @@ import classes from './auth.module.css';
  * @constructor
  */
 export const Auth = () => {
+
+    const [inputError, setIError] = useState(false);
 
     /**
      * константа и метод ее изменения, для переключения индикатора загрузки
@@ -39,6 +42,10 @@ export const Auth = () => {
         setData(prevState => ({ ...prevState, [e.target.name]: e.target.value }))
     };
 
+    const focusInput = () => {
+        setIError(false)
+    };
+
     /**
      * прослушивание события отправки формы авторизации
      * тут идет запрос на сервер
@@ -47,12 +54,19 @@ export const Auth = () => {
     const handleSubmitForm = async (e) => {
         e.preventDefault();
         setIsLoad(true)
-        await Api.login(data).then(res => {
+        await Api.login(data).then(() => {
             setIsLoad(false)
             dispatch(log_in());
             history.push('/');
         }).catch(er => {
-            console.log(er)
+            if (er.response) {
+                setIError(true)
+                notificationPopUp('error','Введены неверные данные','Перепроверьте введенные данные и попробуйте еще раз')
+            }else if (er.request) {
+                notificationPopUp('error','Проблемы с сервером','Попробуйте позже')
+            } else {
+                console.log('another');
+            }
             setIsLoad(false)
         });
     };
@@ -64,8 +78,14 @@ export const Auth = () => {
             </div>
             <form className={classes.form_wrapper} onSubmit={handleSubmitForm}>
                 <div className={classes.form_wrapper__item}>
-                    <OtherInput value={data.username} setValue={handleChangeInput} label={'введите login'} name={'username'} type={'text'} />
-                    <OtherInput value={data.password} setValue={handleChangeInput} label={'введите пароль'} name={'password'} type={'password'} />
+                    <div>
+                        <OtherInput onFocus={focusInput} value={data.username} setValue={handleChangeInput} danger={inputError} label={'введите login'} name={'username'} type={'text'} />
+                        {inputError&&<span className={classes.warning_text}>Не правильно заполнен Login</span>}
+                    </div>
+                    <div>
+                        <OtherInput onFocus={focusInput} value={data.password} setValue={handleChangeInput} danger={inputError} label={'введите пароль'} name={'password'} type={'password'} />
+                        {inputError&&<span className={classes.warning_text}>Не правильно заполнен Пароль</span>}
+                    </div>
                 </div>
                 <div className={classes.form_wrapper__send}>
                     <Button factor={'success'} size={"auto"} disabled={!data.username || !data.password || isLoad} text={'Войти'} type={'submit'} />

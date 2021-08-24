@@ -12,16 +12,21 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     clear_profile,
     load_profile_aboniment, load_profile_couch,
-    load_profile_filial,
+    // load_profile_filial,
     load_profile_group,
     load_profile_status,
     load_profile_user
-} from "../../Acnions/profileActions";
+} from "../../Actions/profileActions";
 import axios from "axios";
-import { error } from "../TimeTable/TimeTable";
 import { ProfileVisit } from './Pages/ProfileVisit/ProfileVisit';
 import { ProfilePay } from './Pages/ProfilePay/ProfilePay';
 
+
+/**
+ * страница просмотра и редактирования профиля клиента
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const Profile = () => {
 
     const profile = useSelector(state => state.profile)
@@ -36,10 +41,10 @@ export const Profile = () => {
         let source = axios.CancelToken.source();
         (async () => {
 
-            /*await Api.getProfile(id).then(r => {
-                // dispatch(load_profile_user(r.data))
-                dispatch(load_profile_user(r))
-            });*/
+            await Api.getProfile(id).then(r => {
+                dispatch(load_profile_user(r.data))
+                // dispatch(load_profile_user(r))
+            });
 
             await Api.getAbonimentList(source.token).then(r => {
                 dispatch(load_profile_aboniment(r.data))
@@ -56,9 +61,9 @@ export const Profile = () => {
             // await Api.getFilialList(source.token).then(r => {
             //     dispatch(load_profile_filial(r.data))
             // });
-        })().catch(e => error(e.message));
+        })();
         return () => {
-            // dispatch(clear_profile());
+            dispatch(clear_profile());
             source.cancel('операция прервана');
         };
     }, [dispatch, id]);
@@ -68,7 +73,7 @@ export const Profile = () => {
             <HeaderNav/>
             <Redirect title={'Профиль'} padding={true} />
             <div className={classes.wrapper}>
-                {profile.user.is_Archive &&
+                {profile.user.is_archive &&
                     <div className={classes.block_info}>
                         <h3 className={classes.block_info__title}>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

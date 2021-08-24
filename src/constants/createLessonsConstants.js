@@ -1,0 +1,7 @@
+export const LOAD_DATA = 'LOAD_DATA';
+export const FIND_LESSON = 'FIND_LESSON';
+export const CLEAR_FILTER_LESSON = 'CLEAR_FILTER_LESSON';
+export const LOAD_GROUP_LESSON = 'LOAD_GROUP_LESSON';
+export const LOAD_COUCH_LESSON = 'LOAD_COUCH_LESSON';
+export const REMOVE_DATA = 'REMOVE_DATA';
+export const ADD_DATA = 'ADD_DATA';

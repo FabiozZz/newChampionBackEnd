@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { DataPickerRange } from '../../../../utils/DataPickerRange/DataPickerRange';
-import { OtherInput } from '../../../../utils/OtherInput/OtherInput';
 import classes from './pay.module.css';
 
-export const ProfilePay = ({profile}) => {
-    const [date, setDate] = useState({
+export const ProfilePay = () => {
+    const [date/*, setDate*/] = useState({
         from: '',
         to: ''
     })
+
     return (
         <>
             <div className={classes.wrapper_search}>
@@ -23,7 +23,7 @@ export const ProfilePay = ({profile}) => {
                         <thead>
                             <tr>
                                 <th>дата</th>
-                                <th>абонимент</th>
+                                <th>абонемент</th>
                                 <th>статус</th>
                                 <th>сумма</th>
                                 <th >скидка</th>

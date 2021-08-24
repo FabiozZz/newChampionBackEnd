@@ -1,0 +1,15 @@
+.wrapper{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: min-content;
+    grid-gap: 16px;
+    justify-items: center;
+}
+.slider{
+    width: 80%;
+}
+.btn_group{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}

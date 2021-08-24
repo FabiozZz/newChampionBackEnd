@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {log_out} from "../../Acnions/userActions";
+import {log_out} from "../../Actions/userActions";
 import {useHistory} from "react-router";
 import Api from "../../Api/Api";
 import classes from './header.module.css';
@@ -18,7 +18,7 @@ export const Header = () => {
      * @param isAuth авторизован ли менеджер
      * @param currentUser данные менеджера если он авторизован
      */
-    const {currentUser,isAuth} = useSelector(state => state.user);
+    const {isAuth} = useSelector(state => state.user);
 
     const dispatch = useDispatch();
 

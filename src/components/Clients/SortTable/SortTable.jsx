@@ -1,8 +1,17 @@
+/**@memberOf Clients.SortTable*/
 import React from 'react';
 import classes from "./sort.module.css";
 import {SortSelect} from './SortSelect/SortSelect';
 import cn from "classnames";
 
+/**
+ * @param {Array<object>} clients массив клиентов для отображения общего количества клиентов
+ * @param {boolean} active указание активного вида списка отображения клиентов
+ * @param {Function} row переключение вида на строчный
+ * @param {Function} column переключение вида на блочный
+ * @returns {React.Element}
+ * @constructor
+ */
 export const SortTable = ({clients,active,row,column}) => {
     return (
         <div className={classes.sort_section}>

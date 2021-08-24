@@ -1,12 +1,11 @@
 import React, {useContext} from 'react';
 import classes from "../../profile.module.css";
-import {CheckboxBtn} from "../../../../utils/CheckboxBtn/CheckboxBtn";
 import {declOfLessonsNum, isEmpty} from '../../../../helpers/common';
 import moment from "moment";
 import {SuccessContext} from "../../SuccessContext";
 
 
-export const AbonimentInfo = ({user,whatsApp,handleToggleWhatsApp}) => {
+export const AbonimentInfo = ({user}) => {
     const {showAndChangeTypeModalChange} = useContext(SuccessContext);
     return (
         <>
@@ -16,7 +15,8 @@ export const AbonimentInfo = ({user,whatsApp,handleToggleWhatsApp}) => {
                     <h4 className={classes.block_info__info_card__general}>{user.club_card.rate.name} со
                         статусом {user.club_card.level.name} клиент</h4>
                     <p className={classes.block_info__info_card__label}>Срок
-                        действия: <b>{moment(user.club_card.value_from).format('DD.MM.YYYY')} &mdash; {moment(user.club_card.valid_until).format('DD.MM.YYYY')}.</b> Доступно <b>{user.club_card.train_balance}</b> {declOfLessonsNum(user.club_card.train_balance)}
+                        действия: <b>{moment(user.club_card.value_from).format('DD.MM.YYYY')} &mdash; {moment(user.club_card.valid_until).format('DD.MM.YYYY')}.</b> Доступно <b>{user.club_card.train_balance>9998?<span
+                            dangerouslySetInnerHTML={{__html: '&#8734;'}}/>:user.club_card.train_balance}</b> {declOfLessonsNum(user.club_card.train_balance)}
                     </p>
                 </div>
                 <svg onClick={showAndChangeTypeModalChange} width="27" height="24" viewBox="0 0 27 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,8 +32,8 @@ export const AbonimentInfo = ({user,whatsApp,handleToggleWhatsApp}) => {
 
             </div>
             <div className={`${classes.block_info__item}`}>
-                <p className={classes.block_info__item_label}>Филиал:</p>
-                <span className={classes.block_info__item_label__text}></span>
+                {/*<p className={classes.block_info__item_label}>Филиал:</p>*/}
+                {/*<span className={classes.block_info__item_label__text}></span>*/}
                 {!isEmpty(user.train_group) ?
                     <>
                         <p className={classes.block_info__item_label}>Записан в группу:</p>

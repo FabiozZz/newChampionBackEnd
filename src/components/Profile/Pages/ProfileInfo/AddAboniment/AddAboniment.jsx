@@ -6,18 +6,16 @@ import { Button } from "../../../../../utils/Buttons/Button";
 import edit from '../../../../../assets/images/editAboniment.svg';
 import success_edit from '../../../../../assets/images/successAbonement.svg';
 import {SelectAbonement} from "../SelectAbonement";
-import { MaskInput } from "../../../../../utils/MaskInput/MaskInput";
 import { Counter } from "../../../../../utils/Counter/Counter";
 import { SelectStatus } from "../SelectStatus/SelectStatus";
 import { declOfLessonsNum, declOfWeekNum } from '../../../../../helpers/common';
 import Api from '../../../../../Api/Api';
-import axios from 'axios';
-import {SelectParent} from "../SelectParent/SelectParent";
+// import axios from 'axios';
 import {SelectCouch} from "./SelectCouch/SelectCouch";
 import {SelectGroup} from "./SelectGroup/SelectGroup";
-import moment from "moment";
+// import moment from "moment";
 import {useDispatch} from "react-redux";
-import {upload_profile_club_card} from "../../../../../Acnions/profileActions";
+import {load_profile_user/*, upload_profile_club_card*/} from "../../../../../Actions/profileActions";
 import {SuccessContext} from "../../../SuccessContext";
 
 
@@ -81,22 +79,22 @@ export const AddAboniment = ({profile}) => {
         setCount(countCard <= 1 ? 1 : countCard - 1)
     };
 
-    const [selectParent, setParent] = useState({
-        first_name: '',
-        last_name: '',
-        middle_name: '',
-    });
-    const handleChangeParentData = (obj) => {
-        setParent({...obj});
-    }
+    // const [selectParent, setParent] = useState({
+    //     first_name: '',
+    //     last_name: '',
+    //     middle_name: '',
+    // });
+    // const handleChangeParentData = (obj) => {
+    //     setParent({...obj});
+    // }
 
-    const [passport, setPassport] = useState({
-        number: '',
-        serial: ''
-    })
-    const handleChangePass = (e) => {
-        setPassport(prevState => ({...prevState, [e.target.name]: e.target.value}))
-    };
+    // const [passport, setPassport] = useState({
+    //     number: '',
+    //     serial: ''
+    // })
+    // const handleChangePass = (e) => {
+    //     setPassport(prevState => ({...prevState, [e.target.name]: e.target.value}))
+    // };
 
     const [editPrice, setEditPrice] = useState({
         price: 0,
@@ -123,35 +121,27 @@ export const AddAboniment = ({profile}) => {
 
     const handleSubmitAboniment = async () => {
         let dopData;
-        if (selectAboniment.is_personal === 0) {
+        if (Number(editPrice.price) !== Number(selectAboniment.price)) {
             dopData = {
-                train_group:selectGroup
+                price:editPrice.price
             }
-        }else if (selectAboniment.is_personal === 1) {
-            dopData = {
-                train_trainer: selectCouch
-            }
-        }else{
-            dopData = {
-                train_group:null,
-                train_trainer:null
-            };
+        }else {
+            dopData = {};
         }
         let uploadData = {
-            club_card: {
-                train_balance: selectAboniment.train_quantity,
-                valid_from: moment().format('YYYY-MM-DD'),
-                valid_until: moment().add(selectAboniment.days_duration, 'd').format('YYYY-MM-DD'),
-                personal_discount: 0,
-                level: {...selectStatus},
-                rate: {...selectAboniment}
-            },
+            rate_id:selectAboniment.id,
+            level_id:selectStatus.id,
+            train_group:selectGroup.id,
+            quantity:countCard,
             ...dopData
         };
-        console.log(selectStatus)
-        await Api.editProfileAbonement(user.id, uploadData);
-        await dispatch(upload_profile_club_card(uploadData));
-        await handleChangeSuccess();
+        console.log(uploadData)
+        await Api.editProfileAbonement(user.club_card.id, uploadData).then(r => {
+            dispatch(load_profile_user(r.data))
+            handleChangeSuccess();
+
+        });
+        // await dispatch(upload_profile_club_card(uploadData));
 
     };
     return (
@@ -163,7 +153,7 @@ export const AddAboniment = ({profile}) => {
                 <div className={classes.aboniment}>
                     <SelectAbonement value={selectAboniment.name} setValue={handleChangeAboniment}
                                      data={typeAboniment}
-                                     label={'тип абонимента'}/>
+                                     label={'тип абонемента'}/>
                 </div>
                 <div className={classes.status}>
                     <SelectStatus value={selectStatus.name} setValue={handleChangeStatus} data={status}
@@ -177,49 +167,47 @@ export const AddAboniment = ({profile}) => {
                              label={'количество'}/>
                 </div>
                 {
-                    selectAboniment.is_personal === 0 ?
+                    !selectAboniment.is_personal?
 
                         <div className={`${classes.group}`}>
                             <SelectGroup label={'группа'} data={group} value={selectGroup}
                                          setValue={handleChangeGroup}/>
                         </div>
 
-                        : selectAboniment.is_personal === 1 ?
+                        :
                         <div className={`${classes.group}`}>
                             <SelectCouch data={couch} value={selectCouch} setValue={handleChangeCouch}
                                          label={'тренер'}/>
                         </div>
-                        :
-                        null
                 }
 
-                {user.is_adult ?
-                    <>
-                        <div className={classes.adult_serial}>
-                            <MaskInput setValue={handleChangePass} name={'serial'} value={passport.serial}
-                                       mask={'9999'}
-                                       label={'паспорт'} placeholder={'Серия'}/>
-                        </div>
-                        <div className={classes.adult_number}>
-                            <MaskInput value={passport.number} setValue={handleChangePass} name={'number'}
-                                       mask={'999999999'} placeholder={'Номер'}/>
-                        </div>
-                    </>
-                    :
-                    <>
-                        <div className={classes.parent_select}>
-                            <SelectParent value={selectParent} setValue={handleChangeParentData} data={user.parents}
-                                          label={'предствитель ребенка'}/>
-                        </div>
-                        <div className={classes.parent_serial}>
-                            <OtherInput label={'паспорт родителя'} placeholder={'Серия'}/>
-                        </div>
-                        <div className={classes.parent_number}>
-                            <OtherInput placeholder={'Номер'}/>
-                        </div>
-                    </>
+                {/*{user.is_adult ?*/}
+                {/*    <>*/}
+                {/*        <div className={classes.adult_serial}>*/}
+                {/*            <MaskInput setValue={handleChangePass} name={'serial'} value={passport.serial}*/}
+                {/*                       mask={'9999'}*/}
+                {/*                       label={'паспорт'} placeholder={'Серия'}/>*/}
+                {/*        </div>*/}
+                {/*        <div className={classes.adult_number}>*/}
+                {/*            <MaskInput value={passport.number} setValue={handleChangePass} name={'number'}*/}
+                {/*                       mask={'999999999'} placeholder={'Номер'}/>*/}
+                {/*        </div>*/}
+                {/*    </>*/}
+                {/*    :*/}
+                {/*    <>*/}
+                {/*        <div className={classes.parent_select}>*/}
+                {/*            <SelectParent value={selectParent} setValue={handleChangeParentData} data={user.parents}*/}
+                {/*                          label={'предствитель ребенка'}/>*/}
+                {/*        </div>*/}
+                {/*        <div className={classes.parent_serial}>*/}
+                {/*            <OtherInput label={'паспорт родителя'} placeholder={'Серия'}/>*/}
+                {/*        </div>*/}
+                {/*        <div className={classes.parent_number}>*/}
+                {/*            <OtherInput placeholder={'Номер'}/>*/}
+                {/*        </div>*/}
+                {/*    </>*/}
 
-                }
+                {/*}*/}
             </div>
 
             {selectAboniment.name !== '' && selectStatus.name !== '' ?
@@ -228,9 +216,9 @@ export const AddAboniment = ({profile}) => {
                     <div className={classes.add_aboniment}>
 
                         <div className={classes.sales_card}>
-                            <div className={classes.procent}>
-                                <OtherInput label={'скидка'}/>
-                            </div>
+                            {/*<div className={classes.procent}>*/}
+                            {/*    <OtherInput label={'скидка'}/>*/}
+                            {/*</div>*/}
                             <div className={`${classes.sale_count}`}>
                             <span className={`${classes.sale_count_text}`}>{selectAboniment.train_quantity > 20 ? <span
                                 dangerouslySetInnerHTML={{__html: '&#8734;'}}/> : selectAboniment.train_quantity} {declOfLessonsNum(selectAboniment.train_quantity)}</span>

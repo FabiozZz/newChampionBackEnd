@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Attempt to paste non-numeric symbol — remove all non-numeric symbols,
                 // formatting will be in onPhoneInput handler
                 input.value = inputNumbersValue;
-                return;
+                return null;
             }
         }
     }
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return input.value = "";
         }
 
-        if (input.value.length != selectionStart) {
+        if (input.value.length !== selectionStart) {
             // Editing in the middle of input, not last symbol
             if (e.data && /\D/g.test(e.data)) {
                 // Attempt to input non-numeric symbol
@@ -42,8 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (["7", "8", "9"].indexOf(inputNumbersValue[0]) > -1) {
-            if (inputNumbersValue[0] == "9") inputNumbersValue = "7" + inputNumbersValue;
-            var firstSymbols = (inputNumbersValue[0] == "8") ? "8" : "+7";
+            if (inputNumbersValue[0] === "9") inputNumbersValue = "7" + inputNumbersValue;
+            var firstSymbols = (inputNumbersValue[0] === "8") ? "8" : "+7";
             formattedInputValue = input.value = firstSymbols + " ";
             if (inputNumbersValue.length > 1) {
                 formattedInputValue += '(' + inputNumbersValue.substring(1, 4);
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var onPhoneKeyDown = function (e) {
         // Clear input after remove last symbol
         var inputValue = e.target.value.replace(/\D/g, '');
-        if (e.keyCode == 8 && inputValue.length == 1) {
+        if (e.keyCode === 8 && inputValue.length === 1) {
             e.target.value = "";
         }
     }

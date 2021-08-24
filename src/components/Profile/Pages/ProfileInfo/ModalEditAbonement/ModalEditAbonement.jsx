@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import { Modal } from '../../../../../utils/Modal/Modal';
 import { OtherInput } from '../../../../../utils/OtherInput/OtherInput';
 import { UserInfo } from '../UserInfo/UserInfo';
 import classes from './modal_edit.module.css';
-import { SelectFilial } from '../../../../Add/common/TestLesson/SelectFilial';
 import separate from '../../../../../assets/images/deviderParent.svg';
 import { AbonimentType } from '../../../../Clients/FilterClientSection/AbonimentType/AbonimentType';
 import { SelectStatus } from '../SelectStatus/SelectStatus';
-import { declOfNum } from '../AbonimentInfo';
 import { declOfLessonsNum, declOfWeekNum } from '../../../../../helpers/common';
 import success_edit from "../../../../../assets/images/successAbonement.svg";
 import edit from "../../../../../assets/images/editAboniment.svg";
@@ -15,7 +12,7 @@ import {SelectGroup} from "../AddAboniment/SelectGroup/SelectGroup";
 import {DataPicker} from "../../../../../utils/DataPicker/DataPicker";
 import {Button} from "../../../../../utils/Buttons/Button";
 import modal_devider from "../../../../../assets/images/modal_devider.svg";
-import {SelectCouch} from "../../../../TimeTable/FilterSection/SelectCouch/SelectCouch";
+import {SelectCouch} from "../AddAboniment/SelectCouch/SelectCouch";
 
 export const ModalEditAbonement = ({ profile, type, change,toggleModal}) => {
     const { user } = profile;
@@ -140,11 +137,11 @@ export const ModalEditAbonement = ({ profile, type, change,toggleModal}) => {
                 }
                 <img width={500} src={separate} alt="separate"/>
                 <div className={classes.block_one}>
-                    <DataPicker label={"Заморозить абонимент"}/>
+                    <DataPicker label={"Заморозить абонемент"}/>
                     <span className={classes.freeze_text_mute}>Доступно <b>3</b> заморозки тренеровок</span>
                 </div>
                 <div className={classes.end_btn}>
-                    <Button click={toggleModal} factor={'danger'} text={'отменить'}/>
+                    <Button click={()=>toggleModal(false)} factor={'danger'} text={'отменить'}/>
                     <Button click={submitData} factor={'success'} text={'сохранить'}/>
                 </div>
 

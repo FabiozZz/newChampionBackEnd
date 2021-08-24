@@ -89,7 +89,7 @@ export const FilterClientsSection = () => {
                         <ListType name={'listType'} value={listType.name} setValue={handleChangeFilterDate} label={'тип списка'} data={filterData.types} />
                     </div>
                     <div className={classes.type_aboniment}>
-                        <AbonimentType name={'abonementType'} value={abonementType.name} setValue={handleChangeFilterDate} label={'тип абонимента'} data={filterData.abonement} />
+                        <AbonimentType name={'abonementType'} value={abonementType.name} setValue={handleChangeFilterDate} label={'тип абонемента'} data={filterData.abonement} />
                     </div>
                     <div className={classes.couch}>
                         <CouchList name={'couchList'} value={couchList.name} setValue={handleChangeFilterDate} label={'тренер'} data={filterData.couch} />

@@ -2,19 +2,28 @@
     padding: 8px 16px;
     font-family: 'SF Pro Display', sans-serif;
     font-style: normal;
+    height: 40px;
     font-weight: normal;
     font-size: 16px;
     line-height: 24px;
     border-radius: 5px;
     box-sizing: border-box;
+    border: 1px solid #BFC5D2;
 }
 .active {
     background: #43BF41;
-    border: 1px solid #BFC5D2;
     color: #FFFFFF;
 }
 .disabled {
     background: #FFFFFF;
-    border: 1px solid #BFC5D2;
     color: #BFC5D2;
 }
+.danger{
+    background: #E50E0F;
+    color: #FFFFFF;
+    border: 1px solid transparent !important;
+}
+.danger path {
+    fill: white;
+}
+

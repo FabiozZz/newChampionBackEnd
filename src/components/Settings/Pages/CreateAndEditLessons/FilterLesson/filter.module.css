@@ -1,0 +1,22 @@
+.wrapper {
+    background-color: #fff;
+    margin: 0 -32px;
+    grid-column: 1/13;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content;
+    padding: 32px;
+    grid-gap: 24px;
+}
+.item{
+    padding-right: 8px;
+}
+.item:last-child{
+    padding: 0;
+}
+.btn_group{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+}

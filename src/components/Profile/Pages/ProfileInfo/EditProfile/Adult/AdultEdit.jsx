@@ -8,7 +8,8 @@ import { EndBtnGroup } from '../../../../../Add/common/EndBtnGroup/EndBtnGroup';
 import { useHistory } from 'react-router';
 import Api from '../../../../../../Api/Api';
 import { useDispatch } from 'react-redux';
-import { change_data_profile } from '../../../../../../Acnions/profileActions';
+import { change_data_profile } from '../../../../../../Actions/profileActions';
+import moment from "moment";
 
 export const AdultEdit = ({ user }) => {
 
@@ -37,7 +38,11 @@ export const AdultEdit = ({ user }) => {
 
     const handleSubmit = async(e)=>{
         e.preventDefault();
-        await Api.editProfile(user.id,client).then(r=>{
+        let uploadData = {
+            ...client,
+            date_of_birth: moment(client.date_of_birth).format('YYYY-MM-DD')
+        }
+        await Api.editProfile(user.id,uploadData).then(r=>{
             dispatch(change_data_profile(r.data))
             history.push(`/profile/${r.data.id}`)
         })
@@ -64,7 +69,7 @@ export const AdultEdit = ({ user }) => {
                             <OtherInput label={'отчество'} setValue={handleChangeClientData} name={'middle_name'} value={client.middle_name} />
                         </div>
                         <div className={`${classes.date_of_birth}`}>
-                            <DataPicker label={'дата рождения'} setValue={handleChangeDateClientData} value={client.date_of_birth} />
+                            <DataPicker label={'дата рождения'} setValue={handleChangeDateClientData} value={moment(client.date_of_birth).format('DD.MM.YYYY')} />
                         </div>
                         <div className={`${classes.phone_number}`}>
                             <OtherInput label={'номер телефона'} setValue={handleChangeClientData} name={'phone_number'} value={client.phone_number} />

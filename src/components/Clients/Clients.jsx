@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from 'react';
+/**@namespace Clients*/
+
+import React, {useEffect, useState} from 'react';
 import { Redirect } from "../common/Redirect";
 import { FilterClientsSection } from "./FilterClientSection/FilterClientsSection";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import Api from "../../Api/Api";
-import { error } from "../TimeTable/TimeTable";
 import {
-    load_abonement_for_all, load_clients_for_all, load_couch_for_all, load_filial_for_all,
-    load_group_for_all,
-    load_sort_list_for_all,
-    load_status_list_for_all,
-    load_types_list_for_all
-} from "../../Acnions/clientsActions";
+    load_clients_for_all,
+} from "../../Actions/clientsActions";
 import { SortTable } from './SortTable/SortTable';
 import { ClientsColumn } from "./SortTable/ClientsColumn/ClientsColumn";
 import { ClientsRow } from "./SortTable/ClientsRow/ClientsRow";
@@ -19,6 +16,10 @@ import classes from './clients.module.css';
 import HeaderNav from '../common/HeaderNav';
 import { Skeleton } from 'antd';
 
+/**
+ * @returns {React.Element}
+ * @constructor
+ */
 export const Clients = () => {
 
     const [load,setLoad] = useState(false);
@@ -39,8 +40,7 @@ export const Clients = () => {
         let source = axios.CancelToken.source();
         setLoad(true);
         (async () => {
-            await Api.getAllClients().then(r => {
-                console.log(r)
+            await Api.getAllClients(source.token).then(r => {
                 dispatch(load_clients_for_all(r.data));
             });
             // await Api.getTypeList(source.token).then(r => {
@@ -67,7 +67,7 @@ export const Clients = () => {
             await setLoad(false)
         })().catch(e => {
             if (axios.isCancel(e)) {
-                error(e.message);
+                console.log(e)
             }
         });
         return () => source.cancel('Операция прервана');

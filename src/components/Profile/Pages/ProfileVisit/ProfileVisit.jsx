@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { DataPickerRange } from '../../../../utils/DataPickerRange/DataPickerRange';
 import { OtherInput } from '../../../../utils/OtherInput/OtherInput';
-import HeaderNav from '../../../common/HeaderNav';
 import classes from './visit.module.css';
 
-export const ProfileVisit = ({ profile }) => {
+export const ProfileVisit = () => {
 
-    const [date, setDate] = useState({
+    const [date/*, setDate*/] = useState({
         from: '',
         to: ''
     })
@@ -24,13 +23,13 @@ export const ProfileVisit = ({ profile }) => {
             <div className={classes.wrapper_result}>
                 <p className={classes.title}>история посещений</p>
                 <div className={classes.wrapper_table}>
-                    <p className={classes.table_caption}>Куплено абониментов: <span className={classes.table_period}>12</span></p>
+                    <p className={classes.table_caption}>Куплено абонементов: <span className={classes.table_period}>12</span></p>
                     <table className={classes.table}>
                         <thead>
                             <tr>
                                 <th>&#x2116;</th>
                                 <th>занятие</th>
-                                <th>абонимент</th>
+                                <th>абонемент</th>
                                 <th>статус</th>
                                 <th>дата и время</th>
                                 <th colSpan={2}>отмечен</th>

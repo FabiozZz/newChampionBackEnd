@@ -11,28 +11,28 @@ import {
 console.log(LOAD_PROFILE_FILIAL);
 const initialState = {
     user: {
-        id: 21,
-        parents: [],
-        club_card: {
-            id: 9,
-            train_balance: 0,
-            valid_from: null,
-            valid_until: null,
-            personal_discount: 0,
-            level: null,
-            rate: null
-        },
-        train_group: null,
-        train_trainer: null,
-        first_name: 'Теодор',
-        middle_name: 'Пучкий',
-        last_name: 'Адалай',
-        date_of_birth: '1300-10-21',
-        address: 'ул.Не важно д.1 кор.1 кв.1',
-        in_archive: false,
-        phone_number: '89999999999',
-        email: '',
-        is_adult: true
+        // id: 21,
+        // parents: [],
+        // club_card: {
+        //     id: 9,
+        //     train_balance: 0,
+        //     valid_from: null,
+        //     valid_until: null,
+        //     personal_discount: 0,
+        //     level: null,
+        //     rate: null
+        // },
+        // train_group: null,
+        // train_trainer: null,
+        // first_name: 'Теодор',
+        // middle_name: 'Пучкий',
+        // last_name: 'Адалай',
+        // date_of_birth: '1300-10-21',
+        // address: 'ул.Не важно д.1 кор.1 кв.1',
+        // in_archive: false,
+        // phone_number: '89999999999',
+        // email: '',
+        // is_adult: true
     },
     typeAboniment: [],
     status: [],

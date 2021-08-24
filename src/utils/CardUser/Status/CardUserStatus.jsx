@@ -5,18 +5,18 @@ import classes from './cardUserStatus.module.css';
 /**
  * вспомогательный компонент для визуального отображения статуса клиента
  * @param cardStatusName имя статуса
- * @param cardFrom срок абонимента от ...
- * @param cardTo срок абонимента до ...
- * @param lessons количество доступных занятий
- * @param status числовое отображение статуса, количество купленных абониментов
+ // * @param cardFrom срок абонемента от ...
+ // * @param cardTo срок абонемента до ...
+ // * @param lessons количество доступных занятий
+ * @param status числовое отображение статуса, количество купленных абонементов
  * @param style объект стилей
- * @param danger булевое значение, выгорает абонимент
- * @param freeze булевое значение, заморожен ли абонимент
+ * @param danger булевое значение, выгорает абонемент
+ * @param freeze булевое значение, заморожен ли абонемент
  * @param classStatus строка, класс для оболлочки карточки
  * @returns {JSX.Element}
  * @constructor
  */
-export const CardUserStatus = ({abonimentName,cardStatusName,cardFrom,cardTo,lessons,status, style,danger,freeze, classStatus=''}) => {
+export const CardUserStatus = ({/*abonimentName,cardStatusName,cardFrom,cardTo,lessons,*/status, style,danger,freeze, classStatus=''}) => {
 
     let color = status > 0 && status <3 ? '#E0E0E0':
         status >= 3 && status <= 5 ? '#A45640' :

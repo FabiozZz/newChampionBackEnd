@@ -97,7 +97,7 @@ export const SelectGroup = ({required=false,name,value,setValue,label,data,...pr
         <option onClick={(e)=> {
             setValue({...item});
             setToggleOptionBox(false);
-        }} value={item} className={classes.optionBox__item}>{item.name}</option>
+        }} className={classes.optionBox__item}>{item.name}</option>
     </div>));
 
     return (

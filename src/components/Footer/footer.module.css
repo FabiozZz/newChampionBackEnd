@@ -1,14 +1,10 @@
 .footer {
   z-index: 99999999999999999999999999999999999999;
   height: 72px;
-  background: radial-gradient(
-    circle at calc(100% - 51px) 7px,
-    transparent 43px,
-    white 48px
-  );
   position: relative;
   display: flex;
   justify-content: flex-start;
+  background-color: #fff;
 }
 .footer_wrapper {
 }

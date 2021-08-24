@@ -7,24 +7,25 @@ import { Route, Switch } from "react-router";
 import { Auth } from "./Auth/Auth";
 import { Footer } from "./Footer/Footer";
 import { Container } from "react-bootstrap";
-import { Adult } from "./Add/Adult/Adult";
-import { Kid } from "./Add/Сhild/Kid";
 import { Profile } from "./Profile/Profile";
 import { Clients } from "./Clients/Clients";
-import { TimeTable } from './TimeTable/TimeTable';
 import { EditProfile } from "./Profile/Pages/ProfileInfo/EditProfile/EditProfile";
 import { SideBar } from './SideBar/SideBar';
+import { Settings } from './Settings/Settings';
+import { CreateAndEditLessons } from "./Settings/Pages/CreateAndEditLessons/CreateAndEditLessons";
+import GeneralPage from "./GeneralPage/GeneralPage";
+import Add from "./Add/Add";
+import Edit from "./Edit/Edit";
 
 /**
  * главный компонент содержащий все приложение
  *
- * @returns {JSX.Element}
- * @constructor
+ * @return {JSX.Element}
  */
 function App() {
     /**
      * константа из redux показывает авторизован ли менеджер
-     * @type {boolean|*}
+     * @type {boolean}
      */
     const isAuth = useSelector(state => state.user.isAuth);
     // const [isLoad, setIsLoad] = useState(false);
@@ -86,12 +87,13 @@ function App() {
                     <div className="app-wrapper">
 
                         <Switch>
-                            <Route exact path={'/'} component={TimeTable} />
-                            <Route path={'/add_adult'} component={Adult} />
-                            <Route path={'/add_child'} component={Kid} />
-                            <Route exact path={'/profile/:id/'} component={Profile} />
-                            <Route exact path={'/profile/:id/edit'} component={EditProfile} />
-                            <Route path={'/clients'} component={Clients} />
+                            <Route exact path={'/'} render={()=><GeneralPage/>} />
+                            <Route path={'/add_client'} render={()=><Add/>} />
+                            <Route exact path={'/profile/:id/'} render={()=><Profile/>} />
+                            <Route exact path={'/profile/:id/edit'} render={()=><Edit/>} />
+                            <Route path={'/clients'} render={()=><Clients/>} />
+                            <Route exact path={'/settings'} render={()=><Settings/>} />
+                            <Route path={'/settings/lesson'} render={()=><CreateAndEditLessons/>} />
                         </Switch>
 
                     </div>
