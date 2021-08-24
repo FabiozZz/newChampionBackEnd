@@ -15,6 +15,7 @@ import { Settings } from './Settings/Settings';
 import { CreateAndEditLessons } from "./Settings/Pages/CreateAndEditLessons/CreateAndEditLessons";
 import GeneralPage from "./GeneralPage/GeneralPage";
 import Add from "./Add/Add";
+import Edit from "./Edit/Edit";
 
 /**
  * главный компонент содержащий все приложение
@@ -63,18 +64,18 @@ function App() {
     /**
      * если не авторизован пользователь, то его выбрасывает на экран входа в систему
      */
-    // if (!isAuth) {
-    //     return (
-    //         <BrowserRouter>
-    //             <Container className={'h-100'} fluid={true}>
-    //                 <Header />
-    //                 <div className="app-wrapper_auth">
-    //                     <Auth />
-    //                 </div>
-    //             </Container>
-    //         </BrowserRouter>
-    //     )
-    // }
+    if (!isAuth) {
+        return (
+            <BrowserRouter>
+                <Container className={'h-100'} fluid={true}>
+                    <Header />
+                    <div className="app-wrapper_auth">
+                        <Auth />
+                    </div>
+                </Container>
+            </BrowserRouter>
+        )
+    }
 
 
     return (
@@ -89,7 +90,7 @@ function App() {
                             <Route exact path={'/'} render={()=><GeneralPage/>} />
                             <Route path={'/add_client'} render={()=><Add/>} />
                             <Route exact path={'/profile/:id/'} render={()=><Profile/>} />
-                            <Route exact path={'/profile/:id/edit'} render={()=><EditProfile/>} />
+                            <Route exact path={'/profile/:id/edit'} render={()=><Edit/>} />
                             <Route path={'/clients'} render={()=><Clients/>} />
                             <Route exact path={'/settings'} render={()=><Settings/>} />
                             <Route path={'/settings/lesson'} render={()=><CreateAndEditLessons/>} />

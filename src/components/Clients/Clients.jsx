@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+/**@namespace Clients*/
+
+import React, {useEffect, useState} from 'react';
 import { Redirect } from "../common/Redirect";
 import { FilterClientsSection } from "./FilterClientSection/FilterClientsSection";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,8 +40,7 @@ export const Clients = () => {
         let source = axios.CancelToken.source();
         setLoad(true);
         (async () => {
-            await Api.getAllClients().then(r => {
-                console.log(r)
+            await Api.getAllClients(source.token).then(r => {
                 dispatch(load_clients_for_all(r.data));
             });
             // await Api.getTypeList(source.token).then(r => {
@@ -66,6 +67,7 @@ export const Clients = () => {
             await setLoad(false)
         })().catch(e => {
             if (axios.isCancel(e)) {
+                console.log(e)
             }
         });
         return () => source.cancel('Операция прервана');

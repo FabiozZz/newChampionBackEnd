@@ -1,0 +1,339 @@
+.redirect{
+    grid-column: 1/13;
+    padding-left: 16px;
+    /* padding-top: 40px; */
+}
+.wrapper{
+    grid-column: 1/13;
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    margin: 0 -14px;
+    padding-bottom: 90px;
+    grid-gap: 16px 24px;
+}
+/*.wrapper_adult{*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    align-items: center;*/
+/*    padding: 40px 24px;*/
+
+/*}*/
+/*.wrapper_adult__svg{*/
+/*    cursor: pointer;*/
+/*    padding: 16px 16px;*/
+/*}*/
+/*.wrapper_adult__title{*/
+/*    font-family: 'Montserrat',sans-serif;*/
+/*    font-style: normal;*/
+/*    font-weight: bold;*/
+/*    font-size: 48px;*/
+/*    line-height: 52px;*/
+/*    color: #2E384D;*/
+/*}*/
+.block_f{
+    grid-column: 1/4;
+    display: flex;
+    width: 174px;
+    height: 224px;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    position: relative;
+    box-shadow: var(--box-shadow);
+    border: none;
+}
+.block_f span{
+    font-family: 'SF Pro Display',sans-serif;
+    padding-top: 16px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #8798AD;
+}
+.block_info_f{
+    grid-column: 4/13;
+    background: #ffffff;
+    padding: 32px 16px;
+    position: relative;
+    box-shadow: var(--box-shadow);
+}
+.block_info{
+    grid-column: 1/13;
+    background: #ffffff;
+    padding: 32px 16px;
+    position: relative;
+    box-shadow: var(--box-shadow);
+}
+.block_info__title{
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #8798AD;
+    padding-bottom: 13px;
+}
+.block_info__item{
+    display: grid;
+    align-items: end;
+    grid-template-columns: repeat(12,1fr);
+    grid-gap: 16px 24px;
+}
+
+.group{
+    grid-column: 1 / span 6;
+}
+.filial{
+    grid-column: span 6/ span 12;
+}
+.picker{
+    grid-column: 1/span 5;
+}
+.button{
+    grid-column: 1 / 5;
+}
+
+.last_name{
+    grid-column: 1 / 7;
+}
+.first_name{
+    grid-column: 7 / 13;
+}
+.middle_name{
+    grid-column: 1 / 7;
+}
+.date_of_birth{
+    grid-column: 1 / 7;
+}
+.phone_number{
+    grid-column:  1  / 7;
+}
+.serial{
+    grid-column: 1 / 6;
+}
+.number{
+    grid-column: 6 / 13;
+}
+
+.street{
+    grid-column: 1 / 7;
+}
+.house{
+    grid-column: 7 / 9;
+}
+.corspus{
+    grid-column: 9 / 11;
+}
+.room{
+    grid-column: 11 / 13;
+}
+
+.sale{
+    grid-column:1/7;
+}
+
+
+.last_name_parent{
+    grid-column: 1 / 5;
+}
+.first_name_parent{
+    grid-column: 5 / 9;
+}
+.middle_name_parent{
+    grid-column: 9 / 13;
+}
+.ho_is{
+    grid-column:1/7;
+}
+.phone_number_parent{
+    grid-column:7/13;
+}
+.serial_parent{
+    grid-column: 1 / 6;
+}
+.number_parent{
+    grid-column: 6 / 13;
+}
+
+
+@media screen and (min-width: 1440px){
+    .redirect{
+        padding-top: 40px;
+    }
+    .block_info__item{
+        grid-template-columns: repeat(11,1fr);
+    }
+    .block_info{
+        padding: 32px 25px;
+    }
+    .group{
+        grid-column: 1 / 4;
+    }
+    .filial{
+        grid-column: 4/ 7;
+    }
+    .picker{
+        grid-column: 7/10;
+    }
+    /*.button{*/
+    /*    grid-column: 10 / 12;*/
+    /*}*/
+
+    .last_name{
+        grid-column: 1 / 4;
+    }
+    .first_name{
+        grid-column: 4 / 7;
+    }
+    .middle_name{
+        grid-column: 7/9;
+    }
+    .date_of_birth{
+        grid-column: 9/11;
+    }
+    .phone_number{
+        grid-column:  1  / 5;
+    }
+    .serial{
+        grid-column: 1 / 6;
+    }
+    .number{
+        grid-column: 6 / 13;
+    }
+
+    .street{
+        grid-column: 1 / 4;
+    }
+    .house{
+        grid-column: 4 / 5;
+    }
+    .corspus{
+        grid-column: 5 / 6;
+    }
+    .room{
+        grid-column: 6 / 7;
+    }
+
+    .sale{
+        grid-column:1/4;
+    }
+
+    .last_name_parent{
+        grid-column: 1 / 4;
+    }
+    .first_name_parent{
+        grid-column: 4 / 7;
+    }
+    .middle_name_parent{
+        grid-column: 7 / 9;
+    }
+    .ho_is{
+        grid-column:9/11;
+    }
+    .phone_number_parent{
+        grid-column:1/4;
+    }
+    .serial_parent{
+        grid-column: 1 / 6;
+    }
+    .number_parent{
+        grid-column: 6 / 13;
+    }
+
+}
+.block_info__input{
+    line-height: 24px;
+    font-family: 'SF Pro Display', sans-serif;
+    color:#BFC5D2;
+    background: #F4F6FC;
+    border: 1px solid #BFC5D2;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 100%;
+    height: 40px;
+    padding: 8px 16px;
+    font-size: 16px;
+}
+.block_info__input:focus {
+    border: 1px solid #8798AD;
+    outline: none;
+    color:#69707F;
+}
+.block_info__input::placeholder {
+    color: #BFC5D2;
+    font-family: inherit;
+    font-weight: inherit;
+}
+.block_info__btn{
+    padding-top: 34px;
+}
+.block_info__parent_block{
+    position: relative;
+}
+.block_info__added{
+    padding-top: 88px;
+}
+.block_info__separate{
+    position: absolute;
+    padding-top: 42px;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.block_info__remove_parents{
+    position: absolute;
+    cursor: pointer;
+    margin-top: 46px;
+    top: 0;
+    right: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.polytic{
+    grid-column: 1/13;
+    margin: 24px 0 24px 16px;
+}
+.polytic__block{
+    padding: 6px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.polytic__text{
+    margin-left: 9px;
+    display: block;
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    color: #8798AD;
+}
+.polytic__sub_text {
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    text-decoration: underline;
+
+}
+.btn_group{
+    grid-column: 1/13;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
+    margin-bottom: 150px;
+}
+.btn_group__item{
+    display: flex;
+    justify-content: center;
+}

@@ -1,4 +1,4 @@
-/***/
+/**@memberOf Clients.SortTable*/
 import React from 'react';
 import classes from "./sort.module.css";
 import {SortSelect} from './SortSelect/SortSelect';

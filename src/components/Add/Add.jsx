@@ -1,3 +1,5 @@
+/** @namespace Add*/
+
 import React, {createContext, useEffect, useRef, useState} from 'react';
 import classes from './add.module.css';
 import {OtherInput} from "../../utils/OtherInput/OtherInput";
@@ -6,39 +8,27 @@ import camera from './camera (1) 1.png';
 import {Redirect} from "../common/Redirect";
 import moment from "moment";
 import {Button} from "../../utils/Buttons/Button";
-import {Adult} from "./Adult/Adult";
 import TrialSectionSection from "./common/TrialSectionSection/TrialSectionSection";
 import {AddresSection} from "./common/AddresSection/AddresSection";
 import {OterSection} from "./common/OterSection/OterSection";
-import {Kid} from "./Сhild/Kid";
 import {RulesSection} from "./common/RulesSection/RulesSection";
-import {EndBtnGroup} from "./common/EndBtnGroup/EndBtnGroup";
 import {useHistory} from "react-router";
 import {Modal} from "../../utils/Modal/Modal";
 import ModalPhoto from "./ModalPhoto/ModalPhoto";
+import PhoneSection from "./PhoneSection/PhoneSection";
+import {EndBtnGroup} from "../common/EndBtnGroup/EndBtnGroup";
+import {ParentsBlock} from "../common/ParentsBlock/ParentsBlock";
 
-export const ContextAdult = createContext();
-export const ContextChild = createContext();
+export const ContextCommon = createContext();
 
 const Add = () => {
 
     /* common */
-    // const [image, setImage] = useState({image:null,navigator:( navigator.getUserMedia ||
-    //         navigator.webkitGetUserMedia ||
-    //         navigator.mozGetUserMedia ||
-    //         navigator.msGetUserMedia)});
-    // const handleChangeImage = (data) => setImage(prevState=>({...prevState,image:data}));
+    const [image, setImage] = useState(null);
+    const handleChangeImage = (data) => setImage(data);
 
 
     const [modal, setModal] = useState(false);
-    const toggleModal = () => {
-        setModal(!modal);
-        // if (modal) {
-        //     image.navigator.mediaDevices.getUserMedia({video: true, audio: false}).then(stream => {
-        //         stream.getTracks().forEach(track=>track.stop())
-        //     });
-        // }
-    };
 
     /**
      * локальный стейт для храниения/установки персональных данных клиента для PersonalData
@@ -137,6 +127,49 @@ const Add = () => {
         history.goBack();
     };
 
+    /**
+     * локальный стейт для хранения/установки данных для TestLesson
+     */
+    const [testData, setTestData] = useState({
+        filial: { name: '' },
+        group: { name: '' },
+        dateTest: ''
+    });
+    const [filialList, setFilialList] = useState([]);
+
+    /**
+     * прослушивание события ввода данных для TestLesson
+     * @param e
+     */
+    const handleChangeValueGroupTestLesson = (obj) => {
+        setTestData({ ...testData, group: { ...obj } });
+    };
+
+    /**
+     * прослушивание события ввода данных для TestLesson
+     * @param e
+     */
+    const handleChangeValueFilialTestLesson = (obj) => {
+        setTestData({ ...testData, filial: { ...obj } });
+    };
+
+    /**
+     * прослушиване события ввода и выбора дыты для TestLesson
+     * @param data
+     */
+    const handleChangeValueDateTestLesson = (data) => {
+        setTestData({ ...testData, dateTest: data });
+    };
+
+
+
+    /**/
+
+    /* Adult */
+
+    const [phone_number, setPhone] = useState('');
+
+    const handleChangePhone = (phone) => {setPhone(phone.target.value)}
 
     /**/
 
@@ -146,31 +179,32 @@ const Add = () => {
     /**
      * локальный стейт для хранения/установки массива данных о родителях клиента
      */
-    // const [parents, setParents] = useState([{}, {}]);
+    const [parents, setParents] = useState([{}, {}]);
 
     /**
      * функция для обновления объекта
      * @param i индекс объекта в массиве
      * @param object новый массив для обновления предидущего
      */
-    // const handleChangeItemParentsBlock = (i, object) => {
-    //     setParents(prevState => [...prevState.slice(0, i), object, ...prevState.slice(i + 1)]);
-    // };
-    //
-    // /**
-    //  * функция добавления нового поустого объекта в массив родителей
-    //  */
-    // const addParentsData = () => {
-    //     setParents(prevState => [...prevState, {}]);
-    // };
-    //
-    // /**
-    //  * удаление объекта из массива
-    //  * @param i индекс объекта в массиве который нужно удалить
-    //  */
-    // const removeParentsData = (i) => {
-    //     setParents(parents.filter((e, index) => index !== i));
-    // };
+    const handleChangeItemParentsBlock = (i, object) => {
+        setParents(prevState => [...prevState.slice(0, i), object, ...prevState.slice(i + 1)]);
+    };
+
+    /**
+     * функция добавления нового поустого объекта в массив родителей
+     */
+    const addParentsData = () => {
+        setParents(prevState => [...prevState, {}]);
+    };
+
+    /**
+     * удаление объекта из массива
+     * @param i индекс объекта в массиве который нужно удалить
+     */
+    const removeParentsData = (i) => {
+        setParents(parents.filter((e, index) => index !== i));
+    };
+
     useEffect(() => {
         if (/\d{2}\.\d{2}\.\d{4}/g.test(personalData.date_of_birth)) {
             let dateNow = moment();
@@ -184,18 +218,22 @@ const Add = () => {
     return (
         <>
             {modal&&
-            <Modal size={'lg'} toggle={toggleModal}>
-                    <ModalPhoto modal={modal}/>
+            <Modal size={'sm'} toggle={setModal}>
+                <ModalPhoto toggleModal={setModal} modal={modal} image={image} setImage={handleChangeImage}/>
             </Modal>
             }
-            <form onSubmit={() => console.log('submit')} className={classes.wrapper}>
+            <form onSubmit={(e) => {
+                e.preventDefault()
+                console.log('submit')
+            }} className={classes.wrapper}>
 
                 <div className={classes.redirect}>
                     <Redirect title={"Регистрация клиента"} padding={true}/>
                 </div>
-                <div onClick={toggleModal} className={classes.block_f}>
-                    <img  src={camera} alt={''}/>
-                    <span>Добавить фото</span>
+                <div onClick={()=>setModal(true)} className={classes.block_f}>
+                    <img  src={image||camera} alt={'avatar'}/>
+                    {!image&&<span>Добавить фото</span>}
+
                 </div>
 
                 <div className={classes.block_info_f}>
@@ -221,25 +259,32 @@ const Add = () => {
                 </div>
                 {age>0 ?
                     <>
-                        {age > 0 && age < 16 ?
-                            <ContextChild.Provider value={{}}>
-                                <div className={classes.button}>
-                                    <Button size={'default'} text={'добавить справку'} click={() => {
-                                        refFile.current.click();
-                                    }}/>
-                                    <input ref={refFile} name={'health'} type="file" hidden={true}/>
-                                </div>
-                                <TrialSectionSection/>
+                        <ContextCommon.Provider value={{phone_number,
+                            handleChangePhone,handleChangeValueDateTestLesson,testData}}>
 
-                                <Kid/>
-                            </ContextChild.Provider>
-                            : age >= 16 ?
-                                <ContextAdult.Provider value={{}}>
-                                    <Adult/>
+                            {age > 0 && age < 16 ?
+                                <>
+                                    <div className={classes.button}>
+                                        <Button size={'default'} text={'добавить справку'} click={() => {
+                                            refFile.current.click();
+                                        }}/>
+                                        <input ref={refFile} name={'health'} type="file" hidden={true}/>
+                                    </div>
                                     <TrialSectionSection/>
-                                </ContextAdult.Provider>
-                                : null
-                        }
+                                    <ParentsBlock parents={parents}
+                                                  change={handleChangeItemParentsBlock}
+                                                  addParents={addParentsData}
+                                                  removeParents={removeParentsData}
+                                    />
+                                </>
+                                : age >= 16 ?
+                                    <>
+                                        <PhoneSection/>
+                                        <TrialSectionSection/>
+                                    </>
+                                    : null
+                            }
+                        </ContextCommon.Provider>
 
 
                         <AddresSection change={handleChangeAddressComponent} address={address}/>

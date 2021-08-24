@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import classes from "../../../add.module.css";
-import {OtherInput} from "../../../../../utils/OtherInput/OtherInput";
-import {isEmpty} from "../../../../../helpers/common";
-import {MaskInputTel} from "../../../../../utils/MaskInputTel/MaskInputTel";
+import classes from "../../../Add/add.module.css";
+import {OtherInput} from "../../../../utils/OtherInput/OtherInput";
+import {isEmpty} from "../../../../helpers/common";
+import {MaskInputTel} from "../../../../utils/MaskInputTel/MaskInputTel";
 
 /**
  * компонент визуализация ввода данных
@@ -14,41 +14,23 @@ import {MaskInputTel} from "../../../../../utils/MaskInputTel/MaskInputTel";
  * @returns {JSX.Element}
  * @constructor
  */
-export const AddParent = ({data,change,index,passport=false}) => {
+export const AddParent = ({data,change,index}) => {
 
     /**
      * локальный стейт, в случае если объект data приходит не пустой, заполняется данными из data
      */
-    let initialState;
-    if (passport) {
-        initialState = {
+    let initialState = {
             last_name: data.last_name||'',
             first_name: data.first_name||'',
             middle_name: data.middle_name||'',
             who: data.who||'',
             phone_number: data.phone_number||'',
-            // passport: {...data.passport}
         };
-    }else{
-        initialState = {
-            last_name: data.last_name||'',
-            first_name: data.first_name||'',
-            middle_name: data.middle_name||'',
-            who: data.who||'',
-            phone_number: data.phone_number||''
-        };
-    }
     const [userDate, setUserDate] = useState(initialState);
 
     const changeInputs = (e) =>{
         setUserDate(prevState => ({...prevState, [e.target.name]: e.target.value}));
-        // Object.assign(data,userDate);
     }
-
-    // const changeInputsPassport = (e) =>{
-    //     setUserDate(prevState => ({...prevState, passport: {...prevState.passport,[e.target.name]:e.target.value}}));
-    //     // Object.assign(data,userDate);
-    // }
 
     /**
      * эффект отрабатывает один раз при отрисовке компонента,
@@ -86,19 +68,7 @@ export const AddParent = ({data,change,index,passport=false}) => {
             <div className={classes.phone_number_parent}>
                 <MaskInputTel name={'phone_number'} value={data.phone_number} setValue={changeInputs} required={true} label={'номер телефона'}/>
             </div>
-            {/* {passport&&
-                <>
-                    <div className={classes.serial_parent}>
-                        <MaskInput setValue={changeInputsPassport} name={'serial'} value={data.passport.serial}
-                                   mask={'9999'}
-                                   label={'паспорт'} placeholder={'Серия'}/>
-                    </div>
-                    <div className={classes.number_parent}>
-                        <MaskInput value={data.passport.number} setValue={changeInputsPassport} name={'number'}
-                                   mask={'999999999'} placeholder={'Номер'}/>
-                    </div>
-                </>
-            } */}
+
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from "../../add.module.css";
+import classes from "../../edit.module.css";
 import {OtherInput} from "../../../../utils/OtherInput/OtherInput";
 
 /**
@@ -8,7 +8,7 @@ import {OtherInput} from "../../../../utils/OtherInput/OtherInput";
  * @returns {JSX.Element}  jsx
  * @constructor
  */
-export const AddresSection = ({address,change}) => {
+export const EditAddresSection = ({address,change}) => {
     const {
         street,
         house,

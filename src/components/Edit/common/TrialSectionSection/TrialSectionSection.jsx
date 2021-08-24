@@ -1,12 +1,11 @@
 import React, {useContext} from 'react';
 import classes from "../../add.module.css";
-import {OtherInput} from "../../../../utils/OtherInput/OtherInput";
 import {DataPicker} from "../../../../utils/DataPicker/DataPicker";
-import {ContextCommon} from "../../Add";
 import SelectGroup from "../../../../utils/SelectGroup/SelectGroup";
+import {ContextCommonEdit} from "../../EditAdd";
 
 const TrialSectionSection = () => {
-    const {handleChangeValueDateTestLesson,testData} = useContext(ContextCommon);
+    const {handleChangeValueDateTestLesson,testData} = useContext(ContextCommonEdit);
     return (
         <div className={classes.block_info}>
             <h3 className={classes.block_info__title}>Пробное занятие</h3>

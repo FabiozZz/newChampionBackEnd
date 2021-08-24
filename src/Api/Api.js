@@ -119,25 +119,29 @@ class Api {
             (r) => r,
             async (error) => {
                 this.refreshToken = localStorage.getItem("refresh_token");
+                console.log(this.refreshToken)
                 if (
-                    !this.token ||
-                    error.message ||
-                    error.response.status !== 401 ||
+                    !this.refreshToken ||
+                    // error.message ||
+                    (error.response.status !== 401 && error.response.status !== 403) ||
                     error.config.retry
                 ) {
+                    // throw error
                     await Promise.reject(error);
                 }
-
+                if (!error.response.status) {
+                    console.log('здесь ошибка')
+                    // throw error
+                }
                 if (!this.refreshRequest) {
                     this.refreshRequest = this.client.post("/refresh-token/", {
                         refresh: this.refreshToken,
                     });
-                    console.log(this.refreshRequest);
                 }
                 const {data} = await this.refreshRequest;
                 this.token = data.access;
-                localStorage.setItem("refresh_token", data.refreshToken);
-                this.refreshToken = data.refreshToken;
+                // localStorage.setItem("refresh_token", data.refreshToken);
+                // this.refreshToken = data.refreshToken;
                 const newRequest = {
                     ...error.config,
                     retry: true,
@@ -397,8 +401,8 @@ class Api {
     }
 
     /* для списка клиентов */
-    async getAllClients() {
-        return await this.client.get("/client/");
+    async getAllClients(token) {
+        return await this.client.get("/client/",{cancelToken: token});
     }
 
     async getTypeList(token) {
@@ -423,9 +427,9 @@ class Api {
     //      this.source.cancel('загрузка отменена');
     // }
     //
-    isCancel(some) {
-        this.client.isCancel(some);
-    }
+    // isCancel(some) {
+    //     this.client.isCancel(some);
+    // }
 
     /* для страницы профиля */
 

@@ -141,7 +141,7 @@ export const ModalEditAbonement = ({ profile, type, change,toggleModal}) => {
                     <span className={classes.freeze_text_mute}>Доступно <b>3</b> заморозки тренеровок</span>
                 </div>
                 <div className={classes.end_btn}>
-                    <Button click={toggleModal} factor={'danger'} text={'отменить'}/>
+                    <Button click={()=>toggleModal(false)} factor={'danger'} text={'отменить'}/>
                     <Button click={submitData} factor={'success'} text={'сохранить'}/>
                 </div>
 

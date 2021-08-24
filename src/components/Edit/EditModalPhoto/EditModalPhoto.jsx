@@ -1,13 +1,13 @@
-import React, {createContext, useEffect, useRef, useState} from 'react';
+import React, {createContext, useRef, useState} from 'react';
 import {Button} from "../../../utils/Buttons/Button";
 import 'react-html5-camera-photo/build/css/index.css';
 import {CropImage} from "./CropImage/CropImage";
 import classes from './photo.module.css';
 import {CameraOn} from "./CameraOn/CameraOn";
 
-export const CameraContext = createContext();
+export const EditCameraContext = createContext();
 
-const ModalPhoto = ({modal,setImage,image,toggleModal}) => {
+const EditModalPhoto = ({modal,setImage,image,toggleModal}) => {
     const [dataUri, setDataUri] = useState(null);
     const [cameraOn,setCameraMode] = useState('off')
 
@@ -60,7 +60,7 @@ const ModalPhoto = ({modal,setImage,image,toggleModal}) => {
                             <CropImage toggle={toggleModal} setImage={setImage} img={dataUri} reboot={() => setDataUri(null)} abort={changePhotoModOff}/>
                         </>
                         :
-                        <CameraContext.Provider value={{dataUri, takePhoto: handleTakePhotoAnimationDone}}>
+                        <EditCameraContext.Provider value={{dataUri, takePhoto: handleTakePhotoAnimationDone}}>
                             {cameraOn === 'off'?
                                 <>
                                     <h3 className={classes.label_header}>добавить фото</h3>
@@ -75,7 +75,7 @@ const ModalPhoto = ({modal,setImage,image,toggleModal}) => {
                                     :null
 
                             }
-                        </CameraContext.Provider>
+                        </EditCameraContext.Provider>
                 }
                 {/*<div className="camera">*/}
                 {/*    <video style={{width:state.width,height:state.height}} onCanPlayCapture={modal?canplay:null} autoPlay={true} ref={video} id="video">Video stream not available.</video>*/}
@@ -104,4 +104,4 @@ const ModalPhoto = ({modal,setImage,image,toggleModal}) => {
     }
 };
 
-export default ModalPhoto;
+export default EditModalPhoto;

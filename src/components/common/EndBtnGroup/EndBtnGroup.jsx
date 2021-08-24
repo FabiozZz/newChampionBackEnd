@@ -1,6 +1,6 @@
 import React from 'react';
-import classes from "../../add.module.css";
-import {Button} from "../../../../utils/Buttons/Button";
+import classes from "../../Add/add.module.css";
+import {Button} from "../../../utils/Buttons/Button";
 
 /**
  * компонент визуализации группы кнопок для сохранения или отмены сохранения

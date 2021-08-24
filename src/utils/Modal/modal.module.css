@@ -14,7 +14,7 @@
     width: 546px;
     display: grid;
     grid-auto-flow: row;
-    padding-top: 32px;padding-bottom: 35px;
+    padding-top: 32px;padding-bottom: 32px;
 }
 .wrapper_lg{
     position: relative;
@@ -29,4 +29,5 @@
     cursor:pointer;
     position:absolute;
     right: 10px;top: 10px;
+    z-index:99;
 }

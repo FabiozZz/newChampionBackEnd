@@ -11,8 +11,8 @@ import close from '../../assets/images/close_modal.svg';
 export const Modal = ({toggle,children,size='sm'}) => {
     const sizeWindow = size === 'lg' ? classes.wrapper_lg : classes.wrapper_sm;
     return (
-        <div className={classes.back}>
-            <div className={sizeWindow}>
+        <div className={classes.back} onClick={()=>toggle(false)}>
+            <div className={sizeWindow} onClick={(e)=>e.stopPropagation()}>
                 <img onClick={toggle} className={classes.close} src={close} alt="close"/>
                 {children}
             </div>

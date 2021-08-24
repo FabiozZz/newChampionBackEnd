@@ -1,3 +1,7 @@
+/**
+ * @memberOf Clients.SortTable.SortSelect
+ * */
+
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {getKeyByValue} from '../../../../helpers/sortSelect/sort';

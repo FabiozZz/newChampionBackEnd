@@ -1,10 +1,9 @@
 import React from 'react';
-import classes from '../../add.module.css';
-import {Button} from "../../../../utils/Buttons/Button";
+import classes from '../../Add/add.module.css';
+import {Button} from "../../../utils/Buttons/Button";
 import {AddParent} from "./AddParent/AddParent";
-import separate from '../../../../assets/images/blockInfoSeparate.svg';
-import remove from '../../../../assets/images/removeParent.svg';
-import {isEmpty} from "../../../../helpers/common";
+import separate from '../../../assets/images/blockInfoSeparate.svg';
+import remove from '../../../assets/images/removeParent.svg';
 
 /**
  * компонент прослойка
@@ -35,7 +34,7 @@ export const ParentsBlock = ({parents,addParents,removeParents,change}) => {
 
                         </>
                         }
-                        <AddParent passport={!isEmpty(e.passport)} data={e} index={index} change={change}/>
+                        <AddParent data={e} index={index} change={change}/>
                     </div>
                 )
             })}
