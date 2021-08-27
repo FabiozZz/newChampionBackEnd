@@ -1,2 +1,9 @@
-export const LOG_IN = 'LOG_IN';
+export const LOG_IN_APP = 'LOG_IN_APP';
+export const LOG_IN_APP_SUCCESS = 'LOG_IN_APP_SUCCESS';
+export const LOG_IN_APP_FAILURE = 'LOG_IN_APP_FAILURE';
 export const LOG_OUT = 'LOG_OUT';
+
+export const CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION';
+
+export const TOKEN_VERIFY = 'TOKEN_VERIFY';
+export const TOKEN_REFRESH = 'TOKEN_REFRESH';

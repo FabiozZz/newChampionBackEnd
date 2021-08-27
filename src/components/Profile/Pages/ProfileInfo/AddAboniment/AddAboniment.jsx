@@ -15,8 +15,12 @@ import {SelectCouch} from "./SelectCouch/SelectCouch";
 import {SelectGroup} from "./SelectGroup/SelectGroup";
 // import moment from "moment";
 import {useDispatch} from "react-redux";
-import {load_profile_user/*, upload_profile_club_card*/} from "../../../../../Actions/profileActions";
+import {
+    edit_profile,
+    load_profile_user/*, upload_profile_club_card*/
+} from "../../../../../store/Actions/profileActions";
 import {SuccessContext} from "../../../SuccessContext";
+import {loggedOutInApp} from "../../../../../store/Sagas/generalPagesSagas";
 
 
 export const AddAboniment = ({profile}) => {
@@ -129,18 +133,20 @@ export const AddAboniment = ({profile}) => {
             dopData = {};
         }
         let uploadData = {
+            id:user.club_card.id,
             rate_id:selectAboniment.id,
             level_id:selectStatus.id,
             train_group:selectGroup.id,
             quantity:countCard,
             ...dopData
         };
-        console.log(uploadData)
-        await Api.editProfileAbonement(user.club_card.id, uploadData).then(r => {
-            dispatch(load_profile_user(r.data))
+        dispatch(edit_profile(uploadData));
+        // await Api.editProfileAbonement(user.club_card.id, uploadData).then(r => {
+        //     console.log(r);
+        //     // dispatch(load_profile_user(r.data))
             handleChangeSuccess();
-
-        });
+        //
+        // });
         // await dispatch(upload_profile_club_card(uploadData));
 
     };

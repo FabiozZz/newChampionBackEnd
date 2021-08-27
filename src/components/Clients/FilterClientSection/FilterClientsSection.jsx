@@ -10,6 +10,7 @@ import { GroupList } from "./GroupList/GroupList";
 import { BtnGroup } from "./BtnGroup/BtnGroup";
 import { StatusFilterSection } from "./StatusFilterSection/StatusFilterSection";
 import { AnchorBox } from "../AnchorBox/AnchorBox";
+import SelectGroup from "../../../utils/SelectGroup/SelectGroup";
 
 export const FilterClientsSection = () => {
 
@@ -98,7 +99,7 @@ export const FilterClientsSection = () => {
                         <FilialList name={'filialList'} value={filialList.name} setValue={handleChangeFilterDate} label={'филиалы'} data={filterData.filial} />
                     </div>
                     <div className={classes.course}>
-                        <GroupList name={'groupList'} value={groupList.name} setValue={handleChangeFilterDate} label={'единоборства'} data={filterData.group} />
+                        <SelectGroup name={'groupList'} value={groupList.name} setValue={handleChangeFilterDate} label={'единоборства'} data={filterData.group} />
                     </div>
                     <div className={classes.btn}>
                         <BtnGroup is_Adult={isAdult} toggleActive={setIsAdult} />

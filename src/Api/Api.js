@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios, {CancelToken} from "axios";
+import {CANCEL} from "redux-saga";
 // import MockAdapter from "axios-mock-adapter";
 //
 // import clientsList from './jsonData/clientsList.json';
@@ -92,17 +93,22 @@ class Api {
      */
     constructor() {
         this.client = axios.create();
-        this.token = null;
-        this.refreshToken = null;
+        this.token = localStorage.getItem('access_token');
+        this.refreshToken = localStorage.getItem('refresh_token');
+
+        this.source = axios.CancelToken.source();
 
         this.refreshRequest = null;
 
         this.client.defaults.baseURL = "http://127.0.0.1:8000/api/v1";
-        console.log(this.token)
         this.client.interceptors.request.use(
             (config) => {
                 if (this.token === null) {
-                    return {...config};
+                    // if (!token) {
+                        return {...config};
+                    // }
+                    // this.setToken(token);
+                    // console.log(token)
                 }
                 const newConfig = {
                     ...config,
@@ -119,7 +125,7 @@ class Api {
             (r) => r,
             async (error) => {
                 this.refreshToken = localStorage.getItem("refresh_token");
-                console.log(this.refreshToken)
+                // console.log(this.refreshToken)
                 if (
                     !this.refreshToken ||
                     // error.message ||
@@ -133,13 +139,13 @@ class Api {
                     console.log('здесь ошибка')
                     // throw error
                 }
-                if (!this.refreshRequest) {
-                    this.refreshRequest = this.client.post("/refresh-token/", {
-                        refresh: this.refreshToken,
-                    });
-                }
-                const {data} = await this.refreshRequest;
-                this.token = data.access;
+                // if (!this.refreshRequest) {
+                //     this.refreshRequest = this.client.post("/refresh-token/", {
+                //         refresh: this.refreshToken,
+                //     });
+                // }
+                // const {data} = await this.refreshRequest;
+                // this.token = data.access;
                 // localStorage.setItem("refresh_token", data.refreshToken);
                 // this.refreshToken = data.refreshToken;
                 const newRequest = {
@@ -159,6 +165,13 @@ class Api {
     getToken() {
         return this.token;
     }
+    setRefreshToken(some) {
+        this.refreshToken = some;
+    }
+
+    getRefreshToken() {
+        return this.refreshToken;
+    }
 
     /* основные api */
 
@@ -166,21 +179,33 @@ class Api {
      * Вход в приложение
      * Отправляет данные пользователя {email,password}
      * Получает пару токенов и пользователя
-     * @param login
-     * @param password
      * @returns {Promise<*>}
+     * @param {username,password} admin
      */
-    async login({username, password}) {
+    async reLogin() {
+        const res = await this.client.post("/refresh-token/", {
+            refresh: this.refreshToken,
+        })
+        console.log('вызван reLogin')
+        this.setToken(await res.data.access);
+        console.log('после reLogin\'a получен токен', this.getToken());
+        localStorage.setItem('access_token', await res.data.access)
+        return res.data
+    }
+    async login(admin) {
+        console.log(admin)
         const res = await this.client
             .post("/login/", {
-                username: username,
-                password: password,
+                username: admin.username,
+                password: admin.password,
             });
         console.log('вызван логин')
         this.setToken(await res.data.access);
+        this.setRefreshToken(await res.data.access);
         console.log('после логина получен токен', this.getToken());
+        console.log('после логина получен рефрешь токен', this.getRefreshToken());
         localStorage.setItem('refresh_token', await res.data.refresh)
-        this.refreshToken = localStorage.getItem('refresh_token');
+        localStorage.setItem('access_token', await res.data.access)
         return res.data
     }
 
@@ -250,14 +275,25 @@ class Api {
           }
       */
 
+    async tokenVerify() {
+        const token = this.getToken();
+        return await this.client.post('/token-verify/', {token: token});
+    }
+
+    async tokenRefresh() {
+        const refresh = this.getRefreshToken();
+        return await this.client.post("/refresh-token/",{refresh})
+    }
+
     /**
      * Выход из приложения
      * Удаляются все токены и стирается currentUser из Redux
      */
     logout() {
+        localStorage.removeItem("refresh_token");
+        localStorage.removeItem("access_token");
         this.token = null;
         this.refreshToken = null;
-        localStorage.removeItem("refresh_token");
     }
 
     /* главная страница */
@@ -401,8 +437,12 @@ class Api {
     }
 
     /* для списка клиентов */
-    async getAllClients(token) {
-        return await this.client.get("/client/",{cancelToken: token});
+    async getAllClients() {
+        const source = CancelToken.source()
+        const request = await this.client.get("/client/", {cancelToken: source.token});
+        // return await this.client.get("/client/", {cancelToken: token});
+        request[CANCEL] = () => source.cancel();
+        return request;
     }
 
     async getTypeList(token) {
@@ -423,9 +463,9 @@ class Api {
      * Отмена операции запроса для axios
      * @returns {void}
      */
-    //  abortAxiosCalling(){
-    //      this.source.cancel('загрузка отменена');
-    // }
+     abortAxiosCalling(){
+         this.source.cancel('загрузка отменена');
+    }
     //
     // isCancel(some) {
     //     this.client.isCancel(some);

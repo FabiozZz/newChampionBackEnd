@@ -3,6 +3,7 @@ import React from 'react';
 import classes from "./sort.module.css";
 import {SortSelect} from './SortSelect/SortSelect';
 import cn from "classnames";
+import {declOfResults} from "../../../helpers/common";
 
 /**
  * @param {Array<object>} clients массив клиентов для отображения общего количества клиентов
@@ -13,10 +14,11 @@ import cn from "classnames";
  * @constructor
  */
 export const SortTable = ({clients,active,row,column}) => {
+
     return (
         <div className={classes.sort_section}>
             <div className={classes.sort_section__sort}>
-                <span className={classes.text_muted}>Показано: <span className={classes.text_result}>{clients.length} результатов</span></span>
+                <span className={classes.text_muted}>Показано: <span className={classes.text_result}>{clients?.length||0} {declOfResults(clients?.length||0)}</span></span>
                 <span className={classes.text_muted}>Сортровать по: <SortSelect/></span>
             </div>
             <div className={classes.sort_section_factor}>

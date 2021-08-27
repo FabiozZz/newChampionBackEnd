@@ -5,7 +5,7 @@ import {
     LOAD_COUCH_LESSON,
     LOAD_DATA,
     LOAD_GROUP_LESSON, REMOVE_DATA
-} from "../constants/createLessonsConstants";
+} from "../../constants/createLessonsConstants";
 
 export const download_data = (lessons)=> ({type: LOAD_DATA,lessons})
 

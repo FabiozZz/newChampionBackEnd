@@ -4,9 +4,9 @@ import {
     LOAD_CLIENTS,
     LOAD_COUCH,
     LOAD_GROUP
-} from "../constants/timeTableConstants";
-import { isEmpty } from "../helpers/common";
-import {FILTERED_CLIENTS_FIO} from "../constants/profileConstant";
+} from "../../constants/timeTableConstants";
+import { isEmpty } from "../../helpers/common";
+import {FILTERED_CLIENTS_FIO} from "../../constants/profileConstant";
 
 const initialState = {
     clients: [],

@@ -10,7 +10,7 @@ import moment from "moment";
 import axios from "axios";
 import Api from "../../../../Api/Api";
 import {useDispatch} from "react-redux";
-import {download_couch_data, download_data, download_group_data} from "../../../../Actions/createLessonsActons";
+import {download_couch_data, download_data, download_group_data} from "../../../../store/Actions/createLessonsActions";
 // import {load_couch, load_group} from "../../../Actions/timeTableActions";
 
 /**

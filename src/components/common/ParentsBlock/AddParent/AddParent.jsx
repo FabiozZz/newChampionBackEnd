@@ -54,19 +54,19 @@ export const AddParent = ({data,change,index}) => {
     return (
         <div className={classes.block_info__item}>
             <div className={classes.last_name_parent}>
-                <OtherInput value={data.last_name} setValue={changeInputs} name={'last_name'} label={'фамилия'} required={true}/>
+                <OtherInput value={data.last_name} setValue={changeInputs} name={'last_name'} label={'фамилия'} required={false}/>
             </div>
             <div className={classes.first_name_parent}>
-                <OtherInput value={data.first_name} setValue={changeInputs} name={'first_name'} label={'имя'} required={true}/>
+                <OtherInput value={data.first_name} setValue={changeInputs} name={'first_name'} label={'имя'} required={false}/>
             </div>
             <div className={classes.middle_name_parent}>
                 <OtherInput value={data.middle_name} setValue={changeInputs} name={'middle_name'} label={'отчество'}/>
             </div>
             <div className={classes.ho_is}>
-                <OtherInput value={data.who} setValue={changeInputs} name={'who'} label={'кем приходитесь ребёнку'} required={true}/>
+                <OtherInput value={data.who} setValue={changeInputs} name={'who'} label={'кем приходитесь ребёнку'} required={false}/>
             </div>
             <div className={classes.phone_number_parent}>
-                <MaskInputTel name={'phone_number'} value={data.phone_number} setValue={changeInputs} required={true} label={'номер телефона'}/>
+                <MaskInputTel name={'phone_number'} value={data.phone_number} setValue={changeInputs} required={false} label={'номер телефона'}/>
             </div>
 
         </div>

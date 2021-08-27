@@ -1,5 +1,3 @@
-/** @namespace Add*/
-
 import React, {createContext, useEffect, useRef, useState} from 'react';
 import classes from './add.module.css';
 import {OtherInput} from "../../utils/OtherInput/OtherInput";
@@ -18,10 +16,14 @@ import ModalPhoto from "./ModalPhoto/ModalPhoto";
 import PhoneSection from "./PhoneSection/PhoneSection";
 import {EndBtnGroup} from "../common/EndBtnGroup/EndBtnGroup";
 import {ParentsBlock} from "../common/ParentsBlock/ParentsBlock";
+import {useDispatch} from "react-redux";
+import {add_client_on_CRM} from "../../store/Actions/globalActions";
 
 export const ContextCommon = createContext();
 
-const Add = () => {
+export const Add = () => {
+
+    const dispatch = useDispatch()
 
     /* common */
     const [image, setImage] = useState(null);
@@ -135,23 +137,23 @@ const Add = () => {
         group: { name: '' },
         dateTest: ''
     });
-    const [filialList, setFilialList] = useState([]);
-
-    /**
-     * прослушивание события ввода данных для TestLesson
-     * @param e
-     */
-    const handleChangeValueGroupTestLesson = (obj) => {
-        setTestData({ ...testData, group: { ...obj } });
-    };
-
-    /**
-     * прослушивание события ввода данных для TestLesson
-     * @param e
-     */
-    const handleChangeValueFilialTestLesson = (obj) => {
-        setTestData({ ...testData, filial: { ...obj } });
-    };
+    // const [filialList, setFilialList] = useState([]);
+    //
+    // /**
+    //  * прослушивание события ввода данных для TestLesson
+    //  * @param e
+    //  */
+    // const handleChangeValueGroupTestLesson = (obj) => {
+    //     setTestData({ ...testData, group: { ...obj } });
+    // };
+    //
+    // /**
+    //  * прослушивание события ввода данных для TestLesson
+    //  * @param e
+    //  */
+    // const handleChangeValueFilialTestLesson = (obj) => {
+    //     setTestData({ ...testData, filial: { ...obj } });
+    // };
 
     /**
      * прослушиване события ввода и выбора дыты для TestLesson
@@ -213,8 +215,60 @@ const Add = () => {
 
             setAge(mathAge);
         }
-
     },[age, personalData.date_of_birth]);
+
+
+    /**
+     *
+     */
+    const submitForm = (e)=>{
+        e.preventDefault();
+        let oldUploadData = {};
+        let newUploadData = {};
+    const {date_of_birth,...other}=personalData
+        if (age < 16) {
+            oldUploadData = {
+                ...other,
+                date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
+                address: `${address.street} ${address.house} ${address.corpus} ${address.room}`,
+                parents,
+                age
+            };
+            newUploadData = {
+                ...other,
+                date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
+                avatar:image,
+                file: refFile.current.files[0],
+                filial:'здесь будет филиал',
+                group:'здесь будет группа',
+                address,
+                parents,
+                age,
+                sale //откуда узнали
+
+            };
+        }else{
+            oldUploadData = {
+                ...other,
+                date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
+                address: `${address.street} ${address.house} ${address.corpus} ${address.room}`,
+                phone_number,
+                age
+            };
+            newUploadData = {
+                ...other,
+                date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
+                avatar:image,
+                filial:'здесь будет филиал',
+                group:'здесь будет группа',
+                address,
+                age,
+                sale //откуда узнали
+            };
+        }
+        console.log(oldUploadData)
+        dispatch(add_client_on_CRM(oldUploadData));
+    }
     return (
         <>
             {modal&&
@@ -222,10 +276,7 @@ const Add = () => {
                 <ModalPhoto toggleModal={setModal} modal={modal} image={image} setImage={handleChangeImage}/>
             </Modal>
             }
-            <form onSubmit={(e) => {
-                e.preventDefault()
-                console.log('submit')
-            }} className={classes.wrapper}>
+            <form onSubmit={submitForm} className={classes.wrapper}>
 
                 <div className={classes.redirect}>
                     <Redirect title={"Регистрация клиента"} padding={true}/>
@@ -300,5 +351,3 @@ const Add = () => {
         </>
     );
 };
-
-export default Add;

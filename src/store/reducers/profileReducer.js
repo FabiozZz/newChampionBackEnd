@@ -1,13 +1,13 @@
 import {
     CHANGE_PROFILE,
-    CLEAR_PROFILE,
+    CLEAR_PROFILE, EDIT_PROFILE, EDIT_PROFILE_FAILURE, EDIT_PROFILE_SUCCESS,
     LOAD_PROFILE_COUCH,
     LOAD_PROFILE_FILIAL,
     LOAD_PROFILE_GROUP,
     LOAD_PROFILE_STATUS,
     LOAD_PROFILE_TYPE_ABONIMENT,
-    LOAD_PROFILE_USER, UPDATE_PROFILE_CLUB_CARD,
-} from "../constants/profileConstant";
+    LOAD_PROFILE_USER, LOAD_PROFILE_USER_FAILURE, LOAD_PROFILE_USER_SUCCESS, UPDATE_PROFILE_CLUB_CARD,
+} from "../../constants/profileConstant";
 console.log(LOAD_PROFILE_FILIAL);
 const initialState = {
     user: {
@@ -38,7 +38,9 @@ const initialState = {
     status: [],
     group: [],
     couch: [],
-    filial: []
+    filial: [],
+    error: [],
+    loading: false
 }
 
 export const profileReducer = (state = initialState, action) => {
@@ -46,7 +48,40 @@ export const profileReducer = (state = initialState, action) => {
         case LOAD_PROFILE_USER:
             return {
                 ...state,
-                user: action.profile
+                loading: true
+            };
+        case LOAD_PROFILE_USER_SUCCESS:
+            return {
+                ...state,
+                loading:false,
+                error: [],
+                ...action.payload,
+
+            };
+        case EDIT_PROFILE:
+            return {
+                ...state,
+                loading: true,
+
+            };
+        case EDIT_PROFILE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: [],
+                user: action.payload,
+            };
+        case EDIT_PROFILE_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: [{...action.payload}],
+            };
+        case LOAD_PROFILE_USER_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: [...state.error, {...action.payload}]
             };
         case LOAD_PROFILE_TYPE_ABONIMENT:
             return {

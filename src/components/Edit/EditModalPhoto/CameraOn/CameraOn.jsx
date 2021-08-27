@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import classes from './camera.module.css';
+// import classes from './camera.module.css';
 import Camera from "react-html5-camera-photo";
 import {EditCameraContext} from "../EditModalPhoto";
 

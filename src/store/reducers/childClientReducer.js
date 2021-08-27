@@ -1,4 +1,4 @@
-import {LOAD_GROUP_FOR_ADD_CHILD, LOAD_TIME_FOR_ADD_CHILD} from "../constants/addChildConsts";
+import {LOAD_GROUP_FOR_ADD_CHILD, LOAD_TIME_FOR_ADD_CHILD} from "../../constants/addChildConsts";
 
 const initialState = {
     groupList: [],

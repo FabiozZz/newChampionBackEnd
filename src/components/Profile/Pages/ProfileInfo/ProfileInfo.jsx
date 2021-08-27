@@ -21,7 +21,7 @@ import {
     load_profile_couch,
     load_profile_group,
     load_profile_status
-} from "../../../../Actions/profileActions";
+} from "../../../../store/Actions/profileActions";
 import {useDispatch} from "react-redux";
 import {Button} from "../../../../utils/Buttons/Button";
 
@@ -42,24 +42,6 @@ export const ProfileInfo = ({profile}) => {
     const [whatsApp, setWhatsApp] = useState(false);
 
     const dispatch = useDispatch();
-
-    useEffect(() =>{
-        let source = axios.CancelToken.source();
-        (async () => {
-            await Api.getGroupList(source.token).then((r) => {
-                dispatch(load_profile_group(r.data))
-            });
-            await Api.getCouchList(source.token).then((r) => {
-                dispatch(load_profile_couch(r.data))
-            });
-            await Api.getAbonimentList(source.token).then((r) => {
-                dispatch(load_profile_aboniment(r.data))
-            });
-            await Api.getStatusListForClients(source.token).then(r => {
-                dispatch(load_profile_status(r.data));
-            });
-        })();
-    },[dispatch])
 
     const handleToggleWhatsApp = () => {
         setWhatsApp(!whatsApp)
@@ -105,7 +87,7 @@ export const ProfileInfo = ({profile}) => {
             {!user.is_Archive &&
             <div className={classes.block_info}>
                 <SuccessContext.Provider value={{success, handleChangeSuccess, profile,showAndChangeTypeModalChange}}>
-                    {success ?
+                    {success && !profile.loading ?
                         <SuccessAdd/>
                         :
                         <>

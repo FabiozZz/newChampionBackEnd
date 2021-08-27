@@ -14,7 +14,7 @@ import classes from './group.module.css';
  * @returns {JSX.Element}
  * @constructor
  */
-export const GroupList = ({name,value,setValue,label,data,...props}) => {
+export const GroupList = ({name,value,setValue,label,data=[],...props}) => {
     const refInput = useRef(null);
 
     /**
@@ -87,14 +87,14 @@ export const GroupList = ({name,value,setValue,label,data,...props}) => {
         return () => document.removeEventListener('click', onClick);
     }, []);
 
-    const renderOption = data.map((item,index)=> (<div key={item.id}>
+    const renderOption = data.length?data.map((item,index)=> (<div key={item.id}>
         <h3 className={classes.optionBox__title}>{item.name}</h3>
         {item.course.map((option,index)=><option key={option.id} onClick={(e)=> {
             setValueInput(e);
             setValue(name,{id:option.id,name:option.name});
             setToggleOptionBox(false);
         }} value={option.name} className={classes.optionBox__item}>{option.name}</option>)}
-    </div>));
+    </div>)):null;
 
     return (
         <div ref={selectRef} className={`${classes.selectBoxWrapper} ${props.className}`} {...props}>

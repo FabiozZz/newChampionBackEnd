@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import { change_data_profile } from '../../../../../../Actions/profileActions';
+import { change_data_profile } from '../../../../../../store/Actions/profileActions';
 import Api from '../../../../../../Api/Api';
 import { DataPicker } from '../../../../../../utils/DataPicker/DataPicker';
 import { OtherInput } from '../../../../../../utils/OtherInput/OtherInput';

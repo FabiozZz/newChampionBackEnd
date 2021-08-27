@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import classes from './gen.module.css';
 import HeaderNav from "../common/HeaderNav";
 import ItemCourse from "./ItemCourse/ItemCourse";
@@ -33,7 +33,7 @@ import ItemCourse from "./ItemCourse/ItemCourse";
 //         ]},
 // ];
 
-const GeneralPage = () => {
+export const GeneralPage = () => {
     // const [group, setGroups] = useState({id: 1, name: 'Бразильское Джиу-Джитсу'});
     // const handleChangeGroup = (group) => {
     //     setGroups(group);
@@ -62,4 +62,3 @@ const GeneralPage = () => {
     );
 };
 
-export default GeneralPage;

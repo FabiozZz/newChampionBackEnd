@@ -4,9 +4,14 @@ import moment from "moment";
 import 'moment/locale/ru';
 import {ContextData} from "../CreateAndEditLessons";
 import {useDispatch, useSelector} from "react-redux";
-import {add_lesson, clear_filter_lesson, remove_lesson, search_lesson} from "../../../../../Actions/createLessonsActons";
 import {AddedLesson} from "./AddedLesson/AddedLesson";
 import {Button} from "../../../../../utils/Buttons/Button";
+import {
+    add_lesson,
+    clear_filter_lesson,
+    remove_lesson,
+    search_lesson
+} from "../../../../../store/Actions/createLessonsActions";
 
 /**
  * отображение расписания за день

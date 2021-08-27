@@ -9,17 +9,9 @@ import { isEmpty } from "../../helpers/common";
 import classes from './profile.module.css';
 import { Button } from "../../utils/Buttons/Button";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    clear_profile,
-    load_profile_aboniment, load_profile_couch,
-    // load_profile_filial,
-    load_profile_group,
-    load_profile_status,
-    load_profile_user
-} from "../../Actions/profileActions";
-import axios from "axios";
 import { ProfileVisit } from './Pages/ProfileVisit/ProfileVisit';
 import { ProfilePay } from './Pages/ProfilePay/ProfilePay';
+import {clear_profile} from "../../store/Actions/profileActions";
 
 
 /**
@@ -38,35 +30,10 @@ export const Profile = () => {
     const [tabIndex, setTabIndex] = useState(0)
 
     useEffect(() => {
-        let source = axios.CancelToken.source();
-        (async () => {
-
-            await Api.getProfile(id).then(r => {
-                dispatch(load_profile_user(r.data))
-                // dispatch(load_profile_user(r))
-            });
-
-            await Api.getAbonimentList(source.token).then(r => {
-                dispatch(load_profile_aboniment(r.data))
-            });
-            await Api.getStatusList(source.token).then(r => {
-                dispatch(load_profile_status(r.data))
-            });
-            await Api.getGroupList(source.token).then(r => {
-                dispatch(load_profile_group(r.data))
-            });
-            await Api.getCouchList(source.token).then(r => {
-                dispatch(load_profile_couch(r.data))
-            });
-            // await Api.getFilialList(source.token).then(r => {
-            //     dispatch(load_profile_filial(r.data))
-            // });
-        })();
         return () => {
             dispatch(clear_profile());
-            source.cancel('операция прервана');
         };
-    }, [dispatch, id]);
+    }, [dispatch]);
 
     return (
         <>

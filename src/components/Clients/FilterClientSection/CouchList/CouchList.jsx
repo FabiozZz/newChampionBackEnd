@@ -90,7 +90,7 @@ export const CouchList = ({name,label,value,setValue,data,...props}) => {
                 {data.map(item=> (<option key={item.id} onClick={(e)=> {
                     setValue(name,{id:item.id,name:item.name});
                     setToggleOptionBox(false);
-                }} value={item.name} className={classes.item}>{item.name}</option>))}
+                }} value={item.name} className={classes.item}>{item.last_name} {item.first_name} {item.middle_name}</option>))}
             </div>
             }
         </div>

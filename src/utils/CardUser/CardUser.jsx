@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import success from '../../assets/images/success.svg';
 import classes from './cardUser.module.css';
 import { useDispatch } from "react-redux";
-import { client_change_toDay } from "../../Actions/timeTableActions";
+import { client_change_toDay } from "../../store/Actions/timeTableActions";
 import Api from "../../Api/Api";
 // import healthSVG from '../../assets/images/health.svg';
 import { CustomTooltip } from "../CustomTooltip/CustomTooltip";

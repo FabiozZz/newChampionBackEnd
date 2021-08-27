@@ -14,11 +14,11 @@ import {EndBtnGroup} from "../common/EndBtnGroup/EndBtnGroup";
 import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import Api from "../../Api/Api";
-import {clear_profile, load_profile_user} from "../../Actions/profileActions";
+import {clear_profile, load_profile_user} from "../../store/Actions/profileActions";
 
 export const ContextCommonEdit = createContext();
 
-const Edit = () => {
+export const Edit = () => {
 
     const user = useSelector(state => state.profile.user);
 
@@ -101,18 +101,18 @@ const Edit = () => {
     //     setAddress(prevState => ({ ...prevState, [name]: e.target.value }))
     // };
 
-    /**
-     * локальный стейт для хранения/установки для Sale
-     */
-    const [sale, setSale] = useState(user.sale);
-
-    /**
-     * прослушивание ввода данных для Sale
-     * @param e
-     */
-    const handleChangeValueSale = (e) => {
-        setSale(e.target.value);
-    };
+    // /**
+    //  * локальный стейт для хранения/установки для Sale
+    //  */
+    // const [sale, setSale] = useState(user.sale);
+    //
+    // /**
+    //  * прослушивание ввода данных для Sale
+    //  * @param e
+    //  */
+    // const handleChangeValueSale = (e) => {
+    //     setSale(e.target.value);
+    // };
 
     // /**
     //  * локальный стейт для установки/снятии флага о том что клиент принял
@@ -337,5 +337,3 @@ const Edit = () => {
         </>
     );
 };
-
-export default Edit;

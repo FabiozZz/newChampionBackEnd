@@ -4,8 +4,8 @@ import {
     LOAD_CLIENTS,
     LOAD_COUCH,
     LOAD_GROUP
-} from "../constants/timeTableConstants";
-import {FILTERED_CLIENTS_FIO} from "../constants/profileConstant";
+} from "../../constants/timeTableConstants";
+import {FILTERED_CLIENTS_FIO} from "../../constants/profileConstant";
 
 export const load_clients = (clients) => ({type: LOAD_CLIENTS, clients});
 export const load_group = (group) => ({type: LOAD_GROUP, group});

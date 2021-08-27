@@ -8,7 +8,7 @@ import { EndBtnGroup } from '../../../../../Add/common/EndBtnGroup/EndBtnGroup';
 import { useHistory } from 'react-router';
 import Api from '../../../../../../Api/Api';
 import { useDispatch } from 'react-redux';
-import { change_data_profile } from '../../../../../../Actions/profileActions';
+import { change_data_profile } from '../../../../../../store/Actions/profileActions';
 import moment from "moment";
 
 export const AdultEdit = ({ user }) => {

@@ -1,6 +1,7 @@
-import {LOAD_GROUP_FOR_ADD_ADULT, LOAD_TIME_FOR_ADD_ADULT} from "../constants/addAdultConsts";
+import {LOAD_GROUP_FOR_ADD_ADULT, LOAD_TIME_FOR_ADD_ADULT} from "../../constants/addAdultConsts";
 
 const initialState = {
+    error:null,
     groupList: [],
     timeList: [],
 }

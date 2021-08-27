@@ -1,112 +1,92 @@
-import React from 'react';
-import { BrowserRouter } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
 import './app.css';
 import { Header } from "./Header/Header";
-import { Route, Switch } from "react-router";
 import { Auth } from "./Auth/Auth";
 import { Footer } from "./Footer/Footer";
 import { Container } from "react-bootstrap";
-import { Profile } from "./Profile/Profile";
-import { Clients } from "./Clients/Clients";
-import { EditProfile } from "./Profile/Pages/ProfileInfo/EditProfile/EditProfile";
 import { SideBar } from './SideBar/SideBar';
-import { Settings } from './Settings/Settings';
-import { CreateAndEditLessons } from "./Settings/Pages/CreateAndEditLessons/CreateAndEditLessons";
-import GeneralPage from "./GeneralPage/GeneralPage";
-import Add from "./Add/Add";
-import Edit from "./Edit/Edit";
+import Routes from "../Routes/Routes";
+import {ConnectedRouter} from "connected-react-router";
+import Api from "../Api/Api";
+import {log_in_done, token_refresh, token_verify} from "../store/Actions/userActions";
+import {isEmpty} from "../helpers/common";
+import {notification} from "antd";
+import {notificationPopUp} from "./common/Error";
 
 /**
  * главный компонент содержащий все приложение
  *
  * @return {JSX.Element}
  */
-function App() {
+function App({history}) {
     /**
      * константа из redux показывает авторизован ли менеджер
      * @type {boolean}
      */
-    const isAuth = useSelector(state => state.user.isAuth);
-    // const [isLoad, setIsLoad] = useState(false);
+    const {isAuth,error,success} = useSelector(state => state.user);
 
-    // if (isLoad) {
-    //     return <div id={'firstLoading'}/>
-    // }
-    // const formRef = useRef();
-    // const [datePicker, setDatePicker] = useState('');
-    // const selectPicker = (e) => {
-    //     let date = new Date(e);
-    //     setDatePicker(date.getFullYear()+'-'+date.getDate()+'-'+ date.getMonth()+1)
-    // };
-    // const clearPicker = (e) => {
-    //     let date = new Date(e);
-    //     setDatePicker('')
-    // };
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     let form={}
-    //     for(let key of formRef.current.elements){
-    //         if (key.tagName === 'INPUT') {
-    //             form = {...form,[key.name]:key.value}
-    //         }
-    //     }
-    //     if (datePicker) {
-    //         form = {...form,birthDay:datePicker};
-    //     }
-    //     console.log(form)
-    // };
-    //
-    // const [show, setShow] = useState(false);
-    // const target = useRef(null);
+    const dispatch = useDispatch();
 
 
+    // const [notification, setNotification] = useState({errorNot:null,successNot:null});
     /**
      * если не авторизован пользователь, то его выбрасывает на экран входа в систему
      */
     if (!isAuth) {
-        return (
-            <BrowserRouter>
-                <Container className={'h-100'} fluid={true}>
-                    <Header />
-                    <div className="app-wrapper_auth">
-                        <Auth />
-                    </div>
-                </Container>
-            </BrowserRouter>
-        )
+        if (Api.getToken() && !error) {
+            dispatch(token_verify());
+        }
     }
 
+    // useEffect(() => {
+    //     setNotification(prevState => ({...prevState,errorNot: error&&null,successNot:success&&null}));
+    // },[error, success]);
 
+    // if(!isEmpty(error)) notificationPopUp(error.type,error.title,error.desc)
+    // if(!isEmpty(success)) notificationPopUp(success.type,success.title,success.desc)
     return (
-        <BrowserRouter>
-            <Container className={'h-100'} fluid={true}>
-                <Header />
-                <div className="wrapper_large">
-                    <SideBar />
-                    <div className="app-wrapper">
+        <>
+            {!isEmpty(error) && notification[error.type]({
+                message: error.title,
+                description: error.desc,
+                duration: 2.5
+            })}
+            {!isEmpty(success) && notification[success.type]({
+                message: success.title,
+                description: success.desc,
+                duration: 2.5
+            })}
 
-                        <Switch>
-                            <Route exact path={'/'} render={()=><GeneralPage/>} />
-                            <Route path={'/add_client'} render={()=><Add/>} />
-                            <Route exact path={'/profile/:id/'} render={()=><Profile/>} />
-                            <Route exact path={'/profile/:id/edit'} render={()=><Edit/>} />
-                            <Route path={'/clients'} render={()=><Clients/>} />
-                            <Route exact path={'/settings'} render={()=><Settings/>} />
-                            <Route path={'/settings/lesson'} render={()=><CreateAndEditLessons/>} />
-                        </Switch>
+            <ConnectedRouter history={history}>
+                {isAuth?
 
-                    </div>
-                </div>
-                {/* <div className={'footer-hidden'}/> */}
+                    <Container className={'h-100'} fluid={true}>
+                        <Header/>
+                        <div className="wrapper_large">
+                            <SideBar/>
+                            <div className="app-wrapper">
+                                <Routes/>
+                            </div>
+                        </div>
+                        {/* <div className={'footer-hidden'}/> */}
 
-                <div className="app-wrapper__footer">
-                    <Footer />
-                </div>
+                        <div className="app-wrapper__footer">
+                            <Footer/>
+                        </div>
 
-            </Container>
+                    </Container>
+                    :
 
-        </BrowserRouter>
+                    <Container className={'h-100'} fluid={true}>
+                        <Header />
+                        <div className="app-wrapper_auth">
+                            <Auth />
+                        </div>
+                    </Container>
+                }
+            </ConnectedRouter>
+        </>
     );
 }
 

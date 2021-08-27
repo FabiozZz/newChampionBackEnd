@@ -1,0 +1,2 @@
+export const STOP_FETCHING = 'STOP_FETCHING';
+export const ADD_CLIENT_ON_CRM = 'ADD_CLIENT_ON_CRM';

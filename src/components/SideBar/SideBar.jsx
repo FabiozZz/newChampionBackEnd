@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Api from '../../Api/Api';
-import { log_out } from '../../Actions/userActions';
+import { log_out } from '../../store/Actions/userActions';
 import { CustomLink } from '../../utils/CustomLink/CustomLink';
 
 /**

@@ -1,15 +1,22 @@
 import {
     CHANGE_PROFILE,
-    CLEAR_PROFILE,
+    CLEAR_PROFILE, EDIT_PROFILE, EDIT_PROFILE_FAILURE, EDIT_PROFILE_SUCCESS,
     LOAD_PROFILE_COUCH,
     LOAD_PROFILE_FILIAL,
     LOAD_PROFILE_GROUP,
     LOAD_PROFILE_STATUS,
     LOAD_PROFILE_TYPE_ABONIMENT,
-    LOAD_PROFILE_USER, UPDATE_PROFILE_CLUB_CARD
-} from "../constants/profileConstant";
+    LOAD_PROFILE_USER, LOAD_PROFILE_USER_FAILURE, LOAD_PROFILE_USER_SUCCESS, UPDATE_PROFILE_CLUB_CARD
+} from "../../constants/profileConstant";
 
-export const load_profile_user = (profile) => ({type: LOAD_PROFILE_USER, profile});
+export const load_profile_user = (id) => ({type: LOAD_PROFILE_USER, payload: id});
+export const load_profile_user_done = (profile) => ({type: LOAD_PROFILE_USER_SUCCESS, payload: profile});
+export const load_profile_user_fail = (error) => ({type: LOAD_PROFILE_USER_FAILURE, payload: error});
+
+export const edit_profile = data => ({type: EDIT_PROFILE, payload: data});
+export const edit_profile_done = client => ({type: EDIT_PROFILE_SUCCESS, payload: client});
+export const edit_profile_fail = error => ({type: EDIT_PROFILE_FAILURE, payload: error});
+
 export const load_profile_aboniment = (aboniment) => ({type: LOAD_PROFILE_TYPE_ABONIMENT, aboniment});
 export const load_profile_status = (status) => ({type: LOAD_PROFILE_STATUS, status});
 export const load_profile_group = (group) => ({type: LOAD_PROFILE_GROUP, group});

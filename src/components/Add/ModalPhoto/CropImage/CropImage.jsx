@@ -27,11 +27,6 @@ export const CropImage = ({img,reboot,abort,setImage,toggle})=> {
     };
     const onClickSave = () => {
         if (editor) {
-            // This returns a HTMLCanvasElement, it can be made into a data URL or a blob,
-            // drawn on another canvas, or added to the DOM.
-            const canvas = editor.getImage();
-
-            // If you want the image resized to the canvas size (also a HTMLCanvasElement)
             const canvasScaled = editor.getImageScaledToCanvas();
             console.log(canvasScaled);
 

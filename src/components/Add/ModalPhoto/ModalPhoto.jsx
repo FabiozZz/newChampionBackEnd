@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useRef, useState} from 'react';
+import React, {createContext, useRef, useState} from 'react';
 import {Button} from "../../../utils/Buttons/Button";
 import 'react-html5-camera-photo/build/css/index.css';
 import {CropImage} from "./CropImage/CropImage";
