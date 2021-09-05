@@ -22,7 +22,6 @@ export const AddresSection = ({error,address,change}) => {
             <div className={classes.block_info__item}>
                 <div className={classes.street}>
                     <OtherInput danger={error&&error.street} name={'street'} value={street} setValue={change} label={'улица'}/>
-                    {(error&&(error.street || error.house || error.building || error.apartments)) &&<span className={classes.warning_text}>{error.street.join()}</span>}
                 </div>
                 <div className={classes.house}>
                     <OtherInput danger={error&&error.house} name={'house'} placeholder={''} value={house} setValue={change} label={'дом'}/>
