@@ -21,17 +21,17 @@ export const AddresSection = ({error,address,change}) => {
             <h3 className={classes.block_info__title}>Адресс</h3>
             <div className={classes.block_info__item}>
                 <div className={classes.street}>
-                    <OtherInput danger={error?error.street.length:false} name={'street'} value={street} setValue={change} label={'улица'}/>
-                    {(error?.street.length || error?.house.length || error?.building.length || error?.apartments.length) &&<span className={classes.warning_text}>{error.street.join()}</span>}
+                    <OtherInput danger={error&&error.street} name={'street'} value={street} setValue={change} label={'улица'}/>
+                    {(error&&(error.street || error.house || error.building || error.apartments)) &&<span className={classes.warning_text}>{error.street.join()}</span>}
                 </div>
                 <div className={classes.house}>
-                    <OtherInput danger={error?error.house.length:false} name={'house'} placeholder={''} value={house} setValue={change} label={'дом'}/>
+                    <OtherInput danger={error&&error.house} name={'house'} placeholder={''} value={house} setValue={change} label={'дом'}/>
                 </div>
                 <div className={classes.corspus}>
-                    <OtherInput danger={error?error.building.length:false} name={'building'} placeholder={''} value={building} setValue={change} label={"корпус"}/>
+                    <OtherInput danger={error&&error.building} name={'building'} placeholder={''} value={building} setValue={change} label={"корпус"}/>
                 </div>
                 <div className={classes.room}>
-                    <OtherInput danger={error?error.apartments.length:false} name={'apartments'} placeholder={''} value={apartments} setValue={change} label={"картира"}/>
+                    <OtherInput danger={error&&error.apartments} name={'apartments'} placeholder={''} value={apartments} setValue={change} label={"картира"}/>
                 </div>
             </div>
         </div>

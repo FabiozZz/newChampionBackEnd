@@ -65,9 +65,9 @@ export const AddParent = ({error,data,change,index}) => {
                 <OtherInput danger={error&&error.middle_name} value={data.middle_name} setValue={changeInputs} name={'middle_name'} label={'отчество'}/>
                 {error&&error.middle_name&&<span className={classes.warning_text}>{error.middle_name.join()}</span>}
             </div>
-            <div className={classes.ho_is}>
-                <OtherInput value={data.who} setValue={changeInputs} name={'who'} label={'кем приходитесь ребёнку'} required={false}/>
-            </div>
+            {/*<div className={classes.ho_is}>*/}
+            {/*    <OtherInput value={data.who} setValue={changeInputs} name={'who'} label={'кем приходитесь ребёнку'} required={false}/>*/}
+            {/*</div>*/}
             <div className={classes.phone_number_parent}>
                 <MaskInputTel danger={error&&error.phone_number} name={'phone_number'} value={data.phone_number} setValue={changeInputs} required={false} label={'номер телефона'}/>
                 {error&&error.phone_number&&<span className={classes.warning_text}>{error.phone_number.join()}</span>}

@@ -286,11 +286,11 @@ export const Edit = () => {
                 <div className={classes.redirect}>
                     <Redirect title={"Редактирование профиля"} padding={true}/>
                 </div>
-                <div onClick={toggleModal} className={classes.block_f}>
-                    <img  src={image||camera} alt={'avatar'}/>
-                    {!image&&<span>Добавить фото</span>}
+                {/*<div onClick={toggleModal} className={classes.block_f}>*/}
+                {/*    <img  src={image||camera} alt={'avatar'}/>*/}
+                {/*    {!image&&<span>Добавить фото</span>}*/}
 
-                </div>
+                {/*</div>*/}
 
                 <div className={classes.block_info_f}>
                     <h3 className={classes.block_info__title}>личная информация</h3>
@@ -320,12 +320,12 @@ export const Edit = () => {
 
                             {age > 0 && age < 16 ?
                                 <>
-                                    <div className={classes.button}>
-                                        <Button size={'default'} text={'добавить справку'} click={() => {
-                                            refFile.current.click();
-                                        }}/>
-                                        <input ref={refFile} name={'health'} type="file" hidden={true}/>
-                                    </div>
+                                    {/*<div className={classes.button}>*/}
+                                    {/*    <Button size={'default'} text={'добавить справку'} click={() => {*/}
+                                    {/*        refFile.current.click();*/}
+                                    {/*    }}/>*/}
+                                    {/*    <input ref={refFile} name={'health'} type="file" hidden={true}/>*/}
+                                    {/*</div>*/}
                                     {/*<TrialSectionSection/>*/}
                                     {/*<ParentsBlock parents={parents}*/}
                                     {/*              change={handleChangeItemParentsBlock}*/}

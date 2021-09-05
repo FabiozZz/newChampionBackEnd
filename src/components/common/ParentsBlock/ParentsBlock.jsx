@@ -35,7 +35,7 @@ export const ParentsBlock = ({parents,addParents,removeParents,change}) => {
 
                         </>
                         }
-                        <AddParent error={errorInput?.parents[index]||null} data={e} index={index} change={change}/>
+                        <AddParent error={(errorInput&&errorInput.parents[index])?errorInput.parents[index]:null} data={e} index={index} change={change}/>
                     </div>
                 )
             })}

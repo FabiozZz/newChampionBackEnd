@@ -236,16 +236,29 @@ export const Add = () => {
         e.preventDefault();
         let oldUploadData = {};
         // let newUploadData = {};
-        const {date_of_birth,...other}=personalData
+        const {date_of_birth,middle_name,...other}=personalData
         if (age < 16) {
-            oldUploadData = {
-                ...other,
-                date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
-                ...address,
-                parents,
-                age_group_id:testData.agesGroup.id,
-                age
-            };
+            if (middle_name) {
+                oldUploadData = {
+                    ...other,
+                    middle_name,
+                    date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
+                    ...address,
+                    parents,
+                    age_group_id:testData.agesGroup.id,
+                    age
+                };
+            }else{
+                oldUploadData = {
+                    ...other,
+                    date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
+                    ...address,
+                    parents,
+                    age_group_id:testData.agesGroup.id,
+                    age
+                };
+
+            }
             // newUploadData = {
             //     ...other,
             //     date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
@@ -261,14 +274,26 @@ export const Add = () => {
             //
             // };
         }else{
-            oldUploadData = {
-                ...other,
-                date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
-                ...address,
-                phone_number,
-                age_group_id:testData.agesGroup.id,
-                age
-            };
+            if (middle_name) {
+                oldUploadData = {
+                    ...other,
+                    middle_name,
+                    date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
+                    ...address,
+                    phone_number,
+                    age_group_id:testData.agesGroup.id,
+                    age
+                };
+            }else{
+                oldUploadData = {
+                    ...other,
+                    date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
+                    ...address,
+                    phone_number,
+                    age_group_id:testData.agesGroup.id,
+                    age
+                };
+            }
             // newUploadData = {
             //     ...other,
             //     date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
@@ -297,11 +322,11 @@ export const Add = () => {
                 <div className={classes.redirect}>
                     <Redirect title={"Регистрация клиента"} padding={true}/>
                 </div>
-                <div onClick={()=>setModal(true)} className={classes.block_f}>
-                    <img  src={image||camera} alt={'avatar'}/>
-                    {!image&&<span>Добавить фото</span>}
+                {/*<div onClick={()=>setModal(true)} className={classes.block_f}>*/}
+                {/*    <img  src={image||camera} alt={'avatar'}/>*/}
+                {/*    {!image&&<span>Добавить фото</span>}*/}
 
-                </div>
+                {/*</div>*/}
 
                 <div className={classes.block_info_f}>
                     <h3 className={classes.block_info__title}>личная информация</h3>
@@ -317,9 +342,8 @@ export const Add = () => {
                             {errorInput&&errorInput.first_name&&<span className={classes.warning_text}>{errorInput.first_name.join()}</span>}
                         </div>
                         <div className={classes.middle_name}>
-                            <OtherInput danger={errorInput&&errorInput.middle_name} setValue={handleChangePersonalData} name={'middle_name'}
+                            <OtherInput setValue={handleChangePersonalData} name={'middle_name'}
                                         value={personalData.middle_name} label={'отчество'}/>
-                            {errorInput&&errorInput.middle_name&&<span className={classes.warning_text}>{errorInput.middle_name.join()}</span>}
                         </div>
                         <div className={classes.date_of_birth}>
                             <DataPicker value={personalData.date_of_birth} setValue={handleDataPickerPersonal}
@@ -335,12 +359,12 @@ export const Add = () => {
 
                             {age > 0 && age < 16 ?
                                 <>
-                                    <div className={classes.button}>
-                                        <Button size={'default'} text={'добавить справку'} click={() => {
-                                            refFile.current.click();
-                                        }}/>
-                                        <input ref={refFile} name={'health'} type="file" hidden={true}/>
-                                    </div>
+                                    {/*<div className={classes.button}>*/}
+                                    {/*    <Button size={'default'} text={'добавить справку'} click={() => {*/}
+                                    {/*        refFile.current.click();*/}
+                                    {/*    }}/>*/}
+                                    {/*    <input ref={refFile} name={'health'} type="file" hidden={true}/>*/}
+                                    {/*</div>*/}
                                     <TrialSectionSection/>
                                     <ParentsBlock parents={parents}
                                                   change={handleChangeItemParentsBlock}
@@ -360,7 +384,7 @@ export const Add = () => {
 
                         <AddresSection error={errorInput} change={handleChangeAddressComponent} address={address}/>
 
-                        <OterSection sale={sale} setSale={handleChangeValueSale}/>
+                        {/*<OterSection sale={sale} setSale={handleChangeValueSale}/>*/}
 
                         <RulesSection rules={rules} setRules={handleToggleRules} personal={personal} setPersonal={handleTogglePersonal}/>
                         {!loading&&
