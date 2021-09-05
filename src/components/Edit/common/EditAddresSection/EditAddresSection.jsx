@@ -12,8 +12,8 @@ export const EditAddresSection = ({address,change}) => {
     const {
         street,
         house,
-        corpus,
-        room
+        building,
+        apartments
     } = address;
 
     return (
@@ -27,10 +27,10 @@ export const EditAddresSection = ({address,change}) => {
                     <OtherInput name={'house'} placeholder={''} value={house} setValue={change} label={'дом'}/>
                 </div>
                 <div className={classes.corspus}>
-                    <OtherInput name={'corpus'} placeholder={''} value={corpus} setValue={change} label={"корпус"}/>
+                    <OtherInput name={'building'} placeholder={''} value={building} setValue={change} label={"корпус"}/>
                 </div>
                 <div className={classes.room}>
-                    <OtherInput name={'room'} placeholder={''} value={room} setValue={change} label={"картира"}/>
+                    <OtherInput name={'apartments'} placeholder={''} value={apartments} setValue={change} label={"картира"}/>
                 </div>
             </div>
         </div>

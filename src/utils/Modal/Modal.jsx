@@ -13,7 +13,7 @@ export const Modal = ({toggle,children,size='sm'}) => {
     return (
         <div className={classes.back} onClick={()=>toggle(false)}>
             <div className={sizeWindow} onClick={(e)=>e.stopPropagation()}>
-                <img onClick={toggle} className={classes.close} src={close} alt="close"/>
+                <img onClick={()=>toggle(false)} className={classes.close} src={close} alt="close"/>
                 {children}
             </div>
         </div>

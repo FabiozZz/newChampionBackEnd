@@ -1,4 +1,4 @@
-import {call, put} from 'redux-saga/effects';
+import {put} from 'redux-saga/effects';
 import Api from "../../../../Api/Api";
 import {load_profile_user_fail} from "../../../Actions/profileActions";
 
@@ -22,6 +22,14 @@ export function* getAbonimentList() {
 export function* getStatusList() {
     try {
         const request = yield Api.getStatusList();
+        return request.data;
+    } catch (e) {
+        yield put(load_profile_user_fail(e))
+    }
+}
+export function* getAgesGroupList() {
+    try {
+        const request = yield Api.getAgesGroupList();
         return request.data;
     } catch (e) {
         yield put(load_profile_user_fail(e))

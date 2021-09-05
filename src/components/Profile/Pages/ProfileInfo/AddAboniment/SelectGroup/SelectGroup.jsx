@@ -14,7 +14,7 @@ import classes from './selectGroup.module.css';
  * @returns {JSX.Element}
  * @constructor
  */
-export const SelectGroup = ({required=false,name,value,setValue,label,data,...props}) => {
+export const SelectGroup = ({required=false,name,value,setValue,label,data={},...props}) => {
     const refInput = useRef(null);
 
     /**

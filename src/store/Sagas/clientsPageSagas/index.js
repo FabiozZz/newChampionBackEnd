@@ -1,7 +1,7 @@
-import {put, call, takeLeading, fork, spawn} from "redux-saga/effects";
+import {put, call, takeLeading} from "redux-saga/effects";
 import {LOAD_CLIENTS_ALL} from "../../../constants/clientsConstans";
 import {load_clients_all_done} from "../../Actions/clientsActions";
-import {data, fetchAllClients, getStatusListForClients} from './workers';
+import { fetchAllClients, getStatusListForClients} from './workers';
 import {getAbonimentList, getCouchList, getGroupList} from "../profilePageSagas/workers";
 
 export function* loadClientsPage() {

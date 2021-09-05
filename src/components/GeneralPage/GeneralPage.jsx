@@ -1,7 +1,11 @@
-import React from 'react';
+import moment from "moment";
+
+import React, {useEffect, useState} from 'react';
 import classes from './gen.module.css';
 import HeaderNav from "../common/HeaderNav";
 import ItemCourse from "./ItemCourse/ItemCourse";
+import {useSelector} from "react-redux";
+import {isEmpty} from "../../helpers/common";
 
 // const data = [
 //     {id: 1, name: 'Бразильское Джиу-Джитсу'},
@@ -38,17 +42,31 @@ export const GeneralPage = () => {
     // const handleChangeGroup = (group) => {
     //     setGroups(group);
     // };
+    const generalPage = useSelector(state => state.general_page);
+    const [renderList, setList] = useState([]);
+    useEffect(() => {
+        if (!isEmpty(generalPage.groups)) {
+            setList(generalPage.groups.sort(function (a, b){
+                return moment(a.date).format('k:mm') > moment(b.date).format('k:mm')?1:-1;
+                // return a.id > b.id;
+            }))
+        }
+    },[generalPage]);
     return (
         <>
             <HeaderNav/>
             <h1 className={classes.title}>Расписание</h1>
             <div className={classes.wrapper}>
-                <span className={classes.time}>21.10.1989</span>
+                <span className={classes.time}>{moment().format('DD.MM.YYYY')}</span>
                 <div className={classes.course_list}>
-                    <ItemCourse/>
-                    <ItemCourse/>
-                    <ItemCourse/>
-                    <ItemCourse/>
+                    {renderList.length?
+                        renderList.map(course=><ItemCourse key={course.id} course={course} couches={generalPage.couches}/> )
+                        :
+                        <h2>Сегодня занятий нет</h2>
+                    }
+                    {/*<ItemCourse/>*/}
+                    {/*<ItemCourse/>*/}
+                    {/*<ItemCourse/>*/}
                 </div>
             </div>
             {/*<div style={{position:'absolute',bottom:'500px',left:0}}>*/}

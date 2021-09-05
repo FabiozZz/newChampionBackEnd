@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import classes from '../../Add/add.module.css';
 import {Button} from "../../../utils/Buttons/Button";
 import {AddParent} from "./AddParent/AddParent";
 import separate from '../../../assets/images/blockInfoSeparate.svg';
 import remove from '../../../assets/images/removeParent.svg';
+import {ContextCommon} from "../../Add/Add";
 
 /**
  * компонент прослойка
@@ -15,7 +16,7 @@ import remove from '../../../assets/images/removeParent.svg';
  * @constructor
  */
 export const ParentsBlock = ({parents,addParents,removeParents,change}) => {
-
+    const {errorInput} = useContext(ContextCommon);
     return (
         <div className={classes.block_info}>
                 <h3 className={classes.block_info__title}>информация о родителях</h3>
@@ -34,7 +35,7 @@ export const ParentsBlock = ({parents,addParents,removeParents,change}) => {
 
                         </>
                         }
-                        <AddParent data={e} index={index} change={change}/>
+                        <AddParent error={errorInput?.parents[index]||null} data={e} index={index} change={change}/>
                     </div>
                 )
             })}

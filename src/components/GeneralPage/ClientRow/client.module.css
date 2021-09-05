@@ -1,0 +1,12 @@
+.wrapper{
+    display: grid;
+    grid-template-columns: min-content 4fr 5fr 2fr;
+    grid-gap: 17px;
+    color: inherit;
+}
+.remove_client{
+    cursor: pointer;
+}
+/*.wrapper:nth-child(3n){*/
+/*    padding-left: 41px;*/
+/*}*/

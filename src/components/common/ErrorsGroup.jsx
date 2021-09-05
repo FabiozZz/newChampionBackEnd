@@ -1,4 +1,3 @@
-import React, {useEffect, useState} from 'react';
 import {notificationPopUp} from "./Error";
 
 const ErrorsGroup = (data) => {

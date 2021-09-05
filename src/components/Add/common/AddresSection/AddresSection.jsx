@@ -8,12 +8,12 @@ import {OtherInput} from "../../../../utils/OtherInput/OtherInput";
  * @returns {JSX.Element}  jsx
  * @constructor
  */
-export const AddresSection = ({address,change}) => {
+export const AddresSection = ({error,address,change}) => {
     const {
         street,
         house,
-        corpus,
-        room
+        building,
+        apartments
     } = address;
 
     return (
@@ -21,16 +21,17 @@ export const AddresSection = ({address,change}) => {
             <h3 className={classes.block_info__title}>Адресс</h3>
             <div className={classes.block_info__item}>
                 <div className={classes.street}>
-                    <OtherInput name={'street'} value={street} setValue={change} label={'улица'}/>
+                    <OtherInput danger={error?error.street.length:false} name={'street'} value={street} setValue={change} label={'улица'}/>
+                    {(error?.street.length || error?.house.length || error?.building.length || error?.apartments.length) &&<span className={classes.warning_text}>{error.street.join()}</span>}
                 </div>
                 <div className={classes.house}>
-                    <OtherInput name={'house'} placeholder={''} value={house} setValue={change} label={'дом'}/>
+                    <OtherInput danger={error?error.house.length:false} name={'house'} placeholder={''} value={house} setValue={change} label={'дом'}/>
                 </div>
                 <div className={classes.corspus}>
-                    <OtherInput name={'corpus'} placeholder={''} value={corpus} setValue={change} label={"корпус"}/>
+                    <OtherInput danger={error?error.building.length:false} name={'building'} placeholder={''} value={building} setValue={change} label={"корпус"}/>
                 </div>
                 <div className={classes.room}>
-                    <OtherInput name={'room'} placeholder={''} value={room} setValue={change} label={"картира"}/>
+                    <OtherInput danger={error?error.apartments.length:false} name={'apartments'} placeholder={''} value={apartments} setValue={change} label={"картира"}/>
                 </div>
             </div>
         </div>

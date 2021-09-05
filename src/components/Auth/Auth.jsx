@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { OtherInput } from "../../utils/OtherInput/OtherInput";
 import { Button } from "../../utils/Buttons/Button";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
+import {useDispatch, useSelector} from "react-redux";
 import { log_in } from "../../store/Actions/userActions";
 import classes from './auth.module.css';
+import {isEmpty} from "../../helpers/common";
 import {notificationPopUp} from "../common/Error";
-import {Header} from "../Header/Header";
-import {Container} from "react-bootstrap";
+import {notification} from "antd";
 
 /**
  * компонент для авторизации менеджера
@@ -16,7 +15,9 @@ import {Container} from "react-bootstrap";
  */
 export const Auth = () => {
 
-    const [inputError, setIError] = useState(false);
+    const {error,success} = useSelector(state => state.user);
+
+    const [inputError, setIError] = useState(!isEmpty(error));
 
     /**
      * константа и метод ее изменения, для переключения индикатора загрузки
@@ -69,8 +70,8 @@ export const Auth = () => {
         //     setIsLoad(false)
         // });
     };
-
     return (
+        <>
             <div className={classes.wrapper}>
                 <div className={classes.title}>
                     <h1>Авторизация</h1>
@@ -78,11 +79,11 @@ export const Auth = () => {
                 <form className={classes.form_wrapper} onSubmit={handleSubmitForm}>
                     <div className={classes.form_wrapper__item}>
                         <div>
-                            <OtherInput onFocus={focusInput} value={data.username} setValue={handleChangeInput} danger={inputError} label={'введите login'} name={'username'} type={'text'} />
+                            <OtherInput onFocus={focusInput} value={data.username} setValue={handleChangeInput} danger={!isEmpty(error)} label={'введите login'} name={'username'} type={'text'} />
                             {inputError&&<span className={classes.warning_text}>Не правильно заполнен Login</span>}
                         </div>
                         <div>
-                            <OtherInput onFocus={focusInput} value={data.password} setValue={handleChangeInput} danger={inputError} label={'введите пароль'} name={'password'} type={'password'} />
+                            <OtherInput onFocus={focusInput} value={data.password} setValue={handleChangeInput} danger={!isEmpty(error)} label={'введите пароль'} name={'password'} type={'password'} />
                             {inputError&&<span className={classes.warning_text}>Не правильно заполнен Пароль</span>}
                         </div>
                     </div>
@@ -91,5 +92,6 @@ export const Auth = () => {
                     </div>
                 </form>
             </div>
+        </>
     );
 };

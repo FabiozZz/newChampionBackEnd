@@ -12,35 +12,21 @@ import EditModalPhoto from "./EditModalPhoto/EditModalPhoto";
 import EditPhoneSection from "./EditPhoneSection/EditPhoneSection";
 import {EndBtnGroup} from "../common/EndBtnGroup/EndBtnGroup";
 import {useDispatch, useSelector} from "react-redux";
-import axios from "axios";
-import Api from "../../Api/Api";
-import {clear_profile, load_profile_user} from "../../store/Actions/profileActions";
+import {edit_profile, open_edit_page} from "../../store/Actions/profileActions";
+import {EditAddresSection} from "./common/EditAddresSection/EditAddresSection";
+import {isEmpty} from "../../helpers/common";
 
 export const ContextCommonEdit = createContext();
 
 export const Edit = () => {
 
     const user = useSelector(state => state.profile.user);
-
     const {id} = useParams()
-
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        let source = axios.CancelToken.source();
-        (async () => {
-            await Api.getProfile(id).then(r => {
-                dispatch(load_profile_user(r.data))
-            });
-        })();
-        return () => {
-            dispatch(clear_profile());
-            source.cancel('операция прервана');
-        };
-    }, [dispatch, id]);
 
     /* common */
-    const [image, setImage] = useState(user.avatar&&null);
+    const [image, setImage] = useState(user?.avatar||null);
     const handleChangeImage = (data) => {
         console.log(data)
         setImage(data)
@@ -59,7 +45,7 @@ export const Edit = () => {
         last_name: user.last_name,
         middle_name: user.middle_name,
         first_name: user.first_name,
-        date_of_birth: user.date_of_birth,
+        date_of_birth: moment(user.date_of_birth).format('DD.MM.YYYY'),
     });
 
     const [age, setAge] = useState(0);
@@ -85,21 +71,21 @@ export const Edit = () => {
     /**
      * локальный стейт для храниения/установки адреса клиента для Address
      */
-    // const [address, setAddress] = useState({
-    //     street: user.address.street,
-    //     house: user.address.house,
-    //     corpus: user.address.corpus,
-    //     room: user.address.room
-    // });
+    const [addressEdit, setAddress] = useState({
+        street: user.street,
+        house: user.house,
+        building: user.building,
+        apartments: user.apartments
+    });
 
     // /**
     //  * прослушивание события ввода данных для Address
     //  * @param e
     //  */
-    // const handleChangeAddressComponent = (e) => {
-    //     let name = e.target.name;
-    //     setAddress(prevState => ({ ...prevState, [name]: e.target.value }))
-    // };
+    const handleChangeAddressComponent = (e) => {
+        let name = e.target.name;
+        setAddress(prevState => ({ ...prevState, [name]: e.target.value }))
+    };
 
     // /**
     //  * локальный стейт для хранения/установки для Sale
@@ -189,7 +175,7 @@ export const Edit = () => {
 
     /* Adult */
 
-    const [phone_number, setPhone] = useState('');
+    const [phone_number, setPhone] = useState(user.phone_number);
 
     const handleChangePhone = (phone) => {setPhone(phone.target.value)}
 
@@ -235,15 +221,59 @@ export const Edit = () => {
         //
         //     setAge(mathAge);
         // }
-        if (/\d{4}-\d{2}-\d{2}/g.test(user.date_of_birth)) {
-            let dateNow = moment();
-            let dateBirth = moment(user.date_of_birth);
-            let mathAge = Math.floor(dateNow.diff(dateBirth, 'year'));
 
-            setAge(mathAge);
-        }
 
     },[age, user.date_of_birth]);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        let uploadData;
+        if (age > 0 && age < 16) {
+            uploadData = {
+                id:id,
+                ...personalData,
+                date_of_birth:personalData.date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
+                ...addressEdit,
+                age_group_id: user.club_card.age_group.id
+            };
+        }else{
+            uploadData = {
+                id:user.id,
+                ...personalData,
+                date_of_birth:personalData.date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
+                ...addressEdit,
+                phone_number,
+                age_group_id: user.club_card.age_group.id
+            };
+        }
+        console.log(uploadData)
+        dispatch(edit_profile(uploadData));
+        history.goBack();
+    };
+    useEffect(() => {
+        if (isEmpty(user)) {
+            dispatch(open_edit_page(id))
+        }else{
+            setPersonalData({
+                last_name:user.last_name,
+                first_name:user.first_name,
+                middle_name:user.middle_name,
+                date_of_birth: moment(user.date_of_birth).format('DD.MM.YYYY')
+            })
+            setPhone(user.phone_number);
+            setAddress({
+                street:user.street,
+                house:user.house,
+                building:user.building,
+                apartments:user.apartments
+            })
+            if (/\d{4}-\d{2}-\d{2}/g.test(user.date_of_birth)) {
+                let dateNow = moment();
+                let dateBirth = moment(user.date_of_birth);
+                let mathAge = Math.floor(dateNow.diff(dateBirth, 'year'));
+                setAge(mathAge);
+            }
+        }
+    }, [dispatch, id, user]);
     return (
         <>
             {modal&&
@@ -251,10 +281,7 @@ export const Edit = () => {
                 <EditModalPhoto toggleModal={setModal} modal={modal} image={image} setImage={handleChangeImage}/>
             </Modal>
             }
-            <form onSubmit={(e) => {
-                e.preventDefault()
-                console.log('submit')
-            }} className={classes.wrapper}>
+            <form onSubmit={handleSubmit} className={classes.wrapper}>
 
                 <div className={classes.redirect}>
                     <Redirect title={"Редактирование профиля"} padding={true}/>
@@ -316,15 +343,15 @@ export const Edit = () => {
                         </ContextCommonEdit.Provider>
 
 
-                        <div className={classes.block_info}>
-                            <h3 className={classes.block_info__title}>Адресс</h3>
-                            <div className={classes.block_info__item}>
-                                <div className={classes.street}>
-                                    <OtherInput name={'street'} value={user.address} label={'улица'}/>
-                                </div>
-                            </div>
-                        </div>
-                        {/*<EditAddresSection address={user.address}/>*/}
+                        {/*<div className={classes.block_info}>*/}
+                        {/*    <h3 className={classes.block_info__title}>Адресс</h3>*/}
+                        {/*    <div className={classes.block_info__item}>*/}
+                        {/*        <div className={classes.street}>*/}
+                        {/*            <OtherInput name={'street'} value={user.address} label={'улица'}/>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
+                        <EditAddresSection address={addressEdit} change={handleChangeAddressComponent}/>
 
                         {/*<OterSection sale={sale} setSale={handleChangeValueSale}/>*/}
 

@@ -50,7 +50,6 @@ export const Option = ({ change, id, couch, couchList }) => {
             }else if(optionBox.current.getBoundingClientRect().left <= 0){
                 optionBox.current.style.right = optionBox.current.getBoundingClientRect().left-10+'px';
             }
-            console.log(optionBox.current.getBoundingClientRect().left)
 
             // else if(optionBox.current.getBoundingClientRect().left <= window.innerWidth){
             //

@@ -14,7 +14,7 @@ import {MaskInputTel} from "../../../../utils/MaskInputTel/MaskInputTel";
  * @returns {JSX.Element}
  * @constructor
  */
-export const AddParent = ({data,change,index}) => {
+export const AddParent = ({error,data,change,index}) => {
 
     /**
      * локальный стейт, в случае если объект data приходит не пустой, заполняется данными из data
@@ -54,19 +54,23 @@ export const AddParent = ({data,change,index}) => {
     return (
         <div className={classes.block_info__item}>
             <div className={classes.last_name_parent}>
-                <OtherInput value={data.last_name} setValue={changeInputs} name={'last_name'} label={'фамилия'} required={false}/>
+                <OtherInput danger={error&&error.last_name} value={data.last_name} setValue={changeInputs} name={'last_name'} label={'фамилия'} required={false}/>
+                {error&&error.last_name&&<span className={classes.warning_text}>{error.last_name.join()}</span>}
             </div>
             <div className={classes.first_name_parent}>
-                <OtherInput value={data.first_name} setValue={changeInputs} name={'first_name'} label={'имя'} required={false}/>
+                <OtherInput danger={error&&error.first_name} value={data.first_name} setValue={changeInputs} name={'first_name'} label={'имя'} required={false}/>
+                {error&&error.first_name&&<span className={classes.warning_text}>{error.first_name.join()}</span>}
             </div>
             <div className={classes.middle_name_parent}>
-                <OtherInput value={data.middle_name} setValue={changeInputs} name={'middle_name'} label={'отчество'}/>
+                <OtherInput danger={error&&error.middle_name} value={data.middle_name} setValue={changeInputs} name={'middle_name'} label={'отчество'}/>
+                {error&&error.middle_name&&<span className={classes.warning_text}>{error.middle_name.join()}</span>}
             </div>
             <div className={classes.ho_is}>
                 <OtherInput value={data.who} setValue={changeInputs} name={'who'} label={'кем приходитесь ребёнку'} required={false}/>
             </div>
             <div className={classes.phone_number_parent}>
-                <MaskInputTel name={'phone_number'} value={data.phone_number} setValue={changeInputs} required={false} label={'номер телефона'}/>
+                <MaskInputTel danger={error&&error.phone_number} name={'phone_number'} value={data.phone_number} setValue={changeInputs} required={false} label={'номер телефона'}/>
+                {error&&error.phone_number&&<span className={classes.warning_text}>{error.phone_number.join()}</span>}
             </div>
 
         </div>

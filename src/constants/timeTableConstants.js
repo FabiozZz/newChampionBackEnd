@@ -1,7 +1,0 @@
-export const LOAD_CLIENTS = 'LOAD_CLIENTS';
-export const LOAD_GROUP = 'LOAD_GROUP';
-export const LOAD_COUCH = 'LOAD_COUCH';
-export const CHANGE_TODAY = 'CHANGE_TODAY';
-export const CHANGE_COUCH_FOR_COURSE = 'CHANGE_COUCH_FOR_COURSE';
-export const FILTERED_CLIENTS = 'FILTERED_CLIENTS';
-export const CLEAR_FILTER = 'CLEAR_FILTER';

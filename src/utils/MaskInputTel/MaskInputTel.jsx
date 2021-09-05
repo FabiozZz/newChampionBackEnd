@@ -27,7 +27,7 @@ import './phoneinput'
  * @returns {JSX.Element}
  * @constructor
  */
-export const MaskInputTel = ({style,label,name,required,disabled,className,placeholder,value,setValue}) => {
+export const MaskInputTel = ({style={},label='',name='',danger=false,required=false,disabled=false,className='',placeholder='',value,setValue=()=>{}}) => {
 
     const inputRef = useRef(null);
 
@@ -112,9 +112,10 @@ export const MaskInputTel = ({style,label,name,required,disabled,className,place
     //         inputRef.current.addEventListener('paste', onPhonePaste, false);
     //     }
     // },[onPhoneInput, onPhonePaste])
+    const classDangerIs = danger ? classes.danger : classes.otherInputWrapper;
     return (
         <>
-            <div style={style} className={`${classes.otherInputWrapper} ${className}`}>
+            <div style={style} className={`${classDangerIs} ${className}`}>
                 {label && <label>{label}</label>}
                 <input name={name}
                        type={"tel"}

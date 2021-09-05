@@ -11,19 +11,13 @@ import {isEmpty} from "../../../../helpers/common";
 import {SuccessContext} from "../../SuccessContext";
 import {SuccessAdd} from "./SuccessAdd/SuccessAdd";
 import {Modal} from "../../../../utils/Modal/Modal";
-import {ModalEditAbonement} from "./ModalEditAbonement/ModalEditAbonement";
 import {ModalChangeAbonement} from "./ModalChangeClient/ModalChangeAbonement";
-import axios from "axios";
-import Api from "../../../../Api/Api";
 import avatar from './avatar.png';
 import {
-    load_profile_aboniment,
-    load_profile_couch,
-    load_profile_group,
-    load_profile_status
+ open_edit_page
 } from "../../../../store/Actions/profileActions";
 import {useDispatch} from "react-redux";
-import {Button} from "../../../../utils/Buttons/Button";
+import {useParams} from "react-router";
 
 /**
  * вывод основной информации о польлзователе
@@ -37,11 +31,17 @@ export const ProfileInfo = ({profile}) => {
     const handleChangeSuccess = () => {
         setSuccess(!success);
     };
+    const {id} = useParams()
+    const dispatch = useDispatch();
+    useEffect(() => {
+        if (isEmpty(user)) {
+            dispatch(open_edit_page(id))
+        }
+    }, [dispatch, id, user]);
 
     const [age, setAge] = useState('');
     const [whatsApp, setWhatsApp] = useState(false);
 
-    const dispatch = useDispatch();
 
     const handleToggleWhatsApp = () => {
         setWhatsApp(!whatsApp)
@@ -62,12 +62,12 @@ export const ProfileInfo = ({profile}) => {
     const showModal = () => {
         toggleModal(prevState=>({...prevState,show:!modal.show}));
     };
-    const clearType = () => {
-        toggleModal(prevState=>({...prevState,type:''}));
-    }
-    const showAndChangeTypeModalEdit = () => {
-        toggleModal(prevState=>({...prevState,show:!modal.show,type:'edit'}));
-    }
+    // const clearType = () => {
+    //     toggleModal(prevState=>({...prevState,type:''}));
+    // }
+    // const showAndChangeTypeModalEdit = () => {
+    //     toggleModal(prevState=>({...prevState,show:!modal.show,type:'edit'}));
+    // }
     const showAndChangeTypeModalChange = () => {
         toggleModal(prevState=>({...prevState,show:!modal.show,type:''}));
     }
@@ -77,7 +77,8 @@ export const ProfileInfo = ({profile}) => {
             <Modal toggle={showModal}>
                 {
                     modal.type === 'edit' ?
-                        <ModalEditAbonement toggleModal={showModal} change={clearType} type={modal.type} profile={profile}/>
+                        null
+                        // <ModalEditAbonement toggleModal={showModal} change={clearType} type={modal.type} profile={profile}/>
                         :
                         <ModalChangeAbonement toggleModal={showModal} profile={profile} type={modal.type}/>
                 }
@@ -86,9 +87,9 @@ export const ProfileInfo = ({profile}) => {
             }
             {!user.is_Archive &&
             <div className={classes.block_info}>
-                <SuccessContext.Provider value={{success, handleChangeSuccess, profile,showAndChangeTypeModalChange}}>
-                    {success && !profile.loading ?
-                        <SuccessAdd/>
+                <SuccessContext.Provider value={{success, handleChangeSuccess, showAndChangeTypeModalChange}}>
+                    {success && !profile.loading  ?
+                        <SuccessAdd profile={profile}/>
                         :
                         <>
                             <div className={classes.block_info__header}>
@@ -106,9 +107,9 @@ export const ProfileInfo = ({profile}) => {
 
                                     <>
                                         <h3 className={classes.block_info__title}>Абонемент</h3>
-                                        <img onClick={showAndChangeTypeModalEdit} className={classes.block_info__header_img}
-                                             src={edit_profile}
-                                             alt="edit_profile"/>
+                                        {/*<img onClick={showAndChangeTypeModalEdit} className={classes.block_info__header_img}*/}
+                                        {/*     src={edit_profile}*/}
+                                        {/*     alt="edit_profile"/>*/}
                                     </>
 
                                 }
@@ -170,7 +171,7 @@ export const ProfileInfo = ({profile}) => {
                 </div>
             </div>
 
-            {!user.is_adult &&
+            {!isEmpty(user.parents) &&
             <div className={classes.block_info}>
 
                 <div className={classes.block_info__header}>
@@ -219,69 +220,69 @@ export const ProfileInfo = ({profile}) => {
 
                 <div className={`${classes.block_info__item_small}`}>
 
-                    <p className={classes.block_info__item_label}>Адрес</p>
-                    <span className={classes.block_info__item_label__text}>{user.address}</span>
+                    {/*<p className={classes.block_info__item_label}>Адрес</p>*/}
+                    {/*<span className={classes.block_info__item_label__text}>{user.address}</span>*/}
 
-                    {/* <p className={classes.block_info__item_label}>Улица:</p>
-                    <span className={classes.block_info__item_label__text}>{user.address.street}</span>
+                    <p className={classes.block_info__item_label}>Улица:</p>
+                    <span className={classes.block_info__item_label__text}>{user.street}</span>
 
                     <p className={classes.block_info__item_label}>Дом:</p>
-                    <span className={classes.block_info__item_label__text}>{user.address.house}</span>
+                    <span className={classes.block_info__item_label__text}>{user.house}</span>
 
                     <p className={classes.block_info__item_label}>Корпус:</p>
-                    <span className={classes.block_info__item_label__text}>{user.address.corpus}</span>
+                    <span className={classes.block_info__item_label__text}>{user.building}</span>
 
                     <p className={classes.block_info__item_label}>Квартира:</p>
-                    <span className={classes.block_info__item_label__text}>{user.address.room}</span> */}
+                    <span className={classes.block_info__item_label__text}>{user.apartments}</span>
 
                 </div>
             </div>
 
-            <div className={classes.block_info}>
+            {/*<div className={classes.block_info}>*/}
 
-                <div className={classes.block_info__header}>
-                    <h3 className={classes.block_info__title}>прочее</h3>
-                    <NavLink className={classes.block_info__header_img_link} to={`/profile/${user.id}/edit`}>
-                        <img src={edit_profile} alt="edit_profile" />
-                    </NavLink>
-                </div>
+            {/*    <div className={classes.block_info__header}>*/}
+            {/*        <h3 className={classes.block_info__title}>прочее</h3>*/}
+            {/*        <NavLink className={classes.block_info__header_img_link} to={`/profile/${user.id}/edit`}>*/}
+            {/*            <img src={edit_profile} alt="edit_profile" />*/}
+            {/*        </NavLink>*/}
+            {/*    </div>*/}
 
-                <div className={`${classes.block_info__item_small}`}>
-                    <p className={classes.block_info__item_label}>Источник:</p>
-                    <span className={classes.block_info__item_label__text}>Яндекс</span>
-                </div>
+            {/*    <div className={`${classes.block_info__item_small}`}>*/}
+            {/*        <p className={classes.block_info__item_label}>Источник:</p>*/}
+            {/*        <span className={classes.block_info__item_label__text}>Яндекс</span>*/}
+            {/*    </div>*/}
 
-            </div>
+            {/*</div>*/}
 
-            <div className={classes.block_info}>
+            {/*<div className={classes.block_info}>*/}
 
-                <div className={classes.block_info__header}>
-                    <h3 className={classes.block_info__title}>Оценка качества</h3>
-                </div>
-                <div className={classes.block_info__ball}>
-                    <div className={classes.ball_group}>
-                        <div className={classes.ball_group_inputs}>
-                            <label><input type="radio" name={'ball'} value="1"/>1</label><label><input type="radio" name={'ball'} value="2"/>2</label><label><input type="radio" name={'ball'} value="3"/>3</label><label><input type="radio" name={'ball'} value="4"/>4</label><label><input type="radio" name={'ball'} value="5"/>5</label><label><input type="radio" name={'ball'} value="6"/>6</label><label><input type="radio" name={'ball'} value="7"/>7</label><label><input type="radio" name={'ball'} value="8"/>8</label><label><input type="radio" name={'ball'} value="9"/>9</label><label><input type="radio" name={'ball'} value="10"/>10</label>
-                        </div>
-                        <div><Button text={'сохранить'} size={'small'} factor={'success'}/></div>
-                    </div>
-                    <div className={classes.ball_history}>
+            {/*    <div className={classes.block_info__header}>*/}
+            {/*        <h3 className={classes.block_info__title}>Оценка качества</h3>*/}
+            {/*    </div>*/}
+            {/*    <div className={classes.block_info__ball}>*/}
+            {/*        <div className={classes.ball_group}>*/}
+            {/*            <div className={classes.ball_group_inputs}>*/}
+            {/*                <label><input type="radio" name={'ball'} value="1"/>1</label><label><input type="radio" name={'ball'} value="2"/>2</label><label><input type="radio" name={'ball'} value="3"/>3</label><label><input type="radio" name={'ball'} value="4"/>4</label><label><input type="radio" name={'ball'} value="5"/>5</label><label><input type="radio" name={'ball'} value="6"/>6</label><label><input type="radio" name={'ball'} value="7"/>7</label><label><input type="radio" name={'ball'} value="8"/>8</label><label><input type="radio" name={'ball'} value="9"/>9</label><label><input type="radio" name={'ball'} value="10"/>10</label>*/}
+            {/*            </div>*/}
+            {/*            <div><Button text={'сохранить'} size={'small'} factor={'success'}/></div>*/}
+            {/*        </div>*/}
+            {/*        <div className={classes.ball_history}>*/}
 
-                        <div className={classes.block_info__header}>
-                            <h4 className={classes.block_info__title}>История оценок</h4>
-                        </div>
-                        <div className={classes.ball_history_table}>
-                            <span className={classes.date}>12.12.2020:</span>
-                            <span className={classes.ball}>10</span>
-                            <span className={classes.date}>12.12.2020:</span>
-                            <span className={classes.ball}>10</span>
-                            <span className={classes.date}>12.12.2020:</span>
-                            <span className={classes.ball}>10</span>
-                        </div>
-                    </div>
-                </div>
+            {/*            <div className={classes.block_info__header}>*/}
+            {/*                <h4 className={classes.block_info__title}>История оценок</h4>*/}
+            {/*            </div>*/}
+            {/*            <div className={classes.ball_history_table}>*/}
+            {/*                <span className={classes.date}>12.12.2020:</span>*/}
+            {/*                <span className={classes.ball}>10</span>*/}
+            {/*                <span className={classes.date}>12.12.2020:</span>*/}
+            {/*                <span className={classes.ball}>10</span>*/}
+            {/*                <span className={classes.date}>12.12.2020:</span>*/}
+            {/*                <span className={classes.ball}>10</span>*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
 
-            </div>
+            {/*</div>*/}
 
         </>
     );

@@ -1,25 +1,34 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import { OtherInput } from '../../../../../utils/OtherInput/OtherInput';
 import { UserInfo } from '../UserInfo/UserInfo';
 import classes from './modal_change.module.css';
 import { AbonimentType } from '../../../../Clients/FilterClientSection/AbonimentType/AbonimentType';
 import { SelectStatus } from '../SelectStatus/SelectStatus';
-import { declOfLessonsNum, declOfWeekNum } from '../../../../../helpers/common';
 import {Counter} from "../../../../../utils/Counter/Counter";
-import {SelectGroup} from "../AddAboniment/SelectGroup/SelectGroup";
 import {SelectCouch} from "../AddAboniment/SelectCouch/SelectCouch";
-import modal_devider from '../../../../../assets/images/modal_devider.svg';
-import success_edit from "../../../../../assets/images/successAbonement.svg";
-import edit from "../../../../../assets/images/editAboniment.svg";
 import {Button} from "../../../../../utils/Buttons/Button";
+import SelectGroup from "../../../../../utils/SelectGroup/SelectGroup";
+import SelectAgesGroup from "../../../../../utils/SelectAgesGroup/SelectAgesGroup";
+import {useDispatch} from "react-redux";
+import {buy_abonement} from "../../../../../store/Actions/profileActions";
 
 export const ModalChangeAbonement = ({ profile,toggleModal }) => {
     const { user } = profile;
+    console.log(profile)
+
+    // const {id} = useParams();
+
+    const dispatch = useDispatch();
 
     const [selectAbonement, setSelectAbonement] = useState(user.club_card.rate)
     const handleChangeAbonementForUser = (obj) => {
         setSelectAbonement(obj);
         console.log(selectAbonement)
+    };
+
+    const [selectAgesGroup, setSelectAgesGroup] = useState(user.club_card.age_group)
+    const handleChangeAgesGroupForUser = (obj) => {
+        setSelectAgesGroup(obj);
     };
 
     const [selectStatus, setSelectStatus] = useState({...user.club_card.level})
@@ -50,21 +59,35 @@ export const ModalChangeAbonement = ({ profile,toggleModal }) => {
     };
 
 
-    const [editPrice, setEditPrice] = useState({
-        price: 0,
-        edit: false
-    });
-    const handleChangePriceAbonement = (e) => {
-        setEditPrice(prevState => ({...prevState,price:Number(e.target.value)}));
-    };
-    const toggleEdit = () => {
-        setEditPrice(prevState => ({...prevState, edit: !prevState.edit}));
-    };
+    // const [editPrice, setEditPrice] = useState({
+    //     price: 0,
+    //     edit: false
+    // });
+    // const handleChangePriceAbonement = (e) => {
+    //     setEditPrice(prevState => ({...prevState,price:Number(e.target.value)}));
+    // };
+    // const toggleEdit = () => {
+    //     setEditPrice(prevState => ({...prevState, edit: !prevState.edit}));
+    // };
 
-    useEffect(() => {
-        setEditPrice(prevState => ({...prevState,price:Number(selectAbonement.price)}));
+    // useEffect(() => {
+    //     setEditPrice(prevState => ({...prevState,price:Number(selectAbonement.price)}));
+    //
+    // },[selectAbonement.price]);
 
-    },[selectAbonement.price]);
+    const handleSubmit = () => {
+        const uploadData = {
+            id:profile.user.club_card.id,
+            level_id: selectStatus.id,
+            quantity: countCard,
+            rate_id: selectAbonement.id,
+            train_group: selectGroup.id,
+            age_group_id: selectAgesGroup.id
+        }
+        dispatch(buy_abonement(uploadData));
+        toggleModal()
+    };
+    let disabled = !selectAgesGroup.id && !selectGroup.id && !selectStatus.id;
 
     return (
         <>
@@ -99,14 +122,27 @@ export const ModalChangeAbonement = ({ profile,toggleModal }) => {
 
                         :null
                 }
+
+                <div className={classes.block_two}>
+                    <SelectAgesGroup label={'возростная группа'} value={selectAgesGroup} setValue={handleChangeAgesGroupForUser} data={profile.ages_group}/>
+                    {
+                        !selectAbonement.is_personal?
+                            <SelectGroup label={'поменять группу'} value={selectGroup}
+                                         setValue={handleChangeGroupForUser}
+                                         data={profile.group}/>
+                            : selectAbonement.is_personal?
+                                <SelectCouch label={'поменять тренера'} value={selectCouch}
+                                             setValue={handleChangeTrainerForUser}
+                                             data={profile.couch}/>
+                                : null
+
+                    }
+                </div>
+
                 <svg width="498" height="1" viewBox="0 0 498 1" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <line y1="0.5" x2="498" y2="0.5" stroke="#EEF3F5" strokeDasharray="12 12"/>
                 </svg>
-
-                <div>
-                    <OtherInput label={"скидка"} placeholder={'Не заполнено'}/>
-                </div>
-
+                {/*
                 <div className={classes.block_form__cash}>
                     <div className={`${classes.sale_count}`}>
                             <span className={`${classes.sale_count_text}`}>{selectAbonement.train_quantity > 20 ? <span
@@ -140,9 +176,10 @@ export const ModalChangeAbonement = ({ profile,toggleModal }) => {
                         </div>
                     </div>
                 </div>
+                */}
                 <div className={classes.end_btn}>
                     <Button click={toggleModal} factor={'danger'} text={'отменить'}/>
-                    <Button factor={'success'} text={'сохранить'}/>
+                    <Button disabled={disabled} factor={'success'} click={handleSubmit} text={'сохранить'}/>
                 </div>
                 {/* <img src={separate} alt="separate" />
                     <div></div>

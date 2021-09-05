@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import './app.css';
 import { Header } from "./Header/Header";
@@ -9,10 +9,8 @@ import { SideBar } from './SideBar/SideBar';
 import Routes from "../Routes/Routes";
 import {ConnectedRouter} from "connected-react-router";
 import Api from "../Api/Api";
-import {log_in_done, token_refresh, token_verify} from "../store/Actions/userActions";
+import { token_verify} from "../store/Actions/userActions";
 import {isEmpty} from "../helpers/common";
-import {notification} from "antd";
-import {notificationPopUp} from "./common/Error";
 
 /**
  * главный компонент содержащий все приложение
@@ -24,7 +22,7 @@ function App({history}) {
      * константа из redux показывает авторизован ли менеджер
      * @type {boolean}
      */
-    const {isAuth,error,success} = useSelector(state => state.user);
+    const {isAuth,error} = useSelector(state => state.user);
 
     const dispatch = useDispatch();
 
@@ -34,9 +32,13 @@ function App({history}) {
      * если не авторизован пользователь, то его выбрасывает на экран входа в систему
      */
     if (!isAuth) {
-        if (Api.getToken() && !error) {
+        if (Api.getToken() && isEmpty(error)) {
             dispatch(token_verify());
         }
+        // if (!Api.getToken() && Api.getRefreshToken()) {
+        // }
+        // else if (Api.getRefreshToken()) {
+        // }
     }
 
     // useEffect(() => {
@@ -47,16 +49,16 @@ function App({history}) {
     // if(!isEmpty(success)) notificationPopUp(success.type,success.title,success.desc)
     return (
         <>
-            {!isEmpty(error) && notification[error.type]({
-                message: error.title,
-                description: error.desc,
-                duration: 2.5
-            })}
-            {!isEmpty(success) && notification[success.type]({
-                message: success.title,
-                description: success.desc,
-                duration: 2.5
-            })}
+            {/*{!isEmpty(error) && notification[error.type]({*/}
+            {/*    message: error.title,*/}
+            {/*    description: error.desc,*/}
+            {/*    duration: 2.5*/}
+            {/*})}*/}
+            {/*{!isEmpty(success) && notification[success.type]({*/}
+            {/*    message: success.title,*/}
+            {/*    description: success.desc,*/}
+            {/*    duration: 2.5*/}
+            {/*})}*/}
 
             <ConnectedRouter history={history}>
                 {isAuth?

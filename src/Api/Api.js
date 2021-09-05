@@ -308,6 +308,10 @@ class Api {
         return await this.client.put(`/schedule/train/${id}/`, {is_visited: set});
     }
 
+    async removeClientFromGroup(id) {
+        return await this.client.delete(`/schedule/train/${id}/`);
+    }
+
     async getProfile(id) {
         return await this.client.get(`/client/${id}/`)
         //     .then(r => {
@@ -319,7 +323,7 @@ class Api {
         return await this.client.put(`/client/${id}/`, {...data});
     }
 
-    async editProfileAbonement(id, data) {
+    async buyProfileAbonement(id, data) {
         return await this.client.post(`/subscription/clubCard/${id}/buy/`, {...data});
     }
 
@@ -328,8 +332,8 @@ class Api {
      * @returns {Promise}
      * @param {CancelToken} token токен для отмены вызова при уничтожении компонента
      */
-    async getClientsTimeTable(token) {
-        return await this.client.get("/schedule/lesson/", {cancelToken: token});
+    async getGeneralPageData() {
+        return await this.client.get("/schedule/lesson/today/");
     }
 
     /**
@@ -337,8 +341,16 @@ class Api {
      * @param token
      * @returns {Promise}
      */
-    async getGroupList(token) {
+    async getGroupList(token=null) {
         return await this.client.get("/core/group/", {cancelToken: token});
+    }
+    /**
+     *
+     * @param token
+     * @returns {Promise}
+     */
+    async getAgesGroupList(token=null) {
+        return await this.client.get("/core/ageGroup/", {cancelToken: token});
     }
 
     /**
@@ -356,7 +368,7 @@ class Api {
      * @returns {Promise}
      */
     async changeCouch(id, couch) {
-        return await this.client.put(`/schedule/lesson/${id}/`, {trainer: {id: couch}})
+        return await this.client.put(`/schedule/lesson/${id}/`, {trainer_id: couch})
     }
 
     /* для страницы добавления взрослого клиента */
@@ -390,13 +402,16 @@ class Api {
     }
 
     /* для добавления ребенка */
-    async postAddChild(child) {
-        return await this.client.post('/client/createChild/', {...child})
+    async postAddClient(client) {
+        return await this.client.post('/client/', {...client})
+    }
+async createTrain(data) {
+        return await this.client.post('/schedule/train/', {...data})
     }
 
-    async postAddAdult(adult) {
-        return await this.client.post('/client/createAdult/', {...adult})
-    }
+    // async postAddAdult(adult) {
+    //     return await this.client.post('/client/createAdult/', {...adult})
+    // }
 
     /**
      * Получение списка групп доступных для ребенка

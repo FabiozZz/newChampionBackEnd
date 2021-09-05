@@ -122,3 +122,8 @@
     justify-content:space-between;
     align-items:flex-end;
 }
+.block_two{
+    grid-gap:24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

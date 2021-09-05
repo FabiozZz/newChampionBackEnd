@@ -1,4 +1,4 @@
-import {LOG_IN_APP, LOG_IN_APP_SUCCESS, LOG_IN_APP_FAILURE, LOG_OUT, TOKEN_VERIFY} from "../../constants/userConstants";
+import {LOG_IN_APP, LOG_IN_APP_SUCCESS, LOG_IN_APP_FAILURE, LOG_OUT} from "../../constants/userConstants";
 
 const initialState = {
     isAuth: false,
@@ -22,7 +22,7 @@ export const userReducer = (state = initialState, action) => {
                 loading: false,
                 success: action.payload,
                 isAuth:true,
-                error:null
+                // error:null
             };
         case LOG_IN_APP_FAILURE:
             return {

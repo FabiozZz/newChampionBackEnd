@@ -16,21 +16,31 @@ import ModalPhoto from "./ModalPhoto/ModalPhoto";
 import PhoneSection from "./PhoneSection/PhoneSection";
 import {EndBtnGroup} from "../common/EndBtnGroup/EndBtnGroup";
 import {ParentsBlock} from "../common/ParentsBlock/ParentsBlock";
-import {useDispatch} from "react-redux";
-import {add_client_on_CRM} from "../../store/Actions/globalActions";
+import {useDispatch, useSelector} from "react-redux";
+import {add_client_on_CRM} from "../../store/Actions/addClientsActions";
 
 export const ContextCommon = createContext();
 
 export const Add = () => {
+    const {groups, couches, agesGroup,loading,error} = useSelector(state => state.addClient);
 
     const dispatch = useDispatch()
 
     /* common */
+
+    const [errorInput, setIsError] = useState(null);
+    useEffect(() => {
+        setIsError(error);
+    },[error]);
+
     const [image, setImage] = useState(null);
     const handleChangeImage = (data) => setImage(data);
 
 
     const [modal, setModal] = useState(false);
+    // const toggleModal = () => {
+    //     setModal(!modal);
+    // };
 
     /**
      * локальный стейт для храниения/установки персональных данных клиента для PersonalData
@@ -68,8 +78,8 @@ export const Add = () => {
     const [address, setAddress] = useState({
         street: '',
         house: '',
-        corpus: '',
-        room: ''
+        building: '',
+        apartments: ''
     });
 
     /**
@@ -135,7 +145,8 @@ export const Add = () => {
     const [testData, setTestData] = useState({
         filial: { name: '' },
         group: { name: '' },
-        dateTest: ''
+        dateTest: '',
+        agesGroup: {label: ''}
     });
     // const [filialList, setFilialList] = useState([]);
     //
@@ -143,17 +154,17 @@ export const Add = () => {
     //  * прослушивание события ввода данных для TestLesson
     //  * @param e
     //  */
-    // const handleChangeValueGroupTestLesson = (obj) => {
-    //     setTestData({ ...testData, group: { ...obj } });
-    // };
+    const handleChangeValueGroupTestLesson = (obj) => {
+        setTestData({ ...testData, group: obj });
+    };
     //
     // /**
     //  * прослушивание события ввода данных для TestLesson
     //  * @param e
     //  */
-    // const handleChangeValueFilialTestLesson = (obj) => {
-    //     setTestData({ ...testData, filial: { ...obj } });
-    // };
+    const handleChangeValueAgesGroupTestLesson = (obj) => {
+        setTestData({ ...testData, agesGroup: obj });
+    };
 
     /**
      * прослушиване события ввода и выбора дыты для TestLesson
@@ -215,7 +226,7 @@ export const Add = () => {
 
             setAge(mathAge);
         }
-    },[age, personalData.date_of_birth]);
+    },[age, error, personalData.date_of_birth]);
 
 
     /**
@@ -224,55 +235,60 @@ export const Add = () => {
     const submitForm = (e)=>{
         e.preventDefault();
         let oldUploadData = {};
-        let newUploadData = {};
-    const {date_of_birth,...other}=personalData
+        // let newUploadData = {};
+        const {date_of_birth,...other}=personalData
         if (age < 16) {
             oldUploadData = {
                 ...other,
                 date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
-                address: `${address.street} ${address.house} ${address.corpus} ${address.room}`,
+                ...address,
                 parents,
+                age_group_id:testData.agesGroup.id,
                 age
             };
-            newUploadData = {
-                ...other,
-                date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
-                avatar:image,
-                file: refFile.current.files[0],
-                filial:'здесь будет филиал',
-                group:'здесь будет группа',
-                address,
-                parents,
-                age,
-                sale //откуда узнали
-
-            };
+            // newUploadData = {
+            //     ...other,
+            //     date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
+            //     avatar:image,
+            //     file: refFile.current.files[0],
+            //     filial:'здесь будет филиал',
+            //     group:'здесь будет группа',
+            //     ...address,
+            //     parents,
+            //     age_group_id:testData.agesGroup.id,
+            //     age,
+            //     sale //откуда узнали
+            //
+            // };
         }else{
             oldUploadData = {
                 ...other,
                 date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
-                address: `${address.street} ${address.house} ${address.corpus} ${address.room}`,
+                ...address,
                 phone_number,
+                age_group_id:testData.agesGroup.id,
                 age
             };
-            newUploadData = {
-                ...other,
-                date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
-                avatar:image,
-                filial:'здесь будет филиал',
-                group:'здесь будет группа',
-                address,
-                age,
-                sale //откуда узнали
-            };
+            // newUploadData = {
+            //     ...other,
+            //     date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
+            //     avatar:image,
+            //     filial:'здесь будет филиал',
+            //     group:'здесь будет группа',
+            //     ...address,
+            //     age_group_id:testData.agesGroup?.id,
+            //     age,
+            //     sale //откуда узнали
+            // };
         }
         console.log(oldUploadData)
         dispatch(add_client_on_CRM(oldUploadData));
     }
+    console.log('Add>>',errorInput)
     return (
         <>
             {modal&&
-            <Modal size={'sm'} toggle={setModal}>
+            <Modal size={'lg'} toggle={setModal}>
                 <ModalPhoto toggleModal={setModal} modal={modal} image={image} setImage={handleChangeImage}/>
             </Modal>
             }
@@ -291,16 +307,19 @@ export const Add = () => {
                     <h3 className={classes.block_info__title}>личная информация</h3>
                     <div className={classes.block_info__item}>
                         <div className={classes.last_name}>
-                            <OtherInput setValue={handleChangePersonalData} name={'last_name'}
+                            <OtherInput danger={errorInput&&errorInput.last_name} setValue={handleChangePersonalData} name={'last_name'}
                                         value={personalData.last_name} label={'фамилия'}/>
+                            {errorInput&&errorInput.last_name&&<span className={classes.warning_text}>{errorInput.last_name.join()}</span>}
                         </div>
                         <div className={classes.first_name}>
-                            <OtherInput setValue={handleChangePersonalData} name={'first_name'}
+                            <OtherInput danger={errorInput&&errorInput.first_name} setValue={handleChangePersonalData} name={'first_name'}
                                         value={personalData.first_name} label={'имя'}/>
+                            {errorInput&&errorInput.first_name&&<span className={classes.warning_text}>{errorInput.first_name.join()}</span>}
                         </div>
                         <div className={classes.middle_name}>
-                            <OtherInput setValue={handleChangePersonalData} name={'middle_name'}
+                            <OtherInput danger={errorInput&&errorInput.middle_name} setValue={handleChangePersonalData} name={'middle_name'}
                                         value={personalData.middle_name} label={'отчество'}/>
+                            {errorInput&&errorInput.middle_name&&<span className={classes.warning_text}>{errorInput.middle_name.join()}</span>}
                         </div>
                         <div className={classes.date_of_birth}>
                             <DataPicker value={personalData.date_of_birth} setValue={handleDataPickerPersonal}
@@ -310,8 +329,9 @@ export const Add = () => {
                 </div>
                 {age>0 ?
                     <>
-                        <ContextCommon.Provider value={{phone_number,
-                            handleChangePhone,handleChangeValueDateTestLesson,testData}}>
+                        <ContextCommon.Provider value={{phone_number,errorInput,
+                            handleChangePhone,handleChangeValueDateTestLesson,testData,groups,couches,agesGroup,handleChangeValueGroupTestLesson,
+                            handleChangeValueAgesGroupTestLesson}}>
 
                             {age > 0 && age < 16 ?
                                 <>
@@ -338,13 +358,14 @@ export const Add = () => {
                         </ContextCommon.Provider>
 
 
-                        <AddresSection change={handleChangeAddressComponent} address={address}/>
+                        <AddresSection error={errorInput} change={handleChangeAddressComponent} address={address}/>
 
                         <OterSection sale={sale} setSale={handleChangeValueSale}/>
 
                         <RulesSection rules={rules} setRules={handleToggleRules} personal={personal} setPersonal={handleTogglePersonal}/>
-
+                        {!loading&&
                         <EndBtnGroup goBack={goBack} personal={personal} rules={rules}/>
+                        }
                     </>
                     : null}
             </form>

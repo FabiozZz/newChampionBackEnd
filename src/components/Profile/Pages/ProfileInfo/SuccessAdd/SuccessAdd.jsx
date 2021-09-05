@@ -1,12 +1,10 @@
-import React, {useContext} from 'react';
-import {SuccessContext} from "../../../SuccessContext";
+import React from 'react';
 import classes from './success.module.css';
 import {Button} from "../../../../../utils/Buttons/Button";
 import {useHistory} from "react-router";
 
-export const SuccessAdd = () => {
+export const SuccessAdd = ({profile}) => {
     const history = useHistory();
-    const {profile} = useContext(SuccessContext)
     const {user} = profile;
     console.log(user)
     const goGeneralPage = () => {
@@ -15,7 +13,7 @@ export const SuccessAdd = () => {
     return (
         <div className={classes.wrapper}>
             <div className={classes.info_wrapper}>
-                <p className={classes.info_head}>Абонемент &laquo;{user.club_card.rate.name}&raquo; со статусом &laquo;{user.club_card.level.name} клиент&raquo; сохранен</p>
+                <p className={classes.info_head}>Абонемент &laquo;{user?.club_card?.rate?.name}&raquo; со статусом &laquo;{user?.club_card?.level?.name} клиент&raquo; сохранен</p>
                 <p className={classes.info_mute}>Абонемент активируется при первом посещении</p>
             </div>
             <div className={classes.btn_group}>

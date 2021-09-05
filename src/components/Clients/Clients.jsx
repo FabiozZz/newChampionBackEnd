@@ -1,6 +1,4 @@
-/**@namespace Clients*/
-
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import { Redirect } from "../common/Redirect";
 import { FilterClientsSection } from "./FilterClientSection/FilterClientsSection";
 import { useSelector } from "react-redux";
@@ -10,7 +8,6 @@ import { ClientsRow } from "./SortTable/ClientsRow/ClientsRow";
 import classes from './clients.module.css';
 import HeaderNav from '../common/HeaderNav';
 import { Skeleton } from 'antd';
-import ErrorsGroup from "../common/ErrorsGroup";
 
 /**
  * @returns {React.Element}
@@ -26,22 +23,22 @@ export const Clients = () => {
     };
 
     const clientsList = useSelector(state => state.clientsList);
-    const {error,loading} = clientsList;
+    const {loading} = clientsList;
     const clients = clientsList.filterClients.length ? clientsList.filterClients : clientsList.allClients;
-    const [renderError, setError] = useState([]);
-
-    useEffect(() => {
-        if (error.length) {
-            setError(ErrorsGroup(error));
-        }
-    }, [error]);
+    // const [renderError, setError] = useState([]);
+    //
+    // useEffect(() => {
+    //     if (error.length) {
+    //         setError(ErrorsGroup(error));
+    //     }
+    // }, [error]);
 
     return (
         <>
-            {error.length ?
-                // <></>
-                renderError
-                : null}
+            {/*{error.length ?*/}
+            {/*    // <></>*/}
+            {/*    renderError*/}
+            {/*    : null}*/}
             <HeaderNav/>
             <Redirect padding={true} title={"Список клиентов"}/>
 

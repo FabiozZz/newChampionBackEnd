@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { AbonimentType } from "./AbonimentType/AbonimentType";
 import { CouchList } from "./CouchList/CouchList";
 import { FilialList } from "./FilialList/FilialList";
-import { GroupList } from "./GroupList/GroupList";
 import { BtnGroup } from "./BtnGroup/BtnGroup";
 import { StatusFilterSection } from "./StatusFilterSection/StatusFilterSection";
 import { AnchorBox } from "../AnchorBox/AnchorBox";

@@ -24,12 +24,12 @@ import classes from './otherInput.module.css';
  * @returns {JSX.Element}
  * @constructor
  */
-export const OtherInput = ({value,setValue,onFocus=()=>{},readOnly=false,name,required,danger, label,type,disabled,style,placeholder}) => {
+export const OtherInput = ({value,setValue,onFocus=()=>{},focus=false,readOnly=false,name,required,danger, label,type,disabled,style,placeholder}) => {
     let classN = danger ? classes.danger:classes.otherInputWrapper;
     return (
         <div style={style} className={`${classN}`}>
             {label&&<label>{label}</label>}
-            <input readOnly={readOnly} onFocus={onFocus} value={value} name={name} onChange={setValue} required={required} placeholder={placeholder} type={type} disabled={disabled}/>
+            <input readOnly={readOnly} onFocus={onFocus} value={value} autoFocus={focus} name={name} onChange={setValue} required={required} placeholder={placeholder} type={type} disabled={disabled}/>
         </div>
     );
 };

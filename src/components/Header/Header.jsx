@@ -1,9 +1,8 @@
 import React from 'react';
-import {Link, NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {log_out} from "../../store/Actions/userActions";
 import classes from './header.module.css';
-import {useHistory} from "react-router";
 
 /**
  * компонент шапки CRM

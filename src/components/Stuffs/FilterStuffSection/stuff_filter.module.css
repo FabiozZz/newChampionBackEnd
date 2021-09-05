@@ -1,0 +1,33 @@
+@import url("../../../utils/variable.css");
+.wrapper {
+  background: #ffffff;
+  display: grid;
+  padding: 24px 32px 24px;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: end;
+  /*grid-template-rows: 1fr 1fr 1fr;*/
+  grid-auto-rows: min-content;
+  grid-gap: 16px;
+  margin: 0 -30px;
+  border-bottom: 2px solid var(--base-color-body);
+}
+.search {
+  grid-column: 1 /13;
+}
+.filial {
+  grid-column: 1/7;
+}
+.special {
+  grid-column: 7/13;
+}
+@media screen and (min-width: 1439px) {
+  .search {
+    grid-column: 1 /5;
+  }
+  .filial {
+    grid-column: 1/7;
+  }
+  .special {
+    grid-column: 7/13;
+  }
+}

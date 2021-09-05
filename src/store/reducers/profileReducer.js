@@ -40,6 +40,7 @@ const initialState = {
     couch: [],
     filial: [],
     error: [],
+    ages_group:[],
     loading: false
 }
 
@@ -69,7 +70,7 @@ export const profileReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 error: [],
-                user: action.payload,
+                user: {...action.payload},
             };
         case EDIT_PROFILE_FAILURE:
             return {
@@ -83,26 +84,26 @@ export const profileReducer = (state = initialState, action) => {
                 loading: false,
                 error: [...state.error, {...action.payload}]
             };
-        case LOAD_PROFILE_TYPE_ABONIMENT:
-            return {
-                ...state,
-                typeAboniment: action.aboniment
-            };
-        case LOAD_PROFILE_STATUS:
-            return {
-                ...state,
-                status: action.status
-            };
-        case LOAD_PROFILE_GROUP:
-            return {
-                ...state,
-                group: action.group
-            };
-        case LOAD_PROFILE_COUCH:
-            return {
-                ...state,
-                couch: action.couch
-            };
+        // case LOAD_PROFILE_TYPE_ABONIMENT:
+        //     return {
+        //         ...state,
+        //         typeAboniment: action.aboniment
+        //     };
+        // case LOAD_PROFILE_STATUS:
+        //     return {
+        //         ...state,
+        //         status: action.status
+        //     };
+        // case LOAD_PROFILE_GROUP:
+        //     return {
+        //         ...state,
+        //         group: action.group
+        //     };
+        // case LOAD_PROFILE_COUCH:
+        //     return {
+        //         ...state,
+        //         couch: action.couch
+        //     };
         case CLEAR_PROFILE:
             return {
                 user: {},
@@ -112,25 +113,25 @@ export const profileReducer = (state = initialState, action) => {
                 couch: [],
                 filial: []
             };
-        case LOAD_PROFILE_FILIAL:
-            return {
-                ...state,
-                filial: action.filial
-            };
-        case CHANGE_PROFILE:
-            return {
-                ...state,
-                user: {...action.profile}
-            };
-        case UPDATE_PROFILE_CLUB_CARD:
-            console.log(action.club_card)
-            return {
-                ...state,
-                user: {
-                    ...state.user,
-                    ...action.club_card
-                }
-            };
+        // case LOAD_PROFILE_FILIAL:
+        //     return {
+        //         ...state,
+        //         filial: action.filial
+        //     };
+        // case CHANGE_PROFILE:
+        //     return {
+        //         ...state,
+        //         user: {...action.profile}
+        //     };
+        // case UPDATE_PROFILE_CLUB_CARD:
+        //     console.log(action.club_card)
+        //     return {
+        //         ...state,
+        //         user: {
+        //             ...state.user,
+        //             ...action.club_card
+        //         }
+        //     };
         default:
             return state;
     }

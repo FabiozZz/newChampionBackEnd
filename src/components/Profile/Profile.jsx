@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router";
-import Api from "../../Api/Api";
 import HeaderNav from "../common/HeaderNav";
 import { Redirect } from "../common/Redirect";
 import { NavigateProfile } from "./NavigeteProfile/NavigeteProfile";
@@ -11,7 +10,7 @@ import { Button } from "../../utils/Buttons/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { ProfileVisit } from './Pages/ProfileVisit/ProfileVisit';
 import { ProfilePay } from './Pages/ProfilePay/ProfilePay';
-import {clear_profile} from "../../store/Actions/profileActions";
+import {clear_profile, open_edit_page} from "../../store/Actions/profileActions";
 
 
 /**
@@ -30,17 +29,20 @@ export const Profile = () => {
     const [tabIndex, setTabIndex] = useState(0)
 
     useEffect(() => {
-        return () => {
-            dispatch(clear_profile());
-        };
-    }, [dispatch]);
+        if (isEmpty(profile.user)) {
+            dispatch(open_edit_page(id))
+        }
+        // return () => {
+        //     dispatch(clear_profile());
+        // };
+    }, [dispatch, id, profile.user]);
 
     return (
         <>
             <HeaderNav/>
             <Redirect title={'Профиль'} padding={true} />
             <div className={classes.wrapper}>
-                {profile.user.is_archive &&
+                {profile.user.in_archive &&
                     <div className={classes.block_info}>
                         <h3 className={classes.block_info__title}>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

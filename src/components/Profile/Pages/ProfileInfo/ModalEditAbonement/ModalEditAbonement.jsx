@@ -8,11 +8,11 @@ import { SelectStatus } from '../SelectStatus/SelectStatus';
 import { declOfLessonsNum, declOfWeekNum } from '../../../../../helpers/common';
 import success_edit from "../../../../../assets/images/successAbonement.svg";
 import edit from "../../../../../assets/images/editAboniment.svg";
-import {SelectGroup} from "../AddAboniment/SelectGroup/SelectGroup";
 import {DataPicker} from "../../../../../utils/DataPicker/DataPicker";
 import {Button} from "../../../../../utils/Buttons/Button";
 import modal_devider from "../../../../../assets/images/modal_devider.svg";
 import {SelectCouch} from "../AddAboniment/SelectCouch/SelectCouch";
+import SelectGroup from "../../../../../utils/SelectGroup/SelectGroup";
 
 export const ModalEditAbonement = ({ profile, type, change,toggleModal}) => {
     const { user } = profile;
@@ -121,20 +121,21 @@ export const ModalEditAbonement = ({ profile, type, change,toggleModal}) => {
                     </div>
                 </div>
                 <img width={500} src={separate} alt="separate"/>
+                <div className={classes.block_two}>
+                    <SelectGroup label={'возростная группа'} value={{name:''}} data={{}}/>
                 {
-                    selectAbonement.is_personal === 0 ?
-                        <div className={classes.block_one}>
+                    !selectAbonement.is_personal?
                             <SelectGroup label={'поменять группу'} value={selectGroup}
                                          setValue={handleChangeGroupForUser}
                                          data={profile.group}/>
-                        </div> : selectAbonement.is_personal === 1 ?
-                        <div className={classes.block_one}>
+                         : selectAbonement.is_personal?
                             <SelectCouch label={'поменять тренера'} value={selectCouch}
                                          setValue={handleChangeCouchForUser}
                                          data={profile.couch}/>
-                        </div> : null
+                         : null
 
                 }
+                </div>
                 <img width={500} src={separate} alt="separate"/>
                 <div className={classes.block_one}>
                     <DataPicker label={"Заморозить абонемент"}/>
