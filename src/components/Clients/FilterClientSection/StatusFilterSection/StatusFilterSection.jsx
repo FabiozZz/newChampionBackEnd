@@ -19,7 +19,7 @@ export const StatusFilterSection = ({data,activePunkt,setPunkt}) => {
                     setPunkt({id:option.id,name:option.name})
                 }} key={option.id} data-value={option.name} className={activeClass}><img data-value={option.name}
                                                                                          src={option.img}
-                                                                                         alt={option.name}/>{option.name}
+                                                                                         />{option.name}
                 </div>);
             })}
         </div>

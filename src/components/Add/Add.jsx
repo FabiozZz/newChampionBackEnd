@@ -322,32 +322,36 @@ export const Add = () => {
                 <div className={classes.redirect}>
                     <Redirect title={"Регистрация клиента"} padding={true}/>
                 </div>
-                {/*<div onClick={()=>setModal(true)} className={classes.block_f}>*/}
-                {/*    <img  src={image||camera} alt={'avatar'}/>*/}
-                {/*    {!image&&<span>Добавить фото</span>}*/}
-
-                {/*</div>*/}
 
                 <div className={classes.block_info_f}>
-                    <h3 className={classes.block_info__title}>личная информация</h3>
-                    <div className={classes.block_info__item}>
-                        <div className={classes.last_name}>
-                            <OtherInput danger={errorInput&&errorInput.last_name} setValue={handleChangePersonalData} name={'last_name'}
-                                        value={personalData.last_name} label={'фамилия'}/>
-                            {errorInput&&errorInput.last_name&&<span className={classes.warning_text}>{errorInput.last_name.join()}</span>}
-                        </div>
-                        <div className={classes.first_name}>
-                            <OtherInput danger={errorInput&&errorInput.first_name} setValue={handleChangePersonalData} name={'first_name'}
-                                        value={personalData.first_name} label={'имя'}/>
-                            {errorInput&&errorInput.first_name&&<span className={classes.warning_text}>{errorInput.first_name.join()}</span>}
-                        </div>
-                        <div className={classes.middle_name}>
-                            <OtherInput setValue={handleChangePersonalData} name={'middle_name'}
-                                        value={personalData.middle_name} label={'отчество'}/>
-                        </div>
-                        <div className={classes.date_of_birth}>
-                            <DataPicker value={personalData.date_of_birth} setValue={handleDataPickerPersonal}
-                                        label={'дата рождения'}/>
+
+                    <div onClick={()=>setModal(true)} className={classes.block_f}>
+                        <img  src={image||camera} alt={'avatar'}/>
+                        {!image&&<span>Добавить фото</span>}
+
+                    </div>
+
+                    <div className={classes.block_personal}>
+                        <h3 className={classes.block_info__title}>личная информация</h3>
+                        <div className={classes.block_info__item}>
+                            <div className={classes.last_name}>
+                                <OtherInput danger={errorInput&&errorInput.last_name} setValue={handleChangePersonalData} name={'last_name'}
+                                            value={personalData.last_name} label={'фамилия'}/>
+                                {errorInput&&errorInput.last_name&&<span className={classes.warning_text}>{errorInput.last_name.join()}</span>}
+                            </div>
+                            <div className={classes.first_name}>
+                                <OtherInput danger={errorInput&&errorInput.first_name} setValue={handleChangePersonalData} name={'first_name'}
+                                            value={personalData.first_name} label={'имя'}/>
+                                {errorInput&&errorInput.first_name&&<span className={classes.warning_text}>{errorInput.first_name.join()}</span>}
+                            </div>
+                            <div className={classes.middle_name}>
+                                <OtherInput setValue={handleChangePersonalData} name={'middle_name'}
+                                            value={personalData.middle_name} label={'отчество'}/>
+                            </div>
+                            <div className={classes.date_of_birth}>
+                                <DataPicker value={personalData.date_of_birth} setValue={handleDataPickerPersonal}
+                                            label={'дата рождения'}/>
+                            </div>
                         </div>
                     </div>
                 </div>

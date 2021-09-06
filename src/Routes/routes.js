@@ -29,84 +29,98 @@ import {CreateAgeGroup} from "../components/Settings/Pages/SettingsGroup/CreateA
 
 export const routes = [
     {
+        /* Домашняя страница */
         id: HOME_ROUTE,
         path: '/',
         exact: true,
         component: GeneralPage
     },
     {
+        /* Страница добавления клиента */
         id: ADD_CLIENT_ROUTE,
         path: '/add_client',
         exact: false,
         component: Add
     },
     {
+        /* Страница профиля клиента */
         id: PROFILE_CLIENT_ROUTE,
         path: '/profile/:id/',
         exact: true,
         component: Profile
     },
     {
+        /* Страница редактирования профиля клиента */
         id: EDIT_CLIENT_ROUTE,
         path: '/profile/:id/edit',
         exact: true,
         component: Edit
     },
     {
+        /* Страница Клиенты */
         id: ALL_CLIENTS_ROUTE,
         path: '/clients',
         exact: false,
         component: Clients
     },
     {
+        /* Главная страница настроек */
         id: SETTINGS_APP_ROUTE,
         path: '/settings',
         exact: true,
         component: Settings
     },
     {
+        /* Страница создания и редактирования занятий */
         id: CREATE_AND_EDIT_LESSONS,
         path: '/settings/lesson',
         exact: false,
         component: CreateAndEditLessons
     },
     {
+        /* Страница Сотрудники */
         id: STUFF_ROUTE,
         path: '/stuffs',
         exact: false,
         component: Stuffs
     },
     {
+        /* Страница настройки групп */
         id: SETTINGS_GROUP,
         path: '/settings/group',
         exact: true,
         component: SettingsGroup
     },
     {
+        /* Страница создания группы */
         id: SETTINGS_GROUP_CREATE,
         path: '/settings/group/create_group',
         exact: true,
         component: CreateGroup
     },
     {
+        /* Страница создания возрастной группы */
         id: SETTINGS_AGE_GROUP_CREATE,
         path: '/settings/group/create_age_group',
         exact: true,
         component: CreateAgeGroup
     },
     {
+        /* Страница редактирования группы */
         id: SETTINGS_GROUP_EDIT,
         path: '/settings/group/create_group/:id',
         exact: true,
         component: EditGroup
     },
     {
+        /* Страница настройек статусов */
         id: SETTINGS_STATUS,
         path: '/settings/status',
         exact: true,
         component: SettingsStatus
     },
     {
+        /* Страница настроек абонементов */
         id: SETTINGS_ABONEMENT,
         path: '/settings/abonement',
         exact: true,

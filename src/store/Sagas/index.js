@@ -7,7 +7,7 @@ import {
     ADD_CLIENT_ROUTE,
     ALL_CLIENTS_ROUTE,
     HOME_ROUTE,
-    PROFILE_CLIENT_ROUTE,
+    PROFILE_CLIENT_ROUTE, SETTINGS_ABONEMENT,
     SETTINGS_GROUP, SETTINGS_GROUP_EDIT
 } from "../../Routes/actionRoutes";
 import clientsPageSagas from "./clientsPageSagas";
@@ -21,6 +21,8 @@ import {load_general_page_data} from "../Actions/generalPageActions";
 import {load_data_for_add_page} from "../Actions/addClientsActions";
 import {start_load_data_set_group} from "../Actions/settingsGroupActions";
 import {settingsGroupSagas} from "./settingsGroupSagas";
+import {start_load_data_settings_abonement} from "../Actions/settingsAbonementActions";
+import {settingsAbonementSagas} from "./settingsAbonementSagas";
 
 
 export function* routeChangeSaga() {
@@ -48,6 +50,15 @@ export function* routeChangeSaga() {
         if (matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_GROUP))) {
             console.log(matchPath(action.payload.location.pathname, getRouteConfig(ADD_CLIENT_ROUTE)));
             yield put(start_load_data_set_group());
+            if (yield cancelled()) {
+                console.log('cancel');
+            }
+        }
+
+        /* страница настроек абонементов */
+        if (matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_ABONEMENT))) {
+            console.log(matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_ABONEMENT)));
+            yield put(start_load_data_settings_abonement());
             if (yield cancelled()) {
                 console.log('cancel');
             }
@@ -108,7 +119,28 @@ export function* routeChangeSaga() {
 
 export default function* rootSaga() {
     console.log('start saga');
-    const sagas = [generalPageSaga,clientsPageSagas,addingClientPageSagas,profilePageSagas,editGroupPageSagas,settingsGroupSagas];
+    const sagas = [
+        /* сага главной страницы */
+        generalPageSaga,
+
+        /* сага страницы клиентов */
+        clientsPageSagas,
+
+        /* сага страницы добавления нового клиента */
+        addingClientPageSagas,
+
+        /* сага страницы профиля клиента */
+        profilePageSagas,
+
+        /* сага страницы настроек редактирования групп */
+        editGroupPageSagas,
+
+        /* сага страницы настроек группы */
+        settingsGroupSagas,
+
+        /* сага страницы настроек абонемента */
+        settingsAbonementSagas
+    ];
     yield all(sagas.map(s => spawn(s)));
     yield fork(routeChangeSaga);
 };

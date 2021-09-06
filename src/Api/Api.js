@@ -190,7 +190,7 @@ class Api {
         this.setToken(await res.data.access);
         console.log('после reLogin\'a получен токен', this.getToken());
         localStorage.setItem('access_token', await res.data.access)
-        return res.data
+        return res
     }
     async login(admin) {
         console.log(admin)
@@ -333,7 +333,7 @@ class Api {
      * @param {CancelToken} token токен для отмены вызова при уничтожении компонента
      */
     async getGeneralPageData() {
-        return await this.client.get("/schedule/lesson/today/");
+        return await this.client.get("/schedule/lesson/");
     }
 
     /**

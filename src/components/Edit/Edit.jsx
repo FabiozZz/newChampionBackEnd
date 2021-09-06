@@ -286,30 +286,33 @@ export const Edit = () => {
                 <div className={classes.redirect}>
                     <Redirect title={"Редактирование профиля"} padding={true}/>
                 </div>
-                {/*<div onClick={toggleModal} className={classes.block_f}>*/}
-                {/*    <img  src={image||camera} alt={'avatar'}/>*/}
-                {/*    {!image&&<span>Добавить фото</span>}*/}
-
-                {/*</div>*/}
 
                 <div className={classes.block_info_f}>
-                    <h3 className={classes.block_info__title}>личная информация</h3>
-                    <div className={classes.block_info__item}>
-                        <div className={classes.last_name}>
-                            <OtherInput setValue={handleChangePersonalData} name={'last_name'}
-                                        value={personalData.last_name} label={'фамилия'}/>
-                        </div>
-                        <div className={classes.first_name}>
-                            <OtherInput setValue={handleChangePersonalData} name={'first_name'}
-                                        value={personalData.first_name} label={'имя'}/>
-                        </div>
-                        <div className={classes.middle_name}>
-                            <OtherInput setValue={handleChangePersonalData} name={'middle_name'}
-                                        value={personalData.middle_name} label={'отчество'}/>
-                        </div>
-                        <div className={classes.date_of_birth}>
-                            <DataPicker value={personalData.date_of_birth} setValue={handleDataPickerPersonal}
-                                        label={'дата рождения'}/>
+                    <div onClick={toggleModal} className={classes.block_f}>
+                        <img  src={image||camera} alt={'avatar'}/>
+                        {!image&&<span>Добавить фото</span>}
+
+                    </div>
+
+                    <div className={classes.block_personal}>
+                        <h3 className={classes.block_info__title}>личная информация</h3>
+                        <div className={classes.block_info__item}>
+                            <div className={classes.last_name}>
+                                <OtherInput setValue={handleChangePersonalData} name={'last_name'}
+                                            value={personalData.last_name} label={'фамилия'}/>
+                            </div>
+                            <div className={classes.first_name}>
+                                <OtherInput setValue={handleChangePersonalData} name={'first_name'}
+                                            value={personalData.first_name} label={'имя'}/>
+                            </div>
+                            <div className={classes.middle_name}>
+                                <OtherInput setValue={handleChangePersonalData} name={'middle_name'}
+                                            value={personalData.middle_name} label={'отчество'}/>
+                            </div>
+                            <div className={classes.date_of_birth}>
+                                <DataPicker value={personalData.date_of_birth} setValue={handleDataPickerPersonal}
+                                            label={'дата рождения'}/>
+                            </div>
                         </div>
                     </div>
                 </div>

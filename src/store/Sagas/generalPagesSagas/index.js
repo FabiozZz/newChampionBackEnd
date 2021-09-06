@@ -28,7 +28,7 @@ export function* tokenVerify() {
 export function* tokenRefresh() {
     console.log('вызов для обновления токена')
     try {
-        const request = yield call(()=>Api.tokenRefresh());
+        const request = yield call(()=>Api.reLogin());
         yield call(() => Api.setToken(request.data.access));
         yield put(log_in_done({
             type: 'success',

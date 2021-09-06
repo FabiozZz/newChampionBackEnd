@@ -11,6 +11,7 @@ import {stuffReducer} from "./reducers/stuffReducer";
 import {settingsForGroupEditPageReducer} from "./reducers/settingsForGroupEditPageReducer";
 import {generalPageReducer} from "./reducers/generalPageReducer";
 import {addClientReducer} from "./reducers/addClientReducer";
+import {settings_abonementReducer} from "./reducers/settings_abonementReducer";
 
 export const history = createBrowserHistory();
 
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
     user: userReducer,
     stuffs: stuffReducer,
     settings_group:settingsForGroupEditPageReducer,
+    settings_abonement:settings_abonementReducer,
     general_page: generalPageReducer,
     clientsList: clientsReducer,
     addClient: addClientReducer,
