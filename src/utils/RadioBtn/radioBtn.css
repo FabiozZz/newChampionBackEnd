@@ -2,8 +2,10 @@
   display: block;
   width: 16px;
   border-radius: 50%;
+  border: 1px solid #DFE6EE;
   cursor: pointer;
   height: 16px;
+  margin: 0;
   background-color: #ffffff;
 }
 .radioWrapper:hover {

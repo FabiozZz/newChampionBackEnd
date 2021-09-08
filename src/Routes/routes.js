@@ -11,8 +11,11 @@ import {
     CREATE_AND_EDIT_LESSONS,
     EDIT_CLIENT_ROUTE,
     HOME_ROUTE,
-    PROFILE_CLIENT_ROUTE, SETTINGS_ABONEMENT, SETTINGS_AGE_GROUP_CREATE,
-    SETTINGS_APP_ROUTE,
+    PROFILE_CLIENT_ROUTE,
+    SETTINGS_ABONEMENT,
+    SETTINGS_ABONEMENT_EDIT, SETTINGS_ABONEMENT_VIEW,
+    SETTINGS_AGE_GROUP_CREATE,
+    SETTINGS_APP_ROUTE, SETTINGS_CREATE_ABONEMENT,
     SETTINGS_GROUP,
     SETTINGS_GROUP_CREATE,
     SETTINGS_GROUP_EDIT,
@@ -26,6 +29,9 @@ import {EditGroup} from "../components/Settings/Pages/SettingsGroup/EditGroup/Ed
 import {SettingsStatus} from "../components/Settings/Pages/SettingsStatus/SettingsStatus";
 import {SettingsAbonement} from "../components/Settings/Pages/SettingsAbonement/SettingsAbonement";
 import {CreateAgeGroup} from "../components/Settings/Pages/SettingsGroup/CreateAgeGroup/CreateAgeGroup";
+import {ViewAbonement} from "../components/Settings/Pages/SettingsAbonement/ViewAbonement/ViewAbonement";
+import {CreateAbonement} from "../components/Settings/Pages/SettingsAbonement/CreateAbonement/CreateAbonement";
+import {EditAbonement} from "../components/Settings/Pages/SettingsAbonement/EditAbonement/EditAbonement";
 
 export const routes = [
     {
@@ -125,6 +131,27 @@ export const routes = [
         path: '/settings/abonement',
         exact: true,
         component: SettingsAbonement
+    },
+    {
+        /* Страница создания абонементов */
+        id: SETTINGS_CREATE_ABONEMENT,
+        path: '/settings/abonement/create/',
+        exact: true,
+        component: CreateAbonement
+    },
+    {
+        /* Страница просмотра абонемента */
+        id: SETTINGS_ABONEMENT_VIEW,
+        path: "/settings/abonement/:id",
+        exact: true,
+        component: ViewAbonement
+    },
+    {
+        /* Страница редактирования абонементов */
+        id: SETTINGS_ABONEMENT_EDIT,
+        path: '/settings/abonement/edit/:id',
+        exact: true,
+        component: EditAbonement
     },
     // {
     //     id: AUTH_ADMIN_IN_APP,

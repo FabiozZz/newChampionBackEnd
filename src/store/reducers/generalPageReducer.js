@@ -39,13 +39,14 @@ export const generalPageReducer = (state = initialState, action = null) => {
             };
         case SEARCH_CLIENTS:
             let search_name = action.payload;
+            console.log(state.clients)
             let filteredData = [...state.clients].filter(client => {
-                let last_first_middle = client.last_name.toLowerCase() + ' ' + client.first_name.toLowerCase() + ' ' + client.middle_name.toLowerCase();
-                let last_middle_first = client.last_name.toLowerCase() + ' ' + client.middle_name.toLowerCase() + ' ' + client.first_name.toLowerCase();
-                let middle_last_first = client.middle_name.toLowerCase() + ' ' + client.last_name.toLowerCase() + ' ' + client.first_name.toLowerCase();
-                let middle_first_last = client.middle_name.toLowerCase() + ' ' + client.first_name.toLowerCase() + ' ' + client.last_name.toLowerCase();
-                let first_middle_last = client.first_name.toLowerCase() + ' ' + client.middle_name.toLowerCase() + ' ' + client.last_name.toLowerCase();
-                let first_last_middle = client.first_name.toLowerCase() + ' ' + client.last_name.toLowerCase() + ' ' + client.middle_name.toLowerCase();
+                let last_first_middle = (client?.last_name?.toLowerCase()||'') + ' ' + (client?.first_name?.toLowerCase()||'') + ' ' + (client?.middle_name?.toLowerCase()||'');
+                let last_middle_first = (client?.last_name?.toLowerCase()||'') + ' ' + (client?.middle_name?.toLowerCase()||'') + ' ' + (client?.first_name?.toLowerCase()||'');
+                let middle_last_first = (client?.middle_name?.toLowerCase()||'') + ' ' + (client?.last_name?.toLowerCase()||'') + ' ' + (client?.first_name?.toLowerCase()||'');
+                let middle_first_last = (client?.middle_name?.toLowerCase()||'') + ' ' + (client?.first_name?.toLowerCase()||'') + ' ' + (client?.last_name?.toLowerCase()||'');
+                let first_middle_last = (client?.first_name?.toLowerCase()||'') + ' ' + (client?.middle_name?.toLowerCase()||'') + ' ' + (client?.last_name?.toLowerCase()||'');
+                let first_last_middle = (client?.first_name?.toLowerCase()||'') + ' ' + (client?.last_name?.toLowerCase()||'') + ' ' + (client?.middle_name?.toLowerCase()||'');
                 if (
                     last_first_middle.includes(search_name.toLowerCase())||
                     last_middle_first.includes(search_name.toLowerCase())||

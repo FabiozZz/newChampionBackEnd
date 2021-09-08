@@ -7,7 +7,7 @@ import {
     ADD_CLIENT_ROUTE,
     ALL_CLIENTS_ROUTE,
     HOME_ROUTE,
-    PROFILE_CLIENT_ROUTE, SETTINGS_ABONEMENT,
+    PROFILE_CLIENT_ROUTE, SETTINGS_ABONEMENT, SETTINGS_ABONEMENT_EDIT, SETTINGS_ABONEMENT_VIEW,
     SETTINGS_GROUP, SETTINGS_GROUP_EDIT
 } from "../../Routes/actionRoutes";
 import clientsPageSagas from "./clientsPageSagas";
@@ -21,7 +21,7 @@ import {load_general_page_data} from "../Actions/generalPageActions";
 import {load_data_for_add_page} from "../Actions/addClientsActions";
 import {start_load_data_set_group} from "../Actions/settingsGroupActions";
 import {settingsGroupSagas} from "./settingsGroupSagas";
-import {start_load_data_settings_abonement} from "../Actions/settingsAbonementActions";
+import {start_load_data_abonement, start_load_data_settings_abonement} from "../Actions/settingsAbonementActions";
 import {settingsAbonementSagas} from "./settingsAbonementSagas";
 
 
@@ -62,6 +62,30 @@ export function* routeChangeSaga() {
             if (yield cancelled()) {
                 console.log('cancel');
             }
+        }
+
+        /* страница просмотра абонемента */
+        const abonementPage = matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_ABONEMENT_VIEW));
+        if (abonementPage) {
+            let {id} = abonementPage.params;
+            id = Number(id);
+            if (!isNaN(id) && typeof id === "number") {
+                yield put(start_load_data_abonement(id));
+            }
+        }else{
+            yield put(clear_profile());
+        }
+
+        /* страница редактирования абонемента */
+        const abonementEditPage = matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_ABONEMENT_EDIT));
+        if (abonementEditPage) {
+            let {id} = abonementEditPage.params;
+            id = Number(id);
+            if (!isNaN(id) && typeof id === "number") {
+                yield put(start_load_data_abonement(id));
+            }
+        }else{
+            yield put(clear_profile());
         }
 
         /* страница профиля */

@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import './radioBtn.css';
 
-export const RadioBtn = (disabled=false) => {
+export const RadioBtn = (disabled=false,name='') => {
 
     const [isChecked, setIsChecked] = useState(false);
 
@@ -17,7 +17,7 @@ export const RadioBtn = (disabled=false) => {
     return (
         <label className={`radioWrapper ${isChecked? 'radioWrapperChecked':''}`} onClick={handleToggleIsChecked}>
 
-            <input ref={refRadio} type="radio" checked={isChecked} hidden={true} disabled={disabled}/>
+            <input ref={refRadio} type="radio" name={name} checked={isChecked} hidden={true} disabled={disabled}/>
         </label>
     );
 };

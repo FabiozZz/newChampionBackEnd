@@ -1,0 +1,113 @@
+.wrapper{
+    grid-column: 1/13;
+    padding-bottom: 100px;
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+}
+.block {
+    grid-column: 1/13;
+    background: white;
+    display: grid;
+    grid-gap: 36px 0;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: min-content;
+    position: relative;
+    padding: 32px 16px;
+    box-shadow: var(--box-shadow);
+    margin: 0 -15px;
+}
+.info_abonement {
+    grid-column: 1/13;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content;
+    grid-gap: 12px;
+    position: relative;
+}
+.line {
+    display: flex;
+    flex-direction: row;
+}
+.line p:first-child {
+    margin-right: 28px;
+}
+.label{
+    font-family:'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1.125px;
+    text-transform: uppercase;
+    color: #69707F;
+}
+.res{
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #69707F;
+}
+.info_prices{
+    grid-column: 1/13;
+}
+.header{
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #8798AD;
+    margin-bottom: 20px;
+}
+.table{
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    grid-gap: 16px;
+    grid-auto-rows: min-content;
+    align-items: center;
+}
+.card{
+    height: 32px;
+    grid-column: 1/6;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.card img{
+    margin-left: 5px;
+    margin-right: 16px;
+}
+.text {
+
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1.125px;
+    text-transform: uppercase;
+    color: rgba(105, 112, 127, 0.7);
+}
+.price{
+    grid-column: 6/13;
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #69707F;
+}
+.edit{
+    padding: 0;
+    margin: 0;
+    justify-self: end;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
