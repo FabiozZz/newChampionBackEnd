@@ -11,8 +11,10 @@ export const AddClientModal = ({change_user,name}) => {
     const {filter_clients} = useSelector(state => state.general_page);
     const handleSearchClient = (e) => {
         setSearch(e.target.value);
-        dispatch(search_clients(search));
     };
+    useEffect(() => {
+        dispatch(search_clients(search));
+    },[dispatch, search]);
 
     const refList = useRef(null);
 
