@@ -243,7 +243,6 @@ export const Add = () => {
                     ...other,
                     middle_name,
                     date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
-                    ...address,
                     parents,
                     age_group_id:testData.agesGroup.id,
                     age
@@ -252,7 +251,6 @@ export const Add = () => {
                 oldUploadData = {
                     ...other,
                     date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
-                    ...address,
                     parents,
                     age_group_id:testData.agesGroup.id,
                     age
@@ -279,7 +277,6 @@ export const Add = () => {
                     ...other,
                     middle_name,
                     date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
-                    ...address,
                     phone_number,
                     age_group_id:testData.agesGroup.id,
                     age
@@ -288,7 +285,6 @@ export const Add = () => {
                 oldUploadData = {
                     ...other,
                     date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
-                    ...address,
                     phone_number,
                     age_group_id:testData.agesGroup.id,
                     age
@@ -306,7 +302,19 @@ export const Add = () => {
             //     sale //откуда узнали
             // };
         }
-        console.log(oldUploadData)
+        if (address.street) {
+            oldUploadData = {...oldUploadData,street:address.street}
+        }
+        if (address.apartments) {
+            oldUploadData = {...oldUploadData,apartments:address.apartments}
+        }
+        if (address.building) {
+            oldUploadData = {...oldUploadData,building:address.building}
+        }
+        if (address.house) {
+            oldUploadData = {...oldUploadData,house:address.house}
+        }
+        console.log(oldUploadData);
         dispatch(add_client_on_CRM(oldUploadData));
     }
     console.log('Add>>',errorInput)
