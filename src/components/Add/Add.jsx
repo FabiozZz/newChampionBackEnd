@@ -18,6 +18,7 @@ import {EndBtnGroup} from "../common/EndBtnGroup/EndBtnGroup";
 import {ParentsBlock} from "../common/ParentsBlock/ParentsBlock";
 import {useDispatch, useSelector} from "react-redux";
 import {add_client_on_CRM} from "../../store/Actions/addClientsActions";
+import {isEmpty} from "../../helpers/common";
 
 export const ContextCommon = createContext();
 
@@ -71,10 +72,6 @@ export const Add = () => {
      * локальный стейт для храниения/установки адреса клиента для Address
      */
     const [address, setAddress] = useState({
-        street: '',
-        house: '',
-        building: '',
-        apartments: ''
     });
 
     /**
@@ -297,17 +294,8 @@ export const Add = () => {
             //     sale //откуда узнали
             // };
         }
-        if (address.street) {
-            oldUploadData = {...oldUploadData,street:address.street}
-        }
-        if (address.apartments) {
-            oldUploadData = {...oldUploadData,apartments:address.apartments}
-        }
-        if (address.building) {
-            oldUploadData = {...oldUploadData,building:address.building}
-        }
-        if (address.house) {
-            oldUploadData = {...oldUploadData,house:address.house}
+        if (!isEmpty(address)) {
+            oldUploadData = {...oldUploadData, ...address};
         }
         console.log(oldUploadData);
         dispatch(add_client_on_CRM(oldUploadData));
