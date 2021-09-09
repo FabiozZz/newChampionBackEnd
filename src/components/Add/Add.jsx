@@ -28,7 +28,7 @@ export const Add = () => {
 
     /* common */
 
-    const [errorInput, setIsError] = useState(null);
+    const [errorInput, setIsError] = useState(error);
     useEffect(() => {
         setIsError(error);
     },[error]);
@@ -45,12 +45,7 @@ export const Add = () => {
     /**
      * локальный стейт для храниения/установки персональных данных клиента для PersonalData
      */
-    const [personalData, setPersonalData] = useState({
-        last_name: '',
-        middle_name: '',
-        first_name: '',
-        date_of_birth: '',
-    });
+    const [personalData, setPersonalData] = useState({});
 
     const [age, setAge] = useState(0);
 
