@@ -46,11 +46,12 @@ const ItemCourse = ({course,couches}) => {
     const removeClient = (train_id) => {
         dispatch(remove_client_from_group(train_id));
     };
+    console.log(course)
     return (
         <>
             {modal &&
             <Modal size={'lg'} toggle={handleToggleModalWindow}>
-                <AddClientModal change_user={handleChangeUser} name={'Бразильское Джиу-Джитсу'}/>
+                <AddClientModal change_user={handleChangeUser} name={course.group.name}/>
             </Modal>
             }
             <div className={classes.wrapper} onClick={toggleBox}>
