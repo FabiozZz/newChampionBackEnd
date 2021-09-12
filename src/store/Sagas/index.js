@@ -48,7 +48,7 @@ export function* routeChangeSaga() {
         }
         /* страница настроек групп */
         if (matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_GROUP))) {
-            console.log(matchPath(action.payload.location.pathname, getRouteConfig(ADD_CLIENT_ROUTE)));
+            console.log(matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_GROUP)));
             yield put(start_load_data_set_group());
             if (yield cancelled()) {
                 console.log('cancel');

@@ -9,3 +9,7 @@ export function* getStatusList(){
     const request = yield call(() => Api.getStatusList());
     return request.data
 }
+export function* getAgesGroup(){
+    const request = yield call(() => Api.getAgesGroupList());
+    return request.data
+}

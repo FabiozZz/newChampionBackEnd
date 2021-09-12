@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from './create.module.css';
 import {Redirect} from "../../../../common/Redirect";
 import {OtherInput} from "../../../../../utils/OtherInput/OtherInput";
@@ -6,8 +6,49 @@ import {Radio} from "antd";
 import './radio.css';
 import {Button} from "../../../../../utils/Buttons/Button";
 import HeaderNav from "../../../../common/HeaderNav";
+import {useDispatch, useSelector} from "react-redux";
+import {start_load_data_settings_abonement} from "../../../../../store/Actions/settingsAbonementActions";
 
 export const CreateAbonement = () => {
+    const settings = useSelector(state=>state.settings_aboniment)
+    console.log(settings)
+    const dispatch = useDispatch();
+    if (!settings) {
+        dispatch(start_load_data_settings_abonement());
+    }
+    const [is_personal, setIsPersonal] = useState(null);
+    const changeIsPersonal = (e) => {
+        setIsPersonal(e.target.value)
+    };
+    const [data, setData] = useState({
+        name:'',
+        train_quantity:'',
+        days_duration:'',
+    });
+    const [prices, setPrices] = useState([]);
+
+    const handleChangeInput = (e) =>{
+        let name = e.target.name;
+        setData(prevState => ({...prevState,[name]:e.target.value}))
+    }
+    let array = [];
+    if (settings) {
+        if (settings.ages && settings.statuses) {
+
+            let newJbj = {};
+            for (let i = 0; i < settings.ages; i++) {
+                newJbj = {...newJbj, ...settings.ages[i]};
+                for (let k = 0; k < settings.statuses; k++) {
+                    newJbj = {...newJbj, ...settings.statuses[k], price: ''};
+                }
+                array.push(newJbj);
+            }
+            setPrices(array)
+        }
+
+    }
+    console.log(prices)
+
     return (
         <>
             <HeaderNav/>
@@ -20,25 +61,16 @@ export const CreateAbonement = () => {
                     <div className={classes.create_section}>
 
                         <div className={classes.fields}>
-                            <OtherInput label={'название тарифа'}/>
-                            <OtherInput label={'филиалы'}/>
-                            <OtherInput label={'продолжительность в днях'}/>
-                            <OtherInput label={'не заполнено'}/>
+                            <OtherInput label={'название тарифа'} name={'name'} setValue={handleChangeInput} value={data.name}/>
+                            {/*<OtherInput label={'филиалы'}/>*/}
+                            <OtherInput label={'продолжительность в днях'} type={'number'} name={'days_duration'} setValue={handleChangeInput} value={data.days_duration}/>
+                            <OtherInput label={'не заполнено'} type={'number'} name={'train_quantity'} setValue={handleChangeInput} value={data.train_quantity}/>
                         </div>
 
-                        <Radio.Group className={classes.radio_field}>
+                        <Radio.Group className={classes.radio_field} onChange={changeIsPersonal} value={is_personal}>
                             <Radio  value={false}>Первональная тариф</Radio>
                             <Radio value={true}>Тариф для групповых тренировок</Radio>
-
                         </Radio.Group>
-                        {/*<div className={classes.check}>*/}
-                        {/*    <RadioBtn name={'is_personal'}/>*/}
-                        {/*    <span>Первональная тариф</span>*/}
-                        {/*</div>*/}
-                        {/*<div className={classes.check}>*/}
-                        {/*    <RadioBtn name={'is_personal'}/>*/}
-                        {/*    <span>Тариф для групповых тренировок</span>*/}
-                        {/*</div>*/}
 
                     </div>
 
@@ -173,7 +205,7 @@ export const CreateAbonement = () => {
                     </div>
 
                     <div className={classes.submit}>
-                        <Button factor={'success'} text={'Сохранить тариф'} size={'auto'}/>
+                        <Button factor={'success'} click={()=>console.log(data)} text={'Сохранить тариф'} size={'auto'}/>
                     </div>
 
                 </form>

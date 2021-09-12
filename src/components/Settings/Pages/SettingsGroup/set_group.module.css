@@ -43,3 +43,24 @@
     line-height: 16px;
     color: #8798AD;
 }
+.table{
+    border-collapse: separate;
+    grid-column: 1/13;
+    table-layout: fixed;
+}
+.table td:not(:first-child){
+    text-align: center;
+}
+.table tr:hover td{
+    cursor:pointer;
+    background-color: #F4F6FC;
+}
+.table_label{
+    font-family: 'SF Pro Display',sans-serif;
+    padding-left: 61px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #69707F;
+}

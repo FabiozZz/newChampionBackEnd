@@ -8,17 +8,17 @@ import {connectRouter, routerMiddleware} from "connected-react-router";
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from "./Sagas";
 import {stuffReducer} from "./reducers/stuffReducer";
-import {settingsForGroupEditPageReducer} from "./reducers/settingsForGroupEditPageReducer";
 import {generalPageReducer} from "./reducers/generalPageReducer";
 import {addClientReducer} from "./reducers/addClientReducer";
 import {settings_abonementReducer} from "./reducers/settings_abonementReducer";
+import {settingsGroupReducer} from "./reducers/settingsGroupReducer";
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
     user: userReducer,
     stuffs: stuffReducer,
-    settings_group:settingsForGroupEditPageReducer,
+    settings_group:settingsGroupReducer,
     settings_abonement:settings_abonementReducer,
     general_page: generalPageReducer,
     clientsList: clientsReducer,

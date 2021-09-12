@@ -24,7 +24,6 @@ export const Edit = () => {
     const {id} = useParams()
     const dispatch = useDispatch();
 
-
     /* common */
     const [image, setImage] = useState(user?.avatar||null);
     const handleChangeImage = (data) => {
@@ -42,10 +41,6 @@ export const Edit = () => {
      * локальный стейт для храниения/установки персональных данных клиента для PersonalData
      */
     const [personalData, setPersonalData] = useState({
-        last_name: user.last_name,
-        middle_name: user.middle_name,
-        first_name: user.first_name,
-        date_of_birth: moment(user.date_of_birth).format('DD.MM.YYYY'),
     });
 
     const [age, setAge] = useState(0);
@@ -72,10 +67,6 @@ export const Edit = () => {
      * локальный стейт для храниения/установки адреса клиента для Address
      */
     const [addressEdit, setAddress] = useState({
-        street: user.street,
-        house: user.house,
-        building: user.building,
-        apartments: user.apartments
     });
 
     // /**
@@ -84,7 +75,7 @@ export const Edit = () => {
     //  */
     const handleChangeAddressComponent = (e) => {
         let name = e.target.name;
-        setAddress(prevState => ({ ...prevState, [name]: e.target.value }))
+        setAddress(prevState => ({ ...prevState, ...({[name]:[e.target.value]}&&[e.target.value]) }))
     };
 
     // /**
@@ -245,7 +236,7 @@ export const Edit = () => {
                 age_group_id: user.club_card.age_group.id
             };
         }
-        console.log(uploadData)
+        console.log('EditPage>>',uploadData)
         dispatch(edit_profile(uploadData));
         history.goBack();
     };
@@ -253,18 +244,19 @@ export const Edit = () => {
         if (isEmpty(user)) {
             dispatch(open_edit_page(id))
         }else{
+            const {last_name,middle_name,phone_number,first_name,street,house,building,apartments} = user;
             setPersonalData({
-                last_name:user.last_name,
-                first_name:user.first_name,
-                middle_name:user.middle_name,
+                ...(last_name&& {last_name}),
+                ...(first_name&& {first_name}),
+                ...(middle_name&& {middle_name}),
                 date_of_birth: moment(user.date_of_birth).format('DD.MM.YYYY')
             })
-            setPhone(user.phone_number);
+            setPhone(...(phone_number&&{phone_number}));
             setAddress({
-                street:user.street,
-                house:user.house,
-                building:user.building,
-                apartments:user.apartments
+                ...(street&& {street}),
+                ...(house&& {house}),
+                ...(building&& {building}),
+                ...(apartments&& {apartments}),
             })
             if (/\d{4}-\d{2}-\d{2}/g.test(user.date_of_birth)) {
                 let dateNow = moment();

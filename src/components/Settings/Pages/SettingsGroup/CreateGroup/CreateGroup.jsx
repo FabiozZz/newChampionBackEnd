@@ -9,12 +9,20 @@ import SelectGroup from "../../../../../utils/SelectGroup/SelectGroup";
 
 export const CreateGroup = () => {
     const {couches,ages_group} = useSelector(state => state.settings_group);
-
+    const svgs = require.context('../../../../../assets/images/IconPack', true, /\.svg$/)
+    const svgsObjArray = svgs.keys()
+        .map(key => ({
+            path: key,
+                file: svgs(key),
+        }))
+    const selectImage = (e)=>{
+        console.log(e.target.getAttribute('src'))
+    }
     return (
         <>
             <Redirect title={'Добавить группу'}/>
             <div className={cn(classes.block_wrapper,classes.block_icon)}>
-
+                {svgsObjArray.map(e=> <img onClick={selectImage} key={e.path} src={e.file.default} alt=""/>)}
             </div>
             <div className={cn(classes.block_wrapper,classes.block_add)}>
                 <div className={classes.name_group}>

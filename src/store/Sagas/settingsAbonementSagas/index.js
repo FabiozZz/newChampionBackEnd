@@ -3,14 +3,15 @@ import {
     START_LOAD_DATA_ABONEMENT,
     START_LOAD_DATA_SETTINGS_ABONEMENT
 } from "../../../constants/settingsAbonementConstants";
-import {getAbonementList, getStatusList} from "./workers";
+import {getAbonementList, getAgesGroup, getStatusList} from "./workers";
 import {start_load_data_settings_abonement_done} from "../../Actions/settingsAbonementActions";
 
 function* fetchDataForAbonementPage() {
     console.log('начала загрузки данных для настроек абонементов')
     const downLoadData = yield {
         abonements: yield call(() => getAbonementList()),
-        statuses: yield call(() => getStatusList())
+        statuses: yield call(() => getStatusList()),
+        ages: yield call(()=> getAgesGroup())
     }
     console.log('страница настроек абонемента>>', downLoadData);
     yield put(start_load_data_settings_abonement_done(downLoadData));

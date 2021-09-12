@@ -15,7 +15,7 @@ export const AbonimentInfo = ({user}) => {
                     <h4 className={classes.block_info__info_card__general}>{user.club_card.rate.name} со
                         статусом {user.club_card.level.name} клиент</h4>
                     <p className={classes.block_info__info_card__label}>Срок
-                        действия: <b>{moment(user.club_card.value_from).format('DD.MM.YYYY')} &mdash; {moment(user.club_card.valid_until).format('DD.MM.YYYY')}.</b> Доступно <b>{user.club_card.train_balance>9998?<span
+                        действия: <b>{moment(user.club_card.valid_from).format('DD.MM.YYYY')} &mdash; {moment(user.club_card.valid_until).format('DD.MM.YYYY')}.</b> Доступно <b>{user.club_card.train_balance>9998?<span
                             dangerouslySetInnerHTML={{__html: '&#8734;'}}/>:user.club_card.train_balance}</b> {declOfLessonsNum(user.club_card.train_balance)}
                     </p>
                 </div>
