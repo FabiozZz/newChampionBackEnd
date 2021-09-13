@@ -1,4 +1,5 @@
 import {
+    CLEAR_CURRENT_ABONEMENT,
     START_LOAD_DATA_ABONEMENT, START_LOAD_DATA_ABONEMENT_FAILURE, START_LOAD_DATA_ABONEMENT_SUCCESS,
     START_LOAD_DATA_SETTINGS_ABONEMENT, START_LOAD_DATA_SETTINGS_ABONEMENT_FAILURE,
     START_LOAD_DATA_SETTINGS_ABONEMENT_SUCCESS
@@ -7,7 +8,10 @@ import {
 const initialState = {
     current_abonement: null,
     error: null,
-    loading: false
+    loading: false,
+    ages: [],
+    statuses: [],
+    abonements: []
 };
 
 export const settings_abonementReducer = (state = initialState, action) => {
@@ -46,6 +50,11 @@ export const settings_abonementReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 error:action.payload
+            }
+        case CLEAR_CURRENT_ABONEMENT:
+            return {
+                ...state,
+                current_abonement: null
             }
         default:
             return state;

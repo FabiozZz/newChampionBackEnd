@@ -7,8 +7,13 @@ import {
     ADD_CLIENT_ROUTE,
     ALL_CLIENTS_ROUTE,
     HOME_ROUTE,
-    PROFILE_CLIENT_ROUTE, SETTINGS_ABONEMENT, SETTINGS_ABONEMENT_EDIT, SETTINGS_ABONEMENT_VIEW,
-    SETTINGS_GROUP, SETTINGS_GROUP_EDIT
+    PROFILE_CLIENT_ROUTE,
+    SETTINGS_ABONEMENT,
+    SETTINGS_ABONEMENT_EDIT,
+    SETTINGS_ABONEMENT_VIEW,
+    SETTINGS_CREATE_ABONEMENT,
+    SETTINGS_GROUP,
+    SETTINGS_GROUP_EDIT
 } from "../../Routes/actionRoutes";
 import clientsPageSagas from "./clientsPageSagas";
 import {load_clients_all} from "../Actions/clientsActions";
@@ -61,6 +66,15 @@ export function* routeChangeSaga() {
             yield put(start_load_data_settings_abonement());
             if (yield cancelled()) {
                 console.log('cancel');
+            }
+        }
+
+        /* страница создания абонементов */
+        if (matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_CREATE_ABONEMENT))) {
+            console.log(matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_CREATE_ABONEMENT)));
+            const settings = yield select(state => state.settings_abonement);
+            if (!settings.ages.length || !settings.statuses.length) {
+                yield put(start_load_data_settings_abonement());
             }
         }
 

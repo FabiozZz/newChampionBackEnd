@@ -5,7 +5,7 @@
     padding-bottom: 100px;
 }
 .block{
-    padding: 32px 16px;
+    padding: 32px 15px;
     grid-column: 1/13;
     display: grid;
     grid-template-columns: repeat(12,1fr);

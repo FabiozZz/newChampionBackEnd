@@ -27,6 +27,7 @@
 .line {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 .line p:first-child {
     margin-right: 28px;

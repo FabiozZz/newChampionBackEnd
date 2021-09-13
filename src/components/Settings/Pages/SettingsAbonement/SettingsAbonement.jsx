@@ -9,8 +9,7 @@ import {useHistory} from "react-router";
 import HeaderNav from "../../../common/HeaderNav";
 
 export const SettingsAbonement = (children, func) => {
-    const {abonements, statuses} = useSelector(state => state.settings_abonement);
-    console.log(abonements, statuses)
+    const {abonements} = useSelector(state => state.settings_abonement);
     const history = useHistory();
     return (
         <>
@@ -31,7 +30,7 @@ export const SettingsAbonement = (children, func) => {
                         </tr>
                         </thead>
                         <tbody>
-                        {abonements.map(item => {
+                        {!!abonements.length&&abonements.map(item => {
                             const mouseMove = (e) => {
                                 if (e.target.getAttribute('class') === classes.left) {
                                     for (let i = 0; i < e.currentTarget.children.length; i++) {
