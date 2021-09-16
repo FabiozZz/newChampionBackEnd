@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import classes from "./agesGroup.module.css";
 
-const SelectAgesGroup = ({label,value,setValue,data={},danger=false,placeholder='не выбрано',...props}) => {
+const SelectAgesGroup = ({label='возрастная группа',value,setValue,data={},danger=false,placeholder='не выбрано',...props}) => {
     /**
      * локальный стейт для установки и хранения значения видимости блока с опциями
      */

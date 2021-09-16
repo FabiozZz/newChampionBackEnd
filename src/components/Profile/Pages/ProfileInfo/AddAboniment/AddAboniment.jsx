@@ -210,7 +210,7 @@ export const AddAboniment = ({profile}) => {
             {(selectAboniment.id&&selectStatus.id&&selectGroup.id)&&
                 <div className={classes.sales_card}>
                     <div className={`${classes.success}`}>
-                        <Button click={handleSubmitAboniment} text={'применить'} factor={"success"}/>
+                        <Button click={handleSubmitAboniment} text={'применить'} size={'auto'} factor={"success"}/>
                     </div>
                 </div>
             }

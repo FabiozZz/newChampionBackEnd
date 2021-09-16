@@ -3,9 +3,8 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-auto-rows: min-content;
-  margin: 0 17px ;
+  margin: 0 32px;
   grid-gap: 24px;
-
 }
 .app-wrapper_auth {
   align-content: center;
@@ -43,7 +42,8 @@
 
 @media screen and (min-width: 1439px) {
   .app-wrapper {
-    grid-template-columns: repeat(12,1fr );
+    grid-column: 2/13;
+    grid-template-columns: repeat(11,1fr );
     height: 100%;
     margin: 0;
   }
@@ -51,12 +51,13 @@
     display: none;
   }
   .wrapper_large{
-    max-width: 100%;
+    width: 100%;
     display:grid;
-    margin-bottom: 0;
-    margin-left: -15px;
-    grid-template-columns: 72px 1fr;
-    grid-gap: 32px;
+    /*margin-bottom: 0;*/
+    grid-template-columns: repeat(12,1fr);
+    padding-right: 32px;
+    padding-left: 32px;
+    grid-gap: 24px;
   }
 }
 

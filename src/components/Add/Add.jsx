@@ -184,7 +184,7 @@ export const Add = () => {
     /**
      * локальный стейт для хранения/установки массива данных о родителях клиента
      */
-    const [parents, setParents] = useState([{}, {}]);
+    const [parents, setParents] = useState([{}]);
 
     /**
      * функция для обновления объекта
@@ -354,12 +354,12 @@ export const Add = () => {
 
                             {age > 0 && age < 16 ?
                                 <>
-                                    {/*<div className={classes.button}>*/}
-                                    {/*    <Button size={'default'} text={'добавить справку'} click={() => {*/}
-                                    {/*        refFile.current.click();*/}
-                                    {/*    }}/>*/}
-                                    {/*    <input ref={refFile} name={'health'} type="file" hidden={true}/>*/}
-                                    {/*</div>*/}
+                                    <div className={classes.button}>
+                                        <Button size={'default'} text={'добавить справку'} click={() => {
+                                            refFile.current.click();
+                                        }}/>
+                                        <input ref={refFile} name={'health'} type="file" hidden={true}/>
+                                    </div>
                                     <TrialSectionSection/>
                                     <ParentsBlock parents={parents}
                                                   change={handleChangeItemParentsBlock}

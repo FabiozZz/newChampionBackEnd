@@ -1,6 +1,7 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import './app.css';
+import './radio.css';
 import { Header } from "./Header/Header";
 import { Auth } from "./Auth/Auth";
 import { Footer } from "./Footer/Footer";
@@ -63,7 +64,7 @@ function App({history}) {
             <ConnectedRouter history={history}>
                 {isAuth?
 
-                    <Container className={'h-100'} fluid={true}>
+                    <Container className={'h-100 p-0 m-0'} fluid={true}>
                         <Header/>
                         <div className="wrapper_large">
                             <SideBar/>

@@ -186,8 +186,18 @@
 
 
 @media screen and (min-width: 1440px){
+    .wrapper{
+        grid-column: 1/12;
+        grid-template-columns: repeat(11,1fr);
+    }
     .redirect{
         padding-top: 40px;
+    }
+    .block_f{
+        grid-column: 1/3;
+    }
+    .block_personal{
+        grid-column: 3/12;
     }
     .block_info__item{
         grid-template-columns: repeat(11,1fr);
@@ -196,16 +206,16 @@
         padding: 32px 25px;
     }
     .ages_group{
-        grid-column: 1 / 4;
+        grid-column: 1 / 3;
     }
     .group{
-        grid-column: 4 / 8;
+        grid-column: 3 / 6;
     }
     .filial{
-        grid-column: 4/ 7;
+        grid-column: 6/ 9;
     }
     .picker{
-        grid-column: 7/10;
+        grid-column: 9/11;
     }
     /*.button{*/
     /*    grid-column: 10 / 12;*/
@@ -230,20 +240,20 @@
         grid-column: 1 / 6;
     }
     .number{
-        grid-column: 6 / 13;
+        grid-column: 6 / 12;
     }
 
     .street{
-        grid-column: 1 / 4;
+        grid-column: 1 / 5;
     }
     .house{
-        grid-column: 4 / 5;
+        grid-column: 5 / 7;
     }
     .corspus{
-        grid-column: 5 / 6;
+        grid-column: 7 / 9;
     }
     .room{
-        grid-column: 6 / 7;
+        grid-column: 9 / 11;
     }
 
     .sale{
@@ -257,19 +267,19 @@
         grid-column: 4 / 7;
     }
     .middle_name_parent{
-        grid-column: 7 / 9;
+        grid-column: 7 / 10;
     }
     .ho_is{
-        grid-column:9/11;
+        grid-column:1/4;
     }
     .phone_number_parent{
-        grid-column:1/4;
+        grid-column:4/7;
     }
     .serial_parent{
         grid-column: 1 / 6;
     }
     .number_parent{
-        grid-column: 6 / 13;
+        grid-column: 6 / 12;
     }
 
 }

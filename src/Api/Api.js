@@ -100,8 +100,8 @@ class Api {
 
         this.refreshRequest = null;
 
-        this.client.defaults.baseURL = "http://127.0.0.1:8000/api/v1";
-        // this.client.defaults.baseURL = "http://5.63.154.181:8000/api/v1";
+        // this.client.defaults.baseURL = "http://127.0.0.1:8000/api/v1";
+        this.client.defaults.baseURL = "http://5.63.154.181:8000/api/v1";
         this.client.interceptors.request.use(
             (config) => {
                 if (this.token === null) {
@@ -334,8 +334,8 @@ class Api {
      * @param {CancelToken} token токен для отмены вызова при уничтожении компонента
      */
     async getGeneralPageData() {
-        return await this.client.get("/schedule/lesson/");
-        // return await this.client.get("/schedule/lesson/today/");
+        // return await this.client.get("/schedule/lesson/");
+        return await this.client.get("/schedule/lesson/today/");
     }
 
     /**
@@ -353,6 +353,15 @@ class Api {
      */
     async getAgesGroupList(token=null) {
         return await this.client.get("/core/ageGroup/", {cancelToken: token});
+    }
+
+    /**
+     *
+     * @returns {Promise}
+     * @param label
+     */
+    async postAgeGroup(label) {
+        return await this.client.post("/core/ageGroup/", {label});
     }
 
     /**
@@ -441,6 +450,10 @@ async createTrain(data) {
 
     async getAbonimentWithId(id) {
         return await this.client.get(`/subscription/rate/${id}`);
+    }
+
+    async removeAbonementWithId(id) {
+        return await this.client.delete(`/subscription/rate/${id}`);
     }
 
 

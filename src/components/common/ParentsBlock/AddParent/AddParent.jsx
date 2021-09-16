@@ -20,11 +20,7 @@ export const AddParent = ({error,data,change,index}) => {
      * локальный стейт, в случае если объект data приходит не пустой, заполняется данными из data
      */
     let initialState = {
-            last_name: data.last_name||'',
-            first_name: data.first_name||'',
-            middle_name: data.middle_name||'',
-            who: data.who||'',
-            phone_number: data.phone_number||'',
+
         };
     const [userDate, setUserDate] = useState(initialState);
 
@@ -65,9 +61,9 @@ export const AddParent = ({error,data,change,index}) => {
                 <OtherInput danger={error&&error.middle_name} value={data.middle_name} setValue={changeInputs} name={'middle_name'} label={'отчество'}/>
                 {error&&error.middle_name&&<span className={classes.warning_text}>{error.middle_name.join()}</span>}
             </div>
-            {/*<div className={classes.ho_is}>*/}
-            {/*    <OtherInput value={data.who} setValue={changeInputs} name={'who'} label={'кем приходитесь ребёнку'} required={false}/>*/}
-            {/*</div>*/}
+            <div className={classes.ho_is}>
+                <OtherInput value={data.who} setValue={changeInputs} name={'who'} label={'кем приходитесь ребёнку'} required={false}/>
+            </div>
             <div className={classes.phone_number_parent}>
                 <MaskInputTel danger={error&&error.phone_number} name={'phone_number'} value={data.phone_number} setValue={changeInputs} required={false} label={'номер телефона'}/>
                 {error&&error.phone_number&&<span className={classes.warning_text}>{error.phone_number.join()}</span>}

@@ -1,0 +1,22 @@
+.form_wrapper{
+    grid-column: 1/13;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: min-content;
+    grid-gap: 16px;
+}
+.form{
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    grid-auto-rows: min-content;
+    grid-gap: 32px;
+    background-color: white;
+    margin: 0 -15px;
+    padding: 32px 16px;
+}
+.label_group{
+    grid-column: 1/7;
+}
+.send_btn{
+    grid-column: 1/7;
+}

@@ -5,13 +5,28 @@
     padding-bottom: 100px;
 }
 .block{
-    padding: 16px 32px;
+    padding: 32px 15px;
     grid-column: 1/13;
     display: grid;
     grid-template-columns: repeat(12,1fr);
     background: white;
     margin: 0 -15px;
-    grid-gap: 44px 0;
+    grid-gap: 40px 0;
+}
+.switch{
+    grid-column: 1/4;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+.switch label {
+    margin-left: 12px;
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #BFC5D2;
 }
 .create_section{
     grid-column: 1/13;
@@ -29,17 +44,56 @@
 }
 .radio_field{
     display: grid;
-
+}
+.check{
+    display: flex;
+    align-items: center;
+}
+.check span{
+    margin-left: 12px;
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #BFC5D2;
+}
+.wrapper_price{
+    grid-column: 1/13;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
 }
 .prices_block{
-
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: min-content;
+    grid-gap: 16px;
+    align-items: end;
+}
+.header{
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #8798AD;
 }
 .card{
-
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.card p{
+    margin-left: 16px;
 }
 .field{
 
 }
 .submit{
-
+    grid-column: 1/6;
 }
+

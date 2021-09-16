@@ -3,7 +3,6 @@ import classes from './create.module.css';
 import {Redirect} from "../../../../common/Redirect";
 import {OtherInput} from "../../../../../utils/OtherInput/OtherInput";
 import {Radio} from "antd";
-import './radio.css';
 import {Button} from "../../../../../utils/Buttons/Button";
 import HeaderNav from "../../../../common/HeaderNav";
 import {useDispatch, useSelector} from "react-redux";

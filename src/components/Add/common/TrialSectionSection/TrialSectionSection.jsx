@@ -14,7 +14,7 @@ const TrialSectionSection = () => {
             <h3 className={classes.block_info__title}>Пробное занятие</h3>
             <div className={classes.block_info__item}>
                 <div className={classes.ages_group}>
-                    <SelectAgesGroup value={testData.agesGroup} danger={errorInput&&errorInput.age_group_id} setValue={handleChangeValueAgesGroupTestLesson} label={'возрастная группа'} data={agesGroup}/>
+                    <SelectAgesGroup value={testData.agesGroup} danger={errorInput&&errorInput.age_group_id} setValue={handleChangeValueAgesGroupTestLesson} data={agesGroup}/>
                     {errorInput&&errorInput.age_group_id&&<span className={classes.warning_text}>{errorInput.age_group_id.join()}</span>}
                 </div>
                 {/*<div className={classes.group}>*/}

@@ -1,5 +1,6 @@
 import {call, put, select, take, takeEvery} from "redux-saga/effects";
 import {
+    REMOVE_ABONEMENT,
     START_LOAD_DATA_ABONEMENT,
     START_LOAD_DATA_SETTINGS_ABONEMENT, UPLOAD_DATA_SETTINGS_ABONEMENT
 } from "../../../constants/settingsAbonementConstants";
@@ -40,8 +41,14 @@ function* fetchPostDataAbonement({payload}) {
     yield call(() => Api.sendNewAbonementWithPrice(payload));
 }
 
+function* removeAbonement({payload}) {
+    yield call(() => Api.removeAbonementWithId(payload));
+    yield put(start_load_data_settings_abonement());
+}
+
 export function* settingsAbonementSagas() {
     yield takeEvery(START_LOAD_DATA_SETTINGS_ABONEMENT, fetchDataForAbonementPage);
     yield takeEvery(START_LOAD_DATA_ABONEMENT, fetchDataForAbonement);
-    yield takeEvery(UPLOAD_DATA_SETTINGS_ABONEMENT,fetchPostDataAbonement)
+    yield takeEvery(UPLOAD_DATA_SETTINGS_ABONEMENT, fetchPostDataAbonement);
+    yield takeEvery(REMOVE_ABONEMENT, removeAbonement);
 }

@@ -6,6 +6,7 @@ import {OtherInput} from "../../../../../utils/OtherInput/OtherInput";
 import {SelectCouch} from "../../../../Profile/Pages/ProfileInfo/AddAboniment/SelectCouch/SelectCouch";
 import {useSelector} from "react-redux";
 import SelectGroup from "../../../../../utils/SelectGroup/SelectGroup";
+import SelectImage from "../../../../../utils/SelectImage/SelectImage";
 
 export const CreateGroup = () => {
     const {couches,ages_group} = useSelector(state => state.settings_group);
@@ -33,6 +34,9 @@ export const CreateGroup = () => {
                 </div>
                 <div className={classes.ages_group}>
                     <SelectGroup label={'Возрастная группа'} data={ages_group}/>
+                </div>
+                <div className={classes.ages_group}>
+                    <SelectImage/>
                 </div>
             </div>
         </>

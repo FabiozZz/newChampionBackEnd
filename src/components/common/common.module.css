@@ -1,9 +1,9 @@
 .wrapper_redirect_p{
-    grid-column: 1/13;
-    /*display: flex;*/
-    /*flex-direction: row;*/
-    align-items: center;
-    padding: 0 0 40px 0;
+    grid-column: 1/12;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding-bottom: calc(44px - 16px);
 }.wrapper_redirect{
     grid-column: 1/13;
     display: flex;
@@ -13,7 +13,7 @@
 }
 .wrapper_redirect__svg{
     cursor: pointer;
-    padding: 16px 16px;
+    padding: 16px 16px 16px 0;
 }
 .wrapper_redirect__title{
     font-family: 'Montserrat',sans-serif;

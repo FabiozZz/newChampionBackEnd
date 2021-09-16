@@ -112,6 +112,7 @@
     height: 40px;
 }
 .minSizeButton{
+    padding: 0 9px;
     width: auto;
     height: 40px;
 }
