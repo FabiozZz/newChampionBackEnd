@@ -1,6 +1,6 @@
 import {call, put, select, takeEvery} from "redux-saga/effects";
 import {BUY_ABONEMENT, EDIT_PROFILE, LOAD_PROFILE_USER, OPEN_EDIT_PAGE} from "../../../constants/profileConstant";
-import {getAbonimentList, getCouchList, getGroupList, getProfile, getStatusList} from "./workers";
+import {getAbonimentList, getCouchList, getGroupList, getProfile, getStatusList, getVisitList} from "./workers";
 import {edit_profile_done, load_profile_user_done} from "../../Actions/profileActions";
 import Api from "../../../Api/Api";
 import {getAgesGroup} from "../addClientOnCRM/workers";
@@ -40,6 +40,7 @@ export function* loadProfileWorker({payload}) {
             ages_group: yield call(()=>getAgesGroup()),
             group: yield call(()=>getGroupList()),
             couch: yield call(()=>getCouchList()),
+            visit_list: yield call(()=>getVisitList(id))
         };
         console.log(finalData)
         yield put(load_profile_user_done(finalData))

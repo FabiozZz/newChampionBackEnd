@@ -1,11 +1,11 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { OtherInput } from "../../../../../utils/OtherInput/OtherInput";
 import classes from '../../../profile.module.css';
 import { Button } from "../../../../../utils/Buttons/Button";
 import {SelectAbonement} from "../SelectAbonement";
 import { Counter } from "../../../../../utils/Counter/Counter";
 import { SelectStatus } from "../SelectStatus/SelectStatus";
-import {isEmpty} from '../../../../../helpers/common';
+import {declOfLessonsNum, declOfWeekNum} from '../../../../../helpers/common';
 import {SelectCouch} from "./SelectCouch/SelectCouch";
 import {SelectGroup} from "./SelectGroup/SelectGroup";
 import {useDispatch} from "react-redux";
@@ -13,6 +13,9 @@ import {
     buy_abonement,
 } from "../../../../../store/Actions/profileActions";
 import {SuccessContext} from "../../../SuccessContext";
+import devider from '../../../../../assets/images/deviderParent.svg'
+import success_edit from '../../../../../assets/images/successAbonement.svg'
+import edit from '../../../../../assets/images/editAboniment.svg'
 
 
 export const AddAboniment = ({profile}) => {
@@ -92,28 +95,34 @@ export const AddAboniment = ({profile}) => {
     //     setPassport(prevState => ({...prevState, [e.target.name]: e.target.value}))
     // };
 
-    // const [editPrice, setEditPrice] = useState({
-    //     price: 0,
-    //     edit: false
-    // });
-    // const handleChangePriceAbonement = (e) => {
-    //     setEditPrice(prevState => ({...prevState,price:Number(e.target.value)}));
-    // };
-    // const toggleEdit = () => {
-    //     setEditPrice(prevState => ({...prevState, edit: !prevState.edit}));
-    // };
+    const [editPrice, setEditPrice] = useState({
+        price: 0,
+        edit: false
+    });
+    const handleChangePriceAbonement = (e) => {
+        setEditPrice(prevState => ({...prevState,price:Number(e.target.value)}));
+    };
+    const toggleEdit = () => {
+        setEditPrice(prevState => ({...prevState, edit: !prevState.edit}));
+    };
 
 
-    // useEffect(() => {
-    //     setEditPrice(prevState => ({...prevState,price:Number(selectAboniment.price)}));
-    //     // let source = axios.CancelToken.source();
-    //     // (async () => {
-    //     //     if (selectAboniment.id && selectStatus.id) {
-    //     //
-    //     //     }
-    //     // })();
-    //     // return () => source.cancel();
-    // }, [selectAboniment.id, selectAboniment.price, selectStatus.id]);
+    useEffect(() => {
+        if (selectAboniment.prices && selectStatus.id) {
+
+        let price = selectAboniment.prices.find(item=>item.age_group.id === user.club_card.age_group.id&&item.level.id === selectStatus.id).price;
+        if (price) {
+            setEditPrice(prevState => ({...prevState,price:Number(price)}));
+        }
+        // let source = axios.CancelToken.source();
+        // (async () => {
+        //     if (selectAboniment.id && selectStatus.id) {
+        //
+        //     }
+        // })();
+        // return () => source.cancel();
+        }
+    },[selectAboniment.prices, selectStatus.id, user.club_card.age_group.id]);
 
     const handleSubmitAboniment = async () => {
         // let dopData;
@@ -216,53 +225,54 @@ export const AddAboniment = ({profile}) => {
             }
             {/* module change price */}
 
-            {/*{selectAboniment.name !== '' && selectStatus.name !== '' ?*/}
-            {/*    <>*/}
-            {/*        <h3 className={classes.block_info__title_aboniment}>{selectAboniment.name} для {selectStatus.name.replace(/[а-я]{2}$/gi, 'ых')} клиентов</h3>*/}
-            {/*        <div className={classes.add_aboniment}>*/}
+            {selectAboniment.name !== '' && selectStatus.name !== '' ?
+                <>
+                    <h3 className={classes.block_info__title_aboniment}>{selectAboniment.name} для {selectStatus.name.replace(/[а-я]{2}$/gi, 'ых')} клиентов</h3>
+                    <div className={classes.add_aboniment}>
 
-            {/*            <div className={classes.sales_card}>*/}
-            {/*                <div className={classes.procent}>*/}
-            {/*                    <OtherInput label={'скидка'}/>*/}
-            {/*                </div>*/}
-            {/*                <div className={`${classes.sale_count}`}>*/}
-            {/*                <span className={`${classes.sale_count_text}`}>{selectAboniment.train_quantity > 20 ? <span*/}
-            {/*                    dangerouslySetInnerHTML={{__html: '&#8734;'}}/> : selectAboniment.train_quantity} {declOfLessonsNum(selectAboniment.train_quantity)}</span>*/}
-            {/*                    <span className={`${classes.sale_count_text}`}>{(selectAboniment.days_duration / 7) > 8 ? <span*/}
-            {/*                        dangerouslySetInnerHTML={{__html: '&#8734;'}}/> : (selectAboniment.days_duration / 7)} {declOfWeekNum((selectAboniment.days_duration / 7))}</span>*/}
-            {/*                    <img className={classes.sale_count_img} src={devider} alt="devider"/>*/}
+                        <div className={classes.sales_card}>
+                            {/*<div className={classes.procent}>*/}
+                            {/*    <OtherInput label={'скидка'}/>*/}
+                            {/*</div>*/}
+                            <div className={`${classes.sale_count}`}>
+                            <span className={`${classes.sale_count_text}`}>{selectAboniment.train_quantity > 20 ? <span
+                                dangerouslySetInnerHTML={{__html: '&#8734;'}}/> : selectAboniment.train_quantity} {declOfLessonsNum(selectAboniment.train_quantity)}</span>
+                                <span className={`${classes.sale_count_text}`}>{(selectAboniment.days_duration / 7) > 8 ? <span
+                                    dangerouslySetInnerHTML={{__html: '&#8734;'}}/> : (selectAboniment.days_duration / 7)} {declOfWeekNum((selectAboniment.days_duration / 7))}</span>
+                                {/*<img className={classes.sale_count_img} src={devider} alt="devider"/>*/}
+                                    <svg className={classes.sale_count_img} width="1428" height="2" viewBox="0 0 1428 2" fill="none" xmlns="http://www.w3.org/2000/svg"><line y1="1" x2="1428" y2="1" stroke="#BFC5D2" strokeLinejoin="round" strokeDasharray="5 5"/></svg>
 
-            {/*                    {*/}
-            {/*                        editPrice.edit ?*/}
-            {/*                            <div onClick={toggleEdit} className={classes.edit_block}>*/}
-            {/*                                <input autoFocus*/}
-            {/*                                       className={classes.edit_price}*/}
-            {/*                                       style={{width:((String(editPrice.price).length*10)+'px')}}*/}
-            {/*                                       value={editPrice.price * countCard}*/}
-            {/*                                       onChange={handleChangePriceAbonement}*/}
-            {/*                                       type="number"/>*/}
-            {/*                                <span className={classes.edit_block_text}>&#8381;</span>*/}
-            {/*                                <img className={classes.img_edit} src={success_edit} alt="edit"/>*/}
-            {/*                            </div>*/}
-            {/*                            :*/}
-            {/*                            <div onClick={toggleEdit} className={classes.edit_block}>*/}
-            {/*                            <span className={`${classes.edit_block_text}`}>{editPrice.price * countCard}*/}
-            {/*                                &#8381;</span>*/}
-            {/*                                <img className={classes.img_edit} src={edit} alt="edit"/>*/}
-            {/*                            </div>*/}
+                                {
+                                    editPrice.edit ?
+                                        <div onClick={toggleEdit} className={classes.edit_block}>
+                                            <input autoFocus
+                                                   className={classes.edit_price}
+                                                   style={{width:((String(editPrice.price).length*10)+'px')}}
+                                                   value={editPrice.price * countCard}
+                                                   onChange={handleChangePriceAbonement}
+                                                   type="number"/>
+                                            <span className={classes.edit_block_text}>&#8381;</span>
+                                            <img className={classes.img_edit} src={success_edit} alt="edit"/>
+                                        </div>
+                                        :
+                                        <div onClick={toggleEdit} className={classes.edit_block}>
+                                        <span className={`${classes.edit_block_text}`}>{editPrice.price * countCard}
+                                            &#8381;</span>
+                                            <img className={classes.img_edit} src={edit} alt="edit"/>
+                                        </div>
 
-            {/*                    }*/}
-            {/*                </div>*/}
-            {/*                <div className={`${classes.success}`}>*/}
-            {/*                    <Button click={handleSubmitAboniment} text={'применить'} factor={"success"}/>*/}
-            {/*                </div>*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*    </>*/}
-            {/*    :*/}
-            {/*    null*/}
+                                }
+                            </div>
+                            <div className={`${classes.success}`}>
+                                <Button click={handleSubmitAboniment} text={'применить'} factor={"success"}/>
+                            </div>
+                        </div>
+                    </div>
+                </>
+                :
+                null
 
-            {/*}*/}
+            }
 
             {/* end module change price */}
 

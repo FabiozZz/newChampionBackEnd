@@ -9,3 +9,7 @@ export function* getAgesGroups() {
     const response = yield call(() => Api.getAgesGroupList());
     return response.data;
 }
+export function* getCoushes() {
+    const response = yield call(() => Api.getCouchList());
+    return response.data;
+}

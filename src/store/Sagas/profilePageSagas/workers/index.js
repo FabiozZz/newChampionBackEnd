@@ -51,6 +51,14 @@ export function* getCouchList() {
         yield put(load_profile_user_fail(e))
     }
 }
+export function* getVisitList(id) {
+    try {
+        const request = yield Api.getProfileVisit(id);
+        return request.data;
+    } catch (e) {
+        yield put(load_profile_user_fail(e))
+    }
+}
 
 //
 // await Api.getAbonimentList(source.token).then(r => {

@@ -36,7 +36,7 @@ export const CreateAgeGroup = () => {
                         <OtherInput setValue={handleChangeLabel} label={'название возрастной группы'} value={label}/>
                     </div>
                     <div className={classes.send_btn}>
-                        <Button text={'Сохранить возрастную группу'} type={"submit"} factor={"success"} size={"min"}/>
+                        <Button disabled={!label.length} text={'Сохранить возрастную группу'} type={"submit"} factor={"success"} size={"min"}/>
                     </div>
                 </form>
 

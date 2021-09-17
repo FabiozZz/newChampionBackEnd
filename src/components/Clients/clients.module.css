@@ -263,4 +263,18 @@
     line-height: 24px;
 }
 @media screen and (min-width:1439px){
+    .wrapper{
+        grid-column: 1/12;
+    }
+    .list_col{
+        grid-template-columns: repeat(5,1fr);
+        width: 100%;
+        margin: 0;
+    }
+    .wr_card_col{
+        width: 237px;
+    }
+    .ancor_wrapper{
+        margin: 0 -47px 0 -90px;
+    }
 }

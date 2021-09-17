@@ -12,7 +12,7 @@ import {
     SETTINGS_ABONEMENT_EDIT,
     SETTINGS_ABONEMENT_VIEW,
     SETTINGS_CREATE_ABONEMENT,
-    SETTINGS_GROUP,
+    SETTINGS_GROUP, SETTINGS_GROUP_CREATE,
     SETTINGS_GROUP_EDIT
 } from "../../Routes/actionRoutes";
 import clientsPageSagas from "./clientsPageSagas";
@@ -52,6 +52,19 @@ export function* routeChangeSaga() {
             }
         }
         /* страница настроек групп */
+        if (matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_GROUP_CREATE))) {
+            console.log(matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_GROUP_CREATE)));
+            const settingsData = yield select(state => state.settings_group);
+            console.log(settingsData)
+            if (!settingsData.couches || !settingsData.ages_group) {
+                yield put(start_load_data_set_group());
+            }
+            if (yield cancelled()) {
+                console.log('cancel');
+            }
+        }
+
+        /* страница создания группы */
         if (matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_GROUP))) {
             console.log(matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_GROUP)));
             yield put(start_load_data_set_group());

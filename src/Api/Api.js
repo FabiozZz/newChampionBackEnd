@@ -320,6 +320,13 @@ class Api {
         // });
     }
 
+    async getProfileVisit(id) {
+        return await this.client.get(`/client/${id}/trainings/`)
+        //     .then(r => {
+        //     return r.data.find(client => Number(client.id) === Number(id));
+        // });
+    }
+
     async editProfile(id, data) {
         return await this.client.put(`/client/${id}/`, {...data});
     }
@@ -346,6 +353,16 @@ class Api {
     async getGroupList(token=null) {
         return await this.client.get("/core/group/", {cancelToken: token});
     }
+
+    /**
+     *
+     * @param token
+     * @returns {Promise}
+     */
+    async postNewGroup(group) {
+        return await this.client.post("/core/group/",{...group});
+    }
+
     /**
      *
      * @param token

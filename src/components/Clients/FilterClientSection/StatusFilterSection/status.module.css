@@ -8,12 +8,6 @@
     padding: 0 32px;
     box-shadow: var(--box-shadow);
 }
-@media screen and (max-width:650px){
-    .wrapper{
-        grid-template-rows: min-content min-content;
-        grid-auto-flow: column;
-    }
-}
 .item{
     cursor: pointer;
     padding: 10px 0;
@@ -46,4 +40,15 @@
     grid-auto-flow: column;
     align-items: center;
     opacity: 0.3;
+}
+@media screen and (max-width:650px){
+    .wrapper{
+        grid-template-rows: min-content min-content;
+        grid-auto-flow: column;
+    }
+}
+@media screen and (min-width: 1439px) {
+    .wrapper{
+        margin: 0 -32px 0 -76px;
+    }
 }

@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ProfileVisit } from './Pages/ProfileVisit/ProfileVisit';
 import { ProfilePay } from './Pages/ProfilePay/ProfilePay';
 import {clear_profile, open_edit_page} from "../../store/Actions/profileActions";
+import {ProfileGamification} from "./Pages/ProfileGamification/ProfileGamification";
 
 
 /**
@@ -75,7 +76,7 @@ export const Profile = () => {
                         <ProfilePay profile={profile} />
                         :
                         tabIndex === 3 ?
-                            <h1>Геймификация</h1>
+                            <ProfileGamification/>
                             :
                             <ProfileInfo profile={profile} />)
                 }
