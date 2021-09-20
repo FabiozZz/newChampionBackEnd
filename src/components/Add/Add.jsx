@@ -234,17 +234,17 @@ export const Add = () => {
                 oldUploadData = {
                     ...other,
                     middle_name,
-                    date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
+                    ...(!isEmpty(date_of_birth)&&{date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1')}),
                     parents,
-                    age_group_id:testData.agesGroup.id,
+                    ...(testData.agesGroup.id&& {age_group_id:testData.agesGroup.id}),
                     age
                 };
             }else{
                 oldUploadData = {
                     ...other,
-                    date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
+                    ...(!isEmpty(date_of_birth)&&{date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1')}),
                     parents,
-                    age_group_id:testData.agesGroup.id,
+                    ...(testData.agesGroup.id&& {age_group_id:testData.agesGroup.id}),
                     age
                 };
 
@@ -268,17 +268,17 @@ export const Add = () => {
                 oldUploadData = {
                     ...other,
                     middle_name,
-                    date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
-                    phone_number,
-                    age_group_id:testData.agesGroup.id,
+                    ...(!isEmpty(date_of_birth)&&{date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1')}),
+                    ...(phone_number&&{phone_number}),
+                    ...(testData.agesGroup.id&& {age_group_id:testData.agesGroup.id}),
                     age
                 };
             }else{
                 oldUploadData = {
                     ...other,
-                    date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
-                    phone_number,
-                    age_group_id:testData.agesGroup.id,
+                    ...(!isEmpty(date_of_birth)&&{date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1')}),
+                    ...(phone_number&&{phone_number}),
+                    ...(testData.agesGroup.id&& {age_group_id:testData.agesGroup.id}),
                     age
                 };
             }
@@ -362,6 +362,7 @@ export const Add = () => {
                                     </div>
                                     <TrialSectionSection/>
                                     <ParentsBlock parents={parents}
+                                                  error={errorInput}
                                                   change={handleChangeItemParentsBlock}
                                                   addParents={addParentsData}
                                                   removeParents={removeParentsData}
@@ -387,6 +388,7 @@ export const Add = () => {
                         }
                     </>
                     : null}
+
             </form>
         </>
     );

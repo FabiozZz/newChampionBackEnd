@@ -47,7 +47,6 @@ const ItemCourse = ({course,couches}) => {
     const removeClient = (train_id) => {
         dispatch(remove_client_from_group(train_id));
     };
-    console.log(course)
     return (
         <>
             {modal &&
@@ -93,7 +92,6 @@ const ItemCourse = ({course,couches}) => {
                         <tbody>
                         {course.trainings.length ?
                             course.trainings.map(trainings => {
-                                console.log(trainings)
                                 return (
                                     <tr key={trainings.id}>
                                         <td className={classes.persona}>

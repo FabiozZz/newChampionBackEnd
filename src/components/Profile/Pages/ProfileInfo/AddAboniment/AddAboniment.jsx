@@ -133,19 +133,22 @@ export const AddAboniment = ({profile}) => {
         // }else {
         //     // dopData = {};
         // }
+        let price = selectAboniment.prices.find(item=>item.age_group.id === user.club_card.age_group.id&&item.level.id === selectStatus.id).price;
+        const userPrice = editPrice.price !== Number(price) ? editPrice.price : false;
         let uploadData = {
             id:user.club_card.id,
             rate_id:selectAboniment.id,
             level_id:selectStatus.id,
             train_group:selectGroup.id,
             quantity:countCard,
-            // ...dopData
+            ...(userPrice && {price:userPrice})
         };
+        // console.log(uploadData)
         dispatch(buy_abonement(uploadData));
         // await Api.editProfileAbonement(user.club_card.id, uploadData).then(r => {
         //     console.log(r);
         //     // dispatch(load_profile_user(r.data))
-            handleChangeSuccess();
+        //     handleChangeSuccess();
         //
         // });
         // await dispatch(upload_profile_club_card(uploadData));
@@ -216,13 +219,13 @@ export const AddAboniment = ({profile}) => {
 
                 {/*}*/}
             </div>
-            {(selectAboniment.id&&selectStatus.id&&selectGroup.id)&&
-                <div className={classes.sales_card}>
-                    <div className={`${classes.success}`}>
-                        <Button click={handleSubmitAboniment} text={'применить'} size={'auto'} factor={"success"}/>
-                    </div>
-                </div>
-            }
+            {/*{(selectAboniment.id&&selectStatus.id&&selectGroup.id)&&*/}
+            {/*    <div className={classes.sales_card}>*/}
+            {/*        <div className={`${classes.success}`}>*/}
+            {/*            <Button click={handleSubmitAboniment} text={'применить'} size={'auto'} factor={"success"}/>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*}*/}
             {/* module change price */}
 
             {selectAboniment.name !== '' && selectStatus.name !== '' ?

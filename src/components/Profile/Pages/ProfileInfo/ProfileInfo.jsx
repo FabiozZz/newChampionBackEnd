@@ -176,7 +176,7 @@ export const ProfileInfo = ({profile}) => {
 
                 <div className={classes.block_info__header}>
                     <h3 className={classes.block_info__title}>Информация о родителях</h3>
-                    <NavLink className={classes.block_info__header_img_link} to={`/profile/${user.id}/edit`}>
+                    <NavLink className={classes.block_info__header_img_link} to={`/profile/${user.id}/edit_parents`}>
                         <img src={edit_profile} alt="edit_profile"/>
                     </NavLink>
                 </div>

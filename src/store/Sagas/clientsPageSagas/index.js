@@ -16,7 +16,6 @@ export function* loadClientsPage() {
     };
     console.log('final data >>>' ,yield finalData)
     yield put(load_clients_all_done(finalData));
-
 }
 
 export default function* clientsPageSagas() {

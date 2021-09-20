@@ -9,7 +9,7 @@ import {
     ADD_CLIENT_ROUTE,
     ALL_CLIENTS_ROUTE,
     CREATE_AND_EDIT_LESSONS,
-    EDIT_CLIENT_ROUTE,
+    EDIT_CLIENT_ROUTE, EDIT_PARENTS_CLIENT_ROUTE,
     HOME_ROUTE,
     PROFILE_CLIENT_ROUTE,
     SETTINGS_ABONEMENT,
@@ -32,6 +32,7 @@ import {CreateAgeGroup} from "../components/Settings/Pages/SettingsGroup/CreateA
 import {ViewAbonement} from "../components/Settings/Pages/SettingsAbonement/ViewAbonement/ViewAbonement";
 import {CreateAbonement} from "../components/Settings/Pages/SettingsAbonement/CreateAbonement/CreateAbonement";
 import {EditAbonement} from "../components/Settings/Pages/SettingsAbonement/EditAbonement/EditAbonement";
+import {EditParents} from "../components/Edit/EditParents";
 
 export const routes = [
     {
@@ -61,6 +62,13 @@ export const routes = [
         path: '/profile/:id/edit',
         exact: true,
         component: Edit
+    },
+    {
+        /* Страница редактирования родителей клиента */
+        id: EDIT_PARENTS_CLIENT_ROUTE,
+        path: '/profile/:id/edit_parents',
+        exact: true,
+        component: EditParents
     },
     {
         /* Страница Клиенты */

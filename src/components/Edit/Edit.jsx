@@ -308,12 +308,12 @@ export const Edit = () => {
                         </div>
                     </div>
                 </div>
-                {age>0 ?
+                {/*{age>0 ?*/}
                     <>
                         <ContextCommonEdit.Provider value={{phone_number,
                             handleChangePhone}}>
 
-                            {age > 0 && age < 16 ?
+                            {/*{age > 0 && age < 16 ?*/}
                                 <>
                                     {/*<div className={classes.button}>*/}
                                     {/*    <Button size={'default'} text={'добавить справку'} click={() => {*/}
@@ -328,13 +328,13 @@ export const Edit = () => {
                                     {/*              removeParents={removeParentsData}*/}
                                     {/*/>*/}
                                 </>
-                                : age >= 16 ?
+                                {/*: age >= 16 ?*/}
                                     <>
                                         <EditPhoneSection/>
                                         {/*<TrialSectionSection/>*/}
                                     </>
-                                    : null
-                            }
+                                    {/*: null*/}
+                            {/*}*/}
                         </ContextCommonEdit.Provider>
 
 

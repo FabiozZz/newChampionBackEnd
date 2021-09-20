@@ -10,14 +10,14 @@ import {isEmpty} from "../../../helpers/common";
 /**
  * компонент прослойка
  * @param parents массив с пустыми объектами
+ * @param error объект ошибок
  * @param addParents функция добавления нового пустого объекта
  * @param removeParents функция удаления ненужно объекта из массива parents
  * @param change функция обработчик, прослушивает событие ввода данных в поле
  * @returns {JSX.Element}
  * @constructor
  */
-export const ParentsBlock = ({parents,addParents,removeParents,change}) => {
-    const {errorInput} = useContext(ContextCommon);
+export const ParentsBlock = ({parents,error={},addParents,removeParents,change}) => {
     return (
         <div className={classes.block_info}>
                 <h3 className={classes.block_info__title}>информация о родителях</h3>
@@ -36,7 +36,7 @@ export const ParentsBlock = ({parents,addParents,removeParents,change}) => {
 
                         </>
                         }
-                        <AddParent error={(errorInput&&!isEmpty(errorInput.parents))?errorInput.parents[index]:null} data={e} index={index} change={change}/>
+                        <AddParent error={(error&&!isEmpty(error.parents))?error.parents[index]:null} data={e} index={index} change={change}/>
                     </div>
                 )
             })}
