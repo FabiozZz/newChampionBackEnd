@@ -308,11 +308,10 @@ export const Add = () => {
                 <ModalPhoto toggleModal={setModal} modal={modal} image={image} setImage={handleChangeImage}/>
             </Modal>
             }
+            <div style={{marginTop:'32px',gridColumn:'1/11'}}>
+            <Redirect title={"Регистрация клиента"} padding={true}/>
+            </div>
             <form onSubmit={submitForm} className={classes.wrapper}>
-
-                <div className={classes.redirect}>
-                    <Redirect title={"Регистрация клиента"} padding={true}/>
-                </div>
 
                 <div className={classes.block_info_f}>
 

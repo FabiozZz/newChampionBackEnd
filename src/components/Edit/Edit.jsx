@@ -166,7 +166,7 @@ export const Edit = () => {
 
     /* Adult */
 
-    const [phone_number, setPhone] = useState(user.phone_number);
+    const [phone_number, setPhone] = useState('');
 
     const handleChangePhone = (phone) => {setPhone(phone.target.value)}
 
@@ -273,11 +273,11 @@ export const Edit = () => {
                 <EditModalPhoto toggleModal={setModal} modal={modal} image={image} setImage={handleChangeImage}/>
             </Modal>
             }
+            <div className={classes.redirect}>
+                <Redirect title={"Редактирование профиля"} padding={true}/>
+            </div>
             <form onSubmit={handleSubmit} className={classes.wrapper}>
 
-                <div className={classes.redirect}>
-                    <Redirect title={"Редактирование профиля"} padding={true}/>
-                </div>
 
                 <div className={classes.block_info_f}>
                     <div onClick={toggleModal} className={classes.block_f}>
@@ -330,7 +330,8 @@ export const Edit = () => {
                                 </>
                                 {/*: age >= 16 ?*/}
                                     <>
-                                        <EditPhoneSection/>
+                                        {phone_number?<EditPhoneSection/>:null}
+
                                         {/*<TrialSectionSection/>*/}
                                     </>
                                     {/*: null*/}
@@ -354,7 +355,7 @@ export const Edit = () => {
 
                         <EndBtnGroup goBack={goBack}/>
                     </>
-                    : null}
+                    {/*: null}*/}
             </form>
         </>
     );

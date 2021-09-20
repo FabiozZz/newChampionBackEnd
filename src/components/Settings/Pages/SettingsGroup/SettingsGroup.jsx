@@ -48,10 +48,10 @@ export const SettingsGroup = () => {
     const history = useHistory();
     const {groups,ages_groups} = useSelector(state => state.settings_group);
     const [listAge, setListAge] = useState([
-        {id:1,order:1,label:'строка 1'},
-        {id:2,order:2,label:'строка 2'},
-        {id:3,order:3,label:'строка 3'},
-        {id:4,order:4,label:'строка 4'},
+        {id:1,order:1,label:'Дети 3-8'},
+        {id:2,order:2,label:'Дети 5-15'},
+        {id:3,order:3,label:'Пенсионеры'},
+        {id:4,order:4,label:'Взрослые'},
     ]);
     const sortOrder = (a,b)=>a.order>b.order?1:-1;
     const link = (e) => {

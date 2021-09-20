@@ -27,3 +27,8 @@
     text-transform: uppercase;
     color: #69707F;
 }
+@media screen and (min-width: 1440px){
+    .wrapper{
+        grid-column: 1/12;
+    }
+}

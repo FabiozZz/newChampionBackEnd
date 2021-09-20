@@ -2,7 +2,7 @@
     grid-column: 1/13;
     display: grid;
     grid-template-columns: repeat(12,1fr);
-    grid-gap: 16px;
+    grid-gap: 16px 24px;
     padding-bottom: 100px;
 }
 
@@ -140,4 +140,26 @@
 }
 .table_course tbody tr:nth-child(2n+2) {
     background:  #F4F6FC;
+}
+@media screen and (min-width: 1440px) {
+    .wrapper{
+        grid-column: 1/12;
+        grid-template-columns: repeat(11,1fr);
+    }
+    .block_wrapper{
+        margin: 0 0 0 -24px;
+        padding: 32px 0 32px 24px;
+        grid-template-columns: repeat(11,1fr);
+        grid-column: 1/12;
+    }
+    .block_header{
+        grid-column: 1/12;
+    }
+    .table{
+        padding-right: 24px;
+        grid-column: 1/12;
+    }
+    .tables_wrapper{
+        grid-column: 1/12;
+    }
 }

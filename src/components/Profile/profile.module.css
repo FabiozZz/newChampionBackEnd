@@ -1,6 +1,7 @@
 .wrapper {
   grid-column: 1/13;
   padding-bottom: 100px;
+  margin: 0 -16px;
 }
 .block_info_f {
   margin: 16px 0;
@@ -382,8 +383,8 @@
   width: 100%;
 }
 .success {
-  margin: 0 auto;
-  grid-column: 5/9;
+  margin: 0 -24px;
+  grid-column: 6/8;
   align-self: center;
   margin-top: 32px;
 }
@@ -546,7 +547,7 @@
 @media screen and (min-width: 1439px) {
   .wrapper{
     grid-column: 1/12;
-    margin-left: -24px;
+    margin: 0 0 0 -24px;
   }
   .block_info {
     grid-template-columns: repeat(11,1fr);

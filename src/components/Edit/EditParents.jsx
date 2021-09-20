@@ -58,11 +58,11 @@ export const EditParents = () => {
     },[dispatch, id, user]);
     return (
         <>
+            <div className={classes.redirect}>
+                <Redirect title={"Редактирование профиля"} padding={true}/>
+            </div>
             <form onSubmit={handleSubmit} className={classes.wrapper}>
 
-                <div className={classes.redirect}>
-                    <Redirect title={"Редактирование профиля"} padding={true}/>
-                </div>
 
                 <ParentsBlock parents={parents}
                               change={handleChangeItemParentsBlock}
