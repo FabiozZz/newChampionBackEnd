@@ -251,7 +251,8 @@ export const Edit = () => {
                 ...(middle_name&& {middle_name}),
                 date_of_birth: moment(user.date_of_birth).format('DD.MM.YYYY')
             })
-            setPhone(...(phone_number&&{phone_number}));
+            console.log(phone_number&& phone_number)
+            setPhone(phone_number&& phone_number);
             setAddress({
                 ...(street&& {street}),
                 ...(house&& {house}),
