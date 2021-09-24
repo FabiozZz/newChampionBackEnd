@@ -5,7 +5,7 @@ import {matchPath} from "react-router";
 import {getRouteConfig} from "../../Routes/routes";
 import {
     ADD_CLIENT_ROUTE,
-    ALL_CLIENTS_ROUTE,
+    ALL_CLIENTS_ROUTE, EDIT_CLIENT_ROUTE,
     HOME_ROUTE,
     PROFILE_CLIENT_ROUTE,
     SETTINGS_ABONEMENT,
@@ -18,7 +18,7 @@ import {
 import clientsPageSagas from "./clientsPageSagas";
 import {load_clients_all} from "../Actions/clientsActions";
 import addingClientPageSagas from "./addClientOnCRM";
-import {clear_profile, load_profile_user} from "../Actions/profileActions";
+import {clear_profile, load_profile_user, open_edit_page} from "../Actions/profileActions";
 import {profilePageSagas} from "./profilePageSagas";
 import {load_data_for_edit_group_page, load_data_one_group} from "../Actions/settingsGroupEditActions";
 import {editGroupPageSagas} from "./editGroupPage";

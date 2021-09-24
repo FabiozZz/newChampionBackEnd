@@ -2,7 +2,7 @@ import React from 'react';
 import {Btn} from "./Btn/Btn";
 import classes from './bgroup.module.css';
 
-export const BtnGroup = ({is_Adult,toggleActive}) => {
+export const BtnGroup = ({is_Adult,toggleActive,left='Дети',right="Взрослые"}) => {
     const childrenActive = () => {
         toggleActive(false);
     };
@@ -11,8 +11,8 @@ export const BtnGroup = ({is_Adult,toggleActive}) => {
     };
     return (
         <div className={classes.group}>
-            <Btn isActive={!is_Adult} onClick={childrenActive}>Дети</Btn>
-            <Btn isActive={is_Adult} onClick={adultActive}>Взрослые</Btn>
+            <Btn isActive={!is_Adult} onClick={childrenActive}>{left}</Btn>
+            <Btn isActive={is_Adult} onClick={adultActive}>{right}</Btn>
         </div>
     );
 };

@@ -1,11 +1,11 @@
 import React, {createContext, useEffect, useRef, useState} from 'react';
 import classes from './add.module.css';
-import {OtherInput} from "../../utils/OtherInput/OtherInput";
+import {OtherInput} from "../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
 import {DataPicker} from "../../utils/DataPicker/DataPicker";
 import camera from './camera (1) 1.png';
 import {Redirect} from "../common/Redirect";
 import moment from "moment";
-import {Button} from "../../utils/Buttons/Button";
+import {Button} from "../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import TrialSectionSection from "./common/TrialSectionSection/TrialSectionSection";
 import {AddresSection} from "./common/AddresSection/AddresSection";
 import {OterSection} from "./common/OterSection/OterSection";
@@ -18,9 +18,18 @@ import {EndBtnGroup} from "../common/EndBtnGroup/EndBtnGroup";
 import {ParentsBlock} from "../common/ParentsBlock/ParentsBlock";
 import {useDispatch, useSelector} from "react-redux";
 import {add_client_on_CRM} from "../../store/Actions/addClientsActions";
-import {isEmpty} from "../../helpers/common";
+import {isEmpty} from "../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
 
 export const ContextCommon = createContext();
+
+function isEmptyArray(arr) {
+    if (arr.length) {
+        for (let i = 0; i < arr.length; i++) {
+            return isEmpty(arr[i]);
+        }
+    }
+    return false;
+}
 
 export const Add = () => {
     const {groups, couches, agesGroup,loading,error} = useSelector(state => state.addClient);
@@ -29,7 +38,7 @@ export const Add = () => {
 
     /* common */
 
-    const [errorInput, setIsError] = useState(error);
+    const [errorInput, setIsError] = useState(null);
     useEffect(() => {
         setIsError(error);
     },[error]);
@@ -221,9 +230,7 @@ export const Add = () => {
     },[age, error, personalData.date_of_birth]);
 
 
-    /**
-     *
-     */
+
     const submitForm = (e)=>{
         e.preventDefault();
         let oldUploadData = {};
@@ -235,7 +242,7 @@ export const Add = () => {
                     ...other,
                     middle_name,
                     ...(!isEmpty(date_of_birth)&&{date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1')}),
-                    parents,
+                    ...(!isEmptyArray(parents)&& {parents}),
                     ...(testData.agesGroup.id&& {age_group_id:testData.agesGroup.id}),
                     age
                 };
@@ -243,7 +250,7 @@ export const Add = () => {
                 oldUploadData = {
                     ...other,
                     ...(!isEmpty(date_of_birth)&&{date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1')}),
-                    parents,
+                    ...(!isEmptyArray(parents)&& {parents}),
                     ...(testData.agesGroup.id&& {age_group_id:testData.agesGroup.id}),
                     age
                 };
@@ -297,10 +304,9 @@ export const Add = () => {
         if (!isEmpty(address)) {
             oldUploadData = {...oldUploadData, ...address};
         }
-        console.log(oldUploadData);
         dispatch(add_client_on_CRM(oldUploadData));
     }
-    console.log('Add>>',errorInput)
+
     return (
         <>
             {modal&&
@@ -326,12 +332,12 @@ export const Add = () => {
                         <div className={classes.block_info__item}>
                             <div className={classes.last_name}>
                                 <OtherInput danger={errorInput&&errorInput.last_name} setValue={handleChangePersonalData} name={'last_name'}
-                                            value={personalData.last_name} label={'фамилия'}/>
+                                            value={personalData.last_name} label={'фамилия'} required={true}/>
                                 {errorInput&&errorInput.last_name&&<span className={classes.warning_text}>{errorInput.last_name.join()}</span>}
                             </div>
                             <div className={classes.first_name}>
                                 <OtherInput danger={errorInput&&errorInput.first_name} setValue={handleChangePersonalData} name={'first_name'}
-                                            value={personalData.first_name} label={'имя'}/>
+                                            value={personalData.first_name} label={'имя'} required={true}/>
                                 {errorInput&&errorInput.first_name&&<span className={classes.warning_text}>{errorInput.first_name.join()}</span>}
                             </div>
                             <div className={classes.middle_name}>
@@ -359,6 +365,7 @@ export const Add = () => {
                                         }}/>
                                         <input ref={refFile} name={'health'} type="file" hidden={true}/>
                                     </div>
+                                    <PhoneSection/>
                                     <TrialSectionSection/>
                                     <ParentsBlock parents={parents}
                                                   error={errorInput}

@@ -12,7 +12,7 @@ import Api from "../../Api/Api";
 // import healthSVG from '../../assets/images/health.svg';
 import { CustomTooltip } from "../CustomTooltip/CustomTooltip";
 import cn from 'classnames';
-import {declOfLessonsNum, isBirthDay} from "../../helpers/common";
+import {declOfLessonsNum, isBirthDay} from "../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
 import moment from 'moment';
 
 /**

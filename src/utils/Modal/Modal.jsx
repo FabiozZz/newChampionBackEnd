@@ -9,7 +9,7 @@ import close from '../../assets/images/close_modal.svg';
  * @returns JSX
  */
 export const Modal = ({toggle,children,size='sm'}) => {
-    const sizeWindow = size === 'lg' ? classes.wrapper_lg : classes.wrapper_sm;
+    const sizeWindow = size === 'lg' ? classes.wrapper_lg : size === 'md'? classes.wrapper_md :classes.wrapper_sm;
     return (
         <div className={classes.back} onClick={()=>toggle(false)}>
             <div className={sizeWindow} onClick={(e)=>e.stopPropagation()}>

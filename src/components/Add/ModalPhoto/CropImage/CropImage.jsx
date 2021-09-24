@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import AvatarEditor from "react-avatar-editor";
 import classes from './crop.module.css';
 import {Slider} from "antd";
-import {Button} from "../../../../utils/Buttons/Button";
+import {Button} from "../../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 
 export const CropImage = ({img,reboot,abort,setImage,toggle})=> {
     const [imgURI, setIMG] = useState(img);

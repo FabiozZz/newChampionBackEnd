@@ -5,16 +5,20 @@ import cn from "classnames";
 import {AddClientModal} from "./AddClientModal/AddClientModal";
 import {Modal} from "../../../utils/Modal/Modal";
 import logo from './djiu.png';
-import {declOfHumanNum} from "../../../helpers/common";
-import {useDispatch} from "react-redux";
+import {declOfHumanNum, isEmpty} from "../../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
+import {useDispatch, useSelector} from "react-redux";
 import {change_couch, createTrainForCourse, remove_client_from_group} from "../../../store/Actions/generalPageActions";
 import {ClientRow} from "../ClientRow/ClientRow";
 import moment from "moment";
-import {Button} from "../../../utils/Buttons/Button";
+import {Button} from "../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 
 const ItemCourse = ({course,couches}) => {
     const {group, trainer, trainings} = course;
+
+    const [noAbonement, setNoAbonement] = useState(false);
+
     const emptyTrainer = {id: null, first_name: '', last_name: '', middle_name: ''};
+    const [currentUser, setCurrentUser] = useState(null);
     const [currentTrainer, setTrainer] = useState(trainer||emptyTrainer);
     const dispatch = useDispatch();
     const handleChangeCouchForCourse = (id,trainer) => {
@@ -26,22 +30,39 @@ const ItemCourse = ({course,couches}) => {
     const refOption = useRef(null);
     const refAdd = useRef(null);
     const toggleBox = (e) => {
-        console.log()
             if ((!refOption.current.contains(e.target) && !refAdd.current.contains(e.target))) {
                 setHide(!hide);
             }
     };
     const handleToggleModalWindow = () => {
         setModal(!modal);
+        if (!modal) {
+            setCurrentUser(null);
+        }
     };
     const handleChangeUser = (user) => {
+        console.log(user)
+        setCurrentUser(user)
         let uploadData = {
             lesson_id:course.id,
             client_id:user.id
         }
-        dispatch(createTrainForCourse(uploadData));
-        setModal(false);
-        setHide(false)
+        const {club_card} = user;
+        if (club_card.rate&&!club_card.rate?.id) {
+            setNoAbonement(true);
+            console.log('modal1')
+        }else {
+            if (club_card.train_balance === 0 || club_card.valid_untill === null) {
+                setNoAbonement(true);
+                console.log('modal2');
+            } else {
+                dispatch(createTrainForCourse(uploadData));
+                setModal(false);
+                setHide(false)
+
+            }
+
+        }
     };
 
     const removeClient = (train_id) => {
@@ -51,7 +72,7 @@ const ItemCourse = ({course,couches}) => {
         <>
             {modal &&
             <Modal size={'lg'} toggle={handleToggleModalWindow}>
-                <AddClientModal change_user={handleChangeUser} name={course.group.name}/>
+                <AddClientModal form={noAbonement} user={currentUser} change_user={handleChangeUser} name={course.group.name}/>
             </Modal>
             }
             <div className={classes.wrapper} onClick={toggleBox}>

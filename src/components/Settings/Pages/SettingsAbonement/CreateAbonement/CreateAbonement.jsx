@@ -1,9 +1,9 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import classes from './create.module.css';
 import {Redirect} from "../../../../common/Redirect";
-import {OtherInput} from "../../../../../utils/OtherInput/OtherInput";
+import {OtherInput} from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
 import {Radio} from "antd";
-import {Button} from "../../../../../utils/Buttons/Button";
+import {Button} from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import HeaderNav from "../../../../common/HeaderNav";
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -20,7 +20,7 @@ export const CreateAbonement = () => {
     const settings = useSelector(state => state.settings_abonement);
     const dispatch = useDispatch();
     const history = useHistory();
-    const [is_personal, setIsPersonal] = useState(null);
+    const [is_personal, setIsPersonal] = useState(false);
     const changeIsPersonal = (e) => {
         setIsPersonal(e.target.value)
     };
@@ -81,9 +81,8 @@ export const CreateAbonement = () => {
             }
         }
         const uploadData = {
-            ...data, prices: arrPrice
+            ...data,is_personal, prices: arrPrice
         };
-
         try {
             dispatch(upload_abonement_data(uploadData));
             history.goBack();
@@ -115,8 +114,8 @@ export const CreateAbonement = () => {
                         </div>
 
                         <Radio.Group className={classes.radio_field} onChange={changeIsPersonal} value={is_personal}>
-                            <Radio value={false}>Первональная тариф</Radio>
-                            <Radio value={true}>Тариф для групповых тренировок</Radio>
+                            <Radio value={true}>Перcональная тариф</Radio>
+                            <Radio value={false}>Тариф для групповых тренировок</Radio>
                         </Radio.Group>
 
                     </div>

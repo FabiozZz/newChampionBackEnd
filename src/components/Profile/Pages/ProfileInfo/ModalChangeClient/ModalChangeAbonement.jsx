@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
-import { OtherInput } from '../../../../../utils/OtherInput/OtherInput';
+import { OtherInput } from '../../../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput';
 import { UserInfo } from '../UserInfo/UserInfo';
 import classes from './modal_change.module.css';
 import { AbonimentType } from '../../../../Clients/FilterClientSection/AbonimentType/AbonimentType';
 import { SelectStatus } from '../SelectStatus/SelectStatus';
 import {Counter} from "../../../../../utils/Counter/Counter";
 import {SelectCouch} from "../AddAboniment/SelectCouch/SelectCouch";
-import {Button} from "../../../../../utils/Buttons/Button";
+import {Button} from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import SelectGroup from "../../../../../utils/SelectGroup/SelectGroup";
 import SelectAgesGroup from "../../../../../utils/SelectAgesGroup/SelectAgesGroup";
 import {useDispatch} from "react-redux";
@@ -108,32 +108,32 @@ export const ModalChangeAbonement = ({ profile,toggleModal }) => {
                              decrement={handleDecrementCount}
                              increment={handleIncrementCount}
                              setValue={handleChangeCountCard}
-                             label={'количество'}/>
+                             label={'количество'} />
                 </div>
                 {
                     selectAbonement.is_personal === 0?
                         <div className={classes.block_one}>
-                            <SelectGroup label={'группа'} value={selectGroup} setValue={handleChangeGroupForUser} data={profile.group}/>
+                            <SelectGroup label={'группа'} value={selectGroup} setValue={handleChangeGroupForUser} data={profile.group} />
                         </div>
                         : selectAbonement.is_personal === 1?
                         <div className={classes.block_one}>
-                            <SelectCouch label={'тренер'} value={selectCouch} setValue={handleChangeTrainerForUser} data={profile.couch}/>
+                            <SelectCouch label={'тренер'} value={selectCouch} setValue={handleChangeTrainerForUser} data={profile.couch} />
                         </div>
 
                         :null
                 }
 
                 <div className={classes.block_two}>
-                    <SelectAgesGroup label={'возростная группа'} value={selectAgesGroup} setValue={handleChangeAgesGroupForUser} data={profile.ages_group}/>
+                    <SelectAgesGroup label={'возростная группа'} value={selectAgesGroup} setValue={handleChangeAgesGroupForUser} data={profile.ages_group} />
                     {
                         !selectAbonement.is_personal?
                             <SelectGroup label={'поменять группу'} value={selectGroup}
                                          setValue={handleChangeGroupForUser}
-                                         data={profile.group}/>
+                                         data={profile.group} />
                             : selectAbonement.is_personal?
                                 <SelectCouch label={'поменять тренера'} value={selectCouch}
                                              setValue={handleChangeTrainerForUser}
-                                             data={profile.couch}/>
+                                             data={profile.couch} />
                                 : null
 
                     }

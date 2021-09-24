@@ -1,7 +1,13 @@
 import {call, put, select, takeEvery} from "redux-saga/effects";
-import {BUY_ABONEMENT, EDIT_PROFILE, LOAD_PROFILE_USER, OPEN_EDIT_PAGE} from "../../../constants/profileConstant";
+import {
+    BUY_ABONEMENT, CREATE_PROFILE_PARENTS,
+    EDIT_PROFILE,
+    EDIT_PROFILE_PARENTS,
+    LOAD_PROFILE_USER,
+    OPEN_EDIT_PAGE, REMOVE_PROFILE_PARENTS
+} from "../../../constants/profileConstant";
 import {getAbonimentList, getCouchList, getGroupList, getProfile, getStatusList, getVisitList} from "./workers";
-import {edit_profile_done, load_profile_user_done} from "../../Actions/profileActions";
+import {edit_profile_done, load_profile_user_done, load_profile_user_fail} from "../../Actions/profileActions";
 import Api from "../../../Api/Api";
 import {getAgesGroup} from "../addClientOnCRM/workers";
 
@@ -80,9 +86,36 @@ export function* uploadDataBuyAbonement({payload}) {
 
 }
 
+export function* editParentsWorker({payload}) {
+    try {
+        yield call(() => Api.editProfileParents(payload))
+    } catch (e) {
+        console.log(e.request)
+        yield put(load_profile_user_fail(e.request))
+    }
+}
+
+function* createProfileParents({payload}) {
+    try {
+        const {id, parents} = payload;
+        yield call(() => Api.createParents(id, parents));
+    } catch (e) {
+        console.log(e.response.data)
+        yield put(load_profile_user_fail(e.request))
+    }
+}
+
+function* removeProfileParents({payload}) {
+    const {id, parents} = payload;
+    yield call(()=>Api.removeParents(id,parents))
+}
+
 export function* profilePageSagas() {
-    yield takeEvery(LOAD_PROFILE_USER,loadProfileWorker)
-    yield takeEvery(OPEN_EDIT_PAGE,openProfileEditWorker)
-    yield takeEvery(EDIT_PROFILE,editProfileWorker)
-    yield takeEvery(BUY_ABONEMENT,uploadDataBuyAbonement)
+    yield takeEvery(LOAD_PROFILE_USER, loadProfileWorker);
+    yield takeEvery(OPEN_EDIT_PAGE, openProfileEditWorker);
+    yield takeEvery(EDIT_PROFILE, editProfileWorker);
+    yield takeEvery(BUY_ABONEMENT, uploadDataBuyAbonement);
+    yield takeEvery(EDIT_PROFILE_PARENTS, editParentsWorker);
+    yield takeEvery(CREATE_PROFILE_PARENTS, createProfileParents);
+    yield takeEvery(REMOVE_PROFILE_PARENTS, removeProfileParents);
 }

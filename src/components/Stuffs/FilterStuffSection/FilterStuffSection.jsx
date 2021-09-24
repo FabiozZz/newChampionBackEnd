@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import classes from './stuff_filter.module.css';
-import { OtherInput } from "../../../utils/OtherInput/OtherInput";
+import { OtherInput } from "../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
 import { StuffAnchorBox } from "../StuffAnchorBox/StuffAnchorBox";
 import SelectGroup from "../../../utils/SelectGroup/SelectGroup";
 import {FilialList} from "../../Clients/FilterClientSection/FilialList/FilialList";

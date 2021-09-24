@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './success.module.css';
-import {Button} from "../../../../../utils/Buttons/Button";
+import {Button} from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import {useHistory} from "react-router";
 
 export const SuccessAdd = ({profile}) => {

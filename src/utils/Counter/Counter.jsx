@@ -19,14 +19,15 @@ import PropTypes from "prop-types";
  * @returns {JSX.Element}
  * @constructor
  */
-export const Counter = ({label,increment,decrement,style,name,value,setValue,required,placeholder,type,disabled,...props}) => {
+export const Counter = ({label,increment,decrement,style,name,value,setValue,required,placeholder,type,disabled=false,...props}) => {
+    let disabledClass = disabled ? classes.disabled : classes.otherInputWrapper;
     return (
-        <div style={style} className={`${classes.otherInputWrapper} ${props.className}`}>
+        <div style={style} className={`${disabledClass} ${props.className}`}>
             {label&&<label>{label}</label>}
             <div className={classes.wrapper}>
-                <span onClick={decrement} className={classes.toggle}>-</span>
+                <span onClick={!disabled&&decrement} className={classes.toggle}>-</span>
                 <input className={classes.wrapper_input} value={value} max={3} min={1}  name={name} onChange={setValue} required={required} placeholder={placeholder} type={'number'} disabled={disabled}/>
-                <span onClick={increment} className={classes.toggle}>+</span>
+                <span onClick={!disabled&&increment} className={classes.toggle}>+</span>
             </div>
         </div>
     );

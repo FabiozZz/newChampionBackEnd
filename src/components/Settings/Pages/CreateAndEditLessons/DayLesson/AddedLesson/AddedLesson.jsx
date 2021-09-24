@@ -3,7 +3,7 @@ import classes from './add.module.css';
 import {SelectGroup} from "../../../../../Profile/Pages/ProfileInfo/AddAboniment/SelectGroup/SelectGroup";
 import {Btn} from "../../../../../Clients/FilterClientSection/BtnGroup/Btn/Btn";
 import {useSelector} from "react-redux";
-import {isEmpty} from "../../../../../../helpers/common";
+import {isEmpty} from "../../../../../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
 
 export const AddedLesson = (props) => {
     const {group} = useSelector(state => state.lessons);

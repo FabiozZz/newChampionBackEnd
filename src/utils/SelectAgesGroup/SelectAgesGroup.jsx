@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import classes from "./agesGroup.module.css";
 
-const SelectAgesGroup = ({label='возрастная группа',value,setValue,data={},danger=false,placeholder='не выбрано',...props}) => {
+const SelectAgesGroup = ({label='возрастная группа',value,setValue,data={},danger=false,placeholder='не выбрано',disabled=false,...props}) => {
     /**
      * локальный стейт для установки и хранения значения видимости блока с опциями
      */
@@ -70,7 +70,7 @@ const SelectAgesGroup = ({label='возрастная группа',value,setVal
     //     }
     //     // eslint-disable-next-line react-hooks/exhaustive-deps
     // },[data]);
-    const classWrapper = danger ? classes.danger : classes.inputWrapper;
+    const classWrapper = disabled?classes.disabled:danger ? classes.danger : classes.inputWrapper;
     return (
         <div ref={selectRef} className={`${classes.selectBoxWrapper} ${props.className}`} {...props}>
             <label className={`${classes.label}`} >{label}</label>

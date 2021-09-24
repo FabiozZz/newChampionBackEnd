@@ -1,13 +1,23 @@
 import {
-    BUY_ABONEMENT, BUY_ABONEMENT_SUCCESS,
+    BUY_ABONEMENT,
+    BUY_ABONEMENT_SUCCESS,
     CHANGE_PROFILE,
-    CLEAR_PROFILE, EDIT_PROFILE, EDIT_PROFILE_FAILURE, EDIT_PROFILE_SUCCESS,
+    CLEAR_PROFILE,
+    CREATE_PROFILE_PARENTS,
+    EDIT_PROFILE,
+    EDIT_PROFILE_FAILURE,
+    EDIT_PROFILE_PARENTS,
+    EDIT_PROFILE_SUCCESS,
     LOAD_PROFILE_COUCH,
     LOAD_PROFILE_FILIAL,
     LOAD_PROFILE_GROUP,
     LOAD_PROFILE_STATUS,
     LOAD_PROFILE_TYPE_ABONIMENT,
-    LOAD_PROFILE_USER, LOAD_PROFILE_USER_FAILURE, LOAD_PROFILE_USER_SUCCESS, OPEN_EDIT_PAGE, UPDATE_PROFILE_CLUB_CARD
+    LOAD_PROFILE_USER,
+    LOAD_PROFILE_USER_FAILURE,
+    LOAD_PROFILE_USER_SUCCESS,
+    OPEN_EDIT_PAGE, REMOVE_PROFILE_PARENTS,
+    UPDATE_PROFILE_CLUB_CARD
 } from "../../constants/profileConstant";
 
 export const load_profile_user = (id) => ({type: LOAD_PROFILE_USER, payload: id});
@@ -18,6 +28,10 @@ export const open_edit_page = id => ({type: OPEN_EDIT_PAGE, payload: id});
 export const edit_profile = (data) => ({type: EDIT_PROFILE, payload: data});
 export const edit_profile_done = client => ({type: EDIT_PROFILE_SUCCESS, payload: client});
 export const edit_profile_fail = error => ({type: EDIT_PROFILE_FAILURE, payload: error});
+
+export const edit_profile_parents = (data) => ({type: EDIT_PROFILE_PARENTS, payload: data});
+export const create_profile_parents = (data) => ({type: CREATE_PROFILE_PARENTS, payload: data});
+export const remove_profile_parents = (data) => ({type: REMOVE_PROFILE_PARENTS, payload: data});
 
 export const buy_abonement = data => ({type: BUY_ABONEMENT, payload: data});
 export const buy_abonement_done = client => ({type: BUY_ABONEMENT_SUCCESS, payload: client});

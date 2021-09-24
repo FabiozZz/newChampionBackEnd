@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react'
-import { OtherInput } from '../../../../../utils/OtherInput/OtherInput';
+import { OtherInput } from '../../../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput';
 import { UserInfo } from '../UserInfo/UserInfo';
 import classes from './modal_edit.module.css';
 import separate from '../../../../../assets/images/deviderParent.svg';
 import { AbonimentType } from '../../../../Clients/FilterClientSection/AbonimentType/AbonimentType';
 import { SelectStatus } from '../SelectStatus/SelectStatus';
-import { declOfLessonsNum, declOfWeekNum } from '../../../../../helpers/common';
+import { declOfLessonsNum, declOfWeekNum } from '../../../../../../../../../next.js/with-redux-thunk-app/components/halpers/common';
 import success_edit from "../../../../../assets/images/successAbonement.svg";
 import edit from "../../../../../assets/images/editAboniment.svg";
 import {DataPicker} from "../../../../../utils/DataPicker/DataPicker";
-import {Button} from "../../../../../utils/Buttons/Button";
+import {Button} from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import modal_devider from "../../../../../assets/images/modal_devider.svg";
 import {SelectCouch} from "../AddAboniment/SelectCouch/SelectCouch";
 import SelectGroup from "../../../../../utils/SelectGroup/SelectGroup";

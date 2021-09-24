@@ -1,26 +1,34 @@
 import React, {createContext, useEffect, useRef, useState} from 'react';
 import classes from './edit.module.css';
-import {OtherInput} from "../../utils/OtherInput/OtherInput";
+import {OtherInput} from "../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
 import {DataPicker} from "../../utils/DataPicker/DataPicker";
 import camera from './camera (1) 1.png';
 import {Redirect} from "../common/Redirect";
 import moment from "moment";
-import {Button} from "../../utils/Buttons/Button";
+import {Button} from "../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import {useHistory, useParams} from "react-router";
 import {Modal} from "../../utils/Modal/Modal";
 import EditModalPhoto from "./EditModalPhoto/EditModalPhoto";
 import EditPhoneSection from "./EditPhoneSection/EditPhoneSection";
 import {EndBtnGroup} from "../common/EndBtnGroup/EndBtnGroup";
 import {useDispatch, useSelector} from "react-redux";
-import {edit_profile, open_edit_page} from "../../store/Actions/profileActions";
+import {
+    create_profile_parents,
+    edit_profile,
+    open_edit_page,
+    remove_profile_parents
+} from "../../store/Actions/profileActions";
 import {EditAddresSection} from "./common/EditAddresSection/EditAddresSection";
-import {isEmpty} from "../../helpers/common";
+import {isEmpty} from "../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
+import {ParentsBlock} from "../common/ParentsBlock/ParentsBlock";
+import TrialSectionSection from "../Add/common/TrialSectionSection/TrialSectionSection";
 
 export const ContextCommonEdit = createContext();
 
 export const Edit = () => {
 
-    const user = useSelector(state => state.profile.user);
+    const {user,error} = useSelector(state => state.profile);
+    console.log(error)
     const {id} = useParams()
     const dispatch = useDispatch();
 
@@ -175,46 +183,49 @@ export const Edit = () => {
     /* child */
     const refFile = useRef(null)
 
-    // /**
-    //  * локальный стейт для хранения/установки массива данных о родителях клиента
-    //  */
-    // const [parents, setParents] = useState([{}, {}]);
-    //
-    // /**
-    //  * функция для обновления объекта
-    //  * @param i индекс объекта в массиве
-    //  * @param object новый массив для обновления предидущего
-    //  */
-    // const handleChangeItemParentsBlock = (i, object) => {
-    //     setParents(prevState => [...prevState.slice(0, i), object, ...prevState.slice(i + 1)]);
-    // };
-    //
-    // /**
-    //  * функция добавления нового поустого объекта в массив родителей
-    //  */
-    // const addParentsData = () => {
-    //     setParents(prevState => [...prevState, {}]);
-    // };
-    //
-    // /**
-    //  * удаление объекта из массива
-    //  * @param i индекс объекта в массиве который нужно удалить
-    //  */
-    // const removeParentsData = (i) => {
-    //     setParents(parents.filter((e, index) => index !== i));
-    // };
+    /**
+     * локальный стейт для хранения/установки массива данных о родителях клиента
+     */
+    const [parents, setParents] = useState([{}]);
+
+    /**
+     * функция для обновления объекта
+     * @param i индекс объекта в массиве
+     * @param object новый массив для обновления предидущего
+     */
+    const handleChangeItemParentsBlock = (i, object) => {
+        setParents(prevState => [...prevState.slice(0, i), object, ...prevState.slice(i + 1)]);
+    };
+
+    /**
+     * функция добавления нового поустого объекта в массив родителей
+     */
+    const addParentsData = () => {
+        setParents(prevState => [...prevState, {}]);
+    };
+
+    /**
+     * удаление объекта из массива
+     * @param i индекс объекта в массиве который нужно удалить
+     */
+    const removeParentsData = (i) => {
+        if (parents[i].id !== undefined) {
+            dispatch(remove_profile_parents({id: user.id, parents: [parents[i].id]}));
+        }
+        setParents(parents.filter((e, index) => index !== i));
+    };
 
     useEffect(() => {
-        // if (/\d{2}\.\d{2}\.\d{4}/g.test(personalData.date_of_birth)) {
-        //     let dateNow = moment();
-        //     let dateBirth = moment(personalData.date_of_birth.replace(/(\d+).(\d+).(\d+)/g, '$3-$2-$1'));
-        //     let mathAge = Math.floor(dateNow.diff(dateBirth, 'year'));
-        //
-        //     setAge(mathAge);
-        // }
+        if (/\d{2}\.\d{2}\.\d{4}/g.test(personalData.date_of_birth)) {
+            let dateNow = moment();
+            let dateBirth = moment(personalData.date_of_birth.replace(/(\d+).(\d+).(\d+)/g, '$3-$2-$1'));
+            let mathAge = Math.floor(dateNow.diff(dateBirth, 'year'));
+
+            setAge(mathAge);
+        }
 
 
-    },[age, user.date_of_birth]);
+    },[personalData.date_of_birth]);
     const handleSubmit = (e) => {
         e.preventDefault();
         let uploadData;
@@ -223,7 +234,8 @@ export const Edit = () => {
                 id:id,
                 ...personalData,
                 date_of_birth:personalData.date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
-                ...addressEdit,
+                ...(addressEdit&&{...addressEdit}),
+                ...(phone_number&&{phone_number}),
                 age_group_id: user.club_card.age_group.id
             };
         }else{
@@ -231,18 +243,45 @@ export const Edit = () => {
                 id:user.id,
                 ...personalData,
                 date_of_birth:personalData.date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
-                ...addressEdit,
-                phone_number,
+                ...(addressEdit&&{...addressEdit}),
+                ...(phone_number&&{phone_number}),
                 age_group_id: user.club_card.age_group.id
             };
         }
-        console.log('EditPage>>',uploadData)
-        dispatch(edit_profile(uploadData));
-        history.goBack();
+        const updateParents = parents.filter(parent => parent.id);
+        const createParents = parents.filter(parent => parent.id === undefined);
+        if (parents.length) {
+            if (updateParents.length) {
+                console.log('parents update', updateParents);
+            }
+            if (createParents.length) {
+                let uploadData = []
+                for (let i = 0; i < createParents.length; i++) {
+                    if (!isEmpty(createParents[i])) {
+                        uploadData.push(createParents[i]);
+                    }
+                }
+                if (uploadData.length) {
+                    console.log('create parents', uploadData);
+                }
+            }
+        }
+        console.log('other', uploadData);
+
+        // try {
+        //     if (parents.length) {
+        //         dispatch(create_profile_parents({id: user.id, parents}));
+        //     }
+        //     dispatch(edit_profile(uploadData));
+        // } catch (e) {
+        //     console.log(e)
+        // }finally {
+        //     history.goBack();
+        // }
     };
     useEffect(() => {
         if (isEmpty(user)) {
-            dispatch(open_edit_page(id))
+            dispatch(open_edit_page(id));
         }else{
             const {last_name,middle_name,phone_number,first_name,street,house,building,apartments} = user;
             setPersonalData({
@@ -251,20 +290,28 @@ export const Edit = () => {
                 ...(middle_name&& {middle_name}),
                 date_of_birth: moment(user.date_of_birth).format('DD.MM.YYYY')
             })
-            console.log(phone_number&& phone_number)
-            setPhone(phone_number&& phone_number);
+            if (user.parents.length) {
+                setParents(user.parents);
+            }
+            if (phone_number) {
+                if (/(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})/g.test(phone_number)){
+                    setPhone(phone_number.replace(/(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})/g,'+7 ($2) $3-$4-$5'));
+                }else{
+                    setPhone(phone_number);
+                }
+            }
             setAddress({
                 ...(street&& {street}),
                 ...(house&& {house}),
                 ...(building&& {building}),
                 ...(apartments&& {apartments}),
             })
-            if (/\d{4}-\d{2}-\d{2}/g.test(user.date_of_birth)) {
-                let dateNow = moment();
-                let dateBirth = moment(user.date_of_birth);
-                let mathAge = Math.floor(dateNow.diff(dateBirth, 'year'));
-                setAge(mathAge);
-            }
+            // if (/\d{4}-\d{2}-\d{2}/g.test(user.date_of_birth)) {
+            //     let dateNow = moment();
+            //     let dateBirth = moment(user.date_of_birth);
+            //     let mathAge = Math.floor(dateNow.diff(dateBirth, 'year'));
+            //     setAge(mathAge);
+            // }
         }
     }, [dispatch, id, user]);
     return (
@@ -309,34 +356,34 @@ export const Edit = () => {
                         </div>
                     </div>
                 </div>
-                {/*{age>0 ?*/}
+                {age>0 ?
                     <>
                         <ContextCommonEdit.Provider value={{phone_number,
                             handleChangePhone}}>
 
-                            {/*{age > 0 && age < 16 ?*/}
+                            {age > 0 && age < 16 ?
                                 <>
-                                    {/*<div className={classes.button}>*/}
-                                    {/*    <Button size={'default'} text={'добавить справку'} click={() => {*/}
-                                    {/*        refFile.current.click();*/}
-                                    {/*    }}/>*/}
-                                    {/*    <input ref={refFile} name={'health'} type="file" hidden={true}/>*/}
-                                    {/*</div>*/}
+                                    <div className={classes.button}>
+                                        <Button size={'default'} text={'добавить справку'} click={() => {
+                                            refFile.current.click();
+                                        }}/>
+                                        <input ref={refFile} name={'health'} type="file" hidden={true}/>
+                                    </div>
                                     {/*<TrialSectionSection/>*/}
-                                    {/*<ParentsBlock parents={parents}*/}
-                                    {/*              change={handleChangeItemParentsBlock}*/}
-                                    {/*              addParents={addParentsData}*/}
-                                    {/*              removeParents={removeParentsData}*/}
-                                    {/*/>*/}
+                                    <ParentsBlock parents={parents}
+                                                  change={handleChangeItemParentsBlock}
+                                                  addParents={addParentsData}
+                                                  removeParents={removeParentsData}
+                                    />
                                 </>
-                                {/*: age >= 16 ?*/}
+                                : age >= 16 ?
                                     <>
                                         {phone_number?<EditPhoneSection/>:null}
 
                                         {/*<TrialSectionSection/>*/}
                                     </>
-                                    {/*: null*/}
-                            {/*}*/}
+                                    : null
+                            }
                         </ContextCommonEdit.Provider>
 
 
@@ -356,7 +403,7 @@ export const Edit = () => {
 
                         <EndBtnGroup goBack={goBack}/>
                     </>
-                    {/*: null}*/}
+                    : null}
             </form>
         </>
     );

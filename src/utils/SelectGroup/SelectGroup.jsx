@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import classes from "./group.module.css";
 
-const SelectGroup = ({label,value,setValue,data={},danger=false,placeholder='не выбрано',...props}) => {
+const SelectGroup = ({label,value,setValue,data={},danger=false,placeholder='не выбрано', disabled=false,...props}) => {
     /**
      * локальный стейт для установки и хранения значения видимости блока с опциями
      */
@@ -71,14 +71,15 @@ const SelectGroup = ({label,value,setValue,data={},danger=false,placeholder='н�
     //     // eslint-disable-next-line react-hooks/exhaustive-deps
     // },[data]);
     const classWrapper = danger ? classes.danger : classes.inputWrapper;
+    let disabledClass = disabled ? classes.disabled : classes.inputWrapper;
 
     return (
         <div ref={selectRef} className={`${classes.selectBoxWrapper} ${props.className}`} {...props}>
             <label className={`${classes.label}`} >{label}</label>
-            <div className={classes.inputWrapper} onClick={handleToggleOptionBox}>
+            <div className={disabledClass} onClick={handleToggleOptionBox}>
                 <svg className={classes.arrow} width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.66437 0.252601C1.25159 -0.114317 0.619519 -0.0771359 0.252601 0.335647C-0.114317 0.74843 -0.0771359 1.3805 0.335647 1.74742L4.83565 5.74742C5.21453 6.08421 5.78549 6.08421 6.16437 5.74742L10.6644 1.74742C11.0772 1.3805 11.1143 0.74843 10.7474 0.335647C10.3805 -0.0771359 9.74843 -0.114317 9.33565 0.252601L5.50001 3.66206L1.66437 0.252601Z" fill="#BFC5D2"/></svg>
                 <span/>
-                <input readOnly={true} className={classes.input} value={value?.name} placeholder={placeholder} disabled={true} type="text" />
+                <input readOnly={true} className={classes.input} value={value?.name} placeholder={placeholder} disabled={disabled} type="text" />
                 {toggleOptionBox&&<div className={classes.arrowOptionBox}/>}
             </div>
             {toggleOptionBox&&

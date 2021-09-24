@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import classes from './filter.module.css';
-import { OtherInput } from "../../../utils/OtherInput/OtherInput";
+import { OtherInput } from "../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
 import { ListType } from "./ListType/ListType";
 import { useSelector } from "react-redux";
 import { AbonimentType } from "./AbonimentType/AbonimentType";

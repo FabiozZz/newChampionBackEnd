@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import { change_data_profile } from '../../../../../../store/Actions/profileActions';
 import Api from '../../../../../../Api/Api';
 import { DataPicker } from '../../../../../../utils/DataPicker/DataPicker';
-import { OtherInput } from '../../../../../../utils/OtherInput/OtherInput';
+import { OtherInput } from '../../../../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput';
 // import { Address } from '../../../../../Add/common/Address/Address';
 import { EndBtnGroup } from '../../../../../Add/common/EndBtnGroup/EndBtnGroup';
 // import { Sale } from '../../../../../Add/common/Sale/Sale';

@@ -1,9 +1,9 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import classes from './edit.module.css';
 import {Redirect} from "../../../../common/Redirect";
-import {OtherInput} from "../../../../../utils/OtherInput/OtherInput";
+import {OtherInput} from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
 import {Radio} from "antd";
-import {Button} from "../../../../../utils/Buttons/Button";
+import {Button} from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import HeaderNav from "../../../../common/HeaderNav";
 import {useDispatch, useSelector} from "react-redux";
 import {

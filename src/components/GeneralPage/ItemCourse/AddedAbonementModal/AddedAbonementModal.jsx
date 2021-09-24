@@ -1,30 +1,28 @@
-import React, {useContext, useEffect, useState} from 'react';
-import { OtherInput } from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
-import classes from '../../../profile.module.css';
-import { Button } from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
-import {SelectAbonement} from "../SelectAbonement";
-import { Counter } from "../../../../../utils/Counter/Counter";
-import { SelectStatus } from "../SelectStatus/SelectStatus";
-import {declOfLessonsNum, declOfWeekNum} from '../../../../../../../../../next.js/with-redux-thunk-app/components/halpers/common';
-import {SelectCouch} from "./SelectCouch/SelectCouch";
-import {SelectGroup} from "./SelectGroup/SelectGroup";
-import {useDispatch} from "react-redux";
-import {
-    buy_abonement,
-} from "../../../../../store/Actions/profileActions";
-import {SuccessContext} from "../../../SuccessContext";
-import devider from '../../../../../assets/images/deviderParent.svg'
-import success_edit from '../../../../../assets/images/successAbonement.svg'
-import edit from '../../../../../assets/images/editAboniment.svg'
+import React, {useEffect, useState} from 'react';
+import {OtherInput} from "../../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
+import {SelectAbonement} from "../../../Profile/Pages/ProfileInfo/SelectAbonement";
+import {SelectStatus} from "../../../Profile/Pages/ProfileInfo/SelectStatus/SelectStatus";
+import {Counter} from "../../../../utils/Counter/Counter";
+import {SelectGroup} from "../../../Profile/Pages/ProfileInfo/AddAboniment/SelectGroup/SelectGroup";
+import {SelectCouch} from "../../../Profile/Pages/ProfileInfo/AddAboniment/SelectCouch/SelectCouch";
+import {declOfLessonsNum, declOfWeekNum} from "../../../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
+import success_edit from "../../../../assets/images/successAbonement.svg";
+import edit from "../../../../assets/images/editAboniment.svg";
+import {Button} from "../../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
+import {useDispatch, useSelector} from "react-redux";
+import {buy_abonement} from "../../../../store/Actions/profileActions";
+import classes from './add.module.css';
+import SelectAgesGroup from "../../../../utils/SelectAgesGroup/SelectAgesGroup";
+import {BtnGroup} from "../../../Clients/FilterClientSection/BtnGroup/BtnGroup";
 
-
-export const AddAboniment = ({profile}) => {
-
-    const {handleChangeSuccess} = useContext(SuccessContext);
-
+const AddedAbonementModal = ({user}) => {
     const dispatch = useDispatch();
 
-    const {couch, group, status, typeAboniment, user} = profile;
+    const [single,setSingle] = useState(false)
+
+    const {added_client} = useSelector(state => state.general_page);
+
+    const {abonements, ages_groups, couches, groups, statuses} = added_client;
 
     const [selectAboniment, setAboniment] = useState({
         id: null,
@@ -32,6 +30,11 @@ export const AddAboniment = ({profile}) => {
     });
     const handleChangeAboniment = (item) => {
         setAboniment(prevState => ({...prevState, ...item}))
+    };
+
+    const [selectAgesGroup, setSelectAgesGroup] = useState(user.club_card.age_group)
+    const handleChangeAgesGroupForUser = (obj) => {
+        setSelectAgesGroup(obj);
     };
 
     const [selectCouch, setCouch] = useState({
@@ -78,23 +81,6 @@ export const AddAboniment = ({profile}) => {
         setCount(countCard <= 1 ? 1 : countCard - 1)
     };
 
-    // const [selectParent, setParent] = useState({
-    //     first_name: '',
-    //     last_name: '',
-    //     middle_name: '',
-    // });
-    // const handleChangeParentData = (obj) => {
-    //     setParent({...obj});
-    // }
-
-    // const [passport, setPassport] = useState({
-    //     number: '',
-    //     serial: ''
-    // })
-    // const handleChangePass = (e) => {
-    //     setPassport(prevState => ({...prevState, [e.target.name]: e.target.value}))
-    // };
-
     const [editPrice, setEditPrice] = useState({
         price: 0,
         edit: false
@@ -108,31 +94,20 @@ export const AddAboniment = ({profile}) => {
 
 
     useEffect(() => {
-        if (selectAboniment.prices && selectStatus.id) {
+        if (!single) {
+            if (selectAboniment.prices && selectStatus.id) {
 
-        let price = selectAboniment.prices.find(item=>item.age_group.id === user.club_card.age_group.id&&item.level.id === selectStatus.id).price;
-        if (price) {
-            setEditPrice(prevState => ({...prevState,price:Number(price)}));
+                let price = selectAboniment.prices.find(item=>item.age_group.id === user.club_card.age_group.id&&item.level.id === selectStatus.id).price;
+                if (price) {
+                    setEditPrice(prevState => ({...prevState,price:Number(price)}));
+                }
+            }
+        }else{
+            setEditPrice(prevState => ({...prevState,price:500}))
         }
-        // let source = axios.CancelToken.source();
-        // (async () => {
-        //     if (selectAboniment.id && selectStatus.id) {
-        //
-        //     }
-        // })();
-        // return () => source.cancel();
-        }
-    },[selectAboniment.prices, selectStatus.id, user.club_card.age_group.id]);
+    },[selectAboniment.prices, selectStatus.id, single, user.club_card.age_group.id]);
 
     const handleSubmitAboniment = async () => {
-        // let dopData;
-        // if (Number(editPrice.price) !== Number(selectAboniment.price)) {
-        //     // dopData = {
-        //     //     // price:editPrice.price
-        //     }
-        // }else {
-        //     // dopData = {};
-        // }
         let price = selectAboniment.prices.find(item=>item.age_group.id === user.club_card.age_group.id&&item.level.id === selectStatus.id).price;
         const userPrice = editPrice.price !== Number(price) ? editPrice.price : false;
         let uploadData = {
@@ -143,91 +118,53 @@ export const AddAboniment = ({profile}) => {
             quantity:countCard,
             ...(userPrice && {price:userPrice})
         };
-        // console.log(uploadData)
         dispatch(buy_abonement(uploadData));
-        // await Api.editProfileAbonement(user.club_card.id, uploadData).then(r => {
-        //     console.log(r);
-        //     // dispatch(load_profile_user(r.data))
-        //     handleChangeSuccess();
-        //
-        // });
-        // await dispatch(upload_profile_club_card(uploadData));
-
     };
     return (
-        <>
+        <div className={classes.wrapper}>
+            <p className={classes.wrapper__label}>Абонемента нет</p>
+
             <div className={classes.add_aboniment}>
                 <div className={classes.card_number}>
-                    <OtherInput value={card} setValue={handleChangeNumCard} label={'номер карты'}/>
+                    <OtherInput value={card} setValue={handleChangeNumCard} label={'номер карты'} disabled={single}/>
                 </div>
                 <div className={classes.aboniment}>
                     <SelectAbonement value={selectAboniment.name} setValue={handleChangeAboniment}
-                                     data={typeAboniment}
-                                     label={'тип абонемента'}/>
+                                     data={abonements}
+                                     label={'тип абонемента'} disabled={single}/>
                 </div>
                 <div className={classes.status}>
-                    <SelectStatus value={selectStatus.name} setValue={handleChangeStatus} data={status}
-                                  label={'статус'}/>
+                    <SelectStatus value={selectStatus.name} setValue={handleChangeStatus} data={statuses}
+                                  label={'статус'} disabled={single}/>
                 </div>
                 <div className={classes.counter}>
                     <Counter value={countCard}
                              decrement={handleDecrementCount}
                              increment={handleIncrementCount}
                              setValue={handleChangeCountCard}
-                             label={'количество'}/>
+                             label={'количество'} disabled={single}/>
+                </div>
+                <div className={classes.ages_group}>
+                    <SelectAgesGroup label={'возростная группа'} value={selectAgesGroup} setValue={handleChangeAgesGroupForUser} data={ages_groups} disabled={single}/>
                 </div>
                 {
                     !selectAboniment.is_personal?
 
                         <div className={`${classes.group}`}>
-                            <SelectGroup label={'группа'} data={group} value={selectGroup}
-                                         setValue={handleChangeGroup}/>
+                            <SelectGroup label={'группа'} data={groups} value={selectGroup}
+                                         setValue={handleChangeGroup} disabled={single}/>
                         </div>
 
                         :
                         <div className={`${classes.group}`}>
-                            <SelectCouch data={couch} value={selectCouch} setValue={handleChangeCouch}
-                                         label={'тренер'}/>
+                            <SelectCouch data={couches} value={selectCouch} setValue={handleChangeCouch}
+                                         label={'тренер'} disabled={single}/>
                         </div>
                 }
-
-                {/*{user.is_adult ?*/}
-                {/*    <>*/}
-                {/*        <div className={classes.adult_serial}>*/}
-                {/*            <MaskInput setValue={handleChangePass} name={'serial'} value={passport.serial}*/}
-                {/*                       mask={'9999'}*/}
-                {/*                       label={'паспорт'} placeholder={'Серия'}/>*/}
-                {/*        </div>*/}
-                {/*        <div className={classes.adult_number}>*/}
-                {/*            <MaskInput value={passport.number} setValue={handleChangePass} name={'number'}*/}
-                {/*                       mask={'999999999'} placeholder={'Номер'}/>*/}
-                {/*        </div>*/}
-                {/*    </>*/}
-                {/*    :*/}
-                {/*    <>*/}
-                {/*        <div className={classes.parent_select}>*/}
-                {/*            <SelectParent value={selectParent} setValue={handleChangeParentData} data={user.parents}*/}
-                {/*                          label={'предствитель ребенка'}/>*/}
-                {/*        </div>*/}
-                {/*        <div className={classes.parent_serial}>*/}
-                {/*            <OtherInput label={'паспорт родителя'} placeholder={'Серия'}/>*/}
-                {/*        </div>*/}
-                {/*        <div className={classes.parent_number}>*/}
-                {/*            <OtherInput placeholder={'Номер'}/>*/}
-                {/*        </div>*/}
-                {/*    </>*/}
-
-                {/*}*/}
+                <div className={classes.switch_box}>
+                    <BtnGroup is_Adult={single} toggleActive={setSingle} left={'Месяц'} right={'Разово'}/>
+                </div>
             </div>
-            {/*{(selectAboniment.id&&selectStatus.id&&selectGroup.id)&&*/}
-            {/*    <div className={classes.sales_card}>*/}
-            {/*        <div className={`${classes.success}`}>*/}
-            {/*            <Button click={handleSubmitAboniment} text={'применить'} size={'auto'} factor={"success"}/>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*}*/}
-            {/* module change price */}
-
             {selectAboniment.name !== '' && selectStatus.name !== '' ?
                 <>
                     <h3 className={classes.block_info__title_aboniment}>{selectAboniment.name} для {selectStatus.name.replace(/[а-я]{2}$/gi, 'ых')} клиентов</h3>
@@ -243,7 +180,7 @@ export const AddAboniment = ({profile}) => {
                                 <span className={`${classes.sale_count_text}`}>{(selectAboniment.days_duration / 7) > 8 ? <span
                                     dangerouslySetInnerHTML={{__html: '&#8734;'}}/> : (selectAboniment.days_duration / 7)} {declOfWeekNum((selectAboniment.days_duration / 7))}</span>
                                 {/*<img className={classes.sale_count_img} src={devider} alt="devider"/>*/}
-                                    <svg className={classes.sale_count_img} width="1428" height="2" viewBox="0 0 1428 2" fill="none" xmlns="http://www.w3.org/2000/svg"><line y1="1" x2="1428" y2="1" stroke="#BFC5D2" strokeLinejoin="round" strokeDasharray="5 5"/></svg>
+                                <svg className={classes.sale_count_img} width="1428" height="2" viewBox="0 0 1428 2" fill="none" xmlns="http://www.w3.org/2000/svg"><line y1="1" x2="1428" y2="1" stroke="#BFC5D2" strokeLinejoin="round" strokeDasharray="5 5"/></svg>
 
                                 {
                                     editPrice.edit ?
@@ -266,9 +203,9 @@ export const AddAboniment = ({profile}) => {
 
                                 }
                             </div>
-                            <div className={`${classes.success}`}>
-                                <Button click={handleSubmitAboniment} text={'применить'} size={"auto"} factor={"success"}/>
-                            </div>
+                            {/*<div className={`${classes.success}`}>*/}
+                            {/*    <Button click={handleSubmitAboniment} text={'применить'} size={"auto"} factor={"success"}/>*/}
+                            {/*</div>*/}
                         </div>
                     </div>
                 </>
@@ -282,6 +219,9 @@ export const AddAboniment = ({profile}) => {
             {/*<input className={classes.sale_count__input}*/}
             {/*       type={'number'} size={editPrice.price.length}*/}
             {/*       value={editPrice.price} onChange={handleChangePriceAbonement}/>*/}
-        </>
+        </div>
+
     );
 };
+
+export default AddedAbonementModal;

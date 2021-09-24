@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import classes from "../../profile.module.css";
-import {declOfLessonsNum, isEmpty} from '../../../../helpers/common';
+import {declOfLessonsNum, isEmpty} from '../../../../../../../../next.js/with-redux-thunk-app/components/halpers/common';
 import moment from "moment";
 import {SuccessContext} from "../../SuccessContext";
 

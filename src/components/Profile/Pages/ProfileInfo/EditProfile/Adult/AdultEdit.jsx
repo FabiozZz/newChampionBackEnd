@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from "../../../../../common/Redirect";
 import HeaderNav from "../../../../../common/HeaderNav";
 import classes from '../../../../profile.module.css';
-import { OtherInput } from '../../../../../../utils/OtherInput/OtherInput';
+import { OtherInput } from '../../../../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput';
 import { DataPicker } from '../../../../../../utils/DataPicker/DataPicker';
 import { EndBtnGroup } from '../../../../../Add/common/EndBtnGroup/EndBtnGroup';
 import { useHistory } from 'react-router';

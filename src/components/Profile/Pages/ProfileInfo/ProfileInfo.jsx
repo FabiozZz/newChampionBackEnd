@@ -7,7 +7,7 @@ import {AbonimentInfo} from "./AbonimentInfo";
 import {AddAboniment} from "./AddAboniment/AddAboniment";
 import edit_profile from '../../../../assets/images/edit_profile.svg';
 import {NavLink} from "react-router-dom";
-import {isEmpty} from "../../../../helpers/common";
+import {isEmpty} from "../../../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
 import {SuccessContext} from "../../SuccessContext";
 import {SuccessAdd} from "./SuccessAdd/SuccessAdd";
 import {Modal} from "../../../../utils/Modal/Modal";
@@ -160,7 +160,7 @@ export const ProfileInfo = ({profile}) => {
                         <span
                             className={classes.block_info__item_label__text}>{moment(user.date_of_birth).format('DD.MM.YYYY')} ({age})</span>
 
-                        {user.is_adult &&
+                        {user.phone_number &&
                         <>
                             <p className={classes.block_info__item_label}>Номер телефона</p>
                             <span className={classes.block_info__item_label__text}>{user.phone_number}</span>
@@ -176,7 +176,7 @@ export const ProfileInfo = ({profile}) => {
 
                 <div className={classes.block_info__header}>
                     <h3 className={classes.block_info__title}>Информация о родителях</h3>
-                    <NavLink className={classes.block_info__header_img_link} to={`/profile/${user.id}/edit_parents`}>
+                    <NavLink className={classes.block_info__header_img_link} to={`/profile/${user.id}/edit`}>
                         <img src={edit_profile} alt="edit_profile"/>
                     </NavLink>
                 </div>

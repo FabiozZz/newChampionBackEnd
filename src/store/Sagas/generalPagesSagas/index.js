@@ -9,7 +9,15 @@ import {
     LOAD_GENERAL_PAGE_DATA, REMOVE_CLIENT_FROM_TRAIN
 } from "../../../constants/generalPageConstants";
 import {load_general_page_data, load_general_page_data_done} from "../../Actions/generalPageActions";
-import {getClients, getCouch, getGroups} from "./workers";
+import {
+    getAbonimentList,
+    getAgesGroupList,
+    getClients,
+    getCouch, getCouchList,
+    getGroupList,
+    getGroups,
+    getStatusList
+} from "./workers";
 
 export function* tokenVerify() {
     console.log('вызов для проверки токена')
@@ -74,7 +82,14 @@ export function* fetchDataGeneralPage() {
     const fetchData = yield {
         groups: yield call(() => getGroups()),
         couches: yield call(()=>getCouch()),
-        clients: yield call(() => getClients())
+        clients: yield call(() => getClients()),
+        added_client:{
+            groups: yield call(()=>getGroupList()),
+            ages_groups: yield call(() => getAgesGroupList()),
+            abonements: yield call(()=>getAbonimentList()),
+            statuses: yield call(() => getStatusList()),
+            couches: yield call(() => getCouchList())
+        }
     }
     console.log(yield fetchData);
     yield put(load_general_page_data_done(fetchData));

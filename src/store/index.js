@@ -33,9 +33,9 @@ const sagasMiddleware = createSagaMiddleware()
 
 const store = createStore(
     rootReducer,
-    // window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
-        applyMiddleware(routerMiddleware(history),sagasMiddleware)
-    // )
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
+        applyMiddleware(routerMiddleware(history), sagasMiddleware)
+    )
 );
 sagasMiddleware.run(rootSaga);
 window.store = store;
