@@ -352,7 +352,6 @@ class Api {
     /**
      * Временный запрос на получение фиктивных клиентов
      * @returns {Promise}
-     * @param {CancelToken} token токен для отмены вызова при уничтожении компонента
      */
     async getGeneralPageData() {
         // return await this.client.get("/schedule/lesson/");
@@ -370,8 +369,8 @@ class Api {
 
     /**
      *
-     * @param token
      * @returns {Promise}
+     * @param group
      */
     async postNewGroup(group) {
         return await this.client.post("/core/group/",{...group});
