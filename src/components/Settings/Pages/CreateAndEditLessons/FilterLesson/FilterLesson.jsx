@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
 import classes from './filter.module.css';
 import {Btn} from "../../../../Clients/FilterClientSection/BtnGroup/Btn/Btn";
-import {OtherInput} from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
 import {ContextData} from "../CreateAndEditLessons";
+import {OtherInput} from "../../../../../utils/OtherInput/OtherInput";
 
 /**
  * фильтрация расписания

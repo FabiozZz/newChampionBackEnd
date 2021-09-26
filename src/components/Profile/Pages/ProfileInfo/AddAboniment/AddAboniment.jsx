@@ -1,11 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
-import { OtherInput } from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
 import classes from '../../../profile.module.css';
-import { Button } from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import {SelectAbonement} from "../SelectAbonement";
 import { Counter } from "../../../../../utils/Counter/Counter";
 import { SelectStatus } from "../SelectStatus/SelectStatus";
-import {declOfLessonsNum, declOfWeekNum} from '../../../../../../../../../next.js/with-redux-thunk-app/components/halpers/common';
 import {SelectCouch} from "./SelectCouch/SelectCouch";
 import {SelectGroup} from "./SelectGroup/SelectGroup";
 import {useDispatch} from "react-redux";
@@ -16,6 +13,9 @@ import {SuccessContext} from "../../../SuccessContext";
 import devider from '../../../../../assets/images/deviderParent.svg'
 import success_edit from '../../../../../assets/images/successAbonement.svg'
 import edit from '../../../../../assets/images/editAboniment.svg'
+import {declOfLessonsNum, declOfWeekNum} from "../../../../../helpers/common";
+import {OtherInput} from "../../../../../utils/OtherInput/OtherInput";
+import {Button} from "../../../../../utils/Buttons/Button";
 
 
 export const AddAboniment = ({profile}) => {

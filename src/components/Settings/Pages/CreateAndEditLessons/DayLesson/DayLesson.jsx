@@ -5,13 +5,13 @@ import 'moment/locale/ru';
 import {ContextData} from "../CreateAndEditLessons";
 import {useDispatch, useSelector} from "react-redux";
 import {AddedLesson} from "./AddedLesson/AddedLesson";
-import {Button} from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import {
     add_lesson,
     clear_filter_lesson,
     remove_lesson,
     search_lesson
 } from "../../../../../store/Actions/createLessonsActions";
+import {Button} from "../../../../../utils/Buttons/Button";
 
 /**
  * отображение расписания за день

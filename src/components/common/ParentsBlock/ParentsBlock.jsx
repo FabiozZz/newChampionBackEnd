@@ -1,11 +1,10 @@
 import React, {useContext} from 'react';
 import classes from '../../Add/add.module.css';
-import {Button} from "../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import {AddParent} from "./AddParent/AddParent";
 import separate from '../../../assets/images/blockInfoSeparate.svg';
 import remove from '../../../assets/images/removeParent.svg';
-import {ContextCommon} from "../../Add/Add";
-import {isEmpty} from "../../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
+import {isEmpty} from "../../../helpers/common";
+import {Button} from "../../../utils/Buttons/Button";
 
 /**
  * компонент прослойка

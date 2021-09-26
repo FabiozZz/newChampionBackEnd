@@ -5,7 +5,7 @@ import 'moment/locale/ru';
 import {ContextData} from "../CreateAndEditLessons";
 import cn from "classnames";
 import {useSelector} from "react-redux";
-import {declOfGroupsNum} from "../../../../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
+import {declOfGroupsNum} from "../../../../../helpers/common";
 
 var defaultWeekdays = Array.apply(null, Array(7)).map(function (_, i) {
     return <span className={classes.weekdays_month} key={i}>{moment(i, 'e').startOf('week').isoWeekday(i + 1).format('ddd')}</span>;

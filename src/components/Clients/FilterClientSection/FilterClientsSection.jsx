@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import classes from './filter.module.css';
-import { OtherInput } from "../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
 import { ListType } from "./ListType/ListType";
 import { useSelector } from "react-redux";
 import { AbonimentType } from "./AbonimentType/AbonimentType";
@@ -10,6 +9,7 @@ import { BtnGroup } from "./BtnGroup/BtnGroup";
 import { StatusFilterSection } from "./StatusFilterSection/StatusFilterSection";
 import { AnchorBox } from "../AnchorBox/AnchorBox";
 import SelectGroup from "../../../utils/SelectGroup/SelectGroup";
+import {OtherInput} from "../../../utils/OtherInput/OtherInput";
 
 export const FilterClientsSection = () => {
 

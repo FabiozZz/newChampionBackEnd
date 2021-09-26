@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import classes from './set_group.module.css';
 import {Redirect} from "../../../common/Redirect";
-import {Button} from "../../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import {useHistory} from "react-router";
 import {useSelector} from "react-redux";
 import {arrayMove, SortableContainer, SortableElement} from 'react-sortable-hoc';
 import HeaderNav from "../../../common/HeaderNav";
+import {Button} from "../../../../utils/Buttons/Button";
 
 const SortableItem = SortableElement(({age_group,link}) => (
     <tr tabIndex={0}

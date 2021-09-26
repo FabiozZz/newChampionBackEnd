@@ -1,11 +1,9 @@
 import React, {createContext, useEffect, useRef, useState} from 'react';
 import classes from './edit.module.css';
-import {OtherInput} from "../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
 import {DataPicker} from "../../utils/DataPicker/DataPicker";
 import camera from './camera (1) 1.png';
 import {Redirect} from "../common/Redirect";
 import moment from "moment";
-import {Button} from "../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import {useHistory, useParams} from "react-router";
 import {Modal} from "../../utils/Modal/Modal";
 import EditModalPhoto from "./EditModalPhoto/EditModalPhoto";
@@ -19,9 +17,11 @@ import {
     remove_profile_parents
 } from "../../store/Actions/profileActions";
 import {EditAddresSection} from "./common/EditAddresSection/EditAddresSection";
-import {isEmpty} from "../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
 import {ParentsBlock} from "../common/ParentsBlock/ParentsBlock";
 import TrialSectionSection from "../Add/common/TrialSectionSection/TrialSectionSection";
+import {isEmpty} from "../../helpers/common";
+import {OtherInput} from "../../utils/OtherInput/OtherInput";
+import {Button} from "../../utils/Buttons/Button";
 
 export const ContextCommonEdit = createContext();
 

@@ -5,7 +5,7 @@ import classes from './gen.module.css';
 import HeaderNav from "../common/HeaderNav";
 import ItemCourse from "./ItemCourse/ItemCourse";
 import {useSelector} from "react-redux";
-import {isEmpty} from "../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
+import {isEmpty} from "../../helpers/common";
 
 // const data = [
 //     {id: 1, name: 'Бразильское Джиу-Джитсу'},

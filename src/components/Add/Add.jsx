@@ -1,11 +1,9 @@
 import React, {createContext, useEffect, useRef, useState} from 'react';
 import classes from './add.module.css';
-import {OtherInput} from "../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
 import {DataPicker} from "../../utils/DataPicker/DataPicker";
 import camera from './camera (1) 1.png';
 import {Redirect} from "../common/Redirect";
 import moment from "moment";
-import {Button} from "../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import TrialSectionSection from "./common/TrialSectionSection/TrialSectionSection";
 import {AddresSection} from "./common/AddresSection/AddresSection";
 import {OterSection} from "./common/OterSection/OterSection";
@@ -18,7 +16,9 @@ import {EndBtnGroup} from "../common/EndBtnGroup/EndBtnGroup";
 import {ParentsBlock} from "../common/ParentsBlock/ParentsBlock";
 import {useDispatch, useSelector} from "react-redux";
 import {add_client_on_CRM} from "../../store/Actions/addClientsActions";
-import {isEmpty} from "../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
+import {isEmpty} from "../../helpers/common";
+import {OtherInput} from "../../utils/OtherInput/OtherInput";
+import {Button} from "../../utils/Buttons/Button";
 
 export const ContextCommon = createContext();
 

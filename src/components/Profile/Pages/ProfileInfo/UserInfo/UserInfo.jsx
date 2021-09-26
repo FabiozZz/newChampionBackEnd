@@ -3,8 +3,8 @@ import classes from './info.module.css';
 import separate from '../../../../../assets/images/lineModalDevider.svg';
 import prolongation_aboniment from '../../../../../assets/images/prolongationAbon.svg';
 import return_cash from '../../../../../assets/images/returnCash.svg';
-import { declOfLessonsNum } from '../../../../../../../../../next.js/with-redux-thunk-app/components/halpers/common';
 import moment from "moment";
+import {declOfLessonsNum} from "../../../../../helpers/common";
 
 export const UserInfo = ({ user,change,type }) => {
     return (

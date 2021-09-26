@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from "../../Add/add.module.css";
-import {Button} from "../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
+import {Button} from "../../../utils/Buttons/Button";
 
 /**
  * компонент визуализации группы кнопок для сохранения или отмены сохранения

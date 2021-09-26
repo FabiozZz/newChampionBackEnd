@@ -1,9 +1,9 @@
 import React, {createContext, useRef, useState} from 'react';
-import {Button} from "../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import 'react-html5-camera-photo/build/css/index.css';
 import {CropImage} from "./CropImage/CropImage";
 import classes from './photo.module.css';
 import {CameraOn} from "./CameraOn/CameraOn";
+import {Button} from "../../../utils/Buttons/Button";
 
 export const EditCameraContext = createContext();
 

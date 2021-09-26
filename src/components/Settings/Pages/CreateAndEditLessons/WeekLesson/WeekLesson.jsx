@@ -5,7 +5,7 @@ import 'moment/locale/ru';
 import {ContextData} from "../CreateAndEditLessons";
 import cn from "classnames";
 import {useSelector} from "react-redux";
-import {declOfLessonsNum} from "../../../../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
+import {declOfLessonsNum} from "../../../../../helpers/common";
 
 // var defaultWeekdays = Array.apply(null, Array(7)).map(function (_, i) {
 //     return ;

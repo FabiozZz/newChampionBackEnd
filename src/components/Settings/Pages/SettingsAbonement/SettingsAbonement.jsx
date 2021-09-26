@@ -1,13 +1,13 @@
 import React from 'react';
 import classes from './abonement.module.css';
 import {Redirect} from "../../../common/Redirect";
-import {Button} from "../../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import {useDispatch, useSelector} from "react-redux";
 import cn from "classnames";
 import {forEach} from "react-bootstrap/ElementChildren";
 import {useHistory} from "react-router";
 import HeaderNav from "../../../common/HeaderNav";
 import {remove_item_abonement} from "../../../../store/Actions/settingsAbonementActions";
+import {Button} from "../../../../utils/Buttons/Button";
 
 export const SettingsAbonement = (children, func) => {
     const {abonements} = useSelector(state => state.settings_abonement);

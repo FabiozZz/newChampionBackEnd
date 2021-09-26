@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import classes from './create_group.module.css';
 import {Redirect} from "../../../../common/Redirect";
-import {OtherInput} from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
 import {SelectCouch} from "../../../../Profile/Pages/ProfileInfo/AddAboniment/SelectCouch/SelectCouch";
 import {useDispatch, useSelector} from "react-redux";
 import SelectGroup from "../../../../../utils/SelectGroup/SelectGroup";
 import SelectImage from "../../../../../utils/SelectImage/SelectImage";
 import HeaderNav from "../../../../common/HeaderNav";
-import {Button} from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import {fetch_group, start_load_data_set_group} from "../../../../../store/Actions/settingsGroupActions";
 import SelectAgesGroup from "../../../../../utils/SelectAgesGroup/SelectAgesGroup";
 import {useHistory} from "react-router";
+import {Button} from "../../../../../utils/Buttons/Button";
+import {OtherInput} from "../../../../../utils/OtherInput/OtherInput";
 
 export const CreateGroup = () => {
     const {couches,ages_groups} = useSelector(state => state.settings_group);

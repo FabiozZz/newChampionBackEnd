@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { DataPickerRange } from '../../../../utils/DataPickerRange/DataPickerRange';
-import { OtherInput } from '../../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput';
 import classes from './visit.module.css';
 import moment from "moment";
+import {OtherInput} from "../../../../utils/OtherInput/OtherInput";
 
 export const ProfileVisit = ({profile}) => {
 

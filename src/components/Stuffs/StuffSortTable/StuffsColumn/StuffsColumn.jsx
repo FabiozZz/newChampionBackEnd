@@ -2,9 +2,9 @@ import React from 'react';
 import cn from "classnames";
 import classes from "../../stuffs.module.css";
 import imageBirthDay from "../../../../assets/images/clientsListCard/giftbox.svg";
-import {ageToString} from "../../../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
 import imagePhone from "../../../../assets/images/clientsListCard/phone.svg";
 import {NavLink} from "react-router-dom";
+import {ageToString} from "../../../../helpers/common";
 
 export const StuffsColumn = ({clients}) => {
     return (

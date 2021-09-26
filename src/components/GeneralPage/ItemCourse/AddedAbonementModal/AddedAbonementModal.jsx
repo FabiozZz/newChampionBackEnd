@@ -1,19 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {OtherInput} from "../../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
 import {SelectAbonement} from "../../../Profile/Pages/ProfileInfo/SelectAbonement";
 import {SelectStatus} from "../../../Profile/Pages/ProfileInfo/SelectStatus/SelectStatus";
 import {Counter} from "../../../../utils/Counter/Counter";
 import {SelectGroup} from "../../../Profile/Pages/ProfileInfo/AddAboniment/SelectGroup/SelectGroup";
 import {SelectCouch} from "../../../Profile/Pages/ProfileInfo/AddAboniment/SelectCouch/SelectCouch";
-import {declOfLessonsNum, declOfWeekNum} from "../../../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
 import success_edit from "../../../../assets/images/successAbonement.svg";
 import edit from "../../../../assets/images/editAboniment.svg";
-import {Button} from "../../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {buy_abonement} from "../../../../store/Actions/profileActions";
 import classes from './add.module.css';
 import SelectAgesGroup from "../../../../utils/SelectAgesGroup/SelectAgesGroup";
 import {BtnGroup} from "../../../Clients/FilterClientSection/BtnGroup/BtnGroup";
+import {OtherInput} from "../../../../utils/OtherInput/OtherInput";
+import {declOfLessonsNum, declOfWeekNum} from "../../../../helpers/common";
 
 const AddedAbonementModal = ({user}) => {
     const dispatch = useDispatch();

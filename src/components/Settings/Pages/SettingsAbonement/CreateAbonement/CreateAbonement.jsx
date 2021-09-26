@@ -1,9 +1,7 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import classes from './create.module.css';
 import {Redirect} from "../../../../common/Redirect";
-import {OtherInput} from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
 import {Radio} from "antd";
-import {Button} from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import HeaderNav from "../../../../common/HeaderNav";
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -11,6 +9,8 @@ import {
     upload_abonement_data
 } from "../../../../../store/Actions/settingsAbonementActions";
 import {useHistory} from "react-router";
+import {OtherInput} from "../../../../../utils/OtherInput/OtherInput";
+import {Button} from "../../../../../utils/Buttons/Button";
 
 function useSome(download,result=[]) {
 

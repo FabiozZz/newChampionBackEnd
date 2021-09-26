@@ -1,8 +1,8 @@
 import React from 'react';
 import classes from "../general.module.css";
 import { NavLink } from "react-router-dom";
-import { Button } from "../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import { SearchBox } from "../../utils/SearchBox/SearchBox";
+import {Button} from "../../utils/Buttons/Button";
 
 const HeaderNav = () => {
     return (

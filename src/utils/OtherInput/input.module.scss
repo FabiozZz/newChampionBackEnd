@@ -1,0 +1,127 @@
+@import '../../../styles/variables';
+
+.otherInputWrapper {
+  position: relative;
+  display: block;
+
+  label{
+    @extend %caption;
+    color: #B0BAC9;
+    padding-bottom: 4px;
+    display: block;
+    margin: 0;
+  }
+  input {
+    display: inline-block;
+    border-radius: 5px;
+    position: relative;
+    color: #BFC5D2;
+    background: #F4F6FC;
+    border: 1px solid #BFC5D2;
+    box-sizing: border-box;
+    overflow: hidden;
+    font-family: 'SF Pro Display', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    width: 100%;
+    height: 40px;
+    padding-left: 16px;
+    padding-right: 16px;
+    &:focus{
+      outline: none;
+      border: 1px solid #69707F;
+      color:#69707F;
+    }
+    &::placeholder{
+      color: #BFC5D2;
+      font-family: inherit;
+      font-weight: inherit;
+    }
+    &::-moz-placeholder{
+      line-height: 40px;
+    }
+  }
+
+}
+.disabled{
+  position: relative;
+  display: block;
+  label{
+    @extend %caption;
+    color: #B0BAC9;
+    padding-bottom: 4px;
+    display: block;
+    margin: 0;
+  }
+  input{
+    @extend %text;
+    display: inline-block;
+    position: relative;
+    color: #BFC5D2;
+    overflow: hidden;
+    width: 100%;
+    height: 40px;
+    padding-left: 16px;
+    padding-right: 16px;
+
+    background: #DADADA;
+    border: 1px solid #BFC5D2;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+    &::-webkit-input-placeholder,
+    &::-moz-placeholder,
+    &::-ms-input-placeholder,
+    &::placeholder{
+      @extend %text;
+      color: #BFC5D2;
+      background: #dadada;
+    }
+
+  }
+}
+
+
+
+.danger{
+  position: relative;
+  display: block;
+
+  label{
+    color: #B0BAC9;
+    @extend %caption;
+    padding-bottom: 4px;
+    display: block;
+    margin: 0;
+  }
+  input {
+    @extend %text;
+    display: inline-block;
+    border-radius: 5px;
+    position: relative;
+    color: #BFC5D2;
+    background: #F4F6FC;
+    border: 1px solid #D63649;
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 100%;
+    height: 40px;
+    padding-left: 16px;
+    padding-right: 16px;
+
+    &:focus{
+      outline: none;
+      border: 1px solid #69707F;
+      color:#69707F;
+    }
+    &::placeholder{
+      color: #BFC5D2;
+      font-family: inherit;
+      font-weight: inherit;
+    }
+    &::-moz-placeholder{
+      line-height: 40px;
+    }
+  }
+}

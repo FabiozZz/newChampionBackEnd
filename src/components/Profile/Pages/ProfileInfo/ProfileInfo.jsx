@@ -7,7 +7,6 @@ import {AbonimentInfo} from "./AbonimentInfo";
 import {AddAboniment} from "./AddAboniment/AddAboniment";
 import edit_profile from '../../../../assets/images/edit_profile.svg';
 import {NavLink} from "react-router-dom";
-import {isEmpty} from "../../../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
 import {SuccessContext} from "../../SuccessContext";
 import {SuccessAdd} from "./SuccessAdd/SuccessAdd";
 import {Modal} from "../../../../utils/Modal/Modal";
@@ -18,6 +17,7 @@ import {
 } from "../../../../store/Actions/profileActions";
 import {useDispatch} from "react-redux";
 import {useParams} from "react-router";
+import {isEmpty} from "../../../../helpers/common";
 
 /**
  * вывод основной информации о польлзователе

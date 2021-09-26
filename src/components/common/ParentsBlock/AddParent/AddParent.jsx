@@ -1,8 +1,8 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import classes from "../../../Add/add.module.css";
-import {OtherInput} from "../../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
-import {isEmpty} from "../../../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
 import {MaskInputTel} from "../../../../utils/MaskInputTel/MaskInputTel";
+import {isEmpty} from "../../../../helpers/common";
+import {OtherInput} from "../../../../utils/OtherInput/OtherInput";
 
 /**
  * компонент визуализация ввода данных

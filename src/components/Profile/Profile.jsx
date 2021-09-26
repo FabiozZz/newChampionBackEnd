@@ -4,14 +4,14 @@ import HeaderNav from "../common/HeaderNav";
 import { Redirect } from "../common/Redirect";
 import { NavigateProfile } from "./NavigeteProfile/NavigeteProfile";
 import { ProfileInfo } from "./Pages/ProfileInfo/ProfileInfo";
-import { isEmpty } from "../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
 import classes from './profile.module.css';
-import { Button } from "../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { ProfileVisit } from './Pages/ProfileVisit/ProfileVisit';
 import { ProfilePay } from './Pages/ProfilePay/ProfilePay';
 import {clear_profile, open_edit_page} from "../../store/Actions/profileActions";
 import {ProfileGamification} from "./Pages/ProfileGamification/ProfileGamification";
+import {isEmpty} from "../../helpers/common";
+import {Button} from "../../utils/Buttons/Button";
 
 
 /**

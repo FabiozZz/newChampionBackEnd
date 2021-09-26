@@ -5,12 +5,12 @@ import cn from "classnames";
 import {AddClientModal} from "./AddClientModal/AddClientModal";
 import {Modal} from "../../../utils/Modal/Modal";
 import logo from './djiu.png';
-import {declOfHumanNum, isEmpty} from "../../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
 import {useDispatch, useSelector} from "react-redux";
 import {change_couch, createTrainForCourse, remove_client_from_group} from "../../../store/Actions/generalPageActions";
 import {ClientRow} from "../ClientRow/ClientRow";
 import moment from "moment";
-import {Button} from "../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
+import {declOfHumanNum} from "../../../helpers/common";
+import {Button} from "../../../utils/Buttons/Button";
 
 const ItemCourse = ({course,couches}) => {
     const {group, trainer, trainings} = course;

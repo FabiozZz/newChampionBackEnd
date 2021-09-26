@@ -1,9 +1,7 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import classes from './edit.module.css';
 import {Redirect} from "../../../../common/Redirect";
-import {OtherInput} from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
 import {Radio} from "antd";
-import {Button} from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import HeaderNav from "../../../../common/HeaderNav";
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -12,6 +10,8 @@ import {
 } from "../../../../../store/Actions/settingsAbonementActions";
 import {useHistory} from "react-router";
 import {SwitchBtn} from "../../../../../utils/SwitchBtn/SwitchBtn";
+import {OtherInput} from "../../../../../utils/OtherInput/OtherInput";
+import {Button} from "../../../../../utils/Buttons/Button";
 
 function useSome(download,result=[]) {
 

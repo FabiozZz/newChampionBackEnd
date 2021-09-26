@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from "../../add.module.css";
-import {OtherInput} from "../../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
+import {OtherInput} from "../../../../utils/OtherInput/OtherInput";
 
 /**
  * компонент визуализации ввода данных адреса

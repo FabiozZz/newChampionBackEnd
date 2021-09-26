@@ -1,10 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
 import classes from './add_modal.module.css';
-import {OtherInput} from "../../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
-import {Button} from "../../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {search_clients} from "../../../../store/Actions/generalPageActions";
 import AddedAbonementModal from "../AddedAbonementModal/AddedAbonementModal";
+import {OtherInput} from "../../../../utils/OtherInput/OtherInput";
+import {Button} from "../../../../utils/Buttons/Button";
 
 export const AddClientModal = ({change_user,name,user,form}) => {
     const {added_client} = useSelector(state => state.general_page);

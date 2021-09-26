@@ -1,9 +1,8 @@
-/**@memberOf Clients.SortTable*/
 import React from 'react';
 import classes from "./sort.module.css";
 import {SortSelect} from './SortSelect/SortSelect';
 import cn from "classnames";
-import {declOfResults} from "../../../../../../../next.js/with-redux-thunk-app/components/halpers/common";
+import {declOfResults} from "../../../helpers/common";
 
 /**
  * @param {Array<object>} clients массив клиентов для отображения общего количества клиентов

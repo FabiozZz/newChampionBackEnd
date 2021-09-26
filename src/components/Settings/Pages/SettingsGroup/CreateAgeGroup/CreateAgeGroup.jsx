@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 import classes from './age.module.css';
 import {Redirect} from "../../../../common/Redirect";
 import HeaderNav from "../../../../common/HeaderNav";
-import {OtherInput} from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/OtherInput/OtherInput";
-import {Button} from "../../../../../../../../../next.js/with-redux-thunk-app/components/ui/Buttons/Button";
 import {useHistory} from "react-router";
 import {useDispatch} from "react-redux";
 import {fetch_new_age_group} from "../../../../../store/Actions/settingsGroupActions";
+import {OtherInput} from "../../../../../utils/OtherInput/OtherInput";
+import {Button} from "../../../../../utils/Buttons/Button";
 
 export const CreateAgeGroup = () => {
 
