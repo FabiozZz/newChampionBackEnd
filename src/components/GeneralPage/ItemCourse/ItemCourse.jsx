@@ -56,13 +56,11 @@ const ItemCourse = ({course,couches}) => {
             setNoAbonement(true);
             console.log('modal2');
         } else {
-            // dispatch(createTrainForCourse(uploadData));
+            dispatch(createTrainForCourse(uploadData));
             setModal(false);
             setHide(false)
 
         }
-        console.log('%cclub_card.valid_untill: ', 'color: MidnightBlue; background: Aquamarine;', club_card.valid_untill)
-        console.log('%ctrain - untill: ', 'color: MidnightBlue; background: Aquamarine;', moment(now()).isAfter(club_card.valid_untill))
     };
 
     const removeClient = (train_id) => {

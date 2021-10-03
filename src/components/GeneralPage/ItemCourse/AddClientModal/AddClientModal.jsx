@@ -62,6 +62,7 @@ export const AddClientModal = ({change_user,name,user,form}) => {
             }
             <div className={classes.btn_group}>
                 <Button text={'Отметить в долг'} factor={'danger'}/>
+
                 <Button text={'оплата'} factor={'success'}/>
             </div>
         </div>
