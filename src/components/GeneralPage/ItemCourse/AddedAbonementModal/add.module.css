@@ -2,7 +2,6 @@
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-auto-rows: min-content;
-
 }
 
 .block_info_f {
@@ -570,8 +569,8 @@
 }
 @media screen and (min-width: 1439px) {
     .wrapper{
-        grid-column: 1/12;
-        margin: 0 0 0 -24px;
+        /*grid-column: 1/12;*/
+        /*margin: 0 0 0 -24px;*/
     }
     .block_info {
         grid-template-columns: repeat(11,1fr);
@@ -616,7 +615,7 @@
     }
 
     .add_aboniment {
-        grid-column: 1/12;
+        grid-column: 1/13;
         display: grid;
         grid-template-columns: repeat(11,1fr);
         grid-gap: 16px 24px;

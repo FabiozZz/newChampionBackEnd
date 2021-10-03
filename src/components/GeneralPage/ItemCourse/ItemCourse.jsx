@@ -8,7 +8,7 @@ import logo from './djiu.png';
 import {useDispatch, useSelector} from "react-redux";
 import {change_couch, createTrainForCourse, remove_client_from_group} from "../../../store/Actions/generalPageActions";
 import {ClientRow} from "../ClientRow/ClientRow";
-import moment from "moment";
+import moment, {now} from "moment";
 import {declOfHumanNum} from "../../../helpers/common";
 import {Button} from "../../../utils/Buttons/Button";
 
@@ -30,9 +30,9 @@ const ItemCourse = ({course,couches}) => {
     const refOption = useRef(null);
     const refAdd = useRef(null);
     const toggleBox = (e) => {
-            if ((!refOption.current.contains(e.target) && !refAdd.current.contains(e.target))) {
-                setHide(!hide);
-            }
+        if ((!refOption.current.contains(e.target) && !refAdd.current.contains(e.target))) {
+            setHide(!hide);
+        }
     };
     const handleToggleModalWindow = () => {
         setModal(!modal);
@@ -51,18 +51,18 @@ const ItemCourse = ({course,couches}) => {
         if (club_card.rate&&!club_card.rate?.id) {
             setNoAbonement(true);
             console.log('modal1')
-        }else {
-            if (club_card.train_balance === 0 || club_card.valid_untill === null) {
-                setNoAbonement(true);
-                console.log('modal2');
-            } else {
-                dispatch(createTrainForCourse(uploadData));
-                setModal(false);
-                setHide(false)
-
-            }
+        }else if (club_card.train_balance === 0 || club_card.valid_until === null||moment(moment()).isAfter(club_card.valid_until)) {
+            console.log('%cclub_card.valid_untill: ', 'color: MidnightBlue; background: Aquamarine;', club_card.valid_until)
+            setNoAbonement(true);
+            console.log('modal2');
+        } else {
+            // dispatch(createTrainForCourse(uploadData));
+            setModal(false);
+            setHide(false)
 
         }
+        console.log('%cclub_card.valid_untill: ', 'color: MidnightBlue; background: Aquamarine;', club_card.valid_untill)
+        console.log('%ctrain - untill: ', 'color: MidnightBlue; background: Aquamarine;', moment(now()).isAfter(club_card.valid_untill))
     };
 
     const removeClient = (train_id) => {

@@ -93,6 +93,27 @@ const AddedAbonementModal = ({user}) => {
 
 
     useEffect(() => {
+        const {club_card} = user;
+        console.log('%cabonements: ', 'color: MidnightBlue; background: Aquamarine;', abonements)
+        if (club_card && club_card.rate?.id) {
+            setAboniment(abonements.find(item=>item.id === club_card.rate.id));
+        }
+        if (club_card && club_card.level.id) {
+            setStatus(club_card.level);
+        }
+        if (club_card && club_card.age_group.id) {
+            setSelectAgesGroup(club_card.age_group)
+        }
+        if (user.train_group && user.train_group.id) {
+            setGroup(user.train_group);
+        }
+
+        console.log('%cuser: ', 'color: MidnightBlue; background: Aquamarine;', user);
+    },[user]);
+
+
+
+    useEffect(() => {
         if (!single) {
             if (selectAboniment.prices && selectStatus.id) {
 
@@ -119,6 +140,8 @@ const AddedAbonementModal = ({user}) => {
         };
         dispatch(buy_abonement(uploadData));
     };
+
+
     return (
         <div className={classes.wrapper}>
             <p className={classes.wrapper__label}>Абонемента нет</p>
