@@ -335,12 +335,12 @@ class Api {
         return await this.client.post(`/client/updateParents/`, {parents});
     }
 
-    async createParents(id,parents) {
+    async removeParents(id,parents) {
         console.log({parents});
         return await this.client.post(`/client/${id}/deleteParents/`, {parents});
     }
 
-    async removeParents(id,parents) {
+    async createParents(id,parents) {
         console.log({parents});
         return await this.client.post(`/client/${id}/addParents/`, {parents});
     }

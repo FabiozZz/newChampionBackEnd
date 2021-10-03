@@ -12,7 +12,7 @@ import {EndBtnGroup} from "../common/EndBtnGroup/EndBtnGroup";
 import {useDispatch, useSelector} from "react-redux";
 import {
     create_profile_parents,
-    edit_profile,
+    edit_profile, edit_profile_parents,
     open_edit_page,
     remove_profile_parents
 } from "../../store/Actions/profileActions";
@@ -22,6 +22,7 @@ import TrialSectionSection from "../Add/common/TrialSectionSection/TrialSectionS
 import {isEmpty} from "../../helpers/common";
 import {OtherInput} from "../../utils/OtherInput/OtherInput";
 import {Button} from "../../utils/Buttons/Button";
+import {update} from "ink-docstrap/fixtures/documents/probe";
 
 export const ContextCommonEdit = createContext();
 
@@ -83,7 +84,9 @@ export const Edit = () => {
     //  */
     const handleChangeAddressComponent = (e) => {
         let name = e.target.name;
-        setAddress(prevState => ({ ...prevState, ...({[name]:[e.target.value]}&&[e.target.value]) }))
+        let value = e.target.value;
+        setAddress(prevState => ({ ...prevState, [name]: value}))
+        console.log('%c({[name]:[e.target.value]}&&[e.target.value]): ', 'color: MidnightBlue; background: Aquamarine;', ({[name]:[e.target.value]}&&[e.target.value]))
     };
 
     // /**
@@ -268,16 +271,19 @@ export const Edit = () => {
         }
         console.log('other', uploadData);
 
-        // try {
-        //     if (parents.length) {
-        //         dispatch(create_profile_parents({id: user.id, parents}));
-        //     }
-        //     dispatch(edit_profile(uploadData));
-        // } catch (e) {
-        //     console.log(e)
-        // }finally {
-        //     history.goBack();
-        // }
+        try {
+            if (updateParents.length) {
+                dispatch(edit_profile_parents([...updateParents]));
+            }
+            if (createParents.length) {
+                dispatch(create_profile_parents({id:user.id, parents: createParents}))
+            }
+            dispatch(edit_profile(uploadData));
+        } catch (e) {
+            console.log(e)
+        }finally {
+            history.goBack();
+        }
     };
     useEffect(() => {
         if (isEmpty(user)) {

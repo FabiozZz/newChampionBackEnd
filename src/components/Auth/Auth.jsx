@@ -4,6 +4,7 @@ import classes from './auth.module.css';
 import {isEmpty} from "../../helpers/common";
 import {OtherInput} from "../../utils/OtherInput/OtherInput";
 import {Button} from "../../utils/Buttons/Button";
+import {log_in} from "../../store/Actions/userActions";
 
 
 /**
@@ -50,7 +51,7 @@ export const Auth = () => {
      */
     const handleSubmitForm = async (e) => {
         e.preventDefault();
-        // dispatch(log_in(data))
+        dispatch(log_in(data))
         // setIsLoad(true)
         // await Api.login(data).then(() => {
         //     setIsLoad(false)

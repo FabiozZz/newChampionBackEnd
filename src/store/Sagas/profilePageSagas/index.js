@@ -96,6 +96,7 @@ export function* editParentsWorker({payload}) {
 }
 
 function* createProfileParents({payload}) {
+    console.log('%cpayload: ', 'color: MidnightBlue; background: Aquamarine;', payload)
     try {
         const {id, parents} = payload;
         yield call(() => Api.createParents(id, parents));
