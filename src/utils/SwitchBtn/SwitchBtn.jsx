@@ -38,7 +38,17 @@ export const SwitchBtn = ({size,position,style,isChecked,setIsChecked,disabled})
     }
     return (
         <div style={userStyle} className={'switch-wrapper'}>
-            <Switch disabled={disabled} size={size} className={isChecked?'switch-wrapper__checked':'switch-wrapper__unchecked'} checked={isChecked} onChange={setIsChecked}/>
+            {isChecked ?
+                <Switch defaultChecked disabled={disabled} size={size}
+                        className={isChecked ? 'switch-wrapper__checked' : 'switch-wrapper__unchecked'}
+                        checked={isChecked}
+                        onChange={setIsChecked} />
+                :
+                <Switch disabled={disabled} size={size}
+                        className={isChecked ? 'switch-wrapper__checked' : 'switch-wrapper__unchecked'}
+                        checked={isChecked}
+                        onChange={setIsChecked} />
+            }
         </div>
     );
 };

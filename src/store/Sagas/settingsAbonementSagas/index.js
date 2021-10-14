@@ -1,9 +1,10 @@
 import {call, put, select, take, takeEvery} from "redux-saga/effects";
 import {
+    EDIT_DATA_SETTINGS_ABONEMENT,
     REMOVE_ABONEMENT,
     START_LOAD_DATA_ABONEMENT,
-    START_LOAD_DATA_SETTINGS_ABONEMENT, UPLOAD_DATA_SETTINGS_ABONEMENT
-} from "../../../constants/settingsAbonementConstants";
+    START_LOAD_DATA_SETTINGS_ABONEMENT, UPLOAD_DATA_SETTINGS_ABONEMENT,
+} from '../../../constants/settingsAbonementConstants';
 import {getAbonementList, getAgesGroup, getStatusList} from "./workers";
 import {
     start_load_data_abonement_done, start_load_data_settings_abonement,
@@ -37,8 +38,12 @@ function* fetchDataForAbonement({payload}) {
     yield put(start_load_data_abonement_done(request.data))
 }
 
-function* fetchPostDataAbonement({payload}) {
+function* fetchPostDataCreateAbonement({payload}) {
     yield call(() => Api.sendNewAbonementWithPrice(payload));
+}
+function* fetchPostDataEditAbonement({payload}) {
+    const {id, ...rest} = payload;
+    yield call(() => Api.editAbonementWithPrice(id,rest));
 }
 
 function* removeAbonement({payload}) {
@@ -49,6 +54,7 @@ function* removeAbonement({payload}) {
 export function* settingsAbonementSagas() {
     yield takeEvery(START_LOAD_DATA_SETTINGS_ABONEMENT, fetchDataForAbonementPage);
     yield takeEvery(START_LOAD_DATA_ABONEMENT, fetchDataForAbonement);
-    yield takeEvery(UPLOAD_DATA_SETTINGS_ABONEMENT, fetchPostDataAbonement);
+    yield takeEvery(UPLOAD_DATA_SETTINGS_ABONEMENT, fetchPostDataCreateAbonement);
+    yield takeEvery(EDIT_DATA_SETTINGS_ABONEMENT, fetchPostDataEditAbonement);
     yield takeEvery(REMOVE_ABONEMENT, removeAbonement);
 }

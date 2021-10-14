@@ -239,7 +239,7 @@ export const Edit = () => {
                 date_of_birth:personalData.date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
                 ...(addressEdit&&{...addressEdit}),
                 ...(phone_number&&{phone_number}),
-                age_group_id: user.club_card.age_group.id
+                age_group_id: user.age_group.id
             };
         }else{
             uploadData = {
@@ -248,7 +248,7 @@ export const Edit = () => {
                 date_of_birth:personalData.date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
                 ...(addressEdit&&{...addressEdit}),
                 ...(phone_number&&{phone_number}),
-                age_group_id: user.club_card.age_group.id
+                age_group_id: user.age_group.id
             };
         }
         const updateParents = parents.filter(parent => parent.id);
@@ -275,7 +275,7 @@ export const Edit = () => {
             if (updateParents.length) {
                 dispatch(edit_profile_parents([...updateParents]));
             }
-            if (createParents.length) {
+            if (createParents.length&&!isEmpty(createParents[0])) {
                 dispatch(create_profile_parents({id:user.id, parents: createParents}))
             }
             dispatch(edit_profile(uploadData));
@@ -376,6 +376,7 @@ export const Edit = () => {
                                         <input ref={refFile} name={'health'} type="file" hidden={true}/>
                                     </div>
                                     {/*<TrialSectionSection/>*/}
+                                    {phone_number?<EditPhoneSection/>:null}
                                     <ParentsBlock parents={parents}
                                                   change={handleChangeItemParentsBlock}
                                                   addParents={addParentsData}
@@ -384,8 +385,15 @@ export const Edit = () => {
                                 </>
                                 : age >= 16 ?
                                     <>
-                                        {phone_number?<EditPhoneSection/>:null}
+                                        <EditPhoneSection/>
+                                        {(user.parents&& !!user.parents.length)&&
+                                        <ParentsBlock parents={parents}
+                                                      change={handleChangeItemParentsBlock}
+                                                      addParents={addParentsData}
+                                                      removeParents={removeParentsData}
+                                        />
 
+                                        }
                                         {/*<TrialSectionSection/>*/}
                                     </>
                                     : null

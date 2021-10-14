@@ -40,7 +40,7 @@ export const CreateGroup = () => {
         e.stopPropagation();
         const uploadData = {
             name: data.name,
-            age_group: data.age.id,
+            age_group_id: data.age.id,
             trainer_id: data.trainer.id
         }
         dispatch(fetch_group(uploadData));
