@@ -15,7 +15,7 @@ export const AbonementInfo = ({ user }) => {
 				<img src={card} alt="card" className={classes.abonement_block_status} />
 				<div className={classes.abonement_block_info}>
 					<p className={classes.abonement_block_title}>
-						{subscription.rate.name} со статусом {level.name} клиент
+						{subscription.rate.name} {level && `со статусом ${level.name} клиент`}
 					</p>
 					<div className={classes.abonement_block_expire}>
 						<p className={classes.abonement_block_date}>
