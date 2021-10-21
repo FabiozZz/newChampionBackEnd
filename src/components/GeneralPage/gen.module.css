@@ -31,6 +31,26 @@
     grid-auto-rows: min-content;
     grid-gap: 4px;
 }
+.no_lessons{
+    grid-column: span 12;
+    background-color: #FFFFFF;
+    display: grid;
+    grid-template-columns: 5fr 5fr;
+    grid-auto-rows: min-content;
+    padding: 32px 16px;
+    box-shadow: var(--box-shadow);
+    border-radius: 1px;
+    margin: 0 -16px;
+    grid-gap: 32px;
+    grid-template-areas: 'span'
+    'btn';
+}
+.no_lessons__text{
+    grid-area: span;
+}
+.no_lessons__btn{
+    grid-area: btn;
+}
 @media screen and (min-width: 1439px) {
     .wrapper{
         grid-column: 1/12;
@@ -41,5 +61,7 @@
     .course_list{
         margin-left: -24px;
     }
-
+    /*.no_lessons{*/
+    /*    grid-column: span 11;*/
+    /*}*/
 }
