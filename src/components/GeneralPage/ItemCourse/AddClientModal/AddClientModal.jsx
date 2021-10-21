@@ -46,8 +46,7 @@ export const AddClientModal = ({ change_user, name, user, form, close_modal, les
 
 					<div className={classes.change}>
 						<span className={classes.placeholder}>
-							Чтобы отметить клиента поднесите карточку к терминалу или напишите его
-							фамилию ниже
+							Чтобы отметить клиента поднесите карточку к терминалу или напишите его фамилию ниже
 						</span>
 						<OtherInput
 							focus={true}
@@ -64,8 +63,7 @@ export const AddClientModal = ({ change_user, name, user, form, close_modal, les
 											key={client.id}
 											onClick={() => change_user(client)}
 											className={classes.list_item}>
-											{client.last_name} {client.first_name}{' '}
-											{client.middle_name}
+											{client.last_name} {client.first_name} {client.middle_name}
 										</div>
 									))}
 								</div>

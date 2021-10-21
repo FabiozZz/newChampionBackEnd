@@ -13,6 +13,7 @@ import {
 	EDIT_PARENTS_CLIENT_ROUTE,
 	HOME_ROUTE,
 	PROFILE_CLIENT_ROUTE,
+	REPORTS_VISITS_ROUTE,
 	SETTINGS_ABONEMENT,
 	SETTINGS_ABONEMENT_EDIT,
 	SETTINGS_ABONEMENT_VIEW,
@@ -36,6 +37,7 @@ import { ViewAbonement } from '../components/Settings/Pages/SettingsAbonement/Vi
 import { CreateAbonement } from '../components/Settings/Pages/SettingsAbonement/CreateAbonement/CreateAbonement';
 import { EditAbonement } from '../components/Settings/Pages/SettingsAbonement/EditAbonement/EditAbonement';
 import { Reports } from '../components/Reports/Reports';
+import { ReportsVisit } from '../components/Reports/Visits/ReportsVisit';
 
 export const routes = [
 	{
@@ -163,6 +165,13 @@ export const routes = [
 		path: '/reports',
 		exact: true,
 		component: Reports,
+	},
+	{
+		/* Главная страница отчетов */
+		id: REPORTS_VISITS_ROUTE,
+		path: '/reports/visited',
+		exact: true,
+		component: ReportsVisit,
 	},
 	// {
 	//     id: AUTH_ADMIN_IN_APP,

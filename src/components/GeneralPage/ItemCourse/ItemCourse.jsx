@@ -110,9 +110,7 @@ const ItemCourse = ({ course, couches }) => {
 					<div className={classes.flex_first_child}>
 						<img width={32} height={32} src={logo} alt={''} />
 						<div className={classes.info}>
-							<span className={classes.time}>
-								{moment(course.date).format('k:mm')}
-							</span>
+							<span className={classes.time}>{moment(course.date).format('k:mm')}</span>
 							<h4 className={classes.name}>{group.name}</h4>
 							<div ref={refOption} className={classes.option}>
 								<Option
@@ -145,8 +143,7 @@ const ItemCourse = ({ course, couches }) => {
 							/>
 						</svg>
 						<span className={classes.people_text}>
-							Отмечено: <b>{trainings.length || 0}</b>{' '}
-							{declOfHumanNum(trainings.length || 0)}
+							Отмечено: <b>{trainings.length || 0}</b> {declOfHumanNum(trainings.length || 0)}
 						</span>
 					</div>
 				</div>
@@ -159,8 +156,7 @@ const ItemCourse = ({ course, couches }) => {
 							{course.trainings.length
 								? course.trainings.map(trainings => {
 										return (
-											<tr
-												key={trainings.id}>
+											<tr key={trainings.id}>
 												<td className={classes.persona}>
 													<ClientRow client={trainings.client} />
 												</td>
@@ -175,10 +171,7 @@ const ItemCourse = ({ course, couches }) => {
 															d="M16.3633 2.73922C13.6612 2.73922 11.0537 1.77609 9.03908 0.0337891L9 0L8.96092 0.0337891C6.94623 1.77609 4.33879 2.73922 1.63669 2.73922H0V6.96055C0 12.4425 3.28504 17.4271 8.42191 19.7397L9 20L9.57809 19.7397C14.715 17.4271 18 12.4425 18 6.96059V2.73922H16.3633ZM15 11.8026H10.9396V16H7.06036V11.8026H3V8.04922H7.06036V4H10.9396V8.04922H15V11.8026Z"
 															fill="#E50E0F"
 														/>
-														<path
-															d="M10 9V5H8V9H4V11H8V15H10V11H14V9H10Z"
-															fill="#E50E0F"
-														/>
+														<path d="M10 9V5H8V9H4V11H8V15H10V11H14V9H10Z" fill="#E50E0F" />
 													</svg>
 													<svg
 														width="20"

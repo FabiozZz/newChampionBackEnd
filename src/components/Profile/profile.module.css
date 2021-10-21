@@ -543,50 +543,108 @@
 	line-height: 24px;
 	color: #69707f;
 }
-
-.abonenet_block {
-	margin: 16px 0;
+.abonement_carousel_wrapper {
+	margin: 44px -16px 0;
+}
+.abonement_carousel_title {
+	padding-left: 16px;
+	font-family: 'Montserrat', sans-serif;
+	font-style: normal;
+	font-weight: 800;
+	font-size: 16px;
+	margin-bottom: 16px;
+	line-height: 24px;
+	letter-spacing: 4px;
+	text-transform: uppercase;
+	color: #8798ad;
+}
+.abonement_carousel {
+	padding-left: 16px;
+	padding-right: 16px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+}
+.abonemet_block {
+	flex-shrink: 0;
+	align-self: flex-start;
 	width: 565px;
 	padding: 16px;
+	border-radius: 4px;
 	display: grid;
 	grid-template-columns: 1fr min-content;
 	background: #fff;
 	box-shadow: var(--box-shadow);
 }
+.abonemet_block:not(.abonemet_block:last-child) {
+	margin-right: 16px;
+}
+.abonemet_block:not(.abonemet_block:first-child) {
+}
 .abonement_block_wrapper {
 	align-items: center;
 	display: grid;
-	background: teal;
-	grid-template-columns: min-content min-content;
+	width: 100%;
+	grid-gap: 7px;
+	grid-template-columns: min-content 1fr;
 }
 .abonement_block_status {
 	width: 37.16px;
 	margin: 10px;
 	height: 25.26px;
-	background: lightcoral;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .abonement_block_info {
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-auto-rows: min-content;
-	grid-gap: 4px;
 }
 .abonement_block_title {
-	background: darkred;
+	font-family: 'SF Pro Display', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 24px;
+	letter-spacing: 1px;
+	color: #69707f;
 }
 .abonement_block_expire {
 }
 .abonement_block_date {
-	background: darkred;
-}
-.abonement_block_trainings {
-	background: yellow;
+	font-family: 'SF Pro Display', sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 12px;
+	line-height: 16px;
+	color: #69707f;
 }
 .abonement_block_bold {
+	font-family: 'Montserrat', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 16px;
+	letter-spacing: 1.125px;
+	text-transform: uppercase;
+	color: #69707f;
 }
 .abonement_block_trainings {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	align-content: center;
+	grid-gap: 8px;
 }
 .abonement_block_btn {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+}
+.abonement_btn{
+	cursor:pointer;
 }
 
 @media screen and (min-width: 1439px) {

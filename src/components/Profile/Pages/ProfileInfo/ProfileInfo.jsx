@@ -16,6 +16,8 @@ import { open_edit_page } from '../../../../store/Actions/profileActions';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 import { isEmpty } from '../../../../helpers/common';
+import { AbonementInfo } from './AbonementInfo/AbonementInfo';
+import { CarouselAbonements } from './CarouselAbonements/CarouselAbonements';
 
 /**
  * вывод основной информации о польлзователе
@@ -81,36 +83,17 @@ export const ProfileInfo = ({ profile }) => {
 				<Modal toggle={showModal}>
 					{modal.type === 'edit' ? null : (
 						// <ModalEditAbonement toggleModal={showModal} change={clearType} type={modal.type} profile={profile}/>
-						<ModalChangeAbonement
-							toggleModal={showModal}
-							profile={profile}
-							type={modal.type}
-						/>
+						<ModalChangeAbonement toggleModal={showModal} profile={profile} type={modal.type} />
 					)}
 				</Modal>
 			)}
-
-			<div className={classes.abonenet_block}>
-				<div className={classes.abonement_block_wrapper}>
-					<img src="" alt="" className={classes.abonement_block_status} />
-					<div className={classes.abonement_block_info}>
-						<p className={classes.abonement_block_title}></p>
-						<div className={classes.abonement_block_expire}>
-							<p className={classes.abonement_block_date}>
-								<span className={classes.abonement_block_bold}></span>
-							</p>
-							<p className={classes.abonement_block_trainings}>
-								<span className={classes.abonement_block_bold}></span>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div className={classes.abonement_block_trainings}>
-					<img src="" alt="" className={classes.abonement_btn} />
-					<img src="" alt="" className={classes.abonement_btn} />
-					<img src="" alt="" className={classes.abonement_btn} />
+			<div className={classes.abonement_carousel_wrapper}>
+				<p className={classes.abonement_carousel_title}>Активные абонементы</p>
+				<div className={classes.abonement_carousel}>
+					<AbonementInfo user={user} />
 				</div>
 			</div>
+			{/*<CarouselAbonements />*/}
 
 			<div className={classes.block_info_f}>
 				<div className={classes.block_foto}>
@@ -133,19 +116,13 @@ export const ProfileInfo = ({ profile }) => {
 
 					<div className={`${classes.block_info__item}`}>
 						<p className={classes.block_info__item_label}>Фамилия:</p>
-						<span className={classes.block_info__item_label__text}>
-							{user.last_name}
-						</span>
+						<span className={classes.block_info__item_label__text}>{user.last_name}</span>
 
 						<p className={classes.block_info__item_label}>Имя:</p>
-						<span className={classes.block_info__item_label__text}>
-							{user.first_name}
-						</span>
+						<span className={classes.block_info__item_label__text}>{user.first_name}</span>
 
 						<p className={classes.block_info__item_label}>Отчество:</p>
-						<span className={classes.block_info__item_label__text}>
-							{user.middle_name}
-						</span>
+						<span className={classes.block_info__item_label__text}>{user.middle_name}</span>
 
 						<p className={classes.block_info__item_label}>Дата рождения:</p>
 						<span className={classes.block_info__item_label__text}>
@@ -155,9 +132,7 @@ export const ProfileInfo = ({ profile }) => {
 						{user.phone_number && (
 							<>
 								<p className={classes.block_info__item_label}>Номер телефона</p>
-								<span className={classes.block_info__item_label__text}>
-									{user.phone_number}
-								</span>
+								<span className={classes.block_info__item_label__text}>{user.phone_number}</span>
 							</>
 						)}
 					</div>
@@ -180,37 +155,23 @@ export const ProfileInfo = ({ profile }) => {
 								key={index}
 								className={`${classes.block_info__item} ${classes.block_info__item_parent}`}>
 								{index > 0 && (
-									<img
-										className={classes.block_info__parent_devider}
-										src={devider}
-										alt="devider"
-									/>
+									<img className={classes.block_info__parent_devider} src={devider} alt="devider" />
 								)}
 
 								<p className={classes.block_info__item_label}>Фамилия:</p>
-								<span className={classes.block_info__item_label__text}>
-									{parent.last_name}
-								</span>
+								<span className={classes.block_info__item_label__text}>{parent.last_name}</span>
 
 								<p className={classes.block_info__item_label}>Имя:</p>
-								<span className={classes.block_info__item_label__text}>
-									{parent.first_name}
-								</span>
+								<span className={classes.block_info__item_label__text}>{parent.first_name}</span>
 
 								<p className={classes.block_info__item_label}>Отчество:</p>
-								<span className={classes.block_info__item_label__text}>
-									{parent.middle_name}
-								</span>
+								<span className={classes.block_info__item_label__text}>{parent.middle_name}</span>
 
 								<p className={classes.block_info__item_label}>Кем приходится:</p>
-								<span className={classes.block_info__item_label__text}>
-									{parent.who}
-								</span>
+								<span className={classes.block_info__item_label__text}>{parent.who}</span>
 
 								<p className={classes.block_info__item_label}>Номер телефона:</p>
-								<span className={classes.block_info__item_label__text}>
-									{parent.phone_number}
-								</span>
+								<span className={classes.block_info__item_label__text}>{parent.phone_number}</span>
 							</div>
 						);
 					})}
@@ -219,9 +180,7 @@ export const ProfileInfo = ({ profile }) => {
 			<div className={classes.block_info}>
 				<div className={classes.block_info__header}>
 					<h3 className={classes.block_info__title}>Адрес проживания</h3>
-					<NavLink
-						className={classes.block_info__header_img_link}
-						to={`/profile/${user.id}/edit`}>
+					<NavLink className={classes.block_info__header_img_link} to={`/profile/${user.id}/edit`}>
 						<img src={edit_profile} alt="edit_profile" />
 					</NavLink>
 				</div>

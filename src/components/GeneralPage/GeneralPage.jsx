@@ -1,5 +1,4 @@
 import moment from 'moment';
-
 import React, { useEffect, useState } from 'react';
 import classes from './gen.module.css';
 import HeaderNav from '../common/HeaderNav';
@@ -40,11 +39,7 @@ export const GeneralPage = () => {
 						renderList
 							.sort((course, nextCourse) => (course.id > nextCourse.id ? 1 : -1))
 							.map(course => (
-								<ItemCourse
-									key={course.id}
-									course={course}
-									couches={generalPage.couches}
-								/>
+								<ItemCourse key={course.id} course={course} couches={generalPage.couches} />
 							))
 					) : (
 						<h2>Сегодня занятий нет</h2>
