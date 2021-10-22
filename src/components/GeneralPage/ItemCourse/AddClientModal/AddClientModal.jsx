@@ -11,7 +11,7 @@ import { Button } from '../../../../utils/Buttons/Button';
 import { notificationPopUp } from '../../../common/Error';
 import { notification } from 'antd';
 
-export const AddClientModal = ({ change_user, name, user, form, close_modal, lesson_id }) => {
+export const AddClientModal = ({ change_user, name, user, form, close_modal, lesson_id, date }) => {
 	const { added_client } = useSelector(state => state.general_page);
 	const [search, setSearch] = useState('');
 	const dispatch = useDispatch();
@@ -37,7 +37,12 @@ export const AddClientModal = ({ change_user, name, user, form, close_modal, les
 	return (
 		<div className={classes.wrapper}>
 			{user && form ? (
-				<AddedAbonementModal user={user} close_modal={close_modal} lesson_id={lesson_id} />
+				<AddedAbonementModal
+					user={user}
+					close_modal={close_modal}
+					lesson_id={lesson_id}
+					date={date}
+				/>
 			) : (
 				<>
 					<h3 className={classes.name}>Отметить клиента в группе {name}</h3>

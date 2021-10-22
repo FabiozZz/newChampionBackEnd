@@ -21,7 +21,7 @@ import {
 	createTrainForCourse,
 } from '../../../../store/Actions/generalPageActions';
 
-const AddedAbonementModal = ({ user, close_modal, lesson_id }) => {
+const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 	const dispatch = useDispatch();
 
 	const { added_client } = useSelector(state => state.general_page);
@@ -121,8 +121,7 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id }) => {
 		if (!single) {
 			if (selectAboniment.prices && selectStatus.id) {
 				let price = selectAboniment.prices.find(
-					item =>
-						item.age_group.id === user.age_group.id && item.level.id === selectStatus.id
+					item => item.age_group.id === user.age_group.id && item.level.id === selectStatus.id
 				).price;
 				if (price) {
 					setEditPrice(prevState => ({ ...prevState, price: Number(price) }));
@@ -149,6 +148,7 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id }) => {
 
 		dispatch(
 			buyAbonementAndCreateOnceTrainForCourse({
+				date: date,
 				abonement: uploadData,
 				client: { lesson_id, client_id: user.id },
 			})
@@ -157,12 +157,12 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id }) => {
 	};
 
 	const createDebtTraining = () => {
-		dispatch(createDebtTrainForCourse({ lesson_id, client_id: user.id }));
+		dispatch(createDebtTrainForCourse({ lesson_id, client_id: user.id, date: date }));
 		close_modal();
 	};
 
 	const createOnceTraining = () => {
-		dispatch(createOnceTrainForCourse({ lesson_id, client_id: user.id }));
+		dispatch(createOnceTrainForCourse({ lesson_id, client_id: user.id, date: date }));
 		close_modal();
 	};
 
@@ -301,12 +301,8 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id }) => {
 							{/*    <OtherInput label={'скидка'}/>*/}
 							{/*</div>*/}
 							<div className={`${classes.sale_count}`}>
-								<span className={`${classes.sale_count_text}`}>
-									1 {declOfLessonsNum(1)}
-								</span>
-								<span className={`${classes.sale_count_text}`}>
-									0 {declOfDay(0)}
-								</span>
+								<span className={`${classes.sale_count_text}`}>1 {declOfLessonsNum(1)}</span>
+								<span className={`${classes.sale_count_text}`}>0 {declOfDay(0)}</span>
 								{/*<img className={classes.sale_count_img} src={devider} alt="devider"/>*/}
 								<svg
 									className={classes.sale_count_img}
@@ -338,11 +334,7 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id }) => {
 											type="number"
 										/>
 										<span className={classes.edit_block_text}>&#8381;</span>
-										<img
-											className={classes.img_edit}
-											src={success_edit}
-											alt="edit"
-										/>
+										<img className={classes.img_edit} src={success_edit} alt="edit" />
 									</div>
 								) : (
 									<div onClick={toggleEdit} className={classes.edit_block}>
@@ -413,11 +405,7 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id }) => {
 											type="number"
 										/>
 										<span className={classes.edit_block_text}>&#8381;</span>
-										<img
-											className={classes.img_edit}
-											src={success_edit}
-											alt="edit"
-										/>
+										<img className={classes.img_edit} src={success_edit} alt="edit" />
 									</div>
 								) : (
 									<div onClick={toggleEdit} className={classes.edit_block}>
@@ -440,21 +428,13 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id }) => {
 			<div className={classes.btn_group}>
 				<Button
 					click={buyAbonementHandler}
-					disabled={
-						single
-							? !single
-							: !(selectAboniment.id && selectStatus.id && selectGroup.id)
-					}
+					disabled={single ? !single : !(selectAboniment.id && selectStatus.id && selectGroup.id)}
 					text={'безналичная оплата'}
 					factor={'default'}
 				/>
 				<Button
 					click={buyAbonementHandler}
-					disabled={
-						single
-							? !single
-							: !(selectAboniment.id && selectStatus.id && selectGroup.id)
-					}
+					disabled={single ? !single : !(selectAboniment.id && selectStatus.id && selectGroup.id)}
 					text={'оплата наличными'}
 					factor={'success'}
 				/>

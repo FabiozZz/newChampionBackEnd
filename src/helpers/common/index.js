@@ -13,7 +13,10 @@ export const ageToString = birth => {
 	let dateBirth = moment(birth.replace(/(\d{2}).(\d{2}).(\d{4})/g, '$3-$2-$1'));
 	let mathAge = Math.floor(dateNow.diff(dateBirth, 'year'));
 	mathAge +=
-		mathAge % 100 < 21 || mathAge % 10 < 1 || (mathAge % 10 > 4 && mathAge % 10 <= 9) || mathAge % 10 === 0
+		mathAge % 100 < 21 ||
+		mathAge % 10 < 1 ||
+		(mathAge % 10 > 4 && mathAge % 10 <= 9) ||
+		mathAge % 10 === 0
 			? ' лет'
 			: mathAge % 10 === 1
 			? ' год'
@@ -199,3 +202,24 @@ export const isBirthDay = date => {
 	let birthData = moment(date).format(`${dateFinish.format('YYYY')}-MM-DD`);
 	return moment(birthData).isBetween(dateStart, dateFinish.format('YYYY-MM-DD'), undefined, '[]');
 };
+export function replaceDate(date) {
+	return date.replace(/(\d{2}).(\d{2}).(\d{4})/g, '$3-$2-$1');
+}
+
+export function maxThreeDay(date) {
+	let currentDate = new Date();
+	let maxDay = replaceDate(
+		new Date(currentDate.setDate(currentDate.getDate() - 2)).toLocaleDateString()
+	);
+	return moment(maxDay).isBefore(replaceDate(date));
+}
+
+export function sameDateNow(date) {
+	let currentDate = replaceDate(new Date().toLocaleDateString());
+	return moment(currentDate).isSame(replaceDate(date));
+}
+
+export function sameDate(date) {
+	let currentDate = replaceDate(new Date().toLocaleDateString());
+	return moment(currentDate).isAfter(replaceDate(date));
+}

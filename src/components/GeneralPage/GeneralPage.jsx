@@ -1,16 +1,24 @@
-import moment from 'moment';
+import moment, { now } from 'moment';
 import React, { useEffect, useState } from 'react';
 import classes from './gen.module.css';
 import HeaderNav from '../common/HeaderNav';
 import ItemCourse from './ItemCourse/ItemCourse';
-import { useSelector } from 'react-redux';
-import { isEmpty } from '../../helpers/common';
+import { useDispatch, useSelector } from 'react-redux';
+import { isEmpty, maxThreeDay, replaceDate, sameDate, sameDateNow } from '../../helpers/common';
 import { notification } from 'antd';
 import { Button } from '../../utils/Buttons/Button';
+import {
+	get_lessons_with_date,
+	load_general_page_data,
+} from '../../store/Actions/generalPageActions';
 
 export const GeneralPage = () => {
+	const dispatch = useDispatch();
+
 	const generalPage = useSelector(state => state.general_page);
+	const { loading } = generalPage;
 	const [renderList, setList] = useState([]);
+	const [dateNow, setDateNow] = useState(moment().format('DD.MM.YYYY'));
 
 	useEffect(() => {
 		if (generalPage.error && generalPage.error.length) {
@@ -20,23 +28,51 @@ export const GeneralPage = () => {
 		}
 	}, [generalPage.error]);
 
+	const prevDay = () => {
+		setDateNow(moment(replaceDate(dateNow)).subtract(1, 'day').format('DD.MM.YYYY'));
+		// setList([]);
+	};
+	const nextDay = () => {
+		setDateNow(moment(replaceDate(dateNow)).add(1, 'day').format('DD.MM.YYYY'));
+		// setList([]);
+	};
+
 	useEffect(() => {
-		// if (!isEmpty(generalPage.groups)) {
-		// 	setList(
-		// 		generalPage.groups.sort(function (a, b) {
-		// 			return moment(a.date).format('k:mm') > moment(b.date).format('k:mm') ? 1 : -1;
-		// 		})
-		// 	);
-		// }
+		sameDateNow(dateNow)
+			? dispatch(load_general_page_data())
+			: dispatch(get_lessons_with_date(replaceDate(dateNow)));
+	}, [dateNow, dispatch]);
+
+	useEffect(() => {
+		setList(
+			generalPage.groups.sort(function (a, b) {
+				return moment(a.date).format('k:mm') > moment(b.date).format('k:mm') ? 1 : -1;
+			})
+		);
 	}, [generalPage]);
 	return (
 		<>
+			{loading && <div className="lds-dual-ring" />}
 			<HeaderNav />
 			<h1 className={classes.title}>Расписание</h1>
 			<div className={classes.wrapper}>
+				<span className={classes.time}>
+					{maxThreeDay(dateNow) && (
+						<>
+							<span onClick={prevDay} className={classes.time_arrow}>
+								&lt;
+							</span>{' '}
+						</>
+					)}{' '}
+					{dateNow}{' '}
+					{sameDate(dateNow) && (
+						<span onClick={nextDay} className={classes.time_arrow}>
+							&gt;
+						</span>
+					)}
+				</span>
 				{renderList.length ? (
 					<>
-						<span className={classes.time}>{moment().format('DD.MM.YYYY')}</span>
 						<div className={classes.course_list}>
 							{renderList
 								.sort((course, nextCourse) => (course.id > nextCourse.id ? 1 : -1))

@@ -13,11 +13,11 @@ import {
 } from '../../../store/Actions/generalPageActions';
 import { ClientRow } from '../ClientRow/ClientRow';
 import moment from 'moment';
-import { declOfHumanNum } from '../../../helpers/common';
+import { declOfHumanNum, replaceDate } from '../../../helpers/common';
 import { Button } from '../../../utils/Buttons/Button';
 
 const ItemCourse = ({ course, couches }) => {
-	const { group, trainer, trainings } = course;
+	const { group, trainer, trainings, date } = course;
 
 	const [noAbonement, setNoAbonement] = useState(false);
 
@@ -57,6 +57,7 @@ const ItemCourse = ({ course, couches }) => {
 		let uploadData = {
 			lesson_id: course.id,
 			client_id: user.id,
+			date: new Date(date).toLocaleDateString(),
 		};
 		const { subscription } = user;
 		if (subscription.rate && !subscription.rate?.id) {
@@ -88,7 +89,7 @@ const ItemCourse = ({ course, couches }) => {
 	};
 
 	const removeClient = train_id => {
-		dispatch(remove_client_from_group(train_id));
+		dispatch(remove_client_from_group({ train_id, date: new Date(date).toLocaleDateString() }));
 	};
 	return (
 		<>
@@ -101,6 +102,7 @@ const ItemCourse = ({ course, couches }) => {
 						lesson_id={course.id}
 						change_user={handleChangeUser}
 						name={course.group.name}
+						date={new Date(date).toLocaleDateString()}
 					/>
 				</Modal>
 			)}
