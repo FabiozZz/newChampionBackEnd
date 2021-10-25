@@ -8,6 +8,7 @@ import { isEmpty, maxThreeDay, replaceDate, sameDate, sameDateNow } from '../../
 import { notification } from 'antd';
 import { Button } from '../../utils/Buttons/Button';
 import {
+	change_date,
 	get_lessons_with_date,
 	load_general_page_data,
 } from '../../store/Actions/generalPageActions';
@@ -18,7 +19,7 @@ export const GeneralPage = () => {
 	const generalPage = useSelector(state => state.general_page);
 	const { loading } = generalPage;
 	const [renderList, setList] = useState([]);
-	const [dateNow, setDateNow] = useState(moment().format('DD.MM.YYYY'));
+	const [dateNow, setDateNow] = useState(generalPage.current_date);
 
 	useEffect(() => {
 		if (generalPage.error && generalPage.error.length) {
@@ -29,13 +30,17 @@ export const GeneralPage = () => {
 	}, [generalPage.error]);
 
 	const prevDay = () => {
-		setDateNow(moment(replaceDate(dateNow)).subtract(1, 'day').format('DD.MM.YYYY'));
+		dispatch(change_date(moment(replaceDate(dateNow)).subtract(1, 'day').format('DD.MM.YYYY')));
 		// setList([]);
 	};
 	const nextDay = () => {
-		setDateNow(moment(replaceDate(dateNow)).add(1, 'day').format('DD.MM.YYYY'));
+		// setDateNow();
 		// setList([]);
+		dispatch(change_date(moment(replaceDate(dateNow)).add(1, 'day').format('DD.MM.YYYY')));
 	};
+	useEffect(() => {
+		setDateNow(generalPage.current_date);
+	}, [generalPage.current_date]);
 
 	useEffect(() => {
 		sameDateNow(dateNow)

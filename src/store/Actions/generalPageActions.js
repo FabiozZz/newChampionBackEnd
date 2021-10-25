@@ -3,6 +3,7 @@ import {
 	ADD_DEBT_CLIENT_IN_TRAIN,
 	ADD_ONCE_CLIENT_IN_TRAIN,
 	BUY_AND_ADD_CLIENT_ON_TRAIN,
+	CHANGE_DATE,
 	CHANGE_DATE_FOR_GET_LESSONS,
 	CHANGE_TRAINER_FOR_GROUP,
 	LOAD_GENERAL_PAGE,
@@ -12,6 +13,9 @@ import {
 	REMOVE_CLIENT_FROM_TRAIN,
 	SEARCH_CLIENTS,
 } from '../../constants/generalPageConstants';
+
+export const change_date = date => ({ type: CHANGE_DATE, payload: date });
+
 export const load_page = () => ({ type: LOAD_GENERAL_PAGE });
 
 export const load_general_page_data = () => ({ type: LOAD_GENERAL_PAGE_DATA });

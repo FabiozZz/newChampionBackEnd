@@ -209,7 +209,7 @@ export function replaceDate(date) {
 export function maxThreeDay(date) {
 	let currentDate = new Date();
 	let maxDay = replaceDate(
-		new Date(currentDate.setDate(currentDate.getDate() - 2)).toLocaleDateString()
+		new Date(currentDate.setDate(currentDate.getDate() - 3)).toLocaleDateString()
 	);
 	return moment(maxDay).isBefore(replaceDate(date));
 }
