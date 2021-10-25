@@ -223,14 +223,16 @@ export const Add = () => {
 	};
 
 	useEffect(() => {
-		if (/\d{2}\.\d{2}\.\d{4}/g.test(personalData.date_of_birth)) {
-			let dateNow = moment();
-			let dateBirth = moment(personalData.date_of_birth.replace(/(\d+).(\d+).(\d+)/g, '$3-$2-$1'));
-			let mathAge = Math.floor(dateNow.diff(dateBirth, 'year'));
+		if (state.date_of_birth) {
+			if (/\d{2}\.\d{2}\.\d{4}/g.test(state.date_of_birth)) {
+				let dateNow = moment();
+				let dateBirth = moment(state.date_of_birth.replace(/(\d+).(\d+).(\d+)/g, '$3-$2-$1'));
+				let mathAge = Math.floor(dateNow.diff(dateBirth, 'year'));
 
-			setAge(mathAge);
+				setAge(mathAge);
+			}
 		}
-	}, [age, error, personalData.date_of_birth]);
+	}, [age, error, personalData.date_of_birth, state]);
 
 	const submitForm = e => {
 		e.preventDefault();
@@ -384,8 +386,8 @@ export const Add = () => {
 							</div>
 							<div className={classes.date_of_birth}>
 								<DataPicker
-									value={personalData.date_of_birth}
-									setValue={handleDataPickerPersonal}
+									value={state.date_of_birth && state.date_of_birth}
+									setValue={onChange}
 									label={'дата рождения'}
 								/>
 							</div>

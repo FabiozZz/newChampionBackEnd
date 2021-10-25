@@ -4,9 +4,13 @@ import { isEmpty } from '../helpers/common';
 export const useInputOnObject = initialState => {
 	const [state, setState] = useState(initialState);
 	const handleChange = e => {
-		let name = e.target.name;
-		let value = e.target.value;
-		setState(prev => ({ ...prev, [name]: value }));
+		if (e && e.target) {
+			let name = e.target.name;
+			let value = e.target.value;
+			setState(prev => ({ ...prev, [name]: value }));
+		} else {
+			setState(prev => ({ ...prev, date_of_birth: e }));
+		}
 	};
 	const copyState = Object.assign({}, state);
 	let newState = {};
