@@ -31,28 +31,23 @@ export const GeneralPage = () => {
 
 	const prevDay = () => {
 		dispatch(change_date(moment(replaceDate(dateNow)).subtract(1, 'day').format('DD.MM.YYYY')));
-		// setList([]);
 	};
 	const nextDay = () => {
-		// setDateNow();
-		// setList([]);
 		dispatch(change_date(moment(replaceDate(dateNow)).add(1, 'day').format('DD.MM.YYYY')));
 	};
-	useEffect(() => {
-		setDateNow(generalPage.current_date);
-	}, [generalPage.current_date]);
-
-	useEffect(() => {
-		dispatch(get_lessons_with_date(replaceDate(dateNow)));
-	}, [dateNow, dispatch]);
-
 	useEffect(() => {
 		setList(
 			generalPage.groups.sort(function (a, b) {
 				return moment(a.date).format('k:mm') > moment(b.date).format('k:mm') ? 1 : -1;
 			})
 		);
-	}, [generalPage]);
+		setDateNow(generalPage.current_date);
+	}, [generalPage.current_date, generalPage.groups]);
+
+	useEffect(() => {
+		dispatch(get_lessons_with_date(replaceDate(dateNow)));
+	}, [dateNow, dispatch]);
+
 	return (
 		<>
 			{loading && <div className="lds-dual-ring" />}

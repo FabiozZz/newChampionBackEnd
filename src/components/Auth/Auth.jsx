@@ -92,12 +92,11 @@ export const Auth = () => {
 						setErrorDate(!authSameDate(current_date));
 						dispatch(log_out());
 					}
-					setLoad(false);
 				})
 				.catch(e => {
 					console.log(e);
-					setLoad(false);
 				});
+			setLoad(false);
 		})();
 	}, [current_date, dispatch]);
 	return (

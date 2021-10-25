@@ -16,9 +16,10 @@ import { EndBtnGroup } from '../common/EndBtnGroup/EndBtnGroup';
 import { ParentsBlock } from '../common/ParentsBlock/ParentsBlock';
 import { useDispatch, useSelector } from 'react-redux';
 import { add_client_on_CRM } from '../../store/Actions/addClientsActions';
-import { isEmpty } from '../../helpers/common';
+import { isEmpty, replaceDate } from '../../helpers/common';
 import { OtherInput } from '../../utils/OtherInput/OtherInput';
 import { Button } from '../../utils/Buttons/Button';
+import { useInputOnObject } from '../../hooks';
 
 export const ContextCommon = createContext();
 
@@ -32,9 +33,7 @@ function isEmptyArray(arr) {
 }
 
 export const Add = () => {
-	const { groups, couches, agesGroup, loading, error } = useSelector(
-		state => state.addClient
-	);
+	const { groups, couches, agesGroup, loading, error } = useSelector(state => state.addClient);
 
 	const dispatch = useDispatch();
 
@@ -53,6 +52,8 @@ export const Add = () => {
 	//     setModal(!modal);
 	// };
 
+	const { onChange, state } = useInputOnObject({});
+	console.log(state);
 	/**
 	 * локальный стейт для храниения/установки персональных данных клиента для PersonalData
 	 */
@@ -147,7 +148,7 @@ export const Add = () => {
 	 */
 	const [testData, setTestData] = useState({
 		filial: { name: '' },
-		group: {  },
+		group: {},
 		dateTest: '',
 		agesGroup: { label: '' },
 	});
@@ -203,11 +204,7 @@ export const Add = () => {
 	 * @param object новый массив для обновления предидущего
 	 */
 	const handleChangeItemParentsBlock = (i, object) => {
-		setParents(prevState => [
-			...prevState.slice(0, i),
-			object,
-			...prevState.slice(i + 1),
-		]);
+		setParents(prevState => [...prevState.slice(0, i), object, ...prevState.slice(i + 1)]);
 	};
 
 	/**
@@ -228,12 +225,7 @@ export const Add = () => {
 	useEffect(() => {
 		if (/\d{2}\.\d{2}\.\d{4}/g.test(personalData.date_of_birth)) {
 			let dateNow = moment();
-			let dateBirth = moment(
-				personalData.date_of_birth.replace(
-					/(\d+).(\d+).(\d+)/g,
-					'$3-$2-$1'
-				)
-			);
+			let dateBirth = moment(personalData.date_of_birth.replace(/(\d+).(\d+).(\d+)/g, '$3-$2-$1'));
 			let mathAge = Math.floor(dateNow.diff(dateBirth, 'year'));
 
 			setAge(mathAge);
@@ -251,33 +243,27 @@ export const Add = () => {
 					...other,
 					middle_name,
 					...(!isEmpty(date_of_birth) && {
-						date_of_birth: date_of_birth.replace(
-							/(\d{2}).(\d{2}).(\d{4})/g,
-							'$3-$2-$1'
-						),
+						date_of_birth: replaceDate(date_of_birth),
 					}),
 					...(!isEmptyArray(parents) && { parents }),
 					...(testData.agesGroup.id && {
 						age_group_id: testData.agesGroup.id,
 					}),
 					age,
-					...(!isEmpty(testData.group)&& {training_group_id:testData.group.id})
+					...(!isEmpty(testData.group) && { training_group_id: testData.group.id }),
 				};
 			} else {
 				oldUploadData = {
 					...other,
 					...(!isEmpty(date_of_birth) && {
-						date_of_birth: date_of_birth.replace(
-							/(\d{2}).(\d{2}).(\d{4})/g,
-							'$3-$2-$1'
-						),
+						date_of_birth: replaceDate(date_of_birth),
 					}),
 					...(!isEmptyArray(parents) && { parents }),
 					...(testData.agesGroup.id && {
 						age_group_id: testData.agesGroup.id,
 					}),
 					age,
-					...(!isEmpty(testData.group)&& {training_group_id:testData.group.id})
+					...(!isEmpty(testData.group) && { training_group_id: testData.group.id }),
 				};
 			}
 			// newUploadData = {
@@ -300,33 +286,27 @@ export const Add = () => {
 					...other,
 					middle_name,
 					...(!isEmpty(date_of_birth) && {
-						date_of_birth: date_of_birth.replace(
-							/(\d{2}).(\d{2}).(\d{4})/g,
-							'$3-$2-$1'
-						),
+						date_of_birth: replaceDate(date_of_birth),
 					}),
 					...(phone_number && { phone_number }),
 					...(testData.agesGroup.id && {
 						age_group_id: testData.agesGroup.id,
 					}),
 					age,
-					...(!isEmpty(testData.group)&& {training_group_id:testData.group.id})
+					...(!isEmpty(testData.group) && { training_group_id: testData.group.id }),
 				};
 			} else {
 				oldUploadData = {
 					...other,
 					...(!isEmpty(date_of_birth) && {
-						date_of_birth: date_of_birth.replace(
-							/(\d{2}).(\d{2}).(\d{4})/g,
-							'$3-$2-$1'
-						),
+						date_of_birth: replaceDate(date_of_birth),
 					}),
 					...(phone_number && { phone_number }),
 					...(testData.agesGroup.id && {
 						age_group_id: testData.agesGroup.id,
 					}),
 					age,
-					...(!isEmpty(testData.group)&& {training_group_id:testData.group.id})
+					...(!isEmpty(testData.group) && { training_group_id: testData.group.id }),
 				};
 			}
 			// newUploadData = {
@@ -344,7 +324,9 @@ export const Add = () => {
 		if (!isEmpty(address)) {
 			oldUploadData = { ...oldUploadData, ...address };
 		}
-		dispatch(add_client_on_CRM(oldUploadData));
+		console.log(personalData);
+		console.log(state);
+		// dispatch(add_client_on_CRM(oldUploadData));
 	};
 
 	return (
@@ -364,31 +346,24 @@ export const Add = () => {
 			</div>
 			<form onSubmit={submitForm} className={classes.wrapper}>
 				<div className={classes.block_info_f}>
-					<div
-						onClick={() => setModal(true)}
-						className={classes.block_f}>
+					<div onClick={() => setModal(true)} className={classes.block_f}>
 						<img src={image || camera} alt={'avatar'} />
 						{!image && <span>Добавить фото</span>}
 					</div>
 
 					<div className={classes.block_personal}>
-						<h3 className={classes.block_info__title}>
-							личная информация
-						</h3>
+						<h3 className={classes.block_info__title}>личная информация</h3>
 						<div className={classes.block_info__item}>
 							<div className={classes.last_name}>
 								<OtherInput
 									danger={errorInput && errorInput.last_name}
-									setValue={handleChangePersonalData}
+									setValue={onChange}
 									name={'last_name'}
-									value={personalData.last_name}
 									label={'фамилия'}
 									required={true}
 								/>
 								{errorInput && errorInput.last_name && (
-									<span className={classes.warning_text}>
-										{errorInput.last_name.join()}
-									</span>
+									<span className={classes.warning_text}>{errorInput.last_name.join()}</span>
 								)}
 							</div>
 							<div className={classes.first_name}>
@@ -401,18 +376,11 @@ export const Add = () => {
 									required={true}
 								/>
 								{errorInput && errorInput.first_name && (
-									<span className={classes.warning_text}>
-										{errorInput.first_name.join()}
-									</span>
+									<span className={classes.warning_text}>{errorInput.first_name.join()}</span>
 								)}
 							</div>
 							<div className={classes.middle_name}>
-								<OtherInput
-									setValue={handleChangePersonalData}
-									name={'middle_name'}
-									value={personalData.middle_name}
-									label={'отчество'}
-								/>
+								<OtherInput setValue={onChange} name={'middle_name'} label={'отчество'} />
 							</div>
 							<div className={classes.date_of_birth}>
 								<DataPicker
@@ -449,12 +417,7 @@ export const Add = () => {
 												refFile.current.click();
 											}}
 										/>
-										<input
-											ref={refFile}
-											name={'health'}
-											type="file"
-											hidden={true}
-										/>
+										<input ref={refFile} name={'health'} type="file" hidden={true} />
 									</div>
 									<PhoneSection />
 									<TrialSectionSection />
@@ -488,13 +451,7 @@ export const Add = () => {
 							personal={personal}
 							setPersonal={handleTogglePersonal}
 						/>
-						{!loading && (
-							<EndBtnGroup
-								goBack={goBack}
-								personal={personal}
-								rules={rules}
-							/>
-						)}
+						{!loading && <EndBtnGroup goBack={goBack} personal={personal} rules={rules} />}
 					</>
 				) : null}
 			</form>
