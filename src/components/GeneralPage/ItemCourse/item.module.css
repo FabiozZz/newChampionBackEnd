@@ -36,11 +36,18 @@
 .option {
 	display: flex;
 }
+.toggle_btn{
+	align-self: center;
+}
 .add_client {
 	grid-column: 10/13;
+	display: grid;
+	grid-template-columns: min-content min-content;
+	grid-gap: 20px;
 	justify-self: center;
 	cursor: pointer;
 }
+
 .none {
 	display: none;
 	transition: all 0.5s;
@@ -106,7 +113,7 @@
 	cursor: pointer;
 }
 .flex_client_wrapper {
-	grid-column: 1/10;
+	grid-column: 1/9;
 	display: grid;
 	grid-template-columns: repeat(9, 1fr);
 }
@@ -120,7 +127,7 @@
 	margin-right: 16px;
 }
 .people {
-	grid-column: 7/10;
+	grid-column: 7/9;
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: repeat(2, min-content);
@@ -161,7 +168,7 @@
 	}
 
 	.flex_client_wrapper {
-		grid-column: 1/10;
+		grid-column: 1/9;
 	}
 	.flex_first_child {
 		padding: 0;

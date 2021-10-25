@@ -352,8 +352,8 @@ class Api {
 	 * @returns {Promise}
 	 */
 	async getGeneralPageData() {
-		// return await this.client.get('/schedule/lesson/');
-		return await this.client.get('/schedule/lesson/today/');
+		return await this.client.get('/schedule/lesson/');
+		// return await this.client.get('/schedule/lesson/today/');
 	}
 
 	async getGeneralPageDataWithDate(date) {
@@ -558,6 +558,10 @@ class Api {
 
 	async getStatusList(token) {
 		return await this.client.get('/core/clientLevel/', { cancelToken: token });
+	}
+
+	async getTimeZone() {
+		return axios.get('http://worldtimeapi.org/api/ip');
 	}
 }
 

@@ -87,12 +87,14 @@ export const ProfileInfo = ({ profile }) => {
 					)}
 				</Modal>
 			)}
-			<div className={classes.abonement_carousel_wrapper}>
-				<p className={classes.abonement_carousel_title}>Активные абонементы</p>
-				<div className={classes.abonement_carousel}>
-					<AbonementInfo user={user} />
+			{user.subscription && (
+				<div className={classes.abonement_carousel_wrapper}>
+					<p className={classes.abonement_carousel_title}>Активные абонементы</p>
+					<div className={classes.abonement_carousel}>
+						<AbonementInfo user={user} />
+					</div>
 				</div>
-			</div>
+			)}
 			{/*<CarouselAbonements />*/}
 
 			<div className={classes.block_info_f}>

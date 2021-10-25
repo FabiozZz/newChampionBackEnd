@@ -223,3 +223,10 @@ export function sameDate(date) {
 	let currentDate = replaceDate(new Date().toLocaleDateString());
 	return moment(currentDate).isAfter(replaceDate(date));
 }
+
+export function authSameDate(currentDate) {
+	console.log(moment().format('YYYY-MM-DD'));
+	console.log(replaceDate(currentDate));
+	console.log(moment(moment().format('YYYY-MM-DD')).isSame(replaceDate(currentDate)));
+	return moment(moment().format('YYYY-MM-DD')).isSame(replaceDate(currentDate));
+}

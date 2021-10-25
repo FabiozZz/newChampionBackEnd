@@ -43,9 +43,7 @@ export const GeneralPage = () => {
 	}, [generalPage.current_date]);
 
 	useEffect(() => {
-		sameDateNow(dateNow)
-			? dispatch(load_general_page_data())
-			: dispatch(get_lessons_with_date(replaceDate(dateNow)));
+		dispatch(get_lessons_with_date(replaceDate(dateNow)));
 	}, [dateNow, dispatch]);
 
 	useEffect(() => {
