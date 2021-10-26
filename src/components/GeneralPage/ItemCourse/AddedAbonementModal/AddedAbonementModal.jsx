@@ -155,14 +155,14 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 			abonement: uploadData,
 			client: { lesson_id, client_id: user.id },
 		});
-		dispatch(
-			buyAbonementAndCreateOnceTrainForCourse({
-				date: date,
-				abonement: uploadData,
-				client: { lesson_id, client_id: user.id },
-			})
-		);
-		close_modal();
+		// dispatch(
+		// 	buyAbonementAndCreateOnceTrainForCourse({
+		// 		date: date,
+		// 		abonement: uploadData,
+		// 		client: { lesson_id, client_id: user.id },
+		// 	})
+		// );
+		// close_modal();
 	};
 
 	const createDebtTraining = () => {

@@ -132,6 +132,7 @@ export const SelectStatus = ({
 								} else {
 									setValue(item);
 								}
+								setInput(item);
 								setToggleOptionBox(false);
 							}}
 							value={item.name}
