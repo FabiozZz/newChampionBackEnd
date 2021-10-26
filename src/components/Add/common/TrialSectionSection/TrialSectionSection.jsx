@@ -6,15 +6,7 @@ import SelectGroup from '../../../../utils/SelectGroup/SelectGroup';
 import SelectAgesGroup from '../../../../utils/SelectAgesGroup/SelectAgesGroup';
 
 const TrialSectionSection = () => {
-	const {
-		handleChangeValueDateTestLesson,
-		testData,
-		groups,
-		agesGroup,
-		handleChangeValueGroupTestLesson,
-		handleChangeValueAgesGroupTestLesson,
-		errorInput,
-	} = useContext(ContextCommon);
+	const { personal_data, groups, agesGroup, errorInput } = useContext(ContextCommon);
 	console.log('TrialSection', errorInput);
 	return (
 		<div className={classes.block_info}>
@@ -22,24 +14,23 @@ const TrialSectionSection = () => {
 			<div className={classes.block_info__item}>
 				<div className={classes.ages_group}>
 					<SelectAgesGroup
-						value={testData.agesGroup}
+						name={'age_group_id'}
 						danger={errorInput && errorInput.age_group_id}
-						setValue={handleChangeValueAgesGroupTestLesson}
+						// setValue={handleChangeValueAgesGroupTestLesson}
+						setValue={personal_data.onChange}
 						data={agesGroup}
 					/>
 					{errorInput && errorInput.age_group_id && (
-						<span className={classes.warning_text}>
-							{errorInput.age_group_id.join()}
-						</span>
+						<span className={classes.warning_text}>{errorInput.age_group_id.join()}</span>
 					)}
 				</div>
 				<div className={classes.group}>
 					<SelectGroup
-						disabled={!testData.agesGroup.id}
-						value={testData.group}
-						setValue={handleChangeValueGroupTestLesson}
+						name={'training_group_id'}
+						disabled={!personal_data.state.age_group_id}
+						setValue={personal_data.onChange}
 						label={'группа'}
-						data={groups.filter(group=>group.age_group.id===testData.agesGroup.id)}
+						data={groups.filter(group => group.age_group.id === personal_data.state.age_group_id)}
 					/>
 				</div>
 				{/* <div className={classes.filial}>

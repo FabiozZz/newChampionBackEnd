@@ -115,23 +115,23 @@ export function* loadStuff() {
 	console.log(request);
 }
 
-export function* fetchDataGeneralPage() {
-	console.log('я за группами');
-	const fetchData = yield {
-		groups: yield call(() => getGroups()),
-		couches: yield call(() => getCouch()),
-		clients: yield call(() => getClients()),
-		added_client: {
-			groups: yield call(() => getGroupList()),
-			ages_groups: yield call(() => getAgesGroupList()),
-			abonements: yield call(() => getAbonimentList()),
-			statuses: yield call(() => getStatusList()),
-			couches: yield call(() => getCouchList()),
-		},
-	};
-	console.log(yield fetchData);
-	yield put(load_general_page_data_done(fetchData));
-}
+// export function* fetchDataGeneralPage() {
+// 	console.log('я за группами');
+// 	const fetchData = yield {
+// 		groups: yield call(() => getGroups()),
+// 		couches: yield call(() => getCouch()),
+// 		clients: yield call(() => getClients()),
+// 		added_client: {
+// 			groups: yield call(() => getGroupList()),
+// 			ages_groups: yield call(() => getAgesGroupList()),
+// 			abonements: yield call(() => getAbonimentList()),
+// 			statuses: yield call(() => getStatusList()),
+// 			couches: yield call(() => getCouchList()),
+// 		},
+// 	};
+// 	console.log(yield fetchData);
+// 	yield put(load_general_page_data_done(fetchData));
+// }
 export function* fetchDataGeneralPageWithDate({ payload }) {
 	console.log('я за группами');
 	const fetchData = yield {
@@ -214,7 +214,7 @@ export default function* generalPageSaga() {
 	yield takeEvery(TOKEN_REFRESH, tokenRefresh);
 	yield takeEvery(LOG_OUT, loggedOutInApp);
 	yield takeEvery(LOAD_STUFF, loadStuff);
-	yield takeEvery(LOAD_GENERAL_PAGE_DATA, fetchDataGeneralPage);
+	// yield takeEvery(LOAD_GENERAL_PAGE_DATA, fetchDataGeneralPage);
 	yield takeEvery(CHANGE_DATE_FOR_GET_LESSONS, fetchDataGeneralPageWithDate);
 	yield takeEvery(ADD_CLIENT_IN_TRAIN, addedClient);
 	yield takeEvery(BUY_AND_ADD_CLIENT_ON_TRAIN, buyAndAdded);

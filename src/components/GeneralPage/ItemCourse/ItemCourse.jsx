@@ -58,7 +58,7 @@ const ItemCourse = ({ course, couches }) => {
 			date: new Date(date).toLocaleDateString(),
 		};
 		const { subscription } = user;
-		if (subscription.rate && !subscription.rate?.id) {
+		if (!subscription || !subscription.rate || !subscription.rate.id) {
 			setNoAbonement(true);
 			console.log('modal1');
 		} else if (

@@ -12,12 +12,21 @@ import classes from './status.module.css';
  * @returns {JSX.Element}
  * @constructor
  */
-export const SelectStatus = ({ label, value, setValue, data, disabled = false, placeholder = 'не выбрано', ...props }) => {
+export const SelectStatus = ({
+	label,
+	value,
+	setValue,
+	data,
+	disabled = false,
+	name = '',
+	placeholder = 'не выбрано',
+	...props
+}) => {
 	/**
 	 * локальный стейт для установки и хранения значения видимости блока с опциями
 	 */
 	const [toggleOptionBox, setToggleOptionBox] = useState(false);
-
+	const [input, setInput] = useState({ name: '' });
 	/**
 	 * переключатлель видимости блока с опциями
 	 * @param e
@@ -46,7 +55,8 @@ export const SelectStatus = ({ label, value, setValue, data, disabled = false, p
 	useEffect(() => {
 		if (optionBox.current != null) {
 			if (optionBox.current.getBoundingClientRect().right > window.innerWidth) {
-				optionBox.current.style.left = window.innerWidth - optionBox.current.getBoundingClientRect().right - 10 + 'px';
+				optionBox.current.style.left =
+					window.innerWidth - optionBox.current.getBoundingClientRect().right - 10 + 'px';
 			}
 		}
 	}, [toggleOptionBox]);
@@ -62,7 +72,12 @@ export const SelectStatus = ({ label, value, setValue, data, disabled = false, p
 	 */
 	useEffect(() => {
 		const onClick = e => {
-			if (optionBox.current && !optionBox.current.contains(e.target) && selectRef.current && !selectRef.current.contains(e.target)) {
+			if (
+				optionBox.current &&
+				!optionBox.current.contains(e.target) &&
+				selectRef.current &&
+				!selectRef.current.contains(e.target)
+			) {
 				setToggleOptionBox(false);
 			}
 		};
@@ -71,11 +86,10 @@ export const SelectStatus = ({ label, value, setValue, data, disabled = false, p
 	}, []);
 
 	useEffect(() => {
-		// if (value === '') {
-		//     setValue(data[0]);
-		// }
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data]);
+		if (value) {
+			setInput(value);
+		}
+	}, [value]);
 
 	let disabledClass = disabled ? classes.disabled : classes.inputWrapper;
 
@@ -83,14 +97,28 @@ export const SelectStatus = ({ label, value, setValue, data, disabled = false, p
 		<div ref={selectRef} className={`${classes.selectBoxWrapper} ${props.className}`} {...props}>
 			<label className={`${classes.label}`}>{label}</label>
 			<div className={disabledClass} onClick={!disabled && handleToggleOptionBox}>
-				<svg className={classes.arrow} width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<svg
+					className={classes.arrow}
+					width="11"
+					height="6"
+					viewBox="0 0 11 6"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg">
 					<path
 						d="M1.66437 0.252601C1.25159 -0.114317 0.619519 -0.0771359 0.252601 0.335647C-0.114317 0.74843 -0.0771359 1.3805 0.335647 1.74742L4.83565 5.74742C5.21453 6.08421 5.78549 6.08421 6.16437 5.74742L10.6644 1.74742C11.0772 1.3805 11.1143 0.74843 10.7474 0.335647C10.3805 -0.0771359 9.74843 -0.114317 9.33565 0.252601L5.50001 3.66206L1.66437 0.252601Z"
 						fill="#BFC5D2"
 					/>
 				</svg>
 				<span />
-				<input readOnly={true} className={classes.input} value={value} placeholder={placeholder} disabled={disabled} type="text" />
+				<input
+					readOnly={true}
+					className={classes.input}
+					value={input.name}
+					name={name}
+					placeholder={placeholder}
+					disabled={disabled}
+					type="text"
+				/>
 				{toggleOptionBox && <div className={classes.arrowOptionBox} />}
 			</div>
 			{toggleOptionBox && (
@@ -99,7 +127,11 @@ export const SelectStatus = ({ label, value, setValue, data, disabled = false, p
 						<option
 							key={item.id}
 							onClick={() => {
-								setValue(item);
+								if (name) {
+									setValue({ [name]: item.id });
+								} else {
+									setValue(item);
+								}
 								setToggleOptionBox(false);
 							}}
 							value={item.name}

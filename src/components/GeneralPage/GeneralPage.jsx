@@ -4,7 +4,13 @@ import classes from './gen.module.css';
 import HeaderNav from '../common/HeaderNav';
 import ItemCourse from './ItemCourse/ItemCourse';
 import { useDispatch, useSelector } from 'react-redux';
-import { isEmpty, maxThreeDay, replaceDate, sameDate, sameDateNow } from '../../helpers/common';
+import {
+	isEmpty,
+	maxThreeDay,
+	replaceDateforBack,
+	sameDate,
+	sameDateNow,
+} from '../../helpers/common';
 import { notification } from 'antd';
 import { Button } from '../../utils/Buttons/Button';
 import {
@@ -30,10 +36,12 @@ export const GeneralPage = () => {
 	}, [generalPage.error]);
 
 	const prevDay = () => {
-		dispatch(change_date(moment(replaceDate(dateNow)).subtract(1, 'day').format('DD.MM.YYYY')));
+		dispatch(
+			change_date(moment(replaceDateforBack(dateNow)).subtract(1, 'day').format('DD.MM.YYYY'))
+		);
 	};
 	const nextDay = () => {
-		dispatch(change_date(moment(replaceDate(dateNow)).add(1, 'day').format('DD.MM.YYYY')));
+		dispatch(change_date(moment(replaceDateforBack(dateNow)).add(1, 'day').format('DD.MM.YYYY')));
 	};
 	useEffect(() => {
 		setList(
@@ -45,7 +53,7 @@ export const GeneralPage = () => {
 	}, [generalPage.current_date, generalPage.groups]);
 
 	useEffect(() => {
-		dispatch(get_lessons_with_date(replaceDate(dateNow)));
+		dispatch(get_lessons_with_date(replaceDateforBack(dateNow)));
 	}, [dateNow, dispatch]);
 
 	return (

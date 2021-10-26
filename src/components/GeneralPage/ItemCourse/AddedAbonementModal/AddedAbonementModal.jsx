@@ -100,18 +100,22 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 
 	useEffect(() => {
 		const { subscription } = user;
-		console.log('%cabonements: ', 'color: MidnightBlue; background: Aquamarine;', abonements);
-		if (subscription && subscription.rate?.id && subscription.rate.rate_type !== 0) {
-			setAboniment(abonements.find(item => item.id === subscription.rate.id));
+		if (subscription) {
+			console.log('%cabonements: ', 'color: MidnightBlue; background: Aquamarine;', abonements);
+			if (subscription && subscription.rate?.id && subscription.rate.rate_type !== 0) {
+				setAboniment(abonements.find(item => item.id === subscription.rate.id));
+			}
+			if (subscription.training_group && subscription.training_group.id) {
+				setGroup(subscription.training_group);
+			}
 		}
 		if (user && user.level && user.level.id) {
 			setStatus(user.level);
 		}
 		if (user && user.age_group.id) {
+			console.log(user.age_group);
 			setSelectAgesGroup(user.age_group);
-		}
-		if (subscription.training_group && subscription.training_group.id) {
-			setGroup(subscription.training_group);
+			console.log(selectAgesGroup);
 		}
 
 		console.log('%cuser: ', 'color: MidnightBlue; background: Aquamarine;', user);
@@ -146,6 +150,11 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 			...(userPrice && { price: userPrice }),
 		};
 
+		console.log('покупаемый абонемент', {
+			date: date,
+			abonement: uploadData,
+			client: { lesson_id, client_id: user.id },
+		});
 		dispatch(
 			buyAbonementAndCreateOnceTrainForCourse({
 				date: date,

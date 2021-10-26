@@ -18,6 +18,7 @@ import { useParams } from 'react-router';
 import { isEmpty } from '../../../../helpers/common';
 import { AbonementInfo } from './AbonementInfo/AbonementInfo';
 import { CarouselAbonements } from './CarouselAbonements/CarouselAbonements';
+import { ModalEditAbonement } from './ModalEditAbonement/ModalEditAbonement';
 
 /**
  * вывод основной информации о польлзователе
@@ -68,34 +69,119 @@ export const ProfileInfo = ({ profile }) => {
 	const showModal = () => {
 		toggleModal(prevState => ({ ...prevState, show: !modal.show }));
 	};
-	// const clearType = () => {
-	//     toggleModal(prevState=>({...prevState,type:''}));
-	// }
-	// const showAndChangeTypeModalEdit = () => {
-	//     toggleModal(prevState=>({...prevState,show:!modal.show,type:'edit'}));
-	// }
+	const clearType = () => {
+		toggleModal(prevState => ({ ...prevState, type: '' }));
+	};
+	const showAndChangeTypeModalEdit = () => {
+		toggleModal(prevState => ({ ...prevState, show: !modal.show, type: 'edit' }));
+	};
 	const showAndChangeTypeModalChange = () => {
 		toggleModal(prevState => ({ ...prevState, show: !modal.show, type: '' }));
 	};
 	return (
 		<>
-			{modal.show && (
-				<Modal toggle={showModal}>
-					{modal.type === 'edit' ? null : (
-						// <ModalEditAbonement toggleModal={showModal} change={clearType} type={modal.type} profile={profile}/>
-						<ModalChangeAbonement toggleModal={showModal} profile={profile} type={modal.type} />
-					)}
-				</Modal>
-			)}
-			{user.subscription && (
-				<div className={classes.abonement_carousel_wrapper}>
-					<p className={classes.abonement_carousel_title}>Активные абонементы</p>
-					<div className={classes.abonement_carousel}>
-						<AbonementInfo user={user} />
-					</div>
-				</div>
-			)}
+			{/*{modal.show && (*/}
+			{/*	<Modal toggle={showModal}>*/}
+			{/*		{modal.type === 'edit' ? (*/}
+			{/*			<ModalEditAbonement*/}
+			{/*				toggleModal={showModal}*/}
+			{/*				change={clearType}*/}
+			{/*				type={modal.type}*/}
+			{/*				profile={profile}*/}
+			{/*			/>*/}
+			{/*		) : (*/}
+			{/*			<ModalChangeAbonement toggleModal={showModal} profile={profile} type={modal.type} />*/}
+			{/*		)}*/}
+			{/*	</Modal>*/}
+			{/*)}*/}
 			{/*<CarouselAbonements />*/}
+
+			<div className={classes.abonement_carousel_wrapper}>
+				<p className={classes.abonement_carousel_title}>Активные абонементы</p>
+				<div className={classes.abonement_carousel}>
+					<div onClick={showAndChangeTypeModalChange}>
+						<svg
+							width="72"
+							height="82"
+							viewBox="0 0 72 82"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg">
+							<g filter="url(#filter0_d_3343:23727)">
+								<path
+									d="M0 14C0 11.7909 1.79086 10 4 10H48C50.2091 10 52 11.7909 52 14V58C52 60.2091 50.2091 62 48 62H4C1.79086 62 0 60.2091 0 58V14Z"
+									fill="black"
+									fillOpacity="0.01"
+								/>
+								<path
+									d="M0 14C0 11.7909 1.79086 10 4 10H48C50.2091 10 52 11.7909 52 14V58C52 60.2091 50.2091 62 48 62H4C1.79086 62 0 60.2091 0 58V14Z"
+									fill="white"
+								/>
+								<path
+									d="M14 25C14 24.4477 14.4477 24 15 24H37C37.5523 24 38 24.4477 38 25V47C38 47.5523 37.5523 48 37 48H15C14.4477 48 14 47.5523 14 47V25Z"
+									fill="black"
+									fillOpacity="0.01"
+								/>
+								<path
+									d="M14 25C14 24.4477 14.4477 24 15 24H37C37.5523 24 38 24.4477 38 25V47C38 47.5523 37.5523 48 37 48H15C14.4477 48 14 47.5523 14 47V25Z"
+									fill="white"
+								/>
+								<path
+									fillRule="evenodd"
+									clipRule="evenodd"
+									d="M27.1969 30C27.1969 29.3372 26.6596 28.8 25.9969 28.8C25.3341 28.8 24.7969 29.3372 24.7969 30V34.8H19.9969C19.3341 34.8 18.7969 35.3373 18.7969 36C18.7969 36.6628 19.3341 37.2 19.9969 37.2H24.7969V42C24.7969 42.6627 25.3341 43.2 25.9969 43.2C26.6596 43.2 27.1969 42.6627 27.1969 42V37.2H31.9969C32.6596 37.2 33.1969 36.6628 33.1969 36C33.1969 35.3373 32.6596 34.8 31.9969 34.8H27.1969V30Z"
+									fill="#8798AD"
+								/>
+								<path
+									d="M4 11H48V9H4V11ZM51 14V58H53V14H51ZM48 61H4V63H48V61ZM1 58V14H-1V58H1ZM4 61C2.34315 61 1 59.6569 1 58H-1C-1 60.7614 1.23858 63 4 63V61ZM51 58C51 59.6569 49.6569 61 48 61V63C50.7614 63 53 60.7614 53 58H51ZM48 11C49.6569 11 51 12.3431 51 14H53C53 11.2386 50.7614 9 48 9V11ZM4 9C1.23858 9 -1 11.2386 -1 14H1C1 12.3431 2.34315 11 4 11V9Z"
+									fill="#8798AD"
+								/>
+							</g>
+							<defs>
+								<filter
+									id="filter0_d_3343:23727"
+									x="-20"
+									y="0"
+									width="92"
+									height="92"
+									filterUnits="userSpaceOnUse"
+									colorInterpolationFilters="sRGB">
+									<feFlood floodOpacity="0" result="BackgroundImageFix" />
+									<feColorMatrix
+										in="SourceAlpha"
+										type="matrix"
+										values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+										result="hardAlpha"
+									/>
+									<feOffset dy="10" />
+									<feGaussianBlur stdDeviation="10" />
+									<feColorMatrix
+										type="matrix"
+										values="0 0 0 0 0.180392 0 0 0 0 0.356863 0 0 0 0 1 0 0 0 0.07 0"
+									/>
+									<feBlend
+										mode="normal"
+										in2="BackgroundImageFix"
+										result="effect1_dropShadow_3343:23727"
+									/>
+									<feBlend
+										mode="normal"
+										in="SourceGraphic"
+										in2="effect1_dropShadow_3343:23727"
+										result="shape"
+									/>
+								</filter>
+							</defs>
+						</svg>
+					</div>
+					{user.subscription && (
+						<>
+							<AbonementInfo user={user} />
+							{/*<AbonementInfo user={user} />*/}
+							{/*<AbonementInfo user={user} />*/}
+						</>
+					)}
+				</div>
+			</div>
 
 			<div className={classes.block_info_f}>
 				<div className={classes.block_foto}>

@@ -544,6 +544,10 @@
 	color: #69707f;
 }
 .abonement_carousel_wrapper {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-auto-rows: min-content;
 	margin: 44px -16px 0;
 }
 .abonement_carousel_title {
@@ -559,13 +563,17 @@
 	color: #8798ad;
 }
 .abonement_carousel {
+	overflow-x: auto;
 	padding-left: 16px;
+	width: inherit;
 	padding-right: 16px;
 	display: flex;
+	flex-flow: row nowrap;
 	justify-content: flex-start;
-	align-items: flex-start;
-	flex-wrap: nowrap;
-	overflow-x: auto;
+	align-items: center;
+}
+.abonement_carousel svg{
+	cursor:pointer;
 }
 .abonemet_block {
 	flex-shrink: 0;

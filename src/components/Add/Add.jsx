@@ -6,7 +6,6 @@ import { Redirect } from '../common/Redirect';
 import moment from 'moment';
 import TrialSectionSection from './common/TrialSectionSection/TrialSectionSection';
 import { AddresSection } from './common/AddresSection/AddresSection';
-import { OterSection } from './common/OterSection/OterSection';
 import { RulesSection } from './common/RulesSection/RulesSection';
 import { useHistory } from 'react-router';
 import { Modal } from '../../utils/Modal/Modal';
@@ -15,11 +14,11 @@ import PhoneSection from './PhoneSection/PhoneSection';
 import { EndBtnGroup } from '../common/EndBtnGroup/EndBtnGroup';
 import { ParentsBlock } from '../common/ParentsBlock/ParentsBlock';
 import { useDispatch, useSelector } from 'react-redux';
-import { add_client_on_CRM } from '../../store/Actions/addClientsActions';
-import { isEmpty, replaceDate } from '../../helpers/common';
+import { isEmpty, replaceDateforBack } from '../../helpers/common';
 import { OtherInput } from '../../utils/OtherInput/OtherInput';
 import { Button } from '../../utils/Buttons/Button';
 import { useInputOnObject } from '../../hooks';
+import { add_client_on_CRM } from '../../store/Actions/addClientsActions';
 
 export const ContextCommon = createContext();
 
@@ -48,52 +47,15 @@ export const Add = () => {
 	const handleChangeImage = data => setImage(data);
 
 	const [modal, setModal] = useState(false);
-	// const toggleModal = () => {
-	//     setModal(!modal);
-	// };
 
-	const { onChange, state } = useInputOnObject({});
-	console.log(state);
+	const personal_data = useInputOnObject({});
+	const address = useInputOnObject({});
 	/**
 	 * локальный стейт для храниения/установки персональных данных клиента для PersonalData
 	 */
-	const [personalData, setPersonalData] = useState({});
+	// const [personalData, setPersonalData] = useState({});
 
 	const [age, setAge] = useState(0);
-
-	/**
-	 * прослушивание события ввода данных для PersonalData
-	 * @param e
-	 */
-	const handleChangePersonalData = e => {
-		let name = e.target.name;
-		setPersonalData(prevState => ({
-			...prevState,
-			[name]: e.target.value,
-		}));
-	};
-
-	/**
-	 * прослушивания события выбора даты персональных данных в DataPicker для PersonalData
-	 * @param some
-	 */
-	const handleDataPickerPersonal = some => {
-		setPersonalData({ ...personalData, date_of_birth: some });
-	};
-
-	/**
-	 * локальный стейт для храниения/установки адреса клиента для Address
-	 */
-	const [address, setAddress] = useState({});
-
-	/**
-	 * прослушивание события ввода данных для Address
-	 * @param e
-	 */
-	const handleChangeAddressComponent = e => {
-		let name = e.target.name;
-		setAddress(prevState => ({ ...prevState, [name]: e.target.value }));
-	};
 
 	/**
 	 * локальный стейт для хранения/установки для Sale
@@ -152,41 +114,6 @@ export const Add = () => {
 		dateTest: '',
 		agesGroup: { label: '' },
 	});
-	// const [filialList, setFilialList] = useState([]);
-	//
-	// /**
-	//  * прослушивание события ввода данных для TestLesson
-	//  * @param e
-	//  */
-	const handleChangeValueGroupTestLesson = obj => {
-		setTestData({ ...testData, group: obj });
-	};
-	//
-	// /**
-	//  * прослушивание события ввода данных для TestLesson
-	//  * @param e
-	//  */
-	const handleChangeValueAgesGroupTestLesson = obj => {
-		setTestData({ ...testData, agesGroup: obj });
-	};
-
-	/**
-	 * прослушиване события ввода и выбора дыты для TestLesson
-	 * @param data
-	 */
-	const handleChangeValueDateTestLesson = data => {
-		setTestData({ ...testData, dateTest: data });
-	};
-
-	/**/
-
-	/* Adult */
-
-	const [phone_number, setPhone] = useState('');
-
-	const handleChangePhone = phone => {
-		setPhone(phone.target.value);
-	};
 
 	/**/
 
@@ -223,112 +150,30 @@ export const Add = () => {
 	};
 
 	useEffect(() => {
-		if (state.date_of_birth) {
-			if (/\d{2}\.\d{2}\.\d{4}/g.test(state.date_of_birth)) {
+		if (personal_data.state.date_of_birth) {
+			const { date_of_birth } = personal_data.state;
+			if (/\d{2}\.\d{2}\.\d{4}/g.test(date_of_birth)) {
 				let dateNow = moment();
-				let dateBirth = moment(state.date_of_birth.replace(/(\d+).(\d+).(\d+)/g, '$3-$2-$1'));
+				let dateBirth = replaceDateforBack(date_of_birth);
 				let mathAge = Math.floor(dateNow.diff(dateBirth, 'year'));
 
 				setAge(mathAge);
 			}
 		}
-	}, [age, error, personalData.date_of_birth, state]);
+	}, [age, error, personal_data.state]);
 
 	const submitForm = e => {
 		e.preventDefault();
-		let oldUploadData = {};
-		// let newUploadData = {};
-		const { date_of_birth, middle_name, ...other } = personalData;
-		if (age < 16) {
-			if (middle_name) {
-				oldUploadData = {
-					...other,
-					middle_name,
-					...(!isEmpty(date_of_birth) && {
-						date_of_birth: replaceDate(date_of_birth),
-					}),
-					...(!isEmptyArray(parents) && { parents }),
-					...(testData.agesGroup.id && {
-						age_group_id: testData.agesGroup.id,
-					}),
-					age,
-					...(!isEmpty(testData.group) && { training_group_id: testData.group.id }),
-				};
-			} else {
-				oldUploadData = {
-					...other,
-					...(!isEmpty(date_of_birth) && {
-						date_of_birth: replaceDate(date_of_birth),
-					}),
-					...(!isEmptyArray(parents) && { parents }),
-					...(testData.agesGroup.id && {
-						age_group_id: testData.agesGroup.id,
-					}),
-					age,
-					...(!isEmpty(testData.group) && { training_group_id: testData.group.id }),
-				};
-			}
-			// newUploadData = {
-			//     ...other,
-			//     date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
-			//     avatar:image,
-			//     file: refFile.current.files[0],
-			//     filial:'здесь будет филиал',
-			//     group:'здесь будет группа',
-			//     ...address,
-			//     parents,
-			//     age_group_id:testData.agesGroup.id,
-			//     age,
-			//     sale //откуда узнали
-			//
-			// };
-		} else {
-			if (middle_name) {
-				oldUploadData = {
-					...other,
-					middle_name,
-					...(!isEmpty(date_of_birth) && {
-						date_of_birth: replaceDate(date_of_birth),
-					}),
-					...(phone_number && { phone_number }),
-					...(testData.agesGroup.id && {
-						age_group_id: testData.agesGroup.id,
-					}),
-					age,
-					...(!isEmpty(testData.group) && { training_group_id: testData.group.id }),
-				};
-			} else {
-				oldUploadData = {
-					...other,
-					...(!isEmpty(date_of_birth) && {
-						date_of_birth: replaceDate(date_of_birth),
-					}),
-					...(phone_number && { phone_number }),
-					...(testData.agesGroup.id && {
-						age_group_id: testData.agesGroup.id,
-					}),
-					age,
-					...(!isEmpty(testData.group) && { training_group_id: testData.group.id }),
-				};
-			}
-			// newUploadData = {
-			//     ...other,
-			//     date_of_birth:date_of_birth.replace(/(\d{2}).(\d{2}).(\d{4})/g,'$3-$2-$1'),
-			//     avatar:image,
-			//     filial:'здесь будет филиал',
-			//     group:'здесь будет группа',
-			//     ...address,
-			//     age_group_id:testData.agesGroup?.id,
-			//     age,
-			//     sale //откуда узнали
-			// };
-		}
-		if (!isEmpty(address)) {
-			oldUploadData = { ...oldUploadData, ...address };
-		}
-		console.log(personalData);
-		console.log(state);
-		// dispatch(add_client_on_CRM(oldUploadData));
+
+		const upload_client_data = {
+			...personal_data.state,
+			...(personal_data.state.date_of_birth && {
+				date_of_birth: replaceDateforBack(personal_data.state.date_of_birth),
+			}),
+			...address.state,
+			...(!isEmptyArray(parents) && { parents }),
+		};
+		dispatch(add_client_on_CRM(upload_client_data));
 	};
 
 	return (
@@ -359,7 +204,7 @@ export const Add = () => {
 							<div className={classes.last_name}>
 								<OtherInput
 									danger={errorInput && errorInput.last_name}
-									setValue={onChange}
+									setValue={personal_data.onChange}
 									name={'last_name'}
 									label={'фамилия'}
 									required={true}
@@ -371,9 +216,8 @@ export const Add = () => {
 							<div className={classes.first_name}>
 								<OtherInput
 									danger={errorInput && errorInput.first_name}
-									setValue={handleChangePersonalData}
+									setValue={personal_data.onChange}
 									name={'first_name'}
-									value={personalData.first_name}
 									label={'имя'}
 									required={true}
 								/>
@@ -382,12 +226,16 @@ export const Add = () => {
 								)}
 							</div>
 							<div className={classes.middle_name}>
-								<OtherInput setValue={onChange} name={'middle_name'} label={'отчество'} />
+								<OtherInput
+									setValue={personal_data.onChange}
+									name={'middle_name'}
+									label={'отчество'}
+								/>
 							</div>
 							<div className={classes.date_of_birth}>
 								<DataPicker
-									value={state.date_of_birth && state.date_of_birth}
-									setValue={onChange}
+									name={'date_of_birth'}
+									setValue={personal_data.onChange}
 									label={'дата рождения'}
 								/>
 							</div>
@@ -398,16 +246,11 @@ export const Add = () => {
 					<>
 						<ContextCommon.Provider
 							value={{
-								phone_number,
 								errorInput,
-								handleChangePhone,
-								handleChangeValueDateTestLesson,
-								testData,
+								personal_data,
 								groups,
 								couches,
 								agesGroup,
-								handleChangeValueGroupTestLesson,
-								handleChangeValueAgesGroupTestLesson,
 							}}>
 							{age > 0 && age < 16 ? (
 								<>
@@ -439,11 +282,7 @@ export const Add = () => {
 							) : null}
 						</ContextCommon.Provider>
 
-						<AddresSection
-							error={errorInput}
-							change={handleChangeAddressComponent}
-							address={address}
-						/>
+						<AddresSection error={errorInput} change={address.onChange} address={address} />
 
 						{/*<OterSection sale={sale} setSale={handleChangeValueSale}/>*/}
 

@@ -40,7 +40,6 @@ export const AbonementInfo = ({ user }) => {
 				</div>
 			</div>
 			<div className={classes.abonement_block_trainings}>
-				<img src={refresh} alt="продлить" className={classes.abonement_btn} />
 				<img src={edit} alt="редактировать" className={classes.abonement_btn} />
 				<img src={remove} alt="удалить" className={classes.abonement_btn} />
 			</div>

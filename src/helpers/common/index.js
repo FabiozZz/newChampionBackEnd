@@ -202,31 +202,34 @@ export const isBirthDay = date => {
 	let birthData = moment(date).format(`${dateFinish.format('YYYY')}-MM-DD`);
 	return moment(birthData).isBetween(dateStart, dateFinish.format('YYYY-MM-DD'), undefined, '[]');
 };
-export function replaceDate(date) {
+export function replaceDateforBack(date) {
 	return date.replace(/(\d{2}).(\d{2}).(\d{4})/g, '$3-$2-$1');
+}
+export function replaceDateforFront(date) {
+	return moment(date).format('DD.MM.YYYY');
 }
 
 export function maxThreeDay(date) {
 	let currentDate = new Date();
-	let maxDay = replaceDate(
+	let maxDay = replaceDateforBack(
 		new Date(currentDate.setDate(currentDate.getDate() - 3)).toLocaleDateString()
 	);
-	return moment(maxDay).isBefore(replaceDate(date));
+	return moment(maxDay).isBefore(replaceDateforBack(date));
 }
 
 export function sameDateNow(date) {
-	let currentDate = replaceDate(new Date().toLocaleDateString());
-	return moment(currentDate).isSame(replaceDate(date));
+	let currentDate = replaceDateforBack(new Date().toLocaleDateString());
+	return moment(currentDate).isSame(replaceDateforBack(date));
 }
 
 export function sameDate(date) {
-	let currentDate = replaceDate(new Date().toLocaleDateString());
-	return moment(currentDate).isAfter(replaceDate(date));
+	let currentDate = replaceDateforBack(new Date().toLocaleDateString());
+	return moment(currentDate).isAfter(replaceDateforBack(date));
 }
 
 export function authSameDate(currentDate) {
 	console.log(moment().format('YYYY-MM-DD'));
-	console.log(replaceDate(currentDate));
-	console.log(moment(moment().format('YYYY-MM-DD')).isSame(replaceDate(currentDate)));
-	return moment(moment().format('YYYY-MM-DD')).isSame(replaceDate(currentDate));
+	console.log(replaceDateforBack(currentDate));
+	console.log(moment(moment().format('YYYY-MM-DD')).isSame(replaceDateforBack(currentDate)));
+	return moment(moment().format('YYYY-MM-DD')).isSame(replaceDateforBack(currentDate));
 }

@@ -8,8 +8,12 @@ export const useInputOnObject = initialState => {
 			let name = e.target.name;
 			let value = e.target.value;
 			setState(prev => ({ ...prev, [name]: value }));
-		} else {
-			setState(prev => ({ ...prev, date_of_birth: e }));
+		} else if (e && e.props) {
+			let name = e.props.name;
+			let value = e.value;
+			setState(prev => ({ ...prev, [name]: value }));
+		} else if (typeof e === 'object') {
+			setState(prev => ({ ...prev, ...(e && e) }));
 		}
 	};
 	const copyState = Object.assign({}, state);
