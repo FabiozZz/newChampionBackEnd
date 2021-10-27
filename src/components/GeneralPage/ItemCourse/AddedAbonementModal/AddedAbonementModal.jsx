@@ -152,17 +152,17 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 
 		console.log('покупаемый абонемент', {
 			date: date,
-			abonement: uploadData,
+			abonement: { ...uploadData, price: editPrice.price },
 			client: { lesson_id, client_id: user.id },
 		});
-		// dispatch(
-		// 	buyAbonementAndCreateOnceTrainForCourse({
-		// 		date: date,
-		// 		abonement: uploadData,
-		// 		client: { lesson_id, client_id: user.id },
-		// 	})
-		// );
-		// close_modal();
+		dispatch(
+			buyAbonementAndCreateOnceTrainForCourse({
+				date: date,
+				abonement: uploadData,
+				client: { lesson_id, client_id: user.id },
+			})
+		);
+		close_modal();
 	};
 
 	const createDebtTraining = () => {

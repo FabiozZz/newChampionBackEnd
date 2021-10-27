@@ -95,13 +95,11 @@ class Api {
 		this.client = axios.create();
 		this.token = localStorage.getItem('access_token');
 		this.refreshToken = localStorage.getItem('refresh_token');
-
 		this.source = axios.CancelToken.source();
-
 		this.refreshRequest = null;
 
-		// this.client.defaults.baseURL = 'http://127.0.0.1:8000/api/v1';
-		this.client.defaults.baseURL = 'http://5.63.154.181:8000/api/v1';
+		this.client.defaults.baseURL = 'http://127.0.0.1:8000/api/v1';
+		// this.client.defaults.baseURL = 'http://5.63.154.181:8000/api/v1';
 		this.client.interceptors.request.use(
 			config => {
 				if (this.token === null) {

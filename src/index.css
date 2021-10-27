@@ -88,3 +88,201 @@ input[type=number]::-webkit-outer-spin-button {
     transform: rotate(360deg);
   }
 }
+.ant-picker-panel-container button {
+  font-family: 'SF Pro Display', sans-serif !important;
+  text-transform: capitalize;
+}
+.ant-picker-panel-container button:hover {
+  color: rgba(67, 191, 65, 0.54);
+}
+.ant-picker-panel-container {
+  font-family: 'SF Pro Display', sans-serif !important;
+}
+.ant-picker-panel-container .ant-picker-panel .ant-picker-content,
+.ant-picker-panel-container .ant-picker-panel table thead {
+  border-bottom: 1px solid #e0e0e0;
+}
+.ant-picker-panel-container .ant-picker-panel .ant-picker-content,
+.ant-picker-panel-container .ant-picker-panel table thead th {
+  font-family: Montserat, sans-serif !important;
+  text-transform: capitalize;
+  color: #bdbdbd;
+}
+/*
+.picker:focus {
+  background: #fefefe !important;
+  border: 1px solid #69707f !important;
+  box-sizing: border-box !important;
+  box-shadow: none !important;
+  border-radius: 5px !important;
+  outline: none !important;
+}
+
+.picker:hover {
+  background: #fefefe;
+  border: 1px solid rgba(67, 191, 65, 0.54);
+  box-sizing: border-box;
+  box-shadow: 0px 0px 4px rgba(67, 191, 65, 0.15);
+  border-radius: 5px;
+}
+*/
+/*
+.devider {
+  font-family: SF Pro Display;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  !* identical to box height, or 150% *!
+
+  color: #bfc5d2;
+}
+*/
+.ant-picker-active-bar {
+  background: rgba(67, 191, 65, 0.54) !important;
+}
+.ant-picker-cell-inner:before {
+  border: 1px solid rgba(67, 191, 65, 0.54) !important;
+}
+.ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner,
+.ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner,
+.ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
+  background: #2e384d !important;
+  border-radius: 50% !important;
+}
+.ant-picker-cell-in-view.ant-picker-cell-in-range::before {
+  background: #dadada !important;
+}
+.ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover::before,
+.ant-picker-cell-in-view.ant-picker-cell-range-start.ant-picker-cell-range-hover::before,
+.ant-picker-cell-in-view.ant-picker-cell-range-end.ant-picker-cell-range-hover::before,
+.ant-picker-cell-in-view.ant-picker-cell-range-start:not(.ant-picker-cell-range-start-single).ant-picker-cell-range-hover-start::before,
+.ant-picker-cell-in-view.ant-picker-cell-range-end:not(.ant-picker-cell-range-end-single).ant-picker-cell-range-hover-end::before,
+.ant-picker-panel > :not(.ant-picker-date-panel) .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-start::before,
+.ant-picker-panel > :not(.ant-picker-date-panel) .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-end::before {
+  background: #eef3f5 !important;
+}
+.ant-picker-cell-in-view.ant-picker-cell-range-start:not(.ant-picker-cell-range-start-single)::before,
+.ant-picker-cell-in-view.ant-picker-cell-range-end:not(.ant-picker-cell-range-end-single)::before {
+  background: #dadada !important;
+}
+.ant-picker-date-panel .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-start .ant-picker-cell-inner::after,
+.ant-picker-date-panel .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-end .ant-picker-cell-inner::after {
+  background: transparent !important;
+}
+.ant-picker:hover {
+  border-color: rgba(67, 191, 65, 0.54) !important;
+}
+.ant-picker {
+  background: #FEFEFE;
+  border-radius: 5px;
+  min-height: 40px;
+}
+.ant-picker-focused {
+  box-shadow: none;
+  border-color: rgba(67, 191, 65, 0.54) !important;
+}
+.ant-input {
+  background: #FEFEFE;
+  min-height: 40px;
+  font-family: 'SF Pro Display', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: #BFC5D2;
+  border-radius: 5px !important;
+}
+.ant-input::placeholder {
+  font-family: 'SF Pro Display', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: #BFC5D2;
+}
+.ant-input:hover {
+  box-shadow: none;
+  border-color: rgba(67, 191, 65, 0.54) !important;
+}
+.ant-input:focus,
+.ant-input-focused {
+  border: 1px solid #69707F;
+  box-shadow: none;
+  font-family: 'SF Pro Display', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: #69707F;
+}
+.ant-input:active,
+.ant-input-focused {
+  box-shadow: none;
+  background: #FEFEFE;
+  border: 1px solid #69707F;
+  box-sizing: border-box;
+  font-family: 'SF Pro Display', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: #69707F;
+}
+.ant-select-selection-item{
+  font-family: 'SF Pro Display', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: #BFC5D2;
+}
+.ant-select .ant-select-selector{
+  background: #FEFEFE;
+  min-height: 40px;
+}
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector .ant-select-selection-search-input,.ant-select-selection-placeholder{
+  min-height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.ant-select-single .ant-select-selector::after, .ant-select-single .ant-select-selector .ant-select-selection-item::after, .ant-select-single .ant-select-selector .ant-select-selection-placeholder::after{
+  content:'' !important;
+  display: none !important;
+  line-height: 0 !important;
+}
+.ant-select-selection-item{
+  padding: 0;
+  min-height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 20px;
+}
+.ant-select-dropdown{
+  border-radius: 4px;
+ }
+.ant-select-item-option-selected{
+}
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled){
+  background: #E0E3E9;
+}
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector{
+  border-color: rgba(67, 191, 65, 0.54) !important;
+}
+.ant-select-item-option-content{
+  padding: 0 20px;
+  font-family: 'SF Pro Display',sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: #2E384D;
+}
+.rc-virtual-list-holder-inner:first-child{
+  margin-top: 24px;
+}
+.rc-virtual-list-holder-inner:last-child{
+  margin-bottom: 24px;
+}

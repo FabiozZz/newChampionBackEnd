@@ -7,7 +7,7 @@ import { Button } from '../../utils/Buttons/Button';
 import { log_in, log_out } from '../../store/Actions/userActions';
 import Api from '../../Api/Api';
 import moment from 'moment';
-import { change_date } from '../../store/Actions/generalPageActions';
+import { change_date, set_date } from '../../store/Actions/generalPageActions';
 import { notification } from 'antd';
 
 /**
@@ -86,7 +86,7 @@ export const Auth = () => {
 		(async () => {
 			await Api.getTimeZone()
 				.then(r => {
-					dispatch(change_date(new Date(r.data.datetime).toLocaleDateString()));
+					dispatch(set_date(new Date(r.data.datetime).toLocaleDateString()));
 					console.log(current_date);
 					if (!authSameDate(current_date)) {
 						setErrorDate(!authSameDate(current_date));

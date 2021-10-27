@@ -12,9 +12,11 @@ import {
 	LOAD_GENERAL_PAGE_DATA_SUCCESS,
 	REMOVE_CLIENT_FROM_TRAIN,
 	SEARCH_CLIENTS,
+	SET_DATE,
 } from '../../constants/generalPageConstants';
 
 export const change_date = date => ({ type: CHANGE_DATE, payload: date });
+export const set_date = date => ({ type: SET_DATE, payload: date });
 
 export const load_page = () => ({ type: LOAD_GENERAL_PAGE });
 

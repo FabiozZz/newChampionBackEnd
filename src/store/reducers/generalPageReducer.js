@@ -5,10 +5,12 @@ import {
 	LOAD_GENERAL_PAGE_DATA_FAILURE,
 	LOAD_GENERAL_PAGE_DATA_SUCCESS,
 	SEARCH_CLIENTS,
+	SET_DATE,
 } from '../../constants/generalPageConstants';
 import moment from 'moment';
 
 const initialState = {
+	date_now: moment().format('DD.MM.YYYY'),
 	current_date: moment().format('DD.MM.YYYY'),
 	groups: [],
 	loading: false,
@@ -22,6 +24,13 @@ const initialState = {
 
 export const generalPageReducer = (state = initialState, action = null) => {
 	switch (action.type) {
+		case SET_DATE:
+			return {
+				...state,
+				date_now: action.payload,
+				current_date: action.payload,
+			};
+
 		case CHANGE_DATE:
 			return {
 				...state,

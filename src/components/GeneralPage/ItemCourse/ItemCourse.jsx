@@ -5,7 +5,7 @@ import cn from 'classnames';
 import { AddClientModal } from './AddClientModal/AddClientModal';
 import { Modal } from '../../../utils/Modal/Modal';
 import logo from './djiu.png';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
 	change_couch,
 	createTrainForCourse,
@@ -13,10 +13,11 @@ import {
 } from '../../../store/Actions/generalPageActions';
 import { ClientRow } from '../ClientRow/ClientRow';
 import moment from 'moment';
-import { declOfHumanNum, replaceDate } from '../../../helpers/common';
+import { declOfHumanNum, replaceDate, replaceDateforBack } from '../../../helpers/common';
 import { Button } from '../../../utils/Buttons/Button';
 
 const ItemCourse = ({ course, couches }) => {
+	const { date_now, current_date } = useSelector(state => state.general_page);
 	const { group, trainer, trainings, date } = course;
 
 	const [noAbonement, setNoAbonement] = useState(false);
@@ -58,27 +59,29 @@ const ItemCourse = ({ course, couches }) => {
 			date: new Date(date).toLocaleDateString(),
 		};
 		const { subscription } = user;
-		if (!subscription || !subscription.rate || !subscription.rate.id) {
-			setNoAbonement(true);
-			console.log('modal1');
-		} else if (
-			subscription.train_balance === 0 ||
-			subscription.train_balance < 0 ||
-			subscription.valid_until === null ||
-			moment(moment()).isAfter(subscription.valid_until)
-		) {
-			console.log(
-				'%cclub_card.valid_untill: ',
-				'color: MidnightBlue; background: Aquamarine;',
-				subscription.valid_until
-			);
-			setNoAbonement(true);
-			console.log('modal2');
-		} else {
-			dispatch(createTrainForCourse(uploadData));
-			setModal(false);
-			setHide(false);
+
+		if (!moment(replaceDateforBack(date_now)).isAfter(moment(replaceDateforBack(current_date)))) {
+			if (!subscription || !subscription.rate || !subscription.rate.id) {
+				setNoAbonement(true);
+				console.log('modal1');
+			} else if (
+				subscription.train_balance === 0 ||
+				subscription.train_balance < 0 ||
+				subscription.valid_until === null ||
+				moment(moment()).isAfter(subscription.valid_until)
+			) {
+				console.log(
+					'%cclub_card.valid_untill: ',
+					'color: MidnightBlue; background: Aquamarine;',
+					subscription.valid_until
+				);
+				setNoAbonement(true);
+				console.log('modal2');
+			}
 		}
+		dispatch(createTrainForCourse(uploadData));
+		setModal(false);
+		setHide(false);
 	};
 
 	const closeModalAndShowList = () => {
