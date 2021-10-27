@@ -81,24 +81,24 @@ export const Auth = () => {
 		// });
 	};
 
-	useEffect(() => {
-		setLoad(true);
-		(async () => {
-			await Api.getTimeZone()
-				.then(r => {
-					dispatch(set_date(new Date(r.data.datetime).toLocaleDateString()));
-					console.log(current_date);
-					if (!authSameDate(current_date)) {
-						setErrorDate(!authSameDate(current_date));
-						dispatch(log_out());
-					}
-				})
-				.catch(e => {
-					console.log(e);
-				});
-			setLoad(false);
-		})();
-	}, [current_date, dispatch]);
+	// useEffect(() => {
+	// 	setLoad(true);
+	// 	(async () => {
+	// 		await Api.getTimeZone()
+	// 			.then(r => {
+	// 				dispatch(set_date(new Date(r.data.datetime).toLocaleDateString()));
+	// 				console.log(current_date);
+	// 				if (!authSameDate(current_date)) {
+	// 					setErrorDate(!authSameDate(current_date));
+	// 					dispatch(log_out());
+	// 				}
+	// 			})
+	// 			.catch(e => {
+	// 				console.log(e);
+	// 			});
+	// 		setLoad(false);
+	// 	})();
+	// }, [current_date, dispatch]);
 	return (
 		<div className={classes.wrapper}>
 			<div className={classes.title}>

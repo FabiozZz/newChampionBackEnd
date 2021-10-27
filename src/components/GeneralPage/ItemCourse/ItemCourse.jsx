@@ -78,10 +78,11 @@ const ItemCourse = ({ course, couches }) => {
 				setNoAbonement(true);
 				console.log('modal2');
 			}
+		}else{
+			dispatch(createTrainForCourse(uploadData));
+			setModal(false);
+			setHide(false);
 		}
-		dispatch(createTrainForCourse(uploadData));
-		setModal(false);
-		setHide(false);
 	};
 
 	const closeModalAndShowList = () => {
