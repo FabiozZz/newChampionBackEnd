@@ -1,6 +1,6 @@
 import React from 'react';
-import classes from './counter.module.css'
-import PropTypes from "prop-types";
+import classes from './counter.module.css';
+import PropTypes from 'prop-types';
 
 /**
  *
@@ -19,40 +19,68 @@ import PropTypes from "prop-types";
  * @returns {JSX.Element}
  * @constructor
  */
-export const Counter = ({label,increment,decrement,style,name,value,setValue,required,placeholder,type,disabled=false,...props}) => {
-    let disabledClass = disabled ? classes.disabled : classes.otherInputWrapper;
-    return (
-        <div style={style} className={`${disabledClass} ${props.className}`}>
-            {label&&<label>{label}</label>}
-            <div className={classes.wrapper}>
-                <span onClick={!disabled&&decrement} className={classes.toggle}>-</span>
-                <input className={classes.wrapper_input} value={value} max={3} min={1}  name={name} onChange={setValue} required={required} placeholder={placeholder} type={'number'} disabled={disabled}/>
-                <span onClick={!disabled&&increment} className={classes.toggle}>+</span>
-            </div>
-        </div>
-    );
+export const Counter = ({
+	label,
+	increment,
+	decrement,
+	style,
+	name,
+	value,
+	setValue,
+	required,
+	placeholder,
+	type,
+	disabled = false,
+	...props
+}) => {
+	let disabledClass = disabled ? classes.disabled : classes.otherInputWrapper;
+	return (
+		<div style={style} className={`${disabledClass} ${props.className}`}>
+			{label && <label>{label}</label>}
+			<div className={classes.wrapper}>
+				<span onClick={!disabled && decrement} className={classes.toggle}>
+					-
+				</span>
+				<input
+					className={classes.wrapper_input}
+					value={value}
+					max={3}
+					min={1}
+					name={name}
+					onChange={setValue}
+					required={required}
+					placeholder={placeholder}
+					type={'number'}
+					disabled={disabled}
+				/>
+				<span onClick={!disabled && increment} className={classes.toggle}>
+					+
+				</span>
+			</div>
+		</div>
+	);
 };
 
 Counter.defaultProps = {
-    required: false,
-    type: 'number',
-    disabled: false,
-    name:'',
-    style: {},
-    placeholder: '',
-    className: '',
-    value:'',
-    setValue: ()=>{}
+	required: false,
+	type: 'number',
+	disabled: false,
+	name: '',
+	style: {},
+	placeholder: '',
+	className: '',
+	value: '',
+	setValue: () => {},
 };
 
 Counter.propTypes = {
-    required: PropTypes.bool,
-    name: PropTypes.string,
-    label: PropTypes.string,
-    type: PropTypes.string,
-    disabled: PropTypes.bool,
-    style: PropTypes.object,
-    placeholder: PropTypes.string,
-    value:PropTypes.number,
-    setValue: PropTypes.func
+	required: PropTypes.bool,
+	name: PropTypes.string,
+	label: PropTypes.string,
+	type: PropTypes.string,
+	disabled: PropTypes.bool,
+	style: PropTypes.object,
+	placeholder: PropTypes.string,
+	value: PropTypes.number,
+	setValue: PropTypes.func,
 };

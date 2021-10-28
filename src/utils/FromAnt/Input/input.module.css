@@ -1,0 +1,19 @@
+/* COLORS */
+/* BTN STYLES */
+/* TEXT STYLES */
+.error {
+  /*border-color: #D63649;*/
+}
+.label {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1.125px;
+  text-transform: uppercase;
+  color: #B0BAC9;
+  margin: 0;
+  padding: 0;
+}
+/*# sourceMappingURL=input.module.css.map */

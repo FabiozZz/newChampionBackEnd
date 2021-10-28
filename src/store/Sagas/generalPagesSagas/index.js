@@ -83,7 +83,7 @@ export function* loggedInApp({ payload }) {
 		yield put(log_in_done({ type: 'success', title: 'Поздравляю', desc: 'Вы вошли в систему' }));
 		yield put(load_general_page_data());
 	} catch (e) {
-		console.log(e.response);
+		console.log(e.request);
 		if (!e.response) {
 			yield put(
 				log_in_fail({
@@ -184,6 +184,8 @@ export function* addedOnceClient({ payload }) {
 export function* buyAndAdded({ payload }) {
 	const { abonement, client, date } = payload;
 	const { id, ...rest } = abonement;
+	console.log(payload);
+	console.log(rest);
 	try {
 		const request = yield call(() => Api.buyProfileAbonement(id, rest));
 		console.log('данные с сервера>>', request.data);

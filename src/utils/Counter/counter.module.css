@@ -20,7 +20,7 @@
     border-radius: 5px;
     position: relative;
     color: #BFC5D2;
-    background: #F4F6FC;
+    background: #FEFEFE;
     border: 1px solid #BFC5D2;
     box-sizing: border-box;
     overflow: hidden;
@@ -43,6 +43,9 @@
 }
 .otherInputWrapper div input::-moz-placeholder{
     line-height: 40px;
+}
+.otherInputWrapper .toggle{
+    background: #FEFFFF;
 }
 .wrapper{
     display: grid;
@@ -68,7 +71,7 @@
     align-items: center;
     width: 24px;
     height: 40px;
-    background: #FFFFFF;
+    background: #FEFFFF;
     border: 1px solid #BFC5D2;
     box-sizing: border-box;
     border-radius: 5px;
@@ -79,7 +82,7 @@
     display: block;
 }
 .disabled .toggle{
-    background: #DADADA;
+    background: rgba(0, 0, 0, 0.25);
     border:none;
     cursor: inherit;
 }
@@ -109,7 +112,7 @@
     height: 40px !important;
     padding-left: 16px !important;
     padding-right: 16px !important;
-    background: #DADADA !important;
+    /*background: rgba(0, 0, 0, 0.25) !important;*/
     border: 1px solid #BFC5D2 !important;
     box-sizing: border-box !important;
     border-radius: 5px !important;
@@ -125,6 +128,6 @@
     line-height: 24px;
     color: #BFC5D2;
 }
-.disabled .arrow path {
-    fill: #B0BAC9 !important;
-}
+/*.disabled .arrow path {*/
+/*    fill: #B0BAC9 !important;*/
+/*}*/

@@ -9,6 +9,8 @@ import Api from '../../Api/Api';
 import moment from 'moment';
 import { change_date, set_date } from '../../store/Actions/generalPageActions';
 import { notification } from 'antd';
+import { useInputOnObject } from '../../hooks';
+import Input from '../../utils/FromAnt/Input/Input';
 
 /**
  * компонент для авторизации менеджера
@@ -27,21 +29,23 @@ export const Auth = () => {
 
 	const dispatch = useDispatch();
 
-	/**
-	 * стейт для полей ввода
-	 */
-	const [data, setData] = useState({
-		username: '',
-		password: '',
-	});
+	const admin = useInputOnObject({});
 
-	/**
-	 * метод для изменения полей ввода
-	 * @param e
-	 */
-	const handleChangeInput = e => {
-		setData(prevState => ({ ...prevState, [e.target.name]: e.target.value }));
-	};
+	// /**
+	//  * стейт для полей ввода
+	//  */
+	// const [data, setData] = useState({
+	// 	username: '',
+	// 	password: '',
+	// });
+
+	// /**
+	//  * метод для изменения полей ввода
+	//  * @param e
+	//  */
+	// const handleChangeInput = e => {
+	// 	setData(prevState => ({ ...prevState, [e.target.name]: e.target.value }));
+	// };
 
 	const focusInput = () => {
 		setIError(false);
@@ -61,44 +65,28 @@ export const Auth = () => {
 			});
 			dispatch(log_out());
 		} else {
-			dispatch(log_in(data));
+			dispatch(log_in({ ...admin.state }));
 		}
-		// setIsLoad(true)
-		// await Api.login(data).then(() => {
-		//     setIsLoad(false)
-		//     dispatch();
-		//     history.push('/');
-		// }).catch(er => {
-		//     if (er.response) {
-		//         setIError(true)
-		//         notificationPopUp('error','Введены неверные данные','Перепроверьте введенные данные и попробуйте еще раз')
-		//     }else if (er.request) {
-		//         notificationPopUp('error','Проблемы с сервером','Попробуйте позже')
-		//     } else {
-		//         console.log('another');
-		//     }
-		//     setIsLoad(false)
-		// });
 	};
 
-	// useEffect(() => {
-	// 	setLoad(true);
-	// 	(async () => {
-	// 		await Api.getTimeZone()
-	// 			.then(r => {
-	// 				dispatch(set_date(new Date(r.data.datetime).toLocaleDateString()));
-	// 				console.log(current_date);
-	// 				if (!authSameDate(current_date)) {
-	// 					setErrorDate(!authSameDate(current_date));
-	// 					dispatch(log_out());
-	// 				}
-	// 			})
-	// 			.catch(e => {
-	// 				console.log(e);
-	// 			});
-	// 		setLoad(false);
-	// 	})();
-	// }, [current_date, dispatch]);
+	useEffect(() => {
+		setLoad(true);
+		(async () => {
+			await Api.getTimeZone()
+				.then(r => {
+					dispatch(set_date(new Date(r.data.datetime).toLocaleDateString()));
+					console.log(current_date);
+					if (!authSameDate(current_date)) {
+						setErrorDate(!authSameDate(current_date));
+						dispatch(log_out());
+					}
+				})
+				.catch(e => {
+					console.log(e);
+				});
+			setLoad(false);
+		})();
+	}, [current_date, dispatch]);
 	return (
 		<div className={classes.wrapper}>
 			<div className={classes.title}>
@@ -107,39 +95,36 @@ export const Auth = () => {
 			<form className={classes.form_wrapper} onSubmit={handleSubmitForm}>
 				<div className={classes.form_wrapper__item}>
 					<div>
-						<OtherInput
+						<Input
 							onFocus={focusInput}
-							value={data.username}
-							setValue={handleChangeInput}
-							danger={!isEmpty(error)}
+							setValue={admin.onChange}
+							error={!isEmpty(error)}
 							label={'введите login'}
 							name={'username'}
-							type={'text'}
 						/>
-						{inputError && (
-							<span className={classes.warning_text}>Не правильно заполнен Login</span>
-						)}
+						{/*{inputError && (*/}
+						{/*	<span className={classes.warning_text}>Не правильно заполнен Login</span>*/}
+						{/*)}*/}
 					</div>
 					<div>
-						<OtherInput
+						<Input
 							onFocus={focusInput}
-							value={data.password}
-							setValue={handleChangeInput}
-							danger={!isEmpty(error)}
+							setValue={admin.onChange}
+							error={!isEmpty(error)}
 							label={'введите пароль'}
 							name={'password'}
 							type={'password'}
 						/>
-						{inputError && (
-							<span className={classes.warning_text}>Не правильно заполнен Пароль</span>
-						)}
+						{/*{inputError && (*/}
+						{/*	<span className={classes.warning_text}>Не правильно заполнен Пароль</span>*/}
+						{/*)}*/}
 					</div>
 				</div>
 				<div className={classes.form_wrapper__send}>
 					<Button
 						factor={'success'}
 						size={'auto'}
-						disabled={!data.username || !data.password || load}
+						disabled={!admin.state.username || !admin.state.password || load}
 						text={'Войти'}
 						type={'submit'}
 					/>

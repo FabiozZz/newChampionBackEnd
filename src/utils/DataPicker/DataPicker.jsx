@@ -20,6 +20,7 @@ import classes from './dataPicker.module.css';
  *
  * @param simpleClass строка, классы для компонента
  *
+ * @param required
  * @returns {JSX.Element}
  * @constructor
  */

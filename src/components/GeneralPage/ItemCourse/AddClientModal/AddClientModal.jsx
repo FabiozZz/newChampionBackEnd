@@ -10,19 +10,18 @@ import { OtherInput } from '../../../../utils/OtherInput/OtherInput';
 import { Button } from '../../../../utils/Buttons/Button';
 import { notificationPopUp } from '../../../common/Error';
 import { notification } from 'antd';
+import Input from '../../../../utils/FromAnt/Input/Input';
+import { useInput } from '../../../../hooks';
 
 export const AddClientModal = ({ change_user, name, user, form, close_modal, lesson_id, date }) => {
 	const { added_client } = useSelector(state => state.general_page);
-	const [search, setSearch] = useState('');
+	const search = useInput('');
 	const dispatch = useDispatch();
 	const { filter_clients } = useSelector(state => state.general_page);
-	const handleSearchClient = e => {
-		setSearch(e.target.value);
-	};
 
 	useEffect(() => {
-		dispatch(search_clients(search));
-	}, [dispatch, search]);
+		dispatch(search_clients(search.state));
+	}, [dispatch, search.state]);
 
 	const refList = useRef(null);
 
@@ -53,10 +52,9 @@ export const AddClientModal = ({ change_user, name, user, form, close_modal, les
 						<span className={classes.placeholder}>
 							Чтобы отметить клиента поднесите карточку к терминалу или напишите его фамилию ниже
 						</span>
-						<OtherInput
-							focus={true}
-							value={search}
-							setValue={handleSearchClient}
+						<Input
+							autoFocus={true}
+							setValue={search.onChange}
 							placeholder={'Начните писать ФИО клиента'}
 						/>
 						{filter_clients.length ? (

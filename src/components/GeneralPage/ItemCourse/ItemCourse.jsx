@@ -77,8 +77,12 @@ const ItemCourse = ({ course, couches }) => {
 				);
 				setNoAbonement(true);
 				console.log('modal2');
+			} else {
+				dispatch(createTrainForCourse(uploadData));
+				setModal(false);
+				setHide(false);
 			}
-		}else{
+		} else {
 			dispatch(createTrainForCourse(uploadData));
 			setModal(false);
 			setHide(false);

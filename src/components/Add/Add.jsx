@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useRef, useState } from 'react';
 import classes from './add.module.css';
-import { DataPicker } from '../../utils/DataPicker/DataPicker';
 import camera from './camera (1) 1.png';
 import { Redirect } from '../common/Redirect';
 import moment from 'moment';
@@ -15,10 +14,11 @@ import { EndBtnGroup } from '../common/EndBtnGroup/EndBtnGroup';
 import { ParentsBlock } from '../common/ParentsBlock/ParentsBlock';
 import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty, replaceDateforBack } from '../../helpers/common';
-import { OtherInput } from '../../utils/OtherInput/OtherInput';
 import { Button } from '../../utils/Buttons/Button';
 import { useInputOnObject } from '../../hooks';
 import { add_client_on_CRM } from '../../store/Actions/addClientsActions';
+import Input from '../../utils/FromAnt/Input/Input';
+import DatePicker from '../../utils/FromAnt/DatePicker/DatePicker';
 
 export const ContextCommon = createContext();
 
@@ -173,6 +173,7 @@ export const Add = () => {
 			...address.state,
 			...(!isEmptyArray(parents) && { parents }),
 		};
+		console.log(upload_client_data);
 		dispatch(add_client_on_CRM(upload_client_data));
 	};
 
@@ -202,38 +203,34 @@ export const Add = () => {
 						<h3 className={classes.block_info__title}>личная информация</h3>
 						<div className={classes.block_info__item}>
 							<div className={classes.last_name}>
-								<OtherInput
-									danger={errorInput && errorInput.last_name}
+								<Input
+									error={errorInput && errorInput.last_name && errorInput.last_name.join()}
 									setValue={personal_data.onChange}
 									name={'last_name'}
 									label={'фамилия'}
 									required={true}
 								/>
-								{errorInput && errorInput.last_name && (
-									<span className={classes.warning_text}>{errorInput.last_name.join()}</span>
-								)}
+								{/*{errorInput && errorInput.last_name && (*/}
+								{/*	<span className={classes.warning_text}>{errorInput.last_name.join()}</span>*/}
+								{/*)}*/}
 							</div>
 							<div className={classes.first_name}>
-								<OtherInput
-									danger={errorInput && errorInput.first_name}
+								<Input
+									error={errorInput && errorInput.first_name && errorInput.first_name.join()}
 									setValue={personal_data.onChange}
 									name={'first_name'}
 									label={'имя'}
 									required={true}
 								/>
-								{errorInput && errorInput.first_name && (
-									<span className={classes.warning_text}>{errorInput.first_name.join()}</span>
-								)}
+								{/*{errorInput && errorInput.first_name && (*/}
+								{/*	<span className={classes.warning_text}>{errorInput.first_name.join()}</span>*/}
+								{/*)}*/}
 							</div>
 							<div className={classes.middle_name}>
-								<OtherInput
-									setValue={personal_data.onChange}
-									name={'middle_name'}
-									label={'отчество'}
-								/>
+								<Input setValue={personal_data.onChange} name={'middle_name'} label={'отчество'} />
 							</div>
 							<div className={classes.date_of_birth}>
-								<DataPicker
+								<DatePicker
 									name={'date_of_birth'}
 									setValue={personal_data.onChange}
 									label={'дата рождения'}

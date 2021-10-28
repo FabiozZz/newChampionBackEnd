@@ -20,6 +20,9 @@ import {
 	createOnceTrainForCourse,
 	createTrainForCourse,
 } from '../../../../store/Actions/generalPageActions';
+import { useInitialStateOnUser, useInputOnObject, usePrice } from '../../../../hooks';
+import Input from '../../../../utils/FromAnt/Input/Input';
+import Select from '../../../../utils/FromAnt/Select/Select';
 
 const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 	const dispatch = useDispatch();
@@ -30,50 +33,10 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 
 	const { abonements, ages_groups, couches, groups, statuses } = added_client;
 	const filter_aboneemnts = abonements.filter(item => item.rate_type !== 0);
-	const [selectAboniment, setAboniment] = useState({
-		id: null,
-		name: '',
-	});
-	const handleChangeAboniment = item => {
-		setAboniment(prevState => ({ ...prevState, ...item }));
-	};
+	const data = useInputOnObject({});
+	const [selectAboniment, setAboniment] = useState({});
 
-	const [selectAgesGroup, setSelectAgesGroup] = useState(user.age_group);
-	const handleChangeAgesGroupForUser = obj => {
-		setSelectAgesGroup(obj);
-	};
-
-	const [selectCouch, setCouch] = useState({
-		id: null,
-		first_name: '',
-		last_name: '',
-		middle_name: '',
-	});
-	const handleChangeCouch = obj => {
-		setCouch(prevState => ({ ...prevState, ...obj }));
-	};
-
-	const [selectGroup, setGroup] = useState({
-		id: null,
-		name: '',
-	});
-	const handleChangeGroup = obj => {
-		setGroup(prevState => ({ ...prevState, ...obj }));
-	};
-
-	const [selectStatus, setStatus] = useState({
-		id: null,
-		name: '',
-	});
-	const handleChangeStatus = obj => {
-		setStatus(prevState => ({ ...prevState, ...obj }));
-	};
-
-	const [card, setCard] = useState('');
-	const handleChangeNumCard = e => {
-		let symbol = e.target.value.replace(/\D/g, '');
-		setCard(symbol);
-	};
+	const [filter_group, setFilter] = useState([]);
 
 	const [countCard, setCount] = useState(1);
 	const handleChangeCountCard = e => {
@@ -86,46 +49,29 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 	const handleDecrementCount = () => {
 		setCount(countCard <= 1 ? 1 : countCard - 1);
 	};
-
-	const [editPrice, setEditPrice] = useState({
-		price: 0,
-		edit: false,
-	});
-	const handleChangePriceAbonement = e => {
-		setEditPrice(prevState => ({ ...prevState, price: Number(e.target.value) }));
-	};
-	const toggleEdit = () => {
-		setEditPrice(prevState => ({ ...prevState, edit: !prevState.edit }));
-	};
+	const { editPrice, setEditPrice, handleChangePriceAbonement, toggleEdit } = usePrice();
 
 	useEffect(() => {
-		const { subscription } = user;
-		if (subscription) {
-			console.log('%cabonements: ', 'color: MidnightBlue; background: Aquamarine;', abonements);
-			if (subscription && subscription.rate?.id && subscription.rate.rate_type !== 0) {
-				setAboniment(abonements.find(item => item.id === subscription.rate.id));
-			}
-			if (subscription.training_group && subscription.training_group.id) {
-				setGroup(subscription.training_group);
-			}
-		}
-		if (user && user.level && user.level.id) {
-			setStatus(user.level);
-		}
-		if (user && user.age_group.id) {
-			console.log(user.age_group);
-			setSelectAgesGroup(user.age_group);
-			console.log(selectAgesGroup);
-		}
+		setFilter(groups.filter(group => group.age_group.id === data.state.age_group_id));
+	}, [data.state.age_group_id, groups]);
 
-		console.log('%cuser: ', 'color: MidnightBlue; background: Aquamarine;', user);
-	}, [user]);
+	useInitialStateOnUser(user, data, setAboniment, abonements);
 
 	useEffect(() => {
 		if (!single) {
-			if (selectAboniment.prices && selectStatus.id) {
-				let price = selectAboniment.prices.find(
-					item => item.age_group.id === user.age_group.id && item.level.id === selectStatus.id
+			if (
+				selectAboniment &&
+				data.state &&
+				data.state.level_id &&
+				data.state.rate_id &&
+				selectAboniment.prices &&
+				selectAboniment.prices.length
+			) {
+				let copyAbonement = Object.assign({}, selectAboniment);
+				let price = copyAbonement.prices.find(
+					item =>
+						item.age_group.id === (data.state.age_group_id || user.age_group.id) &&
+						item.level.id === data.state.level_id
 				).price;
 				if (price) {
 					setEditPrice(prevState => ({ ...prevState, price: Number(price) }));
@@ -134,34 +80,37 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 		} else {
 			setEditPrice(prevState => ({ ...prevState, price: 500 }));
 		}
-	}, [selectAboniment.prices, selectStatus.id, single, user.age_group.id]);
+	}, [data.state?.level_id, data.state?.rate_id, selectAboniment, single]);
 
 	const handleSubmitAboniment = () => {
-		let price = selectAboniment.prices.find(
-			item => item.age_group.id === user.age_group.id && item.level.id === selectStatus.id
+		let copyAbonement = [...selectAboniment.prices];
+		console.log(copyAbonement);
+		let price = copyAbonement.find(
+			item =>
+				item.age_group.id === (data.state.age_group_id || user.age_group.id) &&
+				item.level.id === data.state.level_id
 		).price;
 		const userPrice = editPrice.price !== Number(price) ? editPrice.price : false;
 		let uploadData = {
-			id: user.id,
-			rate_id: selectAboniment.id,
-			level_id: selectStatus.id,
-			training_group_id: selectGroup.id,
-			quantity: countCard,
-			...(userPrice && { price: userPrice }),
+			date: date,
+			abonement: {
+				id: user.id,
+				...(userPrice && { price: userPrice }),
+				...(data.state && data.state),
+			},
+			client: { lesson_id, client_id: user.id },
 		};
 
 		console.log('покупаемый абонемент', {
 			date: date,
-			abonement: { ...uploadData, price: editPrice.price },
+			abonement: {
+				id: user.id,
+				...(userPrice && { price: userPrice }),
+				...(data.state && data.state),
+			},
 			client: { lesson_id, client_id: user.id },
 		});
-		dispatch(
-			buyAbonementAndCreateOnceTrainForCourse({
-				date: date,
-				abonement: uploadData,
-				client: { lesson_id, client_id: user.id },
-			})
-		);
+		dispatch(buyAbonementAndCreateOnceTrainForCourse(uploadData));
 		close_modal();
 	};
 
@@ -213,29 +162,28 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 							</svg>
 						</div>
 						<div className={classes.card_number}>
-							<OtherInput
-								value={card}
-								setValue={handleChangeNumCard}
-								label={'номер карты'}
-								disabled={single}
-							/>
+							<Input label={'номер карты'} disabled={single} />
 						</div>
 						<div className={classes.aboniment}>
-							<SelectAbonement
-								value={selectAboniment.name}
-								setValue={handleChangeAboniment}
+							<Select
+								value={data.state.rate_id && data.state.rate_id}
+								setValue={data.onChange}
+								name={'rate_id'}
 								data={filter_aboneemnts}
 								label={'тип абонемента'}
 								disabled={single}
+								field={'name'}
 							/>
 						</div>
 						<div className={classes.status}>
-							<SelectStatus
-								value={selectStatus.name}
-								setValue={handleChangeStatus}
+							<Select
+								value={data.state.level_id && data.state.level_id}
+								setValue={data.onChange}
 								data={statuses}
+								name={'level_id'}
 								label={'статус'}
 								disabled={single}
+								field={'name'}
 							/>
 						</div>
 						<div className={classes.counter}>
@@ -249,35 +197,39 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 							/>
 						</div>
 						<div className={classes.ages_group}>
-							<SelectAgesGroup
+							<Select
 								label={'возростная группа'}
-								value={selectAgesGroup}
-								setValue={handleChangeAgesGroupForUser}
+								value={data.state.age_group_id && data.state.age_group_id}
+								setValue={data.onChange}
+								name={'age_group_id'}
+								field={'label'}
 								data={ages_groups}
 								disabled={single}
 							/>
 						</div>
-						{!selectAboniment.is_personal ? (
-							<div className={`${classes.group}`}>
-								<SelectGroup
-									label={'группа'}
-									data={groups}
-									value={selectGroup}
-									setValue={handleChangeGroup}
-									disabled={single}
-								/>
-							</div>
-						) : (
-							<div className={`${classes.group}`}>
-								<SelectCouch
-									data={couches}
-									value={selectCouch}
-									setValue={handleChangeCouch}
-									label={'тренер'}
-									disabled={single}
-								/>
-							</div>
-						)}
+						{/*{data.state.rate_id ? (*/}
+						<div className={`${classes.group}`}>
+							<Select
+								field={'name'}
+								label={'группа'}
+								data={filter_group}
+								value={data.state.training_group_id && data.state.training_group_id}
+								name={'training_group_id'}
+								setValue={data.onChange}
+								disabled={single || !data.state.age_group_id}
+							/>
+						</div>
+						{/*) : (*/}
+						{/*	<div className={`${classes.group}`}>*/}
+						{/*		<SelectCouch*/}
+						{/*			data={couches}*/}
+						{/*			value={selectCouch}*/}
+						{/*			setValue={handleChangeCouch}*/}
+						{/*			label={'тренер'}*/}
+						{/*			disabled={single}*/}
+						{/*		/>*/}
+						{/*	</div>*/}
+						{/*)}*/}
 						<div className={classes.svg}>
 							<svg
 								width="582"
@@ -360,7 +312,7 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 							{/*</div>*/}
 						</div>
 					</div>
-				) : selectAboniment.id && selectStatus.id ? (
+				) : data.state.rate_id && data.state.level_id ? (
 					<div className={classes.add_aboniment}>
 						<div className={classes.sales_card}>
 							{/*<div className={classes.procent}>*/}
@@ -368,20 +320,20 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 							{/*</div>*/}
 							<div className={`${classes.sale_count}`}>
 								<span className={`${classes.sale_count_text}`}>
-									{selectAboniment.train_quantity > 9990 ? (
+									{selectAboniment?.train_quantity > 9990 ? (
 										<span dangerouslySetInnerHTML={{ __html: '&#8734;' }} />
 									) : (
-										selectAboniment.train_quantity
+										selectAboniment?.train_quantity
 									)}{' '}
-									{declOfLessonsNum(selectAboniment.train_quantity)}
+									{declOfLessonsNum(selectAboniment?.train_quantity)}
 								</span>
 								<span className={`${classes.sale_count_text}`}>
-									{selectAboniment.days_duration > 9990 ? (
+									{selectAboniment?.days_duration > 9990 ? (
 										<span dangerouslySetInnerHTML={{ __html: '&#8734;' }} />
 									) : (
-										selectAboniment.days_duration
+										selectAboniment?.days_duration
 									)}{' '}
-									{declOfDay(selectAboniment.days_duration)}
+									{declOfDay(selectAboniment?.days_duration)}
 								</span>
 								{/*<img className={classes.sale_count_img} src={devider} alt="devider"/>*/}
 								<svg
@@ -437,13 +389,21 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 			<div className={classes.btn_group}>
 				<Button
 					click={buyAbonementHandler}
-					disabled={single ? !single : !(selectAboniment.id && selectStatus.id && selectGroup.id)}
+					disabled={
+						single
+							? !single
+							: !(data.state.rate_id && data.state.level_id && data.state.age_group_id)
+					}
 					text={'безналичная оплата'}
 					factor={'default'}
 				/>
 				<Button
 					click={buyAbonementHandler}
-					disabled={single ? !single : !(selectAboniment.id && selectStatus.id && selectGroup.id)}
+					disabled={
+						single
+							? !single
+							: !(data.state.rate_id && data.state.level_id && data.state.age_group_id)
+					}
 					text={'оплата наличными'}
 					factor={'success'}
 				/>

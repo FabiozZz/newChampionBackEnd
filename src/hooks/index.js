@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { isEmpty } from '../helpers/common';
 
 export const useInputOnObject = initialState => {
@@ -24,7 +24,7 @@ export const useInputOnObject = initialState => {
 		}
 	}
 	return {
-		state: newState,
+		state: { ...state, ...newState },
 		onChange: handleChange,
 	};
 };
@@ -40,3 +40,49 @@ export const useInput = initialProps => {
 		onChange: handleChange,
 	};
 };
+export const usePrice = () => {
+	const [editPrice, setEditPrice] = useState({
+		price: 0,
+		edit: false,
+	});
+	const handleChangePriceAbonement = e => {
+		setEditPrice(prevState => ({ ...prevState, price: Number(e.target.value) }));
+	};
+	const toggleEdit = () => {
+		setEditPrice(prevState => ({ ...prevState, edit: !prevState.edit }));
+	};
+	return {
+		editPrice,
+		setEditPrice,
+		toggleEdit,
+		handleChangePriceAbonement,
+	};
+};
+export function useInitialStateOnUser(user, data, setAbonement, abonements) {
+	useEffect(() => {
+		const { subscription } = user;
+		if (subscription) {
+			console.log('%cabonements: ', 'color: MidnightBlue; background: Aquamarine;', abonements);
+			if (subscription && subscription.rate?.id && subscription.rate.rate_type !== 0) {
+				data.onChange({ rate_id: abonements.find(item => item.id === subscription.rate.id).id });
+			}
+			if (subscription.training_group && subscription.training_group.id) {
+				data.onChange({ training_group_id: subscription.training_group.id });
+			}
+		}
+		if (user && user.level && user.level.id) {
+			data.onChange({ level_id: user.level.id });
+		}
+		if (user && user.age_group.id) {
+			console.log(user.age_group);
+			data.onChange({ age_group_id: user.age_group.id });
+		}
+
+		console.log('%cuser: ', 'color: MidnightBlue; background: Aquamarine;', user);
+	}, [user]);
+	useEffect(() => {
+		if (data.state.rate_id) {
+			setAbonement({ ...abonements.find(abonement => abonement.id === data.state.rate_id) });
+		}
+	}, [abonements, data.state?.rate_id]);
+}

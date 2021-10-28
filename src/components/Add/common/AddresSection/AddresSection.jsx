@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from '../../add.module.css';
 import { OtherInput } from '../../../../utils/OtherInput/OtherInput';
+import Input from '../../../../utils/FromAnt/Input/Input';
 
 /**
  * компонент визуализации ввода данных адреса
@@ -14,16 +15,16 @@ export const AddresSection = ({ error, address, change }) => {
 			<h3 className={classes.block_info__title}>Адресс</h3>
 			<div className={classes.block_info__item}>
 				<div className={classes.street}>
-					<OtherInput
-						danger={error && error.street}
+					<Input
+						error={error && error.street && error.street.join()}
 						name={'street'}
 						setValue={change}
 						label={'улица'}
 					/>
 				</div>
 				<div className={classes.house}>
-					<OtherInput
-						danger={error && error.house}
+					<Input
+						error={error && error.house && error.house.join()}
 						name={'house'}
 						placeholder={''}
 						setValue={change}
@@ -31,8 +32,8 @@ export const AddresSection = ({ error, address, change }) => {
 					/>
 				</div>
 				<div className={classes.corspus}>
-					<OtherInput
-						danger={error && error.building}
+					<Input
+						error={error && error.building && error.building.join()}
 						name={'building'}
 						placeholder={''}
 						setValue={change}
@@ -40,8 +41,8 @@ export const AddresSection = ({ error, address, change }) => {
 					/>
 				</div>
 				<div className={classes.room}>
-					<OtherInput
-						danger={error && error.apartments}
+					<Input
+						error={error && error.apartments && error.apartments.join()}
 						name={'apartments'}
 						placeholder={''}
 						setValue={change}
