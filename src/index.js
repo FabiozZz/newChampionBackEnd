@@ -3,17 +3,17 @@ import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
+import 'moment/locale/ru';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import {Provider} from "react-redux";
-import store, {history} from './store';
-
+import { Provider } from 'react-redux';
+import store, { history } from './store';
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App history={history}/>
-    </Provider>,
-    document.getElementById('root')
+	<Provider store={store}>
+		<App history={history} />
+	</Provider>,
+	document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

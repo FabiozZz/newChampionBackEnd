@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import classes from './picker.module.css';
 import { DatePicker as Picker } from 'antd';
 import moment from 'moment';
-import 'moment/locale/ru';
-import locale from 'antd/es/time-picker/locale/ru_RU';
 import { useSelector } from 'react-redux';
 import { replaceDateforBack } from '../../../helpers/common';
+import locale from 'antd/es/date-picker/locale/ru_RU';
+import ReactDOM from 'react-dom';
 const { RangePicker } = Picker;
 
 const DatePickerRange = ({ disabled = false, value, setValue, label }) => {
 	const [date, setDate] = useState([]);
+	const datePickerRef = useRef(null);
 	const onChange = e => {
 		setDate(e);
 		if (setValue && typeof setValue === 'function') {
@@ -21,6 +22,42 @@ const DatePickerRange = ({ disabled = false, value, setValue, label }) => {
 		}
 	};
 	const { date_now } = useSelector(state => state.general_page);
+
+	function someFunc(e) {
+		if (e.keyCode < 47 || e.keyCode > 57) {
+			e.preventDefault();
+		}
+		let len = e.target.value.length;
+		let value = e.target.value;
+		if (len !== 1 || len !== 3) {
+			if (e.keyCode === 47) {
+				e.preventDefault();
+			}
+		}
+		if (len === 2) {
+			value += '.';
+		}
+		if (len === 5) {
+			value += '.';
+		}
+		e.target.value = value;
+	}
+
+	useEffect(() => {
+		const input1 = ReactDOM.findDOMNode(datePickerRef.current).children[0].children[0];
+		input1.addEventListener('keypress', someFunc);
+		input1.maxLength = 10;
+
+		const input2 = ReactDOM.findDOMNode(datePickerRef.current).children[2].children[0];
+		input2.addEventListener('keypress', someFunc);
+		input2.maxLength = 10;
+
+		return () => {
+			input1.removeEventListener('keypress', someFunc);
+			input2.removeEventListener('keypress', someFunc);
+		};
+	}, []);
+
 	function disabledDate(current) {
 		return current && current > moment(replaceDateforBack(date_now)).endOf('day');
 	}
@@ -28,6 +65,7 @@ const DatePickerRange = ({ disabled = false, value, setValue, label }) => {
 		<div>
 			{label && <span className={classes.label}>{label}</span>}
 			<RangePicker
+				ref={datePickerRef}
 				value={date}
 				onChange={onChange}
 				disabled={disabled}

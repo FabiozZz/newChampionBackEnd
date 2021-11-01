@@ -1,5 +1,5 @@
 .wrapper_search {
-  margin: 28px -32px 60px;
+  margin: 28px -16px 60px;
   background: #fff;
   display: grid;
   padding: 32px;
@@ -15,7 +15,7 @@
 }
 .wrapper_result {
   display: grid;
-  margin: 0 -32px;
+  margin: 0;
   background-color: #fff;
   grid-auto-flow: row;
   grid-gap: 24px;
@@ -84,15 +84,12 @@
   justify-content: space-around;
 }
 .mute_text{
-  font-family: 'Montserrat',sans-serif;
+  font-family: 'SF Pro Display',sans-serif;
   font-style: normal;
-  font-weight: 800;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: #8798AD;
-}
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: #8798AD;}
 @media screen and (min-width: 1439px) {
   .wrapper_search{
     margin: 28px -32px 60px -72px;

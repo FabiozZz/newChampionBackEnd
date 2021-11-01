@@ -15,6 +15,7 @@ import {
 	REMOVE_CLIENT_FROM_TRAIN,
 } from '../../../constants/generalPageConstants';
 import {
+	abonemet_expire,
 	get_lessons_with_date,
 	load_general_page_data,
 	load_general_page_data_done,
@@ -158,7 +159,7 @@ export function* addedClient({ payload }) {
 		yield call(() => Api.createTrain(rest));
 		yield put(get_lessons_with_date(date));
 	} catch (e) {
-		yield put(load_general_page_data_fail([e.message]));
+		yield put(abonemet_expire());
 	}
 }
 

@@ -31,6 +31,9 @@ function isEmptyArray(arr) {
 	return false;
 }
 
+/*
+ Добавляет учетную карту нового клиента
+ */
 export const Add = () => {
 	const { groups, couches, agesGroup, loading, error } = useSelector(state => state.addClient);
 
@@ -44,6 +47,7 @@ export const Add = () => {
 	}, [error]);
 
 	const [image, setImage] = useState(null);
+
 	const handleChangeImage = data => setImage(data);
 
 	const [modal, setModal] = useState(false);

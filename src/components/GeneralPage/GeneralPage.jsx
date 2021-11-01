@@ -30,7 +30,11 @@ export const GeneralPage = () => {
 	useEffect(() => {
 		if (generalPage.error && generalPage.error.length) {
 			for (let i = 0; i < generalPage.error.length; i++) {
-				notification.error({ message: generalPage.error[i], duration: 2.5 });
+				notification.error({
+					message: generalPage.error[i],
+					duration: 2.5,
+					style: { zIndex: 999 },
+				});
 			}
 		}
 	}, [generalPage.error]);

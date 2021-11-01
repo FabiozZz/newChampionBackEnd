@@ -9,12 +9,12 @@ import AddedAbonementModal from '../AddedAbonementModal/AddedAbonementModal';
 import { OtherInput } from '../../../../utils/OtherInput/OtherInput';
 import { Button } from '../../../../utils/Buttons/Button';
 import { notificationPopUp } from '../../../common/Error';
-import { notification } from 'antd';
+import { notification, Select } from 'antd';
 import Input from '../../../../utils/FromAnt/Input/Input';
 import { useInput } from '../../../../hooks';
 
 export const AddClientModal = ({ change_user, name, user, form, close_modal, lesson_id, date }) => {
-	const { added_client } = useSelector(state => state.general_page);
+	const { added_client, clients } = useSelector(state => state.general_page);
 	const search = useInput('');
 	const dispatch = useDispatch();
 	const { filter_clients } = useSelector(state => state.general_page);
@@ -32,6 +32,10 @@ export const AddClientModal = ({ change_user, name, user, form, close_modal, les
 			refList.current.style.bottom = `-${height_list + 8}px`;
 		}
 	}, [filter_clients]);
+
+	const selectUser = id => {
+		change_user(clients.find(client => (client.id === id[0] ? client : false)));
+	};
 
 	return (
 		<div className={classes.wrapper}>
@@ -52,26 +56,40 @@ export const AddClientModal = ({ change_user, name, user, form, close_modal, les
 						<span className={classes.placeholder}>
 							Чтобы отметить клиента поднесите карточку к терминалу или напишите его фамилию ниже
 						</span>
-						<Input
+						<Select
+							searchValue={search.state}
+							mode={'multiple'}
+							filterOption={false}
+							dropdownStyle={{ zIndex: 99 }}
+							onSearch={search.onChange}
+							onChange={selectUser}
 							autoFocus={true}
-							setValue={search.onChange}
 							placeholder={'Начните писать ФИО клиента'}
+							options={filter_clients.map(client => ({
+								value: client.id,
+								label: `${client.last_name} ${client.first_name} ${client.middle_name}`,
+							}))}
 						/>
-						{filter_clients.length ? (
-							<>
-								<span className={classes.arrow} />
-								<div ref={refList} className={classes.list}>
-									{filter_clients.map(client => (
-										<div
-											key={client.id}
-											onClick={() => change_user(client)}
-											className={classes.list_item}>
-											{client.last_name} {client.first_name} {client.middle_name}
-										</div>
-									))}
-								</div>
-							</>
-						) : null}
+						{/*<Input*/}
+						{/*	autoFocus={true}*/}
+						{/*	setValue={search.onChange}*/}
+						{/*	placeholder={'Начните писать ФИО клиента'}*/}
+						{/*/>*/}
+						{/*{filter_clients.length ? (*/}
+						{/*	<>*/}
+						{/*		<span className={classes.arrow} />*/}
+						{/*		<div ref={refList} className={classes.list}>*/}
+						{/*			{filter_clients.map(client => (*/}
+						{/*				<div*/}
+						{/*					key={client.id}*/}
+						{/*					onClick={() => change_user(client)}*/}
+						{/*					className={classes.list_item}>*/}
+						{/*					{client.last_name} {client.first_name} {client.middle_name}*/}
+						{/*				</div>*/}
+						{/*			))}*/}
+						{/*		</div>*/}
+						{/*	</>*/}
+						{/*) : null}*/}
 					</div>
 				</>
 			)}

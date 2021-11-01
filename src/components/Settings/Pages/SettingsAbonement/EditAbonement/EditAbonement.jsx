@@ -64,6 +64,7 @@ export const EditAbonement = () => {
 		if (current_abonement) {
 			let arr = [];
 			let newJbj = {};
+			console.log(current_abonement);
 			for (let i = 0; i < settings.ages.length; i++) {
 				newJbj = { ...newJbj, ...settings.ages[i], abonements: [] };
 				for (let k = 0; k < current_abonement.prices.length; k++) {
@@ -82,6 +83,7 @@ export const EditAbonement = () => {
 				}
 				arr.push(newJbj);
 			}
+			console.log(arr);
 			setPrices(arr);
 			setIsPersonal(current_abonement.rate_type);
 			setData({
@@ -108,6 +110,7 @@ export const EditAbonement = () => {
 				arrPrice.push(newObj);
 			}
 		}
+		console.log('рефактор данных>>', arrPrice);
 		const uploadData = {
 			id: current_abonement.id,
 			...data,
@@ -140,7 +143,12 @@ export const EditAbonement = () => {
 
 					<div className={classes.create_section}>
 						<div className={classes.fields}>
-							<OtherInput label={'название тарифа'} name={'name'} setValue={handleChangeInput} value={data.name} />
+							<OtherInput
+								label={'название тарифа'}
+								name={'name'}
+								setValue={handleChangeInput}
+								value={data.name}
+							/>
 							{/*<OtherInput label={'филиалы'}/>*/}
 							<OtherInput
 								label={'продолжительность в днях'}
@@ -156,7 +164,10 @@ export const EditAbonement = () => {
 							/>
 						</div>
 
-						<Radio.Group className={classes.radio_field} onChange={changeIsPersonal} value={is_personalUser}>
+						<Radio.Group
+							className={classes.radio_field}
+							onChange={changeIsPersonal}
+							value={is_personalUser}>
 							<Radio value={1}>Персональный тариф</Radio>
 							<Radio value={2}>Тариф для групповых тренировок</Radio>
 						</Radio.Group>

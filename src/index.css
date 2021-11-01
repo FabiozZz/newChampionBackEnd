@@ -335,3 +335,6 @@ input[type=number]::-webkit-outer-spin-button {
   border-radius: 5px !important;
 
 }
+.ant-select-dropdown{
+  z-index: 999999 !important;
+}

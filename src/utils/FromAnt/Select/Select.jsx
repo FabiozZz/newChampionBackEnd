@@ -29,17 +29,23 @@ const Select = ({
 			}
 		}
 	}
-	const renderList = data.map(item => {
-		let renderList =
-			field === 'object'
-				? field.reduce((acc, some) => (acc += `${item[some]} `), '').trim()
-				: item[field];
-		return (
-			<Option selected={value === item.id} style={{ minWidth: '100%' }} value={item.id}>
-				{renderList}
-			</Option>
-		);
-	});
+	const renderList =
+		data &&
+		data.map(item => {
+			let renderList =
+				field === 'object'
+					? field.reduce((acc, some) => (acc += `${item[some]} `), '').trim()
+					: item[field];
+			return (
+				<Option
+					key={item.id}
+					selected={value === item.id}
+					style={{ minWidth: '100%' }}
+					value={item.id}>
+					{renderList}
+				</Option>
+			);
+		});
 	const errorInput = useMemo(() => {
 		if (error) {
 			return {

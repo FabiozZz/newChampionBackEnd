@@ -149,9 +149,7 @@ export const CreateAbonement = () => {
 													<OtherInput
 														label={'цена в рублях'}
 														name={'price'}
-														setValue={e =>
-															handleChangePrice(e, age, status)
-														}
+														setValue={e => handleChangePrice(e, age, status)}
 														value={abonement.price}
 													/>
 												</div>
@@ -293,12 +291,7 @@ export const CreateAbonement = () => {
 					{/*</div>*/}
 
 					<div className={classes.submit}>
-						<Button
-							factor={'success'}
-							type={'submit'}
-							text={'Сохранить тариф'}
-							size={'auto'}
-						/>
+						<Button factor={'success'} type={'submit'} text={'Сохранить тариф'} size={'auto'} />
 					</div>
 				</form>
 			</div>

@@ -1,4 +1,5 @@
 import {
+	ABONEMENT_EXPIRE,
 	CHANGE_DATE,
 	CHANGE_DATE_FOR_GET_LESSONS,
 	LOAD_GENERAL_PAGE_DATA,
@@ -10,6 +11,7 @@ import {
 import moment from 'moment';
 
 const initialState = {
+	form_add: false,
 	date_now: moment().format('DD.MM.YYYY'),
 	current_date: moment().format('DD.MM.YYYY'),
 	groups: [],
@@ -34,12 +36,19 @@ export const generalPageReducer = (state = initialState, action = null) => {
 		case CHANGE_DATE:
 			return {
 				...state,
-				current_date: action.payload,
+				current_date: [...action.payload],
+			};
+		case ABONEMENT_EXPIRE:
+			return {
+				...state,
+				form_add: true,
+				error: [...action.payload],
 			};
 		case LOAD_GENERAL_PAGE_DATA:
 			return {
 				...state,
 				error: [],
+				form_add: false,
 				loading: true,
 			};
 		case CHANGE_DATE_FOR_GET_LESSONS:

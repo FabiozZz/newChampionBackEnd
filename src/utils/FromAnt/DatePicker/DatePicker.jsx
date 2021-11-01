@@ -1,25 +1,55 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { DatePicker as Picker } from 'antd';
 import moment from 'moment';
-import 'moment/locale/ru';
-import locale from 'antd/es/time-picker/locale/ru_RU';
 import classes from './picker.module.css';
+import locale from 'antd/es/date-picker/locale/ru_RU';
+import ReactDOM from 'react-dom';
 
 const DatePicker = ({ setValue, disabled = false, label, placeholder = 'Не выбрано', name }) => {
 	const [date, setDate] = useState(null);
-	const change_date = e => {
+	const datePickerRef = useRef(null);
+	const change_date = (e, str) => {
 		setDate(e);
 		if (setValue && typeof setValue === 'function') {
 			if (name) {
 				let obj = {
-					[name]: e.format('DD.MM.YYYY'),
+					[name]: str,
 				};
 				setValue(obj);
 			} else {
-				setValue(e.format('DD.MM.YYYY'));
+				setValue(str);
 			}
 		}
 	};
+	function someFunc(e) {
+		if (e.keyCode < 47 || e.keyCode > 57) {
+			e.preventDefault();
+		}
+		let len = e.target.value.length;
+		let value = e.target.value;
+		if (len !== 1 || len !== 3) {
+			if (e.keyCode === 47) {
+				e.preventDefault();
+			}
+		}
+		if (len === 2) {
+			value += '.';
+		}
+		if (len === 5) {
+			value += '.';
+		}
+		e.target.value = value;
+	}
+
+	useEffect(() => {
+		const input = ReactDOM.findDOMNode(datePickerRef.current).children[0].children[0];
+		input.addEventListener('keypress', someFunc);
+		input.maxLength = 10;
+
+		return () => {
+			input.removeEventListener('keypress', someFunc);
+		};
+	}, []);
 	function disabledDate(current) {
 		return current && current > moment().endOf('day');
 	}
@@ -27,11 +57,13 @@ const DatePicker = ({ setValue, disabled = false, label, placeholder = 'Не в�
 		<div>
 			{label && <span className={classes.label}>{label}</span>}
 			<Picker
+				ref={datePickerRef}
 				value={date}
 				onChange={change_date}
 				disabled={disabled}
 				disabledDate={disabledDate}
 				allowClear={false}
+				showToday={false}
 				suffixIcon={
 					<svg
 						width="16"

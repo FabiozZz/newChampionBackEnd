@@ -32,8 +32,12 @@ export const useInputOnObject = initialState => {
 export const useInput = initialProps => {
 	const [state, setState] = useState(initialProps);
 	const handleChange = e => {
-		let value = e.target.value;
-		setState(value);
+		if (e.target && e.target.value) {
+			let value = e.target.value;
+			setState(value);
+		} else {
+			setState(e);
+		}
 	};
 	return {
 		state,

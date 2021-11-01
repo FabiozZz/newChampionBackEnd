@@ -1,4 +1,5 @@
 import {
+	ABONEMENT_EXPIRE,
 	ADD_CLIENT_IN_TRAIN,
 	ADD_DEBT_CLIENT_IN_TRAIN,
 	ADD_ONCE_CLIENT_IN_TRAIN,
@@ -19,6 +20,8 @@ export const change_date = date => ({ type: CHANGE_DATE, payload: date });
 export const set_date = date => ({ type: SET_DATE, payload: date });
 
 export const load_page = () => ({ type: LOAD_GENERAL_PAGE });
+
+export const abonemet_expire = data => ({ type: ABONEMENT_EXPIRE, payload: data });
 
 export const load_general_page_data = () => ({ type: LOAD_GENERAL_PAGE_DATA });
 

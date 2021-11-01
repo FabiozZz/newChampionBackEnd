@@ -7,20 +7,23 @@ import { Modal } from '../../../utils/Modal/Modal';
 import logo from './djiu.png';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+	abonemet_expire,
 	change_couch,
 	createTrainForCourse,
+	get_lessons_with_date,
 	remove_client_from_group,
 } from '../../../store/Actions/generalPageActions';
 import { ClientRow } from '../ClientRow/ClientRow';
 import moment from 'moment';
 import { declOfHumanNum, replaceDate, replaceDateforBack } from '../../../helpers/common';
 import { Button } from '../../../utils/Buttons/Button';
+import Api from '../../../Api/Api';
 
 const ItemCourse = ({ course, couches }) => {
-	const { date_now, current_date } = useSelector(state => state.general_page);
+	const { date_now, current_date, form_add } = useSelector(state => state.general_page);
 	const { group, trainer, trainings, date } = course;
 
-	const [noAbonement, setNoAbonement] = useState(false);
+	// const [noAbonement, setNoAbonement] = useState(false);
 
 	const emptyTrainer = { id: null, first_name: '', last_name: '', middle_name: '' };
 
@@ -51,42 +54,58 @@ const ItemCourse = ({ course, couches }) => {
 		}
 	};
 	const handleChangeUser = user => {
-		console.log(user);
 		setCurrentUser(user);
 		let uploadData = {
 			lesson_id: course.id,
 			client_id: user.id,
-			date: new Date(date).toLocaleDateString(),
 		};
-		const { subscription } = user;
 
-		if (!moment(replaceDateforBack(date_now)).isAfter(moment(replaceDateforBack(current_date)))) {
-			if (!subscription || !subscription.rate || !subscription.rate.id) {
-				setNoAbonement(true);
-				console.log('modal1');
-			} else if (
-				subscription.train_balance === 0 ||
-				subscription.train_balance < 0 ||
-				subscription.valid_until === null ||
-				moment(moment()).isAfter(subscription.valid_until)
-			) {
-				console.log(
-					'%cclub_card.valid_untill: ',
-					'color: MidnightBlue; background: Aquamarine;',
-					subscription.valid_until
-				);
-				setNoAbonement(true);
-				console.log('modal2');
-			} else {
-				dispatch(createTrainForCourse(uploadData));
-				setModal(false);
-				setHide(false);
-			}
-		} else {
-			dispatch(createTrainForCourse(uploadData));
-			setModal(false);
-			setHide(false);
-		}
+		// if (!moment(replaceDateforBack(date_now)).isAfter(moment(replaceDateforBack(current_date)))) {
+		// 	if (!subscription || !subscription.rate || !subscription.rate.id) {
+		// 		setNoAbonement(true);
+		// 		console.log('modal1');
+		// 	} else if (
+		// 		subscription.train_balance === 0 ||
+		// 		subscription.train_balance < 0 ||
+		// 		subscription.valid_until === null ||
+		// 		moment(moment()).isAfter(subscription.valid_until)
+		// 	) {
+		// 		console.log(
+		// 			'%cclub_card.valid_untill: ',
+		// 			'color: MidnightBlue; background: Aquamarine;',
+		// 			subscription.valid_until
+		// 		);
+		// 		setNoAbonement(true);
+		// 		console.log('modal2');
+		// 	} else {
+		// 		dispatch(createTrainForCourse(uploadData));
+		// 		setModal(false);
+		// 		setHide(false);
+		// 	}
+		// } else {
+		(async () => {
+			await Api.createTrain(uploadData)
+				.then(() => {
+					dispatch(get_lessons_with_date(new Date(date).toLocaleDateString()));
+					setModal(false);
+					setHide(false);
+				})
+				.catch(e => {
+					dispatch(
+						abonemet_expire(
+							e.response.status === 404
+								? ['Абонемент клиента истек']
+								: e.response.status === 403
+								? ['Кончились доступные тренировки клиента']
+								: [e.message]
+						)
+					);
+				});
+		})();
+		// dispatch(createTrainForCourse(uploadData));
+		// if (!form_add) {
+		// }
+		// }
 	};
 
 	const closeModalAndShowList = () => {
@@ -102,7 +121,7 @@ const ItemCourse = ({ course, couches }) => {
 			{modal && (
 				<Modal size={'lg'} toggle={handleToggleModalWindow}>
 					<AddClientModal
-						form={noAbonement}
+						form={form_add}
 						close_modal={closeModalAndShowList}
 						user={currentUser}
 						lesson_id={course.id}
