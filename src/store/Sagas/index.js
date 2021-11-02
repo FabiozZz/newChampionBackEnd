@@ -16,6 +16,9 @@ import {
 	SETTINGS_GROUP,
 	SETTINGS_GROUP_CREATE,
 	SETTINGS_GROUP_EDIT,
+	SETTINGS_STATUS,
+	SETTINGS_STATUS_CREATE,
+	SETTINGS_STATUS_EDIT,
 } from '../../Routes/actionRoutes';
 import clientsPageSagas from './clientsPageSagas';
 import { load_clients_all } from '../Actions/clientsActions';
@@ -34,6 +37,7 @@ import { settingsGroupSagas } from './settingsGroupSagas';
 import {
 	start_load_data_abonement,
 	start_load_data_settings_abonement,
+	start_load_data_status,
 } from '../Actions/settingsAbonementActions';
 import { settingsAbonementSagas } from './settingsAbonementSagas';
 
@@ -90,11 +94,30 @@ export function* routeChangeSaga() {
 				console.log('cancel');
 			}
 		}
+		/* страница настроек статусов */
+		if (matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_STATUS))) {
+			console.log(matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_STATUS)));
+			yield put(start_load_data_settings_abonement());
+			if (yield cancelled()) {
+				console.log('cancel');
+			}
+		}
 
 		/* страница создания абонементов */
 		if (matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_CREATE_ABONEMENT))) {
 			console.log(
 				matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_CREATE_ABONEMENT))
+			);
+			const settings = yield select(state => state.settings_abonement);
+			if (!settings.ages.length || !settings.statuses.length) {
+				yield put(start_load_data_settings_abonement());
+			}
+		}
+
+		/* страница создания статуса */
+		if (matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_STATUS_CREATE))) {
+			console.log(
+				matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_STATUS_CREATE))
 			);
 			const settings = yield select(state => state.settings_abonement);
 			if (!settings.ages.length || !settings.statuses.length) {
@@ -118,6 +141,21 @@ export function* routeChangeSaga() {
 		}
 
 		/* страница редактирования абонемента */
+		const statusEditPage = matchPath(
+			action.payload.location.pathname,
+			getRouteConfig(SETTINGS_STATUS_EDIT)
+		);
+		if (statusEditPage) {
+			let { id } = statusEditPage.params;
+			id = Number(id);
+			if (!isNaN(id) && typeof id === 'number') {
+				yield put(start_load_data_status(id));
+			}
+		} else {
+			yield put(clear_profile());
+		}
+
+		/* страница редактирования статуса */
 		const abonementEditPage = matchPath(
 			action.payload.location.pathname,
 			getRouteConfig(SETTINGS_ABONEMENT_EDIT)

@@ -4,8 +4,17 @@ import moment from 'moment';
 import classes from './picker.module.css';
 import locale from 'antd/es/date-picker/locale/ru_RU';
 import ReactDOM from 'react-dom';
+import { replaceDateforBack } from '../../../helpers/common';
 
-const DatePicker = ({ setValue, disabled = false, label, placeholder = 'Не выбрано', name }) => {
+const DatePicker = ({
+	setValue,
+	disabled = false,
+	label,
+	placeholder = 'Не выбрано',
+	name,
+	value,
+	toDay,
+}) => {
 	const [date, setDate] = useState(null);
 	const datePickerRef = useRef(null);
 	const change_date = (e, str) => {
@@ -53,8 +62,12 @@ const DatePicker = ({ setValue, disabled = false, label, placeholder = 'Не в�
 	function disabledDate(current) {
 		return current && current > moment().endOf('day');
 	}
+
+	useEffect(() => {
+		if (value) setDate(moment(value));
+	}, [value]);
 	return (
-		<div>
+		<>
 			{label && <span className={classes.label}>{label}</span>}
 			<Picker
 				ref={datePickerRef}
@@ -63,7 +76,7 @@ const DatePicker = ({ setValue, disabled = false, label, placeholder = 'Не в�
 				disabled={disabled}
 				disabledDate={disabledDate}
 				allowClear={false}
-				showToday={false}
+				showToday={toDay}
 				suffixIcon={
 					<svg
 						width="16"
@@ -85,7 +98,7 @@ const DatePicker = ({ setValue, disabled = false, label, placeholder = 'Не в�
 				format={'DD.MM.YYYY'}
 				placeholder={placeholder}
 			/>
-		</div>
+		</>
 	);
 };
 

@@ -14,6 +14,7 @@ const Select = ({
 	disabled = false,
 	error,
 	name,
+	...props
 }) => {
 	const [select, setSelect] = useState(null);
 	function handleChange(item) {
@@ -57,6 +58,7 @@ const Select = ({
 	}, [error]);
 
 	useEffect(() => {
+		console.log(value);
 		if (value) {
 			setSelect(value);
 		}
@@ -65,6 +67,7 @@ const Select = ({
 		<>
 			{label && <span className={classes.label}>{label}</span>}
 			<S
+				{...props}
 				dropdownStyle={{ zIndex: 99999999999 }}
 				dropdownMatchSelectWidth={false}
 				disabled={disabled}

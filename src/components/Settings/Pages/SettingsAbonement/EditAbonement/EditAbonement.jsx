@@ -67,15 +67,30 @@ export const EditAbonement = () => {
 			console.log(current_abonement);
 			for (let i = 0; i < settings.ages.length; i++) {
 				newJbj = { ...newJbj, ...settings.ages[i], abonements: [] };
-				for (let k = 0; k < current_abonement.prices.length; k++) {
-					if (current_abonement.prices[k].age_group.label === settings.ages[i].label) {
+				if (current_abonement.prices.length) {
+					for (let k = 0; k < current_abonement.prices.length; k++) {
+						if (current_abonement.prices[k].age_group.label === settings.ages[i].label) {
+							newJbj = {
+								...newJbj,
+								abonements: [
+									...newJbj.abonements,
+									{
+										...current_abonement.prices[k].level,
+										price: Number(current_abonement.prices[k].price || 0),
+									},
+								],
+							};
+						}
+					}
+				} else {
+					for (let k = 0; k < settings.statuses.length; k++) {
 						newJbj = {
 							...newJbj,
 							abonements: [
 								...newJbj.abonements,
 								{
-									...current_abonement.prices[k].level,
-									price: Number(current_abonement.prices[k].price || 0),
+									...settings.statuses[k],
+									price: 0,
 								},
 							],
 						};

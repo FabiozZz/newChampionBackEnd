@@ -17,10 +17,13 @@
 .ant-radio-wrapper:hover .ant-radio, .ant-radio:hover .ant-radio-inner, .ant-radio-input:focus + .ant-radio-inner {
     border-color: #43BF41 !important;
 }
+.ant-radio-checked .ant-radio-inner{
+    border-color: #43BF41 !important;
+}
 .ant-radio-inner::after {
     position: absolute;
     top: 0;
-    left: -0.25px;
+    left: 0;
     display: block;
     width: 101%;
     height: 101%;

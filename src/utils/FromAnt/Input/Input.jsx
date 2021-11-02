@@ -29,9 +29,6 @@ const Input = ({
 
 	const change = e => {
 		let value = e.target.value;
-		// if (type && type === 'number') {
-		// 	value = value.replace(/\w/g, '');
-		// }
 		setInput(value);
 		if (setValue && typeof setValue === 'function') {
 			setValue(e);
@@ -42,7 +39,7 @@ const Input = ({
 			setInput(value);
 			setOneLoad(false);
 		}
-	}, []);
+	}, [value]);
 	return (
 		<div style={{ position: 'relative' }}>
 			<span className={classes.label}>{label}</span>

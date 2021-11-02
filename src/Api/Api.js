@@ -492,12 +492,25 @@ class Api {
 		return await this.client.get(`/subscription/rate/${id}`);
 	}
 
+	async getStatusWithId(id) {
+		return await this.client.get(`/core/clientLevel/${id}/`);
+	}
+
 	async removeAbonementWithId(id) {
 		return await this.client.delete(`/subscription/rate/${id}`);
 	}
 
+	async removeStatusWithId(id) {
+		return await this.client.delete(`/core/clientLevel/${id}/`);
+	}
+
 	async sendNewAbonementWithPrice(data) {
 		return await this.client.post('/subscription/rate/', { ...data });
+	}
+
+	async sendNewStatus(name) {
+		console.log(name);
+		return await this.client.post('/core/clientLevel/', { name });
 	}
 
 	async editAbonementWithPrice(id, data) {

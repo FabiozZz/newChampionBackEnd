@@ -18,6 +18,7 @@ import {
 	get_lessons_with_date,
 	load_general_page_data,
 } from '../../store/Actions/generalPageActions';
+import DatePicker from '../../utils/FromAnt/DatePicker/DatePicker';
 
 export const GeneralPage = () => {
 	const dispatch = useDispatch();
@@ -39,14 +40,14 @@ export const GeneralPage = () => {
 		}
 	}, [generalPage.error]);
 
-	const prevDay = () => {
-		dispatch(
-			change_date(moment(replaceDateforBack(dateNow)).subtract(1, 'day').format('DD.MM.YYYY'))
-		);
+	const change_current_date = e => {
+		dispatch(change_date(moment(replaceDateforBack(e)).format('DD.MM.YYYY')));
 	};
-	const nextDay = () => {
-		dispatch(change_date(moment(replaceDateforBack(dateNow)).add(1, 'day').format('DD.MM.YYYY')));
-	};
+
+	// const prevDay = () => {};
+	// const nextDay = () => {
+	// 	dispatch(change_date(moment(replaceDateforBack(dateNow)).add(1, 'day').format('DD.MM.YYYY')));
+	// };
 	useEffect(() => {
 		setList(
 			generalPage.groups.sort(function (a, b) {
@@ -67,19 +68,11 @@ export const GeneralPage = () => {
 			<h1 className={classes.title}>Расписание</h1>
 			<div className={classes.wrapper}>
 				<span className={classes.time}>
-					{maxThreeDay(dateNow) && (
-						<>
-							<span onClick={prevDay} className={classes.time_arrow}>
-								&lt;
-							</span>{' '}
-						</>
-					)}{' '}
-					{dateNow}{' '}
-					{sameDate(dateNow) && (
-						<span onClick={nextDay} className={classes.time_arrow}>
-							&gt;
-						</span>
-					)}
+					<DatePicker
+						toDay={true}
+						value={moment(replaceDateforBack(dateNow))}
+						setValue={change_current_date}
+					/>
 				</span>
 				{renderList.length ? (
 					<>

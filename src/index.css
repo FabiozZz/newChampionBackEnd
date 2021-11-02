@@ -176,6 +176,7 @@ input[type=number]::-webkit-outer-spin-button {
 .ant-picker {
   background: #FEFEFE;
   border-radius: 5px;
+  width: 100%;
   min-height: 40px;
 }
 .ant-picker-focused {

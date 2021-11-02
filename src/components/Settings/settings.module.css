@@ -4,6 +4,7 @@
     grid-auto-rows: min-content;
     grid-gap: 24px;
     grid-column: 1/13;
+    padding-bottom: 100px;
 }
 .link{
     padding: 12px 15px;

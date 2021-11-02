@@ -24,13 +24,15 @@ import {
 	SETTINGS_GROUP_CREATE,
 	SETTINGS_GROUP_EDIT,
 	SETTINGS_STATUS,
+	SETTINGS_STATUS_CREATE,
+	SETTINGS_STATUS_EDIT,
 	STUFF_ROUTE,
 } from './actionRoutes';
 import { Stuffs } from '../components/Stuffs/Stuffs';
 import { SettingsGroup } from '../components/Settings/Pages/SettingsGroup/SettingsGroup';
 import { CreateGroup } from '../components/Settings/Pages/SettingsGroup/CreateGroup/CreateGroup';
 import { EditGroup } from '../components/Settings/Pages/SettingsGroup/EditGroup/EditGroup';
-import { SettingsStatus } from '../components/Settings/Pages/SettingsStatus/SettingsStatus';
+import { SettingsStatus } from 'components/Settings/Pages/SettingsStatus/SettingsStatus';
 import { SettingsAbonement } from '../components/Settings/Pages/SettingsAbonement/SettingsAbonement';
 import { CreateAgeGroup } from '../components/Settings/Pages/SettingsGroup/CreateAgeGroup/CreateAgeGroup';
 import { ViewAbonement } from '../components/Settings/Pages/SettingsAbonement/ViewAbonement/ViewAbonement';
@@ -38,6 +40,8 @@ import { CreateAbonement } from '../components/Settings/Pages/SettingsAbonement/
 import { EditAbonement } from '../components/Settings/Pages/SettingsAbonement/EditAbonement/EditAbonement';
 import { Reports } from '../components/Reports/Reports';
 import { ReportsVisit } from '../components/Reports/Visits/ReportsVisit';
+import { CreateStatus } from '../components/Settings/Pages/SettingsStatus/CreateStatus/CreateStatus';
+import { EditStatus } from '../components/Settings/Pages/SettingsStatus/EditStatus/EditStatus';
 
 export const routes = [
 	{
@@ -130,6 +134,20 @@ export const routes = [
 		path: '/settings/status',
 		exact: true,
 		component: SettingsStatus,
+	},
+	{
+		/* Страница редактирования статуса */
+		id: SETTINGS_STATUS_EDIT,
+		path: '/settings/status/edit/:id',
+		exact: true,
+		component: EditStatus,
+	},
+	{
+		/* Страница создания статуса */
+		id: SETTINGS_STATUS_CREATE,
+		path: '/settings/create_status',
+		exact: true,
+		component: CreateStatus,
 	},
 	{
 		/* Страница настроек абонементов */

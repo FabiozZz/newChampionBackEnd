@@ -11,7 +11,7 @@ export const ViewAbonement = () => {
 	const abonement = useSelector(state => state.settings_abonement);
 	const { current_abonement, ages, loading } = abonement;
 	const [renderList, setRender] = useState([]);
-	console.log();
+	console.log(ages);
 	const dispatch = useDispatch();
 
 	useLayoutEffect(() => {
@@ -27,7 +27,7 @@ export const ViewAbonement = () => {
 						tempArr.push({
 							id: current_abonement.prices[dataPrice].level.id,
 							name: current_abonement.prices[dataPrice].level.name,
-							price: current_abonement.prices[dataPrice].price,
+							price: current_abonement.prices[dataPrice].price || 0,
 						});
 					}
 				}
@@ -88,7 +88,9 @@ export const ViewAbonement = () => {
 									: 'Пробный тариф'}
 							</p>
 						</div>
-						<NavLink className={classes.edit} to={`/settings/abonement/edit/${current_abonement?.id}`}>
+						<NavLink
+							className={classes.edit}
+							to={`/settings/abonement/edit/${current_abonement?.id}`}>
 							<img src={edit_profile} alt="edit_profile" />
 						</NavLink>
 					</div>
@@ -96,7 +98,9 @@ export const ViewAbonement = () => {
 					{renderList.map(price => {
 						return (
 							<div key={price.id} className={classes.info_prices}>
-								<h3 className={classes.header}>цены для возрастной группы &laquo;{price.name}&raquo;</h3>
+								<h3 className={classes.header}>
+									цены для возрастной группы &laquo;{price.name}&raquo;
+								</h3>
 								<div className={classes.table}>
 									{price.price.map(item => {
 										return (

@@ -1,0 +1,145 @@
+.general {
+    grid-column: 1/13;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: min-content;
+    padding-bottom: 100px;
+    grid-gap: 16px;
+}
+.wrapper{
+    margin: 0 -15px;
+    grid-column: 1/13;
+    background-color: white;
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    grid-auto-rows: min-content;
+    grid-gap: 32px 24px;
+    padding: 32px 16px;
+}
+.label{
+    grid-column: 1/13;
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #8798AD;
+}
+.empty_data{
+    grid-column: 1/13;
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    color: #8798AD;
+}
+.btn_add{
+    grid-column: 1/6;
+}
+
+.table{
+    grid-column: 1/13;
+    /*display: grid;*/
+    /*grid-template-columns: 4fr 2fr 2fr 4fr 1fr 1fr;*/
+    /*grid-auto-rows: min-content;*/
+    border-collapse: separate;
+    table-layout: fixed;
+    width: 100%;
+}
+.table td {
+    padding: 14px 0;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    /*background-color: red;*/
+    font-family: 'SF Pro Display',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #69707F;
+}
+.table thead th{
+    padding: 0  0 14px;
+    text-align: center;
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1.125px;
+    text-transform: uppercase;
+    color: rgba(105, 112, 127, 0.7);
+}
+
+.left {
+    cursor: pointer;
+}
+.hover{
+    background: #E0E3E9;
+}
+
+/*.table tr:hover .left  {*/
+/*    !*background: red;*!*/
+/*    background: #E0E3E9;*/
+/*    cursor: pointer;*/
+/*}*/
+/*.table tr > .left {*/
+/*    !*background: red;*!*/
+/*    !*background: black;*!*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.table tbody tr .right:hover {*/
+/*    background: #E0E3E9;*/
+/*}*/
+
+
+.right:hover {
+    background: #E0E3E9;
+}
+/*.table tr .right:hover  .left:nth-child(5n) {*/
+/*    background: inherit;*/
+/*}*/
+
+/*.table tbody tr:hover td:nth-last-child(1n+3) {*/
+/*}*/
+
+
+.table tr td:nth-child(1) {
+    width: 7.38%;
+}
+.table tr td:nth-child(2) {
+    width: 22.14%;
+}
+.table tr td:nth-child(3) {
+    width: 7.38%;
+}
+.table tr td:nth-child(4) {
+    width: 7.38%;
+}
+
+.table td:nth-child(3) {
+    text-overflow: clip;
+}
+.table td:nth-child(4) {
+    text-overflow: clip;
+}
+
+.table .right{
+    cursor: pointer;
+}
+
+.table tbody tr:nth-child(2n+1) {
+    background:  #FBFBFE;;
+}
+.table tbody tr:nth-child(2n+2) {
+    background:  #F4F6FC;
+}
