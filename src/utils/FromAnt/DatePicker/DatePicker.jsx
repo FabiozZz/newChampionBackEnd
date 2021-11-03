@@ -67,7 +67,7 @@ const DatePicker = ({
 		if (value) setDate(moment(value));
 	}, [value]);
 	return (
-		<>
+		<div>
 			{label && <span className={classes.label}>{label}</span>}
 			<Picker
 				ref={datePickerRef}
@@ -98,7 +98,7 @@ const DatePicker = ({
 				format={'DD.MM.YYYY'}
 				placeholder={placeholder}
 			/>
-		</>
+		</div>
 	);
 };
 

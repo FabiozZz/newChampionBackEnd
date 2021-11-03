@@ -80,20 +80,20 @@ export const ProfileInfo = ({ profile }) => {
 	};
 	return (
 		<>
-			{/*{modal.show && (*/}
-			{/*	<Modal toggle={showModal}>*/}
-			{/*		{modal.type === 'edit' ? (*/}
-			{/*			<ModalEditAbonement*/}
-			{/*				toggleModal={showModal}*/}
-			{/*				change={clearType}*/}
-			{/*				type={modal.type}*/}
-			{/*				profile={profile}*/}
-			{/*			/>*/}
-			{/*		) : (*/}
-			{/*			<ModalChangeAbonement toggleModal={showModal} profile={profile} type={modal.type} />*/}
-			{/*		)}*/}
-			{/*	</Modal>*/}
-			{/*)}*/}
+			{modal.show && (
+				<Modal size={'lg'} toggle={showModal}>
+					{modal.type === 'edit' ? (
+						<ModalEditAbonement
+							toggleModal={showModal}
+							change={clearType}
+							type={modal.type}
+							profile={profile}
+						/>
+					) : (
+						<ModalChangeAbonement toggleModal={showModal} profile={profile} type={modal.type} />
+					)}
+				</Modal>
+			)}
 			{/*<CarouselAbonements />*/}
 
 			<div className={classes.abonement_carousel_wrapper}>

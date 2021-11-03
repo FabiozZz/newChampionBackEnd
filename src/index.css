@@ -88,6 +88,12 @@ input[type=number]::-webkit-outer-spin-button {
     transform: rotate(360deg);
   }
 }
+.ant-picker-input > input{
+  color:#BFC5D2;
+}
+/*.ant-picker-input > input{*/
+/*  color:#BFC5D2;*/
+/*}*/
 .ant-picker-panel-container button {
   font-family: 'SF Pro Display', sans-serif !important;
   text-transform: capitalize;
@@ -177,7 +183,7 @@ input[type=number]::-webkit-outer-spin-button {
   background: #FEFEFE;
   border-radius: 5px;
   width: 100%;
-  min-height: 40px;
+  height: 40px;
 }
 .ant-picker-focused {
   box-shadow: none;

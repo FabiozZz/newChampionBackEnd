@@ -1,14 +1,16 @@
 import React from 'react';
 import classes from '../../../profile.module.css';
-import card from '../../../../../assets/images/statusFilter/BrilClient.svg';
-import refresh from '../../../../../assets/images/refresh.svg';
-import remove from '../../../../../assets/images/remove.svg';
-import edit from '../../../../../assets/images/edit.svg';
+import card from 'assets/images/statusFilter/BrilClient.svg';
+import refresh from 'assets/images/refresh.svg';
+import remove from 'assets/images/remove.svg';
+import edit from 'assets/images/edit.svg';
 import moment from 'moment';
-import { declOfLessonsNum } from '../../../../../helpers/common';
+import { declOfLessonsNum } from 'helpers/common';
 
 export const AbonementInfo = ({ user }) => {
 	const { subscription, level } = user;
+	console.log(user);
+
 	return (
 		<div className={classes.abonemet_block}>
 			<div className={classes.abonement_block_wrapper}>
