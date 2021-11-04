@@ -16,6 +16,8 @@ import {
 import { BtnGroup } from 'components/Clients/FilterClientSection/BtnGroup/BtnGroup';
 import Select from 'utils/FromAnt/Select/Select';
 import DatePicker from '../../../../../utils/FromAnt/DatePicker/DatePicker';
+import { buy_abonement } from '../../../../../store/Actions/profileActions';
+import moment from 'moment';
 
 export const ModalChangeAbonement = ({ profile, toggleModal }) => {
 	const dispatch = useDispatch();
@@ -73,56 +75,72 @@ export const ModalChangeAbonement = ({ profile, toggleModal }) => {
 		} else {
 			setEditPrice(prevState => ({ ...prevState, price: 500 }));
 		}
-		data.onChange({ date: replaceDateforBack(current_date) });
 	}, [data.state?.level_id, data.state?.rate_id, selectAboniment, single]);
 
-	const handleSubmitAboniment = () => {
+	const handleSubmitAbonimentCash = () => {
 		console.log(data.state);
-		// let copyAbonement = [...selectAboniment.prices];
-		// console.log(copyAbonement);
-		// let price = copyAbonement.find(
-		// 	item =>
-		// 		item.age_group.id === (data.state.age_group_id || user.age_group.id) &&
-		// 		item.level.id === data.state.level_id
-		// ).price;
-		// const userPrice = editPrice.price !== Number(price) ? editPrice.price : false;
-		// let uploadData = {
-		// 	date: date,
-		// 	abonement: {
-		// 		id: user.id,
-		// 		...(userPrice && { price: userPrice }),
-		// 		...(data.state && data.state),
-		// 	},
-		// 	client: { lesson_id, client_id: user.id },
-		// };
-		//
-		// console.log('покупаемый абонемент', {
-		// 	date: date,
-		// 	abonement: {
-		// 		id: user.id,
-		// 		...(userPrice && { price: userPrice }),
-		// 		...(data.state && data.state),
-		// 	},
-		// 	client: { lesson_id, client_id: user.id },
-		// });
-		// dispatch(buyAbonementAndCreateOnceTrainForCourse(uploadData));
-		// close_modal();
+		let copyAbonement = [...selectAboniment.prices];
+		console.log(copyAbonement);
+		let price = copyAbonement.find(
+			item =>
+				item.age_group.id === (data.state.age_group_id || user.age_group.id) &&
+				item.level.id === data.state.level_id
+		).price;
+		const userPrice = editPrice.price !== Number(price) ? editPrice.price : false;
+		let uploadData = {
+			id: user.id,
+			payment_method: 'cash',
+			...(userPrice && { price: userPrice }),
+			...(data.state && data.state),
+			...(data.state.purchase_date && {
+				purchase_date: replaceDateforBack(data.state.purchase_date),
+			}),
+		};
+
+		console.log('покупаемый абонемент', uploadData);
+		dispatch(buy_abonement(uploadData));
+		toggleModal();
 	};
 
-	const createDebtTraining = () => {
-		// dispatch(createDebtTrainForCourse({ lesson_id, client_id: user.id, date: date }));
-		// close_modal();
-	};
-
-	const createOnceTraining = () => {
-		// dispatch(createOnceTrainForCourse({ lesson_id, client_id: user.id, date: date }));
-		// close_modal();
-	};
-
-	const buyAbonementHandler = () => {
+	const handleSubmitAbonimentCashLess = () => {
 		console.log(data.state);
-		// single ? createOnceTraining() : handleSubmitAboniment();
+		let copyAbonement = [...selectAboniment.prices];
+		console.log(copyAbonement);
+		let price = copyAbonement.find(
+			item =>
+				item.age_group.id === (data.state.age_group_id || user.age_group.id) &&
+				item.level.id === data.state.level_id
+		).price;
+		const userPrice = editPrice.price !== Number(price) ? editPrice.price : false;
+		let uploadData = {
+			id: user.id,
+			payment_method: 'cashless',
+			...(userPrice && { price: userPrice }),
+			...(data.state && data.state),
+			...(data.state.purchase_date && {
+				purchase_date: replaceDateforBack(data.state.purchase_date),
+			}),
+		};
+
+		console.log('покупаемый абонемент', uploadData);
+		dispatch(buy_abonement(uploadData));
+		toggleModal();
 	};
+
+	// const createDebtTraining = () => {
+	// 	// dispatch(createDebtTrainForCourse({ lesson_id, client_id: user.id, date: date }));
+	// 	// close_modal();
+	// };
+	//
+	// const createOnceTraining = () => {
+	// 	// dispatch(createOnceTrainForCourse({ lesson_id, client_id: user.id, date: date }));
+	// 	// close_modal();
+	// };
+	//
+	// const buyAbonementHandler = () => {
+	// 	console.log(data.state);
+	// 	// single ? createOnceTraining() : handleSubmitAboniment();
+	// };
 
 	return (
 		<div className={classes.wrapper}>
@@ -162,10 +180,10 @@ export const ModalChangeAbonement = ({ profile, toggleModal }) => {
 					</div>
 					<div className={classes.date_picker}>
 						<DatePicker
-							value={data.state.date && data.state.date}
 							setValue={data.onChange}
-							name={'date'}
+							name={'purchase_date'}
 							label={'дата тренировки'}
+							defaultValue={moment(replaceDateforBack(current_date))}
 						/>
 					</div>
 					<div className={classes.aboniment}>
@@ -392,7 +410,7 @@ export const ModalChangeAbonement = ({ profile, toggleModal }) => {
 			{/* end module change price */}
 			<div className={classes.btn_group}>
 				<Button
-					click={buyAbonementHandler}
+					click={handleSubmitAbonimentCashLess}
 					disabled={
 						single
 							? !single
@@ -402,7 +420,7 @@ export const ModalChangeAbonement = ({ profile, toggleModal }) => {
 					factor={'default'}
 				/>
 				<Button
-					click={buyAbonementHandler}
+					click={handleSubmitAbonimentCash}
 					disabled={
 						single
 							? !single

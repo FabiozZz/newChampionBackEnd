@@ -14,6 +14,7 @@ const DatePicker = ({
 	name,
 	value,
 	toDay,
+	defaultValue = null,
 }) => {
 	const [date, setDate] = useState(null);
 	const datePickerRef = useRef(null);
@@ -70,6 +71,7 @@ const DatePicker = ({
 		<div>
 			{label && <span className={classes.label}>{label}</span>}
 			<Picker
+				// defaultValue={defaultValue}
 				ref={datePickerRef}
 				value={date}
 				onChange={change_date}

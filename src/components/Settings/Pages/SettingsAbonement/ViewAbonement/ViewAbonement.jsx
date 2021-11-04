@@ -27,6 +27,7 @@ export const ViewAbonement = () => {
 						tempArr.push({
 							id: current_abonement.prices[dataPrice].level.id,
 							name: current_abonement.prices[dataPrice].level.name,
+							color: current_abonement.prices[dataPrice].level.color,
 							price: current_abonement.prices[dataPrice].price || 0,
 						});
 					}
@@ -103,10 +104,25 @@ export const ViewAbonement = () => {
 								</h3>
 								<div className={classes.table}>
 									{price.price.map(item => {
+										console.log(item);
 										return (
 											<React.Fragment key={item.id}>
 												<div className={classes.card}>
-													<img width={22.87} height={15.55} alt="" />
+													<svg
+														width="24"
+														height="16"
+														viewBox="0 0 24 16"
+														fill="none"
+														xmlns="http://www.w3.org/2000/svg">
+														<path
+															d="M23.4674 3.77273V2.54545C23.4674 1.13964 22.3575 0 20.9883 0H3.27995C1.91074 0 0.800781 1.13964 0.800781 2.54545V3.77273C0.800781 3.89823 0.899904 4 1.02214 4H23.2461C23.3683 4 23.4674 3.89823 23.4674 3.77273Z"
+															fill={item.color}
+														/>
+														<path
+															d="M1 5.22727V13C1 14.4058 2.10996 15.5455 3.47917 15.5455H21.1875C22.5567 15.5455 23.6667 14.4058 23.6667 13V5.22727C23.6667 5.10177 23.5675 5 23.4453 5H1.22135C1.09912 5 1 5.10177 1 5.22727Z"
+															fill={item.color}
+														/>
+													</svg>
 													<p className={classes.text}>{item.name}</p>
 												</div>
 												<p className={classes.price}>{item.price}&#8381;</p>

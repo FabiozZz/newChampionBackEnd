@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useRef, useState } from 'react';
 import classes from './edit.module.css';
-import { DataPicker } from '../../utils/DataPicker/DataPicker';
 import camera from './camera (1) 1.png';
 import { Redirect } from '../common/Redirect';
 import moment from 'moment';
@@ -25,6 +24,8 @@ import { OtherInput } from '../../utils/OtherInput/OtherInput';
 import { Button } from '../../utils/Buttons/Button';
 import { update } from 'ink-docstrap/fixtures/documents/probe';
 import { useInputOnObject } from '../../hooks';
+import DatePicker from '../../utils/FromAnt/DatePicker/DatePicker';
+import Input from '../../utils/FromAnt/Input/Input';
 
 export const ContextCommonEdit = createContext();
 
@@ -240,7 +241,7 @@ export const Edit = () => {
 		const createParents = parents.filter(parent => parent.id === undefined);
 		const uploadUser = {
 			id: user.id,
-			age_group_id: personal_data.state.age_group.id,
+			// age_group_id: personal_data.state.age_group.id,
 			...personal_data.state,
 			date_of_birth: replaceDateforBack(personal_data.state.date_of_birth),
 			...(address.state && { ...address.state }),
@@ -279,21 +280,36 @@ export const Edit = () => {
 		if (isEmpty(user)) {
 			dispatch(open_edit_page(id));
 		} else {
-			const { id, subscription, parents, balance, ...rest } = user;
+			const {
+				id,
+				subscription,
+				parents,
+				date_of_birth,
+				phone_number,
+				balance,
+				first_name,
+				middle_name,
+				last_name,
+				age_group,
+				...rest
+			} = user;
 			personal_data.onChange({
-				...rest,
-				...(rest.date_of_birth && { date_of_birth: replaceDateforFront(rest.date_of_birth) }),
-				...(rest.phone_number && { phone_number: replaceDateforFront(rest.date_of_birth) }),
+				...(last_name && { last_name }),
+				...(first_name && { first_name }),
+				...(middle_name && { middle_name }),
+				...(age_group && { age_group_id: age_group.id }),
+				...(date_of_birth && { date_of_birth: replaceDateforFront(date_of_birth) }),
+				...(phone_number && phone_number.length && { phone_number: rest.phone_number }),
 			});
 
 			if (parents.length) {
 				setParents(parents);
 			}
 			address.onChange({
-				street: user.street,
-				house: user.house,
-				building: user.building,
-				apartments: user.apartments,
+				...(user.street && user.street.length && { street: user.street }),
+				...(user.house && user.house.length && { house: user.house }),
+				...(user.building && user.building.length && { building: user.building }),
+				...(user.apartments && user.apartments.length && { apartments: user.apartments }),
 			});
 		}
 	}, [dispatch, id, user]);
@@ -323,7 +339,7 @@ export const Edit = () => {
 						<h3 className={classes.block_info__title}>личная информация</h3>
 						<div className={classes.block_info__item}>
 							<div className={classes.last_name}>
-								<OtherInput
+								<Input
 									setValue={personal_data.onChange}
 									name={'last_name'}
 									value={personal_data.state?.last_name}
@@ -331,7 +347,7 @@ export const Edit = () => {
 								/>
 							</div>
 							<div className={classes.first_name}>
-								<OtherInput
+								<Input
 									setValue={personal_data.onChange}
 									name={'first_name'}
 									value={personal_data.state?.first_name}
@@ -339,7 +355,7 @@ export const Edit = () => {
 								/>
 							</div>
 							<div className={classes.middle_name}>
-								<OtherInput
+								<Input
 									setValue={personal_data.onChange}
 									name={'middle_name'}
 									value={personal_data.state?.middle_name}
@@ -347,9 +363,12 @@ export const Edit = () => {
 								/>
 							</div>
 							<div className={classes.date_of_birth}>
-								<DataPicker
+								<DatePicker
 									name={'date_of_birth'}
-									value={personal_data.state?.date_of_birth}
+									value={
+										personal_data.state.date_of_birth &&
+										moment(replaceDateforBack(personal_data.state.date_of_birth))
+									}
 									setValue={personal_data.onChange}
 									label={'дата рождения'}
 								/>

@@ -329,6 +329,9 @@ input[type=number]::-webkit-outer-spin-button {
 .ant-select-dropdown .ant-select-dropdown-placement-bottomLeft{
   right: 0 !important;
 }
+.ant-picker-dropdown{
+  z-index: 9999999999 !important;
+}
 .ant-select-selection-item{
   min-width: 0 !important;
   max-width: inherit !important;

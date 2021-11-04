@@ -8,8 +8,19 @@ import {
 	OPEN_EDIT_PAGE,
 	REMOVE_PROFILE_PARENTS,
 } from '../../../constants/profileConstant';
-import { getAbonimentList, getCouchList, getGroupList, getProfile, getStatusList, getVisitList } from './workers';
-import { edit_profile_done, load_profile_user_done, load_profile_user_fail } from '../../Actions/profileActions';
+import {
+	getAbonimentList,
+	getCouchList,
+	getGroupList,
+	getProfile,
+	getStatusList,
+	getVisitList,
+} from './workers';
+import {
+	edit_profile_done,
+	load_profile_user_done,
+	load_profile_user_fail,
+} from '../../Actions/profileActions';
 import Api from '../../../Api/Api';
 import { getAgesGroup } from '../addClientOnCRM/workers';
 

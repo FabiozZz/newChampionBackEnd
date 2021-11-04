@@ -2,6 +2,7 @@ import {
 	ADD_NEW_STATUS,
 	CLEAR_CURRENT_ABONEMENT,
 	EDIT_DATA_SETTINGS_ABONEMENT,
+	EDIT_STATUS,
 	EXIT_STATUS_EDIT_PAGE,
 	REMOVE_ABONEMENT,
 	REMOVE_LEVEL,
@@ -45,6 +46,11 @@ export const add_new_level = name => ({
 	type: ADD_NEW_STATUS,
 	payload: name,
 });
+export const edit_level = level => ({
+	type: EDIT_STATUS,
+	payload: level,
+});
+
 export const start_load_data_status_done = current => ({
 	type: START_LOAD_STATUS_SUCCESS,
 	payload: current,

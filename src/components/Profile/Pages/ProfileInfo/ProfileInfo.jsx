@@ -173,7 +173,7 @@ export const ProfileInfo = ({ profile }) => {
 							</defs>
 						</svg>
 					</div>
-					{user.subscription && (
+					{user.subscription && user.subscription.rate && (
 						<>
 							<AbonementInfo user={user} />
 							{/*<AbonementInfo user={user} />*/}

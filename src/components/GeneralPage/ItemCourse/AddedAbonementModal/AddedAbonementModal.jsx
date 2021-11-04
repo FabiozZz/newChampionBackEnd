@@ -12,7 +12,12 @@ import classes from './add.module.css';
 import SelectAgesGroup from '../../../../utils/SelectAgesGroup/SelectAgesGroup';
 import { BtnGroup } from '../../../Clients/FilterClientSection/BtnGroup/BtnGroup';
 import { OtherInput } from '../../../../utils/OtherInput/OtherInput';
-import { declOfDay, declOfLessonsNum, declOfWeekNum } from '../../../../helpers/common';
+import {
+	declOfDay,
+	declOfLessonsNum,
+	declOfWeekNum,
+	replaceDateforBack,
+} from '../../../../helpers/common';
 import { Button } from '../../../../utils/Buttons/Button';
 import {
 	buyAbonementAndCreateOnceTrainForCourse,
@@ -27,7 +32,7 @@ import Select from '../../../../utils/FromAnt/Select/Select';
 const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 	const dispatch = useDispatch();
 
-	const { added_client } = useSelector(state => state.general_page);
+	const { added_client, current_date } = useSelector(state => state.general_page);
 
 	const [single, setSingle] = useState(false);
 
@@ -82,7 +87,7 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 		}
 	}, [data.state?.level_id, data.state?.rate_id, selectAboniment, single]);
 
-	const handleSubmitAboniment = () => {
+	const handleSubmitAbonimentCash = () => {
 		let copyAbonement = [...selectAboniment.prices];
 		console.log(copyAbonement);
 		let price = copyAbonement.find(
@@ -95,8 +100,10 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 			date: date,
 			abonement: {
 				id: user.id,
+				payment_method: 'cash',
 				...(userPrice && { price: userPrice }),
 				...(data.state && data.state),
+				purchase_date: replaceDateforBack(current_date),
 			},
 			client: { lesson_id, client_id: user.id },
 		};
@@ -114,18 +121,56 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 		close_modal();
 	};
 
-	const createDebtTraining = () => {
-		dispatch(createDebtTrainForCourse({ lesson_id, client_id: user.id, date: date }));
+	const handleSubmitAbonimentCashLess = () => {
+		let copyAbonement = [...selectAboniment.prices];
+		console.log(copyAbonement);
+		let price = copyAbonement.find(
+			item =>
+				item.age_group.id === (data.state.age_group_id || user.age_group.id) &&
+				item.level.id === data.state.level_id
+		).price;
+		const userPrice = editPrice.price !== Number(price) ? editPrice.price : false;
+		let uploadData = {
+			date: date,
+			abonement: {
+				id: user.id,
+				payment_method: 'cashless',
+				...(userPrice && { price: userPrice }),
+				...(data.state && data.state),
+				purchase_date: replaceDateforBack(current_date),
+			},
+			client: { lesson_id, client_id: user.id },
+		};
+
+		console.log('покупаемый абонемент', {
+			date: date,
+			abonement: {
+				id: user.id,
+				...(userPrice && { price: userPrice }),
+				...(data.state && data.state),
+			},
+			client: { lesson_id, client_id: user.id },
+		});
+		dispatch(buyAbonementAndCreateOnceTrainForCourse(uploadData));
 		close_modal();
 	};
+
+	// const createDebtTraining = () => {
+	// 	dispatch(createDebtTrainForCourse({ lesson_id, client_id: user.id, date: date }));
+	// 	close_modal();
+	// };
 
 	const createOnceTraining = () => {
 		dispatch(createOnceTrainForCourse({ lesson_id, client_id: user.id, date: date }));
 		close_modal();
 	};
 
-	const buyAbonementHandler = () => {
-		single ? createOnceTraining() : handleSubmitAboniment();
+	const buyAbonementHandlerCash = () => {
+		single ? createOnceTraining() : handleSubmitAbonimentCash();
+	};
+
+	const buyAbonementHandlerCashLess = () => {
+		single ? createOnceTraining() : handleSubmitAbonimentCashLess();
 	};
 
 	return (
@@ -388,7 +433,7 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 			{/* end module change price */}
 			<div className={classes.btn_group}>
 				<Button
-					click={buyAbonementHandler}
+					click={buyAbonementHandlerCashLess}
 					disabled={
 						single
 							? !single
@@ -398,7 +443,7 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 					factor={'default'}
 				/>
 				<Button
-					click={buyAbonementHandler}
+					click={buyAbonementHandlerCash}
 					disabled={
 						single
 							? !single

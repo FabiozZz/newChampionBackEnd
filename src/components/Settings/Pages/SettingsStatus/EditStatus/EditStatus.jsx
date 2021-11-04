@@ -6,12 +6,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'utils/Buttons/Button';
 import { useInputOnObject } from 'hooks';
 import Input from 'utils/FromAnt/Input/Input';
-import { exit_edit_page_status } from '../../../../../store/Actions/settingsAbonementActions';
+import {
+	edit_level,
+	exit_edit_page_status,
+} from '../../../../../store/Actions/settingsAbonementActions';
+import { fetch_new_age_group } from '../../../../../store/Actions/settingsGroupActions';
+import { useHistory } from 'react-router';
 
 export const EditStatus = () => {
 	const { current_status } = useSelector(state => state.settings_abonement);
 	const level = useInputOnObject({
-		label: '',
+		name: '',
 		color: '',
 	});
 
@@ -19,15 +24,18 @@ export const EditStatus = () => {
 
 	const dispatch = useDispatch();
 
+	const history = useHistory();
+
 	const handleSubmit = e => {
 		e.preventDefault();
 		console.log(level.state);
-		// dispatch(fetch_new_age_group(age_group));
+		dispatch(edit_level(level.state));
+		history.goBack();
 	};
 
 	useEffect(() => {
 		if (current_status) {
-			level.onChange({ label: current_status.name });
+			level.onChange({ ...current_status });
 		}
 		return () => {
 			dispatch(exit_edit_page_status());
@@ -76,14 +84,14 @@ export const EditStatus = () => {
 					<div className={classes.label_group}>
 						<Input
 							setValue={level.onChange}
-							value={level.state.label}
-							name={'label'}
+							value={level.state.name}
+							name={'name'}
 							label={'название статуса'}
 						/>
 					</div>
 					<div className={classes.send_btn}>
 						<Button
-							disabled={!level.state.label.length}
+							disabled={!level.state.name.length}
 							text={'Сохранить возрастную группу'}
 							type={'submit'}
 							factor={'success'}

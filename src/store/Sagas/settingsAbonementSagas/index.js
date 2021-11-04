@@ -2,6 +2,7 @@ import { call, put, select, take, takeEvery } from 'redux-saga/effects';
 import {
 	ADD_NEW_STATUS,
 	EDIT_DATA_SETTINGS_ABONEMENT,
+	EDIT_STATUS,
 	REMOVE_ABONEMENT,
 	REMOVE_LEVEL,
 	START_LOAD_DATA_ABONEMENT,
@@ -64,6 +65,13 @@ function* fetchPostDataEditStatus({ payload }) {
 	yield put(start_load_data_settings_abonement());
 	yield put(start_load_data_status_done(response.data));
 }
+
+function* fetchPatchDataStatus({ payload }) {
+	const { id, ...rest } = payload;
+	yield call(() => Api.updateStatus(id, rest));
+	yield put(start_load_data_settings_abonement());
+}
+
 function* removeStatus({ payload }) {
 	yield call(() => Api.removeStatusWithId(payload));
 	yield put(start_load_data_settings_abonement());
@@ -78,4 +86,5 @@ export function* settingsAbonementSagas() {
 	yield takeEvery(REMOVE_ABONEMENT, removeAbonement);
 	yield takeEvery(REMOVE_LEVEL, removeStatus);
 	yield takeEvery(ADD_NEW_STATUS, fetchPostDataCreateStatus);
+	yield takeEvery(EDIT_STATUS, fetchPatchDataStatus);
 }

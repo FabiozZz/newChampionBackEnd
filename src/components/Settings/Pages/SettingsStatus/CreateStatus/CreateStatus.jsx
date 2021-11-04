@@ -11,7 +11,7 @@ import { useHistory } from 'react-router';
 
 export const CreateStatus = () => {
 	const age_group = useInputOnObject({
-		label: '',
+		name: '',
 		color: '',
 	});
 	const inputRef = useRef(null);
@@ -20,8 +20,7 @@ export const CreateStatus = () => {
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		console.log(age_group.state.label);
-		dispatch(add_new_level(age_group.state.label));
+		dispatch(add_new_level(age_group.state));
 		history.goBack();
 	};
 
@@ -70,11 +69,11 @@ export const CreateStatus = () => {
 						/>
 					</div>
 					<div className={classes.label_group}>
-						<Input setValue={age_group.onChange} name={'label'} label={'название статуса'} />
+						<Input setValue={age_group.onChange} name={'name'} label={'название статуса'} />
 					</div>
 					<div className={classes.send_btn}>
 						<Button
-							disabled={age_group.state && age_group.state.label && !age_group.state.label}
+							disabled={age_group.state && age_group.state.label && !age_group.state.name}
 							text={'Сохранить возрастную группу'}
 							type={'submit'}
 							factor={'success'}

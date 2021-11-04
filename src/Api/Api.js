@@ -98,8 +98,8 @@ class Api {
 		this.source = axios.CancelToken.source();
 		this.refreshRequest = null;
 
-		this.client.defaults.baseURL = 'http://127.0.0.1:8000/api/v1';
-		// this.client.defaults.baseURL = 'http://5.63.154.181:8000/api/v1';
+		// this.client.defaults.baseURL = 'http://127.0.0.1:8000/api/v1';
+		this.client.defaults.baseURL = 'http://5.63.154.181:8000/api/v1';
 		this.client.interceptors.request.use(
 			config => {
 				if (this.token === null) {
@@ -394,6 +394,15 @@ class Api {
 	 */
 	async postAgeGroup(label) {
 		return await this.client.post('/core/ageGroup/', { label });
+	}
+
+	/**
+	 *
+	 * @returns {Promise}
+	 * @param label
+	 */
+	async updateStatus(id, obj) {
+		return await this.client.patch(`/core/clientLevel/${id}/`, { ...obj });
 	}
 
 	/**
