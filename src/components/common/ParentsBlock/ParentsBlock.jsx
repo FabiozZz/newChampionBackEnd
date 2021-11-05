@@ -1,10 +1,10 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import classes from '../../Add/add.module.css';
-import {AddParent} from "./AddParent/AddParent";
+import { AddParent } from './AddParent/AddParent';
 import separate from '../../../assets/images/blockInfoSeparate.svg';
 import remove from '../../../assets/images/removeParent.svg';
-import {isEmpty} from "../../../helpers/common";
-import {Button} from "../../../utils/Buttons/Button";
+import { isEmpty } from '../../../helpers/common';
+import { Button } from '../../../utils/Buttons/Button';
 
 /**
  * компонент прослойка
@@ -16,35 +16,52 @@ import {Button} from "../../../utils/Buttons/Button";
  * @returns {JSX.Element}
  * @constructor
  */
-export const ParentsBlock = ({parents,error={},addParents,removeParents,change}) => {
-    return (
-        <div className={classes.block_info}>
-                <h3 className={classes.block_info__title}>информация о родителях</h3>
-            {parents.map((e,index)=> {
-                return (
-                    <div key={index} className={`${classes.block_info__parent_block} ${index>0&& classes.block_info__added}`}>
+export const ParentsBlock = ({ parents, error = {}, addParents, removeParents, change }) => {
+	return (
+		<div className={classes.block_info}>
+			<h3 className={classes.block_info__title}>информация о родителях</h3>
+			{parents.map((e, index) => {
+				return (
+					<div
+						key={index}
+						className={`${classes.block_info__parent_block} ${
+							index > 0 && classes.block_info__added
+						}`}>
+						{/* начиная со второго элемента добавляется разделитель между блоками и кнопка для удаления не нужного блока */}
+						{index > 0 && (
+							<>
+								<img
+									className={`${classes.block_info__separate} ${classes.block_info__added}`}
+									src={separate}
+									alt="separate"
+								/>
 
-                        {/* начиная со второго элемента добавляется разделитель между блоками и кнопка для удаления не нужного блока */}
-                        {index>0 &&
-                        <>
-                            <img className={`${classes.block_info__separate} ${classes.block_info__added}`} src={separate} alt="separate"/>
+								<div
+									onClick={() => removeParents(index)}
+									className={classes.block_info__remove_parents}>
+									<img src={remove} alt="remove" />
+								</div>
+							</>
+						)}
 
-                            <div onClick={()=>removeParents(index)} className={classes.block_info__remove_parents}>
-                                <img src={remove} alt="remove"/>
-                            </div>
+						<AddParent
+							error={error && !isEmpty(error.parents) ? error.parents[index] : null}
+							data={e}
+							index={index}
+							change={change}
+						/>
+					</div>
+				);
+			})}
 
-                        </>
-                        }
-
-                        <AddParent error={(error&&!isEmpty(error.parents))?error.parents[index]:null} data={e} index={index} change={change}/>
-                    </div>
-                )
-            })}
-
-            <div className={`col-12 ${classes.block_info__btn}`}>
-                <Button text={'добавить родственника'} click={addParents} size={'auto'} factor={'success'}/>
-            </div>
-        </div>
-
-    );
+			<div className={`col-12 ${classes.block_info__btn}`}>
+				<Button
+					text={'добавить родственника'}
+					click={addParents}
+					size={'auto'}
+					factor={'success'}
+				/>
+			</div>
+		</div>
+	);
 };

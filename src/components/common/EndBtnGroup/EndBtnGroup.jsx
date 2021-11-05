@@ -1,6 +1,6 @@
 import React from 'react';
-import classes from "../../Add/add.module.css";
-import {Button} from "../../../utils/Buttons/Button";
+import classes from '../../Add/add.module.css';
+import { Button } from '../../../utils/Buttons/Button';
 
 /**
  * компонент визуализации группы кнопок для сохранения или отмены сохранения
@@ -13,20 +13,23 @@ import {Button} from "../../../utils/Buttons/Button";
  * @returns {JSX.Element}
  * @constructor
  */
-export const EndBtnGroup = ({save, goBack, personal = true, rules = true}) => {
-    return (
-        <div className={`${classes.btn_group}`}>
-            <span/>
-            <div className={`${classes.btn_group__item}`}>
-                <Button click={goBack} text={'отменить'} factor={'danger'}/>
-            </div>
+export const EndBtnGroup = ({ save, goBack, personal = true, rules = true }) => {
+	return (
+		<div className={`${classes.btn_group}`}>
+			<span />
+			<div className={`${classes.btn_group__item}`}>
+				<Button click={goBack} text={'отменить'} factor={'danger'} />
+			</div>
 
-            <div className={`${classes.btn_group__item}`}>
-                <Button type={'submit'} disabled={(!personal || !rules) && !save} text={'сохранить'}
-                        factor={'success'}/>
-            </div>
-            <span/>
-
-        </div>
-    );
+			<div className={`${classes.btn_group__item}`}>
+				<Button
+					type={'submit'}
+					disabled={(!personal || !rules) && !save}
+					text={'сохранить'}
+					factor={'success'}
+				/>
+			</div>
+			<span />
+		</div>
+	);
 };

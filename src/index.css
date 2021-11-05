@@ -348,3 +348,20 @@ input[type=number]::-webkit-outer-spin-button {
 .ant-select-dropdown{
   z-index: 999999 !important;
 }
+/*.ant-picker-cell-today .ant-picker-cell-selected.ant-picker-cell-inner::before{*/
+/*  content: '';*/
+/*  border: 2px solid #43BF41 !important;*/
+/*  border-radius: 50% !important;*/
+/*  color: #43BF41;*/
+/*}*/
+.ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before{
+  content: '';
+  border: 2px solid #43BF41 !important;
+  border-radius: 50% !important;
+}
+.ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner{
+  color: #43BF41 !important;
+}
+.ant-picker-cell:hover:not(.ant-picker-cell-in-view) .ant-picker-cell-inner, .ant-picker-cell:hover:not(.ant-picker-cell-selected):not(.ant-picker-cell-range-start):not(.ant-picker-cell-range-end):not(.ant-picker-cell-range-hover-start):not(.ant-picker-cell-range-hover-end) .ant-picker-cell-inner{
+  border-radius: 50%;
+}
