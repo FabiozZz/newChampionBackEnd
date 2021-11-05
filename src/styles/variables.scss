@@ -102,6 +102,8 @@ $WHITE:#FFFFFF;
 
 @for $i from 1 through 12{
   .col-#{$i}{
-    grid-column: span $i;
+    grid-column: span $i !important;
   }
 }
+
+$BOX_SHADOW: 0px 10px 20px rgba(46, 91, 255, 0.07);

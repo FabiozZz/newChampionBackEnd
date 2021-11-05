@@ -64,7 +64,7 @@ const Select = ({
 		}
 	}, [value]);
 	return (
-		<>
+		<div style={{ width: '100%' }}>
 			{label && <span className={classes.label}>{label}</span>}
 			<S
 				{...props}
@@ -84,7 +84,7 @@ const Select = ({
 				{data && renderList}
 			</S>
 			{error && <span className={'form-fail'}>{error}</span>}
-		</>
+		</div>
 	);
 };
 
