@@ -87,6 +87,23 @@ export const Auth = () => {
 			setLoad(false);
 		})();
 	}, [current_date, dispatch]);
+
+	function getDates(startDate, stopDate) {
+		var dateArray = [];
+		var currentDate = moment(startDate);
+		var stopDate = moment(stopDate);
+		while (currentDate <= stopDate) {
+			dateArray.push({
+				date: moment(currentDate).format('YYYY-MM-DD '),
+				value: 2 + Math.ceil(Math.random() * (800 - 2)),
+			});
+			currentDate = moment(currentDate).add(1, 'days');
+		}
+		console.log(dateArray);
+		return dateArray;
+	}
+	getDates('2000-10-11', moment().format('YYYY-MM-DD'));
+
 	return (
 		<div className={classes.wrapper}>
 			<div className={classes.title}>

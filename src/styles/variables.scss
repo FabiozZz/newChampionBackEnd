@@ -34,6 +34,15 @@ $WHITE:#FFFFFF;
 
 /* text variable */
 
+%name{
+  font-family: 'Montserrat',sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  color: rgba(105, 112, 127, 0.7);
+}
+
 %h1{
   font-family: 'Montserrat',sans-serif;
   font-style: normal;
@@ -101,7 +110,7 @@ $WHITE:#FFFFFF;
 /* grid columns classes */
 
 @for $i from 1 through 12{
-  .col-#{$i}{
+  .gcol-#{$i}{
     grid-column: span $i !important;
   }
 }
