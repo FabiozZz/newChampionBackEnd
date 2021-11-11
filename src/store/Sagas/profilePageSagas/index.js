@@ -12,6 +12,7 @@ import {
 	getAbonimentList,
 	getCouchList,
 	getGroupList,
+	getPayList,
 	getProfile,
 	getStatusList,
 	getVisitList,
@@ -60,6 +61,7 @@ export function* loadProfileWorker({ payload }) {
 			group: yield call(() => getGroupList()),
 			couch: yield call(() => getCouchList()),
 			visit_list: yield call(() => getVisitList(id)),
+			pay_list: yield call(() => getPayList(id)),
 		};
 		console.log(finalData);
 		yield put(load_profile_user_done(finalData));

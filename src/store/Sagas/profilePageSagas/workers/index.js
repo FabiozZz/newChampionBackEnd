@@ -59,6 +59,14 @@ export function* getVisitList(id) {
         yield put(load_profile_user_fail(e))
     }
 }
+export function* getPayList(id) {
+    try {
+        const request = yield Api.getProfilePay(id);
+        return request.data;
+    } catch (e) {
+        yield put(load_profile_user_fail(e))
+    }
+}
 
 //
 // await Api.getAbonimentList(source.token).then(r => {

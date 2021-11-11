@@ -98,8 +98,8 @@ class Api {
 		this.source = axios.CancelToken.source();
 		this.refreshRequest = null;
 
-		this.client.defaults.baseURL = 'http://127.0.0.1:8000/api/v1';
-		// this.client.defaults.baseURL = 'http://5.63.154.181:8000/api/v1';
+		// this.client.defaults.baseURL = 'http://127.0.0.1:8000/api/v1';
+		this.client.defaults.baseURL = 'http://5.63.154.181:8000/api/v1';
 		this.client.interceptors.request.use(
 			config => {
 				if (this.token === null) {
@@ -318,6 +318,13 @@ class Api {
 
 	async getProfileVisit(id) {
 		return await this.client.get(`/client/${id}/trainings/`);
+		//     .then(r => {
+		//     return r.data.find(client => Number(client.id) === Number(id));
+		// });
+	}
+
+	async getProfilePay(id) {
+		return await this.client.get(`/payment/client/${id}/`);
 		//     .then(r => {
 		//     return r.data.find(client => Number(client.id) === Number(id));
 		// });
