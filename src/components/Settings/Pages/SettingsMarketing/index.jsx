@@ -21,15 +21,11 @@ const Index = props => {
 			<div className={cn('gcol-12', classes.padding)}>
 				<div className={cn('gcol-12', classes.wrapper)}>
 					<p className={cn('gcol-12', classes.title, classes.text)}>Источники рекламы</p>
-					{/*<p className={cn('gcol-12', classes.sub_text, classes.text)}>*/}
-					{/*	Вы еще не добавили ни одного источника*/}
-					{/*</p>*/}
-					{!!sources.length && (
+					{!!sources.length ? (
 						<table cellSpacing={4} cellPadding={18} className={classes.table}>
 							<tbody>
 								{sources
 									.sort((a, b) => (a.id < b.id ? -1 : 1))
-									.filter(abonement => !abonement.in_archive)
 									.map(item => {
 										const mouseMove = e => {
 											if (e.target.getAttribute('class') === classes.left) {
@@ -77,6 +73,10 @@ const Index = props => {
 									})}
 							</tbody>
 						</table>
+					) : (
+						<p className={cn('gcol-12', classes.sub_text, classes.text)}>
+							Вы еще не добавили ни одного источника
+						</p>
 					)}
 
 					<div className={cn('gcol-5', classes.btn)}>

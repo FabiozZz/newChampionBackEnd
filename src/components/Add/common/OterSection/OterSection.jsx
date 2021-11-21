@@ -3,16 +3,6 @@ import classes from '../../add.module.css';
 import Select from 'utils/FromAnt/Select/Select';
 import { useSelector } from 'react-redux';
 
-const data = [
-	{ id: 1, name: 'some 1' },
-	{ id: 2, name: 'some 2' },
-	{ id: 3, name: 'some 3' },
-	{ id: 4, name: 'some 4' },
-	{ id: 5, name: 'some 5' },
-	{ id: 6, name: 'some 6' },
-	{ id: 7, name: 'some 7' },
-];
-
 /**
  * компонент визуализации ввода данных источника откуда узнал о клубе
  *
