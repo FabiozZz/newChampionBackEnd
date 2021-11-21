@@ -292,6 +292,7 @@ export const Edit = () => {
 				middle_name,
 				last_name,
 				age_group,
+				ad_source,
 				...rest
 			} = user;
 			personal_data.onChange({
@@ -301,6 +302,7 @@ export const Edit = () => {
 				...(age_group && { age_group_id: age_group.id }),
 				...(date_of_birth && { date_of_birth: replaceDateforFront(date_of_birth) }),
 				...(phone_number && phone_number.length && { phone_number: rest.phone_number }),
+				...(ad_source && { ad_source_id: ad_source.id }),
 			});
 
 			if (parents.length) {
@@ -431,7 +433,7 @@ export const Edit = () => {
 						{/*</div>*/}
 						<EditAddresSection change={address.onChange} />
 
-						{/*<OterSection />*/}
+						<OterSection personal_data={personal_data} />
 
 						{/*<RulesSection rules={rules} setRules={handleToggleRules} personal={personal} setPersonal={handleTogglePersonal}/>*/}
 
