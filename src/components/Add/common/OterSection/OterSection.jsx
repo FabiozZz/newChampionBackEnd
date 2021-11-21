@@ -27,7 +27,6 @@ export const OterSection = ({ personal_data }) => {
 			<div className={classes.block_info__item}>
 				<div className={classes.sale}>
 					<Select
-						value={personal_data.state.ad_source_id && personal_data.state.ad_source_id}
 						field={'name'}
 						name={'ad_source_id'}
 						setValue={personal_data.onChange}

@@ -1,71 +1,75 @@
-import {put} from 'redux-saga/effects';
-import Api from "../../../../Api/Api";
-import {load_profile_user_fail} from "../../../Actions/profileActions";
+import { call, put } from 'redux-saga/effects';
+import Api from '../../../../Api/Api';
+import { load_profile_user_fail } from '../../../Actions/profileActions';
 
 export function* getProfile(id) {
-    console.log(id);
-    try {
-        const request = yield Api.getProfile(id);
-        return request.data;
-    } catch (e) {
-        yield put(load_profile_user_fail(e))
-    }
+	console.log(id);
+	try {
+		const request = yield Api.getProfile(id);
+		return request.data;
+	} catch (e) {
+		yield put(load_profile_user_fail(e));
+	}
 }
 export function* getAbonimentList() {
-    try {
-        const request = yield Api.getAbonimentList();
-        return request.data;
-    } catch (e) {
-        yield put(load_profile_user_fail(e))
-    }
+	try {
+		const request = yield Api.getAbonimentList();
+		return request.data;
+	} catch (e) {
+		yield put(load_profile_user_fail(e));
+	}
 }
 export function* getStatusList() {
-    try {
-        const request = yield Api.getStatusList();
-        return request.data;
-    } catch (e) {
-        yield put(load_profile_user_fail(e))
-    }
+	try {
+		const request = yield Api.getStatusList();
+		return request.data;
+	} catch (e) {
+		yield put(load_profile_user_fail(e));
+	}
 }
 export function* getAgesGroupList() {
-    try {
-        const request = yield Api.getAgesGroupList();
-        return request.data;
-    } catch (e) {
-        yield put(load_profile_user_fail(e))
-    }
+	try {
+		const request = yield Api.getAgesGroupList();
+		return request.data;
+	} catch (e) {
+		yield put(load_profile_user_fail(e));
+	}
 }
 export function* getGroupList() {
-    try {
-        const request = yield Api.getGroupList();
-        return request.data;
-    } catch (e) {
-        yield put(load_profile_user_fail(e))
-    }
+	try {
+		const request = yield Api.getGroupList();
+		return request.data;
+	} catch (e) {
+		yield put(load_profile_user_fail(e));
+	}
 }
 export function* getCouchList() {
-    try {
-        const request = yield Api.getCouchList();
-        return request.data;
-    } catch (e) {
-        yield put(load_profile_user_fail(e))
-    }
+	try {
+		const request = yield Api.getCouchList();
+		return request.data;
+	} catch (e) {
+		yield put(load_profile_user_fail(e));
+	}
 }
 export function* getVisitList(id) {
-    try {
-        const request = yield Api.getProfileVisit(id);
-        return request.data;
-    } catch (e) {
-        yield put(load_profile_user_fail(e))
-    }
+	try {
+		const request = yield Api.getProfileVisit(id);
+		return request.data;
+	} catch (e) {
+		yield put(load_profile_user_fail(e));
+	}
 }
 export function* getPayList(id) {
-    try {
-        const request = yield Api.getProfilePay(id);
-        return request.data;
-    } catch (e) {
-        yield put(load_profile_user_fail(e))
-    }
+	try {
+		const request = yield Api.getProfilePay(id);
+		return request.data;
+	} catch (e) {
+		yield put(load_profile_user_fail(e));
+	}
+}
+export function* getSourceList() {
+	const request = yield call(() => Api.getSourceList());
+	return request.data;
 }
 
 //

@@ -23,7 +23,7 @@ import {
 	load_profile_user_fail,
 } from '../../Actions/profileActions';
 import Api from '../../../Api/Api';
-import { getAgesGroup } from '../addClientOnCRM/workers';
+import { getAgesGroup, getSourceList } from '../addClientOnCRM/workers';
 
 // export function* loadClientsPage() {
 //     let finalData = {};
@@ -76,6 +76,7 @@ export function* openProfileEditWorker({ payload }) {
 		ages_group: yield call(() => getAgesGroup()),
 		group: yield call(() => getGroupList()),
 		couch: yield call(() => getCouchList()),
+		source: yield call(() => getSourceList()),
 	};
 	console.log(finalData);
 	yield put(load_profile_user_done(finalData));

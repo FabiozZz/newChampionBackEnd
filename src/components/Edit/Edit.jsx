@@ -27,6 +27,7 @@ import { useInputOnObject } from '../../hooks';
 import DatePicker from '../../utils/FromAnt/DatePicker/DatePicker';
 import Input from '../../utils/FromAnt/Input/Input';
 import { OterSection } from 'components/Add/common/OterSection/OterSection';
+import { EditOterSection } from 'components/Edit/common/EditOterSection/EditOterSection';
 
 export const ContextCommonEdit = createContext();
 
@@ -433,7 +434,7 @@ export const Edit = () => {
 						{/*</div>*/}
 						<EditAddresSection change={address.onChange} />
 
-						<OterSection personal_data={personal_data} />
+						<EditOterSection personal_data={personal_data} />
 
 						{/*<RulesSection rules={rules} setRules={handleToggleRules} personal={personal} setPersonal={handleTogglePersonal}/>*/}
 
