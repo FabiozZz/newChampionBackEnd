@@ -58,7 +58,7 @@ export const AbonementInfo = ({ user }) => {
 							Срок действия{' '}
 							<span className={classes.abonement_block_bold}>
 								{moment(subscription.valid_from).format('DD.MM.YYYY')} &#8212;
-								{moment(subscription.valid_until).format('DD.MM.YYYY')}
+								{moment(subscription.valid_until).subtract(1, 'day').format('DD.MM.YYYY')}
 							</span>
 						</p>
 						<p className={classes.abonement_block_date}>
