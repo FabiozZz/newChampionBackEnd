@@ -114,73 +114,77 @@ export const ClientsColumn = ({ clients }) => {
 									<line y1="0.5" x2="187" y2="0.5" stroke="#EEF3F5" strokeDasharray="12 12" />
 								</svg>
 							</div>
-							<div className={classes.list_col__item_block}>
-								{client.level ? (
-									<>
-										<svg
-											width="15"
-											height="10"
-											viewBox="0 0 15 10"
-											fill="none"
-											xmlns="http://www.w3.org/2000/svg">
-											<path
-												d="M14.1667 2.35795V1.59091C14.1667 0.712273 13.4729 0 12.6172 0H1.54948C0.693724 0 0 0.712273 0 1.59091V2.35795C0 2.43639 0.0619515 2.5 0.138346 2.5H14.0283C14.1047 2.5 14.1667 2.43639 14.1667 2.35795Z"
-												fill={client.level.color}
-											/>
-											<path
-												d="M0.125 3.26705V8.125C0.125 9.00364 0.818724 9.71591 1.67448 9.71591H12.7422C13.5979 9.71591 14.2917 9.00364 14.2917 8.125V3.26705C14.2917 3.18861 14.2297 3.125 14.1533 3.125H0.263346C0.186951 3.125 0.125 3.18861 0.125 3.26705Z"
-												fill={client.level.color}
-											/>
-										</svg>
+							{client.subscription && (
+								<div className={classes.list_col__item_block}>
+									{client.level ? (
+										<>
+											<svg
+												width="15"
+												height="10"
+												viewBox="0 0 15 10"
+												fill="none"
+												xmlns="http://www.w3.org/2000/svg">
+												<path
+													d="M14.1667 2.35795V1.59091C14.1667 0.712273 13.4729 0 12.6172 0H1.54948C0.693724 0 0 0.712273 0 1.59091V2.35795C0 2.43639 0.0619515 2.5 0.138346 2.5H14.0283C14.1047 2.5 14.1667 2.43639 14.1667 2.35795Z"
+													fill={client.level.color}
+												/>
+												<path
+													d="M0.125 3.26705V8.125C0.125 9.00364 0.818724 9.71591 1.67448 9.71591H12.7422C13.5979 9.71591 14.2917 9.00364 14.2917 8.125V3.26705C14.2917 3.18861 14.2297 3.125 14.1533 3.125H0.263346C0.186951 3.125 0.125 3.18861 0.125 3.26705Z"
+													fill={client.level.color}
+												/>
+											</svg>
 
-										<p className={classes.list_col__item_block_text}>
-											{client.subscription.rate.name}. {client.level.name} клиент
-										</p>
-									</>
-								) : (
-									<>
-										<svg
-											width="12"
-											height="14"
-											viewBox="0 0 12 14"
-											fill="none"
-											xmlns="http://www.w3.org/2000/svg">
-											<path
-												fillRule="evenodd"
-												clipRule="evenodd"
-												d="M2.27713 1.52556C3.52591 0.626439 5.00443 0.333252 6 0.333252C8.35061 0.333252 9.88409 1.32761 10.8077 2.61038C11.7068 3.85916 12 5.33768 12 6.33325V12.3333C12 12.6029 11.8376 12.846 11.5885 12.9492C11.3393 13.0524 11.0526 12.9953 10.8619 12.8047L10 11.9427L8.94281 12.9999C8.42211 13.5206 7.57789 13.5206 7.05719 12.9999L6 11.9427L4.94281 12.9999C4.42211 13.5206 3.57789 13.5206 3.05719 12.9999L2 11.9427L1.13807 12.8047C0.947406 12.9953 0.660661 13.0524 0.411544 12.9492C0.162428 12.846 0 12.6029 0 12.3333V6.33325C0 3.98264 0.994355 2.44916 2.27713 1.52556ZM2.66667 5.66658C2.66667 4.93021 3.26362 4.33325 4 4.33325C4.73638 4.33325 5.33333 4.93021 5.33333 5.66658C5.33333 6.40296 4.73638 6.99992 4 6.99992C3.26362 6.99992 2.66667 6.40296 2.66667 5.66658ZM6.66667 5.66658C6.66667 4.93021 7.26362 4.33325 8 4.33325C8.73638 4.33325 9.33333 4.93021 9.33333 5.66658C9.33333 6.40296 8.73638 6.99992 8 6.99992C7.26362 6.99992 6.66667 6.40296 6.66667 5.66658Z"
-												fill="#43BF41"
-											/>
-										</svg>
+											<p className={classes.list_col__item_block_text}>
+												{client.subscription.rate.name}. {client.level.name} клиент
+											</p>
+										</>
+									) : (
+										<>
+											<svg
+												width="12"
+												height="14"
+												viewBox="0 0 12 14"
+												fill="none"
+												xmlns="http://www.w3.org/2000/svg">
+												<path
+													fillRule="evenodd"
+													clipRule="evenodd"
+													d="M2.27713 1.52556C3.52591 0.626439 5.00443 0.333252 6 0.333252C8.35061 0.333252 9.88409 1.32761 10.8077 2.61038C11.7068 3.85916 12 5.33768 12 6.33325V12.3333C12 12.6029 11.8376 12.846 11.5885 12.9492C11.3393 13.0524 11.0526 12.9953 10.8619 12.8047L10 11.9427L8.94281 12.9999C8.42211 13.5206 7.57789 13.5206 7.05719 12.9999L6 11.9427L4.94281 12.9999C4.42211 13.5206 3.57789 13.5206 3.05719 12.9999L2 11.9427L1.13807 12.8047C0.947406 12.9953 0.660661 13.0524 0.411544 12.9492C0.162428 12.846 0 12.6029 0 12.3333V6.33325C0 3.98264 0.994355 2.44916 2.27713 1.52556ZM2.66667 5.66658C2.66667 4.93021 3.26362 4.33325 4 4.33325C4.73638 4.33325 5.33333 4.93021 5.33333 5.66658C5.33333 6.40296 4.73638 6.99992 4 6.99992C3.26362 6.99992 2.66667 6.40296 2.66667 5.66658ZM6.66667 5.66658C6.66667 4.93021 7.26362 4.33325 8 4.33325C8.73638 4.33325 9.33333 4.93021 9.33333 5.66658C9.33333 6.40296 8.73638 6.99992 8 6.99992C7.26362 6.99992 6.66667 6.40296 6.66667 5.66658Z"
+													fill="#43BF41"
+												/>
+											</svg>
 
-										<p className={classes.list_col__item_block_text}>
-											{/*{client.subscription?.rate.name}.*/}
-										</p>
-									</>
-								)}
-							</div>
-							<div className={classes.list_col__item_block}>
-								<svg
-									width="14"
-									height="14"
-									viewBox="0 0 14 14"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg">
-									<path
-										fillRule="evenodd"
-										clipRule="evenodd"
-										d="M0.333008 7.00016C0.333008 3.31826 3.31778 0.333496 6.99967 0.333496C10.6816 0.333496 13.6663 3.31826 13.6663 7.00016C13.6663 10.6821 10.6816 13.6668 6.99967 13.6668C3.31778 13.6668 0.333008 10.6821 0.333008 7.00016ZM7.66634 3.66683C7.66634 3.29864 7.36786 3.00016 6.99967 3.00016C6.63148 3.00016 6.33301 3.29864 6.33301 3.66683V6.17612C6.33301 6.93366 6.76101 7.62619 7.43858 7.96497L9.3682 8.92978C9.69752 9.09444 10.098 8.96096 10.2626 8.63164C10.4273 8.30232 10.2938 7.90187 9.96448 7.73721L8.03487 6.7724C7.80901 6.65947 7.66634 6.42863 7.66634 6.17612V3.66683Z"
-										fill="#8798AD"
-									/>
-								</svg>
-								<p className={classes.list_col__item_block_text}>
-									<span style={{ fontWeight: 900 }}>{client.subscription.train_balance}</span>{' '}
-									{declOfLessonsNum(client.subscription.train_balance)} до{' '}
-									<span style={{ fontWeight: 900 }}>
-										{replaceDateforFront(client.subscription.valid_until)}
-									</span>
-								</p>
-							</div>
+											<p className={classes.list_col__item_block_text}>
+												{client.subscription?.rate.name}.
+											</p>
+										</>
+									)}
+								</div>
+							)}
+							{client.subscription && (
+								<div className={classes.list_col__item_block}>
+									<svg
+										width="14"
+										height="14"
+										viewBox="0 0 14 14"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg">
+										<path
+											fillRule="evenodd"
+											clipRule="evenodd"
+											d="M0.333008 7.00016C0.333008 3.31826 3.31778 0.333496 6.99967 0.333496C10.6816 0.333496 13.6663 3.31826 13.6663 7.00016C13.6663 10.6821 10.6816 13.6668 6.99967 13.6668C3.31778 13.6668 0.333008 10.6821 0.333008 7.00016ZM7.66634 3.66683C7.66634 3.29864 7.36786 3.00016 6.99967 3.00016C6.63148 3.00016 6.33301 3.29864 6.33301 3.66683V6.17612C6.33301 6.93366 6.76101 7.62619 7.43858 7.96497L9.3682 8.92978C9.69752 9.09444 10.098 8.96096 10.2626 8.63164C10.4273 8.30232 10.2938 7.90187 9.96448 7.73721L8.03487 6.7724C7.80901 6.65947 7.66634 6.42863 7.66634 6.17612V3.66683Z"
+											fill="#8798AD"
+										/>
+									</svg>
+									<p className={classes.list_col__item_block_text}>
+										<span style={{ fontWeight: 900 }}>{client.subscription.train_balance}</span>{' '}
+										{declOfLessonsNum(client.subscription.train_balance)} до{' '}
+										<span style={{ fontWeight: 900 }}>
+											{replaceDateforFront(client.subscription.valid_until)}
+										</span>
+									</p>
+								</div>
+							)}
 							<div className={classes.list_col__item_block}>
 								<svg
 									width="187"
@@ -222,7 +226,7 @@ export const ClientsColumn = ({ clients }) => {
 
 								<p className={classes.list_col__item_block_text}>{client.age_group.label}</p>
 							</div>
-							{client.subscription.training_group && (
+							{client.subscription && client.subscription.training_group && (
 								<div className={classes.list_col__item_block}>
 									<svg
 										width="14"
