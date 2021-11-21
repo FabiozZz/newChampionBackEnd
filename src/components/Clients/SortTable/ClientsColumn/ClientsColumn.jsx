@@ -4,7 +4,7 @@ import classes from '../../clients.module.css';
 import imageBirthDay from '../../../../assets/images/clientsListCard/giftbox.svg';
 import imagePhone from '../../../../assets/images/clientsListCard/phone.svg';
 import { NavLink } from 'react-router-dom';
-import { ageToString, declOfLessonsNum, replaceDateforFront } from '../../../../helpers/common';
+import { ageToString, declOfLessonsNum, replaceDateforFront } from 'helpers/common';
 
 export const ClientsColumn = ({ clients }) => {
 	return (
@@ -154,7 +154,7 @@ export const ClientsColumn = ({ clients }) => {
 										</svg>
 
 										<p className={classes.list_col__item_block_text}>
-											{client.subscription.rate.name}.
+											{/*{client.subscription?.rate.name}.*/}
 										</p>
 									</>
 								)}
