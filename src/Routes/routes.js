@@ -26,22 +26,27 @@ import {
 	SETTINGS_STATUS,
 	SETTINGS_STATUS_CREATE,
 	SETTINGS_STATUS_EDIT,
+	SETTINTS_SALES_LIST,
+	SETTINTS_SALES_LIST_CREATE,
 	STUFF_ROUTE,
 } from './actionRoutes';
-import { Stuffs } from '../components/Stuffs/Stuffs';
-import { SettingsGroup } from '../components/Settings/Pages/SettingsGroup/SettingsGroup';
-import { CreateGroup } from '../components/Settings/Pages/SettingsGroup/CreateGroup/CreateGroup';
-import { EditGroup } from '../components/Settings/Pages/SettingsGroup/EditGroup/EditGroup';
+import { Stuffs } from 'components/Stuffs/Stuffs';
+import { SettingsGroup } from 'components/Settings/Pages/SettingsGroup/SettingsGroup';
+import { CreateGroup } from 'components/Settings/Pages/SettingsGroup/CreateGroup/CreateGroup';
+import { EditGroup } from 'components/Settings/Pages/SettingsGroup/EditGroup/EditGroup';
 import { SettingsStatus } from 'components/Settings/Pages/SettingsStatus/SettingsStatus';
-import { SettingsAbonement } from '../components/Settings/Pages/SettingsAbonement/SettingsAbonement';
-import { CreateAgeGroup } from '../components/Settings/Pages/SettingsGroup/CreateAgeGroup/CreateAgeGroup';
-import { ViewAbonement } from '../components/Settings/Pages/SettingsAbonement/ViewAbonement/ViewAbonement';
-import { CreateAbonement } from '../components/Settings/Pages/SettingsAbonement/CreateAbonement/CreateAbonement';
-import { EditAbonement } from '../components/Settings/Pages/SettingsAbonement/EditAbonement/EditAbonement';
-import { Reports } from '../components/Reports/Reports';
-import { ReportsVisit } from '../components/Reports/Visits/ReportsVisit';
-import { CreateStatus } from '../components/Settings/Pages/SettingsStatus/CreateStatus/CreateStatus';
-import { EditStatus } from '../components/Settings/Pages/SettingsStatus/EditStatus/EditStatus';
+import { SettingsAbonement } from 'components/Settings/Pages/SettingsAbonement/SettingsAbonement';
+import { CreateAgeGroup } from 'components/Settings/Pages/SettingsGroup/CreateAgeGroup/CreateAgeGroup';
+import { ViewAbonement } from 'components/Settings/Pages/SettingsAbonement/ViewAbonement/ViewAbonement';
+import { CreateAbonement } from 'components/Settings/Pages/SettingsAbonement/CreateAbonement/CreateAbonement';
+import { EditAbonement } from 'components/Settings/Pages/SettingsAbonement/EditAbonement/EditAbonement';
+import { Reports } from 'components/Reports/Reports';
+import { ReportsVisit } from 'components/Reports/Visits/ReportsVisit';
+import { CreateStatus } from 'components/Settings/Pages/SettingsStatus/CreateStatus/CreateStatus';
+import { EditStatus } from 'components/Settings/Pages/SettingsStatus/EditStatus/EditStatus';
+import SettingsMarkketing from 'components/Settings/Pages/SettingsMarketing';
+import SettingsMarketing from 'components/Settings/Pages/SettingsMarketing';
+import SettingsMarketingCreate from 'components/Settings/Pages/SettingsMarketing/CreateSale';
 
 export const routes = [
 	{
@@ -176,6 +181,20 @@ export const routes = [
 		path: '/settings/abonement/edit/:id',
 		exact: true,
 		component: EditAbonement,
+	},
+	{
+		/* Страница настройек источников рекламы */
+		id: SETTINTS_SALES_LIST,
+		path: '/settings/marketing',
+		exact: true,
+		component: SettingsMarkketing,
+	},
+	{
+		/* Страница добавления источника рекламы */
+		id: SETTINTS_SALES_LIST_CREATE,
+		path: '/settings/marketing/create_sale',
+		exact: true,
+		component: SettingsMarketingCreate,
 	},
 	{
 		/* Главная страница отчетов */

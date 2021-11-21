@@ -1,24 +1,18 @@
 import moment, { now } from 'moment';
 import React, { useEffect, useState } from 'react';
 import classes from './gen.module.css';
-import HeaderNav from '../common/HeaderNav';
+import HeaderNav from 'components/common/HeaderNav';
 import ItemCourse from './ItemCourse/ItemCourse';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-	isEmpty,
-	maxThreeDay,
-	replaceDateforBack,
-	sameDate,
-	sameDateNow,
-} from '../../helpers/common';
+import { isEmpty, maxThreeDay, replaceDateforBack, sameDate, sameDateNow } from 'helpers/common';
 import { notification } from 'antd';
-import { Button } from '../../utils/Buttons/Button';
+import { Button } from 'utils/Buttons/Button';
 import {
 	change_date,
 	get_lessons_with_date,
 	load_general_page_data,
-} from '../../store/Actions/generalPageActions';
-import DatePicker from '../../utils/FromAnt/DatePicker/DatePicker';
+} from 'store/Actions/generalPageActions';
+import DatePicker from 'utils/FromAnt/DatePicker/DatePicker';
 
 export const GeneralPage = () => {
 	const dispatch = useDispatch();
@@ -69,6 +63,7 @@ export const GeneralPage = () => {
 			<div className={classes.wrapper}>
 				<span className={classes.time}>
 					<DatePicker
+						label={'Выберете дату расписания'}
 						toDay={true}
 						value={moment(replaceDateforBack(dateNow))}
 						setValue={change_current_date}

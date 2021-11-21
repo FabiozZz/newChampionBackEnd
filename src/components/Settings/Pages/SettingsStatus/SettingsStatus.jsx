@@ -1,11 +1,10 @@
 import React from 'react';
-import HeaderNav from 'components/common/HeaderNav';
-import { Redirect } from 'components/common/Redirect';
 import classes from './index.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { Button } from '../../../../utils/Buttons/Button';
-import { remove_level } from '../../../../store/Actions/settingsAbonementActions';
+import { Button } from 'utils/Buttons/Button';
+import { remove_level } from 'store/Actions/settingsAbonementActions';
+import HeaderNav from 'components/common/HeaderNav';
 
 export const SettingsStatus = () => {
 	const { statuses } = useSelector(state => state.settings_abonement);
@@ -18,7 +17,7 @@ export const SettingsStatus = () => {
 	return (
 		<>
 			<HeaderNav />
-			<Redirect title={'Статусы'} padding={true} />
+			{/* <Redirect title={'Статусы'} padding={true} /> */}
 			<div className={classes.wrapper}>
 				<table cellSpacing={4} cellPadding={18} className={classes.table}>
 					<tbody>

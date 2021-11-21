@@ -79,17 +79,45 @@
 .table tbody tr:nth-child(2n + 2) {
   background-color: #fbfbfe;
 }
-.table tbody tr td:last-child {
-  display: flex;
-  justify-content: space-around;
-}
+/*.table tbody tr td:last-child {*/
+/*  display: flex;*/
+/*  justify-content: space-around;*/
+/*}*/
 .mute_text{
   font-family: 'SF Pro Display',sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
-  color: #8798AD;}
+  color: #8798AD;
+}
+
+.comment{
+  display: grid;
+  grid-template-columns: min-content auto;
+  background: white;
+  /*grid-template-rows: min-content;*/
+  justify-content: center;
+  padding: 0 84px;
+  gap: 20px;
+  font-style: italic;
+}
+.comment > span{
+  /*justify-self: right;*/
+  text-align: right;
+  white-space: nowrap;
+  /*flex-grow: 1;*/
+}
+.comment > p{
+  width: 500px;
+  text-align: left;
+  /*justify-self: left;*/
+  /*flex-grow: 2;*/
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @media screen and (min-width: 1439px) {
   .wrapper_search{
     margin: 28px -32px 60px -72px;

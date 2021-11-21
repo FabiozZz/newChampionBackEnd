@@ -3,7 +3,7 @@ import classes from './item.module.css';
 import { Option } from './Option/Option';
 import cn from 'classnames';
 import { AddClientModal } from './AddClientModal/AddClientModal';
-import { Modal } from '../../../utils/Modal/Modal';
+import { Modal } from 'utils/Modal/Modal';
 import logo from './djiu.png';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -12,12 +12,12 @@ import {
 	createTrainForCourse,
 	get_lessons_with_date,
 	remove_client_from_group,
-} from '../../../store/Actions/generalPageActions';
+} from 'store/Actions/generalPageActions';
 import { ClientRow } from '../ClientRow/ClientRow';
 import moment from 'moment';
-import { declOfHumanNum, replaceDate, replaceDateforBack } from '../../../helpers/common';
-import { Button } from '../../../utils/Buttons/Button';
-import Api from '../../../Api/Api';
+import { declOfHumanNum, replaceDate, replaceDateforBack } from 'helpers/common';
+import { Button } from 'utils/Buttons/Button';
+import Api from 'Api/Api';
 
 const ItemCourse = ({ course, couches }) => {
 	const { date_now, current_date, form_add } = useSelector(state => state.general_page);

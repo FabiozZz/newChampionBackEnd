@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './button.module.css';
+import PropTypes from 'prop-types';
 
 /**
  * @desc Компонент кнопка которая может использоваться как отправка формы, для этого нужно передать type='submit'
@@ -18,21 +19,64 @@ import classes from './button.module.css';
  * @returns {JSX.Element}
  * @constructor
  */
-export const Button = ({name,size,factor, text,style,click, type='button',disabled,...props}) => {
+export const Button = ({
+	name,
+	size,
+	factor,
+	text,
+	style,
+	click,
+	type = 'button',
+	disabled,
+	...props
+}) => {
+	/**
+	 * проверка введенного значения и подстановка соответствующего класса
+	 */
+	let sizeUser =
+		size === 'default'
+			? classes.defaultSizeButton
+			: size === 'small'
+			? classes.smallSizeButton
+			: size === 'auto'
+			? classes.autoSizeButton
+			: size === 'min'
+			? classes.minSizeButton
+			: classes.defaultSizeButton;
 
-    /**
-     * проверка введенного значения и подстановка соответствующего класса
-     */
-    let sizeUser = size === 'default' ? classes.defaultSizeButton : size === 'small' ? classes.smallSizeButton : size === 'auto'? classes.autoSizeButton :size === 'min'? classes.minSizeButton :classes.defaultSizeButton;
+	/**
+	 * проверка введенного форм-фактора и в зависимости от выбранного применяет стили
+	 */
+	let factorUser =
+		factor === 'success'
+			? classes.success
+			: factor === 'danger'
+			? classes.danger
+			: factor === 'default'
+			? classes.default
+			: factor === 'dark'
+			? classes.dark
+			: classes.default;
 
-    /**
-     * проверка введенного форм-фактора и в зависимости от выбранного применяет стили
-     */
-    let factorUser = factor === 'success' ? classes.success :
-        factor === 'danger' ? classes.danger : factor === 'default' ? classes.default :
-            factor === 'dark' ? classes.dark : classes.default;
-
-    return (
-        <button name={name} disabled={disabled} type={type} className={`${sizeUser} ${classes.btnApp} ${factorUser}`} onClick={click} style={style}>{text?text:props.children}</button>
-    );
+	return (
+		<button
+			name={name}
+			disabled={disabled}
+			type={type}
+			className={`${sizeUser} ${classes.btnApp} ${factorUser}`}
+			onClick={click}
+			style={style}>
+			{text ? text : props.children}
+		</button>
+	);
+};
+Button.propTypes = {
+	size: PropTypes.oneOf(['auto', 'small', 'min', 'default']),
+	factor: PropTypes.oneOf(['success', 'danger', 'default', 'dark']),
+	name: PropTypes.string,
+	text: PropTypes.string,
+	style: PropTypes.object,
+	click: PropTypes.func,
+	type: PropTypes.string,
+	disabled: PropTypes.bool,
 };

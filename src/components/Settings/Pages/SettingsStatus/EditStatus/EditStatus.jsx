@@ -6,11 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'utils/Buttons/Button';
 import { useInputOnObject } from 'hooks';
 import Input from 'utils/FromAnt/Input/Input';
-import {
-	edit_level,
-	exit_edit_page_status,
-} from '../../../../../store/Actions/settingsAbonementActions';
-import { fetch_new_age_group } from '../../../../../store/Actions/settingsGroupActions';
+import { edit_level, exit_edit_page_status } from 'store/Actions/settingsAbonementActions';
+import { fetch_new_age_group } from 'store/Actions/settingsGroupActions';
 import { useHistory } from 'react-router';
 
 export const EditStatus = () => {

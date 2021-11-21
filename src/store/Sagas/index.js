@@ -19,6 +19,8 @@ import {
 	SETTINGS_STATUS,
 	SETTINGS_STATUS_CREATE,
 	SETTINGS_STATUS_EDIT,
+	SETTINTS_SALES_LIST,
+	SETTINTS_SALES_LIST_CREATE,
 } from '../../Routes/actionRoutes';
 import clientsPageSagas from './clientsPageSagas';
 import { load_clients_all } from '../Actions/clientsActions';
@@ -40,6 +42,8 @@ import {
 	start_load_data_status,
 } from '../Actions/settingsAbonementActions';
 import { settingsAbonementSagas } from './settingsAbonementSagas';
+import settingsSourceListPage from 'store/Sagas/settingsSorcePage';
+import { start_load_data_settings_source_list } from 'store/Actions/settingsSourcePageActions';
 
 export function* routeChangeSaga() {
 	while (true) {
@@ -122,6 +126,25 @@ export function* routeChangeSaga() {
 			const settings = yield select(state => state.settings_abonement);
 			if (!settings.ages.length || !settings.statuses.length) {
 				yield put(start_load_data_settings_abonement());
+			}
+		}
+
+		/* страница настроек источников рекламы */
+		if (
+			matchPath(
+				action.payload.location.pathname,
+				getRouteConfig(SETTINTS_SALES_LIST || SETTINTS_SALES_LIST_CREATE)
+			)
+		) {
+			console.log(
+				matchPath(
+					action.payload.location.pathname,
+					getRouteConfig(SETTINTS_SALES_LIST || SETTINTS_SALES_LIST_CREATE)
+				)
+			);
+			const settings = yield select(state => state.settings_abonement);
+			if (!settings.ages.length || !settings.statuses.length) {
+				yield put(start_load_data_settings_source_list());
 			}
 		}
 
@@ -248,6 +271,9 @@ export default function* rootSaga() {
 
 		/* сага страницы настроек абонемента */
 		settingsAbonementSagas,
+
+		/* сага страницы настроек источников рекламы */
+		settingsSourceListPage,
 	];
 	yield all(sagas.map(s => spawn(s)));
 	yield fork(routeChangeSaga);

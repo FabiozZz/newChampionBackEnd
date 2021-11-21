@@ -12,11 +12,11 @@ import {
 	buyAbonementAndCreateOnceTrainForCourse,
 	createDebtTrainForCourse,
 	createOnceTrainForCourse,
-} from '../../../../../store/Actions/generalPageActions';
+} from 'store/Actions/generalPageActions';
 import { BtnGroup } from 'components/Clients/FilterClientSection/BtnGroup/BtnGroup';
 import Select from 'utils/FromAnt/Select/Select';
-import DatePicker from '../../../../../utils/FromAnt/DatePicker/DatePicker';
-import { buy_abonement } from '../../../../../store/Actions/profileActions';
+import DatePicker from 'utils/FromAnt/DatePicker/DatePicker';
+import { buy_abonement } from 'store/Actions/profileActions';
 import moment from 'moment';
 
 export const ModalChangeAbonement = ({ profile, toggleModal }) => {

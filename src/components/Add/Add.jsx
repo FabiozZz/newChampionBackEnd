@@ -19,6 +19,7 @@ import { useInputOnObject } from '../../hooks';
 import { add_client_on_CRM } from '../../store/Actions/addClientsActions';
 import Input from '../../utils/FromAnt/Input/Input';
 import DatePicker from '../../utils/FromAnt/DatePicker/DatePicker';
+import { OterSection } from 'components/Add/common/OterSection/OterSection';
 
 export const ContextCommon = createContext();
 
@@ -285,7 +286,7 @@ export const Add = () => {
 
 						<AddresSection error={errorInput} change={address.onChange} address={address} />
 
-						{/*<OterSection sale={sale} setSale={handleChangeValueSale}/>*/}
+						<OterSection personal_data={personal_data} />
 
 						<RulesSection
 							rules={rules}

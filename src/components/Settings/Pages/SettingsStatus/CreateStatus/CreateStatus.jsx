@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import classes from './status.module.css';
-import { Redirect } from 'components/common/Redirect';
-import HeaderNav from 'components/common/HeaderNav';
 import { useDispatch } from 'react-redux';
-import { Button } from 'utils/Buttons/Button';
 import { useInputOnObject } from 'hooks';
-import Input from 'utils/FromAnt/Input/Input';
-import { add_new_level } from '../../../../../store/Actions/settingsAbonementActions';
+import { add_new_level } from 'store/Actions/settingsAbonementActions';
 import { useHistory } from 'react-router';
+import { Button } from 'utils/Buttons/Button';
+import HeaderNav from 'components/common/HeaderNav';
+import Input from 'utils/FromAnt/Input/Input';
+import { Redirect } from 'components/common/Redirect';
 
 export const CreateStatus = () => {
 	const age_group = useInputOnObject({

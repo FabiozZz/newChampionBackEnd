@@ -9,13 +9,13 @@ import edit_profile from '../../../../assets/images/edit_profile.svg';
 import { NavLink } from 'react-router-dom';
 import { SuccessContext } from '../../SuccessContext';
 import { SuccessAdd } from './SuccessAdd/SuccessAdd';
-import { Modal } from '../../../../utils/Modal/Modal';
+import { Modal } from 'utils/Modal/Modal';
 import { ModalChangeAbonement } from './ModalChangeClient/ModalChangeAbonement';
 import avatar from './avatar.png';
-import { open_edit_page } from '../../../../store/Actions/profileActions';
+import { open_edit_page } from 'store/Actions/profileActions';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
-import { isEmpty } from '../../../../helpers/common';
+import { isEmpty } from 'helpers/common';
 import { AbonementInfo } from './AbonementInfo/AbonementInfo';
 import { CarouselAbonements } from './CarouselAbonements/CarouselAbonements';
 import { ModalEditAbonement } from './ModalEditAbonement/ModalEditAbonement';
@@ -290,18 +290,22 @@ export const ProfileInfo = ({ profile }) => {
 					<span className={classes.block_info__item_label__text}>{user.apartments}</span>
 				</div>
 			</div>
-			{/*<div className={classes.block_info}>*/}
-			{/*    <div className={classes.block_info__header}>*/}
-			{/*        <h3 className={classes.block_info__title}>прочее</h3>*/}
-			{/*        <NavLink className={classes.block_info__header_img_link} to={`/profile/${user.id}/edit`}>*/}
-			{/*            <img src={edit_profile} alt="edit_profile" />*/}
-			{/*        </NavLink>*/}
-			{/*    </div>*/}
-			{/*    <div className={`${classes.block_info__item_small}`}>*/}
-			{/*        <p className={classes.block_info__item_label}>Источник:</p>*/}
-			{/*        <span className={classes.block_info__item_label__text}>Яндекс</span>*/}
-			{/*    </div>*/}
-			{/*</div>*/}
+			{user.ad_source && (
+				<div className={classes.block_info}>
+					<div className={classes.block_info__header}>
+						<h3 className={classes.block_info__title}>прочее</h3>
+						<NavLink
+							className={classes.block_info__header_img_link}
+							to={`/profile/${user.id}/edit`}>
+							<img src={edit_profile} alt="edit_profile" />
+						</NavLink>
+					</div>
+					<div className={`${classes.block_info__item_small}`}>
+						<p className={classes.block_info__item_label}>Источник:</p>
+						<span className={classes.block_info__item_label__text}>{user.ad_source.name}</span>
+					</div>
+				</div>
+			)}
 			{/*<div className={classes.block_info}>*/}
 			{/*    <div className={classes.block_info__header}>*/}
 			{/*        <h3 className={classes.block_info__title}>Оценка качества</h3>*/}
