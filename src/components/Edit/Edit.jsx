@@ -26,6 +26,7 @@ import { update } from 'ink-docstrap/fixtures/documents/probe';
 import { useInputOnObject } from '../../hooks';
 import DatePicker from '../../utils/FromAnt/DatePicker/DatePicker';
 import Input from '../../utils/FromAnt/Input/Input';
+import { OterSection } from 'components/Add/common/OterSection/OterSection';
 
 export const ContextCommonEdit = createContext();
 
@@ -430,7 +431,7 @@ export const Edit = () => {
 						{/*</div>*/}
 						<EditAddresSection change={address.onChange} />
 
-						{/*<OterSection sale={sale} setSale={handleChangeValueSale}/>*/}
+						{/*<OterSection />*/}
 
 						{/*<RulesSection rules={rules} setRules={handleToggleRules} personal={personal} setPersonal={handleTogglePersonal}/>*/}
 
