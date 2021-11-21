@@ -122,8 +122,11 @@
 .wrapper table tr td:first-child {
   width: 92%;
 }
-.wrapper table tr td:last-child {
-  width: 8%;
+.wrapper table tr td:nth-child(2) {
+  width: auto;
+}
+.wrapper table tr td:nth-child(3) {
+  width: auto;
 }
 .wrapper .right:hover {
   background: #E0E3E9;

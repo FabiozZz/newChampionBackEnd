@@ -1,0 +1,15 @@
+@import '../../../../../styles/variables';
+
+
+.wrapper{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  padding: 0 20px;
+  grid-auto-rows: min-content;
+  grid-gap: 24px 16px;
+  .text{
+    @extend %caption;
+    color:$BLACK_50;
+    text-align: center;
+  }
+}

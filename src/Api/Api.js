@@ -500,6 +500,14 @@ class Api {
 
 	/* для настроек списка источников рекламы */
 
+	async getSource(id) {
+		return await this.client.get(`/core/adSource/${id}/`);
+	}
+
+	async editSourceList(source) {
+		return await this.client.put(`/core/adSource/${source.id}/`, { name: source.name });
+	}
+
 	async createSourceList(obj) {
 		return await this.client.post('/core/adSource/', { name: obj.name });
 	}

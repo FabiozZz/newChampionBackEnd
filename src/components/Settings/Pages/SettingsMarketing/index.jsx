@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import HeaderNav from 'components/common/HeaderNav';
 import { Redirect } from 'components/common/Redirect';
@@ -8,14 +8,29 @@ import { Button } from 'utils/Buttons/Button';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { remove_source_on_CRM } from 'store/Actions/settingsSourcePageActions';
+import { Modal } from 'utils/Modal/Modal';
+import ConfirmDelet from 'components/Settings/Pages/SettingsMarketing/ConfirmDelet';
 
 const Index = props => {
+	const [confirm, showConfirm] = useState(false);
+	const [current_course, setSource] = useState(null);
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const { sources } = useSelector(state => state.marketing);
+	const select_source = source_id => {
+		setSource(source_id);
+	};
+	const remove = () => {
+		dispatch(remove_source_on_CRM(current_course));
+	};
 
 	return (
 		<>
+			{confirm && (
+				<Modal toggle={showConfirm}>
+					<ConfirmDelet show={showConfirm} remove={remove} />
+				</Modal>
+			)}
 			<HeaderNav />
 			<Redirect padding={true} title={'Маркетинг'} />
 			<div className={cn('gcol-12', classes.padding)}>
@@ -50,8 +65,31 @@ const Index = props => {
 											<tr key={item.id} onMouseMove={mouseMove} onMouseOut={mouseOut}>
 												<td className={classes.left}>{item.name}</td>
 												<td
+													onClick={e => {
+														e.stopPropagation();
+														history.push(`/settings/marketing/${item.id}`);
+													}}
+													className={classes.right}>
+													<svg
+														width="16"
+														height="16"
+														viewBox="0 0 16 16"
+														fill="none"
+														xmlns="http://www.w3.org/2000/svg">
+														<path
+															d="M9.41845 4.00586L2.80893 10.6159C2.77568 10.6492 2.75167 10.6913 2.74023 10.7366L2.00763 13.6771C1.98572 13.7656 2.01173 13.8597 2.07633 13.9243C2.12521 13.9732 2.19181 14.0003 2.25993 14.0003C2.2808 14.0003 2.30214 13.9977 2.32291 13.9925L5.26342 13.2598C5.30925 13.2483 5.35088 13.2244 5.38414 13.1912L11.9942 6.58164L9.41845 4.00586Z"
+															fill="#BFC5D2"
+														/>
+														<path
+															d="M13.6332 3.10437L12.8974 2.36862C12.4057 1.87689 11.5487 1.87736 11.0575 2.36862L10.1562 3.26987L12.7319 5.84555L13.6332 4.94431C13.8788 4.69877 14.0141 4.37196 14.0141 4.02439C14.0141 3.67681 13.8788 3.35 13.6332 3.10437Z"
+															fill="#BFC5D2"
+														/>
+													</svg>
+												</td>
+												<td
 													onClick={() => {
-														dispatch(remove_source_on_CRM(item.id));
+														showConfirm(true);
+														select_source(item.id);
 													}}
 													className={classes.right}>
 													<svg

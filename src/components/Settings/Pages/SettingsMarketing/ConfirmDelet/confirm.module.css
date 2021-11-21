@@ -1,0 +1,75 @@
+/* colors */
+/* buttons variables */
+/* text variable */
+.wrapper .text {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1.125px;
+  text-transform: uppercase;
+}
+
+/* grid columns classes */
+.gcol-1 {
+  grid-column: span 1 !important;
+}
+
+.gcol-2 {
+  grid-column: span 2 !important;
+}
+
+.gcol-3 {
+  grid-column: span 3 !important;
+}
+
+.gcol-4 {
+  grid-column: span 4 !important;
+}
+
+.gcol-5 {
+  grid-column: span 5 !important;
+}
+
+.gcol-6 {
+  grid-column: span 6 !important;
+}
+
+.gcol-7 {
+  grid-column: span 7 !important;
+}
+
+.gcol-8 {
+  grid-column: span 8 !important;
+}
+
+.gcol-9 {
+  grid-column: span 9 !important;
+}
+
+.gcol-10 {
+  grid-column: span 10 !important;
+}
+
+.gcol-11 {
+  grid-column: span 11 !important;
+}
+
+.gcol-12 {
+  grid-column: span 12 !important;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  padding: 0 20px;
+  grid-auto-rows: min-content;
+  grid-gap: 24px 16px;
+}
+.wrapper .text {
+  color: #8798AD;
+  text-align: center;
+}
+
+/*# sourceMappingURL=confirm.module.css.map */

@@ -21,6 +21,7 @@ import {
 	SETTINGS_STATUS_EDIT,
 	SETTINTS_SALES_LIST,
 	SETTINTS_SALES_LIST_CREATE,
+	SETTINTS_SALES_LIST_EDIT,
 } from '../../Routes/actionRoutes';
 import clientsPageSagas from './clientsPageSagas';
 import { load_clients_all } from '../Actions/clientsActions';
@@ -43,7 +44,10 @@ import {
 } from '../Actions/settingsAbonementActions';
 import { settingsAbonementSagas } from './settingsAbonementSagas';
 import settingsSourceListPage from 'store/Sagas/settingsSorcePage';
-import { start_load_data_settings_source_list } from 'store/Actions/settingsSourcePageActions';
+import {
+	start_edit_source_on_CRM,
+	start_load_data_settings_source_list,
+} from 'store/Actions/settingsSourcePageActions';
 
 export function* routeChangeSaga() {
 	while (true) {
@@ -146,6 +150,21 @@ export function* routeChangeSaga() {
 			if (!settings.ages.length || !settings.statuses.length) {
 				yield put(start_load_data_settings_source_list());
 			}
+		}
+
+		/* страница настроек редактирования источников рекламы */
+		const sourceEditPage = matchPath(
+			action.payload.location.pathname,
+			getRouteConfig(SETTINTS_SALES_LIST_EDIT)
+		);
+		if (sourceEditPage) {
+			let { id } = sourceEditPage.params;
+			id = Number(id);
+			if (!isNaN(id) && typeof id === 'number') {
+				yield put(start_edit_source_on_CRM(id));
+			}
+		} else {
+			yield put(clear_profile());
 		}
 
 		/* страница просмотра абонемента */

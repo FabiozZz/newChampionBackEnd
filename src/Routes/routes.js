@@ -28,6 +28,7 @@ import {
 	SETTINGS_STATUS_EDIT,
 	SETTINTS_SALES_LIST,
 	SETTINTS_SALES_LIST_CREATE,
+	SETTINTS_SALES_LIST_EDIT,
 	STUFF_ROUTE,
 } from './actionRoutes';
 import { Stuffs } from 'components/Stuffs/Stuffs';
@@ -47,6 +48,7 @@ import { EditStatus } from 'components/Settings/Pages/SettingsStatus/EditStatus/
 import SettingsMarkketing from 'components/Settings/Pages/SettingsMarketing';
 import SettingsMarketing from 'components/Settings/Pages/SettingsMarketing';
 import SettingsMarketingCreate from 'components/Settings/Pages/SettingsMarketing/CreateSale';
+import EditSale from 'components/Settings/Pages/SettingsMarketing/EditSale';
 
 export const routes = [
 	{
@@ -195,6 +197,13 @@ export const routes = [
 		path: '/settings/marketing/create_sale',
 		exact: true,
 		component: SettingsMarketingCreate,
+	},
+	{
+		/* Страница редактирования источника рекламы */
+		id: SETTINTS_SALES_LIST_EDIT,
+		path: '/settings/marketing/:id',
+		exact: true,
+		component: EditSale,
 	},
 	{
 		/* Главная страница отчетов */
