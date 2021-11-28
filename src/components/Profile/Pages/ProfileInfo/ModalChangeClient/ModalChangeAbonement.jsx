@@ -277,64 +277,64 @@ export const ModalChangeAbonement = ({ profile, toggleModal }) => {
 				{/*<h3 className={classes.block_info__title_aboniment}>*/}
 				{/*	{selectAboniment.name} для {selectStatus.name.replace(/[а-я]{2}$/gi, 'ых')} клиентов*/}
 				{/*</h3>*/}
-				{single ? (
-					<div className={classes.add_aboniment}>
-						<div className={classes.sales_card}>
-							{/*<div className={classes.procent}>*/}
-							{/*    <OtherInput label={'скидка'}/>*/}
-							{/*</div>*/}
-							<div className={`${classes.sale_count}`}>
-								<span className={`${classes.sale_count_text}`}>1 {declOfLessonsNum(1)}</span>
-								<span className={`${classes.sale_count_text}`}>0 {declOfDay(0)}</span>
-								{/*<img className={classes.sale_count_img} src={devider} alt="devider"/>*/}
-								<svg
-									className={classes.sale_count_img}
-									width="1428"
-									height="2"
-									viewBox="0 0 1428 2"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg">
-									<line
-										y1="1"
-										x2="1428"
-										y2="1"
-										stroke="#BFC5D2"
-										strokeLinejoin="round"
-										strokeDasharray="5 5"
-									/>
-								</svg>
+				{/*{single ? (*/}
+				{/*	<div className={classes.add_aboniment}>*/}
+				{/*		<div className={classes.sales_card}>*/}
+				{/*			/!*<div className={classes.procent}>*!/*/}
+				{/*			/!*    <OtherInput label={'скидка'}/>*!/*/}
+				{/*			/!*</div>*!/*/}
+				{/*			<div className={`${classes.sale_count}`}>*/}
+				{/*				<span className={`${classes.sale_count_text}`}>1 {declOfLessonsNum(1)}</span>*/}
+				{/*				<span className={`${classes.sale_count_text}`}>0 {declOfDay(0)}</span>*/}
+				{/*				/!*<img className={classes.sale_count_img} src={devider} alt="devider"/>*!/*/}
+				{/*				<svg*/}
+				{/*					className={classes.sale_count_img}*/}
+				{/*					width="1428"*/}
+				{/*					height="2"*/}
+				{/*					viewBox="0 0 1428 2"*/}
+				{/*					fill="none"*/}
+				{/*					xmlns="http://www.w3.org/2000/svg">*/}
+				{/*					<line*/}
+				{/*						y1="1"*/}
+				{/*						x2="1428"*/}
+				{/*						y2="1"*/}
+				{/*						stroke="#BFC5D2"*/}
+				{/*						strokeLinejoin="round"*/}
+				{/*						strokeDasharray="5 5"*/}
+				{/*					/>*/}
+				{/*				</svg>*/}
 
-								{editPrice.edit ? (
-									<div onClick={toggleEdit} className={classes.edit_block}>
-										<input
-											autoFocus
-											className={classes.edit_price}
-											style={{
-												width: String(editPrice.price).length * 10 + 'px',
-											}}
-											value={editPrice.price * countCard}
-											onChange={handleChangePriceAbonement}
-											type="number"
-										/>
-										<span className={classes.edit_block_text}>&#8381;</span>
-										<img className={classes.img_edit} src={success_edit} alt="edit" />
-									</div>
-								) : (
-									<div onClick={toggleEdit} className={classes.edit_block}>
-										<span className={`${classes.edit_block_text}`}>
-											{editPrice.price * countCard}
-											&#8381;
-										</span>
-										<img className={classes.img_edit} src={edit} alt="edit" />
-									</div>
-								)}
-							</div>
-							{/*<div className={`${classes.success}`}>*/}
-							{/*    <Button click={handleSubmitAboniment} text={'применить'} size={"auto"} factor={"success"}/>*/}
-							{/*</div>*/}
-						</div>
-					</div>
-				) : data.state.rate_id && data.state.level_id ? (
+				{/*				{editPrice.edit ? (*/}
+				{/*					<div onClick={toggleEdit} className={classes.edit_block}>*/}
+				{/*						<input*/}
+				{/*							autoFocus*/}
+				{/*							className={classes.edit_price}*/}
+				{/*							style={{*/}
+				{/*								width: String(editPrice.price).length * 10 + 'px',*/}
+				{/*							}}*/}
+				{/*							value={editPrice.price * countCard}*/}
+				{/*							onChange={handleChangePriceAbonement}*/}
+				{/*							type="number"*/}
+				{/*						/>*/}
+				{/*						<span className={classes.edit_block_text}>&#8381;</span>*/}
+				{/*						<img className={classes.img_edit} src={success_edit} alt="edit" />*/}
+				{/*					</div>*/}
+				{/*				) : (*/}
+				{/*					<div onClick={toggleEdit} className={classes.edit_block}>*/}
+				{/*						<span className={`${classes.edit_block_text}`}>*/}
+				{/*							{editPrice.price * countCard}*/}
+				{/*							&#8381;*/}
+				{/*						</span>*/}
+				{/*						<img className={classes.img_edit} src={edit} alt="edit" />*/}
+				{/*					</div>*/}
+				{/*				)}*/}
+				{/*			</div>*/}
+				{/*			/!*<div className={`${classes.success}`}>*!/*/}
+				{/*			/!*    <Button click={handleSubmitAboniment} text={'применить'} size={"auto"} factor={"success"}/>*!/*/}
+				{/*			/!*</div>*!/*/}
+				{/*		</div>*/}
+				{/*	</div>*/}
+				{data.state.rate_id && data.state.level_id ? (
 					<div className={classes.add_aboniment}>
 						<div className={classes.sales_card}>
 							{/*<div className={classes.procent}>*/}
@@ -359,22 +359,21 @@ export const ModalChangeAbonement = ({ profile, toggleModal }) => {
 								</span>
 								{/*<img className={classes.sale_count_img} src={devider} alt="devider"/>*/}
 								<svg
-									className={classes.sale_count_img}
-									width="1428"
-									height="2"
-									viewBox="0 0 1428 2"
+									width="100%"
+									height="1"
+									viewBox="0 0 100% 1"
 									fill="none"
 									xmlns="http://www.w3.org/2000/svg">
 									<line
-										y1="1"
-										x2="1428"
-										y2="1"
+										x1="4.37114e-08"
+										y1="0.5"
+										x2="100%"
+										y2="0.500022"
 										stroke="#BFC5D2"
 										strokeLinejoin="round"
-										strokeDasharray="5 5"
+										strokeDasharray="3 3"
 									/>
 								</svg>
-
 								{editPrice.edit ? (
 									<div onClick={toggleEdit} className={classes.edit_block}>
 										<input

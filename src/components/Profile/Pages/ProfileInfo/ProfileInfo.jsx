@@ -76,7 +76,7 @@ export const ProfileInfo = ({ profile }) => {
 		toggleModal(prevState => ({ ...prevState, show: !modal.show, type: 'edit' }));
 	};
 	const showAndChangeTypeModalChange = () => {
-		toggleModal(prevState => ({ ...prevState, show: !modal.show, type: '' }));
+		toggleModal(prevState => ({ ...prevState, show: !modal.show, type: 'create' }));
 	};
 	return (
 		<>
@@ -175,7 +175,7 @@ export const ProfileInfo = ({ profile }) => {
 					</div>
 					{user.subscription && user.subscription.rate && (
 						<>
-							<AbonementInfo user={user} />
+							<AbonementInfo user={user} showModal={showAndChangeTypeModalEdit} />
 							{/*<AbonementInfo user={user} />*/}
 							{/*<AbonementInfo user={user} />*/}
 						</>
@@ -208,9 +208,12 @@ export const ProfileInfo = ({ profile }) => {
 
 						<p className={classes.block_info__item_label}>Имя:</p>
 						<span className={classes.block_info__item_label__text}>{user.first_name}</span>
-
-						<p className={classes.block_info__item_label}>Отчество:</p>
-						<span className={classes.block_info__item_label__text}>{user.middle_name}</span>
+						{user.middle_name && (
+							<>
+								<p className={classes.block_info__item_label}>Отчество:</p>
+								<span className={classes.block_info__item_label__text}>{user.middle_name}</span>
+							</>
+						)}
 
 						<p className={classes.block_info__item_label}>Дата рождения:</p>
 						<span className={classes.block_info__item_label__text}>
@@ -265,31 +268,47 @@ export const ProfileInfo = ({ profile }) => {
 					})}
 				</div>
 			)}
-			<div className={classes.block_info}>
-				<div className={classes.block_info__header}>
-					<h3 className={classes.block_info__title}>Адрес проживания</h3>
-					<NavLink className={classes.block_info__header_img_link} to={`/profile/${user.id}/edit`}>
-						<img src={edit_profile} alt="edit_profile" />
-					</NavLink>
+			{(user.street || user.house || user.building || user.apartments) && (
+				<div className={classes.block_info}>
+					<div className={classes.block_info__header}>
+						<h3 className={classes.block_info__title}>Адрес проживания</h3>
+						<NavLink
+							className={classes.block_info__header_img_link}
+							to={`/profile/${user.id}/edit`}>
+							<img src={edit_profile} alt="edit_profile" />
+						</NavLink>
+					</div>
+
+					<div className={`${classes.block_info__item_small}`}>
+						{/*<p className={classes.block_info__item_label}>Адрес</p>*/}
+						{/*<span className={classes.block_info__item_label__text}>{user.address}</span>*/}
+						{user.street && (
+							<>
+								<p className={classes.block_info__item_label}>Улица:</p>
+								<span className={classes.block_info__item_label__text}>{user.street}</span>
+							</>
+						)}
+						{user.house && (
+							<>
+								<p className={classes.block_info__item_label}>Дом:</p>
+								<span className={classes.block_info__item_label__text}>{user.house}</span>
+							</>
+						)}
+						{user.building && (
+							<>
+								<p className={classes.block_info__item_label}>Корпус:</p>
+								<span className={classes.block_info__item_label__text}>{user.building}</span>
+							</>
+						)}
+						{user.apartments && (
+							<>
+								<p className={classes.block_info__item_label}>Квартира:</p>
+								<span className={classes.block_info__item_label__text}>{user.apartments}</span>
+							</>
+						)}
+					</div>
 				</div>
-
-				<div className={`${classes.block_info__item_small}`}>
-					{/*<p className={classes.block_info__item_label}>Адрес</p>*/}
-					{/*<span className={classes.block_info__item_label__text}>{user.address}</span>*/}
-
-					<p className={classes.block_info__item_label}>Улица:</p>
-					<span className={classes.block_info__item_label__text}>{user.street}</span>
-
-					<p className={classes.block_info__item_label}>Дом:</p>
-					<span className={classes.block_info__item_label__text}>{user.house}</span>
-
-					<p className={classes.block_info__item_label}>Корпус:</p>
-					<span className={classes.block_info__item_label__text}>{user.building}</span>
-
-					<p className={classes.block_info__item_label}>Квартира:</p>
-					<span className={classes.block_info__item_label__text}>{user.apartments}</span>
-				</div>
-			</div>
+			)}
 			{user.ad_source && (
 				<div className={classes.block_info}>
 					<div className={classes.block_info__header}>

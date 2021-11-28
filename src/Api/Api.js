@@ -323,6 +323,35 @@ class Api {
 		// });
 	}
 
+	async getProfileComments(id) {
+		return await this.client.get(`/client/${id}/comments/`);
+		//     .then(r => {
+		//     return r.data.find(client => Number(client.id) === Number(id));
+		// });
+	}
+
+	async getComment(id) {
+		return await this.client.get(`/core/comments/${id}`);
+		//     .then(r => {
+		//     return r.data.find(client => Number(client.id) === Number(id));
+		// });
+	}
+
+	async createProfileComment(data) {
+		return await this.client.post(`/core/comments/`, { ...data });
+		//     .then(r => {
+		//     return r.data.find(client => Number(client.id) === Number(id));
+		// });
+	}
+
+	async editProfileComment(id, data) {
+		console.log('this edit way comment', id, data);
+		return await this.client.put(`/core/comments/${id}`, { ...data });
+		//     .then(r => {
+		//     return r.data.find(client => Number(client.id) === Number(id));
+		// });
+	}
+
 	async getProfilePay(id) {
 		return await this.client.get(`/payment/client/${id}/`);
 		//     .then(r => {

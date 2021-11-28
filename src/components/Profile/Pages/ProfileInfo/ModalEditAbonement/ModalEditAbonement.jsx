@@ -10,65 +10,115 @@ import { DataPicker } from '../../../../../utils/DataPicker/DataPicker';
 import modal_devider from '../../../../../assets/images/modal_devider.svg';
 import { SelectCouch } from '../AddAboniment/SelectCouch/SelectCouch';
 import SelectGroup from '../../../../../utils/SelectGroup/SelectGroup';
-import { declOfLessonsNum, declOfWeekNum } from '../../../../../helpers/common';
+import {
+	declOfDay,
+	declOfLessonsNum,
+	declOfWeekNum,
+	replaceDateforBack,
+} from '../../../../../helpers/common';
 import { Button } from '../../../../../utils/Buttons/Button';
 import { OtherInput } from '../../../../../utils/OtherInput/OtherInput';
-import { useInputOnObject } from '../../../../../hooks';
+import { useInitialStateOnUser, useInputOnObject, usePrice } from '../../../../../hooks';
+import Select from 'utils/FromAnt/Select/Select';
+import { useDispatch, useSelector } from 'react-redux';
+import { buy_abonement } from 'store/Actions/profileActions';
+import Input from 'utils/FromAnt/Input/Input';
 
 export const ModalEditAbonement = ({ profile, type, change, toggleModal }) => {
+	const dispatch = useDispatch();
 	const { user } = profile;
-	// const [selectFilial, setSelectFilial] = useState(user.filial)
-	// const handleChangeFilialForUser = (obj) => {
-	//     setSelectFilial(obj);
-	// };
+	const { ages_group, couch, group, status, typeAboniment } = useSelector(state => state.profile);
 
-	const inputs = useInputOnObject({});
+	const filter_aboneemnts = typeAboniment.filter(item => item.rate_type !== 0);
 
-	const [selectAbonement, setSelectAbonement] = useState();
-	const handleChangeAbonementForUser = obj => {
-		setSelectAbonement(obj);
-	};
+	const data = useInputOnObject({});
+	const [selectAboniment, setAboniment] = useState({});
 
-	const [selectGroup, setSelectGroup] = useState(user.train_group || {});
-	const handleChangeGroupForUser = obj => {
-		setSelectGroup(obj);
-	};
+	const [filter_group, setFilter] = useState([]);
 
-	const [selectCouch, setSelectCouch] = useState(user.train_trainer || {});
-	const handleChangeCouchForUser = obj => {
-		setSelectCouch(obj);
+	const [countCard, setCount] = useState(1);
+	const handleChangeCountCard = e => {
+		let symbol = e.target.value;
+		setCount(Number(symbol) > 999 ? 999 : Number(symbol) < 1 ? 1 : Number(symbol));
 	};
-
-	const [selectStatus, setSelectStatus] = useState(user.club_card.level);
-	const handleChangeStatusForUser = obj => {
-		setSelectStatus(obj);
+	const handleIncrementCount = () => {
+		setCount(countCard < 999 ? countCard + 1 : 999);
 	};
-
-	const [editPrice, setEditPrice] = useState({
-		price: 0,
-		edit: false,
-	});
-	const handleChangePriceAbonement = e => {
-		setEditPrice(prevState => ({ ...prevState, price: Number(e.target.value) }));
+	const handleDecrementCount = () => {
+		setCount(countCard <= 1 ? 1 : countCard - 1);
 	};
-	const toggleEdit = () => {
-		setEditPrice(prevState => ({ ...prevState, edit: !prevState.edit }));
-	};
+	const { editPrice, setEditPrice, handleChangePriceAbonement, toggleEdit } = usePrice();
 
 	useEffect(() => {
-		setEditPrice(prevState => ({ ...prevState, price: Number(selectAbonement.price) }));
-	}, [selectAbonement.price]);
+		setFilter(group.filter(group => group.age_group.id === data.state.age_group_id));
+	}, [data.state.age_group_id, group]);
 
-	const submitData = () => {
-		console.log(selectAbonement);
-		console.log(selectGroup);
-		console.log(selectCouch);
-		// let uploadData = {
-		//     ...selectAbonement,
-		//
-		// }
+	useInitialStateOnUser(user, data, setAboniment, typeAboniment);
+
+	useEffect(() => {
+		if (
+			selectAboniment &&
+			data.state &&
+			data.state.level_id &&
+			data.state.rate_id &&
+			selectAboniment.prices &&
+			selectAboniment.prices.length
+		) {
+			let copyAbonement = Object.assign({}, selectAboniment);
+			let price = copyAbonement.prices.find(
+				item =>
+					item.age_group.id === (data.state.age_group_id || user.age_group.id) &&
+					item.level.id === data.state.level_id
+			).price;
+			if (price) {
+				setEditPrice(prevState => ({ ...prevState, price: Number(price) }));
+			}
+		}
+	}, [data.state?.level_id, data.state?.rate_id, selectAboniment]);
+
+	const handleSubmitAbonimentCash = () => {
+		console.log(data.state);
+		let copyAbonement = [...selectAboniment.prices];
+		console.log(copyAbonement);
+		let price = copyAbonement.find(
+			item =>
+				item.age_group.id === (data.state.age_group_id || user.age_group.id) &&
+				item.level.id === data.state.level_id
+		).price;
+		const userPrice = editPrice.price !== Number(price) ? editPrice.price : false;
+		let uploadData = {
+			id: user.id,
+			payment_method: 'cash',
+			...(userPrice && { price: userPrice }),
+			...(data.state && data.state),
+		};
+
+		console.log('покупаемый абонемент', uploadData);
+		dispatch(buy_abonement(uploadData));
+		toggleModal();
 	};
 
+	const handleSubmitAbonimentCashLess = () => {
+		console.log(data.state);
+		let copyAbonement = [...selectAboniment.prices];
+		console.log(copyAbonement);
+		let price = copyAbonement.find(
+			item =>
+				item.age_group.id === (data.state.age_group_id || user.age_group.id) &&
+				item.level.id === data.state.level_id
+		).price;
+		const userPrice = editPrice.price !== Number(price) ? editPrice.price : false;
+		let uploadData = {
+			id: user.id,
+			payment_method: 'cashless',
+			...(userPrice && { price: userPrice }),
+			...(data.state && data.state),
+		};
+
+		console.log('покупаемый абонемент', uploadData);
+		dispatch(buy_abonement(uploadData));
+		toggleModal();
+	};
 	return (
 		<>
 			<p className={classes.wrapper__label}>Редактирование абонемента</p>
@@ -76,46 +126,101 @@ export const ModalEditAbonement = ({ profile, type, change, toggleModal }) => {
 			<UserInfo type={type} change={change} user={user} />
 			<div className={classes.block_form}>
 				<div className={classes.block_two}>
-					<OtherInput label={'перенести абонемент'} placeholder={'ФИО нового владельца'} />
+					<Input label={'перенести абонемент'} placeholder={'ФИО нового владельца'} />
+					<Select label={'филиал'} />
 					{/*<SelectFilial value={selectFilial.name} setValue={handleChangeFilialForUser} label={'филиал'} data={profile.profile} />*/}
 				</div>
-				<img width={500} src={separate} alt="separate" />
+				{/*<img width={550} src={separate} alt="separate" />*/}
+				<svg width="100%" height="1" viewBox="0 0 100% 1" fill="none">
+					<line y1="0.5" x2="100%" y2="0.5" stroke="#EEF3F5" strokeDasharray="12 12" />
+				</svg>
+
 				<div className={classes.block_two}>
-					<AbonimentType
+					<Select
 						label={'тип абонемента'}
-						setValue={handleChangeAbonementForUser}
-						value={selectAbonement.name}
-						data={profile.typeAboniment}
+						name={'rate_id'}
+						setValue={data.onChange}
+						field={'name'}
+						value={data.state.rate_id && data.state.rate_id}
+						data={filter_aboneemnts}
 					/>
-					<SelectStatus
+					{/*<AbonimentType*/}
+					{/*	label={'тип абонемента'}*/}
+					{/*	setValue={handleChangeAbonementForUser}*/}
+					{/*	value={selectAbonement.name}*/}
+					{/*	data={profile.typeAboniment}*/}
+					{/*/>*/}
+					<Select
+						value={data.state.level_id && data.state.level_id}
+						setValue={data.onChange}
+						data={status}
+						name={'level_id'}
 						label={'статус'}
-						value={selectStatus.name}
-						setValue={handleChangeStatusForUser}
-						data={profile.status}
+						field={'name'}
 					/>
+					{/*<SelectStatus*/}
+					{/*	label={'статус'}*/}
+					{/*	value={selectStatus.name}*/}
+					{/*	setValue={handleChangeStatusForUser}*/}
+					{/*	data={profile.status}*/}
+					{/*/>*/}
 				</div>
 				<div>
 					<span className={classes.label_cash}>Нужно доплатить</span>
 					<div className={`${classes.sale_count}`}>
 						<span className={`${classes.sale_count_text}`}>
-							{selectAbonement.train_quantity > 20 ? (
+							{selectAboniment?.train_quantity > 9990 ? (
 								<span dangerouslySetInnerHTML={{ __html: '&#8734;' }} />
 							) : (
-								selectAbonement.train_quantity
+								selectAboniment?.train_quantity
 							)}{' '}
-							{declOfLessonsNum(selectAbonement.train_quantity)}
+							{declOfLessonsNum(selectAboniment?.train_quantity)}
 						</span>
 						<span className={`${classes.sale_count_text}`}>
-							{selectAbonement.days_duration / 7 > 8 ? (
+							{selectAboniment?.days_duration > 9990 ? (
 								<span dangerouslySetInnerHTML={{ __html: '&#8734;' }} />
 							) : (
-								selectAbonement.days_duration / 7
+								selectAboniment?.days_duration
 							)}{' '}
-							{declOfWeekNum(selectAbonement.days_duration / 7)}
+							{declOfDay(selectAboniment?.days_duration)}
 						</span>
 						{/*<img className={classes.sale_count_img} src={devider} alt="devider"/>*/}
+						<svg
+							width="100%"
+							height="1"
+							viewBox="0 0 100% 1"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg">
+							<line
+								x1="4.37114e-08"
+								y1="0.5"
+								x2="100%"
+								y2="0.500022"
+								stroke="#BFC5D2"
+								strokeLinejoin="round"
+								strokeDasharray="3 3"
+							/>
+						</svg>
+
+						{/*<span className={`${classes.sale_count_text}`}>*/}
+						{/*	{selectAbonement.train_quantity > 20 ? (*/}
+						{/*		<span dangerouslySetInnerHTML={{ __html: '&#8734;' }} />*/}
+						{/*	) : (*/}
+						{/*		selectAbonement.train_quantity*/}
+						{/*	)}{' '}*/}
+						{/*	{declOfLessonsNum(selectAbonement.train_quantity)}*/}
+						{/*</span>*/}
+						{/*<span className={`${classes.sale_count_text}`}>*/}
+						{/*	{selectAbonement.days_duration / 7 > 8 ? (*/}
+						{/*		<span dangerouslySetInnerHTML={{ __html: '&#8734;' }} />*/}
+						{/*	) : (*/}
+						{/*		selectAbonement.days_duration / 7*/}
+						{/*	)}{' '}*/}
+						{/*	{declOfWeekNum(selectAbonement.days_duration / 7)}*/}
+						{/*</span>*/}
+						{/*<img className={classes.sale_count_img} src={devider} alt="devider"/>*/}
 						<div className={classes.flex}>
-							<img className={classes.sale_count_img} src={modal_devider} alt="devider" />
+							{/*<img className={classes.sale_count_img} src={modal_devider} alt="devider" />*/}
 
 							{editPrice.edit ? (
 								<div onClick={toggleEdit} className={classes.edit_block}>
@@ -142,24 +247,38 @@ export const ModalEditAbonement = ({ profile, type, change, toggleModal }) => {
 						</div>
 					</div>
 				</div>
-				<img width={500} src={separate} alt="separate" />
+				<svg width="100%" height="1" viewBox="0 0 100% 1" fill="none">
+					<line y1="0.5" x2="100%" y2="0.5" stroke="#EEF3F5" strokeDasharray="12 12" />
+				</svg>
 				<div className={classes.block_two}>
-					<SelectGroup label={'возростная группа'} value={{ name: '' }} data={{}} />
-					{!selectAbonement.is_personal ? (
-						<SelectGroup
-							label={'поменять группу'}
-							value={selectGroup}
-							setValue={handleChangeGroupForUser}
-							data={profile.group}
-						/>
-					) : selectAbonement.is_personal ? (
-						<SelectCouch
-							label={'поменять тренера'}
-							value={selectCouch}
-							setValue={handleChangeCouchForUser}
-							data={profile.couch}
-						/>
-					) : null}
+					<Select label={'возростная группа'} field={'label'} data={ages_group} />
+					<Select label={'группа'} field={'name'} data={filter_group} />
+					{/*{!selectAbonement.is_personal ? (*/}
+					{/*	<Select label={'поменять группу'} data={profile.group} />*/}
+					{/*) : selectAbonement.is_personal ? (*/}
+					{/*	<Select*/}
+					{/*		label={'поменять тренера'}*/}
+					{/*		// value={selectCouch}*/}
+					{/*		// setValue={handleChangeCouchForUser}*/}
+					{/*		data={profile.couch}*/}
+					{/*	/>*/}
+					{/*) : null}*/}
+					{/*<SelectGroup label={'возростная группа'} value={{ name: '' }} data={{}} />*/}
+					{/*{!selectAbonement.is_personal ? (*/}
+					{/*	<SelectGroup*/}
+					{/*		label={'поменять группу'}*/}
+					{/*		value={selectGroup}*/}
+					{/*		setValue={handleChangeGroupForUser}*/}
+					{/*		data={profile.group}*/}
+					{/*	/>*/}
+					{/*) : selectAbonement.is_personal ? (*/}
+					{/*	<SelectCouch*/}
+					{/*		label={'поменять тренера'}*/}
+					{/*		// value={selectCouch}*/}
+					{/*		// setValue={handleChangeCouchForUser}*/}
+					{/*		data={profile.couch}*/}
+					{/*	/>*/}
+					{/*) : null}*/}
 				</div>
 				<img width={500} src={separate} alt="separate" />
 				<div className={classes.block_one}>
@@ -170,7 +289,7 @@ export const ModalEditAbonement = ({ profile, type, change, toggleModal }) => {
 				</div>
 				<div className={classes.end_btn}>
 					<Button click={() => toggleModal(false)} factor={'danger'} text={'отменить'} />
-					<Button click={submitData} factor={'success'} text={'сохранить'} />
+					<Button factor={'success'} text={'сохранить'} />
 				</div>
 			</div>
 		</>

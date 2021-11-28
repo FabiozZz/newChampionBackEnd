@@ -24,7 +24,7 @@ export const useInputOnObject = initialState => {
 		}
 	}
 	return {
-		state: { ...state, ...newState },
+		state: { ...newState },
 		onChange: handleChange,
 	};
 };

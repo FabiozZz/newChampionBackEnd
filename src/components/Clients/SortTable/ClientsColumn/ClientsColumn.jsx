@@ -5,6 +5,7 @@ import imageBirthDay from '../../../../assets/images/clientsListCard/giftbox.svg
 import imagePhone from '../../../../assets/images/clientsListCard/phone.svg';
 import { NavLink } from 'react-router-dom';
 import { ageToString, declOfLessonsNum, replaceDateforFront } from 'helpers/common';
+import moment from 'moment';
 
 export const ClientsColumn = ({ clients }) => {
 	return (
@@ -16,7 +17,7 @@ export const ClientsColumn = ({ clients }) => {
 							<p className={classes.list_col__item_name}>
 								{client.last_name} {client.first_name} {client.middle_name}
 							</p>
-							{client.is_Archive ? (
+							{client.is_archive ? (
 								<svg
 									width="16"
 									height="16"
@@ -54,7 +55,7 @@ export const ClientsColumn = ({ clients }) => {
 							<div className={classes.list_col__item_block}>
 								<img src={imageBirthDay} alt="birthday" />
 								<p className={classes.list_col__item_block_text}>
-									{client.date_of_birth} ({ageToString(client.date_of_birth)})
+									{replaceDateforFront(client.date_of_birth)} ({ageToString(client.date_of_birth)})
 								</p>
 							</div>
 							{client.phone_number ? (
@@ -180,7 +181,9 @@ export const ClientsColumn = ({ clients }) => {
 										<span style={{ fontWeight: 900 }}>{client.subscription.train_balance}</span>{' '}
 										{declOfLessonsNum(client.subscription.train_balance)} до{' '}
 										<span style={{ fontWeight: 900 }}>
-											{replaceDateforFront(client.subscription.valid_until)}
+											{moment(client.subscription.valid_until)
+												.subtract(1, 'day')
+												.format('DD.MM.YYYY')}
 										</span>
 									</p>
 								</div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import './checkbox.css';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 /**
  * компонент для визуализации <input type="checkbox">,
@@ -17,32 +17,43 @@ import PropTypes from "prop-types";
  * @returns {JSX.Element}
  * @constructor
  */
-export const CheckboxBtn = ({disabled = false,name='',setIsChecked,isChecked=false, }) => {
-    /**
-     * при disabled = true возвращает разметку показывая что кнопка не активно и выключает <input>
-     * @type {JSX.Element}
-     */
-    let disabledBox = disabled ? <div className={'checkboxDisabled'}/> : isChecked ?
-        <div className={'checkbox-wrapper'}>
-            <div className={'checkCheckBox'}/>
-        </div> : <div className={'checkbox-nonDisabled'}/>;
+export const CheckboxBtn = ({ disabled = false, name = '', setIsChecked, isChecked = false }) => {
+	/**
+	 * при disabled = true возвращает разметку показывая что кнопка не активно и выключает <input>
+	 * @type {JSX.Element}
+	 */
+	let disabledBox = disabled ? (
+		<div className={'checkboxDisabled'} />
+	) : isChecked ? (
+		<div className={'checkbox-wrapper'}>
+			<div className={'checkCheckBox'} />
+		</div>
+	) : (
+		<div className={'checkbox-nonDisabled'} />
+	);
 
-    return (
-            <label className={'checkbox-app'}>
-                {disabledBox}
-                <input disabled={disabled} onChange={setIsChecked} name={name} value={isChecked?1:0} type="checkbox"/>
-            </label>
-    )
+	return (
+		<label className={'checkbox-app'}>
+			{disabledBox}
+			<input
+				disabled={disabled}
+				onChange={setIsChecked}
+				name={name}
+				value={isChecked ? 1 : 0}
+				type="checkbox"
+			/>
+		</label>
+	);
 };
 
 CheckboxBtn.defaultProps = {
-    disabled: false,
-    name: '',
+	disabled: false,
+	name: '',
 };
 
 CheckboxBtn.propTypes = {
-    disabled: PropTypes.bool,
-    name: PropTypes.string,
-    setIsChecked: PropTypes.func.isRequired,
-    isChecked: PropTypes.bool.isRequired
+	disabled: PropTypes.bool,
+	name: PropTypes.string,
+	setIsChecked: PropTypes.func,
+	isChecked: PropTypes.bool.isRequired,
 };

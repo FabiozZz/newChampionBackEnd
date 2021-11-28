@@ -1,0 +1,78 @@
+@import "../../styles/variables";
+.wrapper{
+  position: relative;
+  summary{
+    background: #fefefe;
+    border: 1px solid #bfc5d2;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 0 16px;
+    height: 40px;
+    font-family: 'SF Pro Display', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #bfc5d2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .boll{
+    border-radius: 50%;
+    color: $WHITE;
+    background: $BLACK_80;
+    padding: 2px 7px;
+  }
+  .label{
+      font-family: 'Montserrat', sans-serif;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 1.125px;
+      text-transform: uppercase;
+      color: #B0BAC9;
+      margin: 0;
+      padding: 0;
+  }
+  .list{
+    padding: 24px 0;
+    margin-top: 6px;
+    background: white;
+    position: absolute;
+    max-height: 368px;
+    overflow: auto;
+    box-shadow: $BOX_SHADOW;
+    left: 0;
+    right: 0;
+    &::after{
+      content: '';
+      position: absolute;
+      display: block;
+      height: 14px;
+      width: 14px;
+      background: white;
+      top: -3px;
+      z-index: -1;
+      right: 15px;
+      transform: rotate(45deg);
+    }
+    .item{
+      padding: 0 24px;
+      margin-top: 8px;
+      display: flex;
+      @extend %text;
+      color:$BLACK;
+      gap: 8px;
+      align-items: center;
+      height: 24px;
+      &:first-child{
+        margin-top: 0;
+      }
+      &:hover{
+        background: $GRAY_60;
+      }
+    }
+  }
+}

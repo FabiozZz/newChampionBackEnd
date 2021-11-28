@@ -432,7 +432,7 @@ export const Edit = () => {
 						{/*        </div>*/}
 						{/*    </div>*/}
 						{/*</div>*/}
-						<EditAddresSection change={address.onChange} />
+						<EditAddresSection address={address.state} change={address.onChange} />
 
 						<EditOterSection personal_data={personal_data} />
 

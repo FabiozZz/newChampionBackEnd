@@ -32,6 +32,12 @@
     right: 10px;top: 10px;
     z-index:99;
 }
+.svg{
+    cursor:pointer;
+    position:absolute;
+    right: 45px;top: 8px;
+    z-index:99;
+}
 .wrapper_md{
     position: relative;
     min-height: 50px;

@@ -1,7 +1,9 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import {
 	BUY_ABONEMENT,
+	CREATE_COMMENT_FOR_CLIENT,
 	CREATE_PROFILE_PARENTS,
+	EDIT_COMMENT_FOR_CLIENT,
 	EDIT_PROFILE,
 	EDIT_PROFILE_PARENTS,
 	LOAD_PROFILE_USER,
@@ -10,6 +12,7 @@ import {
 } from '../../../constants/profileConstant';
 import {
 	getAbonimentList,
+	getCommentList,
 	getCouchList,
 	getGroupList,
 	getPayList,
@@ -19,11 +22,13 @@ import {
 } from './workers';
 import {
 	edit_profile_done,
+	load_profile_user,
 	load_profile_user_done,
 	load_profile_user_fail,
 } from '../../Actions/profileActions';
 import Api from '../../../Api/Api';
 import { getAgesGroup, getSourceList } from '../addClientOnCRM/workers';
+import { func } from 'prop-types';
 
 // export function* loadClientsPage() {
 //     let finalData = {};
@@ -51,6 +56,7 @@ import { getAgesGroup, getSourceList } from '../addClientOnCRM/workers';
 
 export function* loadProfileWorker({ payload }) {
 	const { id } = payload;
+	console.log(payload);
 	const profile = select(state => state.profile);
 	if (!profile.user) {
 		const finalData = yield {
@@ -61,6 +67,7 @@ export function* loadProfileWorker({ payload }) {
 			group: yield call(() => getGroupList()),
 			couch: yield call(() => getCouchList()),
 			visit_list: yield call(() => getVisitList(id)),
+			comment_list: yield call(() => getCommentList(id)),
 			pay_list: yield call(() => getPayList(id)),
 		};
 		console.log(finalData);
@@ -77,6 +84,9 @@ export function* openProfileEditWorker({ payload }) {
 		group: yield call(() => getGroupList()),
 		couch: yield call(() => getCouchList()),
 		source: yield call(() => getSourceList()),
+		visit_list: yield call(() => getVisitList(payload)),
+		comment_list: yield call(() => getCommentList(payload)),
+		pay_list: yield call(() => getPayList(payload)),
 	};
 	console.log(finalData);
 	yield put(load_profile_user_done(finalData));
@@ -129,6 +139,18 @@ function* removeProfileParents({ payload }) {
 	yield call(() => Api.removeParents(id, parents));
 }
 
+function* create_comments_for_user({ payload }) {
+	console.log('create comment >>>', payload);
+	yield call(() => Api.createProfileComment({ ...payload }));
+	yield put(load_profile_user({ id: payload.client_id }));
+}
+
+function* edit_comments_for_user({ payload }) {
+	const { id, ...rest } = payload;
+	yield call(() => Api.editProfileComment(id, { ...rest }));
+	yield put(load_profile_user({ id: rest.client_id }));
+}
+
 export function* profilePageSagas() {
 	yield takeEvery(LOAD_PROFILE_USER, loadProfileWorker);
 	yield takeEvery(OPEN_EDIT_PAGE, openProfileEditWorker);
@@ -137,4 +159,6 @@ export function* profilePageSagas() {
 	yield takeEvery(EDIT_PROFILE_PARENTS, editParentsWorker);
 	yield takeEvery(CREATE_PROFILE_PARENTS, createProfileParents);
 	yield takeEvery(REMOVE_PROFILE_PARENTS, removeProfileParents);
+	yield takeEvery(CREATE_COMMENT_FOR_CLIENT, create_comments_for_user);
+	yield takeEvery(EDIT_COMMENT_FOR_CLIENT, edit_comments_for_user);
 }

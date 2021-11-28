@@ -5,6 +5,7 @@ import imageBirthDay from '../../../../assets/images/clientsListCard/giftbox.svg
 import imagePhone from '../../../../assets/images/clientsListCard/phone.svg';
 import { NavLink } from 'react-router-dom';
 import { ageToString, declOfLessonsNum, replaceDateforFront } from '../../../../helpers/common';
+import moment from 'moment';
 
 export const ClientsRow = ({ clients }) => {
 	return (
@@ -48,7 +49,8 @@ export const ClientsRow = ({ clients }) => {
 								<div className={classes.group_block}>
 									<img src={imageBirthDay} alt={clients.date_of_birth} />
 									<span className={classes.item_text}>
-										{client.date_of_birth} ({ageToString(client.date_of_birth)})
+										{replaceDateforFront(client.date_of_birth)} ({ageToString(client.date_of_birth)}
+										)
 									</span>
 								</div>
 								<div className={classes.group_block}>
@@ -180,7 +182,9 @@ export const ClientsRow = ({ clients }) => {
 											<span style={{ fontWeight: 900 }}>{client.subscription.train_balance}</span>{' '}
 											{declOfLessonsNum(client.subscription.train_balance)} до{' '}
 											<span style={{ fontWeight: 900 }}>
-												{replaceDateforFront(client.subscription.valid_until)}
+												{moment(client.subscription.valid_until)
+													.subtract(1, 'day')
+													.format('DD.MM.YYYY')}
 											</span>
 											{/*{client.subscription.rate.name}*/}
 										</p>

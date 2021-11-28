@@ -1,0 +1,138 @@
+/* colors */
+/* buttons variables */
+/* text variable */
+.wrapper .list .item {
+  font-family: "SF Pro Display", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* grid columns classes */
+.gcol-1 {
+  grid-column: span 1 !important;
+}
+
+.gcol-2 {
+  grid-column: span 2 !important;
+}
+
+.gcol-3 {
+  grid-column: span 3 !important;
+}
+
+.gcol-4 {
+  grid-column: span 4 !important;
+}
+
+.gcol-5 {
+  grid-column: span 5 !important;
+}
+
+.gcol-6 {
+  grid-column: span 6 !important;
+}
+
+.gcol-7 {
+  grid-column: span 7 !important;
+}
+
+.gcol-8 {
+  grid-column: span 8 !important;
+}
+
+.gcol-9 {
+  grid-column: span 9 !important;
+}
+
+.gcol-10 {
+  grid-column: span 10 !important;
+}
+
+.gcol-11 {
+  grid-column: span 11 !important;
+}
+
+.gcol-12 {
+  grid-column: span 12 !important;
+}
+
+.wrapper {
+  position: relative;
+}
+.wrapper summary {
+  background: #fefefe;
+  border: 1px solid #bfc5d2;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 0 16px;
+  height: 40px;
+  font-family: "SF Pro Display", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: #bfc5d2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrapper .boll {
+  border-radius: 50%;
+  color: #FFFFFF;
+  background: #69707F;
+  padding: 2px 7px;
+}
+.wrapper .label {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1.125px;
+  text-transform: uppercase;
+  color: #B0BAC9;
+  margin: 0;
+  padding: 0;
+}
+.wrapper .list {
+  padding: 24px 0;
+  margin-top: 6px;
+  background: white;
+  position: absolute;
+  max-height: 368px;
+  overflow: auto;
+  box-shadow: 0px 10px 20px rgba(46, 91, 255, 0.07);
+  left: 0;
+  right: 0;
+}
+.wrapper .list::after {
+  content: "";
+  position: absolute;
+  display: block;
+  height: 14px;
+  width: 14px;
+  background: white;
+  top: -3px;
+  z-index: -1;
+  right: 15px;
+  transform: rotate(45deg);
+}
+.wrapper .list .item {
+  padding: 0 24px;
+  margin-top: 8px;
+  display: flex;
+  color: #2E384D;
+  gap: 8px;
+  align-items: center;
+  height: 24px;
+}
+.wrapper .list .item:first-child {
+  margin-top: 0;
+}
+.wrapper .list .item:hover {
+  background: #EEF3F5;
+}
+
+/*# sourceMappingURL=select.module.css.map */

@@ -7,7 +7,7 @@ import edit from 'assets/images/edit.svg';
 import moment from 'moment';
 import { declOfLessonsNum } from 'helpers/common';
 
-export const AbonementInfo = ({ user }) => {
+export const AbonementInfo = ({ user, showModal }) => {
 	const { subscription, level } = user;
 	console.log(user);
 
@@ -76,7 +76,7 @@ export const AbonementInfo = ({ user }) => {
 				</div>
 			</div>
 			<div className={classes.abonement_block_trainings}>
-				<img src={edit} alt="редактировать" className={classes.abonement_btn} />
+				<img onClick={showModal} src={edit} alt="редактировать" className={classes.abonement_btn} />
 				<img src={remove} alt="удалить" className={classes.abonement_btn} />
 			</div>
 		</div>

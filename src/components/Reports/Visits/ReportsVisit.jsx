@@ -4,10 +4,11 @@
 // import data from './data.json';
 // import 'moment/locale/ru';
 // import moment from 'moment';
-// import { useEffect } from 'react';
+// import { useEffect, useState } from 'react';
 // import React from 'react';
-// import { Select } from 'antd';
-// import { DownOutlined } from '@ant-design/icons';
+// import { Checkbox, Select } from 'antd';
+// import { CheckboxBtn } from 'utils/CheckboxBtn/CheckboxBtn';
+// import { SelectCheckBox } from 'utils/SelectCheckBox/SelectCheckBox';
 //
 // // const getOrCreateTooltip = ({ chart }) => {
 // // 	let tooltipEl = chart.canvas.parentNode.querySelector('div');
@@ -375,62 +376,31 @@
 // 			}}
 // 		/>
 // 	);
+// 	const [checkbox_list, setCheckboxList] = useState({
+// 		all_visits: { value: false, label: 'Все посещения' },
+// 		visits_train: { value: false, label: 'Посещено тренировок' },
+// 		missing_visits: { value: false, label: 'Пропущено тренировок' },
+// 		freeze_train: { value: false, label: 'Заморожено тренировок' },
+// 		personal_train: { value: false, label: 'Персональные тренировки' },
+// 	});
+// 	const change_value = e => {
+// 		const name = e.target.name;
+// 		const checked = e.target.checked;
+// 		setCheckboxList(prevState => ({
+// 			...prevState,
+// 			[name]: { ...prevState[name], value: checked },
+// 		}));
+// 	};
+// 	console.log(checkbox_list);
 //
 // 	return (
-// 		<div className="gcol-12">
-// 			{lineChart}
-// 			<div>
-// 				<SelectWithSearch />
+// 		<>
+// 			<div className={'gcol-6'} style={{ paddingBottom: 100 }}>
+// 				<SelectCheckBox label={'некое описание'} data={checkbox_list} click={change_value} />
 // 			</div>
-// 		</div>
+// 			<div className="gcol-12">{lineChart}</div>
+// 		</>
 // 	);
 // };
 //
-// export const SelectWithSearch = () => {
-// 	function onChange(value) {
-// 		console.log(`selected ${value}`);
-// 	}
-//
-// 	function onBlur() {
-// 		console.log('blur');
-// 	}
-//
-// 	function onFocus() {
-// 		console.log('focus');
-// 	}
-//
-// 	function onSearch(val) {
-// 		console.log('search:', val);
-// 	}
-// 	return (
-// 		<Select
-// 			suffixIcon={() => (
-// 				<svg width="12" height="7" viewBox="0 0 12 7" fill="none">
-// 					<path
-// 						d="M1.66437 0.252601C1.25159 -0.114317 0.619519 -0.0771359 0.252601 0.335647C-0.114317 0.74843 -0.0771359 1.3805 0.335647 1.74742L4.83565 5.74742C5.21453 6.08421 5.78549 6.08421 6.16437 5.74742L10.6644 1.74742C11.0772 1.3805 11.1143 0.74843 10.7474 0.335647C10.3805 -0.0771359 9.74843 -0.114317 9.33565 0.252601L5.50001 3.66206L1.66437 0.252601Z"
-// 						fill="#BFC5D2"
-// 					/>
-// 				</svg>
-// 			)}
-// 			dropdownMatchSelectWidth={false}
-// 			showSearch
-// 			style={{ width: 200 }}
-// 			placeholder="Select a person"
-// 			optionFilterProp="children"
-// 			onChange={onChange}
-// 			onFocus={onFocus}
-// 			onBlur={onBlur}
-// 			onSearch={onSearch}
-// 			filterOption={(input, option) =>
-// 				option.children && option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-// 			}>
-// 			<Option value="jack">Jack</Option>
-// 			<Option value="lucy">Lucy</Option>
-// 			<Option value="tom">Tom</Option>
-// 			<Option value="dominik">danidominikel</Option>
-// 			<Option value="daniel">daniel</Option>
-// 			<Option value="martin">martin</Option>
-// 			<Option value="frank">frankom</Option>
-// 		</Select>
-// 	);
-// };
+// export const SelectWithSearch = ({}) => {};

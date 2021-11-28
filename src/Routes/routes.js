@@ -13,6 +13,9 @@ import {
 	EDIT_PARENTS_CLIENT_ROUTE,
 	HOME_ROUTE,
 	PROFILE_CLIENT_ROUTE,
+	REPORTS_ABONEMENTS_ROUTE,
+	REPORTS_CLIENT_ROUTE,
+	REPORTS_PROCEED_ROUTE,
 	REPORTS_VISITS_ROUTE,
 	SETTINGS_ABONEMENT,
 	SETTINGS_ABONEMENT_EDIT,
@@ -49,6 +52,10 @@ import SettingsMarkketing from 'components/Settings/Pages/SettingsMarketing';
 import SettingsMarketing from 'components/Settings/Pages/SettingsMarketing';
 import SettingsMarketingCreate from 'components/Settings/Pages/SettingsMarketing/CreateSale';
 import EditSale from 'components/Settings/Pages/SettingsMarketing/EditSale';
+import VisitedReport from 'components/Reports/Pages/VisitedReport';
+import ProceedReport from 'components/Reports/Pages/ProceedReport';
+import ClientReport from 'components/Reports/Pages/ClientReport';
+import AbonementReport from 'components/Reports/Pages/AbonementReport';
 
 export const routes = [
 	{
@@ -213,11 +220,32 @@ export const routes = [
 		component: Reports,
 	},
 	{
-		/* Главная страница отчетов */
+		/* Отчеты по посещениям */
 		id: REPORTS_VISITS_ROUTE,
 		path: '/reports/visited',
 		exact: true,
-		component: ReportsVisit,
+		component: VisitedReport,
+	},
+	{
+		/* Отчеты по выручке */
+		id: REPORTS_PROCEED_ROUTE,
+		path: '/reports/proceeds',
+		exact: true,
+		component: ProceedReport,
+	},
+	{
+		/* Отчеты по клиентам */
+		id: REPORTS_CLIENT_ROUTE,
+		path: '/reports/client',
+		exact: true,
+		component: ClientReport,
+	},
+	{
+		/* Отчеты по абонементам */
+		id: REPORTS_ABONEMENTS_ROUTE,
+		path: '/reports/abonement',
+		exact: true,
+		component: AbonementReport,
 	},
 	// {
 	//     id: AUTH_ADMIN_IN_APP,
