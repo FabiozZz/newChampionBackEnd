@@ -88,7 +88,7 @@ export const EditStatus = () => {
 					</div>
 					<div className={classes.send_btn}>
 						<Button
-							disabled={!level.state.name.length}
+							disabled={!level.state.name || !level.state.name.length}
 							text={'Сохранить возрастную группу'}
 							type={'submit'}
 							factor={'success'}
