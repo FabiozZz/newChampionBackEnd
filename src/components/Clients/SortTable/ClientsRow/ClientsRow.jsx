@@ -179,7 +179,11 @@ export const ClientsRow = ({ clients }) => {
 										</svg>
 
 										<p className={classes.list_col__item_block_text}>
-											<span style={{ fontWeight: 900 }}>{client.subscription.train_balance}</span>{' '}
+											<span style={{ fontWeight: 900 }}>{client.subscription.train_balance > 999 ? (
+												<span dangerouslySetInnerHTML={{ __html: '&#8734;' }} />
+											) : (
+												client.subscription.train_balance
+											)}</span>{' '}
 											{declOfLessonsNum(client.subscription.train_balance)} до{' '}
 											<span style={{ fontWeight: 900 }}>
 												{moment(client.subscription.valid_until)
