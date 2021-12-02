@@ -175,4 +175,4 @@
 
 33. <b id="indexsquote"><mark style='background:#e6d095'>***&nbsp;&nbsp;index.css&nbsp;&nbsp;***</mark><b> - глобальные стили (сброс стилей, переопределение классов [antd](https://ant.design/)) <a href="#indexs" role="doc-backlink">↩</a>
 
-34. <b id="indexquote"><mark style='background:#e6d095'>==***&nbsp;&nbsp;index.css&nbsp;&nbsp;***==</mark><b> - вход в приложение, подключение store к проекту, подключение стилей <a href="#index" role="doc-backlink">↩</a>
+34. <b id="indexquote"><mark style='background:#e6d095'>***&nbsp;&nbsp;index.css&nbsp;&nbsp;***</mark><b> - вход в приложение, подключение store к проекту, подключение стилей <a href="#index" role="doc-backlink">↩</a>
