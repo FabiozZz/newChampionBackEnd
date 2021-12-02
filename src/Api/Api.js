@@ -98,8 +98,12 @@ class Api {
 		this.source = axios.CancelToken.source();
 		this.refreshRequest = null;
 
+		/* базовый URL для локальной разработки */
 		// this.client.defaults.baseURL = 'http://127.0.0.1:8000/api/v1';
+
+		/* базовый URL для продакшн разработки */
 		this.client.defaults.baseURL = 'http://5.63.154.181:8000/api/v1';
+
 		this.client.interceptors.request.use(
 			config => {
 				if (this.token === null) {
@@ -179,7 +183,6 @@ class Api {
 	 * Отправляет данные пользователя {email,password}
 	 * Получает пару токенов и пользователя
 	 * @returns {Promise<*>}
-	 * @param {username,password} admin
 	 */
 	async reLogin() {
 		const res = await this.client.post('/refresh-token/', {
@@ -191,6 +194,12 @@ class Api {
 		localStorage.setItem('access_token', await res.data.access);
 		return res;
 	}
+
+	/**
+	 * Авторизация в приложении
+	 * @param admin {username:string, password:string}
+	 * @returns {Promise<any>}
+	 */
 	async login(admin) {
 		const res = await this.client.post('/login/', {
 			username: admin.username,
@@ -272,11 +281,19 @@ class Api {
           }
       */
 
+	/**
+	 * Проверка токена на валидность
+	 * @returns {Promise}
+	 */
 	async tokenVerify() {
 		const token = this.getToken();
 		return await this.client.post('/token-verify/', { token: token });
 	}
 
+	/**
+	 * Обновление токена
+	 * @returns {Promise}
+	 */
 	async tokenRefresh() {
 		const refresh = this.getRefreshToken();
 		return await this.client.post('/refresh-token/', { refresh });
@@ -295,20 +312,32 @@ class Api {
 
 	/* главная страница */
 
+	/** TODO старый путь, проверить необходимость*/
 	/**
 	 * Отметка\снятие отметки о присутствии клиента на занятии
 	 *
 	 * @param id {number} id клиента
 	 * @param set {boolean} состояние был/не был
+	 * @returns {Promise}
 	 */
 	async checkClient(id, set) {
 		return await this.client.put(`/schedule/train/${id}/`, { is_visited: set });
 	}
 
+	/**
+	 * Отметка\снятие отметки о присутствии клиента на занятии
+	 * @param id {number} id клиента
+	 * @returns {Promise}
+	 */
 	async removeClientFromGroup(id) {
 		return await this.client.delete(`/schedule/train/${id}/`);
 	}
 
+	/**
+	 * Получить профиль клиента
+	 * @param id {number} id клиента
+	 * @returns {Promise}
+	 */
 	async getProfile(id) {
 		return await this.client.get(`/client/${id}/`);
 		//     .then(r => {
@@ -316,6 +345,11 @@ class Api {
 		// });
 	}
 
+	/**
+	 * Получить список посещения конкретного клиента
+	 * @param id {number} id клиента
+	 * @returns {Promise}
+	 */
 	async getProfileVisit(id) {
 		return await this.client.get(`/client/${id}/trainings/`);
 		//     .then(r => {
@@ -323,6 +357,11 @@ class Api {
 		// });
 	}
 
+	/**
+	 * Получить список комментариев конкретного клиента
+	 * @param id {number} id клиента
+	 * @returns {Promise}
+	 */
 	async getProfileComments(id) {
 		return await this.client.get(`/client/${id}/comments/`);
 		//     .then(r => {
@@ -330,6 +369,11 @@ class Api {
 		// });
 	}
 
+	/**
+	 * Получить конкретный комментарий
+	 * @param id
+	 * @returns {Promise}
+	 */
 	async getComment(id) {
 		return await this.client.get(`/core/comments/${id}`);
 		//     .then(r => {
@@ -337,6 +381,11 @@ class Api {
 		// });
 	}
 
+	/**
+	 * Создание нового комментария для конкретного клиента
+	 * @param data {client_id:number, text:string} текс комментария
+	 * @returns {Promise}
+	 */
 	async createProfileComment(data) {
 		return await this.client.post(`/core/comments/`, { ...data });
 		//     .then(r => {
@@ -344,14 +393,24 @@ class Api {
 		// });
 	}
 
+	/**
+	 * Редактирование комментария
+ 	 * @param id id конкретного комментария
+	 * @param data {client_id:number,text:string}
+	 * @returns {Promise}
+	 */
 	async editProfileComment(id, data) {
-		console.log('this edit way comment', id, data);
 		return await this.client.put(`/core/comments/${id}`, { ...data });
 		//     .then(r => {
 		//     return r.data.find(client => Number(client.id) === Number(id));
 		// });
 	}
 
+	/**
+	 * Получить список оплат конкретного клиента
+	 * @param id id клиента
+	 * @returns {Promise}
+	 */
 	async getProfilePay(id) {
 		return await this.client.get(`/payment/client/${id}/`);
 		//     .then(r => {
@@ -359,101 +418,136 @@ class Api {
 		// });
 	}
 
+	/**
+	 * Редактирование личной информации клиента
+	 * @param id id клиента
+	 * @param data - данные для обновления клиента
+	 * @returns {Promise}
+	 */
 	async editProfile(id, data) {
 		return await this.client.put(`/client/${id}/`, { ...data });
 	}
 
+	/**
+	 * Путь для редактирования личных данных родителей клиента
+	 * @param parents - массив родителей клиента
+	 * @returns {Promise}
+	 */
 	async editProfileParents(parents) {
 		return await this.client.post(`/client/updateParents/`, { parents });
 	}
 
+	/**
+	 * Путь на удаление добавленных при регистрации родителей
+	 * @param id id клиента
+	 * @param parents массив родителей
+	 * @returns {Promise}
+	 */
 	async removeParents(id, parents) {
 		console.log({ parents });
 		return await this.client.post(`/client/${id}/deleteParents/`, { parents });
 	}
 
+	/**
+	 * Создание ранее не созданных родителей
+	 * @param id id клиента
+	 * @param parents массив родителей
+	 * @returns {Promise}
+	 */
 	async createParents(id, parents) {
 		console.log({ parents });
 		return await this.client.post(`/client/${id}/addParents/`, { parents });
 	}
 
+	/**
+	 * Путь на покупку абонемента
+	 * @param id id клиента
+	 * @param data данные об абонементе
+	 * @returns {Promise}
+	 */
 	async buyProfileAbonement(id, data) {
 		return await this.client.post(`/subscription/${id}/buy/`, { ...data });
 	}
 
+	// /**
+	//  * Временный запрос на получение фиктивных клиентов
+	//  * @returns {Promise}
+	//  */
+	// async getGeneralPageData() {
+	// 	return await this.client.get('/schedule/lesson/');
+	// 	// return await this.client.get('/schedule/lesson/today/');
+	// }
+
 	/**
-	 * Временный запрос на получение фиктивных клиентов
+	 * Путь на получение списка занятий на конкретную дату
+ 	 * @param date дата проведения занятий
 	 * @returns {Promise}
 	 */
-	async getGeneralPageData() {
-		return await this.client.get('/schedule/lesson/');
-		// return await this.client.get('/schedule/lesson/today/');
-	}
-
 	async getGeneralPageDataWithDate(date) {
-		console.log(date);
-		// return await this.client.get('/schedule/lesson/');
 		return await this.client.get(`/schedule/lesson/?date=${date}`);
 	}
 
 	/**
-	 *
-	 * @param token
+	 * Получить список существующих групп
 	 * @returns {Promise}
 	 */
-	async getGroupList(token = null) {
-		return await this.client.get('/core/group/', { cancelToken: token });
+	async getGroupList() {
+		return await this.client.get('/core/group/');
 	}
 
 	/**
-	 *
+	 * Создание занятия
+	 * @param group {name:string}
 	 * @returns {Promise}
-	 * @param group
 	 */
 	async postNewGroup(group) {
 		return await this.client.post('/core/group/', { ...group });
 	}
 
 	/**
-	 *
-	 * @param token
+	 * Получить список возростных групп
 	 * @returns {Promise}
 	 */
-	async getAgesGroupList(token = null) {
-		return await this.client.get('/core/ageGroup/', { cancelToken: token });
+	async getAgesGroupList() {
+		return await this.client.get('/core/ageGroup/');
 	}
 
 	/**
-	 *
+	 * Создание возростной группы
+	 * @param label {label:string}
 	 * @returns {Promise}
-	 * @param label
 	 */
 	async postAgeGroup(label) {
 		return await this.client.post('/core/ageGroup/', { label });
 	}
 
 	/**
-	 *
+	 * Путь на обновление статуса
+	 * @param id id статуса
+	 * @param obj {label:string} обновляемые данные
 	 * @returns {Promise}
-	 * @param label
 	 */
 	async updateStatus(id, obj) {
 		return await this.client.patch(`/core/clientLevel/${id}/`, { ...obj });
 	}
 
 	/**
-	 *
-	 * @param token
+	 * Получить список все тренеров
 	 * @returns {Promise}
 	 */
-	async getCouchList(token) {
-		return await this.client.get('/core/trainer/', { cancelToken: token });
+	async getCouchList() {
+		return await this.client.get('/core/trainer/');
 	}
 
 	/**
 	 * смена тренера у группы
-	 *
 	 * @returns {Promise}
+	 */
+	/**
+	 *
+	 * @param id id занятия
+	 * @param couch данные тренера
+	 * @returns {Promise<AxiosResponse<any>>}
 	 */
 	async changeCouch(id, couch) {
 		return await this.client.put(`/schedule/lesson/${id}/`, { trainer_id: couch });

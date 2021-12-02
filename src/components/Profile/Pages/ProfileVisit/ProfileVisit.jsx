@@ -78,7 +78,7 @@ export const ProfileVisit = ({ profile }) => {
 	}, [current_comment]);
 
 	/**
-	 * TODO сделаить замену класса в зависимости от разрешения
+	 * TODO сделать замену класса в зависимости от разрешения
 	 */
 	// window.onresize = function () {
 	// 	document.getElementById ("id").className = "new_class_name";

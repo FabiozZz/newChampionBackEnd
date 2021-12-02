@@ -8,8 +8,8 @@ import { SideBar } from './SideBar/SideBar';
 import Routes from '../Routes/Routes';
 import { ConnectedRouter } from 'connected-react-router';
 import Api from '../Api/Api';
-import { token_verify } from '../store/Actions/userActions';
-import { isEmpty } from '../helpers/common';
+import { token_verify } from 'store/Actions/userActions';
+import { isEmpty } from 'helpers/common';
 import { Auth } from './Auth/Auth';
 
 /**

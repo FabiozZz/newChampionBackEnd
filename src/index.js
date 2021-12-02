@@ -9,6 +9,9 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store, { history } from './store';
 
+/**
+ * вход в приложение
+ */
 ReactDOM.render(
 	<Provider store={store}>
 		<App history={history} />
