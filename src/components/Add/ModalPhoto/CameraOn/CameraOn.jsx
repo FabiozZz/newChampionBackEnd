@@ -8,7 +8,9 @@ export const CameraOn = () => {
 	return (
 		<div style={{ marginTop: '-36px', marginBottom: '-45px', width: '634px' }}>
 			<Camera
-				onCameraError={() => 'Проблемы с камерой'}
+				onCameraError={() => {
+					return 'Проблемы с камерой';
+				}}
 				onTakePhotoAnimationDone={takePhoto}
 			/>
 		</div>
