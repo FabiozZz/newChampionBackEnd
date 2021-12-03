@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
 import classes from '../../add.module.css';
-import { DataPicker } from '../../../../utils/DataPicker/DataPicker';
 import { ContextCommon } from '../../Add';
-import SelectGroup from '../../../../utils/SelectGroup/SelectGroup';
-import SelectAgesGroup from '../../../../utils/SelectAgesGroup/SelectAgesGroup';
-import Select from '../../../../utils/FromAnt/Select/Select';
+import Select from 'utils/FromAnt/Select/Select';
 
+/**
+ * Компонент визуализации ввода данных о пробной тренировке
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const TrialSectionSection = () => {
 	const { personal_data, groups, agesGroup, errorInput } = useContext(ContextCommon);
 	console.log('TrialSection', errorInput);
@@ -18,7 +21,9 @@ const TrialSectionSection = () => {
 					<Select
 						name={'age_group_id'}
 						label={'возрастная группа'}
-						error={errorInput && errorInput.age_group_id && errorInput.age_group_id.join()}
+						error={
+							errorInput && errorInput.age_group_id && errorInput.age_group_id.join()
+						}
 						// setValue={handleChangeValueAgesGroupTestLesson}
 						setValue={personal_data.onChange}
 						data={agesGroup}
@@ -41,7 +46,9 @@ const TrialSectionSection = () => {
 						disabled={!personal_data.state.age_group_id}
 						setValue={personal_data.onChange}
 						label={'группа'}
-						data={groups.filter(group => group.age_group.id === personal_data.state.age_group_id)}
+						data={groups.filter(
+							group => group.age_group.id === personal_data.state.age_group_id
+						)}
 						field={'name'}
 					/>
 					{/*<SelectGroup*/}

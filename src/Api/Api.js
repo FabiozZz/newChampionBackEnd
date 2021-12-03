@@ -197,6 +197,7 @@ class Api {
 
 	/**
 	 * Авторизация в приложении
+	 *
 	 * @param admin {username:string, password:string}
 	 * @returns {Promise<any>}
 	 */
@@ -283,6 +284,7 @@ class Api {
 
 	/**
 	 * Проверка токена на валидность
+	 *
 	 * @returns {Promise}
 	 */
 	async tokenVerify() {
@@ -292,6 +294,7 @@ class Api {
 
 	/**
 	 * Обновление токена
+	 *
 	 * @returns {Promise}
 	 */
 	async tokenRefresh() {
@@ -312,7 +315,6 @@ class Api {
 
 	/* главная страница */
 
-	/** TODO старый путь, проверить необходимость*/
 	/**
 	 * Отметка\снятие отметки о присутствии клиента на занятии
 	 *
@@ -326,6 +328,7 @@ class Api {
 
 	/**
 	 * Отметка\снятие отметки о присутствии клиента на занятии
+	 *
 	 * @param id {number} id клиента
 	 * @returns {Promise}
 	 */
@@ -335,6 +338,7 @@ class Api {
 
 	/**
 	 * Получить профиль клиента
+	 *
 	 * @param id {number} id клиента
 	 * @returns {Promise}
 	 */
@@ -347,6 +351,7 @@ class Api {
 
 	/**
 	 * Получить список посещения конкретного клиента
+	 *
 	 * @param id {number} id клиента
 	 * @returns {Promise}
 	 */
@@ -359,6 +364,7 @@ class Api {
 
 	/**
 	 * Получить список комментариев конкретного клиента
+	 *
 	 * @param id {number} id клиента
 	 * @returns {Promise}
 	 */
@@ -371,7 +377,8 @@ class Api {
 
 	/**
 	 * Получить конкретный комментарий
-	 * @param id
+	 *
+	 * @param id комментария
 	 * @returns {Promise}
 	 */
 	async getComment(id) {
@@ -383,6 +390,7 @@ class Api {
 
 	/**
 	 * Создание нового комментария для конкретного клиента
+	 *
 	 * @param data {client_id:number, text:string} текс комментария
 	 * @returns {Promise}
 	 */
@@ -395,6 +403,7 @@ class Api {
 
 	/**
 	 * Редактирование комментария
+	 *
  	 * @param id id конкретного комментария
 	 * @param data {client_id:number,text:string}
 	 * @returns {Promise}
@@ -408,6 +417,7 @@ class Api {
 
 	/**
 	 * Получить список оплат конкретного клиента
+	 *
 	 * @param id id клиента
 	 * @returns {Promise}
 	 */
@@ -420,6 +430,7 @@ class Api {
 
 	/**
 	 * Редактирование личной информации клиента
+	 *
 	 * @param id id клиента
 	 * @param data - данные для обновления клиента
 	 * @returns {Promise}
@@ -430,6 +441,7 @@ class Api {
 
 	/**
 	 * Путь для редактирования личных данных родителей клиента
+	 *
 	 * @param parents - массив родителей клиента
 	 * @returns {Promise}
 	 */
@@ -439,6 +451,7 @@ class Api {
 
 	/**
 	 * Путь на удаление добавленных при регистрации родителей
+	 *
 	 * @param id id клиента
 	 * @param parents массив родителей
 	 * @returns {Promise}
@@ -450,6 +463,7 @@ class Api {
 
 	/**
 	 * Создание ранее не созданных родителей
+	 *
 	 * @param id id клиента
 	 * @param parents массив родителей
 	 * @returns {Promise}
@@ -461,6 +475,7 @@ class Api {
 
 	/**
 	 * Путь на покупку абонемента
+	 *
 	 * @param id id клиента
 	 * @param data данные об абонементе
 	 * @returns {Promise}
@@ -480,6 +495,7 @@ class Api {
 
 	/**
 	 * Путь на получение списка занятий на конкретную дату
+	 *
  	 * @param date дата проведения занятий
 	 * @returns {Promise}
 	 */
@@ -547,7 +563,7 @@ class Api {
 	 *
 	 * @param id id занятия
 	 * @param couch данные тренера
-	 * @returns {Promise<AxiosResponse<any>>}
+	 * @returns {Promise}
 	 */
 	async changeCouch(id, couch) {
 		return await this.client.put(`/schedule/lesson/${id}/`, { trainer_id: couch });
@@ -575,6 +591,7 @@ class Api {
 
 	/**
 	 * Получение списка филиалов для клиента
+	 * TODO пока не используется
 	 *
 	 * @param token
 	 * @returns {Promise}
@@ -623,63 +640,147 @@ class Api {
 
 	/* для настроек списка источников рекламы */
 
+	/**
+	 * Получить конкретный источник рекламы
+	 *
+	 * @param id id источника рекламы
+	 * @returns {Promise}
+	 */
 	async getSource(id) {
 		return await this.client.get(`/core/adSource/${id}/`);
 	}
 
+	/**
+	 * Путь нв радактирование конкретного источника рекламы
+	 *
+	 * @param source {id:string,name:string} name - название источника рекламы, id - конкретный источник рекламы
+	 * @returns {Promise<AxiosResponse<any>>}
+	 */
 	async editSourceList(source) {
 		return await this.client.put(`/core/adSource/${source.id}/`, { name: source.name });
 	}
 
+	/**
+	 * Путь на создание источника рекламы
+	 *
+	 * @param obj {name} name - название источника рекламы
+	 * @returns {Promise<AxiosResponse<any>>}
+	 */
 	async createSourceList(obj) {
 		return await this.client.post('/core/adSource/', { name: obj.name });
 	}
 
+	/**
+	 * Получить список всех источников рекламы
+	 *
+	 * @returns {Promise}
+	 */
 	async getSourceList() {
 		return await this.client.get('/core/adSource/');
 	}
 
+	/**
+	 * Путь на удаление конкретного источника рекламы
+	 *
+	 * @param id id удаление конкретного источника рекламы
+	 * @returns {Promise}
+	 */
 	async deleteSourceList(id) {
 		return await this.client.delete(`/core/adSource/${id}/`);
 	}
 
 	/* для профиля */
 
-	async getAbonimentList(token) {
-		return await this.client.get('/subscription/rate/', { cancelToken: token });
+	/**
+	 * Получить список всех абонементов
+	 *
+	 * @returns {Promise}
+	 */
+	async getAbonimentList() {
+		return await this.client.get('/subscription/rate/');
 	}
 
+	/**
+	 * Получить конкретного клиента
+	 *
+	 * @param id id абонемента
+	 * @returns {Promise}
+	 */
 	async getAbonimentWithId(id) {
 		return await this.client.get(`/subscription/rate/${id}`);
 	}
 
+	/**
+	 * Получить конкретный статус
+	 *
+	 * @param id id статуса
+	 * @returns {Promise}
+	 */
 	async getStatusWithId(id) {
 		return await this.client.get(`/core/clientLevel/${id}/`);
 	}
 
+	/**
+	 * Удалить конкретный абонемент
+	 *
+	 * @param id id абонемента
+	 * @returns {Promise}
+	 */
 	async removeAbonementWithId(id) {
 		return await this.client.delete(`/subscription/rate/${id}`);
 	}
 
+	/**
+	 * Удалить конкретный статус
+	 *
+	 * @param id id статуса
+	 * @returns {Promise}
+	 */
 	async removeStatusWithId(id) {
 		return await this.client.delete(`/core/clientLevel/${id}/`);
 	}
 
+	/**
+	 * Путь на создание нового абонемента
+	 *
+	 * @param data данные нового абонемента
+	 * @returns {Promise}
+	 */
 	async sendNewAbonementWithPrice(data) {
 		return await this.client.post('/subscription/rate/', { ...data });
 	}
 
+	/**
+	 * Путь на создание статуса
+	 *
+	 * @param name {name:string,color:string} name - имя нового статуса, color - цвет статуса
+	 * @returns {Promise}
+	 */
 	async sendNewStatus(name) {
 		console.log(name);
 		return await this.client.post('/core/clientLevel/', { name });
 	}
 
+	/**
+	 * Путь на редактирование абонемента
+	 *
+	 * @param id id конкретного абонемента
+	 * @param data данные для редактирования абонемента
+	 * @returns {Promise}
+	 */
 	async editAbonementWithPrice(id, data) {
 		return await this.client.patch(`/subscription/rate/${id}/`, { ...data });
 	}
 
-	async getPriceList(token, abonement, status) {
-		return await this.client.get('/get_price', { cancelToken: token }).then(r => {
+	/**
+	 * Получить список цен для конкретного абонемента в зависимости от статуса
+	 *
+	 * @param abonement абонемент по которому ведется поиск
+	 * @param status статус
+	 * @returns {Promise}
+	 */
+	async getPriceList(abonement, status) {
+		return await this.client.get('/get_price').then(r => {
 			let priceList, result;
 			if (abonement <= 4) {
 				priceList = r.data.find(item => item.abonement === abonement);
@@ -692,6 +793,11 @@ class Api {
 	}
 
 	/* для списка клиентов */
+	/**
+	 * Получить список всех клиентов
+	 *
+	 * @returns {Promise}
+	 */
 	async getAllClients() {
 		const source = CancelToken.source();
 		const request = await this.client.get('/client/', { cancelToken: source.token });
@@ -700,14 +806,28 @@ class Api {
 		return request;
 	}
 
-	async getTypeList(token) {
-		return await this.client.get('/get_types_for_all', { cancelToken: token });
+	/**
+	 * TODO пока не используется, не понятно нуден будет или нет
+	 * @returns {Promise}
+	 */
+	async getTypeList() {
+		return await this.client.get('/get_types_for_all');
 	}
 
-	async getStatusListForClients(token) {
-		return await this.client.get('/core/clientLevel/', { cancelToken: token });
+	/**
+	 * Получение всех статусов
+	 *
+	 * @returns {Promise}
+	 */
+	async getStatusListForClients() {
+		return await this.client.get('/core/clientLevel/');
 	}
 
+	/**
+	 * TODO пока не используется
+	 * @param token
+	 * @returns {Promise}
+	 */
 	async getSortListForClients(token) {
 		return await this.client.get('/get_sort_for_all', { cancelToken: token });
 	}
@@ -716,6 +836,9 @@ class Api {
 
 	/**
 	 * Отмена операции запроса для axios
+	 *
+	 * TODO пока не реализовано
+	 *
 	 * @returns {void}
 	 */
 	abortAxiosCalling() {
@@ -728,10 +851,20 @@ class Api {
 
 	/* для страницы профиля */
 
+	/**
+	 * Путь на получение списка статусов
+	 *
+	 * @returns {Promise}
+	 */
 	async getStatusList(token) {
-		return await this.client.get('/core/clientLevel/', { cancelToken: token });
+		return await this.client.get('/core/clientLevel/');
 	}
 
+	/**
+	 * Путь на получение актуальной даты
+	 *
+	 * @returns {Promise}
+	 */
 	async getTimeZone() {
 		return axios.get('http://worldtimeapi.org/api/ip');
 	}

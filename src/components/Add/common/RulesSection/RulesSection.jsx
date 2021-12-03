@@ -1,14 +1,14 @@
 import React from 'react';
 import classes from '../../add.module.css';
-import { CheckboxBtn } from '../../../../utils/CheckboxBtn/CheckboxBtn';
+import { CheckboxBtn } from 'utils/CheckboxBtn/CheckboxBtn';
 
 /**
  * компонент визуализации установки флагов принятия правил клуба
  *
- * @param personal флаг принятия обработки персональных данных
- * @param setPersonal функция установки/снятии флага personal
- * @param rules флаг принятия правил посещения и зачисления в клуб
- * @param setRules функция установки/снятия флага rules
+ * @param personal {boolean} флаг принятия обработки персональных данных
+ * @param setPersonal {function} функция установки/снятии флага personal
+ * @param rules {boolean} флаг принятия правил посещения и зачисления в клуб
+ * @param setRules {function} функция установки/снятия флага rules
  * @returns {JSX.Element}
  * @constructor
  */

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 /**
  * компонент визуализации ввода данных источника откуда узнал о клубе
  *
+ * @param personal_data {object} объект изначально пустой, поля появляются при помощи метода onChange в объекте
  * @returns {JSX.Element}
  * @constructor
  */

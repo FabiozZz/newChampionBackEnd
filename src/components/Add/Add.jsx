@@ -7,18 +7,18 @@ import TrialSectionSection from './common/TrialSectionSection/TrialSectionSectio
 import { AddresSection } from './common/AddresSection/AddresSection';
 import { RulesSection } from './common/RulesSection/RulesSection';
 import { useHistory } from 'react-router';
-import { Modal } from '../../utils/Modal/Modal';
+import { Modal } from 'utils/Modal/Modal';
 import ModalPhoto from './ModalPhoto/ModalPhoto';
 import PhoneSection from './PhoneSection/PhoneSection';
-import { EndBtnGroup } from '../common/EndBtnGroup/EndBtnGroup';
-import { ParentsBlock } from '../common/ParentsBlock/ParentsBlock';
+import { EndBtnGroup } from 'components/common/EndBtnGroup/EndBtnGroup';
+import { ParentsBlock } from 'components/common/ParentsBlock/ParentsBlock';
 import { useDispatch, useSelector } from 'react-redux';
-import { isEmpty, replaceDateforBack } from '../../helpers/common';
-import { Button } from '../../utils/Buttons/Button';
-import { useInputOnObject } from '../../hooks';
-import { add_client_on_CRM } from '../../store/Actions/addClientsActions';
-import Input from '../../utils/FromAnt/Input/Input';
-import DatePicker from '../../utils/FromAnt/DatePicker/DatePicker';
+import { isEmpty, replaceDateforBack } from 'helpers/common';
+import { Button } from 'utils/Buttons/Button';
+import { useInputOnObject } from 'hooks';
+import { add_client_on_CRM } from 'store/Actions/addClientsActions';
+import Input from 'utils/FromAnt/Input/Input';
+import DatePicker from 'utils/FromAnt/DatePicker/DatePicker';
 import { OterSection } from 'components/Add/common/OterSection/OterSection';
 
 export const ContextCommon = createContext();
@@ -33,10 +33,17 @@ function isEmptyArray(arr) {
 }
 
 /*
- Добавляет учетную карту нового клиента
+ */
+/**
+ * Добавляет учетную карту нового клиента
+ *
+ * @returns {JSX.Element}
+ * @constructor
  */
 export const Add = () => {
-	const { groups, couches, agesGroup, loading, error } = useSelector(state => state.addClient);
+	const { groups, couches, agesGroup, loading, error } = useSelector(
+		state => state.addClient
+	);
 
 	const dispatch = useDispatch();
 
@@ -58,22 +65,8 @@ export const Add = () => {
 	/**
 	 * локальный стейт для храниения/установки персональных данных клиента для PersonalData
 	 */
-	// const [personalData, setPersonalData] = useState({});
 
 	const [age, setAge] = useState(0);
-
-	/**
-	 * локальный стейт для хранения/установки для Sale
-	 */
-	const [sale, setSale] = useState('');
-
-	/**
-	 * прослушивание ввода данных для Sale
-	 * @param e
-	 */
-	const handleChangeValueSale = e => {
-		setSale(e.target.value);
-	};
 
 	/**
 	 * локальный стейт для установки/снятии флага о том что клиент принял
@@ -110,19 +103,8 @@ export const Add = () => {
 		history.goBack();
 	};
 
-	/**
-	 * локальный стейт для хранения/установки данных для TestLesson
-	 */
-	const [testData, setTestData] = useState({
-		filial: { name: '' },
-		group: {},
-		dateTest: '',
-		agesGroup: { label: '' },
-	});
-
-	/**/
-
 	/* child */
+
 	const refFile = useRef(null);
 
 	/**
@@ -136,7 +118,11 @@ export const Add = () => {
 	 * @param object новый массив для обновления предидущего
 	 */
 	const handleChangeItemParentsBlock = (i, object) => {
-		setParents(prevState => [...prevState.slice(0, i), object, ...prevState.slice(i + 1)]);
+		setParents(prevState => [
+			...prevState.slice(0, i),
+			object,
+			...prevState.slice(i + 1),
+		]);
 	};
 
 	/**
@@ -154,6 +140,11 @@ export const Add = () => {
 		setParents(parents.filter((e, index) => index !== i));
 	};
 
+	/**
+	 * ловит изменение в переменной personal_data
+	 * берет из нее свойство date_of_birth
+	 * и рассчитывает возраст
+	 */
 	useEffect(() => {
 		if (personal_data.state.date_of_birth) {
 			const { date_of_birth } = personal_data.state;
@@ -167,6 +158,11 @@ export const Add = () => {
 		}
 	}, [age, error, personal_data.state]);
 
+	/**
+	 * Отправка данных на сервер
+	 *
+	 * @param e event
+	 */
 	const submitForm = e => {
 		e.preventDefault();
 
@@ -209,7 +205,9 @@ export const Add = () => {
 						<div className={classes.block_info__item}>
 							<div className={classes.last_name}>
 								<Input
-									error={errorInput && errorInput.last_name && errorInput.last_name.join()}
+									error={
+										errorInput && errorInput.last_name && errorInput.last_name.join()
+									}
 									setValue={personal_data.onChange}
 									name={'last_name'}
 									label={'фамилия'}
@@ -221,7 +219,9 @@ export const Add = () => {
 							</div>
 							<div className={classes.first_name}>
 								<Input
-									error={errorInput && errorInput.first_name && errorInput.first_name.join()}
+									error={
+										errorInput && errorInput.first_name && errorInput.first_name.join()
+									}
 									setValue={personal_data.onChange}
 									name={'first_name'}
 									label={'имя'}
@@ -232,7 +232,11 @@ export const Add = () => {
 								{/*)}*/}
 							</div>
 							<div className={classes.middle_name}>
-								<Input setValue={personal_data.onChange} name={'middle_name'} label={'отчество'} />
+								<Input
+									setValue={personal_data.onChange}
+									name={'middle_name'}
+									label={'отчество'}
+								/>
 							</div>
 							<div className={classes.date_of_birth}>
 								<DatePicker
@@ -284,7 +288,11 @@ export const Add = () => {
 							) : null}
 						</ContextCommon.Provider>
 
-						<AddresSection error={errorInput} change={address.onChange} address={address} />
+						<AddresSection
+							error={errorInput}
+							change={address.onChange}
+							address={address}
+						/>
 
 						<OterSection personal_data={personal_data} />
 
@@ -294,7 +302,9 @@ export const Add = () => {
 							personal={personal}
 							setPersonal={handleTogglePersonal}
 						/>
-						{!loading && <EndBtnGroup goBack={goBack} personal={personal} rules={rules} />}
+						{!loading && (
+							<EndBtnGroup goBack={goBack} personal={personal} rules={rules} />
+						)}
 					</>
 				) : null}
 			</form>

@@ -1,15 +1,16 @@
 import React from 'react';
 import classes from '../../add.module.css';
-import { OtherInput } from '../../../../utils/OtherInput/OtherInput';
-import Input from '../../../../utils/FromAnt/Input/Input';
+import Input from 'utils/FromAnt/Input/Input';
 
 /**
  * компонент визуализации ввода данных адреса
  *
+ * @param error {Array} массив ошибок
+ * @param change {function} функция для изменения стейта
  * @returns {JSX.Element}  jsx
  * @constructor
  */
-export const AddresSection = ({ error, address, change }) => {
+export const AddresSection = ({ error, change }) => {
 	return (
 		<div className={classes.block_info}>
 			<h3 className={classes.block_info__title}>Адресс</h3>
