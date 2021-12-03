@@ -7,7 +7,7 @@ export const CameraOn = () => {
 	const { takePhoto } = useContext(CameraContext);
 	return (
 		<div style={{ marginTop: '-36px', marginBottom: '-45px', width: '634px' }}>
-			<Camera isFullscreen={false} onTakePhotoAnimationDone={takePhoto} />
+			<Camera onTakePhotoAnimationDone={takePhoto} />
 		</div>
 	);
 };

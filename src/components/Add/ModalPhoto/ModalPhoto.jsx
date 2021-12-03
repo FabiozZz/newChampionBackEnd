@@ -30,9 +30,7 @@ const ModalPhoto = ({ modal, setImage, image, toggleModal }) => {
 		}
 	}
 
-	console.log(navigator.userAgent);
-
-	if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile/i.test(navigator.userAgent)) {
+	if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile/gi.test(navigator.userAgent)) {
 		return (
 			<>
 				{dataUri ? (
@@ -66,12 +64,11 @@ const ModalPhoto = ({ modal, setImage, image, toggleModal }) => {
 			</>
 		);
 	} else {
+		navigator.mediaDevices.getUserMedia({ audio: false, video: true });
 		return (
 			<>
 				{dataUri ? (
 					<>
-						{/*<div onClick={} style={{position:'absolute',top:'50%'}}>rebot</div>*/}
-						{/*<img src={dataUri}/>*/}
 						<CropImage
 							toggle={toggleModal}
 							setImage={setImage}
