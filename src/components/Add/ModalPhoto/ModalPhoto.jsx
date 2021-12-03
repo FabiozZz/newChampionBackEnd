@@ -64,7 +64,6 @@ const ModalPhoto = ({ modal, setImage, image, toggleModal }) => {
 			</>
 		);
 	} else {
-		navigator.mediaDevices.getUserMedia({ audio: false, video: true });
 		return (
 			<>
 				{dataUri ? (
