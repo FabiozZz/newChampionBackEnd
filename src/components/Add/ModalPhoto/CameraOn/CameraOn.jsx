@@ -7,7 +7,10 @@ export const CameraOn = () => {
 	const { takePhoto } = useContext(CameraContext);
 	return (
 		<div style={{ marginTop: '-36px', marginBottom: '-45px', width: '634px' }}>
-			<Camera onCameraError={e => console.log(e)} onTakePhotoAnimationDone={takePhoto} />
+			<Camera
+				onCameraError={() => 'Проблемы с камерой'}
+				onTakePhotoAnimationDone={takePhoto}
+			/>
 		</div>
 	);
 };
