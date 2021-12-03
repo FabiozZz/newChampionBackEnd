@@ -443,6 +443,6 @@ input[type='number']::-webkit-outer-spin-button {
     transition: all 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
     content: ' ';
 }
-.react-html5-camera-photo > img, .react-html5-camera-photo > video{
+.react-html5-camera-photo > img, .react-html5-camera-photo > video, .display-error{
 	width: 634px !important;
 }
