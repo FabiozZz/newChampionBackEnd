@@ -1,27 +1,47 @@
-import moment, { now } from 'moment';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import classes from './gen.module.css';
 import HeaderNav from 'components/common/HeaderNav';
 import ItemCourse from './ItemCourse/ItemCourse';
 import { useDispatch, useSelector } from 'react-redux';
-import { isEmpty, maxThreeDay, replaceDateforBack, sameDate, sameDateNow } from 'helpers/common';
+import { replaceDateforBack } from 'helpers/common';
 import { notification } from 'antd';
 import { Button } from 'utils/Buttons/Button';
-import {
-	change_date,
-	get_lessons_with_date,
-	load_general_page_data,
-} from 'store/Actions/generalPageActions';
+import { change_date, get_lessons_with_date } from 'store/Actions/generalPageActions';
 import DatePicker from 'utils/FromAnt/DatePicker/DatePicker';
 
+/**
+ * Компонент главной страницы
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const GeneralPage = () => {
 	const dispatch = useDispatch();
 
+	/**
+	 * Данные из redux
+	 */
 	const generalPage = useSelector(state => state.general_page);
+
+	/**
+	 * индикатор загрузки из redux
+	 */
 	const { loading } = generalPage;
+
+	/**
+	 * Локальный стэйт для списка занятий
+	 */
 	const [renderList, setList] = useState([]);
+
+	/**
+	 * Локальный стейт текущей даты
+	 */
 	const [dateNow, setDateNow] = useState(generalPage.current_date);
 
+	/**
+	 * Эффект следит за наличием ошибок в redux, и выводит их
+	 */
 	useEffect(() => {
 		if (generalPage.error && generalPage.error.length) {
 			for (let i = 0; i < generalPage.error.length; i++) {
@@ -34,14 +54,18 @@ export const GeneralPage = () => {
 		}
 	}, [generalPage.error]);
 
+	/**
+	 * Функция изменения текущей даты
+	 *
+	 * @param e
+	 */
 	const change_current_date = e => {
 		dispatch(change_date(moment(replaceDateforBack(e)).format('DD.MM.YYYY')));
 	};
 
-	// const prevDay = () => {};
-	// const nextDay = () => {
-	// 	dispatch(change_date(moment(replaceDateforBack(dateNow)).add(1, 'day').format('DD.MM.YYYY')));
-	// };
+	/**
+	 * Эффект следит за списком занятий в redux и закидывает их в локальный стэйт фильтруя по времени проведения
+	 */
 	useEffect(() => {
 		setList(
 			generalPage.groups.sort(function (a, b) {
@@ -51,6 +75,9 @@ export const GeneralPage = () => {
 		setDateNow(generalPage.current_date);
 	}, [generalPage.current_date, generalPage.groups]);
 
+	/**
+	 * Эффект следит за изменением текущей даты и посылает данные в redux и идет на сервер за список занятий на установленную дату
+	 */
 	useEffect(() => {
 		dispatch(get_lessons_with_date(replaceDateforBack(dateNow)));
 	}, [dateNow, dispatch]);
@@ -75,7 +102,11 @@ export const GeneralPage = () => {
 							{renderList
 								.sort((course, nextCourse) => (course.id > nextCourse.id ? 1 : -1))
 								.map(course => (
-									<ItemCourse key={course.id} course={course} couches={generalPage.couches} />
+									<ItemCourse
+										key={course.id}
+										course={course}
+										couches={generalPage.couches}
+									/>
 								))}
 						</div>
 					</>

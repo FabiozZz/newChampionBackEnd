@@ -39,6 +39,7 @@ export const AbonimentType = ({
 		setToggleOptionBox(prevState => !prevState);
 	};
 
+	// eslint-disable-next-line no-unused-vars
 	const [input, setInput] = useState({});
 
 	/**
@@ -92,7 +93,10 @@ export const AbonimentType = ({
 
 	let disabledClass = disabled ? classes.disabled : classes.inputWrapper;
 	return (
-		<div ref={selectRef} className={`${classes.selectBoxWrapper} ${props.className}`} {...props}>
+		<div
+			ref={selectRef}
+			className={`${classes.selectBoxWrapper} ${props.className}`}
+			{...props}>
 			<label className={`${classes.label}`}>{label}</label>
 			<div className={disabledClass} onClick={!disabled && handleToggleOptionBox}>
 				<svg

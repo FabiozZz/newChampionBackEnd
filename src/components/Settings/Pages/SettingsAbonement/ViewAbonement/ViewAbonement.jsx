@@ -9,6 +9,7 @@ import { clear_current_abonement } from '../../../../../store/Actions/settingsAb
 
 export const ViewAbonement = () => {
 	const abonement = useSelector(state => state.settings_abonement);
+	// eslint-disable-next-line no-unused-vars
 	const { current_abonement, ages, loading } = abonement;
 	const [renderList, setRender] = useState([]);
 	console.log(ages);
@@ -22,7 +23,11 @@ export const ViewAbonement = () => {
 				let tempObj = {};
 				let tempArr = [];
 				tempObj = { id: ages[age_g].id, name: ages[age_g].label, price: [] };
-				for (let dataPrice = 0; dataPrice < current_abonement.prices.length; dataPrice++) {
+				for (
+					let dataPrice = 0;
+					dataPrice < current_abonement.prices.length;
+					dataPrice++
+				) {
 					if (tempObj.id === current_abonement.prices[dataPrice].age_group.id) {
 						tempArr.push({
 							id: current_abonement.prices[dataPrice].level.id,

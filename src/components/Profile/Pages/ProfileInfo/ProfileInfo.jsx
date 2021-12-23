@@ -2,23 +2,27 @@ import React, { useEffect, useState } from 'react';
 import classes from '../../profile.module.css';
 import moment from 'moment';
 import devider from '../../../../assets/images/deviderParent.svg';
-import addCard from '../../../../assets/images/cardAdd.svg';
-import { AbonimentInfo } from './AbonimentInfo';
-import { AddAboniment } from './AddAboniment/AddAboniment';
 import edit_profile from '../../../../assets/images/edit_profile.svg';
 import { NavLink } from 'react-router-dom';
-import { SuccessContext } from '../../SuccessContext';
-import { SuccessAdd } from './SuccessAdd/SuccessAdd';
 import { Modal } from 'utils/Modal/Modal';
 import { ModalChangeAbonement } from './ModalChangeClient/ModalChangeAbonement';
 import avatar from './avatar.png';
 import { open_edit_page } from 'store/Actions/profileActions';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { isEmpty } from 'helpers/common';
 import { AbonementInfo } from './AbonementInfo/AbonementInfo';
-import { CarouselAbonements } from './CarouselAbonements/CarouselAbonements';
 import { ModalEditAbonement } from './ModalEditAbonement/ModalEditAbonement';
+import { Button } from 'utils/Buttons/Button';
+import Select from 'utils/FromAnt/Select/Select';
+import { useInputOnObject } from 'hooks';
+
+const paths = [
+	// { id: '/abonement_trial', name: 'Пробное занятие' },
+	// { id: '/abonement_once', name: 'Разовая тренировка' },
+	{ id: '/abonement', name: 'Оформить абонемент' },
+	{ id: '/abonement_constructor', name: 'Конфигуратор абонемента' },
+];
 
 /**
  * вывод основной информации о польлзователе
@@ -28,24 +32,41 @@ import { ModalEditAbonement } from './ModalEditAbonement/ModalEditAbonement';
  */
 export const ProfileInfo = ({ profile }) => {
 	const { user } = profile;
+
+	const paths_for_url = useInputOnObject({
+		path_id: null,
+		client_id: null,
+		base_patch: '/profile/',
+	});
+
+	const [isOpen, setOpen] = useState(false);
+	const handleChangeSelect = () => {
+		setOpen(!isOpen);
+	};
+
 	const [success, setSuccess] = useState(false);
+	// eslint-disable-next-line no-unused-vars
 	const handleChangeSuccess = () => {
 		setSuccess(!success);
 	};
 	const { id } = useParams();
 	const dispatch = useDispatch();
+	const history = useHistory();
+
 	useEffect(() => {
 		if (isEmpty(user)) {
 			dispatch(open_edit_page(id));
 		}
+		paths_for_url.onChange({ client_id: id });
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch, id, user]);
-
 	const [age, setAge] = useState('');
+	// eslint-disable-next-line no-unused-vars
 	const [whatsApp, setWhatsApp] = useState(false);
 
-	const handleToggleWhatsApp = () => {
-		setWhatsApp(!whatsApp);
-	};
+	// const handleToggleWhatsApp = () => {
+	// 	setWhatsApp(!whatsApp);
+	// };
 	useEffect(() => {
 		let dateNow = moment();
 		let dateBirth = moment(user.date_of_birth);
@@ -75,9 +96,22 @@ export const ProfileInfo = ({ profile }) => {
 	const showAndChangeTypeModalEdit = () => {
 		toggleModal(prevState => ({ ...prevState, show: !modal.show, type: 'edit' }));
 	};
-	const showAndChangeTypeModalChange = () => {
-		toggleModal(prevState => ({ ...prevState, show: !modal.show, type: 'create' }));
-	};
+	// const showAndChangeTypeModalChange = () => {
+	// 	toggleModal(prevState => ({ ...prevState, show: !modal.show, type: 'create' }));
+	// };
+
+	useEffect(() => {
+		if (
+			paths_for_url.state &&
+			paths_for_url.state.client_id &&
+			paths_for_url.state.path_id
+		) {
+			const { base_patch, client_id, path_id } = paths_for_url.state;
+			const path = `${base_patch}${client_id}${path_id}`;
+			history.push(path);
+		}
+	}, [history, paths_for_url.state]);
+
 	return (
 		<>
 			{modal.show && (
@@ -90,7 +124,11 @@ export const ProfileInfo = ({ profile }) => {
 							profile={profile}
 						/>
 					) : (
-						<ModalChangeAbonement toggleModal={showModal} profile={profile} type={modal.type} />
+						<ModalChangeAbonement
+							toggleModal={showModal}
+							profile={profile}
+							type={modal.type}
+						/>
 					)}
 				</Modal>
 			)}
@@ -99,79 +137,37 @@ export const ProfileInfo = ({ profile }) => {
 			<div className={classes.abonement_carousel_wrapper}>
 				<p className={classes.abonement_carousel_title}>Активные абонементы</p>
 				<div className={classes.abonement_carousel}>
-					<div onClick={showAndChangeTypeModalChange}>
-						<svg
-							width="72"
-							height="82"
-							viewBox="0 0 72 82"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg">
-							<g filter="url(#filter0_d_3343:23727)">
-								<path
-									d="M0 14C0 11.7909 1.79086 10 4 10H48C50.2091 10 52 11.7909 52 14V58C52 60.2091 50.2091 62 48 62H4C1.79086 62 0 60.2091 0 58V14Z"
-									fill="black"
-									fillOpacity="0.01"
+					<div className={classes.abonement_carousel_btn}>
+						<div
+							style={{
+								background: 'white',
+								position: 'relative',
+								width: 200,
+								borderRadius: 5,
+							}}>
+							<Button
+								text={isOpen ? 'закрыть' : 'Добавить абонемент'}
+								click={handleChangeSelect}
+								size={'auto'}
+							/>
+							<div
+								style={{
+									position: 'absolute',
+									top: 0,
+									bottom: 0,
+									right: 0,
+									left: 0,
+									zIndex: -1,
+								}}>
+								<Select
+									name={'path_id'}
+									setValue={paths_for_url.onChange}
+									data={paths}
+									field={'name'}
+									open={isOpen}
 								/>
-								<path
-									d="M0 14C0 11.7909 1.79086 10 4 10H48C50.2091 10 52 11.7909 52 14V58C52 60.2091 50.2091 62 48 62H4C1.79086 62 0 60.2091 0 58V14Z"
-									fill="white"
-								/>
-								<path
-									d="M14 25C14 24.4477 14.4477 24 15 24H37C37.5523 24 38 24.4477 38 25V47C38 47.5523 37.5523 48 37 48H15C14.4477 48 14 47.5523 14 47V25Z"
-									fill="black"
-									fillOpacity="0.01"
-								/>
-								<path
-									d="M14 25C14 24.4477 14.4477 24 15 24H37C37.5523 24 38 24.4477 38 25V47C38 47.5523 37.5523 48 37 48H15C14.4477 48 14 47.5523 14 47V25Z"
-									fill="white"
-								/>
-								<path
-									fillRule="evenodd"
-									clipRule="evenodd"
-									d="M27.1969 30C27.1969 29.3372 26.6596 28.8 25.9969 28.8C25.3341 28.8 24.7969 29.3372 24.7969 30V34.8H19.9969C19.3341 34.8 18.7969 35.3373 18.7969 36C18.7969 36.6628 19.3341 37.2 19.9969 37.2H24.7969V42C24.7969 42.6627 25.3341 43.2 25.9969 43.2C26.6596 43.2 27.1969 42.6627 27.1969 42V37.2H31.9969C32.6596 37.2 33.1969 36.6628 33.1969 36C33.1969 35.3373 32.6596 34.8 31.9969 34.8H27.1969V30Z"
-									fill="#8798AD"
-								/>
-								<path
-									d="M4 11H48V9H4V11ZM51 14V58H53V14H51ZM48 61H4V63H48V61ZM1 58V14H-1V58H1ZM4 61C2.34315 61 1 59.6569 1 58H-1C-1 60.7614 1.23858 63 4 63V61ZM51 58C51 59.6569 49.6569 61 48 61V63C50.7614 63 53 60.7614 53 58H51ZM48 11C49.6569 11 51 12.3431 51 14H53C53 11.2386 50.7614 9 48 9V11ZM4 9C1.23858 9 -1 11.2386 -1 14H1C1 12.3431 2.34315 11 4 11V9Z"
-									fill="#8798AD"
-								/>
-							</g>
-							<defs>
-								<filter
-									id="filter0_d_3343:23727"
-									x="-20"
-									y="0"
-									width="92"
-									height="92"
-									filterUnits="userSpaceOnUse"
-									colorInterpolationFilters="sRGB">
-									<feFlood floodOpacity="0" result="BackgroundImageFix" />
-									<feColorMatrix
-										in="SourceAlpha"
-										type="matrix"
-										values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-										result="hardAlpha"
-									/>
-									<feOffset dy="10" />
-									<feGaussianBlur stdDeviation="10" />
-									<feColorMatrix
-										type="matrix"
-										values="0 0 0 0 0.180392 0 0 0 0 0.356863 0 0 0 0 1 0 0 0 0.07 0"
-									/>
-									<feBlend
-										mode="normal"
-										in2="BackgroundImageFix"
-										result="effect1_dropShadow_3343:23727"
-									/>
-									<feBlend
-										mode="normal"
-										in="SourceGraphic"
-										in2="effect1_dropShadow_3343:23727"
-										result="shape"
-									/>
-								</filter>
-							</defs>
-						</svg>
+							</div>
+						</div>
 					</div>
 					{user.subscription && user.subscription.rate && (
 						<>
@@ -207,11 +203,15 @@ export const ProfileInfo = ({ profile }) => {
 						<span className={classes.block_info__item_label__text}>{user.last_name}</span>
 
 						<p className={classes.block_info__item_label}>Имя:</p>
-						<span className={classes.block_info__item_label__text}>{user.first_name}</span>
+						<span className={classes.block_info__item_label__text}>
+							{user.first_name}
+						</span>
 						{user.middle_name && (
 							<>
 								<p className={classes.block_info__item_label}>Отчество:</p>
-								<span className={classes.block_info__item_label__text}>{user.middle_name}</span>
+								<span className={classes.block_info__item_label__text}>
+									{user.middle_name}
+								</span>
 							</>
 						)}
 
@@ -223,7 +223,9 @@ export const ProfileInfo = ({ profile }) => {
 						{user.phone_number && (
 							<>
 								<p className={classes.block_info__item_label}>Номер телефона</p>
-								<span className={classes.block_info__item_label__text}>{user.phone_number}</span>
+								<span className={classes.block_info__item_label__text}>
+									{user.phone_number}
+								</span>
 							</>
 						)}
 					</div>
@@ -246,23 +248,35 @@ export const ProfileInfo = ({ profile }) => {
 								key={index}
 								className={`${classes.block_info__item} ${classes.block_info__item_parent}`}>
 								{index > 0 && (
-									<img className={classes.block_info__parent_devider} src={devider} alt="devider" />
+									<img
+										className={classes.block_info__parent_devider}
+										src={devider}
+										alt="devider"
+									/>
 								)}
 
 								<p className={classes.block_info__item_label}>Фамилия:</p>
-								<span className={classes.block_info__item_label__text}>{parent.last_name}</span>
+								<span className={classes.block_info__item_label__text}>
+									{parent.last_name}
+								</span>
 
 								<p className={classes.block_info__item_label}>Имя:</p>
-								<span className={classes.block_info__item_label__text}>{parent.first_name}</span>
+								<span className={classes.block_info__item_label__text}>
+									{parent.first_name}
+								</span>
 
 								<p className={classes.block_info__item_label}>Отчество:</p>
-								<span className={classes.block_info__item_label__text}>{parent.middle_name}</span>
+								<span className={classes.block_info__item_label__text}>
+									{parent.middle_name}
+								</span>
 
 								<p className={classes.block_info__item_label}>Кем приходится:</p>
 								<span className={classes.block_info__item_label__text}>{parent.who}</span>
 
 								<p className={classes.block_info__item_label}>Номер телефона:</p>
-								<span className={classes.block_info__item_label__text}>{parent.phone_number}</span>
+								<span className={classes.block_info__item_label__text}>
+									{parent.phone_number}
+								</span>
 							</div>
 						);
 					})}
@@ -285,7 +299,9 @@ export const ProfileInfo = ({ profile }) => {
 						{user.street && (
 							<>
 								<p className={classes.block_info__item_label}>Улица:</p>
-								<span className={classes.block_info__item_label__text}>{user.street}</span>
+								<span className={classes.block_info__item_label__text}>
+									{user.street}
+								</span>
 							</>
 						)}
 						{user.house && (
@@ -297,13 +313,17 @@ export const ProfileInfo = ({ profile }) => {
 						{user.building && (
 							<>
 								<p className={classes.block_info__item_label}>Корпус:</p>
-								<span className={classes.block_info__item_label__text}>{user.building}</span>
+								<span className={classes.block_info__item_label__text}>
+									{user.building}
+								</span>
 							</>
 						)}
 						{user.apartments && (
 							<>
 								<p className={classes.block_info__item_label}>Квартира:</p>
-								<span className={classes.block_info__item_label__text}>{user.apartments}</span>
+								<span className={classes.block_info__item_label__text}>
+									{user.apartments}
+								</span>
 							</>
 						)}
 					</div>
@@ -321,7 +341,9 @@ export const ProfileInfo = ({ profile }) => {
 					</div>
 					<div className={`${classes.block_info__item_small}`}>
 						<p className={classes.block_info__item_label}>Источник:</p>
-						<span className={classes.block_info__item_label__text}>{user.ad_source.name}</span>
+						<span className={classes.block_info__item_label__text}>
+							{user.ad_source.name}
+						</span>
 					</div>
 				</div>
 			)}

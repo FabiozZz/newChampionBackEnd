@@ -1,5 +1,6 @@
 import axios, { CancelToken } from 'axios';
 import { CANCEL } from 'redux-saga';
+import nookies from 'nookies';
 // import MockAdapter from "axios-mock-adapter";
 //
 // import clientsList from './jsonData/clientsList.json';
@@ -97,6 +98,8 @@ class Api {
 		this.refreshToken = localStorage.getItem('refresh_token');
 		this.source = axios.CancelToken.source();
 		this.refreshRequest = null;
+		this.access = nookies.get().access || null;
+		this.refresh = nookies.get().refresh || null;
 
 		/* базовый URL для локальной разработки */
 		// this.client.defaults.baseURL = 'http://127.0.0.1:8000/api/v1';
@@ -106,7 +109,7 @@ class Api {
 
 		this.client.interceptors.request.use(
 			config => {
-				if (this.token === null) {
+				if (this.access === null) {
 					// if (!token) {
 					return { ...config };
 					// }
@@ -116,7 +119,7 @@ class Api {
 				const newConfig = {
 					...config,
 				};
-				newConfig.headers.Authorization = `Bearer ${this.token}`;
+				newConfig.headers.Authorization = `Bearer ${this.access}`;
 				return newConfig;
 			},
 			e => {
@@ -127,10 +130,10 @@ class Api {
 		this.client.interceptors.response.use(
 			r => r,
 			async error => {
-				this.refreshToken = localStorage.getItem('refresh_token');
+				// this.refreshToken = localStorage.getItem('refresh_token');
 				// console.log(this.refreshToken)
 				if (
-					!this.refreshToken ||
+					!this.refresh ||
 					// error.message ||
 					(error.response.status !== 401 && error.response.status !== 403) ||
 					error.config.retry
@@ -163,17 +166,21 @@ class Api {
 
 	setToken(some) {
 		this.token = some;
+		this.access = some;
+		nookies.set(null, 'access', some);
 	}
 
 	getToken() {
-		return this.token;
+		return this.access;
 	}
 	setRefreshToken(some) {
 		this.refreshToken = some;
+		this.refresh = some;
+		nookies.set(null, 'refresh', some);
 	}
 
 	getRefreshToken() {
-		return this.refreshToken;
+		return this.refresh;
 	}
 
 	/* основные api */
@@ -191,7 +198,7 @@ class Api {
 		console.log('вызван reLogin');
 		this.setToken(await res.data.access);
 		console.log("после reLogin'a получен токен", this.getToken());
-		localStorage.setItem('access_token', await res.data.access);
+		// localStorage.setItem('access_token', await res.data.access);
 		return res;
 	}
 
@@ -211,8 +218,8 @@ class Api {
 		this.setRefreshToken(await res.data.access);
 		console.log('после логина получен токен', this.getToken());
 		console.log('после логина получен рефрешь токен', this.getRefreshToken());
-		localStorage.setItem('refresh_token', await res.data.refresh);
-		localStorage.setItem('access_token', await res.data.access);
+		// localStorage.setItem('refresh_token', await res.data.refresh);
+		// localStorage.setItem('access_token', await res.data.access);
 		return res.data;
 	}
 
@@ -309,6 +316,10 @@ class Api {
 	logout() {
 		localStorage.removeItem('refresh_token');
 		localStorage.removeItem('access_token');
+		this.access = null;
+		this.refresh = null;
+		nookies.destroy(null, 'access');
+		nookies.destroy(null, 'refresh');
 		this.token = null;
 		this.refreshToken = null;
 	}
@@ -404,7 +415,7 @@ class Api {
 	/**
 	 * Редактирование комментария
 	 *
- 	 * @param id id конкретного комментария
+	 * @param id id конкретного комментария
 	 * @param data {client_id:number,text:string}
 	 * @returns {Promise}
 	 */
@@ -484,6 +495,17 @@ class Api {
 		return await this.client.post(`/subscription/${id}/buy/`, { ...data });
 	}
 
+	/**
+	 * Путь на покупку абонемента
+	 *
+	 * @param id id клиента
+	 * @param data данные об абонементе
+	 * @returns {Promise}
+	 */
+	async buyProfileAbonement_configure(id, data) {
+		return await this.client.post(`/subscription/${id}/configure/`, { ...data });
+	}
+
 	// /**
 	//  * Временный запрос на получение фиктивных клиентов
 	//  * @returns {Promise}
@@ -496,7 +518,7 @@ class Api {
 	/**
 	 * Путь на получение списка занятий на конкретную дату
 	 *
- 	 * @param date дата проведения занятий
+	 * @param date дата проведения занятий
 	 * @returns {Promise}
 	 */
 	async getGeneralPageDataWithDate(date) {

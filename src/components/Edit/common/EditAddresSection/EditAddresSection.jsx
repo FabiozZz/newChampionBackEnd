@@ -1,7 +1,6 @@
 import React from 'react';
 import classes from '../../edit.module.css';
-import { OtherInput } from '../../../../utils/OtherInput/OtherInput';
-import Input from '../../../../utils/FromAnt/Input/Input';
+import Input from 'utils/FromAnt/Input/Input';
 
 /**
  * компонент визуализации ввода данных адреса

@@ -2,6 +2,15 @@ import React from 'react';
 import classes from './common.module.css';
 import { useHistory } from 'react-router';
 
+/**
+ * Заголовок со стрелкой "назад"
+ *
+ * @param title {string} содержание заголовка
+ * @param padding {boolean} будет ли отступ сверху
+ * @param to {string} куда перенаправлять, если не задан то отправляет на страницу назад
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const Redirect = ({ title, padding = false, to }) => {
 	const history = useHistory();
 

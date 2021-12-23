@@ -8,18 +8,40 @@ import locale from 'antd/es/date-picker/locale/ru_RU';
 import ReactDOM from 'react-dom';
 const { RangePicker } = Picker;
 
-const DatePickerRange = ({ disabled = false, value, setValue, label }) => {
+const DatePickerRange = ({
+	setValue,
+	disabled = false,
+	label,
+	placeholder = 'Не выбрано',
+	name,
+	value,
+	toDay,
+	defaultValue = null,
+	limit = true,
+}) => {
 	const [date, setDate] = useState([]);
 	const datePickerRef = useRef(null);
-	const onChange = e => {
+	const onChange = (e, str) => {
 		setDate(e);
+		console.log('date picker ', e, 'str', str);
 		if (setValue && typeof setValue === 'function') {
-			let date = {
-				from: e[0].format('DD.MM.YYYY'),
-				to: e[1].format('DD.MM.YYYY'),
-			};
-			setValue(date);
+			if (name) {
+				let obj = {
+					[name]: str,
+				};
+				setValue(obj);
+			} else {
+				setValue(str);
+			}
 		}
+
+		// if (setValue && typeof setValue === 'function') {
+		// 	let date = {
+		// 		from: e[0].format('DD.MM.YYYY'),
+		// 		to: e[1].format('DD.MM.YYYY'),
+		// 	};
+		// 	setValue(date);
+		// }
 	};
 	const { date_now } = useSelector(state => state.general_page);
 
@@ -61,6 +83,7 @@ const DatePickerRange = ({ disabled = false, value, setValue, label }) => {
 	function disabledDate(current) {
 		return current && current > moment(replaceDateforBack(date_now)).endOf('day');
 	}
+
 	return (
 		<div>
 			{label && <span className={classes.label}>{label}</span>}
@@ -69,7 +92,7 @@ const DatePickerRange = ({ disabled = false, value, setValue, label }) => {
 				value={date}
 				onChange={onChange}
 				disabled={disabled}
-				disabledDate={disabledDate}
+				disabledDate={limit && disabledDate}
 				allowClear={false}
 				separator={<div className={classes.devider}>&mdash;</div>}
 				suffixIcon={

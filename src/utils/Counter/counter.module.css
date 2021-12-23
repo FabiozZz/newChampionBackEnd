@@ -28,7 +28,7 @@
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
-    width: 49px;
+    min-width: 45px;
     height: 40px;
 }
 .otherInputWrapper div input:focus{
@@ -49,8 +49,15 @@
 }
 .wrapper{
     display: grid;
-    grid-template-columns: repeat(3,min-content);
+    grid-template-columns: 1fr 10fr 1fr;
+    column-gap: 2px;
 }
+/*.wrapper span{*/
+/*    width: 10%;*/
+/*}*/
+/*.wrapper span{*/
+/*    width: 10%;*/
+/*}*/
 /*.wrapper_input {*/
 /*    -moz-appearance: textfield;*/
 /*}*/
@@ -69,7 +76,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 24px;
+    min-width: 24px;
     height: 40px;
     background: #FEFFFF;
     border: 1px solid #BFC5D2;

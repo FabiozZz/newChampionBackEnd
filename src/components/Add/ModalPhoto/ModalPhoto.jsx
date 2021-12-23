@@ -6,7 +6,16 @@ import { CameraOn } from './CameraOn/CameraOn';
 import { Button } from 'utils/Buttons/Button';
 
 export const CameraContext = createContext();
-
+/**
+ * Модалка для загрузки фотографии
+ *
+ * @param modal {boolean} true/false самой модалки
+ * @param setImage {function} функция установки изображения
+ * @param image {string} изображение
+ * @param toggleModal {function} функция изменения состояния модалки
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const ModalPhoto = ({ modal, setImage, image, toggleModal }) => {
 	const [dataUri, setDataUri] = useState(null);
 	const [cameraOn, setCameraMode] = useState('off');
@@ -30,6 +39,11 @@ const ModalPhoto = ({ modal, setImage, image, toggleModal }) => {
 		}
 	}
 
+	/**
+	 * Если зашли с устройства используется нативный метод добавления фото\изображение
+	 *
+	 * Если с десктопа\ноута то включается вторая часть условия с компонетом react-html5-camera-photo
+	 */
 	if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile/gi.test(navigator.userAgent)) {
 		return (
 			<>

@@ -1,19 +1,29 @@
 import React from 'react';
 import cn from 'classnames';
 import classes from '../../clients.module.css';
-import imageBirthDay from '../../../../assets/images/clientsListCard/giftbox.svg';
-import imagePhone from '../../../../assets/images/clientsListCard/phone.svg';
+import imageBirthDay from 'assets/images/clientsListCard/giftbox.svg';
+import imagePhone from 'assets/images/clientsListCard/phone.svg';
 import { NavLink } from 'react-router-dom';
-import { ageToString, declOfLessonsNum, replaceDateforFront } from '../../../../helpers/common';
+import { ageToString, declOfLessonsNum, replaceDateforFront } from 'helpers/common';
 import moment from 'moment';
 
+/**
+ * Компонент отображения списка клиентов в виде строк
+ *
+ * @param clients {Array} массив клиентов
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const ClientsRow = ({ clients }) => {
 	return (
 		<div className={cn(classes.list_row)}>
 			{clients.map(client => {
 				// let rowBlock = client.status <= 0 ? classes.item_block_not_status : classes.item_block;
 				return (
-					<NavLink key={client.id} className={classes.wr_card_row} to={`/profile/${client.id}`}>
+					<NavLink
+						key={client.id}
+						className={classes.wr_card_row}
+						to={`/profile/${client.id}`}>
 						<div className={classes.list_row__item}>
 							<div className={classes.item_name_and_notif}>
 								{client.is_archive ? (
@@ -49,8 +59,8 @@ export const ClientsRow = ({ clients }) => {
 								<div className={classes.group_block}>
 									<img src={imageBirthDay} alt={clients.date_of_birth} />
 									<span className={classes.item_text}>
-										{replaceDateforFront(client.date_of_birth)} ({ageToString(client.date_of_birth)}
-										)
+										{replaceDateforFront(client.date_of_birth)} (
+										{ageToString(client.date_of_birth)})
 									</span>
 								</div>
 								<div className={classes.group_block}>
@@ -99,7 +109,9 @@ export const ClientsRow = ({ clients }) => {
 											/>
 										</svg>
 
-										<p className={classes.list_col__item_block_text}>тут должна быть справка</p>
+										<p className={classes.list_col__item_block_text}>
+											тут должна быть справка
+										</p>
 									</div>
 								</div>
 								<div className={classes.item}>
@@ -116,7 +128,9 @@ export const ClientsRow = ({ clients }) => {
 											/>
 										</svg>
 
-										<p className={classes.list_col__item_block_text}>тут должен быть тренер</p>
+										<p className={classes.list_col__item_block_text}>
+											тут должен быть тренер
+										</p>
 									</div>
 								</div>
 								<div className={classes.item}>
@@ -179,11 +193,13 @@ export const ClientsRow = ({ clients }) => {
 										</svg>
 
 										<p className={classes.list_col__item_block_text}>
-											<span style={{ fontWeight: 900 }}>{client.subscription.train_balance > 999 ? (
-												<span dangerouslySetInnerHTML={{ __html: '&#8734;' }} />
-											) : (
-												client.subscription.train_balance
-											)}</span>{' '}
+											<span style={{ fontWeight: 900 }}>
+												{client.subscription.train_balance > 999 ? (
+													<span dangerouslySetInnerHTML={{ __html: '&#8734;' }} />
+												) : (
+													client.subscription.train_balance
+												)}
+											</span>{' '}
 											{declOfLessonsNum(client.subscription.train_balance)} до{' '}
 											<span style={{ fontWeight: 900 }}>
 												{moment(client.subscription.valid_until)

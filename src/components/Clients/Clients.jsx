@@ -10,6 +10,8 @@ import HeaderNav from '../common/HeaderNav';
 import { Skeleton } from 'antd';
 
 /**
+ * Список клиентов зарегистрированных в базе
+ *
  * @returns {React.Element}
  * @constructor
  */
@@ -42,11 +44,17 @@ export const Clients = () => {
 			{/*    renderError*/}
 			{/*    : null}*/}
 			<HeaderNav />
+
 			<Redirect padding={true} title={'Список клиентов'} />
 
 			<div className={classes.wrapper}>
 				<FilterClientsSection />
-				<SortTable clients={clients} active={activeFactor} row={toggleRow} column={toggleColumn} />
+				<SortTable
+					clients={clients}
+					active={activeFactor}
+					row={toggleRow}
+					column={toggleColumn}
+				/>
 				<Skeleton loading={loading} paragraph={{ rows: 4, width: '100%' }} active={true}>
 					{!clients?.length || false ? (
 						<p className={classes.text_none_data}>Данных нет</p>

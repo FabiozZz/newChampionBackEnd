@@ -152,6 +152,7 @@ export const DataPicker = ({
 	 * @param e
 	 */
 	const handleChangeInputDate = e => {
+		// eslint-disable-next-line no-unused-vars
 		let symbol = e.target.value;
 		// setUserData(symbol);
 		// setValue(symbol);
@@ -272,7 +273,12 @@ export const DataPicker = ({
 							value={value}
 							required={required}
 						/>
-						<img ref={iconRef} src={calendar} alt="calendar" onClick={handleToggleIconCalendar} />
+						<img
+							ref={iconRef}
+							src={calendar}
+							alt="calendar"
+							onClick={handleToggleIconCalendar}
+						/>
 					</label>
 				</div>
 

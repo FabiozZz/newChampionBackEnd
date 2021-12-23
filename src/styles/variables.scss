@@ -34,6 +34,8 @@ $WHITE:#FFFFFF;
 
 /* text variable */
 
+$BOX_SHADOW: 0px 10px 20px rgba(46, 91, 255, 0.07);
+
 %name{
   font-family: 'Montserrat',sans-serif;
   font-style: normal;
@@ -108,11 +110,96 @@ $WHITE:#FFFFFF;
 }
 
 /* grid columns classes */
-
-@for $i from 1 through 12{
-  .gcol-#{$i}{
-    grid-column: span $i !important;
+@media screen and(max-width:1440px){
+  .container-g{
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    grid-auto-rows: min-content;
+    grid-gap: 16px 24px;
+  }
+  .block{
+    display: grid;
+    background: $WHITE;
+    box-shadow: $BOX_SHADOW;
+    grid-template-columns: repeat(12,1fr);
+    grid-auto-rows: min-content;
+    grid-gap: 16px 24px;
+    padding: 24px 16px;
+  }
+}
+@media screen and(min-width:1440px){
+  .container-g{
+    display: grid;
+    grid-template-columns: repeat(11,1fr);
+    grid-auto-rows: min-content;
+    grid-gap: 16px 24px;
+  }
+  .block{
+    display: grid;
+    background: $WHITE;
+    box-shadow: $BOX_SHADOW;
+    grid-template-columns: repeat(11,1fr);
+    grid-auto-rows: min-content;
+    grid-gap: 16px 24px;
+    padding: 24px 16px;
   }
 }
 
-$BOX_SHADOW: 0px 10px 20px rgba(46, 91, 255, 0.07);
+@for $i from 1 through 12{
+  @media screen and(max-width:1440px){
+    .gcol-md-#{$i}{
+      grid-column: span $i !important;
+      align-self: end;
+      //overflow: hidden;
+    }
+  }
+  @media screen and(min-width:1440px){
+    .gcol-lg-#{$i}{
+      grid-column: span $i !important;
+      align-self: end;
+      //overflow: hidden;
+    }
+  }
+}
+.pb100{
+  padding-bottom: 100px;
+}
+.flex{
+  display: flex;
+}
+$flexes: left,center,right,space-between,space-around,flex-start,flex-end;
+$directions: colemn,row;
+$aligns: center,flex-start,flex-end;
+@each $flex in $flexes{
+  .flex-#{$flex}{
+    justify-content: $flex;
+  }
+}
+
+@each $direction in $directions{
+  .flex-#{$direction}{
+    flex-direction: $direction;
+  }
+}
+@each $align in $aligns{
+  .align-#{$align}{
+    align-items: $align;
+  }
+}
+@for $i from 1 through 32{
+  .gap-#{$i}{
+    gap: #{$i}px
+  }
+}
+.flex-center{
+  justify-content: center;
+}
+.overflow-hidden{
+  overflow: hidden !important;
+}
+.-margin-16{
+  margin-left: -16px;
+  margin-right: -16px;
+  padding-left: 16px;
+  padding-right: 16px;
+}

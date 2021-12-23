@@ -13,8 +13,26 @@ import { addClientReducer } from './reducers/addClientReducer';
 import { settings_abonementReducer } from './reducers/settings_abonementReducer';
 import { settingsGroupReducer } from './reducers/settingsGroupReducer';
 import { settingsMarketingReducer } from 'store/reducers/settingsMarketingReducer';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 export const history = createBrowserHistory();
+
+const persistConfig = {
+	key: 'user',
+	storage: storage,
+	whitelist: [
+		'user',
+		'stuff',
+		'settingsGroup',
+		'generalPage',
+		'clients',
+		'addClient',
+		'profile',
+		'createLessons',
+		'settingsMarketing',
+	], // which reducer want to store
+};
 
 const rootReducer = combineReducers({
 	user: userReducer,
@@ -30,14 +48,16 @@ const rootReducer = combineReducers({
 	router: connectRouter(history),
 });
 
+const pReducer = persistReducer(persistConfig, rootReducer);
+
 const sagasMiddleware = createSagaMiddleware();
 
-const store = createStore(
-	rootReducer,
-	// window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
-	applyMiddleware(routerMiddleware(history), sagasMiddleware)
-	// )
-);
+const middleware = applyMiddleware(routerMiddleware(history), sagasMiddleware);
+
+const store = createStore(pReducer, middleware);
 sagasMiddleware.run(rootSaga);
+
+const persistor = persistStore(store);
+
 window.store = store;
-export default store;
+export { store, persistor };

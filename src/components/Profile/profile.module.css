@@ -99,7 +99,6 @@
 	letter-spacing: 4px;
 	text-transform: uppercase;
 	color: #8798ad;
-	padding-left: 12px;
 }
 .block_info__title {
 	font-family: 'Montserrat', sans-serif;
@@ -568,11 +567,19 @@
 	width: inherit;
 	padding-right: 16px;
 	display: flex;
+	gap: 16px;
+
 	flex-flow: row nowrap;
 	justify-content: flex-start;
 	align-items: center;
 }
+.abonement_carousel::-webkit-scrollbar { width: 0; }
+.abonement_carousel { -ms-overflow-style: none; }
+.abonement_carousel { overflow: -moz-scrollbars-none; }
 .abonement_carousel svg{
+	cursor:pointer;
+}
+.abonement_carousel_btn{
 	cursor:pointer;
 }
 .abonemet_block {

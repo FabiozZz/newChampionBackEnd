@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import classes from '../../Add/add.module.css';
 import { AddParent } from './AddParent/AddParent';
-import separate from '../../../assets/images/blockInfoSeparate.svg';
-import remove from '../../../assets/images/removeParent.svg';
-import { isEmpty } from '../../../helpers/common';
-import { Button } from '../../../utils/Buttons/Button';
+import separate from 'assets/images/blockInfoSeparate.svg';
+import remove from 'assets/images/removeParent.svg';
+import { isEmpty } from 'helpers/common';
+import { Button } from 'utils/Buttons/Button';
 
 /**
  * компонент прослойка
+ *
  * @param parents массив с пустыми объектами
  * @param error объект ошибок
  * @param addParents функция добавления нового пустого объекта
@@ -16,7 +17,13 @@ import { Button } from '../../../utils/Buttons/Button';
  * @returns {JSX.Element}
  * @constructor
  */
-export const ParentsBlock = ({ parents, error = {}, addParents, removeParents, change }) => {
+export const ParentsBlock = ({
+	parents,
+	error = {},
+	addParents,
+	removeParents,
+	change,
+}) => {
 	return (
 		<div className={classes.block_info}>
 			<h3 className={classes.block_info__title}>информация о родителях</h3>

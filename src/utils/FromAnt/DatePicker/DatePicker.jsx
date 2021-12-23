@@ -4,7 +4,7 @@ import moment from 'moment';
 import classes from './picker.module.css';
 import locale from 'antd/es/date-picker/locale/ru_RU';
 import ReactDOM from 'react-dom';
-import { replaceDateforBack } from '../../../helpers/common';
+// import { replaceDateforBack } from '../../../helpers/common';
 
 const DatePicker = ({
 	setValue,
@@ -68,7 +68,7 @@ const DatePicker = ({
 		if (value) setDate(moment(value));
 	}, [value]);
 	return (
-		<div>
+		<>
 			{label && <span className={classes.label}>{label}</span>}
 			<Picker
 				// defaultValue={defaultValue}
@@ -100,7 +100,7 @@ const DatePicker = ({
 				format={'DD.MM.YYYY'}
 				placeholder={placeholder}
 			/>
-		</div>
+		</>
 	);
 };
 

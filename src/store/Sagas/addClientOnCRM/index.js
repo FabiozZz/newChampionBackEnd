@@ -4,8 +4,15 @@ import { history } from '../../index';
 import {
 	ADD_CLIENT_ON_CRM,
 	LOAD_DATA_FOR_ADD_CLIENT_PAGE,
-} from '../../../constants/addClientConstants';
-import { getAgesGroup, getCouch, getGroup, getSourceList } from './workers';
+} from 'constants/addClientConstants';
+import {
+	getAbonimentList,
+	getAgesGroup,
+	getCouch,
+	getGroup,
+	getSourceList,
+	getStatusList,
+} from './workers';
 import {
 	add_client_on_CRM_error,
 	load_data_for_add_page_done,
@@ -29,6 +36,8 @@ export function* fetchDataAddClient() {
 		groups: yield call(() => getGroup()),
 		couches: yield call(() => getCouch()),
 		source: yield call(() => getSourceList()),
+		abonements: yield call(() => getAbonimentList()),
+		statuses: yield call(() => getStatusList()),
 		agesGroup: yield call(() => getAgesGroup()),
 	};
 	console.log('данные для создания клиента>>', fetchData);

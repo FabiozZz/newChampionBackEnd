@@ -75,6 +75,7 @@ export const ProfileVisit = ({ profile }) => {
 		if (current_comment) {
 			update_comment_text.onChange({ text: current_comment.text });
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [current_comment]);
 
 	/**
@@ -86,12 +87,17 @@ export const ProfileVisit = ({ profile }) => {
 	return (
 		<>
 			{modal && (
-				<Modal toggle={setModal} edit={type_modal === 'info'} onEdit={() => setTypeModal('edit')}>
+				<Modal
+					toggle={setModal}
+					edit={type_modal === 'info'}
+					onEdit={() => setTypeModal('edit')}>
 					<div className={classes.modal}>
 						{type_modal === 'create' ? (
 							<>
-								<span className={cn(classes.title, 'gcol-12')}>Добавить комментарий</span>
-								<div className={'gcol-12'}>
+								<span className={cn(classes.title, 'gcol-md-12 gcol-lg-12')}>
+									Добавить комментарий
+								</span>
+								<div className={'gcol-md-12 gcol-lg-12'}>
 									<Input
 										autoFocus
 										name={'text'}
@@ -101,15 +107,21 @@ export const ProfileVisit = ({ profile }) => {
 										placeholder={'Введите комментарий'}
 									/>
 								</div>
-								<div className={cn('gcol-12', classes.btn_group)}>
-									<Button click={() => setModal(false)} text={'отменить'} factor={'danger'} />
+								<div className={cn('gcol-md-12 gcol-lg-12', classes.btn_group)}>
+									<Button
+										click={() => setModal(false)}
+										text={'отменить'}
+										factor={'danger'}
+									/>
 									<Button click={submit_comment} text={'сохранить'} factor={'success'} />
 								</div>
 							</>
 						) : type_modal === 'edit' ? (
 							<>
-								<span className={cn(classes.title, 'gcol-12')}>редактировать комемнтарий</span>
-								<div className={'gcol-12'}>
+								<span className={cn(classes.title, 'gcol-md-12 gcol-lg-12')}>
+									редактировать комемнтарий
+								</span>
+								<div className={'gcol-md-12 gcol-lg-12'}>
 									<Input
 										autoFocus
 										name={'text'}
@@ -123,16 +135,21 @@ export const ProfileVisit = ({ profile }) => {
 										placeholder={'Введите комментарий'}
 									/>
 								</div>
-								<div className={cn('gcol-12', classes.btn_group)}>
-									<Button click={() => setModal(false)} text={'отменить'} factor={'danger'} />
+								<div className={cn('gcol-md-12 gcol-lg-12', classes.btn_group)}>
+									<Button
+										click={() => setModal(false)}
+										text={'отменить'}
+										factor={'danger'}
+									/>
 									<Button click={update_comment} text={'сохранить'} factor={'success'} />
 								</div>
 							</>
 						) : type_modal === 'info' ? (
 							<>
-								<div className={cn(classes.info_comment, 'gcol-12')}>
+								<div className={cn(classes.info_comment, 'gcol-md-12 gcol-lg-12')}>
 									<span className={cn(classes.info_date)}>
-										{moment(current_comment.updated_at).format('DD.MM.YYYY HH:mm')} Отредактирован
+										{moment(current_comment.updated_at).format('DD.MM.YYYY HH:mm')}{' '}
+										Отредактирован
 									</span>
 									<span className={cn(classes.info_text)}>{current_comment.text}</span>
 								</div>
@@ -153,8 +170,10 @@ export const ProfileVisit = ({ profile }) => {
 				{type_table === 'visit' ? (
 					<>
 						<div className={classes.field_with_btn}>
-							<p className={cn(classes.title, 'gcol-7')}>история посещений</p>
-							<div className={'gcol-5'}>
+							<p className={cn(classes.title, 'gcol-md-7 gcol-lg-9')}>
+								история посещений
+							</p>
+							<div className={'gcol-md-5 gcol-lg-3'}>
 								<Button
 									click={() => {
 										setTypeModal('create');
@@ -170,7 +189,8 @@ export const ProfileVisit = ({ profile }) => {
 								<>
 									<div className={classes.change_field}>
 										<p className={classes.table_caption}>
-											Куплено абонементов: <span className={classes.table_period}>12</span>
+											Куплено абонементов:{' '}
+											<span className={classes.table_period}>12</span>
 										</p>
 										{profile.comment_list && profile.comment_list.length ? (
 											<span
@@ -198,7 +218,9 @@ export const ProfileVisit = ({ profile }) => {
 														<td>{visit.lesson.group.name}</td>
 														{/*<td>NONSTOP</td>*/}
 														{/*<td>Брилиантовый</td>*/}
-														<td>{moment(visit.lesson.date).format('DD.MM.YYYY HH:mm')}</td>
+														<td>
+															{moment(visit.lesson.date).format('DD.MM.YYYY HH:mm')}
+														</td>
 													</tr>
 												);
 											})}
@@ -222,8 +244,10 @@ export const ProfileVisit = ({ profile }) => {
 				) : type_table === 'comment' ? (
 					<>
 						<div className={classes.field_with_btn}>
-							<p className={cn(classes.title, 'gcol-7')}>список комментариев</p>
-							<div className={'gcol-5'}>
+							<p className={cn(classes.title, 'gcol-md-7 gcol-lg-9')}>
+								список комментариев
+							</p>
+							<div className={'gcol-md-5 gcol-lg-3'}>
 								<Button
 									click={() => {
 										setTypeModal('create');
@@ -239,7 +263,8 @@ export const ProfileVisit = ({ profile }) => {
 								<>
 									<div className={classes.change_field}>
 										<p className={classes.table_caption}>
-											Куплено абонементов: <span className={classes.table_period}>12</span>
+											Куплено абонементов:{' '}
+											<span className={classes.table_period}>12</span>
 										</p>
 										<span
 											onClick={visit_list}
@@ -262,7 +287,9 @@ export const ProfileVisit = ({ profile }) => {
 												return (
 													<tr key={comment.id} onClick={() => select_comment(comment.id)}>
 														{/*<td>1000</td>*/}
-														<td>{moment(comment.created_at).format('DD.MM.YYYY HH:mm')}</td>
+														<td>
+															{moment(comment.created_at).format('DD.MM.YYYY HH:mm')}
+														</td>
 														{/*<td>NONSTOP</td>*/}
 														<td style={{ textAlign: 'left', padding: '0 20px' }}>
 															<div>

@@ -6,16 +6,17 @@ import { getRouteConfig } from '../../Routes/routes';
 import {
 	ADD_CLIENT_ROUTE,
 	ALL_CLIENTS_ROUTE,
-	EDIT_CLIENT_ROUTE,
-	HOME_ROUTE,
 	PROFILE_CLIENT_ROUTE,
+	PROFILE_CLIENT_ROUTE_ABONEMENT,
+	PROFILE_CLIENT_ROUTE_ABONEMENT_CONSTRUCTOR,
+	PROFILE_CLIENT_ROUTE_ABONEMENT_ONCE,
+	PROFILE_CLIENT_ROUTE_ABONEMENT_TRIAL,
 	SETTINGS_ABONEMENT,
 	SETTINGS_ABONEMENT_EDIT,
 	SETTINGS_ABONEMENT_VIEW,
 	SETTINGS_CREATE_ABONEMENT,
 	SETTINGS_GROUP,
 	SETTINGS_GROUP_CREATE,
-	SETTINGS_GROUP_EDIT,
 	SETTINGS_STATUS,
 	SETTINGS_STATUS_CREATE,
 	SETTINGS_STATUS_EDIT,
@@ -26,14 +27,9 @@ import {
 import clientsPageSagas from './clientsPageSagas';
 import { load_clients_all } from '../Actions/clientsActions';
 import addingClientPageSagas from './addClientOnCRM';
-import { clear_profile, load_profile_user, open_edit_page } from '../Actions/profileActions';
+import { clear_profile, load_profile_user } from '../Actions/profileActions';
 import { profilePageSagas } from './profilePageSagas';
-import {
-	load_data_for_edit_group_page,
-	load_data_one_group,
-} from '../Actions/settingsGroupEditActions';
 import { editGroupPageSagas } from './editGroupPage';
-import { load_general_page_data } from '../Actions/generalPageActions';
 import { load_data_for_add_page } from '../Actions/addClientsActions';
 import { start_load_data_set_group } from '../Actions/settingsGroupActions';
 import { settingsGroupSagas } from './settingsGroupSagas';
@@ -55,7 +51,9 @@ export function* routeChangeSaga() {
 		/* страница клиентов */
 		if (matchPath(action.payload.location.pathname, getRouteConfig(ALL_CLIENTS_ROUTE))) {
 			let some_data;
-			console.log(matchPath(action.payload.location.pathname, getRouteConfig(ALL_CLIENTS_ROUTE)));
+			console.log(
+				matchPath(action.payload.location.pathname, getRouteConfig(ALL_CLIENTS_ROUTE))
+			);
 			some_data = yield put(load_clients_all());
 			console.log(some_data);
 			if (yield cancelled()) {
@@ -64,14 +62,18 @@ export function* routeChangeSaga() {
 		}
 		/* страница добавления клиента */
 		if (matchPath(action.payload.location.pathname, getRouteConfig(ADD_CLIENT_ROUTE))) {
-			console.log(matchPath(action.payload.location.pathname, getRouteConfig(ADD_CLIENT_ROUTE)));
+			console.log(
+				matchPath(action.payload.location.pathname, getRouteConfig(ADD_CLIENT_ROUTE))
+			);
 			yield put(load_data_for_add_page());
 			if (yield cancelled()) {
 				console.log('cancel');
 			}
 		}
 		/* страница настроек групп */
-		if (matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_GROUP_CREATE))) {
+		if (
+			matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_GROUP_CREATE))
+		) {
 			console.log(
 				matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_GROUP_CREATE))
 			);
@@ -87,7 +89,9 @@ export function* routeChangeSaga() {
 
 		/* страница создания группы */
 		if (matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_GROUP))) {
-			console.log(matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_GROUP)));
+			console.log(
+				matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_GROUP))
+			);
 			yield put(start_load_data_set_group());
 			if (yield cancelled()) {
 				console.log('cancel');
@@ -96,7 +100,9 @@ export function* routeChangeSaga() {
 
 		/* страница настроек абонементов */
 		if (matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_ABONEMENT))) {
-			console.log(matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_ABONEMENT)));
+			console.log(
+				matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_ABONEMENT))
+			);
 			yield put(start_load_data_settings_abonement());
 			if (yield cancelled()) {
 				console.log('cancel');
@@ -104,7 +110,9 @@ export function* routeChangeSaga() {
 		}
 		/* страница настроек статусов */
 		if (matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_STATUS))) {
-			console.log(matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_STATUS)));
+			console.log(
+				matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_STATUS))
+			);
 			yield put(start_load_data_settings_abonement());
 			if (yield cancelled()) {
 				console.log('cancel');
@@ -112,9 +120,17 @@ export function* routeChangeSaga() {
 		}
 
 		/* страница создания абонементов */
-		if (matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_CREATE_ABONEMENT))) {
+		if (
+			matchPath(
+				action.payload.location.pathname,
+				getRouteConfig(SETTINGS_CREATE_ABONEMENT)
+			)
+		) {
 			console.log(
-				matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_CREATE_ABONEMENT))
+				matchPath(
+					action.payload.location.pathname,
+					getRouteConfig(SETTINGS_CREATE_ABONEMENT)
+				)
 			);
 			const settings = yield select(state => state.settings_abonement);
 			if (!settings.ages.length || !settings.statuses.length) {
@@ -123,9 +139,14 @@ export function* routeChangeSaga() {
 		}
 
 		/* страница создания статуса */
-		if (matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_STATUS_CREATE))) {
+		if (
+			matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_STATUS_CREATE))
+		) {
 			console.log(
-				matchPath(action.payload.location.pathname, getRouteConfig(SETTINGS_STATUS_CREATE))
+				matchPath(
+					action.payload.location.pathname,
+					getRouteConfig(SETTINGS_STATUS_CREATE)
+				)
 			);
 			const settings = yield select(state => state.settings_abonement);
 			if (!settings.ages.length || !settings.statuses.length) {
@@ -213,13 +234,27 @@ export function* routeChangeSaga() {
 		}
 
 		/* страница профиля */
-		const profilePage = matchPath(
-			action.payload.location.pathname,
-			getRouteConfig(PROFILE_CLIENT_ROUTE)
-		);
+		const profilePage =
+			matchPath(action.payload.location.pathname, getRouteConfig(PROFILE_CLIENT_ROUTE)) ||
+			matchPath(
+				action.payload.location.pathname,
+				getRouteConfig(PROFILE_CLIENT_ROUTE_ABONEMENT)
+			) ||
+			matchPath(
+				action.payload.location.pathname,
+				getRouteConfig(PROFILE_CLIENT_ROUTE_ABONEMENT_ONCE)
+			) ||
+			matchPath(
+				action.payload.location.pathname,
+				getRouteConfig(PROFILE_CLIENT_ROUTE_ABONEMENT_TRIAL)
+			) ||
+			matchPath(
+				action.payload.location.pathname,
+				getRouteConfig(PROFILE_CLIENT_ROUTE_ABONEMENT_CONSTRUCTOR)
+			);
 		if (profilePage) {
+			console.log('index saga profile params', profilePage);
 			const id = profilePage.params;
-			console.log(id);
 			if (id) {
 				yield put(load_profile_user(id));
 			}

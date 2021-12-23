@@ -1,9 +1,9 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import classes from './create.module.css';
 import { Redirect } from '../../../../common/Redirect';
 import { Radio } from 'antd';
 import HeaderNav from '../../../../common/HeaderNav';
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { upload_abonement_data } from '../../../../../store/Actions/settingsAbonementActions';
 import { useHistory } from 'react-router';
 import { OtherInput } from '../../../../../utils/OtherInput/OtherInput';
@@ -306,7 +306,12 @@ export const CreateAbonement = () => {
 					{/*</div>*/}
 
 					<div className={classes.submit}>
-						<Button factor={'success'} type={'submit'} text={'Сохранить тариф'} size={'auto'} />
+						<Button
+							factor={'success'}
+							type={'submit'}
+							text={'Сохранить тариф'}
+							size={'auto'}
+						/>
 					</div>
 				</form>
 			</div>

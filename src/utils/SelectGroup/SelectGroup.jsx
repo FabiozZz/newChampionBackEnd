@@ -52,7 +52,8 @@ const SelectGroup = ({
 					window.innerWidth - optionBox.current.getBoundingClientRect().right - 10 + 'px';
 			}
 			if (optionBox.current.getBoundingClientRect().left <= 0) {
-				optionBox.current.style.left = optionBox.current.getBoundingClientRect().left + 10 + 'px';
+				optionBox.current.style.left =
+					optionBox.current.getBoundingClientRect().left + 10 + 'px';
 			}
 		}
 	}, [toggleOptionBox]);
@@ -87,11 +88,15 @@ const SelectGroup = ({
 	//     }
 	//     // eslint-disable-next-line react-hooks/exhaustive-deps
 	// },[data]);
+	// eslint-disable-next-line no-unused-vars
 	const classWrapper = danger ? classes.danger : classes.inputWrapper;
 	let disabledClass = disabled ? classes.disabled : classes.inputWrapper;
 
 	return (
-		<div ref={selectRef} className={`${classes.selectBoxWrapper} ${props.className}`} {...props}>
+		<div
+			ref={selectRef}
+			className={`${classes.selectBoxWrapper} ${props.className}`}
+			{...props}>
 			<label className={`${classes.label}`}>{label}</label>
 			<div className={disabledClass} onClick={handleToggleOptionBox}>
 				<svg

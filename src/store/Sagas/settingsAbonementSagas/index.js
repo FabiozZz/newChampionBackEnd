@@ -1,4 +1,4 @@
-import { call, put, select, take, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import {
 	ADD_NEW_STATUS,
 	EDIT_DATA_SETTINGS_ABONEMENT,
@@ -18,7 +18,6 @@ import {
 	start_load_data_status_done,
 } from '../../Actions/settingsAbonementActions';
 import Api from '../../../Api/Api';
-import { SETTINGS_STATUS_EDIT } from '../../../Routes/actionRoutes';
 
 function* fetchDataForAbonementPage() {
 	console.log('начала загрузки данных для настроек абонементов');

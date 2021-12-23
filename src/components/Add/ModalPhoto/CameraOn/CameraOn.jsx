@@ -3,6 +3,12 @@ import React, { useContext } from 'react';
 import Camera from 'react-html5-camera-photo';
 import { CameraContext } from '../ModalPhoto';
 
+/**
+ * Компонент-обертка над скачанным модулем react-html5-camera-photo
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const CameraOn = () => {
 	const { takePhoto } = useContext(CameraContext);
 	return (

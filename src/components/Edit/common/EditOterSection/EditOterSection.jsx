@@ -6,8 +6,6 @@ import { useSelector } from 'react-redux';
 /**
  * компонент визуализации ввода данных источника откуда узнал о клубе
  *
- * @param sale строка
- * @param setSale функция установки sale
  * @returns {JSX.Element}
  * @constructor
  */

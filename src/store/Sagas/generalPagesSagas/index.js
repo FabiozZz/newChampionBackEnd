@@ -1,5 +1,5 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import { LOG_IN_APP, LOG_OUT, TOKEN_REFRESH, TOKEN_VERIFY } from '../../../constants/userConstants';
+import { LOG_IN_APP, LOG_OUT, TOKEN_VERIFY } from '../../../constants/userConstants';
 import Api from '../../../Api/Api';
 import { log_in_done, log_in_fail, token_refresh } from '../../Actions/userActions';
 import { LOAD_STUFF } from '../../../constants/stuffsConstants';
@@ -10,8 +10,6 @@ import {
 	BUY_AND_ADD_CLIENT_ON_TRAIN,
 	CHANGE_DATE_FOR_GET_LESSONS,
 	CHANGE_TRAINER_FOR_GROUP,
-	LOAD_GENERAL_PAGE_DATA,
-	LOAD_GENERAL_PAGE_DATA_FAILURE,
 	REMOVE_CLIENT_FROM_TRAIN,
 } from '../../../constants/generalPageConstants';
 import {
@@ -28,7 +26,6 @@ import {
 	getCouch,
 	getCouchList,
 	getGroupList,
-	getGroups,
 	getGroupsWithDate,
 	getStatusList,
 } from './workers';
@@ -80,8 +77,14 @@ export function* tokenRefresh() {
 
 export function* loggedInApp({ payload }) {
 	try {
-		yield Api.login({ ...payload });
-		yield put(log_in_done({ type: 'success', title: 'Поздравляю', desc: 'Вы вошли в систему' }));
+		const response = yield Api.login({ ...payload });
+		console.log(response);
+		yield put(
+			log_in_done(
+				{ type: 'success', title: 'Поздравляю', desc: 'Вы вошли в систему' },
+				{ tokens: response }
+			)
+		);
 		yield put(load_general_page_data());
 	} catch (e) {
 		console.log(e.request);
@@ -214,7 +217,7 @@ export function* removeClientFromTrain({ payload }) {
 export default function* generalPageSaga() {
 	yield takeEvery(LOG_IN_APP, loggedInApp);
 	yield takeEvery(TOKEN_VERIFY, tokenVerify);
-	yield takeEvery(TOKEN_REFRESH, tokenRefresh);
+	// yield takeEvery(TOKEN_REFRESH, tokenRefresh);
 	yield takeEvery(LOG_OUT, loggedOutInApp);
 	yield takeEvery(LOAD_STUFF, loadStuff);
 	// yield takeEvery(LOAD_GENERAL_PAGE_DATA, fetchDataGeneralPage);

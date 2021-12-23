@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import classes from './auth.module.css';
-import { authSameDate, isEmpty } from '../../helpers/common';
-import { OtherInput } from '../../utils/OtherInput/OtherInput';
-import { Button } from '../../utils/Buttons/Button';
-import { log_in, log_out } from '../../store/Actions/userActions';
+import { authSameDate, isEmpty } from 'helpers/common';
+import { Button } from 'utils/Buttons/Button';
+import { log_in, log_out } from 'store/Actions/userActions';
 import Api from '../../Api/Api';
 import moment from 'moment';
-import { change_date, set_date } from '../../store/Actions/generalPageActions';
+import { set_date } from 'store/Actions/generalPageActions';
 import { notification } from 'antd';
-import { useInputOnObject } from '../../hooks';
+import { useInputOnObject } from 'hooks';
 import Input from '../../utils/FromAnt/Input/Input';
 
 /**
  * компонент для авторизации менеджера
+ *
  * @returns {JSX.Element}
  * @constructor
  */
 export const Auth = () => {
-	const { error, success } = useSelector(state => state.user);
+	const { error } = useSelector(state => state.user);
 	const { current_date } = useSelector(state => state.general_page);
 	const [load, setLoad] = useState(false);
+	// eslint-disable-next-line no-unused-vars
 	const [inputError, setIError] = useState(!isEmpty(error));
 	const [errorDate, setErrorDate] = useState(false);
 	/**
@@ -61,7 +62,8 @@ export const Auth = () => {
 		if (errorDate) {
 			notification.error({
 				message: 'Ошибка',
-				description: 'Установлена неверная дата на компьютере. Исправьте чтобы войти в систему',
+				description:
+					'Установлена неверная дата на компьютере. Исправьте чтобы войти в систему',
 			});
 			dispatch(log_out());
 		} else {
@@ -88,11 +90,18 @@ export const Auth = () => {
 		})();
 	}, [current_date, dispatch]);
 
+	/**
+	 * моковые данные для тестов отчетов
+	 * TODO потом удалить
+	 * @param startDate
+	 * @param stopDate
+	 * @returns {*[]}
+	 */
 	function getDates(startDate, stopDate) {
-		var dateArray = [];
-		var currentDate = moment(startDate);
-		var stopDate = moment(stopDate);
-		while (currentDate <= stopDate) {
+		let dateArray = [];
+		let currentDate = moment(startDate);
+		let stop = moment(stopDate);
+		while (currentDate <= stop) {
 			dateArray.push({
 				date: moment(currentDate).format('YYYY-MM-DD '),
 				value: 2 + Math.ceil(Math.random() * (800 - 2)),
@@ -102,6 +111,7 @@ export const Auth = () => {
 		console.log(dateArray);
 		return dateArray;
 	}
+
 	getDates('2000-10-11', moment().format('YYYY-MM-DD'));
 
 	return (
@@ -116,7 +126,7 @@ export const Auth = () => {
 							onFocus={focusInput}
 							setValue={admin.onChange}
 							error={!isEmpty(error)}
-							label={'введите login'}
+							label={'введите логин'}
 							name={'username'}
 						/>
 						{/*{inputError && (*/}

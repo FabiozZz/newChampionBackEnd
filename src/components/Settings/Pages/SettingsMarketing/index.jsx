@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import HeaderNav from 'components/common/HeaderNav';
 import { Redirect } from 'components/common/Redirect';
 import classes from './index.module.css';
@@ -33,9 +32,11 @@ const Index = props => {
 			)}
 			<HeaderNav />
 			<Redirect padding={true} title={'Маркетинг'} />
-			<div className={cn('gcol-12', classes.padding)}>
-				<div className={cn('gcol-12', classes.wrapper)}>
-					<p className={cn('gcol-12', classes.title, classes.text)}>Источники рекламы</p>
+			<div className={cn('gcol-lg-11 gcol-md-12 container-g', classes.padding)}>
+				<div className={cn('gcol-lg-12 gcol-md-12 container-g', classes.wrapper)}>
+					<p className={cn('gcol-lg-11 gcol-md-12', classes.title, classes.text)}>
+						Источники рекламы
+					</p>
 					{!!sources.length ? (
 						<table cellSpacing={4} cellPadding={18} className={classes.table}>
 							<tbody>

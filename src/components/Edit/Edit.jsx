@@ -4,7 +4,7 @@ import camera from './camera (1) 1.png';
 import { Redirect } from '../common/Redirect';
 import moment from 'moment';
 import { useHistory, useParams } from 'react-router';
-import { Modal } from '../../utils/Modal/Modal';
+import { Modal } from 'utils/Modal/Modal';
 import EditModalPhoto from './EditModalPhoto/EditModalPhoto';
 import EditPhoneSection from './EditPhoneSection/EditPhoneSection';
 import { EndBtnGroup } from '../common/EndBtnGroup/EndBtnGroup';
@@ -15,182 +15,97 @@ import {
 	edit_profile_parents,
 	open_edit_page,
 	remove_profile_parents,
-} from '../../store/Actions/profileActions';
+} from 'store/Actions/profileActions';
 import { EditAddresSection } from './common/EditAddresSection/EditAddresSection';
 import { ParentsBlock } from '../common/ParentsBlock/ParentsBlock';
-import TrialSectionSection from '../Add/common/TrialSectionSection/TrialSectionSection';
-import { isEmpty, replaceDateforBack, replaceDateforFront } from '../../helpers/common';
-import { OtherInput } from '../../utils/OtherInput/OtherInput';
-import { Button } from '../../utils/Buttons/Button';
-import { update } from 'ink-docstrap/fixtures/documents/probe';
-import { useInputOnObject } from '../../hooks';
-import DatePicker from '../../utils/FromAnt/DatePicker/DatePicker';
-import Input from '../../utils/FromAnt/Input/Input';
-import { OterSection } from 'components/Add/common/OterSection/OterSection';
+import { isEmpty, replaceDateforBack, replaceDateforFront } from 'helpers/common';
+import { Button } from 'utils/Buttons/Button';
+import { useInputOnObject } from 'hooks';
+import DatePicker from 'utils/FromAnt/DatePicker/DatePicker';
+import Input from 'utils/FromAnt/Input/Input';
 import { EditOterSection } from 'components/Edit/common/EditOterSection/EditOterSection';
 
 export const ContextCommonEdit = createContext();
 
+/**
+ * Компонент редактирования клиента
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const Edit = () => {
+	/**
+	 * значения из redux
+	 */
+	// eslint-disable-next-line no-unused-vars
 	const { user, error } = useSelector(state => state.profile);
-	console.log(error);
+
+	/**
+	 * получаю id клиента из URL строки браузера
+	 */
 	const { id } = useParams();
+
 	const dispatch = useDispatch();
 
+	/**
+	 * Локальный стейт для хранения персональных данных
+	 *
+	 * @type {{onChange: function(*=): void, state: {}}}
+	 */
 	const personal_data = useInputOnObject({});
+
+	/**
+	 * Локальный стейт для хранения адреса клиента
+	 *
+	 * @type {{onChange: function(*=): void, state: {}}}
+	 */
 	const address = useInputOnObject({});
-	console.log(personal_data);
-	/* common */
+
+	/**
+	 * Локальный стейт для хранения аватара клиента (если таковой имеется)
+	 */
 	const [image, setImage] = useState(user?.avatar || null);
+
+	/**
+	 * Функция установки изображения
+	 *
+	 * @param data
+	 */
 	const handleChangeImage = data => {
-		console.log(data);
 		setImage(data);
 	};
 
+	/**
+	 * Локальный стейт для управления модальным окном
+	 */
 	const [modal, setModal] = useState(false);
+
+	/**
+	 * Функция изменения значения флага модального окна
+	 */
 	const toggleModal = () => {
 		setModal(!modal);
 	};
 
 	/**
-	 * локальный стейт для храниения/установки персональных данных клиента для PersonalData
+	 * Локальный стейт для хранения значения возраста клиента
 	 */
-	const [personalData, setPersonalData] = useState({});
-
 	const [age, setAge] = useState(0);
-
-	/**
-	 * прослушивание события ввода данных для PersonalData
-	 * @param e
-	 */
-	const handleChangePersonalData = e => {
-		let name = e.target.name;
-		setPersonalData(prevState => ({ ...prevState, [name]: e.target.value }));
-	};
-
-	/**
-	 * прослушивания события выбора даты персональных данных в DataPicker для PersonalData
-	 * @param some
-	 */
-	const handleDataPickerPersonal = some => {
-		setPersonalData({ ...personalData, date_of_birth: some });
-	};
-
-	/**
-	 * локальный стейт для храниения/установки адреса клиента для Address
-	 */
-	const [addressEdit, setAddress] = useState({});
-
-	// /**
-	//  * прослушивание события ввода данных для Address
-	//  * @param e
-	//  */
-	const handleChangeAddressComponent = e => {
-		let name = e.target.name;
-		let value = e.target.value;
-		setAddress(prevState => ({ ...prevState, [name]: value }));
-		console.log(
-			'%c({[name]:[e.target.value]}&&[e.target.value]): ',
-			'color: MidnightBlue; background: Aquamarine;',
-			{ [name]: [e.target.value] } && [e.target.value]
-		);
-	};
-
-	// /**
-	//  * локальный стейт для хранения/установки для Sale
-	//  */
-	// const [sale, setSale] = useState(user.sale);
-	//
-	// /**
-	//  * прослушивание ввода данных для Sale
-	//  * @param e
-	//  */
-	// const handleChangeValueSale = (e) => {
-	//     setSale(e.target.value);
-	// };
-
-	// /**
-	//  * локальный стейт для установки/снятии флага о том что клиент принял
-	//  * правила посещения клуба для Rules
-	//  */
-	// const [rules, setRules] = useState(true);
-	//
-	// /**
-	//  * прослушивание клика для переключения флага для Rules
-	//  */
-	// const handleToggleRules = () => {
-	//     setRules(!rules);
-	// };
-	//
-	// /**
-	//  * локальный стейт для установки/снятии флага о том что клиент принял
-	//  * правилазачисления и посещения клуба для Rules
-	//  */
-	// const [personal, setPersonal] = useState(true);
-	//
-	// /**
-	//  * прослушивание клика для переключения флага для Rules
-	//  */
-	// const handleTogglePersonal = () => {
-	//     setPersonal(!personal);
-	// };
 
 	const history = useHistory();
 
 	/**
-	 * функция для вохврата в компонент с которого переключились
+	 * функция для возврата в компонент с которого переключились
 	 */
 	const goBack = () => {
 		history.goBack();
 	};
 
-	// /**
-	//  * локальный стейт для хранения/установки данных для TestLesson
-	//  */
-	// const [testData, setTestData] = useState({
-	//     filial: { name: '' },
-	//     group: { name: '' },
-	//     dateTest: ''
-	// });
-	// const [filialList, setFilialList] = useState([]);
-	//
-	// /**
-	//  * прослушивание события ввода данных для TestLesson
-	//  * @param e
-	//  */
-	// const handleChangeValueGroupTestLesson = (obj) => {
-	//     setTestData({ ...testData, group: { ...obj } });
-	// };
-	//
-	// /**
-	//  * прослушивание события ввода данных для TestLesson
-	//  * @param e
-	//  */
-	// const handleChangeValueFilialTestLesson = (obj) => {
-	//     setTestData({ ...testData, filial: { ...obj } });
-	// };
-	//
-	// /**
-	//  * прослушиване события ввода и выбора дыты для TestLesson
-	//  * @param data
-	//  */
-	// const handleChangeValueDateTestLesson = (data) => {
-	//     setTestData({ ...testData, dateTest: data });
-	// };
-
-	/**/
-
-	/* Adult */
-
-	const [phone_number, setPhone] = useState('');
-
-	const handleChangePhone = phone => {
-		setPhone(phone.target.value);
-	};
-
-	/**/
-
-	/* child */
+	/**
+	 * ссылка на кнопку добавления справки
+	 *
+	 * @type {React.MutableRefObject<null>}
+	 */
 	const refFile = useRef(null);
 
 	/**
@@ -204,7 +119,11 @@ export const Edit = () => {
 	 * @param object новый массив для обновления предидущего
 	 */
 	const handleChangeItemParentsBlock = (i, object) => {
-		setParents(prevState => [...prevState.slice(0, i), object, ...prevState.slice(i + 1)]);
+		setParents(prevState => [
+			...prevState.slice(0, i),
+			object,
+			...prevState.slice(i + 1),
+		]);
 	};
 
 	/**
@@ -225,6 +144,9 @@ export const Edit = () => {
 		setParents(parents.filter((e, index) => index !== i));
 	};
 
+	/**
+	 * Эффект срабатывает при смене даты рождения клиента, и в зависимости от даты устанавливает возраст клиента
+	 */
 	useEffect(() => {
 		if (/\d{2}\.\d{2}\.\d{4}/g.test(personal_data.state.date_of_birth)) {
 			let dateNow = moment();
@@ -236,6 +158,12 @@ export const Edit = () => {
 			setAge(mathAge);
 		}
 	}, [personal_data.state.date_of_birth]);
+
+	/**
+	 * Функция отправки данных на сервер
+	 *
+	 * @param e
+	 */
 	const handleSubmit = e => {
 		e.preventDefault();
 
@@ -278,6 +206,11 @@ export const Edit = () => {
 			history.goBack();
 		}
 	};
+
+	/**
+	 * Эффект отрабатывает после изменения клиента (его id или самого клиента)
+	 * И записывает данные в стэйт для подмены значений в инпутах
+	 */
 	useEffect(() => {
 		if (isEmpty(user)) {
 			dispatch(open_edit_page(id));
@@ -316,7 +249,8 @@ export const Edit = () => {
 				...(user.apartments && user.apartments.length && { apartments: user.apartments }),
 			});
 		}
-	}, [dispatch, id, user]);
+	}, [address, dispatch, id, personal_data, user]);
+
 	return (
 		<>
 			{modal && (

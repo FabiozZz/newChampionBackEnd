@@ -40,6 +40,7 @@ const Input = ({
 			setInput(value);
 			setOneLoad(false);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
 	return (
 		<div style={{ position: 'relative' }}>
@@ -59,6 +60,7 @@ const Input = ({
 				<Text
 					name={name}
 					{...props}
+					type={type}
 					style={errorInput}
 					value={input}
 					className={cn({ [classes.error]: error })}

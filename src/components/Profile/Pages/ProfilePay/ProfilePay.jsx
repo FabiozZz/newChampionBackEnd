@@ -5,9 +5,11 @@ import classes from './pay.module.css';
 
 export const ProfilePay = ({ profile }) => {
 	const { pay_list } = profile;
+	// eslint-disable-next-line no-unused-vars
 	const data = [];
 	console.log(profile);
-	const [date /*, setDate*/] = useState({
+	// eslint-disable-next-line no-unused-vars
+	const [date, setDate] = useState({
 		from: '',
 		to: '',
 	});
@@ -27,7 +29,9 @@ export const ProfilePay = ({ profile }) => {
 							<p className={classes.table_caption}>
 								Сумма оплаты за все время:{' '}
 								<span className={classes.table_period}>
-									{pay_list.reduce((acc, item) => (acc += +item.total), 0).toLocaleString('ru-RU')}{' '}
+									{pay_list
+										.reduce((acc, item) => (acc += +item.total), 0)
+										.toLocaleString('ru-RU')}{' '}
 									&#8381;
 								</span>
 							</p>

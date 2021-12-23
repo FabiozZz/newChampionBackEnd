@@ -1,6 +1,7 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import {
 	BUY_ABONEMENT,
+	BUY_ABONEMENT_CONFIGURE,
 	CREATE_COMMENT_FOR_CLIENT,
 	CREATE_PROFILE_PARENTS,
 	EDIT_COMMENT_FOR_CLIENT,
@@ -28,7 +29,6 @@ import {
 } from '../../Actions/profileActions';
 import Api from '../../../Api/Api';
 import { getAgesGroup, getSourceList } from '../addClientOnCRM/workers';
-import { func } from 'prop-types';
 
 // export function* loadClientsPage() {
 //     let finalData = {};
@@ -58,6 +58,7 @@ export function* loadProfileWorker({ payload }) {
 	const { id } = payload;
 	console.log(payload);
 	const profile = select(state => state.profile);
+	console.log('from profile saga ', profile);
 	if (!profile.user) {
 		const finalData = yield {
 			user: yield call(() => getProfile(id)),
@@ -114,6 +115,17 @@ export function* uploadDataBuyAbonement({ payload }) {
 	}
 }
 
+export function* uploadDataBuyAbonementConfigure({ payload }) {
+	const { id, ...rest } = payload;
+	try {
+		const request = yield call(() => Api.buyProfileAbonement_configure(id, rest));
+		console.log('данные с сервера>>', request.data);
+		yield put(edit_profile_done(request.data));
+	} catch (e) {
+		console.log(e);
+	}
+}
+
 export function* editParentsWorker({ payload }) {
 	try {
 		yield call(() => Api.editProfileParents(payload));
@@ -156,6 +168,7 @@ export function* profilePageSagas() {
 	yield takeEvery(OPEN_EDIT_PAGE, openProfileEditWorker);
 	yield takeEvery(EDIT_PROFILE, editProfileWorker);
 	yield takeEvery(BUY_ABONEMENT, uploadDataBuyAbonement);
+	yield takeEvery(BUY_ABONEMENT_CONFIGURE, uploadDataBuyAbonementConfigure);
 	yield takeEvery(EDIT_PROFILE_PARENTS, editParentsWorker);
 	yield takeEvery(CREATE_PROFILE_PARENTS, createProfileParents);
 	yield takeEvery(REMOVE_PROFILE_PARENTS, removeProfileParents);

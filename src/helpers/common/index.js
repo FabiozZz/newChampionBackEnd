@@ -200,7 +200,12 @@ export const isBirthDay = date => {
 	let dateFinish = moment();
 	let dateStart = moment().subtract(3, 'd').format('YYYY-MM-DD');
 	let birthData = moment(date).format(`${dateFinish.format('YYYY')}-MM-DD`);
-	return moment(birthData).isBetween(dateStart, dateFinish.format('YYYY-MM-DD'), undefined, '[]');
+	return moment(birthData).isBetween(
+		dateStart,
+		dateFinish.format('YYYY-MM-DD'),
+		undefined,
+		'[]'
+	);
 };
 export function replaceDateforBack(date) {
 	if (typeof date == 'object') {
@@ -208,6 +213,14 @@ export function replaceDateforBack(date) {
 	}
 	return date.replace(/(\d{2}).(\d{2}).(\d{4})/g, '$3-$2-$1');
 }
+
+export function countDaysbetweenTwoDate(array) {
+	const [from, to] = array;
+	const start_day = moment(replaceDateforBack(to));
+	const end_day = moment(replaceDateforBack(from));
+	return start_day.diff(end_day, 'days');
+}
+
 export function replaceDateforFront(date) {
 	return moment(date).format('DD.MM.YYYY');
 }
@@ -233,6 +246,8 @@ export function sameDate(date) {
 export function authSameDate(currentDate) {
 	console.log(moment().format('YYYY-MM-DD'));
 	console.log(replaceDateforBack(currentDate));
-	console.log(moment(moment().format('YYYY-MM-DD')).isSame(replaceDateforBack(currentDate)));
+	console.log(
+		moment(moment().format('YYYY-MM-DD')).isSame(replaceDateforBack(currentDate))
+	);
 	return moment(moment().format('YYYY-MM-DD')).isSame(replaceDateforBack(currentDate));
 }

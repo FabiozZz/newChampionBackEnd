@@ -1,6 +1,5 @@
 import React from 'react';
 import classes from './info.module.css';
-import separate from '../../../../../assets/images/lineModalDevider.svg';
 import prolongation_aboniment from '../../../../../assets/images/prolongationAbon.svg';
 import return_cash from '../../../../../assets/images/returnCash.svg';
 import moment from 'moment';
@@ -57,7 +56,8 @@ export const UserInfo = ({ user, change, type }) => {
 			<div className={classes.block_info}>
 				<div className={classes.block_info__client}>
 					<p className={classes.block_info__text}>
-						{user.subscription.rate.name} со статусом {user.level && user.level.name} клиент
+						{user.subscription.rate.name} со статусом {user.level && user.level.name}{' '}
+						клиент
 					</p>
 					<p className={classes.block_info__mute}>
 						Срок действия:{' '}
@@ -78,7 +78,11 @@ export const UserInfo = ({ user, change, type }) => {
 				</div>
 				{type === 'edit' ? (
 					<div className={classes.block_info__images}>
-						<img onClick={change} src={prolongation_aboniment} alt="продление абонемента" />
+						<img
+							onClick={change}
+							src={prolongation_aboniment}
+							alt="продление абонемента"
+						/>
 						<img src={return_cash} alt="возврат ДС" />
 					</div>
 				) : null}

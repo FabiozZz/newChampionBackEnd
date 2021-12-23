@@ -1,5 +1,4 @@
 import {
-	LOAD_DATA_SOURCE_LIST,
 	SUCCESS_EDIT_SOURCE_LIST,
 	SUCCESS_LOAD_DATA_SOURCE_LIST,
 } from 'constants/settingsSourceListConstants';

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import classes from './status.module.css';
 import { Redirect } from 'components/common/Redirect';
 import HeaderNav from 'components/common/HeaderNav';
@@ -6,8 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'utils/Buttons/Button';
 import { useInputOnObject } from 'hooks';
 import Input from 'utils/FromAnt/Input/Input';
-import { edit_level, exit_edit_page_status } from 'store/Actions/settingsAbonementActions';
-import { fetch_new_age_group } from 'store/Actions/settingsGroupActions';
+import {
+	edit_level,
+	exit_edit_page_status,
+} from 'store/Actions/settingsAbonementActions';
 import { useHistory } from 'react-router';
 
 export const EditStatus = () => {
@@ -37,6 +39,7 @@ export const EditStatus = () => {
 		return () => {
 			dispatch(exit_edit_page_status());
 		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [current_status]);
 
 	return (

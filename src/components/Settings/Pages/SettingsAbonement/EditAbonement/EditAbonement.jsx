@@ -1,23 +1,21 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import classes from './edit.module.css';
 import { Redirect } from '../../../../common/Redirect';
 import { Radio } from 'antd';
 import HeaderNav from '../../../../common/HeaderNav';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-	edit_abonement_data,
-	start_load_data_settings_abonement,
-	upload_abonement_data,
-} from '../../../../../store/Actions/settingsAbonementActions';
+import { edit_abonement_data } from '../../../../../store/Actions/settingsAbonementActions';
 import { useHistory } from 'react-router';
 import { SwitchBtn } from '../../../../../utils/SwitchBtn/SwitchBtn';
 import { OtherInput } from '../../../../../utils/OtherInput/OtherInput';
 import { Button } from '../../../../../utils/Buttons/Button';
 
+// eslint-disable-next-line no-unused-vars
 function useSome(download, result = []) {}
 
 export const EditAbonement = () => {
 	const settings = useSelector(state => state.settings_abonement);
+	// eslint-disable-next-line no-unused-vars
 	const { current_abonement, loading } = settings;
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -237,7 +235,12 @@ export const EditAbonement = () => {
 						})}
 
 					<div className={classes.submit}>
-						<Button factor={'success'} type={'submit'} text={'Сохранить тариф'} size={'auto'} />
+						<Button
+							factor={'success'}
+							type={'submit'}
+							text={'Сохранить тариф'}
+							size={'auto'}
+						/>
 					</div>
 				</form>
 			</div>

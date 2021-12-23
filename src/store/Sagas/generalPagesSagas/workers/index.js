@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
-import Api from '../../../../Api/Api';
-import { load_profile_user_fail } from '../../../Actions/profileActions';
+import Api from 'Api/Api';
+import { load_profile_user_fail } from 'store/Actions/profileActions';
 
 export function* getGroups() {
 	const request = yield call(() => Api.getGeneralPageData());

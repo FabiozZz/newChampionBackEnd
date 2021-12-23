@@ -12,52 +12,383 @@
 }
 
 /* grid columns classes */
-.gcol-1 {
-  grid-column: span 1 !important;
+@media screen and (max-width: 1440px) {
+  .container-g {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: min-content;
+    grid-gap: 16px 24px;
+  }
+
+  .block {
+    display: grid;
+    background: #FFFFFF;
+    box-shadow: 0px 10px 20px rgba(46, 91, 255, 0.07);
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: min-content;
+    grid-gap: 16px 24px;
+    padding: 24px 16px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .container-g {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    grid-auto-rows: min-content;
+    grid-gap: 16px 24px;
+  }
+
+  .block {
+    display: grid;
+    background: #FFFFFF;
+    box-shadow: 0px 10px 20px rgba(46, 91, 255, 0.07);
+    grid-template-columns: repeat(11, 1fr);
+    grid-auto-rows: min-content;
+    grid-gap: 16px 24px;
+    padding: 24px 16px;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .gcol-md-1 {
+    grid-column: span 1 !important;
+    align-self: end;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .gcol-lg-1 {
+    grid-column: span 1 !important;
+    align-self: end;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .gcol-md-2 {
+    grid-column: span 2 !important;
+    align-self: end;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .gcol-lg-2 {
+    grid-column: span 2 !important;
+    align-self: end;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .gcol-md-3 {
+    grid-column: span 3 !important;
+    align-self: end;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .gcol-lg-3 {
+    grid-column: span 3 !important;
+    align-self: end;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .gcol-md-4 {
+    grid-column: span 4 !important;
+    align-self: end;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .gcol-lg-4 {
+    grid-column: span 4 !important;
+    align-self: end;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .gcol-md-5 {
+    grid-column: span 5 !important;
+    align-self: end;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .gcol-lg-5 {
+    grid-column: span 5 !important;
+    align-self: end;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .gcol-md-6 {
+    grid-column: span 6 !important;
+    align-self: end;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .gcol-lg-6 {
+    grid-column: span 6 !important;
+    align-self: end;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .gcol-md-7 {
+    grid-column: span 7 !important;
+    align-self: end;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .gcol-lg-7 {
+    grid-column: span 7 !important;
+    align-self: end;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .gcol-md-8 {
+    grid-column: span 8 !important;
+    align-self: end;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .gcol-lg-8 {
+    grid-column: span 8 !important;
+    align-self: end;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .gcol-md-9 {
+    grid-column: span 9 !important;
+    align-self: end;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .gcol-lg-9 {
+    grid-column: span 9 !important;
+    align-self: end;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .gcol-md-10 {
+    grid-column: span 10 !important;
+    align-self: end;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .gcol-lg-10 {
+    grid-column: span 10 !important;
+    align-self: end;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .gcol-md-11 {
+    grid-column: span 11 !important;
+    align-self: end;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .gcol-lg-11 {
+    grid-column: span 11 !important;
+    align-self: end;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .gcol-md-12 {
+    grid-column: span 12 !important;
+    align-self: end;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .gcol-lg-12 {
+    grid-column: span 12 !important;
+    align-self: end;
+  }
+}
+.pb100 {
+  padding-bottom: 100px;
 }
 
-.gcol-2 {
-  grid-column: span 2 !important;
+.flex {
+  display: flex;
 }
 
-.gcol-3 {
-  grid-column: span 3 !important;
+.flex-left {
+  justify-content: left;
 }
 
-.gcol-4 {
-  grid-column: span 4 !important;
+.flex-center {
+  justify-content: center;
 }
 
-.gcol-5 {
-  grid-column: span 5 !important;
+.flex-right {
+  justify-content: right;
 }
 
-.gcol-6 {
-  grid-column: span 6 !important;
+.flex-space-between {
+  justify-content: space-between;
 }
 
-.gcol-7 {
-  grid-column: span 7 !important;
+.flex-space-around {
+  justify-content: space-around;
 }
 
-.gcol-8 {
-  grid-column: span 8 !important;
+.flex-flex-start {
+  justify-content: flex-start;
 }
 
-.gcol-9 {
-  grid-column: span 9 !important;
+.flex-flex-end {
+  justify-content: flex-end;
 }
 
-.gcol-10 {
-  grid-column: span 10 !important;
+.flex-colemn {
+  flex-direction: colemn;
 }
 
-.gcol-11 {
-  grid-column: span 11 !important;
+.flex-row {
+  flex-direction: row;
 }
 
-.gcol-12 {
-  grid-column: span 12 !important;
+.align-center {
+  align-items: center;
+}
+
+.align-flex-start {
+  align-items: flex-start;
+}
+
+.align-flex-end {
+  align-items: flex-end;
+}
+
+.gap-1 {
+  gap: 1px;
+}
+
+.gap-2 {
+  gap: 2px;
+}
+
+.gap-3 {
+  gap: 3px;
+}
+
+.gap-4 {
+  gap: 4px;
+}
+
+.gap-5 {
+  gap: 5px;
+}
+
+.gap-6 {
+  gap: 6px;
+}
+
+.gap-7 {
+  gap: 7px;
+}
+
+.gap-8 {
+  gap: 8px;
+}
+
+.gap-9 {
+  gap: 9px;
+}
+
+.gap-10 {
+  gap: 10px;
+}
+
+.gap-11 {
+  gap: 11px;
+}
+
+.gap-12 {
+  gap: 12px;
+}
+
+.gap-13 {
+  gap: 13px;
+}
+
+.gap-14 {
+  gap: 14px;
+}
+
+.gap-15 {
+  gap: 15px;
+}
+
+.gap-16 {
+  gap: 16px;
+}
+
+.gap-17 {
+  gap: 17px;
+}
+
+.gap-18 {
+  gap: 18px;
+}
+
+.gap-19 {
+  gap: 19px;
+}
+
+.gap-20 {
+  gap: 20px;
+}
+
+.gap-21 {
+  gap: 21px;
+}
+
+.gap-22 {
+  gap: 22px;
+}
+
+.gap-23 {
+  gap: 23px;
+}
+
+.gap-24 {
+  gap: 24px;
+}
+
+.gap-25 {
+  gap: 25px;
+}
+
+.gap-26 {
+  gap: 26px;
+}
+
+.gap-27 {
+  gap: 27px;
+}
+
+.gap-28 {
+  gap: 28px;
+}
+
+.gap-29 {
+  gap: 29px;
+}
+
+.gap-30 {
+  gap: 30px;
+}
+
+.gap-31 {
+  gap: 31px;
+}
+
+.gap-32 {
+  gap: 32px;
+}
+
+.flex-center {
+  justify-content: center;
+}
+
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
+.-margin-16 {
+  margin-left: -16px;
+  margin-right: -16px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .wrapper {

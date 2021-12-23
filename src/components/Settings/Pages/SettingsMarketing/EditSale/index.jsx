@@ -19,6 +19,7 @@ const Index = () => {
 		if (current_source && current_source.name) {
 			source.onChange({ name: current_source.name });
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [current_source]);
 	const handleSubmit = e => {
 		e.preventDefault();
@@ -39,7 +40,12 @@ const Index = () => {
 					/>
 				</div>
 				<div className={cn('gcol-4', classes.btn)}>
-					<Button click={handleSubmit} factor={'success'} size={'auto'} text={'Создать источник'} />
+					<Button
+						click={handleSubmit}
+						factor={'success'}
+						size={'auto'}
+						text={'Создать источник'}
+					/>
 				</div>
 			</div>
 		</>

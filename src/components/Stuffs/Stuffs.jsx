@@ -1,34 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from '../common/Redirect';
 import './stuff.css';
-import { FilterStuffSection } from './FilterStuffSection/FilterStuffSection';
 import { useSelector } from 'react-redux';
-import { StuffSortTable } from './StuffSortTable/StuffSortTable';
-import { StuffsColumn } from './StuffSortTable/StuffsColumn/StuffsColumn';
-import { StuffsRow } from './StuffSortTable/StuffsRow/StuffsRow';
-import classes from './stuffs.module.css';
 import HeaderNav from '../common/HeaderNav';
-import { Skeleton } from 'antd';
 import ErrorsGroup from '../common/ErrorsGroup';
 import Input from '../../utils/FromAnt/Input/Input';
 import Select from '../../utils/FromAnt/Select/Select';
 import { Button } from '../../utils/Buttons/Button';
 import { NavLink } from 'react-router-dom';
-import moment from 'moment';
 
 /**
  * @returns {React.Element}
  * @constructor
  */
 export const Stuffs = () => {
+	// eslint-disable-next-line no-unused-vars
 	const [activeFactor, setActiveFactor] = useState(true);
+	// eslint-disable-next-line no-unused-vars
 	const toggleColumn = () => {
 		setActiveFactor(true);
 	};
+
+	// eslint-disable-next-line no-unused-vars
 	const toggleRow = () => {
 		setActiveFactor(false);
 	};
 
+	// eslint-disable-next-line no-unused-vars
 	const { error, loading, stuffList } = useSelector(state => state.stuffs);
 	// const stuff = stuffList.filterClients.length ? stuffList.filterClients : stuffList.allClients;
 	const [renderError, setError] = useState([]);
@@ -48,18 +46,18 @@ export const Stuffs = () => {
 			<HeaderNav />
 			<Redirect padding={true} title={'Список сотрудников'} />
 
-			<div className={'stuff-page gcol-12'}>
+			<div className={'stuff-page gcol-md-12 gcol-lg-11'}>
 				<div className={'stuff-page__filter block-container'}>
-					<div className="gcol-12">
+					<div className="gcol-md-12 gcol-lg-12">
 						<Input label={'Поиск'} />
 					</div>
-					<div className="gcol-6">
+					<div className="gcol-md-6 gcol-lg-6">
 						<Select label={'филиалы'} />
 					</div>
-					<div className="gcol-6">
+					<div className="gcol-md-6 gcol-lg-6">
 						<Select label={'должность'} />
 					</div>
-					<div className="block-container__clear block-container__clear_hide gcol-12">
+					<div className="block-container__clear block-container__clear_hide gcol-md-12 gcol-lg-12">
 						<span className={'block-container__clear-text'}>Очистить</span>
 					</div>
 				</div>
@@ -119,7 +117,9 @@ export const Stuffs = () => {
 				<div className="staff-page__list list-container ">
 					<div className={'list-container__row'}>
 						<NavLink to={'/some'} className={'item'}>
-							<span className={'name'}>Константин Константинович Константинопольский</span>
+							<span className={'name'}>
+								Константин Константинович Константинопольский
+							</span>
 							<svg
 								className={'devider'}
 								width="187"
@@ -127,7 +127,13 @@ export const Stuffs = () => {
 								viewBox="0 0 187 1"
 								fill="none"
 								xmlns="http://www.w3.org/2000/svg">
-								<line y1="0.5" x2="187" y2="0.5" stroke="#EEF3F5" strokeDasharray="12 12" />
+								<line
+									y1="0.5"
+									x2="187"
+									y2="0.5"
+									stroke="#EEF3F5"
+									strokeDasharray="12 12"
+								/>
 							</svg>
 							<div className="group-first_line">
 								<div className={'item-flex'}>
@@ -182,7 +188,13 @@ export const Stuffs = () => {
 								viewBox="0 0 187 1"
 								fill="none"
 								xmlns="http://www.w3.org/2000/svg">
-								<line y1="0.5" x2="187" y2="0.5" stroke="#EEF3F5" strokeDasharray="12 12" />
+								<line
+									y1="0.5"
+									x2="187"
+									y2="0.5"
+									stroke="#EEF3F5"
+									strokeDasharray="12 12"
+								/>
 							</svg>
 							<div className="group-second_line">
 								<div className={'item-flex'}>
@@ -236,7 +248,9 @@ export const Stuffs = () => {
 							</div>
 						</NavLink>
 						<NavLink to={'/some'} className={'item'}>
-							<span className={'name'}>Константин Константинович Константинопольский</span>
+							<span className={'name'}>
+								Константин Константинович Константинопольский
+							</span>
 							<svg
 								className={'devider'}
 								width="187"
@@ -244,7 +258,13 @@ export const Stuffs = () => {
 								viewBox="0 0 187 1"
 								fill="none"
 								xmlns="http://www.w3.org/2000/svg">
-								<line y1="0.5" x2="187" y2="0.5" stroke="#EEF3F5" strokeDasharray="12 12" />
+								<line
+									y1="0.5"
+									x2="187"
+									y2="0.5"
+									stroke="#EEF3F5"
+									strokeDasharray="12 12"
+								/>
 							</svg>
 							<div className="group-first_line">
 								<div className={'item-flex'}>
@@ -299,7 +319,13 @@ export const Stuffs = () => {
 								viewBox="0 0 187 1"
 								fill="none"
 								xmlns="http://www.w3.org/2000/svg">
-								<line y1="0.5" x2="187" y2="0.5" stroke="#EEF3F5" strokeDasharray="12 12" />
+								<line
+									y1="0.5"
+									x2="187"
+									y2="0.5"
+									stroke="#EEF3F5"
+									strokeDasharray="12 12"
+								/>
 							</svg>
 							<div className="group-second_line">
 								<div className={'item-flex'}>
@@ -337,7 +363,9 @@ export const Stuffs = () => {
 							</div>
 						</NavLink>
 						<NavLink to={'/some'} className={'item'}>
-							<span className={'name'}>Константин Константинович Константинопольский</span>
+							<span className={'name'}>
+								Константин Константинович Константинопольский
+							</span>
 							<svg
 								className={'devider'}
 								width="187"
@@ -345,7 +373,13 @@ export const Stuffs = () => {
 								viewBox="0 0 187 1"
 								fill="none"
 								xmlns="http://www.w3.org/2000/svg">
-								<line y1="0.5" x2="187" y2="0.5" stroke="#EEF3F5" strokeDasharray="12 12" />
+								<line
+									y1="0.5"
+									x2="187"
+									y2="0.5"
+									stroke="#EEF3F5"
+									strokeDasharray="12 12"
+								/>
 							</svg>
 							<div className="group-first_line">
 								<div className={'item-flex'}>
@@ -400,7 +434,13 @@ export const Stuffs = () => {
 								viewBox="0 0 187 1"
 								fill="none"
 								xmlns="http://www.w3.org/2000/svg">
-								<line y1="0.5" x2="187" y2="0.5" stroke="#EEF3F5" strokeDasharray="12 12" />
+								<line
+									y1="0.5"
+									x2="187"
+									y2="0.5"
+									stroke="#EEF3F5"
+									strokeDasharray="12 12"
+								/>
 							</svg>
 							<div className="group-second_line">
 								<div className={'item-flex'}>
@@ -454,7 +494,9 @@ export const Stuffs = () => {
 							</div>
 						</NavLink>
 						<NavLink to={'/some'} className={'item'}>
-							<span className={'name'}>Константин Константинович Константинопольский</span>
+							<span className={'name'}>
+								Константин Константинович Константинопольский
+							</span>
 							<svg
 								className={'devider'}
 								width="187"
@@ -462,7 +504,13 @@ export const Stuffs = () => {
 								viewBox="0 0 187 1"
 								fill="none"
 								xmlns="http://www.w3.org/2000/svg">
-								<line y1="0.5" x2="187" y2="0.5" stroke="#EEF3F5" strokeDasharray="12 12" />
+								<line
+									y1="0.5"
+									x2="187"
+									y2="0.5"
+									stroke="#EEF3F5"
+									strokeDasharray="12 12"
+								/>
 							</svg>
 							<div className="group-first_line">
 								<div className={'item-flex'}>
@@ -517,7 +565,13 @@ export const Stuffs = () => {
 								viewBox="0 0 187 1"
 								fill="none"
 								xmlns="http://www.w3.org/2000/svg">
-								<line y1="0.5" x2="187" y2="0.5" stroke="#EEF3F5" strokeDasharray="12 12" />
+								<line
+									y1="0.5"
+									x2="187"
+									y2="0.5"
+									stroke="#EEF3F5"
+									strokeDasharray="12 12"
+								/>
 							</svg>
 							<div className="group-second_line">
 								<div className={'item-flex'}>

@@ -1,0 +1,24 @@
+@import '../../../../styles/variables';
+
+.wrapper {
+	padding-bottom: 100px;
+	.header {
+		@extend %h3;
+		color: $BLACK_50;
+		font-weight: 900;
+	}
+	.btn_group {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		gap: 4px;
+	}
+	.chart_container {
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+		grid-gap: 16px 24px;
+		grid-auto-rows: min-content;
+		canvas {
+			height: 191px;
+		}
+	}
+}

@@ -8,12 +8,6 @@ import success_edit from 'assets/images/successAbonement.svg';
 import edit from 'assets/images/editAboniment.svg';
 import Input from 'utils/FromAnt/Input/Input';
 import { useInitialStateOnUser, useInputOnObject, usePrice } from 'hooks';
-import {
-	buyAbonementAndCreateOnceTrainForCourse,
-	createDebtTrainForCourse,
-	createOnceTrainForCourse,
-} from 'store/Actions/generalPageActions';
-import { BtnGroup } from 'components/Clients/FilterClientSection/BtnGroup/BtnGroup';
 import Select from 'utils/FromAnt/Select/Select';
 import DatePicker from 'utils/FromAnt/DatePicker/DatePicker';
 import { buy_abonement } from 'store/Actions/profileActions';
@@ -23,8 +17,12 @@ export const ModalChangeAbonement = ({ profile, toggleModal }) => {
 	const dispatch = useDispatch();
 	const { user } = profile;
 	const { current_date } = useSelector(state => state.general_page);
-	const { ages_group, couch, group, status, typeAboniment } = useSelector(state => state.profile);
+	// eslint-disable-next-line no-unused-vars
+	const { ages_group, couch, group, status, typeAboniment } = useSelector(
+		state => state.profile
+	);
 
+	// eslint-disable-next-line no-unused-vars
 	const [single, setSingle] = useState(false);
 
 	const filter_aboneemnts = typeAboniment.filter(item => item.rate_type !== 0);
@@ -75,7 +73,15 @@ export const ModalChangeAbonement = ({ profile, toggleModal }) => {
 		} else {
 			setEditPrice(prevState => ({ ...prevState, price: 500 }));
 		}
-	}, [data.state?.level_id, data.state?.rate_id, selectAboniment, single]);
+	}, [
+		data.state,
+		data.state.level_id,
+		data.state.rate_id,
+		selectAboniment,
+		setEditPrice,
+		single,
+		user.age_group.id,
+	]);
 
 	const handleSubmitAbonimentCash = () => {
 		console.log(data.state);

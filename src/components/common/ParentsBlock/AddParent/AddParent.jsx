@@ -1,8 +1,7 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classes from '../../../Add/add.module.css';
 import { MaskInputTel } from '../../../../utils/MaskInputTel/MaskInputTel';
 import { isEmpty } from '../../../../helpers/common';
-import { OtherInput } from '../../../../utils/OtherInput/OtherInput';
 import Input from '../../../../utils/FromAnt/Input/Input';
 
 /**
@@ -47,7 +46,15 @@ export const AddParent = ({ error, data = {}, change, index }) => {
 				...(!!data.who && { who: data.who }),
 			});
 		}
-	}, [data.first_name, data.last_name, data.middle_name, data.phone_number, data.who, data.id]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [
+		data.first_name,
+		data.last_name,
+		data.middle_name,
+		data.phone_number,
+		data.who,
+		data.id,
+	]);
 
 	/**
 	 * эффект отрабатывает каждый раз при вводе пользователем
@@ -56,6 +63,7 @@ export const AddParent = ({ error, data = {}, change, index }) => {
 	useEffect(() => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		change(index, userDate);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [userDate]);
 
 	return (

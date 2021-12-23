@@ -9,50 +9,95 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
 	abonemet_expire,
 	change_couch,
-	createTrainForCourse,
 	get_lessons_with_date,
 	remove_client_from_group,
 } from 'store/Actions/generalPageActions';
 import { ClientRow } from '../ClientRow/ClientRow';
 import moment from 'moment';
-import { declOfHumanNum, replaceDate, replaceDateforBack } from 'helpers/common';
+import { declOfHumanNum } from 'helpers/common';
 import { Button } from 'utils/Buttons/Button';
 import Api from 'Api/Api';
 
+/**
+ * Компонент отображения одного занятия
+ *
+ * @param course {object} объект с данными о занятии
+ * @param couches {Array} массив тренеров
+ * @returns {JSX.Element}
+ * @constructor
+ */
 const ItemCourse = ({ course, couches }) => {
+	/**
+	 * данные из redux
+	 */
+	// eslint-disable-next-line no-unused-vars
 	const { date_now, current_date, form_add } = useSelector(state => state.general_page);
 	const { group, trainer, trainings, date } = course;
 
-	// const [noAbonement, setNoAbonement] = useState(false);
-
 	const emptyTrainer = { id: null, first_name: '', last_name: '', middle_name: '' };
 
+	/**
+	 * Локальный стэйт для хранения найденного клиента
+	 */
 	const [currentUser, setCurrentUser] = useState(null);
 
+	/**
+	 * Локальный стэйт для хранения выбранного тренера (берется из курса)
+	 */
 	const [currentTrainer, setTrainer] = useState(trainer || emptyTrainer);
 
 	const dispatch = useDispatch();
 
+	/**
+	 * функция изменения ведущего тренера для занятия
+	 *
+	 * @param id {number} id занятия
+	 * @param trainer {object} выбранный тренер
+	 */
 	const handleChangeCouchForCourse = (id, trainer) => {
 		setTrainer(trainer);
 		dispatch(change_couch({ lesson: course.id, couch: trainer.id }));
 	};
 
+	/**
+	 * Локальный стэйт для управления отображения списка клиентов отмеченных на занятии
+	 */
 	const [hide, setHide] = useState(true);
+
+	/**
+	 * Локальный стэйт для хранения флага отображения модального окна
+	 */
 	const [modal, setModal] = useState(false);
 
 	const refOption = useRef(null);
 	const refAdd = useRef(null);
 
+	/**
+	 * Функция открытия аккардиона со списком пришедших клиентов
+	 * @param e
+	 */
 	const toggleBox = e => {
 		setHide(!hide);
 	};
+
+	/**
+	 * Функция закрытия модального окна, при этом удаляется выбранный клиент
+	 */
 	const handleToggleModalWindow = () => {
 		setModal(!modal);
 		if (!modal) {
 			setCurrentUser(null);
 		}
 	};
+
+	/**
+	 * Функция для отметки клиента на занятии, потом закрывается модалка
+	 *
+	 * Если при отправке появились ошибки, клиент не добавляется в расписание,
+	 * появляется всплывающее сообщение об ошибке и в зависимости от ошибки появляется модалка для покупки абонемента
+	 *
+	 * @param user
+	 */
 	const handleChangeUser = user => {
 		setCurrentUser(user);
 		let uploadData = {
@@ -108,13 +153,23 @@ const ItemCourse = ({ course, couches }) => {
 		// }
 	};
 
+	/**
+	 * Функция закрытия модалки и переключения аккордиона
+	 */
 	const closeModalAndShowList = () => {
 		setModal(false);
 		setHide(false);
 	};
 
+	/**
+	 * Функция отправляет запрос на сервер на удаление тренировки для клиента
+	 *
+	 * @param train_id {number} id тренировки
+	 */
 	const removeClient = train_id => {
-		dispatch(remove_client_from_group({ train_id, date: new Date(date).toLocaleDateString() }));
+		dispatch(
+			remove_client_from_group({ train_id, date: new Date(date).toLocaleDateString() })
+		);
 	};
 	return (
 		<>
@@ -170,7 +225,8 @@ const ItemCourse = ({ course, couches }) => {
 							/>
 						</svg>
 						<span className={classes.people_text}>
-							Отмечено: <b>{trainings.length || 0}</b> {declOfHumanNum(trainings.length || 0)}
+							Отмечено: <b>{trainings.length || 0}</b>{' '}
+							{declOfHumanNum(trainings.length || 0)}
 						</span>
 					</div>
 				</div>
@@ -211,7 +267,8 @@ const ItemCourse = ({ course, couches }) => {
 					</div>
 					<Button click={handleToggleModalWindow} text={'добавить'} size={'min'} />
 				</div>
-				<div className={cn({ [classes.client_wrapper]: !hide }, { [classes.none]: hide })}>
+				<div
+					className={cn({ [classes.client_wrapper]: !hide }, { [classes.none]: hide })}>
 					<table>
 						<tbody>
 							{course.trainings.length
@@ -232,7 +289,10 @@ const ItemCourse = ({ course, couches }) => {
 															d="M16.3633 2.73922C13.6612 2.73922 11.0537 1.77609 9.03908 0.0337891L9 0L8.96092 0.0337891C6.94623 1.77609 4.33879 2.73922 1.63669 2.73922H0V6.96055C0 12.4425 3.28504 17.4271 8.42191 19.7397L9 20L9.57809 19.7397C14.715 17.4271 18 12.4425 18 6.96059V2.73922H16.3633ZM15 11.8026H10.9396V16H7.06036V11.8026H3V8.04922H7.06036V4H10.9396V8.04922H15V11.8026Z"
 															fill="#E50E0F"
 														/>
-														<path d="M10 9V5H8V9H4V11H8V15H10V11H14V9H10Z" fill="#E50E0F" />
+														<path
+															d="M10 9V5H8V9H4V11H8V15H10V11H14V9H10Z"
+															fill="#E50E0F"
+														/>
 													</svg>
 													<svg
 														width="20"

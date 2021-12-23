@@ -7,12 +7,22 @@ import { NavLink } from 'react-router-dom';
 import { ageToString, declOfLessonsNum, replaceDateforFront } from 'helpers/common';
 import moment from 'moment';
 
+/**
+ * Компонент отображения списка клиентов в виде столбиков
+ *
+ * @param clients {Array} массив клиентов
+ * @returns {JSX.Element}
+ * @constructor
+ */
 export const ClientsColumn = ({ clients }) => {
 	return (
 		<div className={cn(classes.list_col)}>
 			{clients.map(client => {
 				return (
-					<NavLink key={client.id} className={classes.wr_card_col} to={`/profile/${client.id}`}>
+					<NavLink
+						key={client.id}
+						className={classes.wr_card_col}
+						to={`/profile/${client.id}`}>
 						<div className={classes.list_col__item}>
 							<p className={classes.list_col__item_name}>
 								{client.last_name} {client.first_name} {client.middle_name}
@@ -48,20 +58,29 @@ export const ClientsColumn = ({ clients }) => {
 									viewBox="0 0 187 1"
 									fill="none"
 									xmlns="http://www.w3.org/2000/svg">
-									<line y1="0.5" x2="187" y2="0.5" stroke="#EEF3F5" strokeDasharray="12 12" />
+									<line
+										y1="0.5"
+										x2="187"
+										y2="0.5"
+										stroke="#EEF3F5"
+										strokeDasharray="12 12"
+									/>
 								</svg>
 							</div>
 
 							<div className={classes.list_col__item_block}>
 								<img src={imageBirthDay} alt="birthday" />
 								<p className={classes.list_col__item_block_text}>
-									{replaceDateforFront(client.date_of_birth)} ({ageToString(client.date_of_birth)})
+									{replaceDateforFront(client.date_of_birth)} (
+									{ageToString(client.date_of_birth)})
 								</p>
 							</div>
 							{client.phone_number ? (
 								<div className={classes.list_col__item_block}>
 									<img src={imagePhone} alt="phone" />
-									<span className={classes.list_col__item_block_text}>{client.phone_number}</span>
+									<span className={classes.list_col__item_block_text}>
+										{client.phone_number}
+									</span>
 								</div>
 							) : null}
 
@@ -112,7 +131,13 @@ export const ClientsColumn = ({ clients }) => {
 									viewBox="0 0 187 1"
 									fill="none"
 									xmlns="http://www.w3.org/2000/svg">
-									<line y1="0.5" x2="187" y2="0.5" stroke="#EEF3F5" strokeDasharray="12 12" />
+									<line
+										y1="0.5"
+										x2="187"
+										y2="0.5"
+										stroke="#EEF3F5"
+										strokeDasharray="12 12"
+									/>
 								</svg>
 							</div>
 							{client.subscription && (
@@ -178,11 +203,13 @@ export const ClientsColumn = ({ clients }) => {
 										/>
 									</svg>
 									<p className={classes.list_col__item_block_text}>
-										<span style={{ fontWeight: 900 }}>{client.subscription.train_balance > 999 ? (
-											<span dangerouslySetInnerHTML={{ __html: '&#8734;' }} />
-										) : (
-											client.subscription.train_balance
-										)}</span>{' '}
+										<span style={{ fontWeight: 900 }}>
+											{client.subscription.train_balance > 999 ? (
+												<span dangerouslySetInnerHTML={{ __html: '&#8734;' }} />
+											) : (
+												client.subscription.train_balance
+											)}
+										</span>{' '}
 										{declOfLessonsNum(client.subscription.train_balance)} до{' '}
 										<span style={{ fontWeight: 900 }}>
 											{moment(client.subscription.valid_until)
@@ -199,7 +226,13 @@ export const ClientsColumn = ({ clients }) => {
 									viewBox="0 0 187 1"
 									fill="none"
 									xmlns="http://www.w3.org/2000/svg">
-									<line y1="0.5" x2="187" y2="0.5" stroke="#EEF3F5" strokeDasharray="12 12" />
+									<line
+										y1="0.5"
+										x2="187"
+										y2="0.5"
+										stroke="#EEF3F5"
+										strokeDasharray="12 12"
+									/>
 								</svg>
 							</div>
 							<div className={classes.list_col__item_block}>
@@ -231,7 +264,9 @@ export const ClientsColumn = ({ clients }) => {
 									/>
 								</svg>
 
-								<p className={classes.list_col__item_block_text}>{client.age_group.label}</p>
+								<p className={classes.list_col__item_block_text}>
+									{client.age_group.label}
+								</p>
 							</div>
 							{client.subscription && client.subscription.training_group && (
 								<div className={classes.list_col__item_block}>

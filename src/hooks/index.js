@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { isEmpty } from '../helpers/common';
+import { isEmpty } from 'helpers/common';
 
 export const useInputOnObject = initialState => {
 	const [state, setState] = useState(initialState);
@@ -44,9 +44,9 @@ export const useInput = initialProps => {
 		onChange: handleChange,
 	};
 };
-export const usePrice = () => {
+export const usePrice = sum => {
 	const [editPrice, setEditPrice] = useState({
-		price: 0,
+		price: sum || 0,
 		edit: false,
 	});
 	const handleChangePriceAbonement = e => {
@@ -64,29 +64,40 @@ export const usePrice = () => {
 };
 export function useInitialStateOnUser(user, data, setAbonement, abonements) {
 	useEffect(() => {
-		const { subscription } = user;
-		if (subscription) {
-			console.log('%cabonements: ', 'color: MidnightBlue; background: Aquamarine;', abonements);
-			if (subscription && subscription.rate?.id && subscription.rate.rate_type !== 0) {
-				data.onChange({ rate_id: abonements.find(item => item.id === subscription.rate.id).id });
+		if (!isEmpty(user)) {
+			const { subscription } = user;
+			if (subscription) {
+				console.log(
+					'%cabonements: ',
+					'color: MidnightBlue; background: Aquamarine;',
+					abonements
+				);
+				if (subscription && subscription.rate?.id && subscription.rate.rate_type !== 0) {
+					data.onChange({
+						rate_id: abonements.find(item => item.id === subscription.rate.id).id,
+					});
+				}
+				if (subscription.training_group && subscription.training_group.id) {
+					data.onChange({ training_group_id: subscription.training_group.id });
+				}
 			}
-			if (subscription.training_group && subscription.training_group.id) {
-				data.onChange({ training_group_id: subscription.training_group.id });
+			if (user && user.level && user.level.id) {
+				data.onChange({ level_id: user.level.id });
 			}
-		}
-		if (user && user.level && user.level.id) {
-			data.onChange({ level_id: user.level.id });
-		}
-		if (user && user.age_group.id) {
-			console.log(user.age_group);
-			data.onChange({ age_group_id: user.age_group.id });
-		}
+			if (user && user.age_group.id) {
+				console.log(user.age_group);
+				data.onChange({ age_group_id: user.age_group.id });
+			}
 
-		console.log('%cuser: ', 'color: MidnightBlue; background: Aquamarine;', user);
-	}, [user]);
+			console.log('%cuser: ', 'color: MidnightBlue; background: Aquamarine;', user);
+		}
+	}, [abonements, data, user]);
 	useEffect(() => {
 		if (data.state.rate_id) {
-			setAbonement({ ...abonements.find(abonement => abonement.id === data.state.rate_id) });
+			setAbonement({
+				...abonements.find(abonement => abonement.id === data.state.rate_id),
+			});
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [abonements, data.state?.rate_id]);
 }

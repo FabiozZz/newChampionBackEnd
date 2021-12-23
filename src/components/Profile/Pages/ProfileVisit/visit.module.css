@@ -25,7 +25,7 @@
 .change_field{
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: flex-end;
   padding-bottom: 10px;
 }
 .field_with_btn{

@@ -1,7 +1,5 @@
 import React from 'react';
 import classes from '../../../profile.module.css';
-import card from 'assets/images/statusFilter/BrilClient.svg';
-import refresh from 'assets/images/refresh.svg';
 import remove from 'assets/images/remove.svg';
 import edit from 'assets/images/edit.svg';
 import moment from 'moment';
@@ -76,7 +74,12 @@ export const AbonementInfo = ({ user, showModal }) => {
 				</div>
 			</div>
 			<div className={classes.abonement_block_trainings}>
-				<img onClick={showModal} src={edit} alt="редактировать" className={classes.abonement_btn} />
+				<img
+					onClick={showModal}
+					src={edit}
+					alt="редактировать"
+					className={classes.abonement_btn}
+				/>
 				<img src={remove} alt="удалить" className={classes.abonement_btn} />
 			</div>
 		</div>

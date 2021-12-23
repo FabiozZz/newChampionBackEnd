@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Select as S } from 'antd';
 import classes from './select.module.css';
-import { log_out } from '../../../store/Actions/userActions';
 const { Option } = S;
 
 const Select = ({
@@ -36,7 +35,8 @@ const Select = ({
 		? {
 				showSearch: true,
 				filterOption: (input, option) =>
-					option.children && option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0,
+					option.children &&
+					option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0,
 		  }
 		: { showSearch: false };
 

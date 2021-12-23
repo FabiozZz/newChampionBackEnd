@@ -7,7 +7,7 @@ import 'moment/locale/ru';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import store, { history } from './store';
+import { store, history } from 'store';
 
 /**
  * вход в приложение

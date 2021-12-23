@@ -1,22 +1,19 @@
-import { GeneralPage } from '../components/GeneralPage/GeneralPage';
-import { Add } from '../components/Add/Add';
-import { Profile } from '../components/Profile/Profile';
-import { Edit } from '../components/Edit/Edit';
-import { Clients } from '../components/Clients/Clients';
-import { Settings } from '../components/Settings/Settings';
-import { CreateAndEditLessons } from '../components/Settings/Pages/CreateAndEditLessons/CreateAndEditLessons';
+import { GeneralPage } from 'components/GeneralPage/GeneralPage';
+import { Add } from 'components/Add/Add';
+import { Profile } from 'components/Profile/Profile';
+import { Edit } from 'components/Edit/Edit';
+import { Clients } from 'components/Clients/Clients';
+import { Settings } from 'components/Settings/Settings';
+import { CreateAndEditLessons } from 'components/Settings/Pages/CreateAndEditLessons/CreateAndEditLessons';
 import {
 	ADD_CLIENT_ROUTE,
 	ALL_CLIENTS_ROUTE,
 	CREATE_AND_EDIT_LESSONS,
 	EDIT_CLIENT_ROUTE,
-	EDIT_PARENTS_CLIENT_ROUTE,
 	HOME_ROUTE,
 	PROFILE_CLIENT_ROUTE,
-	REPORTS_ABONEMENTS_ROUTE,
-	REPORTS_CLIENT_ROUTE,
-	REPORTS_PROCEED_ROUTE,
-	REPORTS_VISITS_ROUTE,
+	PROFILE_CLIENT_ROUTE_ABONEMENT,
+	PROFILE_CLIENT_ROUTE_ABONEMENT_CONSTRUCTOR,
 	SETTINGS_ABONEMENT,
 	SETTINGS_ABONEMENT_EDIT,
 	SETTINGS_ABONEMENT_VIEW,
@@ -44,18 +41,13 @@ import { CreateAgeGroup } from 'components/Settings/Pages/SettingsGroup/CreateAg
 import { ViewAbonement } from 'components/Settings/Pages/SettingsAbonement/ViewAbonement/ViewAbonement';
 import { CreateAbonement } from 'components/Settings/Pages/SettingsAbonement/CreateAbonement/CreateAbonement';
 import { EditAbonement } from 'components/Settings/Pages/SettingsAbonement/EditAbonement/EditAbonement';
-import { Reports } from 'components/Reports/Reports';
-import { ReportsVisit } from 'components/Reports/Visits/ReportsVisit';
 import { CreateStatus } from 'components/Settings/Pages/SettingsStatus/CreateStatus/CreateStatus';
 import { EditStatus } from 'components/Settings/Pages/SettingsStatus/EditStatus/EditStatus';
 import SettingsMarkketing from 'components/Settings/Pages/SettingsMarketing';
-import SettingsMarketing from 'components/Settings/Pages/SettingsMarketing';
 import SettingsMarketingCreate from 'components/Settings/Pages/SettingsMarketing/CreateSale';
 import EditSale from 'components/Settings/Pages/SettingsMarketing/EditSale';
-import VisitedReport from 'components/Reports/Pages/VisitedReport';
-import ProceedReport from 'components/Reports/Pages/ProceedReport';
-import ClientReport from 'components/Reports/Pages/ClientReport';
-import AbonementReport from 'components/Reports/Pages/AbonementReport';
+import Abonement from 'components/Profile/AbonementPage/Abonement';
+import AbonementConstructor from 'components/Profile/AbonementPage/AbonementConstructor';
 
 export const routes = [
 	{
@@ -79,6 +71,36 @@ export const routes = [
 		exact: true,
 		component: Profile,
 	},
+
+	{
+		/* Страница профиля клиента добавление нового абонемента */
+		id: PROFILE_CLIENT_ROUTE_ABONEMENT,
+		path: '/profile/:id/abonement',
+		exact: true,
+		component: Abonement,
+	},
+	// {
+	// 	/* Страница профиля клиента добавление разового занятия */
+	// 	id: PROFILE_CLIENT_ROUTE_ABONEMENT_ONCE,
+	// 	path: '/profile/:id/abonement_once',
+	// 	exact: true,
+	// 	component: AbonementOnce,
+	// },
+	// {
+	// 	/* Страница профиля клиента добавление пробного занятия */
+	// 	id: PROFILE_CLIENT_ROUTE_ABONEMENT_TRIAL,
+	// 	path: '/profile/:id/abonement_trial',
+	// 	exact: true,
+	// 	component: AbonementTrial,
+	// },
+	{
+		/* Страница профиля клиента добавление конфигурируемого абонемента */
+		id: PROFILE_CLIENT_ROUTE_ABONEMENT_CONSTRUCTOR,
+		path: '/profile/:id/abonement_constructor',
+		exact: true,
+		component: AbonementConstructor,
+	},
+
 	{
 		/* Страница редактирования профиля клиента */
 		id: EDIT_CLIENT_ROUTE,
@@ -212,41 +234,41 @@ export const routes = [
 		exact: true,
 		component: EditSale,
 	},
-	{
-		/* Главная страница отчетов */
-		id: SETTINGS_ABONEMENT_EDIT,
-		path: '/reports',
-		exact: true,
-		component: Reports,
-	},
-	{
-		/* Отчеты по посещениям */
-		id: REPORTS_VISITS_ROUTE,
-		path: '/reports/visited',
-		exact: true,
-		component: VisitedReport,
-	},
-	{
-		/* Отчеты по выручке */
-		id: REPORTS_PROCEED_ROUTE,
-		path: '/reports/proceeds',
-		exact: true,
-		component: ProceedReport,
-	},
-	{
-		/* Отчеты по клиентам */
-		id: REPORTS_CLIENT_ROUTE,
-		path: '/reports/client',
-		exact: true,
-		component: ClientReport,
-	},
-	{
-		/* Отчеты по абонементам */
-		id: REPORTS_ABONEMENTS_ROUTE,
-		path: '/reports/abonement',
-		exact: true,
-		component: AbonementReport,
-	},
+	// {
+	// 	/* Главная страница отчетов */
+	// 	id: SETTINGS_ABONEMENT_EDIT,
+	// 	path: '/reports',
+	// 	exact: true,
+	// 	component: Reports,
+	// },
+	// {
+	// 	/* Отчеты по посещениям */
+	// 	id: REPORTS_VISITS_ROUTE,
+	// 	path: '/reports/visited',
+	// 	exact: true,
+	// 	component: VisitedReport,
+	// },
+	// {
+	// 	/* Отчеты по выручке */
+	// 	id: REPORTS_PROCEED_ROUTE,
+	// 	path: '/reports/proceeds',
+	// 	exact: true,
+	// 	component: ProceedReport,
+	// },
+	// {
+	// 	/* Отчеты по клиентам */
+	// 	id: REPORTS_CLIENT_ROUTE,
+	// 	path: '/reports/client',
+	// 	exact: true,
+	// 	component: ClientReport,
+	// },
+	// {
+	// 	/* Отчеты по абонементам */
+	// 	id: REPORTS_ABONEMENTS_ROUTE,
+	// 	path: '/reports/abonement',
+	// 	exact: true,
+	// 	component: AbonementReport,
+	// },
 	// {
 	//     id: AUTH_ADMIN_IN_APP,
 	//     path: '/settings/lesson',

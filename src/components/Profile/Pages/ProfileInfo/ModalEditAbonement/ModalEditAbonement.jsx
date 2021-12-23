@@ -2,22 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { UserInfo } from '../UserInfo/UserInfo';
 import classes from './modal_edit.module.css';
 import separate from '../../../../../assets/images/deviderParent.svg';
-import { AbonimentType } from '../../../../Clients/FilterClientSection/AbonimentType/AbonimentType';
-import { SelectStatus } from '../SelectStatus/SelectStatus';
 import success_edit from '../../../../../assets/images/successAbonement.svg';
 import edit from '../../../../../assets/images/editAboniment.svg';
 import { DataPicker } from '../../../../../utils/DataPicker/DataPicker';
-import modal_devider from '../../../../../assets/images/modal_devider.svg';
-import { SelectCouch } from '../AddAboniment/SelectCouch/SelectCouch';
-import SelectGroup from '../../../../../utils/SelectGroup/SelectGroup';
-import {
-	declOfDay,
-	declOfLessonsNum,
-	declOfWeekNum,
-	replaceDateforBack,
-} from '../../../../../helpers/common';
+import { declOfDay, declOfLessonsNum } from '../../../../../helpers/common';
 import { Button } from '../../../../../utils/Buttons/Button';
-import { OtherInput } from '../../../../../utils/OtherInput/OtherInput';
 import { useInitialStateOnUser, useInputOnObject, usePrice } from '../../../../../hooks';
 import Select from 'utils/FromAnt/Select/Select';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,7 +16,10 @@ import Input from 'utils/FromAnt/Input/Input';
 export const ModalEditAbonement = ({ profile, type, change, toggleModal }) => {
 	const dispatch = useDispatch();
 	const { user } = profile;
-	const { ages_group, couch, group, status, typeAboniment } = useSelector(state => state.profile);
+	// eslint-disable-next-line no-unused-vars
+	const { ages_group, couch, group, status, typeAboniment } = useSelector(
+		state => state.profile
+	);
 
 	const filter_aboneemnts = typeAboniment.filter(item => item.rate_type !== 0);
 
@@ -37,13 +29,16 @@ export const ModalEditAbonement = ({ profile, type, change, toggleModal }) => {
 	const [filter_group, setFilter] = useState([]);
 
 	const [countCard, setCount] = useState(1);
+	// eslint-disable-next-line no-unused-vars
 	const handleChangeCountCard = e => {
 		let symbol = e.target.value;
 		setCount(Number(symbol) > 999 ? 999 : Number(symbol) < 1 ? 1 : Number(symbol));
 	};
+	// eslint-disable-next-line no-unused-vars
 	const handleIncrementCount = () => {
 		setCount(countCard < 999 ? countCard + 1 : 999);
 	};
+	// eslint-disable-next-line no-unused-vars
 	const handleDecrementCount = () => {
 		setCount(countCard <= 1 ? 1 : countCard - 1);
 	};
@@ -74,8 +69,16 @@ export const ModalEditAbonement = ({ profile, type, change, toggleModal }) => {
 				setEditPrice(prevState => ({ ...prevState, price: Number(price) }));
 			}
 		}
-	}, [data.state?.level_id, data.state?.rate_id, selectAboniment]);
+	}, [
+		data.state,
+		data.state.level_id,
+		data.state.rate_id,
+		selectAboniment,
+		setEditPrice,
+		user.age_group.id,
+	]);
 
+	// eslint-disable-next-line no-unused-vars
 	const handleSubmitAbonimentCash = () => {
 		console.log(data.state);
 		let copyAbonement = [...selectAboniment.prices];
@@ -98,6 +101,7 @@ export const ModalEditAbonement = ({ profile, type, change, toggleModal }) => {
 		toggleModal();
 	};
 
+	// eslint-disable-next-line no-unused-vars
 	const handleSubmitAbonimentCashLess = () => {
 		console.log(data.state);
 		let copyAbonement = [...selectAboniment.prices];

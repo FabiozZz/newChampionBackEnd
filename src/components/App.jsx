@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './app.css';
 import { Header } from './Header/Header';
@@ -7,10 +7,9 @@ import { Container } from 'react-bootstrap';
 import { SideBar } from './SideBar/SideBar';
 import Routes from '../Routes/Routes';
 import { ConnectedRouter } from 'connected-react-router';
-import Api from '../Api/Api';
 import { token_verify } from 'store/Actions/userActions';
-import { isEmpty } from 'helpers/common';
 import { Auth } from './Auth/Auth';
+import nookies from 'nookies';
 
 /**
  * главный компонент содержащий все приложение
@@ -22,18 +21,19 @@ function App({ history }) {
 	 * константа из redux показывает авторизован ли менеджер
 	 * @type {boolean}
 	 */
-	const { isAuth, error } = useSelector(state => state.user);
-
+	const { isAuth } = useSelector(state => state.user);
+	const access = nookies.get().access;
+	// const refresh = nookies.get().refresh;
 	const dispatch = useDispatch();
 
 	/**
 	 * если не авторизован пользователь, то его выбрасывает на экран входа в систему
 	 */
-	if (!isAuth) {
-		if (Api.getToken() && isEmpty(error)) {
+	useEffect(() => {
+		if (access) {
 			dispatch(token_verify());
 		}
-	}
+	}, [access, dispatch]);
 	return (
 		<>
 			<ConnectedRouter history={history}>

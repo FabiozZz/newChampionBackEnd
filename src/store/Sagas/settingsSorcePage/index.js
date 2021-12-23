@@ -1,4 +1,4 @@
-import { call, put, take, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import {
 	CREATE_SOURCE_LIST,
 	DELETE_SOURCE_LIST,
