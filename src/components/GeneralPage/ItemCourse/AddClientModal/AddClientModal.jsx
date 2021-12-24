@@ -70,7 +70,9 @@ export const AddClientModal = ({
 							placeholder={'Начните писать ФИО клиента'}
 							options={filter_clients.map(client => ({
 								value: client.id,
-								label: `${client.last_name} ${client.first_name} ${client.middle_name}`,
+								label: `${client.last_name} ${client.first_name} ${
+									client.middle_name && client.middle_name
+								}`,
 							}))}
 						/>
 						{/*<Input*/}

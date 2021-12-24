@@ -40,9 +40,13 @@
 
 3. Открыть терминал в корне проекта и запустить команду 
 
-    > ` docker run -it --rm -v ${PWD}:/app -v /app/node_modules -p 3001:3000 -e CHOKIDAR_USEPOLLING=true front `
+   > ` docker build -t front ./ `
+   
+    этой командой начнется скачивание образов для работы контейнера 
 
-    это запустит скачивание образов для работы контейнера, а так же будет установлены все зависимости проекта
+    > ` docker run -d -it --rm -v ${PWD}:/app -v /app/node_modules -p 3001:3000 -e CHOKIDAR_USEPOLLING=true front `
+
+    это запустит сам проект
 
     ---
 

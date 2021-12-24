@@ -3,7 +3,7 @@ import NavigateReports from 'components/Reports/NavigateReports';
 import { Redirect } from 'components/common/Redirect';
 import HeaderNav from 'components/common/HeaderNav';
 
-const Index = () => {
+const ClientReport = () => {
 	return (
 		<>
 			<HeaderNav />
@@ -16,4 +16,4 @@ const Index = () => {
 	);
 };
 
-export default Index;
+export default ClientReport;
