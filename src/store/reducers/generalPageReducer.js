@@ -55,6 +55,7 @@ export const generalPageReducer = (state = initialState, action = null) => {
 			return {
 				...state,
 				error: [],
+				form_add: false,
 				loading: true,
 			};
 		case LOAD_GENERAL_PAGE_DATA_SUCCESS:
