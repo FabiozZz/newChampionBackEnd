@@ -194,6 +194,7 @@ const Abonement = () => {
 					</div>
 					<div className={'gcol-md-6 gcol-lg-4'}>
 						<DatePicker
+							limit={false}
 							// value={
 							// 	subscription_data.state.purchase_date &&
 							// 	subscription_data.state.purchase_date

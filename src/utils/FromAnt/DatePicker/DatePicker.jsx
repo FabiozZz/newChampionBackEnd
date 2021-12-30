@@ -15,6 +15,7 @@ const DatePicker = ({
 	value,
 	toDay,
 	defaultValue = null,
+	limit = false,
 }) => {
 	const [date, setDate] = useState(null);
 	const datePickerRef = useRef(null);
@@ -76,7 +77,7 @@ const DatePicker = ({
 				value={date}
 				onChange={change_date}
 				disabled={disabled}
-				disabledDate={disabledDate}
+				disabledDate={limit && disabledDate}
 				allowClear={false}
 				showToday={toDay}
 				suffixIcon={
