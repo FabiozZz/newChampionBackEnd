@@ -30,6 +30,7 @@ import {
 	getStatusList,
 } from './workers';
 import { edit_profile_done } from '../../Actions/profileActions';
+import { replaceDateforFront } from 'helpers/common';
 
 export function* tokenVerify() {
 	console.log('вызов для проверки токена');
@@ -138,7 +139,7 @@ export function* loadStuff() {
 // }
 export function* fetchDataGeneralPageWithDate({ payload }) {
 	console.log('я за группами', payload);
-	console.log(payload.replace(/(\d{2})[/.](\d{2}).(\d{4})/g, '$3-$2-$1'));
+	console.log(replaceDateforFront(payload));
 	const fetchData = yield {
 		groups: yield call(() =>
 			getGroupsWithDate(payload.replace(/(\d{2})[/.](\d{2}).(\d{4})/g, '$3-$2-$1'))
