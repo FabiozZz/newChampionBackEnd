@@ -2,6 +2,7 @@ import axios, { CancelToken } from 'axios';
 import { CANCEL } from 'redux-saga';
 import nookies from 'nookies';
 import moment from 'moment';
+import { replaceDateforBack } from 'helpers/common';
 // import MockAdapter from "axios-mock-adapter";
 //
 // import clientsList from './jsonData/clientsList.json';
@@ -523,7 +524,7 @@ class Api {
 	 * @returns {Promise}
 	 */
 	async getGeneralPageDataWithDate(date) {
-		console.log(moment(date));
+		console.log(replaceDateforBack(date));
 		return await this.client.get(`/schedule/lesson/?date=${date}`);
 	}
 
