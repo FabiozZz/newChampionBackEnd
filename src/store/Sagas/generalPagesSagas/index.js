@@ -137,7 +137,7 @@ export function* loadStuff() {
 // 	yield put(load_general_page_data_done(fetchData));
 // }
 export function* fetchDataGeneralPageWithDate({ payload }) {
-	console.log('я за группами');
+	console.log('я за группами', payload);
 	const fetchData = yield {
 		groups: yield call(() =>
 			getGroupsWithDate(payload.replace(/(\d{2}).(\d{2}).(\d{4})/g, '$3-$2-$1'))
