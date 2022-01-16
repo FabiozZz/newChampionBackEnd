@@ -138,11 +138,10 @@ export function* loadStuff() {
 // 	yield put(load_general_page_data_done(fetchData));
 // }
 export function* fetchDataGeneralPageWithDate({ payload }) {
-	console.log('я за группами', payload);
-	console.log(replaceDateforFront(payload));
+	let date = replaceDateforFront(payload);
 	const fetchData = yield {
 		groups: yield call(() =>
-			getGroupsWithDate(payload.replace(/(\d{2})[/.](\d{2}).(\d{4})/g, '$3-$2-$1'))
+			getGroupsWithDate(date.replace(/(\d{2})[/.](\d{2}).(\d{4})/g, '$3-$2-$1'))
 		),
 		couches: yield call(() => getCouch()),
 		clients: yield call(() => getClients()),
