@@ -211,7 +211,7 @@ export function replaceDateforBack(date) {
 	if (typeof date == 'object') {
 		date = date.join('');
 	}
-	return date.replace(/(\d{2}).(\d{2}).(\d{4})/g, '$3-$2-$1');
+	return date.replace(/(\d{2})[/|.](\d{2})[/|.](\d{4})/g, '$3-$2-$1');
 }
 
 export function countDaysbetweenTwoDate(array) {
