@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import classes from './auth.module.css';
-import { authSameDate, isEmpty } from 'helpers/common';
+import { authSameDate, isEmpty, replaceDateforFront } from 'helpers/common';
 import { Button } from 'utils/Buttons/Button';
 import { log_in, log_out } from 'store/Actions/userActions';
 import Api from '../../Api/Api';
@@ -76,7 +76,9 @@ export const Auth = () => {
 		(async () => {
 			await Api.getTimeZone()
 				.then(r => {
-					dispatch(set_date(new Date(r.data.datetime).toLocaleDateString()));
+					dispatch(
+						set_date(replaceDateforFront(new Date(r.data.datetime).toISOString()))
+					);
 					console.log(current_date);
 					if (!authSameDate(current_date)) {
 						setErrorDate(!authSameDate(current_date));

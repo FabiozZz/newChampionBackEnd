@@ -42,6 +42,7 @@ const AbonementOnce = () => {
 
 	useEffect(() => {
 		(async () => {
+			console.log('data', upload.state.date);
 			if (upload.state && upload.state.date) {
 				let response = await Api.getGeneralPageDataWithDate(
 					replaceDateforBack(upload.state.date)
