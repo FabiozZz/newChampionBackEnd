@@ -524,6 +524,7 @@ class Api {
 	 * @returns {Promise}
 	 */
 	async getGeneralPageDataWithDate(date) {
+		console.log(date);
 		console.log(replaceDateforBack(date));
 		return await this.client.get(`/schedule/lesson/?date=${date}`);
 	}
