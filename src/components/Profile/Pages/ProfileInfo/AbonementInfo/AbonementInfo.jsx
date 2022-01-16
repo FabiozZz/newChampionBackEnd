@@ -1,11 +1,11 @@
 import React from 'react';
 import classes from '../../../profile.module.css';
-import remove from 'assets/images/remove.svg';
+import remove_img from 'assets/images/remove.svg';
 import edit from 'assets/images/edit.svg';
 import moment from 'moment';
 import { declOfLessonsNum } from 'helpers/common';
 
-export const AbonementInfo = ({ user, showModal }) => {
+export const AbonementInfo = ({ user, showModal, remove }) => {
 	const { subscription, level } = user;
 	console.log(user);
 
@@ -80,7 +80,12 @@ export const AbonementInfo = ({ user, showModal }) => {
 					alt="редактировать"
 					className={classes.abonement_btn}
 				/>
-				<img src={remove} alt="удалить" className={classes.abonement_btn} />
+				<img
+					onClick={remove}
+					src={remove_img}
+					alt="удалить"
+					className={classes.abonement_btn}
+				/>
 			</div>
 		</div>
 	);

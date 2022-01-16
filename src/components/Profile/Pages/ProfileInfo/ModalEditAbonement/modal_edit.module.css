@@ -82,7 +82,7 @@
     padding: 0;
     margin: 0;
     border: none;
-    font-family: "SF Pro Display", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -95,7 +95,7 @@
     padding: 0;
     margin: 0;
     outline: none;
-    font-family: "SF Pro Display", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -137,4 +137,32 @@
     display: flex;
     justify-content:space-between;
     align-items:flex-end;
+}
+
+.remove_edit_price {
+    padding: 0;
+    margin: 0;
+    border: none;
+    font-family: "Roboto",sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: right;
+    letter-spacing: 1px;
+
+    color: #69707F;
+    /*border-bottom: 1px solid #69707f;*/
+}
+.remove_edit_price:focus {
+    border-bottom: 1px solid #69707f;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #69707f;
 }

@@ -423,4 +423,20 @@
   height: 191px;
 }
 
+.carousel::-webkit-scrollbar {
+  width: 0;
+}
+
+.carousel {
+  -ms-overflow-style: none;
+}
+
+.carousel {
+  overflow: -moz-scrollbars-none;
+}
+
+.carousel {
+  scrollbar-width: none;
+}
+
 /*# sourceMappingURL=index.module.css.map */

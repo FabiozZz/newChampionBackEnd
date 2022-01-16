@@ -221,8 +221,8 @@ export function countDaysbetweenTwoDate(array) {
 	return start_day.diff(end_day, 'days');
 }
 
-export function replaceDateforFront(date) {
-	return moment(date).format('DD.MM.YYYY');
+export function replaceDateforFront(date, format = 'DD.MM.YYYY') {
+	return moment(date).format(format);
 }
 
 export function maxThreeDay(date) {
@@ -251,3 +251,12 @@ export function authSameDate(currentDate) {
 	);
 	return moment(moment().format('YYYY-MM-DD')).isSame(replaceDateforBack(currentDate));
 }
+
+export const presence_of_variables = function () {
+	for (let i = 0; i < arguments.length; i++) {
+		if (!arguments[i]) {
+			return true;
+		}
+	}
+	return false;
+};

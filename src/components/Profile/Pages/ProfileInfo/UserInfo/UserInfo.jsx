@@ -5,8 +5,7 @@ import return_cash from '../../../../../assets/images/returnCash.svg';
 import moment from 'moment';
 import { declOfLessonsNum } from '../../../../../helpers/common';
 
-export const UserInfo = ({ user, change, type }) => {
-	console.log('edit modal >>>', user);
+export const UserInfo = ({ user, type, change }) => {
 	return (
 		<div className={classes.wrapper}>
 			{/*<img className={classes.top_separate} src={separate} alt="separate" />*/}
@@ -78,12 +77,44 @@ export const UserInfo = ({ user, change, type }) => {
 				</div>
 				{type === 'edit' ? (
 					<div className={classes.block_info__images}>
-						<img
+						{/*<svg*/}
+						{/*	onClick={change}*/}
+						{/*	width="32"*/}
+						{/*	height="32"*/}
+						{/*	viewBox="0 0 32 32"*/}
+						{/*	fill="none"*/}
+						{/*	xmlns="http://www.w3.org/2000/svg">*/}
+						{/*	<circle cx="16" cy="16" r="16" fill="white" />*/}
+						{/*	<path*/}
+						{/*		d="M6 7C6 6.44772 6.44772 6 7 6H25C25.5523 6 26 6.44772 26 7V25C26 25.5523 25.5523 26 25 26H7C6.44772 26 6 25.5523 6 25V7Z"*/}
+						{/*		fill="black"*/}
+						{/*		fillOpacity="0.01"*/}
+						{/*	/>*/}
+						{/*	<path*/}
+						{/*		fillRule="evenodd"*/}
+						{/*		clipRule="evenodd"*/}
+						{/*		d="M17 11C17 10.4477 16.5523 10 16 10C15.4477 10 15 10.4477 15 11V15H11C10.4477 15 10 15.4477 10 16C10 16.5523 10.4477 17 11 17H15V21C15 21.5523 15.4477 22 16 22C16.5523 22 17 21.5523 17 21V17H21C21.5523 17 22 16.5523 22 16C22 15.4477 21.5523 15 21 15H17V11Z"*/}
+						{/*		fill="#8798AD"*/}
+						{/*	/>*/}
+						{/*</svg>*/}
+						<svg
+							style={{ cursor: 'pointer' }}
 							onClick={change}
-							src={prolongation_aboniment}
-							alt="продление абонемента"
-						/>
-						<img src={return_cash} alt="возврат ДС" />
+							width="32"
+							height="32"
+							viewBox="0 0 32 32"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg">
+							<circle cx="16" cy="16" r="16" fill="white" />
+							<path
+								fillRule="evenodd"
+								clipRule="evenodd"
+								d="M14.521 10.8333H17.479C17.405 10.5458 17.144 10.3333 16.8333 10.3333H15.1667C14.856 10.3333 14.595 10.5458 14.521 10.8333ZM12.5 11C12.5 9.52725 13.6939 8.33334 15.1667 8.33334H16.8333C18.3061 8.33334 19.5 9.52725 19.5 11H22.6667C23.1269 11 23.5 11.3731 23.5 11.8333C23.5 12.2936 23.1269 12.6667 22.6667 12.6667H21.8333V21C21.8333 22.3807 20.714 23.5 19.3333 23.5H12.6667C11.286 23.5 10.1667 22.3807 10.1667 21V12.6667H9.33333C8.8731 12.6667 8.5 12.2936 8.5 11.8333C8.5 11.3731 8.8731 11 9.33333 11H12.5ZM15.1667 15.1667C15.1667 14.7064 14.7936 14.3333 14.3333 14.3333C13.8731 14.3333 13.5 14.7064 13.5 15.1667V19.3333C13.5 19.7936 13.8731 20.1667 14.3333 20.1667C14.7936 20.1667 15.1667 19.7936 15.1667 19.3333V15.1667ZM18.5 15.1667C18.5 14.7064 18.1269 14.3333 17.6667 14.3333C17.2064 14.3333 16.8333 14.7064 16.8333 15.1667V19.3333C16.8333 19.7936 17.2064 20.1667 17.6667 20.1667C18.1269 20.1667 18.5 19.7936 18.5 19.3333V15.1667Z"
+								fill="#8798AD"
+							/>
+						</svg>
+
+						{/*<img src={return_cash} alt="возврат ДС" />*/}
 					</div>
 				) : null}
 			</div>

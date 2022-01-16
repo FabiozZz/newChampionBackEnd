@@ -5,7 +5,6 @@ import devider from '../../../../assets/images/deviderParent.svg';
 import edit_profile from '../../../../assets/images/edit_profile.svg';
 import { NavLink } from 'react-router-dom';
 import { Modal } from 'utils/Modal/Modal';
-import { ModalChangeAbonement } from './ModalChangeClient/ModalChangeAbonement';
 import avatar from './avatar.png';
 import { open_edit_page } from 'store/Actions/profileActions';
 import { useDispatch } from 'react-redux';
@@ -16,11 +15,12 @@ import { ModalEditAbonement } from './ModalEditAbonement/ModalEditAbonement';
 import { Button } from 'utils/Buttons/Button';
 import Select from 'utils/FromAnt/Select/Select';
 import { useInputOnObject } from 'hooks';
+import RemoveAbonement from 'components/Profile/Pages/ProfileInfo/RemoveAbonement';
 
 const paths = [
-	// { id: '/abonement_trial', name: 'Пробное занятие' },
-	// { id: '/abonement_once', name: 'Разовая тренировка' },
-	{ id: '/abonement', name: 'Оформить абонемент' },
+	{ id: '/abonement_trial', name: 'Пробное занятие' },
+	{ id: '/abonement_once', name: 'Разовая тренировка' },
+	{ id: '/abonement', name: 'Купить абонемент' },
 	{ id: '/abonement_constructor', name: 'Конфигуратор абонемента' },
 ];
 
@@ -91,10 +91,13 @@ export const ProfileInfo = ({ profile }) => {
 		toggleModal(prevState => ({ ...prevState, show: !modal.show }));
 	};
 	const clearType = () => {
-		toggleModal(prevState => ({ ...prevState, type: '' }));
+		toggleModal(prevState => ({ ...prevState, type: 'remove' }));
 	};
 	const showAndChangeTypeModalEdit = () => {
 		toggleModal(prevState => ({ ...prevState, show: !modal.show, type: 'edit' }));
+	};
+	const showAndChangeTypeModalRemove = () => {
+		toggleModal(prevState => ({ ...prevState, show: !modal.show, type: 'remove' }));
 	};
 	// const showAndChangeTypeModalChange = () => {
 	// 	toggleModal(prevState => ({ ...prevState, show: !modal.show, type: 'create' }));
@@ -124,11 +127,12 @@ export const ProfileInfo = ({ profile }) => {
 							profile={profile}
 						/>
 					) : (
-						<ModalChangeAbonement
-							toggleModal={showModal}
-							profile={profile}
-							type={modal.type}
-						/>
+						<RemoveAbonement type={modal.type} profile={profile} />
+						// <ModalChangeAbonement
+						// 	toggleModal={showModal}
+						// 	profile={profile}
+						// 	type={modal.type}
+						// />
 					)}
 				</Modal>
 			)}
@@ -171,7 +175,11 @@ export const ProfileInfo = ({ profile }) => {
 					</div>
 					{user.subscription && user.subscription.rate && (
 						<>
-							<AbonementInfo user={user} showModal={showAndChangeTypeModalEdit} />
+							<AbonementInfo
+								user={user}
+								showModal={showAndChangeTypeModalEdit}
+								remove={showAndChangeTypeModalRemove}
+							/>
 							{/*<AbonementInfo user={user} />*/}
 							{/*<AbonementInfo user={user} />*/}
 						</>

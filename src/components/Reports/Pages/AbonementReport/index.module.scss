@@ -9,7 +9,7 @@
   }
   .btn_group {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 4px;
   }
   .chart_container {
@@ -21,4 +21,10 @@
       height: 191px;
     }
   }
+}
+.carousel::-webkit-scrollbar { width: 0; }
+.carousel { -ms-overflow-style: none; }
+.carousel { overflow: -moz-scrollbars-none; }
+.carousel {
+  scrollbar-width: none;
 }

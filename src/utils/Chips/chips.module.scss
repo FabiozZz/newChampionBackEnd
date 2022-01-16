@@ -4,6 +4,8 @@
   padding: 4px 12px;
   border-radius: 16px;
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   gap: 9px;
   align-items: center;
   @extend %text;

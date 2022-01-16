@@ -183,11 +183,11 @@ const Abonement = () => {
 	return (
 		<>
 			<HeaderNav />
-			<Redirect padding={true} title={'Оформление абонемента'} />
+			<Redirect padding={true} title={'Покупка абонемента'} />
 			<div className={'pb100 container-g gcol-md-12 gcol-lg-12 '}>
 				<form className={'block gcol-md-12 gcol-lg-11 overflow-hidden -margin-16'}>
 					<p className={cn('gcol-md-12 gcol-lg-11', classes.block_info__title_wr_text)}>
-						Оформить абонемент
+						Купить абонемент
 					</p>
 					<div className={'gcol-md-6 gcol-lg-5'}>
 						<Input label={'Номер карточки'} />

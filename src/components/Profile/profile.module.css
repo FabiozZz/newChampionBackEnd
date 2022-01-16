@@ -576,6 +576,9 @@
 .abonement_carousel::-webkit-scrollbar { width: 0; }
 .abonement_carousel { -ms-overflow-style: none; }
 .abonement_carousel { overflow: -moz-scrollbars-none; }
+.abonement_carousel {
+	scrollbar-width: none;
+}
 .abonement_carousel svg{
 	cursor:pointer;
 }

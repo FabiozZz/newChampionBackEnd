@@ -87,7 +87,7 @@ export const Footer = props => {
 							fill="#69707F"
 						/>
 					</svg>
-					<span>отчеты</span>
+					<span>Отчеты</span>
 				</CustomLink>
 
 				{/* кнопка для перехода к списку сотрудников*/}
@@ -110,7 +110,7 @@ export const Footer = props => {
 							fill="#69707F"
 						/>
 					</svg>
-					<span>сотрудники</span>
+					<span>Сотрудники</span>
 				</CustomLink>
 
 				{/* кнопка для перехода к списку клиентов*/}
@@ -133,7 +133,7 @@ export const Footer = props => {
 							fill="#69707F"
 						/>
 					</svg>
-					<span>клиенты</span>
+					<span>Клиенты</span>
 				</CustomLink>
 
 				{/* кнопка для перехода к настройкам */}
@@ -156,7 +156,7 @@ export const Footer = props => {
 							fill="#69707F"
 						/>
 					</svg>
-					<span>настройки</span>
+					<span>Настройки</span>
 				</CustomLink>
 			</div>
 		</div>

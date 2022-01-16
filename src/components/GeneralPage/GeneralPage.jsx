@@ -81,7 +81,6 @@ export const GeneralPage = () => {
 	useEffect(() => {
 		dispatch(get_lessons_with_date(replaceDateforBack(dateNow)));
 	}, [dateNow, dispatch]);
-
 	return (
 		<>
 			{loading && <div className="lds-dual-ring" />}

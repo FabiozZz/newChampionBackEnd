@@ -25,7 +25,7 @@ import DatePicker from 'utils/FromAnt/DatePicker/DatePicker';
 import Input from 'utils/FromAnt/Input/Input';
 import { EditOterSection } from 'components/Edit/common/EditOterSection/EditOterSection';
 
-export const ContextCommonEdit = createContext();
+export const ContextCommonEdit = createContext(null);
 
 /**
  * Компонент редактирования клиента
@@ -215,6 +215,7 @@ export const Edit = () => {
 		if (isEmpty(user)) {
 			dispatch(open_edit_page(id));
 		} else {
+			console.log('yep');
 			const {
 				id,
 				subscription,
@@ -249,8 +250,9 @@ export const Edit = () => {
 				...(user.apartments && user.apartments.length && { apartments: user.apartments }),
 			});
 		}
-	}, [address, dispatch, id, personal_data, user]);
-
+	}, [id, user]);
+	console.log(user);
+	console.log(address.state, personal_data.state, parents);
 	return (
 		<>
 			{modal && (
@@ -372,7 +374,7 @@ export const Edit = () => {
 
 						{/*<RulesSection rules={rules} setRules={handleToggleRules} personal={personal} setPersonal={handleTogglePersonal}/>*/}
 
-						<EndBtnGroup goBack={goBack} />
+						<EndBtnGroup submit={handleSubmit} goBack={goBack} />
 					</>
 				) : null}
 			</form>

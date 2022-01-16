@@ -14,6 +14,8 @@ import {
 	PROFILE_CLIENT_ROUTE,
 	PROFILE_CLIENT_ROUTE_ABONEMENT,
 	PROFILE_CLIENT_ROUTE_ABONEMENT_CONSTRUCTOR,
+	PROFILE_CLIENT_ROUTE_ABONEMENT_ONCE,
+	PROFILE_CLIENT_ROUTE_ABONEMENT_TRIAL,
 	REPORTS_ABONEMENTS_ROUTE,
 	REPORTS_CLIENT_ROUTE,
 	REPORTS_PROCEED_ROUTE,
@@ -57,6 +59,8 @@ import VisitedReport from 'components/Reports/Pages/VisitedReport';
 import ProceedReport from 'components/Reports/Pages/ProceedReport';
 import ClientReport from 'components/Reports/Pages/ClientReport';
 import AbonementReport from 'components/Reports/Pages/AbonementReport';
+import AbonementOnce from 'components/Profile/AbonementPage/AbonementOnce';
+import AbonementTrial from 'components/Profile/AbonementPage/AbonementTrial';
 
 export const routes = [
 	{
@@ -88,20 +92,20 @@ export const routes = [
 		exact: true,
 		component: Abonement,
 	},
-	// {
-	// 	/* Страница профиля клиента добавление разового занятия */
-	// 	id: PROFILE_CLIENT_ROUTE_ABONEMENT_ONCE,
-	// 	path: '/profile/:id/abonement_once',
-	// 	exact: true,
-	// 	component: AbonementOnce,
-	// },
-	// {
-	// 	/* Страница профиля клиента добавление пробного занятия */
-	// 	id: PROFILE_CLIENT_ROUTE_ABONEMENT_TRIAL,
-	// 	path: '/profile/:id/abonement_trial',
-	// 	exact: true,
-	// 	component: AbonementTrial,
-	// },
+	{
+		/* Страница профиля клиента добавление разового занятия */
+		id: PROFILE_CLIENT_ROUTE_ABONEMENT_ONCE,
+		path: '/profile/:id/abonement_once',
+		exact: true,
+		component: AbonementOnce,
+	},
+	{
+		/* Страница профиля клиента добавление пробного занятия */
+		id: PROFILE_CLIENT_ROUTE_ABONEMENT_TRIAL,
+		path: '/profile/:id/abonement_trial',
+		exact: true,
+		component: AbonementTrial,
+	},
 	{
 		/* Страница профиля клиента добавление конфигурируемого абонемента */
 		id: PROFILE_CLIENT_ROUTE_ABONEMENT_CONSTRUCTOR,

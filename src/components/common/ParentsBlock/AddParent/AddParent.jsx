@@ -75,7 +75,6 @@ export const AddParent = ({ error, data = {}, change, index }) => {
 					setValue={changeInputs}
 					name={'last_name'}
 					label={'фамилия'}
-					required={false}
 				/>
 				{/*<OtherInput danger={error&&error.last_name} value={data.last_name} setValue={changeInputs} name={'last_name'} label={'фамилия'} required={false}/>*/}
 				{/*{error&&error.last_name&&<span className={classes.warning_text}>{error.last_name.join()}</span>}*/}
@@ -87,7 +86,6 @@ export const AddParent = ({ error, data = {}, change, index }) => {
 					setValue={changeInputs}
 					name={'first_name'}
 					label={'имя'}
-					required={false}
 				/>
 				{/*<OtherInput danger={error&&error.first_name} value={data.first_name} setValue={changeInputs} name={'first_name'} label={'имя'} required={false}/>*/}
 				{/*{error&&error.first_name&&<span className={classes.warning_text}>{error.first_name.join()}</span>}*/}
@@ -109,7 +107,6 @@ export const AddParent = ({ error, data = {}, change, index }) => {
 					setValue={changeInputs}
 					name={'who'}
 					label={'кем приходитесь ребёнку'}
-					required={false}
 				/>
 			</div>
 			<div className={classes.phone_number_parent}>
@@ -118,7 +115,6 @@ export const AddParent = ({ error, data = {}, change, index }) => {
 					name={'phone_number'}
 					value={data.phone_number}
 					setValue={changeInputs}
-					required={false}
 					label={'номер телефона'}
 				/>
 				{error && error.phone_number && (

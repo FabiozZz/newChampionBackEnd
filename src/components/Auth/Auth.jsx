@@ -112,7 +112,7 @@ export const Auth = () => {
 		return dateArray;
 	}
 
-	getDates('2000-10-11', moment().format('YYYY-MM-DD'));
+	// getDates('2000-10-11', moment().format('YYYY-MM-DD'));
 
 	return (
 		<div className={classes.wrapper}>

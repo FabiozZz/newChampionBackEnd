@@ -4,7 +4,6 @@ import classes from './modal_edit.module.css';
 import separate from '../../../../../assets/images/deviderParent.svg';
 import success_edit from '../../../../../assets/images/successAbonement.svg';
 import edit from '../../../../../assets/images/editAboniment.svg';
-import { DataPicker } from '../../../../../utils/DataPicker/DataPicker';
 import { declOfDay, declOfLessonsNum } from '../../../../../helpers/common';
 import { Button } from '../../../../../utils/Buttons/Button';
 import { useInitialStateOnUser, useInputOnObject, usePrice } from '../../../../../hooks';
@@ -12,6 +11,7 @@ import Select from 'utils/FromAnt/Select/Select';
 import { useDispatch, useSelector } from 'react-redux';
 import { buy_abonement } from 'store/Actions/profileActions';
 import Input from 'utils/FromAnt/Input/Input';
+import DatePickerRange from 'utils/FromAnt/DatePickerRange/DatePickerRange';
 
 export const ModalEditAbonement = ({ profile, type, change, toggleModal }) => {
 	const dispatch = useDispatch();
@@ -286,14 +286,14 @@ export const ModalEditAbonement = ({ profile, type, change, toggleModal }) => {
 				</div>
 				<img width={500} src={separate} alt="separate" />
 				<div className={classes.block_one}>
-					<DataPicker label={'Заморозить абонемент'} />
-					<span className={classes.freeze_text_mute}>
-						Доступно <b>3</b> заморозки тренеровок
-					</span>
+					<DatePickerRange label={'Заморозить абонемент'} />
+					{/*<span className={classes.freeze_text_mute}>*/}
+					{/*	Доступно <b>3</b> заморозки тренеровок*/}
+					{/*</span>*/}
 				</div>
 				<div className={classes.end_btn}>
-					<Button click={() => toggleModal(false)} factor={'danger'} text={'отменить'} />
-					<Button factor={'success'} text={'сохранить'} />
+					<Button click={() => toggleModal(false)} text={'Безналичная оплата'} />
+					<Button factor={'success'} text={'Оплата наличными'} />
 				</div>
 			</div>
 		</>

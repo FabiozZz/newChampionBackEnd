@@ -170,7 +170,7 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 				}
 			}
 		} else {
-			setPrice(price);
+			setPrice(500);
 			// setEditPrice(prevState => ({ ...prevState, price: 500 }));
 		}
 		// eslint-disable-next-line
@@ -258,8 +258,48 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 	/**
 	 * Функция отправки на сервер данных при покупке разового посещения
 	 */
-	const createOnceTraining = () => {
-		dispatch(createOnceTrainForCourse({ lesson_id, client_id: user.id, date: date }));
+	const createOnceTraining_cash = () => {
+		const userPrice = editPrice.price !== Number(price) ? editPrice.price : false;
+		// console.log({
+		// 	lesson_id,
+		// 	client_id: user.id,
+		// 	date: date,
+		// 	payment_method: 'cash',
+		// 	...(userPrice && { price: userPrice }),
+		// });
+		dispatch(
+			createOnceTrainForCourse({
+				lesson_id,
+				client_id: user.id,
+				date: date,
+				payment_method: 'cash',
+				...(userPrice && { price: userPrice }),
+			})
+		);
+		close_modal();
+	};
+
+	/**
+	 * Функция отправки на сервер данных при покупке разового посещения
+	 */
+	const createOnceTraining_cashless = () => {
+		const userPrice = editPrice.price !== Number(price) ? editPrice.price : false;
+		// console.log({
+		// 	lesson_id,
+		// 	client_id: user.id,
+		// 	date: date,
+		// 	payment_method: 'cashless',
+		// 	...(userPrice && { price: userPrice }),
+		// });
+		dispatch(
+			createOnceTrainForCourse({
+				lesson_id,
+				client_id: user.id,
+				date: date,
+				payment_method: 'cashless',
+				...(userPrice && { price: userPrice }),
+			})
+		);
 		close_modal();
 	};
 
@@ -267,11 +307,11 @@ const AddedAbonementModal = ({ user, close_modal, lesson_id, date }) => {
 	 *
 	 */
 	const buyAbonementHandlerCash = () => {
-		single ? createOnceTraining() : handleSubmitAbonimentCash();
+		single ? createOnceTraining_cash() : handleSubmitAbonimentCash();
 	};
 
 	const buyAbonementHandlerCashLess = () => {
-		single ? createOnceTraining() : handleSubmitAbonimentCashLess();
+		single ? createOnceTraining_cashless() : handleSubmitAbonimentCashLess();
 	};
 	useEffect(() => {
 		setEditPrice(prevState => ({ ...prevState, price: Number(price) }));

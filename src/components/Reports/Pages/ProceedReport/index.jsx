@@ -7,11 +7,12 @@ import cn from 'classnames';
 import DatePickerRange from 'utils/FromAnt/DatePickerRange/DatePickerRange';
 import Select from 'utils/FromAnt/Select/Select';
 import Chart, { Chart as CChart } from 'react-chartjs-2';
-import data from 'components/Reports/Visits/data.json';
+import data from 'components/Reports/fake/data.json';
 import moment from 'moment';
 import zoom from 'chartjs-plugin-zoom';
 import 'chartjs-adapter-moment';
-import { fake_new_data, generateColorOnArray } from 'components/Reports/Visits/fake';
+import { fake_new_data, generateColorOnArray } from 'components/Reports/fake/fake';
+import Chips from 'utils/Chips';
 
 CChart.register([
 	zoom,
@@ -70,7 +71,7 @@ const options_pie = {
 			bodyFont: {
 				font: {
 					size: 12,
-					family: "'SF Pro Display',sans-serif",
+					family: "'Roboto',sans-serif",
 				},
 			},
 			callbacks: {
@@ -426,7 +427,7 @@ const ProceedReport = () => {
 				<div className={cn('gcol-md-12 gcol-lg-11')}>
 					<div className={cn('block -margin-16 py-32')}>
 						<p className={cn(classes.header, 'gcol-md-12 gcol-lg-11')}>some text</p>
-						<div className={cn(classes.btn_group, 'gcol-md-6 gcol-lg-5')}>
+						<div className={cn(classes.btn_group, 'gcol-md-6 gcol-lg-6')}>
 							<button>some</button>
 							<button>some</button>
 							<button>some</button>
@@ -437,17 +438,29 @@ const ProceedReport = () => {
 						<div className={'gcol-md-6 gcol-lg-5'}>
 							<Select label={'возрастная группа'} />
 						</div>
-						<div className={'gcol-md-6 gcol-lg-5'}>
+						<div className={'gcol-md-6 gcol-lg-6'}>
 							<Select label={'единоборства'} />
 						</div>
 						<div className={'gcol-md-4 gcol-lg-4'}>
 							<Select label={'филиал'} />
 						</div>
-						<div className={'gcol-md-4 gcol-lg-3'}>
+						<div className={'gcol-md-4 gcol-lg-4'}>
 							<Select label={'сотрудник'} />
 						</div>
 						<div className={'gcol-md-4 gcol-lg-3'}>
 							<Select label={'источник рекламы'} />
+						</div>
+						<div
+							className={cn(
+								classes.carousel,
+								'flex gcol-md-12 gcol-lg-11 gap-12 overflow-auto'
+							)}>
+							<Chips active={false}>Новые</Chips>
+							<Chips active={false}>Бронзовые</Chips>
+							<Chips active={false}>Золотые</Chips>
+							<Chips active={false}>Рубиновые</Chips>
+							<Chips active={false}>Сапфировые</Chips>
+							<Chips active={false}>Бриллиантовые</Chips>
 						</div>
 						<div className={cn(classes.chart_container, 'gcol-md-12 gcol-lg-11')}>
 							{pie_chart_data.map((_, i) => (
@@ -523,7 +536,7 @@ const ProceedReport = () => {
 				<div className={cn('gcol-md-12 gcol-lg-11 ', classes.wrapper)}>
 					<div className={cn('block -margin-16 py-32')}>
 						<p className={cn(classes.header, 'gcol-md-12 gcol-lg-11')}>some text</p>
-						<div className={cn(classes.btn_group, 'gcol-md-6 gcol-lg-5')}>
+						<div className={cn(classes.btn_group, 'gcol-md-6 gcol-lg-6')}>
 							<button>some</button>
 							<button>some</button>
 							<button>some</button>
@@ -534,22 +547,39 @@ const ProceedReport = () => {
 						<div className={'gcol-md-6 gcol-lg-5'}>
 							<Select label={'возрастная группа'} />
 						</div>
-						<div className={'gcol-md-6 gcol-lg-5'}>
+						<div className={'gcol-md-6 gcol-lg-6'}>
 							<Select label={'единоборства'} />
 						</div>
 						<div className={'gcol-md-4 gcol-lg-4'}>
 							<Select label={'филиал'} />
 						</div>
-						<div className={'gcol-md-4 gcol-lg-3'}>
+						<div className={'gcol-md-4 gcol-lg-4'}>
 							<Select label={'сотрудник'} />
 						</div>
 						<div className={'gcol-md-4 gcol-lg-3'}>
 							<Select label={'источник рекламы'} />
 						</div>
+						<div
+							className={cn(
+								classes.carousel,
+								'flex gcol-md-12 gcol-lg-11 gap-12 overflow-auto'
+							)}>
+							<Chips active={false}>Новые</Chips>
+							<Chips active={false}>Бронзовые</Chips>
+							<Chips active={false}>Золотые</Chips>
+							<Chips active={false}>Рубиновые</Chips>
+							<Chips active={false}>Сапфировые</Chips>
+							<Chips active={false}>Бриллиантовые</Chips>
+						</div>
 						<div className={cn(classes.chart_container, 'gcol-md-12 gcol-lg-11')}>
 							<dir className="gcol-md-12 gcol-lg-12">
 								<Chart type={'line'} data={getData} options={options_line} />
 							</dir>
+						</div>
+						<div className={'flex gap-12 gcol-md-12 gcol-lg-11'}>
+							<Chips active={false}>Все</Chips>
+							<Chips active={false}>Наличные</Chips>
+							<Chips active={false}>Безнал</Chips>
 						</div>
 						{/*<div className={cn(classes.chart_container, 'gcol-md-12')}>*/}
 						{/*	<dir className="gcol-md-12">*/}
