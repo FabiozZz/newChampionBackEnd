@@ -7,9 +7,14 @@
     color: $BLACK_50;
     font-weight: 900;
   }
-  .btn_group {
+  .btn_group_two {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+  .btn_group_three {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 4px;
   }
   .chart_container {

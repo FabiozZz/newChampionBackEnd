@@ -54,10 +54,14 @@ export const AbonementInfo = ({ user, showModal, remove }) => {
 					<div className={classes.abonement_block_expire}>
 						<p className={classes.abonement_block_date}>
 							Срок действия{' '}
-							<span className={classes.abonement_block_bold}>
-								{moment(subscription.valid_from).format('DD.MM.YYYY')} &#8212;
-								{moment(subscription.valid_until).subtract(1, 'day').format('DD.MM.YYYY')}
-							</span>
+									<span className={classes.abonement_block_bold}>
+							{subscription.valid_from !== null?
+								( `${moment(subscription.valid_from).format('DD.MM.YYYY')} -
+										${moment(subscription.valid_until).subtract(1, 'day').format('DD.MM.YYYY')}`
+								):
+								'не активен'
+							}
+									</span>
 						</p>
 						<p className={classes.abonement_block_date}>
 							Доступно{' '}

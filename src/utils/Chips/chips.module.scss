@@ -1,6 +1,7 @@
 @import '../../styles/variables';
 
 .wrapper{
+  cursor:pointer;
   padding: 4px 12px;
   border-radius: 16px;
   display: flex;
@@ -8,6 +9,8 @@
   flex-wrap: nowrap;
   gap: 9px;
   align-items: center;
+  text-wrap: none;
+  white-space: nowrap;
   @extend %text;
 }
 .default{

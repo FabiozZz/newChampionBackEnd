@@ -253,6 +253,14 @@ input[type='number']::-webkit-outer-spin-button {
 	line-height: 24px;
 	color: #bfc5d2;
 }
+.ant-select-selection-item{
+}
+/*.ant-select-selector {*/
+/*	overflow: hidden !important;*/
+/*}*/
+/*.ant-select-selection-item{*/
+/*	text-overflow: ellipsis;*/
+/*}*/
 .ant-select .ant-select-selector {
 	background: #fefefe;
 	border-radius: 5px !important;

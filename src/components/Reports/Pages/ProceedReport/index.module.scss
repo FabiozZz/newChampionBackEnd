@@ -7,9 +7,16 @@
 		color: $BLACK_50;
 		font-weight: 900;
 	}
-	.btn_group {
+	.btn_group_three {
+		display: flex;
+		flex-wrap: nowrap;
+		width: 100%;
+		align-items: end;
+		gap:4px;
+	}
+	.btn_group_two {
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1fr;
 		gap: 4px;
 	}
 	.chart_container {
@@ -20,6 +27,16 @@
 		canvas {
 			height: 191px;
 		}
+	}
+	.total_price{
+		@extend %small_text;
+		font-weight: 700;
+		color: $BLACK_80;
+	}
+	.small{
+		@extend %small_text;
+		font-weight: normal;
+		color: $BLACK_80;
 	}
 }
 .carousel::-webkit-scrollbar { width: 0; }

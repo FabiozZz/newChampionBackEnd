@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
  *
  * @param name имя для input
  *
+ * @param text
  * @param setIsChecked функция-коллбек для переключения внешнего и внутреннего состояния компонента
  *
  * @param isChecked булевое значение для визуализации компонента
@@ -17,7 +18,7 @@ import PropTypes from 'prop-types';
  * @returns {JSX.Element}
  * @constructor
  */
-export const CheckboxBtn = ({ disabled = false, name = '', setIsChecked, isChecked = false }) => {
+export const CheckboxBtn = ({ disabled = false,full=false, name = '',text='', setIsChecked, isChecked = false }) => {
 	/**
 	 * при disabled = true возвращает разметку показывая что кнопка не активно и выключает <input>
 	 * @type {JSX.Element}
@@ -28,7 +29,11 @@ export const CheckboxBtn = ({ disabled = false, name = '', setIsChecked, isCheck
 		<div className={'checkbox-wrapper'}>
 			<div className={'checkCheckBox'} />
 		</div>
-	) : (
+	) : full? (
+		<div className={'checkbox-wrapper'} >
+			<div className={'checkbox-full-check'} />
+		</div>
+	):(
 		<div className={'checkbox-nonDisabled'} />
 	);
 
@@ -39,9 +44,10 @@ export const CheckboxBtn = ({ disabled = false, name = '', setIsChecked, isCheck
 				disabled={disabled}
 				onChange={setIsChecked}
 				name={name}
-				value={isChecked ? 1 : 0}
+				value={isChecked?1:0}
 				type="checkbox"
 			/>
+			{text}
 		</label>
 	);
 };

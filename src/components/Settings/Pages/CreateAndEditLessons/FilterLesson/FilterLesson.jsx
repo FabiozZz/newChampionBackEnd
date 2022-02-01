@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import classes from './filter.module.css';
-import {Btn} from "../../../../Clients/FilterClientSection/BtnGroup/Btn/Btn";
+import {Btn} from "../../../../../utils/Btn/Btn";
 import {ContextData} from "../CreateAndEditLessons";
 import {OtherInput} from "../../../../../utils/OtherInput/OtherInput";
 

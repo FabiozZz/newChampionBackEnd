@@ -26,6 +26,7 @@ const Abonement = () => {
 	const subscription_data = useInputOnObject({});
 	console.log(profile);
 	const filter_aboneemnts = typeAboniment.filter(item => item.rate_type !== 0);
+	const [current_abonements,setCurrent] = useState(null)
 	const filter_group = client_data.state.age_group_id
 		? group.filter(item => item.age_group.id === client_data.state.age_group_id)
 		: [];
@@ -44,6 +45,12 @@ const Abonement = () => {
 	};
 	const { editPrice, setEditPrice, handleChangePriceAbonement, toggleEdit } =
 		usePrice(price);
+	useEffect(()=>{
+		if(subscription_data.state &&subscription_data.state.rate_id){
+			setCurrent(typeAboniment.find(_=>_.id === subscription_data.state.rate_id))
+		}
+	},[subscription_data.state.rate_id])
+	console.log('current_abonements',current_abonements)
 	useEffect(() => {
 		if (user && !isEmpty(user)) {
 			console.log(user);
@@ -271,7 +278,7 @@ const Abonement = () => {
 									{/*</div>*/}
 									<div className={`${classes.sale_count}`}>
 										<span className={`${classes.sale_count_text}`}>
-											1 {declOfLessonsNum(1)}
+											{(current_abonements&&current_abonements.train_quantity)?current_abonements.train_quantity:0} {declOfLessonsNum((current_abonements&&current_abonements.train_quantity)?current_abonements.train_quantity:0)}
 										</span>
 										{/*<span></span>*/}
 										<span className={`${classes.sale_count_text}`}>

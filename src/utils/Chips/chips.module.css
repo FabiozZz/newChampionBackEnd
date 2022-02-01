@@ -7,8 +7,6 @@
   font-weight: normal;
   font-size: 16px;
   line-height: 24px;
-  text-wrap: none;
-  white-space: nowrap;
 }
 
 /* grid columns classes */
@@ -52,144 +50,192 @@
   .gcol-md-1 {
     grid-column: span 1 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (min-width: 1440px) {
   .gcol-lg-1 {
     grid-column: span 1 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (max-width: 1440px) {
   .gcol-md-2 {
     grid-column: span 2 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (min-width: 1440px) {
   .gcol-lg-2 {
     grid-column: span 2 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (max-width: 1440px) {
   .gcol-md-3 {
     grid-column: span 3 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (min-width: 1440px) {
   .gcol-lg-3 {
     grid-column: span 3 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (max-width: 1440px) {
   .gcol-md-4 {
     grid-column: span 4 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (min-width: 1440px) {
   .gcol-lg-4 {
     grid-column: span 4 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (max-width: 1440px) {
   .gcol-md-5 {
     grid-column: span 5 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (min-width: 1440px) {
   .gcol-lg-5 {
     grid-column: span 5 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (max-width: 1440px) {
   .gcol-md-6 {
     grid-column: span 6 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (min-width: 1440px) {
   .gcol-lg-6 {
     grid-column: span 6 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (max-width: 1440px) {
   .gcol-md-7 {
     grid-column: span 7 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (min-width: 1440px) {
   .gcol-lg-7 {
     grid-column: span 7 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (max-width: 1440px) {
   .gcol-md-8 {
     grid-column: span 8 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (min-width: 1440px) {
   .gcol-lg-8 {
     grid-column: span 8 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (max-width: 1440px) {
   .gcol-md-9 {
     grid-column: span 9 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (min-width: 1440px) {
   .gcol-lg-9 {
     grid-column: span 9 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (max-width: 1440px) {
   .gcol-md-10 {
     grid-column: span 10 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (min-width: 1440px) {
   .gcol-lg-10 {
     grid-column: span 10 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (max-width: 1440px) {
   .gcol-md-11 {
     grid-column: span 11 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (min-width: 1440px) {
   .gcol-lg-11 {
     grid-column: span 11 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (max-width: 1440px) {
   .gcol-md-12 {
     grid-column: span 12 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 @media screen and (min-width: 1440px) {
   .gcol-lg-12 {
     grid-column: span 12 !important;
     align-self: end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 .pb100 {
@@ -246,6 +292,70 @@
 
 .align-flex-end {
   align-items: flex-end;
+}
+
+.flex-shrink-1 {
+  flex-shrink: 1;
+}
+
+.flex-shrink-2 {
+  flex-shrink: 2;
+}
+
+.flex-shrink-3 {
+  flex-shrink: 3;
+}
+
+.flex-shrink-4 {
+  flex-shrink: 4;
+}
+
+.flex-shrink-5 {
+  flex-shrink: 5;
+}
+
+.flex-shrink-6 {
+  flex-shrink: 6;
+}
+
+.flex-shrink-7 {
+  flex-shrink: 7;
+}
+
+.flex-shrink-8 {
+  flex-shrink: 8;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.flex-grow-2 {
+  flex-grow: 2;
+}
+
+.flex-grow-3 {
+  flex-grow: 3;
+}
+
+.flex-grow-4 {
+  flex-grow: 4;
+}
+
+.flex-grow-5 {
+  flex-grow: 5;
+}
+
+.flex-grow-6 {
+  flex-grow: 6;
+}
+
+.flex-grow-7 {
+  flex-grow: 7;
+}
+
+.flex-grow-8 {
+  flex-grow: 8;
 }
 
 .gap-1 {
@@ -397,11 +507,10 @@
 .-margin-16 {
   margin-left: -16px;
   margin-right: -16px;
-  padding-left: 16px;
-  padding-right: 16px;
 }
 
 .wrapper {
+  cursor: pointer;
   padding: 4px 12px;
   border-radius: 16px;
   display: flex;
@@ -409,6 +518,8 @@
   flex-wrap: nowrap;
   gap: 9px;
   align-items: center;
+  text-wrap: none;
+  white-space: nowrap;
 }
 
 .default {

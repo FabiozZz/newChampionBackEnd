@@ -260,3 +260,16 @@ export const presence_of_variables = function () {
 	}
 	return false;
 };
+export function getRandomColor() {
+	let letters = '0123456789ABCDEF';
+	let color = '#';
+	for (let i = 0; i < 6; i++) {
+		color += letters[Math.floor(Math.random() * 16)];
+	}
+	return color;
+}
+export function makeMoney(n) {
+	return parseFloat(n)
+		.toFixed(2)
+		.replace(/(\d)(?=(\d{3})+\.)/g, '$1 ');
+}

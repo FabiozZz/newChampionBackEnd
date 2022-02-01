@@ -150,14 +150,16 @@ $BOX_SHADOW: 0px 10px 20px rgba(46, 91, 255, 0.07);
     .gcol-md-#{$i}{
       grid-column: span $i !important;
       align-self: end;
-      //overflow: hidden;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
   @media screen and(min-width:1440px){
     .gcol-lg-#{$i}{
       grid-column: span $i !important;
       align-self: end;
-      //overflow: hidden;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
@@ -186,6 +188,16 @@ $aligns: center,flex-start,flex-end;
     align-items: $align;
   }
 }
+@for $i from 1 through 8 {
+  .flex-shrink-#{$i}{
+    flex-shrink: #{$i};
+  }
+}
+@for $i from 1 through 8 {
+  .flex-grow-#{$i}{
+    flex-grow: #{$i};
+  }
+}
 @for $i from 1 through 32{
   .gap-#{$i}{
     gap: #{$i}px
@@ -208,6 +220,6 @@ $aligns: center,flex-start,flex-end;
 .-margin-16{
   margin-left: -16px;
   margin-right: -16px;
-  padding-left: 16px;
-  padding-right: 16px;
+  //padding-left: 16px;
+  //padding-right: 16px;
 }

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import classes from './add.module.css';
 import {SelectGroup} from "../../../../../Profile/Pages/ProfileInfo/AddAboniment/SelectGroup/SelectGroup";
-import {Btn} from "../../../../../Clients/FilterClientSection/BtnGroup/Btn/Btn";
+import {Btn} from "../../../../../../utils/Btn/Btn";
 import {useSelector} from "react-redux";
 import {isEmpty} from "../../../../../../helpers/common";
 

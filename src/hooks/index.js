@@ -101,3 +101,36 @@ export function useInitialStateOnUser(user, data, setAbonement, abonements) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [abonements, data.state?.rate_id]);
 }
+
+export const useSelectWithCheck = (array) => {
+	const [state, setState] = useState([...((array&&!!array.length)?[{id:0,name:'Все',active:true}]:[])])
+
+	const check = (group)=>{
+		const select_group = state.find(_=>_.id === group.id)
+		select_group.active = !select_group.active
+
+		setState(state.map(_=>_.id === select_group.id? select_group:_.id === 0?({..._,active:false}):_ ))
+	}
+
+	const clear = ()=>{
+		const base_check = state.find(_=>_.id ===0)
+		base_check.active = !base_check.active
+		if (base_check.active){
+			setState(prevState => prevState.map(_=>_.id!==0?({..._,active: false}):({..._,active:_.active})))
+		}else{
+			setState(prevState => prevState.map(_=>_.id===0?({..._,active: base_check.active}):_))
+		}
+	}
+	useEffect(() => {
+		if (state.length === 1 && array.length) {
+			setState(prevState => [...prevState,...array.map(_ => ({..._, active: false}))])
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [array]);
+	return {
+		state,
+		check,
+		clear
+	}
+
+};

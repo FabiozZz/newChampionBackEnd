@@ -1,5 +1,5 @@
 .btn {
-    padding: 8px 16px;
+    padding: 8px 12px;
     font-family: 'SF Pro Display', sans-serif;
     font-style: normal;
     height: 40px;
@@ -9,6 +9,7 @@
     border-radius: 5px;
     box-sizing: border-box;
     border: 1px solid #BFC5D2;
+    white-space: nowrap;
 }
 .active {
     background: #43BF41;

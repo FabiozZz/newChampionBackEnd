@@ -15,6 +15,7 @@ import { settingsGroupReducer } from './reducers/settingsGroupReducer';
 import { settingsMarketingReducer } from 'store/reducers/settingsMarketingReducer';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import {reportProceedReducer} from "./reducers/reportProceedReducer";
 
 export const history = createBrowserHistory();
 
@@ -31,6 +32,7 @@ const persistConfig = {
 		'profile',
 		'createLessons',
 		'settingsMarketing',
+		'reports_proceed'
 	], // which reducer want to store
 };
 
@@ -45,6 +47,7 @@ const rootReducer = combineReducers({
 	profile: profileReducer,
 	lessons: createLessonsReducer,
 	marketing: settingsMarketingReducer,
+	reports_proceed:reportProceedReducer,
 	router: connectRouter(history),
 });
 

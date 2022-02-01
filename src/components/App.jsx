@@ -10,7 +10,44 @@ import { ConnectedRouter } from 'connected-react-router';
 import { token_verify } from 'store/Actions/userActions';
 import { Auth } from './Auth/Auth';
 import nookies from 'nookies';
+import {Chart as CChart} from "react-chartjs-2";
+import zoom from "chartjs-plugin-zoom";
+import 'chartjs-adapter-moment';
 
+
+CChart.register([
+	zoom,
+	{
+		id: 'some',
+		afterDraw: function (chart, easing) {
+			// console.log(chart);
+			if (
+				chart._active &&
+				chart._active.length &&
+				chart.config._config.type !== 'pie' &&
+				chart.config._config.type !== 'bar'
+			) {
+				const activePoint = chart.tooltip._active[0];
+				// console.log(activePoint);
+				const ctx = chart.ctx;
+				const x = activePoint.element.x;
+				// console.log(chart.scales.yAxes.top);
+				const topY = chart.scales.yAxes.top;
+				const bottomY = chart.scales.yAxes.bottom;
+				ctx.save();
+				ctx.beginPath();
+				ctx.moveTo(x, topY);
+				ctx.lineTo(x, bottomY);
+				ctx.lineWidth = 1;
+				ctx.strokeStyle = '#69707F';
+				ctx.fillStyle = '#69707F';
+				ctx.stroke();
+				ctx.fill();
+				ctx.restore();
+			}
+		},
+	},
+]);
 /**
  * главный компонент содержащий все приложение
  *

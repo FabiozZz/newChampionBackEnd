@@ -1,5 +1,5 @@
 import React from 'react';
-import {Btn} from "./Btn/Btn";
+import {Btn} from "../../../../utils/Btn/Btn";
 import classes from './bgroup.module.css';
 
 export const BtnGroup = ({is_Adult,toggleActive,left='Дети',right="Взрослые"}) => {

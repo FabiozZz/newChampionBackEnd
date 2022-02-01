@@ -9,54 +9,25 @@ import Select from 'utils/FromAnt/Select/Select';
 import Chart, { Chart as CChart } from 'react-chartjs-2';
 import {
 	fake_abonements_active_abonements,
+	fake_abonements_average_subscription_abonements,
+	fake_abonements_average_subscription_price,
 	fake_abonements_proceed,
+	fake_abonements_retention_rate,
+	fake_abonements_average_visit_in_group_abonements,
 	fake_new_visits,
 } from 'components/Reports/fake/fake';
 import moment from 'moment';
-import zoom from 'chartjs-plugin-zoom';
 import Chips from 'utils/Chips';
+import ChartProceedAbonements from "./ChartProceedAbonements";
+import {getRandomColor} from "../../../../helpers/common";
+import ChartActiveAbonements from "./ChartActiveAbonements";
+import ChartRetentionRate from "./ChartRetentionRate";
+import ChartAverageSubscriptionsAbonements from "./ChartAverageSubscriptionsAbonements";
+import ChartAverageSubscriptionPriceAbonements from "./ChartAverageSubscriptionPriceAbonements";
+import ChartAverageVisitsInGroup from "./ChartAverageVisitsInGroup";
 
-CChart.register([
-	zoom,
-	{
-		id: 'some',
-		afterDraw: function (chart, easing) {
-			// console.log(chart);
-			if (
-				chart._active &&
-				chart._active.length &&
-				chart.config._config.type !== 'pie' &&
-				chart.config._config.type !== 'bar'
-			) {
-				const activePoint = chart.tooltip._active[0];
-				// console.log(activePoint);
-				const ctx = chart.ctx;
-				const x = activePoint.element.x;
-				// console.log(chart.scales.yAxes.top);
-				const topY = chart.scales.yAxes.top;
-				const bottomY = chart.scales.yAxes.bottom;
-				ctx.save();
-				ctx.beginPath();
-				ctx.moveTo(x, topY);
-				ctx.lineTo(x, bottomY);
-				ctx.lineWidth = 1;
-				ctx.strokeStyle = '#69707F';
-				ctx.fillStyle = '#69707F';
-				ctx.stroke();
-				ctx.fill();
-				ctx.restore();
-			}
-		},
-	},
-]);
-function getRandomColor() {
-	let letters = '0123456789ABCDEF';
-	let color = '#';
-	for (let i = 0; i < 6; i++) {
-		color += letters[Math.floor(Math.random() * 16)];
-	}
-	return color;
-}
+
+
 
 const AbonementReport = () => {
 	const getOptionWithDates = (array, zoom_enabled = false) => {
@@ -108,30 +79,26 @@ const AbonementReport = () => {
 					},
 				},
 				xAxes: {
-					...(zoom_enabled
-						? {
-								distribution: 'linear',
-								bounds: 'data',
-								sampleSize: 1,
-								type: 'time',
-								min: start_date,
-								max: end_date,
-								time: {
-									parser: 'YYYY-MM-DDTHH:mm',
-									minUnit: 'day',
-									// unit: 'day',
-									tooltipFormat: 'DD MMMM YYYY',
-									displayFormats: {
-										hour: 'DD hh:mm',
-										day: 'DD MMMM',
-										quarter: 'Q DD.MM.YY',
-										month: 'MMMM YYYY',
-										year: 'YYYY',
-									},
-									stepSize: 2,
-								},
-						  }
-						: {}),
+					distribution: 'linear',
+					bounds: 'data',
+					sampleSize: 1,
+					type: 'time',
+					min: start_date,
+					max: end_date,
+					time: {
+					parser: 'YYYY-MM-DDTHH:mm',
+					minUnit: 'day',
+					// unit: 'day',
+					tooltipFormat: 'DD MMMM YYYY',
+					displayFormats: {
+						hour: 'DD hh:mm',
+						day: 'DD MMMM',
+						quarter: 'Q DD.MM.YY',
+						month: 'MMMM YYYY',
+						year: 'YYYY',
+					},
+					stepSize: 2,
+					},
 					ticks: {
 						source: 'labels',
 						autoSkip: false,
@@ -160,8 +127,6 @@ const AbonementReport = () => {
 						lineHeight: '16px',
 					},
 				},
-				...(zoom_enabled
-					? {
 							zoom: {
 								pan: {
 									enabled: true,
@@ -192,8 +157,6 @@ const AbonementReport = () => {
 									},
 								},
 							},
-					  }
-					: {}),
 			},
 		};
 		return option;
@@ -358,6 +321,74 @@ const AbonementReport = () => {
 		// 	datasets,
 		// };
 	};
+
+	const option = {
+		// maintainAspectRatio: false,
+		tooltips: {},
+		hover: {
+			mode: 'x',
+			responsive: true,
+			intersect: false,
+		},
+		// scaleShowVerticalLines: true,
+		transitions: {
+			zoom: {
+				animation: {
+					duration: 1000,
+					easing: 'easeOutCubic',
+				},
+			},
+		},
+		elements: {
+			point: {
+				radius: 0,
+			},
+			line: {
+				borderWidth: 1.5,
+			},
+		},
+		scales: {
+			yAxes: {
+				type: 'linear',
+				ticks: {
+					beginAtZero: true,
+				},
+				grid: {
+					display: false,
+				},
+			},
+			xAxes: {
+
+				ticks: {
+					source: 'labels',
+					autoSkip: false,
+					autoSkipPadding: 20,
+					maxRotation: 0,
+				},
+			},
+		},
+
+		plugins: {
+			legend: {
+				display: false,
+			},
+			tooltip: {
+				x: 50,
+				y: 50,
+				responsive: false,
+				mode: 'x',
+				interaction: {
+					intersect: false,
+				},
+				displayColors: false,
+				padding: 12,
+				bodyFont: {
+					family: "'Roboto',sans-serif",
+					lineHeight: '16px',
+				},
+			},
+		}
+	};
 	return (
 		<>
 			<HeaderNav />
@@ -408,13 +439,7 @@ const AbonementReport = () => {
 						</div>
 						<div className={cn(classes.chart_container, 'gcol-md-12 gcol-lg-11')}>
 							<dir className="gcol-md-12 gcol-lg-12">
-								<Chart
-									type={'line'}
-									data={canvas => getData(canvas, fake_abonements_proceed)}
-									height={232}
-									width={640}
-									options={getOptionWithDates(fake_abonements_proceed)}
-								/>
+								<ChartProceedAbonements data={fake_abonements_proceed}/>
 							</dir>
 						</div>
 					</div>
@@ -424,7 +449,7 @@ const AbonementReport = () => {
 						<p className={cn(classes.header, 'gcol-md-12 gcol-lg-11')}>
 							Действующие абонементы
 						</p>
-						<div className={cn(classes.btn_group, 'gcol-md-6 gcol-lg-5')}>
+						<div className={cn(classes.btn_group_two, 'gcol-md-6 gcol-lg-5')}>
 							<button>вчера</button>
 							<button>сегодня</button>
 						</div>
@@ -465,14 +490,206 @@ const AbonementReport = () => {
 						</div>
 
 						<div className={cn(classes.chart_container, 'gcol-md-12 gcol-lg-11')}>
-							<dir className="gcol-md-12 gcol-lg-11">
-								<Chart
-									type={'line'}
-									data={canvas => getData(canvas, fake_abonements_active_abonements)}
-									height={232}
-									width={640}
-									options={getOptionWithDates(fake_abonements_active_abonements, true)}
-								/>
+							<dir className="gcol-md-12 gcol-lg-12">
+								<ChartActiveAbonements data={fake_abonements_active_abonements}/>
+							</dir>
+						</div>
+					</div>
+				</div>
+				<div className={cn('gcol-md-12 gcol-lg-11')}>
+					<div className={cn('block -margin-16 py-32')}>
+						<p className={cn(classes.header, 'gcol-md-12 gcol-lg-11')}>
+							Retention Rate (Коэффициент удержания)
+						</p>
+						<div className={cn(classes.btn_group_three, 'gcol-md-6 gcol-lg-5')}>
+							<button>неделя</button>
+							<button>вчера</button>
+							<button>сегодня</button>
+						</div>
+						<div className={'gcol-md-6 gcol-lg-6'}>
+							<DatePickerRange />
+						</div>
+
+						<div className={'gcol-md-4 gcol-lg-5'}>
+							<Select label={'филиал'} />
+						</div>
+						<div className={'gcol-md-4 gcol-lg-5'}>
+							<Select label={'тренер'} />
+						</div>
+						<div className={'gcol-md-4 gcol-lg-5'}>
+							<Select label={'тип абонемента'} />
+						</div>
+						<div className={'gcol-md-4 gcol-lg-4'}>
+							<Select label={'возрастная группа'} />
+						</div>
+						<div className={'gcol-md-4 gcol-lg-3'}>
+							<Select label={'единоборство'} />
+						</div>
+						<div className={'gcol-md-4 gcol-lg-3'}>
+							<Select label={'источник рекламы'} />
+						</div>
+
+						<div
+							className={cn(
+								classes.carousel,
+								'flex gcol-md-12 gcol-lg-11 gap-12 overflow-auto'
+							)}>
+							<Chips active={false}>Новые</Chips>
+							<Chips active={false}>Бронзовые</Chips>
+							<Chips active={false}>Золотые</Chips>
+							<Chips active={false}>Рубиновые</Chips>
+							<Chips active={false}>Сапфировые</Chips>
+							<Chips active={false}>Бриллиантовые</Chips>
+						</div>
+
+						<div className={cn(classes.chart_container, 'gcol-md-12 gcol-lg-11')}>
+							<dir className="gcol-md-12 gcol-lg-12">
+								<ChartRetentionRate data={fake_abonements_retention_rate}/>
+							</dir>
+						</div>
+					</div>
+				</div>
+				<div className={cn('gcol-md-12 gcol-lg-11')}>
+					<div className={cn('block -margin-16 py-32')}>
+						<p className={cn(classes.header, 'gcol-md-12 gcol-lg-11')}>
+							Среднее количество абонементов на одного клиента
+						</p>
+						<div className={cn(classes.btn_group_three, 'gcol-md-6 gcol-lg-5')}>
+							<button>неделя</button>
+							<button>вчера</button>
+							<button>сегодня</button>
+						</div>
+						<div className={'gcol-md-6 gcol-lg-6'}>
+							<DatePickerRange />
+						</div>
+
+						<div className={'gcol-md-6 gcol-lg-5'}>
+							<Select label={'филиал'} />
+						</div>
+						<div className={'gcol-md-6 gcol-lg-5'}>
+							<Select label={'тренер'} />
+						</div>
+						<div className={'gcol-md-4 gcol-lg-4'}>
+							<Select label={'возрастная группа'} />
+						</div>
+						<div className={'gcol-md-4 gcol-lg-3'}>
+							<Select label={'единоборство'} />
+						</div>
+						<div className={'gcol-md-4 gcol-lg-3'}>
+							<Select label={'источник рекламы'} />
+						</div>
+
+						<div
+							className={cn(
+								classes.carousel,
+								'flex gcol-md-12 gcol-lg-11 gap-12 overflow-auto'
+							)}>
+							<Chips active={false}>Новые</Chips>
+							<Chips active={false}>Бронзовые</Chips>
+							<Chips active={false}>Золотые</Chips>
+							<Chips active={false}>Рубиновые</Chips>
+							<Chips active={false}>Сапфировые</Chips>
+							<Chips active={false}>Бриллиантовые</Chips>
+						</div>
+
+						<div className={cn(classes.chart_container, 'gcol-md-12 gcol-lg-11')}>
+							<dir className="gcol-md-12 gcol-lg-12">
+								<ChartAverageSubscriptionsAbonements data={fake_abonements_average_subscription_abonements}/>
+							</dir>
+						</div>
+					</div>
+				</div>
+				<div className={cn('gcol-md-12 gcol-lg-11')}>
+					<div className={cn('block -margin-16 py-32')}>
+						<p className={cn(classes.header, 'gcol-md-12 gcol-lg-11')}>
+							Средняя стоимость абонемента
+						</p>
+						<div className={cn(classes.btn_group_three, 'gcol-md-6 gcol-lg-5')}>
+							<button>неделя</button>
+							<button>вчера</button>
+							<button>сегодня</button>
+						</div>
+						<div className={'gcol-md-6 gcol-lg-6'}>
+							<DatePickerRange />
+						</div>
+
+						<div className={'gcol-md-6 gcol-lg-5'}>
+							<Select label={'филиал'} />
+						</div>
+						<div className={'gcol-md-6 gcol-lg-5'}>
+							<Select label={'тренер'} />
+						</div>
+						<div className={'gcol-md-4 gcol-lg-4'}>
+							<Select label={'возрастная группа'} />
+						</div>
+						<div className={'gcol-md-4 gcol-lg-3'}>
+							<Select label={'единоборство'} />
+						</div>
+						<div className={'gcol-md-4 gcol-lg-3'}>
+							<Select label={'источник рекламы'} />
+						</div>
+
+						<div
+							className={cn(
+								classes.carousel,
+								'flex gcol-md-12 gcol-lg-11 gap-12 overflow-auto'
+							)}>
+							<Chips active={false}>Новые</Chips>
+							<Chips active={false}>Бронзовые</Chips>
+							<Chips active={false}>Золотые</Chips>
+							<Chips active={false}>Рубиновые</Chips>
+							<Chips active={false}>Сапфировые</Chips>
+							<Chips active={false}>Бриллиантовые</Chips>
+						</div>
+
+						<div className={cn(classes.chart_container, 'gcol-md-12 gcol-lg-11')}>
+							<dir className="gcol-md-12 gcol-lg-12">
+								<ChartAverageSubscriptionPriceAbonements data={fake_abonements_average_subscription_price}/>
+							</dir>
+						</div>
+					</div>
+				</div>
+				<div className={cn('gcol-md-12 gcol-lg-11')}>
+					<div className={cn('block -margin-16 py-32')}>
+						<p className={cn(classes.header, 'gcol-md-12 gcol-lg-11')}>
+							Среднее количество посещений Клиента в одной группе
+						</p>
+						<div className={'gcol-md-6 gcol-lg-6'}>
+							<DatePickerRange />
+						</div>
+						<div className={'gcol-md-6 gcol-lg-5'}/>
+						<div className={'gcol-md-6 gcol-lg-5'}>
+							<Select label={'филиал'} />
+						</div>
+						<div className={'gcol-md-6 gcol-lg-5'}>
+							<Select label={'тренер'} />
+						</div>
+						<div className={'gcol-md-4 gcol-lg-4'}>
+							<Select label={'возрастная группа'} />
+						</div>
+						<div className={'gcol-md-4 gcol-lg-3'}>
+							<Select label={'единоборство'} />
+						</div>
+						<div className={'gcol-md-4 gcol-lg-3'}>
+							<Select label={'источник рекламы'} />
+						</div>
+
+						<div
+							className={cn(
+								classes.carousel,
+								'flex gcol-md-12 gcol-lg-11 gap-12 overflow-auto'
+							)}>
+							<Chips active={false}>Новые</Chips>
+							<Chips active={false}>Бронзовые</Chips>
+							<Chips active={false}>Золотые</Chips>
+							<Chips active={false}>Рубиновые</Chips>
+							<Chips active={false}>Сапфировые</Chips>
+							<Chips active={false}>Бриллиантовые</Chips>
+						</div>
+
+						<div className={cn(classes.chart_container, 'gcol-md-12 gcol-lg-11')}>
+							<dir className="gcol-md-12 gcol-lg-12">
+								<ChartAverageVisitsInGroup data={fake_abonements_average_visit_in_group_abonements}/>
 							</dir>
 						</div>
 					</div>
